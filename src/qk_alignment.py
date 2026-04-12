@@ -92,6 +92,59 @@ def qk_attention_maps(hidden_states: np.ndarray, qk_matrices: np.ndarray, d_head
     return weights / np.clip(denominator, a_min=np.finfo(np.float64).tiny, a_max=None)
 
 
+def qk_key_scores_from_factors(
+    hidden_states: np.ndarray,
+    w_q: np.ndarray,
+    w_k: np.ndarray,
+    d_head: int | None = None,
+) -> np.ndarray:
+    """Compute query-averaged QK scores via low-rank W_Q/W_K factors."""
+
+    hidden = np.asarray(hidden_states, dtype=np.float32)
+    w_q = np.asarray(w_q, dtype=np.float32)
+    w_k = np.asarray(w_k, dtype=np.float32)
+    if hidden.ndim != 2:
+        raise ValueError("hidden_states must be shaped [tokens, d_model].")
+    if w_q.shape != w_k.shape or w_q.ndim != 3:
+        raise ValueError("w_q and w_k must both be shaped [head, d_model, d_head].")
+    if hidden.shape[1] != w_q.shape[1]:
+        raise ValueError("QK factors and hidden states have incompatible d_model dimensions.")
+
+    scale = np.sqrt(float(d_head or w_q.shape[-1]))
+    q_proj = np.einsum("td,hdf->htf", hidden, w_q)
+    k_proj = np.einsum("td,hdf->htf", hidden, w_k)
+    scores = np.einsum("hqf,hkf->hqk", q_proj, k_proj) / scale
+    return scores.mean(axis=1)
+
+
+def qk_attention_maps_from_factors(
+    hidden_states: np.ndarray,
+    w_q: np.ndarray,
+    w_k: np.ndarray,
+    d_head: int | None = None,
+) -> np.ndarray:
+    """Reconstruct attention probabilities via low-rank W_Q/W_K factors."""
+
+    hidden = np.asarray(hidden_states, dtype=np.float32)
+    w_q = np.asarray(w_q, dtype=np.float32)
+    w_k = np.asarray(w_k, dtype=np.float32)
+    if hidden.ndim != 2:
+        raise ValueError("hidden_states must be shaped [tokens, d_model].")
+    if w_q.shape != w_k.shape or w_q.ndim != 3:
+        raise ValueError("w_q and w_k must both be shaped [head, d_model, d_head].")
+    if hidden.shape[1] != w_q.shape[1]:
+        raise ValueError("QK factors and hidden states have incompatible d_model dimensions.")
+
+    scale = np.sqrt(float(d_head or w_q.shape[-1]))
+    q_proj = np.einsum("td,hdf->htf", hidden, w_q)
+    k_proj = np.einsum("td,hdf->htf", hidden, w_k)
+    logits = np.einsum("hqf,hkf->hqk", q_proj, k_proj) / scale
+    logits = logits - np.max(logits, axis=-1, keepdims=True)
+    weights = np.exp(logits)
+    denominator = weights.sum(axis=-1, keepdims=True)
+    return weights / np.clip(denominator, a_min=np.finfo(np.float64).tiny, a_max=None)
+
+
 def qk_alignment_table(
     qk_by_layer: np.ndarray,
     layer_indices: Iterable[int],
@@ -440,10 +493,17 @@ def run_ctcf_qk_alignment(
         raise FileNotFoundError(f"QK/OV matrix archive not found: {qk_archive_path}")
     qk_archive = np.load(qk_archive_path)
     qk_by_layer = qk_archive["qk"]
+    w_q_by_layer = qk_archive["w_q"] if "w_q" in qk_archive.files else None
+    w_k_by_layer = qk_archive["w_k"] if "w_k" in qk_archive.files else None
     layer_indices = tuple(int(layer) for layer in qk_archive["layers"])
     if len(layer_indices) == 0:
         raise ValueError("QK archive does not contain any layer indices.")
     d_head = int(bundle.hf_model.encoder.layer[layer_indices[0]].attention.self.attention_head_size)
+    use_low_rank = w_q_by_layer is not None and w_k_by_layer is not None
+    if use_low_rank:
+        progress("Using low-rank W_Q/W_K factors for strict QK proof scoring")
+    else:
+        progress("Using dense QK matrices for strict QK proof scoring; rerun circuit export for faster W_Q/W_K factors")
 
     limit_text = "all" if max_sequences is None else str(max_sequences)
     progress(f"Scoring CTCF motif support for up to {limit_text} sequences")
@@ -476,6 +536,7 @@ def run_ctcf_qk_alignment(
         for layer_idx in layer_indices
     }
     any_supports = False
+    report_every = 1000
     for idx, record in enumerate(motif_records, start=1):
         captured = _capture_layer_inputs(bundle, record.sequence, layer_indices)
         motif_scores = np.asarray(record.token_scores, dtype=np.float64)
@@ -484,7 +545,12 @@ def run_ctcf_qk_alignment(
         for layer_offset, layer_idx in enumerate(layer_indices):
             hidden = captured[layer_idx]
             qk_layer = qk_by_layer[layer_offset]
-            key_scores = qk_key_scores(hidden, qk_layer, d_head=d_head)
+            if use_low_rank:
+                w_q_layer = w_q_by_layer[layer_offset]
+                w_k_layer = w_k_by_layer[layer_offset]
+                key_scores = qk_key_scores_from_factors(hidden, w_q_layer, w_k_layer, d_head=d_head)
+            else:
+                key_scores = qk_key_scores(hidden, qk_layer, d_head=d_head)
             usable = min(key_scores.shape[1], len(motif_scores))
             x = motif_scores[:usable]
             stats = alignment_stats[layer_idx]
@@ -503,7 +569,10 @@ def run_ctcf_qk_alignment(
                 stats["sum_xy"][head_idx] += (x_valid * y_valid).sum()
 
             if record.support_tokens:
-                attention_heads = qk_attention_maps(hidden, qk_layer, d_head=d_head)
+                if use_low_rank:
+                    attention_heads = qk_attention_maps_from_factors(hidden, w_q_layer, w_k_layer, d_head=d_head)
+                else:
+                    attention_heads = qk_attention_maps(hidden, qk_layer, d_head=d_head)
                 key_pos = attention_heads.shape[-1]
                 enrich = enrichment_stats[layer_idx]
                 for token_idx in record.support_tokens:
@@ -516,7 +585,7 @@ def run_ctcf_qk_alignment(
                     enrich["background_mass"] += attention_heads[:, :, background].sum(axis=(1, 2))
                     enrich["support_tokens"] += 1
                     enrich["background_tokens"] += int(len(background))
-        if idx == 1 or idx == len(motif_records) or idx % max(1, len(motif_records) // 10) == 0:
+        if idx == 1 or idx == len(motif_records) or idx % report_every == 0:
             progress(f"Processed strict QK proof inputs for {idx}/{len(motif_records)} CTCF sequences")
 
     progress("Computing final QK/motif Pearson tables from streaming statistics")
