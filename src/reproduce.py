@@ -41,18 +41,22 @@ def _write_model_manifest(config: PipelineConfig) -> dict[str, Any]:
     manifest_path = config.paths.manifests_dir / "model_hooked_encoder_manifest.json"
     write_json(
         manifest_path,
-        {
-            "created_at": utc_now_iso(),
-            "model_name": bundle.model_name,
-            "device": bundle.device,
-            "hook_point_count_reported": len(hook_points),
-            "hook_points_sample": hook_points,
-        },
+            {
+                "created_at": utc_now_iso(),
+                "model_name": bundle.model_name,
+                "device": bundle.device,
+                "instrumentation_backend": bundle.instrumentation_backend,
+                "instrumentation_error": bundle.instrumentation_error,
+                "hook_point_count_reported": len(hook_points),
+                "hook_points_sample": hook_points,
+            },
     )
     return {
         "model_name": bundle.model_name,
         "device": bundle.device,
         "manifest": str(manifest_path),
+        "instrumentation_backend": bundle.instrumentation_backend,
+        "instrumentation_error": bundle.instrumentation_error,
         "hook_points_reported": len(hook_points),
     }
 
