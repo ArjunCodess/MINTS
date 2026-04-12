@@ -16,7 +16,7 @@ Then run the complete pipeline from one command:
 python main.py
 ```
 
-The run creates a manifest at `results/manifests/pipeline_run.json`.
+By default, this uses all available rows for residual caching and linear probing. The run creates the root summary manifest at `results/pipeline_run.json`.
 
 For a full overwrite of generated outputs:
 
@@ -24,4 +24,12 @@ For a full overwrite of generated outputs:
 python main.py --overwrite
 ```
 
-The pipeline writes intermediate data under `data/` and manifests under `results/manifests/`.
+For a faster capped run while debugging, limit the number of train and test rows used for activation caching and linear probing:
+
+```powershell
+python main.py --max-probe-train 512 --max-probe-test 256
+```
+
+The caps are applied per task. Omit those flags to run probing on the full saved train/test splits.
+
+The pipeline writes intermediate data under `data/`, detailed component manifests under `results/manifests/`, and the commit-friendly run summary under `results/pipeline_run.json`.

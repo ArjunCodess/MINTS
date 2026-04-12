@@ -218,3 +218,12 @@ data/hf_downstream/
 results/manifests/*_manifest.json
 results/manifests/pipeline_config.json
 results/manifests/pipeline_run.json
+results/activations/*.npz
+results/circuits/*.npz
+results/**/*.pt
+results/**/*.pth
+results/**/*.safetensors
+results/**/*.bin
+results/**/*.arrow
+results/**/*.parquet
+results/**/*.tmp
