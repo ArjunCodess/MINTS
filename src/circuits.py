@@ -65,6 +65,8 @@ def extract_qk_ov_matrices(
     layer_indices = tuple(layers or config.data.circuit_layers)
     qk_by_layer = []
     ov_by_layer = []
+    w_q_by_layer = []
+    w_k_by_layer = []
     n_heads = d_model = d_head = 0
 
     for layer_idx in layer_indices:
@@ -76,10 +78,14 @@ def extract_qk_ov_matrices(
         ov = np.einsum("hmd,hdn->hmn", w_v, w_o).astype(dtype)
         qk_by_layer.append(qk)
         ov_by_layer.append(ov)
+        w_q_by_layer.append(w_q.astype(dtype))
+        w_k_by_layer.append(w_k.astype(dtype))
         n_heads, d_model, d_head = w_q.shape
 
     qk_stack = np.stack(qk_by_layer, axis=0)
     ov_stack = np.stack(ov_by_layer, axis=0)
+    w_q_stack = np.stack(w_q_by_layer, axis=0)
+    w_k_stack = np.stack(w_k_by_layer, axis=0)
     output_path = config.paths.circuits_dir / "qk_ov_matrices.npz"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     progress(f"Writing QK/OV matrix archive: {output_path}")
@@ -87,6 +93,8 @@ def extract_qk_ov_matrices(
         output_path,
         qk=qk_stack,
         ov=ov_stack,
+        w_q=w_q_stack,
+        w_k=w_k_stack,
         layers=np.asarray(layer_indices, dtype=np.int64),
     )
     write_json(
@@ -97,6 +105,8 @@ def extract_qk_ov_matrices(
             "layers": list(layer_indices),
             "qk_shape": list(qk_stack.shape),
             "ov_shape": list(ov_stack.shape),
+            "w_q_shape": list(w_q_stack.shape),
+            "w_k_shape": list(w_k_stack.shape),
             "n_heads": int(n_heads),
             "d_model": int(d_model),
             "d_head": int(d_head),
