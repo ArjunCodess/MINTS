@@ -55,8 +55,40 @@ Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_len
   - otherwise probe score on patched residuals as the primary v1 metric.
 - Save layer-by-head restoration matrices to `results/patching/` and heatmaps to `results/figures/`.
 
+## Strict Mechanistic Proof Extensions
+- Implement `src/motif_scoring.py` for ground-truth motif scoring:
+  - load the JASPAR CORE vertebrate CTCF PWM with matrix ID `MA0139.1` using Biopython,
+  - prefer a local `data/**/MA0139.1.jaspar` file and fall back to the JASPAR 2024 API for the small matrix file,
+  - scan ENCODE GM12878 CTCF peak sequences derived from ENCSR000DKV/ENCODE artifacts,
+  - compute scalar motif scores per nucleotide and per token position,
+  - record motif-support token intervals for later attention and patching tests.
+- Implement `src/qk_alignment.py`:
+  - capture layer-input hidden states for selected DNABERT-2 layers,
+  - compute per-position QK attention logits from exported/direct `QK = W_Q @ W_K.T` matrices,
+  - correlate QK-derived key scores with ground-truth CTCF motif scores using Pearson correlation,
+  - flag candidate heads satisfying the pre-registered criterion `r >= 0.5` and `p < 0.05`,
+  - save alignment tables and heatmaps under `results/qk_alignment/` and `results/figures/`.
+- Extend attention enrichment:
+  - isolate attention mass assigned to motif-support key positions, `a_motif`,
+  - compare it with matched non-motif background mass, `a_bg`,
+  - flag heads with enrichment ratio `rho_h >= 2.0`,
+  - save enrichment tables and heatmaps under `results/enrichment/` and `results/figures/`.
+- Implement custom DNABERT-2 PyTorch hook patching:
+  - cache clean head outputs from `encoder.layer[i].attention.self`,
+  - rerun corrupted counterfactual inputs while replacing only the requested layer/head slice,
+  - use a probe score on patched residuals as the scalar target logit when no task-specific classifier head exists,
+  - compute the normalized patching metric `(patched_logit - corrupted_logit) / (clean_logit - corrupted_logit)`,
+  - save layer-by-head restoration matrices and heatmaps.
+- Wire the strict proof exports into the existing one-command pipeline after residual caches, probe metrics, and QK/OV matrices exist.
+- Add a CLI cap for CTCF QK-alignment sequence count so quick runs can use a subset while the default scans all prepared CTCF sequences.
+- Treat a head as a strict candidate motif detector only when three conditions align:
+  - QK-to-motif Pearson criterion passes,
+  - attention enrichment criterion passes,
+  - causal restoration criterion passes.
+
 ## Test Plan
 - Unit-test URL filtering, task alias normalization, motif mutation length preservation, coordinate-to-token mapping, QK/OV matrix shape checks, and restoration metric edge cases where `clean_logit == corrupted_logit`.
+- Unit-test JASPAR PWM loading/scoring, token-level motif support extraction, Pearson candidate filtering, matched-background enrichment, and head-output hook replacement.
 - Add smoke tests that run on 4-8 sequences per task and produce small result files in `results/test_runs/`.
 - Add integration tests for:
   - HF dataset filtering returns non-empty rows for all four canonical task names.
