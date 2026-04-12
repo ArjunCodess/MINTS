@@ -10,7 +10,7 @@ import pandas as pd
 
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .data_ingestion import canonicalize_task_name
-from .utils import utc_now_iso, write_json
+from .utils import progress, utc_now_iso, write_json
 
 
 @dataclass(frozen=True)
@@ -56,10 +56,15 @@ def train_logistic_probe_for_task(
 
     task = canonicalize_task_name(task, config.data)
     probe_layer = config.data.probe_layer if layer is None else layer
+    progress(f"Loading residual caches for probe: task={task}, layer={probe_layer}")
     train_payload = _load_activation_file(config.paths.activations_dir / f"{task}_train_residual_mean.npz")
     test_payload = _load_activation_file(config.paths.activations_dir / f"{task}_test_residual_mean.npz")
     x_train, y_train = _features_for_layer(train_payload, probe_layer)
     x_test, y_test = _features_for_layer(test_payload, probe_layer)
+    progress(
+        f"Training probe for {task}: train={len(y_train)}, test={len(y_test)}, "
+        f"train_pos_rate={float(np.mean(y_train)):.3f}, test_pos_rate={float(np.mean(y_test)):.3f}"
+    )
 
     classifier = make_pipeline(
         StandardScaler(),
@@ -73,13 +78,17 @@ def train_logistic_probe_for_task(
     classifier.fit(x_train, y_train)
     probabilities = classifier.predict_proba(x_test)[:, 1]
     predictions = (probabilities >= 0.5).astype(int)
+    auroc = float(roc_auc_score(y_test, probabilities))
+    auprc = float(average_precision_score(y_test, probabilities))
+    accuracy = float(accuracy_score(y_test, predictions))
+    progress(f"Probe complete for {task}: AUROC={auroc:.4f}, AUPRC={auprc:.4f}, accuracy={accuracy:.4f}")
 
     return ProbeResult(
         task=task,
         layer=probe_layer,
-        auroc=float(roc_auc_score(y_test, probabilities)),
-        auprc=float(average_precision_score(y_test, probabilities)),
-        accuracy=float(accuracy_score(y_test, predictions)),
+        auroc=auroc,
+        auprc=auprc,
+        accuracy=accuracy,
         train_examples=int(len(y_train)),
         test_examples=int(len(y_test)),
         train_positive_rate=float(np.mean(y_train)),
@@ -95,6 +104,7 @@ def run_all_probes(config: PipelineConfig = DEFAULT_CONFIG) -> Path:
     table = pd.DataFrame([result.__dict__ for result in results])
     output_path = config.paths.tables_dir / "linear_probe_metrics.csv"
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    progress(f"Writing probe metrics table: {output_path}")
     table.to_csv(output_path, index=False)
     write_json(
         config.paths.manifests_dir / "linear_probe_manifest.json",

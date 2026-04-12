@@ -30,6 +30,13 @@ def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
+def progress(message: str) -> None:
+    """Print a flushed pipeline progress message."""
+
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    print(f"[MINTS {timestamp}] {message}", flush=True)
+
+
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     """Write a deterministic JSON file."""
 

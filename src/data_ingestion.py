@@ -10,7 +10,7 @@ from typing import Iterable
 from urllib.parse import unquote, urlparse
 
 from .config import DEFAULT_CONFIG, DataConfig, PipelineConfig
-from .utils import sha256_file, utc_now_iso, write_json
+from .utils import progress, sha256_file, utc_now_iso, write_json
 
 
 ENCODE_DOWNLOAD_RE = re.compile(r"^https://www\.encodeproject\.org/files/[^/]+/@@download/[^\"']+$")
@@ -130,6 +130,7 @@ def download_encode_artifacts(
 
     for url in artifact_urls:
         output_path = config.paths.encode_dir / encode_output_filename(url)
+        progress(f"Checking ENCODE artifact: {output_path.name}")
         if dry_run:
             records.append(DownloadRecord(url=url, output_path=output_path, status="dry_run"))
         else:
@@ -215,8 +216,10 @@ def ingest_hf_downstream_tasks(
     summary: dict[str, dict[str, int]] = {}
 
     for task in canonical_tasks:
+        progress(f"Preparing HF downstream task: {task}")
         task_splits = {}
         for split_name, split_dataset in dataset_dict.items():
+            progress(f"Filtering {split_name} split for task={task}")
             filtered = split_dataset.filter(
                 lambda example, task_name=task: example["task"] == task_name,
                 desc=f"Filtering {split_name}:{task}",
@@ -237,8 +240,11 @@ def ingest_hf_downstream_tasks(
             existing = _load_existing_dataset_dict(output_dir)
             if existing is not None:
                 summary[task] = {split: len(ds) for split, ds in existing.items()}
+                progress(f"Reusing cached tokenized dataset for {task}: {summary[task]}")
                 continue
+            progress(f"Removing partial cached dataset for {task}: {output_dir}")
             shutil.rmtree(output_dir)
+        progress(f"Saving tokenized dataset for {task} to {output_dir}")
         tokenized.save_to_disk(str(output_dir))
         summary[task] = {split: len(ds) for split, ds in tokenized.items()}
 

@@ -15,7 +15,7 @@ from .circuits import extract_qk_ov_matrices
 from .data_ingestion import download_encode_artifacts, ingest_hf_downstream_tasks
 from .modeling import load_hooked_encoder, summarize_hook_points
 from .probing import run_all_probes
-from .utils import utc_now_iso, write_json
+from .utils import progress, utc_now_iso, write_json
 
 
 @dataclass(frozen=True)
@@ -29,12 +29,19 @@ class StepRecord:
 
 
 def _run_step(name: str, func: Callable[[], dict[str, Any]]) -> StepRecord:
+    progress(f"Starting step: {name}")
     started = time.perf_counter()
-    details = func()
+    try:
+        details = func()
+    except Exception:
+        progress(f"Failed step: {name}")
+        raise
+    seconds = round(time.perf_counter() - started, 3)
+    progress(f"Completed step: {name} in {seconds:.3f}s")
     return StepRecord(
         name=name,
         status="completed",
-        seconds=round(time.perf_counter() - started, 3),
+        seconds=seconds,
         details=details,
     )
 
@@ -42,7 +49,9 @@ def _run_step(name: str, func: Callable[[], dict[str, Any]]) -> StepRecord:
 def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
     """Load the model once and export circuit/probe artifacts."""
 
+    progress(f"Loading model: {config.model.model_name}")
     bundle = load_hooked_encoder(config.model)
+    progress(f"Model ready on {bundle.device} using {bundle.instrumentation_backend}")
     hook_points = summarize_hook_points(bundle.hooked_model)
     model_manifest_path = config.paths.manifests_dir / "model_hooked_encoder_manifest.json"
     write_json(
@@ -58,8 +67,11 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
         },
     )
 
+    progress("Caching residual activations for probe tasks")
     activation_exports = cache_probe_residuals(bundle, config=config)
+    progress("Extracting QK/OV circuit matrices")
     circuit_export = extract_qk_ov_matrices(bundle, config=config)
+    progress("Training linear probes from cached residuals")
     probe_table = run_all_probes(config=config)
     return {
         "model_manifest": str(model_manifest_path),
@@ -234,16 +246,19 @@ def run_pipeline(
 ) -> Path:
     """Run the complete reproducibility pipeline."""
 
+    progress("Creating required data/results directories")
     config.ensure_paths()
     run_manifest_path = config.paths.results_dir / "pipeline_run.json"
     steps: list[StepRecord] = []
 
     def record_config() -> dict[str, Any]:
         config_path = config.paths.manifests_dir / "pipeline_config.json"
+        progress(f"Writing config snapshot to {config_path}")
         write_json(config_path, {"created_at": utc_now_iso(), "config": config.to_dict()})
         return {"path": str(config_path)}
 
     def ingest_hf() -> dict[str, Any]:
+        progress("Preparing Hugging Face downstream task datasets")
         summary = ingest_hf_downstream_tasks(
             config=config,
             overwrite=overwrite,
@@ -251,6 +266,7 @@ def run_pipeline(
         return {"tasks": summary}
 
     def download_encode() -> dict[str, Any]:
+        progress("Checking ENCODE CTCF artifacts")
         records = download_encode_artifacts(
             config=config,
             overwrite=overwrite,
@@ -263,10 +279,12 @@ def run_pipeline(
         }
 
     def download_grch38() -> dict[str, Any]:
+        progress("Checking GRCh38 FASTA")
         path = ensure_grch38_fasta(config=config, overwrite=overwrite, decompress=True)
         return {"path": str(path)}
 
     def prepare_ctcf() -> dict[str, Any]:
+        progress("Preparing CTCF peak sequence table")
         output_path = prepare_ctcf_sequences(
             config=config,
             flank=0,
@@ -281,6 +299,7 @@ def run_pipeline(
         steps.append(_run_step("prepare_ctcf_sequences", prepare_ctcf))
         steps.append(_run_step("circuit_extraction_and_residual_probing", lambda: _run_circuit_and_probe_exports(config)))
     except Exception as exc:
+        progress(f"Writing failed run manifest to {run_manifest_path}")
         _write_run_manifest(
             run_manifest_path,
             config=config,
@@ -291,6 +310,7 @@ def run_pipeline(
         )
         raise
 
+    progress(f"Writing completed run manifest to {run_manifest_path}")
     _write_run_manifest(
         run_manifest_path,
         config=config,

@@ -11,7 +11,7 @@ import numpy as np
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .data_ingestion import canonicalize_task_name
 from .modeling import LoadedModelBundle
-from .utils import utc_now_iso, write_json
+from .utils import progress, utc_now_iso, write_json
 
 
 @dataclass(frozen=True)
@@ -113,8 +113,13 @@ def cache_task_split_residuals(
     task = canonicalize_task_name(task, config.data)
     layer_indices = tuple(layers or config.data.activation_layers)
     dataset_path = config.paths.hf_downstream_dir / task
+    progress(f"Loading cached dataset split: {task}/{split}")
     dataset_dict = load_from_disk(str(dataset_path))
     dataset = _selected_dataset_rows(dataset_dict[split], max_examples, config.data.seed)
+    progress(
+        f"Caching residuals for {task}/{split}: {len(dataset)} examples, "
+        f"layers={list(layer_indices)}, batch_size={config.data.batch_size}"
+    )
 
     pooled_batches: list[np.ndarray] = []
     labels: list[int] = []
@@ -124,8 +129,10 @@ def cache_task_split_residuals(
     tokenizer = bundle.tokenizer
 
     model.eval()
+    total_batches = max(1, (len(dataset) + config.data.batch_size - 1) // config.data.batch_size)
+    report_every = max(1, total_batches // 10)
     with torch.no_grad():
-        for start in range(0, len(dataset), config.data.batch_size):
+        for batch_index, start in enumerate(range(0, len(dataset), config.data.batch_size), start=1):
             batch = dataset[start : start + config.data.batch_size]
             batch_sequences = list(batch["sequence"])
             encoded = _collate_sequences(tokenizer, batch_sequences, config.data.token_max_length)
@@ -150,10 +157,14 @@ def cache_task_split_residuals(
             labels.extend(int(label) for label in batch["label"])
             names.extend(str(name) for name in batch["name"])
             sequences.extend(batch_sequences)
+            if batch_index == 1 or batch_index == total_batches or batch_index % report_every == 0:
+                seen = min(start + config.data.batch_size, len(dataset))
+                progress(f"{task}/{split}: cached {seen}/{len(dataset)} examples")
 
     pooled = np.concatenate(pooled_batches, axis=0) if pooled_batches else np.empty((0, len(layer_indices), 0))
     output_path = config.paths.activations_dir / f"{task}_{split}_residual_mean.npz"
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    progress(f"Writing residual cache: {output_path}")
     np.savez_compressed(
         output_path,
         residual_mean=pooled.astype(np.float32),
@@ -185,6 +196,7 @@ def cache_task_split_residuals(
             ),
         },
     )
+    progress(f"Finished residual cache for {task}/{split}: shape={list(pooled.shape)}")
     return ActivationExport(
         task=task,
         split=split,
@@ -203,6 +215,7 @@ def cache_probe_residuals(
 
     exports: list[ActivationExport] = []
     for task in config.data.task_names:
+        progress(f"Starting residual-cache exports for task: {task}")
         exports.append(
             cache_task_split_residuals(
                 bundle=bundle,
@@ -221,4 +234,5 @@ def cache_probe_residuals(
                 max_examples=config.data.max_probe_test,
             )
         )
+        progress(f"Finished residual-cache exports for task: {task}")
     return exports

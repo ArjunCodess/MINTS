@@ -10,7 +10,7 @@ import numpy as np
 
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .modeling import LoadedModelBundle
-from .utils import utc_now_iso, write_json
+from .utils import progress, utc_now_iso, write_json
 
 
 @dataclass(frozen=True)
@@ -68,6 +68,7 @@ def extract_qk_ov_matrices(
     n_heads = d_model = d_head = 0
 
     for layer_idx in layer_indices:
+        progress(f"Extracting QK/OV matrices for layer {layer_idx}")
         layer = _get_layer(bundle, layer_idx)
         w_q, w_k, w_v = _split_qkv(layer)
         w_o = _split_o(layer)
@@ -81,6 +82,7 @@ def extract_qk_ov_matrices(
     ov_stack = np.stack(ov_by_layer, axis=0)
     output_path = config.paths.circuits_dir / "qk_ov_matrices.npz"
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    progress(f"Writing QK/OV matrix archive: {output_path}")
     np.savez_compressed(
         output_path,
         qk=qk_stack,
@@ -99,5 +101,9 @@ def extract_qk_ov_matrices(
             "d_model": int(d_model),
             "d_head": int(d_head),
         },
+    )
+    progress(
+        "Finished QK/OV export: "
+        f"layers={list(layer_indices)}, heads={n_heads}, d_model={d_model}, d_head={d_head}"
     )
     return CircuitExport(output_path, layer_indices, int(n_heads), int(d_model), int(d_head))
