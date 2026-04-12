@@ -5,6 +5,7 @@ import numpy as np
 from src.config import PipelineConfig, ProjectPaths
 from src.counterfactuals import char_span_to_token_span, generate_counterfactual_sequence
 from src.patching import (
+    _replace_concatenated_head_slice,
     layer_head_restoration_matrix,
     patch_head_output_tensor,
     restoration_metric,
@@ -106,6 +107,19 @@ def test_patch_head_output_tensor_patches_only_target_head() -> None:
     assert patched[1, 2, 2].sum() == 5
     assert patched[1, 2, 1].sum() == 0
     assert patched[0].sum() == 0
+
+
+def test_replace_concatenated_head_slice_preserves_other_heads() -> None:
+    import torch
+
+    clean = torch.ones((3, 6), dtype=torch.float32)
+    corrupted = torch.zeros((3, 6), dtype=torch.float32)
+
+    patched = _replace_concatenated_head_slice(corrupted, clean, head_idx=1, d_head=2)
+
+    assert torch.allclose(patched[:, :2], torch.zeros((3, 2)))
+    assert torch.allclose(patched[:, 2:4], torch.ones((3, 2)))
+    assert torch.allclose(patched[:, 4:], torch.zeros((3, 2)))
 
 
 def test_layer_head_restoration_matrix_averages_examples() -> None:
