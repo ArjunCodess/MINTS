@@ -113,6 +113,12 @@ def _load_probe_metrics(path: str | Path, config: PipelineConfig) -> list[dict[s
                     "accuracy": float(row["accuracy"]),
                     "train_examples": int(row["train_examples"]),
                     "test_examples": int(row["test_examples"]),
+                    "train_positive_rate": float(row["train_positive_rate"])
+                    if "train_positive_rate" in row
+                    else None,
+                    "test_positive_rate": float(row["test_positive_rate"])
+                    if "test_positive_rate" in row
+                    else None,
                 }
             )
     return rows

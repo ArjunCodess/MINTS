@@ -5,8 +5,10 @@ __all__ = [
     "ctcf",
     "activations",
     "circuits",
+    "counterfactuals",
     "data_ingestion",
     "enrichment",
     "modeling",
+    "patching",
     "probing",
 ]

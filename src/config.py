@@ -26,6 +26,9 @@ class ProjectPaths:
     activations_dir: Path = RESULTS_DIR / "activations"
     circuits_dir: Path = RESULTS_DIR / "circuits"
     enrichment_dir: Path = RESULTS_DIR / "enrichment"
+    counterfactuals_dir: Path = RESULTS_DIR / "counterfactuals"
+    patching_dir: Path = RESULTS_DIR / "patching"
+    figures_dir: Path = RESULTS_DIR / "figures"
     tables_dir: Path = RESULTS_DIR / "tables"
     encode_url_file: Path = DATA_DIR / "ENCODE4_v1.5.1_GRCh38.txt"
     grch38_fasta_gz: Path = DATA_DIR / "genomes" / "hg38.fa.gz"
@@ -44,6 +47,9 @@ class ProjectPaths:
             self.activations_dir,
             self.circuits_dir,
             self.enrichment_dir,
+            self.counterfactuals_dir,
+            self.patching_dir,
+            self.figures_dir,
             self.tables_dir,
             self.grch38_fasta.parent,
         ):

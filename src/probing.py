@@ -24,6 +24,8 @@ class ProbeResult:
     accuracy: float
     train_examples: int
     test_examples: int
+    train_positive_rate: float
+    test_positive_rate: float
 
 
 def _load_activation_file(path: Path) -> dict[str, np.ndarray]:
@@ -80,6 +82,8 @@ def train_logistic_probe_for_task(
         accuracy=float(accuracy_score(y_test, predictions)),
         train_examples=int(len(y_train)),
         test_examples=int(len(y_test)),
+        train_positive_rate=float(np.mean(y_train)),
+        test_positive_rate=float(np.mean(y_test)),
     )
 
 
