@@ -13,6 +13,7 @@ from .ctcf import ensure_grch38_fasta, prepare_ctcf_sequences
 from .activations import cache_probe_residuals
 from .circuits import extract_qk_ov_matrices
 from .data_ingestion import download_encode_artifacts, ingest_hf_downstream_tasks
+from .mechanistic_proofs import run_mechanistic_proof_exports
 from .modeling import load_hooked_encoder, summarize_hook_points
 from .probing import run_all_probes
 from .utils import progress, utc_now_iso, write_json
@@ -73,6 +74,8 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
     circuit_export = extract_qk_ov_matrices(bundle, config=config)
     progress("Training linear probes from cached residuals")
     probe_table = run_all_probes(config=config)
+    progress("Running strict mechanistic proof exports")
+    proof_exports = run_mechanistic_proof_exports(bundle, config=config)
     return {
         "model_manifest": str(model_manifest_path),
         "instrumentation_backend": bundle.instrumentation_backend,
@@ -94,6 +97,7 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
             "d_head": circuit_export.d_head,
         },
         "probe_table": str(probe_table),
+        "proof_exports": proof_exports,
     }
 
 
@@ -186,6 +190,19 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
                 "metrics_path": _relative_to_project(details["probe_table"], config),
                 "metrics": _load_probe_metrics(details["probe_table"], config),
             },
+            "strict_proofs": {
+                "qk_alignment": {
+                    key: _relative_to_project(path, config)
+                    for key, path in details["proof_exports"]["qk_alignment"].items()
+                },
+                "activation_patching": {
+                    key: _relative_to_project(path, config)
+                    for key, path in details["proof_exports"]["activation_patching"].items()
+                },
+                "patching_pair": _relative_to_project(details["proof_exports"]["patching_pair"], config),
+                "patching_pair_summary": details["proof_exports"]["patching_pair_summary"],
+                "summary": details["proof_exports"].get("summary", {}),
+            },
         }
     else:
         compact_details = details
@@ -232,6 +249,7 @@ def _write_run_manifest(
             "circuit_layers": list(config.data.circuit_layers),
             "max_probe_train": config.data.max_probe_train,
             "max_probe_test": config.data.max_probe_test,
+            "max_qk_alignment_sequences": config.data.max_qk_alignment_sequences,
         },
         "steps": [_compact_step(step, config) for step in steps],
     }

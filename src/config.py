@@ -26,6 +26,7 @@ class ProjectPaths:
     activations_dir: Path = RESULTS_DIR / "activations"
     circuits_dir: Path = RESULTS_DIR / "circuits"
     enrichment_dir: Path = RESULTS_DIR / "enrichment"
+    qk_alignment_dir: Path = RESULTS_DIR / "qk_alignment"
     counterfactuals_dir: Path = RESULTS_DIR / "counterfactuals"
     patching_dir: Path = RESULTS_DIR / "patching"
     figures_dir: Path = RESULTS_DIR / "figures"
@@ -47,6 +48,7 @@ class ProjectPaths:
             self.activations_dir,
             self.circuits_dir,
             self.enrichment_dir,
+            self.qk_alignment_dir,
             self.counterfactuals_dir,
             self.patching_dir,
             self.figures_dir,
@@ -93,6 +95,7 @@ class DataConfig:
     probe_layer: int = 11
     max_probe_train: int | None = None
     max_probe_test: int | None = None
+    max_qk_alignment_sequences: int | None = None
     circuit_layers: tuple[int, ...] = (0, 5, 11)
 
     def canonical_task(self, task_name: str) -> str:

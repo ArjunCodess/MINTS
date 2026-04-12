@@ -9,7 +9,8 @@ import numpy as np
 import pandas as pd
 
 from .config import DEFAULT_CONFIG, PipelineConfig
-from .utils import utc_now_iso, write_json
+from .data_ingestion import canonicalize_task_name
+from .utils import progress, utc_now_iso, write_json
 
 
 def restoration_metric(
@@ -200,3 +201,216 @@ def run_transformerlens_head_out_patching(
         clean_cache,
         patching_metric_fn,
     )
+
+
+def _train_probe_scorer(task: str, config: PipelineConfig):
+    """Train the same linear probe family used as the patching target score."""
+
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import StandardScaler
+
+    from .probing import _features_for_layer, _load_activation_file
+
+    task = canonicalize_task_name(task, config.data)
+    train_payload = _load_activation_file(config.paths.activations_dir / f"{task}_train_residual_mean.npz")
+    x_train, y_train = _features_for_layer(train_payload, config.data.probe_layer)
+    scorer = make_pipeline(
+        StandardScaler(),
+        LogisticRegression(
+            max_iter=2000,
+            class_weight="balanced",
+            random_state=config.data.seed,
+            solver="lbfgs",
+        ),
+    )
+    scorer.fit(x_train, y_train)
+    return scorer
+
+
+def _encode_single(tokenizer, sequence: str, device: str) -> dict:
+    encoded = tokenizer(sequence, return_tensors="pt", padding=True, truncation=True)
+    return {key: value.to(device) for key, value in encoded.items()}
+
+
+def _mean_pool_single(hidden, attention_mask):
+    """Mean-pool a single-sequence DNABERT hidden state."""
+
+    if hidden.ndim == 3:
+        mask = attention_mask.to(hidden.device).unsqueeze(-1).to(hidden.dtype)
+        return ((hidden * mask).sum(dim=1) / mask.sum(dim=1).clamp_min(1.0)).detach().cpu().numpy()
+    if hidden.ndim == 2:
+        return hidden.mean(dim=0, keepdim=True).detach().cpu().numpy()
+    raise ValueError(f"Unexpected hidden rank for probe scoring: {hidden.ndim}")
+
+
+def _score_sequence_with_probe(bundle, sequence: str, scorer, config: PipelineConfig) -> float:
+    import torch
+
+    encoded = _encode_single(bundle.tokenizer, sequence, bundle.device)
+    bundle.hf_model.eval()
+    with torch.no_grad():
+        outputs = bundle.hf_model(
+            input_ids=encoded["input_ids"],
+            attention_mask=encoded["attention_mask"],
+            output_all_encoded_layers=True,
+        )
+    hidden = outputs[0][config.data.probe_layer]
+    pooled = _mean_pool_single(hidden, encoded["attention_mask"])
+    return float(scorer.decision_function(pooled)[0])
+
+
+def _cache_clean_attention_self_outputs(bundle, clean_sequence: str, layer_indices: tuple[int, ...]) -> dict[int, object]:
+    """Cache concatenated per-head outputs from DNABERT attention-self modules."""
+
+    import torch
+
+    cache: dict[int, object] = {}
+    handles = []
+    for layer_idx in layer_indices:
+        module = bundle.hf_model.encoder.layer[layer_idx].attention.self
+
+        def make_hook(idx: int):
+            def hook(_module, _inputs, output):
+                cache[idx] = output.detach()
+
+            return hook
+
+        handles.append(module.register_forward_hook(make_hook(layer_idx)))
+    try:
+        encoded = _encode_single(bundle.tokenizer, clean_sequence, bundle.device)
+        bundle.hf_model.eval()
+        with torch.no_grad():
+            bundle.hf_model(
+                input_ids=encoded["input_ids"],
+                attention_mask=encoded["attention_mask"],
+                output_all_encoded_layers=False,
+            )
+    finally:
+        for handle in handles:
+            handle.remove()
+    return cache
+
+
+def _replace_concatenated_head_slice(output, clean_output, head_idx: int, d_head: int):
+    """Replace one contiguous head slice in DNABERT's concatenated head output."""
+
+    start = head_idx * d_head
+    end = start + d_head
+    if clean_output.shape != output.shape:
+        raise ValueError(
+            "Clean/corrupted attention output shapes differ; "
+            f"got clean {tuple(clean_output.shape)} and corrupted {tuple(output.shape)}."
+        )
+    patched = output.clone()
+    patched[:, start:end] = clean_output[:, start:end]
+    return patched
+
+
+def _patched_probe_score(
+    bundle,
+    corrupted_sequence: str,
+    scorer,
+    config: PipelineConfig,
+    clean_cache: dict[int, object],
+    layer_idx: int,
+    head_idx: int,
+) -> float:
+    """Run corrupted input while replacing one layer/head attention-self output."""
+
+    import torch
+
+    module = bundle.hf_model.encoder.layer[layer_idx].attention.self
+    d_head = int(module.attention_head_size)
+
+    def patch_hook(_module, _inputs, output):
+        clean_output = clean_cache[layer_idx].to(device=output.device, dtype=output.dtype)
+        return _replace_concatenated_head_slice(output, clean_output, head_idx=head_idx, d_head=d_head)
+
+    handle = module.register_forward_hook(patch_hook)
+    try:
+        encoded = _encode_single(bundle.tokenizer, corrupted_sequence, bundle.device)
+        bundle.hf_model.eval()
+        with torch.no_grad():
+            outputs = bundle.hf_model(
+                input_ids=encoded["input_ids"],
+                attention_mask=encoded["attention_mask"],
+                output_all_encoded_layers=True,
+            )
+    finally:
+        handle.remove()
+
+    hidden = outputs[0][config.data.probe_layer]
+    pooled = _mean_pool_single(hidden, encoded["attention_mask"])
+    return float(scorer.decision_function(pooled)[0])
+
+
+def run_custom_dnabert_activation_patching(
+    bundle,
+    clean_sequence: str,
+    corrupted_sequence: str,
+    task: str,
+    config: PipelineConfig = DEFAULT_CONFIG,
+    layer_indices: tuple[int, ...] | None = None,
+    output_stem: str = "dnabert_custom_activation_patching",
+) -> dict[str, Path]:
+    """Run custom forward-hook activation patching over DNABERT-2 heads.
+
+    This uses the attention-self module output shaped `[nonpad_tokens,
+    n_heads * d_head]`. Each intervention replaces only one head's contiguous
+    slice from the clean run into the corrupted run. The scalar target is the
+    task probe's decision-function score on the patched final residual vector.
+    """
+
+    task = canonicalize_task_name(task, config.data)
+    layers = layer_indices or tuple(range(len(bundle.hf_model.encoder.layer)))
+    n_heads = int(bundle.hf_model.encoder.layer[layers[0]].attention.self.num_attention_heads)
+    progress(f"Training probe scorer for activation patching task={task}")
+    scorer = _train_probe_scorer(task, config)
+
+    clean_encoded = _encode_single(bundle.tokenizer, clean_sequence, bundle.device)
+    corrupted_encoded = _encode_single(bundle.tokenizer, corrupted_sequence, bundle.device)
+    if clean_encoded["input_ids"].shape != corrupted_encoded["input_ids"].shape:
+        raise ValueError(
+            "Clean and corrupted sequences must tokenize to the same shape for head-output patching; "
+            f"got {tuple(clean_encoded['input_ids'].shape)} and {tuple(corrupted_encoded['input_ids'].shape)}."
+        )
+
+    clean_score = _score_sequence_with_probe(bundle, clean_sequence, scorer, config)
+    corrupted_score = _score_sequence_with_probe(bundle, corrupted_sequence, scorer, config)
+    clean_cache = _cache_clean_attention_self_outputs(bundle, clean_sequence, layers)
+
+    restoration = np.full((len(layers), n_heads), np.nan, dtype=np.float64)
+    for layer_offset, layer_idx in enumerate(layers):
+        for head_idx in range(n_heads):
+            patched_score = _patched_probe_score(
+                bundle=bundle,
+                corrupted_sequence=corrupted_sequence,
+                scorer=scorer,
+                config=config,
+                clean_cache=clean_cache,
+                layer_idx=layer_idx,
+                head_idx=head_idx,
+            )
+            restoration[layer_offset, head_idx] = restoration_metric(clean_score, corrupted_score, patched_score)
+        progress(f"Custom patching complete for layer {layer_idx}")
+
+    outputs = save_restoration_matrix(restoration, output_stem, config=config)
+    manifest_path = outputs["manifest"]
+    write_json(
+        manifest_path,
+        {
+            "created_at": utc_now_iso(),
+            "table_path": str(outputs["table"]),
+            "figure_path": str(outputs["figure"]),
+            "task": task,
+            "target": "linear_probe_decision_function",
+            "clean_score": clean_score,
+            "corrupted_score": corrupted_score,
+            "layers": list(layers),
+            "n_heads": n_heads,
+            "shape": list(restoration.shape),
+            "nan_count": int(np.isnan(restoration).sum()),
+        },
+    )
+    return outputs

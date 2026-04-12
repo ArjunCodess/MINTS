@@ -42,6 +42,16 @@ def build_parser() -> argparse.ArgumentParser:
             "Omit this flag to use all available test rows."
         ),
     )
+    parser.add_argument(
+        "--max-qk-alignment-sequences",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Limit CTCF sequences used for strict QK motif-alignment exports. "
+            "Omit this flag to scan all prepared CTCF sequences."
+        ),
+    )
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON output.")
     return parser
 
@@ -55,6 +65,8 @@ def run(argv: list[str] | None = None) -> int:
         parser.error("--max-probe-train must be a positive integer.")
     if args.max_probe_test is not None and args.max_probe_test <= 0:
         parser.error("--max-probe-test must be a positive integer.")
+    if args.max_qk_alignment_sequences is not None and args.max_qk_alignment_sequences <= 0:
+        parser.error("--max-qk-alignment-sequences must be a positive integer.")
 
     config = PipelineConfig()
     config = replace(
@@ -63,6 +75,7 @@ def run(argv: list[str] | None = None) -> int:
             config.data,
             max_probe_train=args.max_probe_train,
             max_probe_test=args.max_probe_test,
+            max_qk_alignment_sequences=args.max_qk_alignment_sequences,
         ),
     )
     manifest_path = run_pipeline(config=config, overwrite=args.overwrite)
