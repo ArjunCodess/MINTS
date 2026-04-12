@@ -1,0 +1,16 @@
+torch
+transformers
+datasets
+transformer-lens
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+tqdm
+requests
+biopython
+pyfaidx
+pytest
+accelerate
+einops
