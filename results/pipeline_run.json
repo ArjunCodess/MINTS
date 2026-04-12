@@ -1,0 +1,211 @@
+{
+  "analysis": {
+    "activation_layers": [
+      0,
+      5,
+      11
+    ],
+    "circuit_layers": [
+      0,
+      5,
+      11
+    ],
+    "max_probe_test": 256,
+    "max_probe_train": 512,
+    "probe_layer": 11
+  },
+  "created_at": "2026-04-12T17:13:32+00:00",
+  "data": {
+    "encode_url_file": "data\\ENCODE4_v1.5.1_GRCh38.txt",
+    "grch38_fasta_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz",
+    "hf_dataset": "InstaDeepAI/nucleotide_transformer_downstream_tasks_revised",
+    "hf_dataset_config": "default",
+    "tasks": [
+      "promoter_tata",
+      "promoter_no_tata",
+      "splice_sites_donors",
+      "splice_sites_acceptors"
+    ]
+  },
+  "model": {
+    "device": "auto",
+    "name": "zhihan1996/DNABERT-2-117M",
+    "revision": null,
+    "trust_remote_code": true
+  },
+  "overwrite": false,
+  "project": "MINTS",
+  "status": "completed",
+  "steps": [
+    {
+      "details": {
+        "path": "results\\manifests\\pipeline_config.json"
+      },
+      "name": "write_config",
+      "seconds": 0.0,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "dataset": "InstaDeepAI/nucleotide_transformer_downstream_tasks_revised",
+        "output_dir": "data\\hf_downstream",
+        "tasks": {
+          "promoter_no_tata": {
+            "test": 1372,
+            "train": 30000
+          },
+          "promoter_tata": {
+            "test": 212,
+            "train": 5062
+          },
+          "splice_sites_acceptors": {
+            "test": 3000,
+            "train": 30000
+          },
+          "splice_sites_donors": {
+            "test": 3000,
+            "train": 30000
+          }
+        }
+      },
+      "name": "ingest_hf_downstream",
+      "seconds": 10.13,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "artifacts": [
+          {
+            "filename": "ENCFF680XUD.bigWig",
+            "path": "data\\encode\\ctcf_gm12878\\ENCFF680XUD.bigWig",
+            "status": "exists"
+          },
+          {
+            "filename": "ENCFF827JRI.bed.gz",
+            "path": "data\\encode\\ctcf_gm12878\\ENCFF827JRI.bed.gz",
+            "status": "exists"
+          },
+          {
+            "filename": "ENCFF511URZ.bigBed",
+            "path": "data\\encode\\ctcf_gm12878\\ENCFF511URZ.bigBed",
+            "status": "exists"
+          }
+        ],
+        "output_dir": "data\\encode\\ctcf_gm12878"
+      },
+      "name": "download_encode_ctcf",
+      "seconds": 0.343,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "path": "data\\genomes\\hg38.fa"
+      },
+      "name": "download_grch38",
+      "seconds": 3.662,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "path": "data\\ctcf\\ctcf_gm12878_sequences.tsv"
+      },
+      "name": "prepare_ctcf_sequences",
+      "seconds": 2.597,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "activations": {
+          "artifact_paths": [
+            "results\\activations\\promoter_tata_train_residual_mean.npz",
+            "results\\activations\\promoter_tata_test_residual_mean.npz",
+            "results\\activations\\promoter_no_tata_train_residual_mean.npz",
+            "results\\activations\\promoter_no_tata_test_residual_mean.npz",
+            "results\\activations\\splice_sites_donors_train_residual_mean.npz",
+            "results\\activations\\splice_sites_donors_test_residual_mean.npz",
+            "results\\activations\\splice_sites_acceptors_train_residual_mean.npz",
+            "results\\activations\\splice_sites_acceptors_test_residual_mean.npz"
+          ],
+          "exports": 8,
+          "layers": [
+            0,
+            5,
+            11
+          ],
+          "pooling": "mean",
+          "splits": [
+            "train",
+            "test"
+          ],
+          "tasks": [
+            "promoter_tata",
+            "promoter_no_tata",
+            "splice_sites_donors",
+            "splice_sites_acceptors"
+          ]
+        },
+        "circuits": {
+          "artifact_path": "results\\circuits\\qk_ov_matrices.npz",
+          "d_head": 64,
+          "d_model": 768,
+          "layers": [
+            0,
+            5,
+            11
+          ],
+          "n_heads": 12
+        },
+        "model": {
+          "device": "cuda",
+          "instrumentation_backend": "huggingface_forward_hooks",
+          "manifest": "results\\manifests\\model_hooked_encoder_manifest.json",
+          "name": "zhihan1996/DNABERT-2-117M"
+        },
+        "probes": {
+          "metrics": [
+            {
+              "accuracy": 0.8349056603773585,
+              "auprc": 0.9299118319571449,
+              "auroc": 0.9201673193307227,
+              "layer": 11,
+              "task": "promoter_tata",
+              "test_examples": 212,
+              "train_examples": 512
+            },
+            {
+              "accuracy": 0.80859375,
+              "auprc": 0.9122641543745198,
+              "auroc": 0.9090576171875,
+              "layer": 11,
+              "task": "promoter_no_tata",
+              "test_examples": 256,
+              "train_examples": 512
+            },
+            {
+              "accuracy": 0.75,
+              "auprc": 0.8436396678993628,
+              "auroc": 0.82086181640625,
+              "layer": 11,
+              "task": "splice_sites_donors",
+              "test_examples": 256,
+              "train_examples": 512
+            },
+            {
+              "accuracy": 0.7109375,
+              "auprc": 0.8030653453906931,
+              "auroc": 0.8035888671875,
+              "layer": 11,
+              "task": "splice_sites_acceptors",
+              "test_examples": 256,
+              "train_examples": 512
+            }
+          ],
+          "metrics_path": "results\\tables\\linear_probe_metrics.csv"
+        }
+      },
+      "name": "circuit_extraction_and_residual_probing",
+      "seconds": 31.049,
+      "status": "completed"
+    }
+  ]
+}
