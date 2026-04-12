@@ -23,6 +23,10 @@ class ProjectPaths:
     encode_dir: Path = DATA_DIR / "encode" / "ctcf_gm12878"
     ctcf_dir: Path = DATA_DIR / "ctcf"
     manifests_dir: Path = RESULTS_DIR / "manifests"
+    activations_dir: Path = RESULTS_DIR / "activations"
+    circuits_dir: Path = RESULTS_DIR / "circuits"
+    enrichment_dir: Path = RESULTS_DIR / "enrichment"
+    tables_dir: Path = RESULTS_DIR / "tables"
     encode_url_file: Path = DATA_DIR / "ENCODE4_v1.5.1_GRCh38.txt"
     grch38_fasta_gz: Path = DATA_DIR / "genomes" / "hg38.fa.gz"
     grch38_fasta: Path = DATA_DIR / "genomes" / "hg38.fa"
@@ -37,6 +41,10 @@ class ProjectPaths:
             self.encode_dir,
             self.ctcf_dir,
             self.manifests_dir,
+            self.activations_dir,
+            self.circuits_dir,
+            self.enrichment_dir,
+            self.tables_dir,
             self.grch38_fasta.parent,
         ):
             path.mkdir(parents=True, exist_ok=True)
@@ -75,6 +83,11 @@ class DataConfig:
     seed: int = 1729
     token_max_length: int | None = None
     batch_size: int = 8
+    activation_layers: tuple[int, ...] = (0, 5, 11)
+    probe_layer: int = 11
+    max_probe_train: int | None = None
+    max_probe_test: int | None = None
+    circuit_layers: tuple[int, ...] = (0, 5, 11)
 
     def canonical_task(self, task_name: str) -> str:
         """Return the canonical task identifier used by the HF dataset."""

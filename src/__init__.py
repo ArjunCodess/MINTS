@@ -3,6 +3,10 @@
 __all__ = [
     "config",
     "ctcf",
+    "activations",
+    "circuits",
     "data_ingestion",
+    "enrichment",
     "modeling",
+    "probing",
 ]

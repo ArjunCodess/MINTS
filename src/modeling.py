@@ -131,6 +131,31 @@ def _patch_dnabert_alibi_builder(model_name: str, hf_config: Any) -> None:
     encoder_class._mints_alibi_patch = True
 
 
+def _disable_dnabert_triton_attention(model_name: str, hf_config: Any) -> None:
+    """Force DNABERT-2 to use its PyTorch attention fallback.
+
+    DNABERT-2 ships a Triton FlashAttention implementation whose `tl.dot`
+    signature is incompatible with newer Triton builds on this environment.
+    The remote attention module already has a maintained PyTorch fallback when
+    `flash_attn_qkvpacked_func` is `None`; this function selects that path.
+    """
+
+    auto_map = getattr(hf_config, "auto_map", None) or {}
+    class_ref = auto_map.get("AutoModel")
+    if class_ref != "bert_layers.BertModel":
+        return
+
+    try:
+        from transformers.dynamic_module_utils import get_class_from_dynamic_module
+    except ImportError:
+        return
+
+    model_class = get_class_from_dynamic_module(class_ref, model_name)
+    module = __import__(model_class.__module__, fromlist=["flash_attn_qkvpacked_func"])
+    if hasattr(module, "flash_attn_qkvpacked_func"):
+        module.flash_attn_qkvpacked_func = None
+
+
 def _rebuild_alibi_on_device(hf_model: Any, device: str) -> None:
     """Rebuild DNABERT-2's ALiBi buffer on the actual runtime device."""
 
@@ -168,6 +193,7 @@ def load_hf_components(config: ModelConfig = DEFAULT_CONFIG.model) -> tuple[Any,
         hf_config.eos_token_id = tokenizer.sep_token_id
 
     _patch_dnabert_alibi_builder(config.model_name, hf_config)
+    _disable_dnabert_triton_attention(config.model_name, hf_config)
     hf_model = AutoModel.from_pretrained(
         config.model_name,
         config=hf_config,
@@ -175,6 +201,8 @@ def load_hf_components(config: ModelConfig = DEFAULT_CONFIG.model) -> tuple[Any,
         revision=config.revision,
     )
     _rebuild_alibi_on_device(hf_model, device)
+    if hasattr(hf_model, "pooler"):
+        hf_model.pooler = None
     hf_model.eval()
     hf_model.to(device)
     return tokenizer, hf_model, device
