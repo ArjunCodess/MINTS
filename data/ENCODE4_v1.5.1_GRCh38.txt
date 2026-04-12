@@ -1,0 +1,4 @@
+"https://www.encodeproject.org/metadata/?type=Experiment&%40id=%2Fexperiments%2FENCSR000DKV%2F&files.analyses.%40id=%2Fanalyses%2FENCAN915FFG%2F&files.preferred_default=true"
+https://www.encodeproject.org/files/ENCFF680XUD/@@download/ENCFF680XUD.bigWig
+https://www.encodeproject.org/files/ENCFF827JRI/@@download/ENCFF827JRI.bed.gz
+https://www.encodeproject.org/files/ENCFF511URZ/@@download/ENCFF511URZ.bigBed
