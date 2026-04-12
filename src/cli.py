@@ -7,7 +7,15 @@ import json
 from dataclasses import replace
 
 from .config import PipelineConfig
-from .reproduce import run_pipeline
+from .reproduce import PIPELINE_STEPS, run_pipeline
+
+
+FROM_STEP_ALIASES = {
+    "all": "write_config",
+    "strict_qk_proof_inputs": "strict_mechanistic_proofs",
+    "strict_qk_proof": "strict_mechanistic_proofs",
+    "strict_proofs": "strict_mechanistic_proofs",
+}
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -52,6 +60,15 @@ def build_parser() -> argparse.ArgumentParser:
             "Omit this flag to scan all prepared CTCF sequences."
         ),
     )
+    parser.add_argument(
+        "--from-step",
+        choices=("all", *PIPELINE_STEPS, "strict_qk_proof_inputs", "strict_qk_proof", "strict_proofs"),
+        default="all",
+        help=(
+            "Start the pipeline from a named checkpoint and continue forward. "
+            "Use strict_mechanistic_proofs to resume at the strict QK/motif proof work."
+        ),
+    )
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON output.")
     return parser
 
@@ -69,6 +86,7 @@ def run(argv: list[str] | None = None) -> int:
         parser.error("--max-qk-alignment-sequences must be a positive integer.")
 
     config = PipelineConfig()
+    from_step = FROM_STEP_ALIASES.get(args.from_step, args.from_step)
     config = replace(
         config,
         data=replace(
@@ -78,7 +96,7 @@ def run(argv: list[str] | None = None) -> int:
             max_qk_alignment_sequences=args.max_qk_alignment_sequences,
         ),
     )
-    manifest_path = run_pipeline(config=config, overwrite=args.overwrite)
+    manifest_path = run_pipeline(config=config, overwrite=args.overwrite, from_step=from_step)
     payload = {
         "message": f"Completed MINTS reproducibility run. Manifest: {manifest_path}",
         "manifest": str(manifest_path),

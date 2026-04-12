@@ -19,6 +19,17 @@ from .probing import run_all_probes
 from .utils import progress, utc_now_iso, write_json
 
 
+PIPELINE_STEPS: tuple[str, ...] = (
+    "write_config",
+    "ingest_hf_downstream",
+    "download_encode_ctcf",
+    "download_grch38",
+    "prepare_ctcf_sequences",
+    "circuit_extraction_and_residual_probing",
+    "strict_mechanistic_proofs",
+)
+
+
 @dataclass(frozen=True)
 class StepRecord:
     """Execution record for a reproducibility step."""
@@ -47,12 +58,9 @@ def _run_step(name: str, func: Callable[[], dict[str, Any]]) -> StepRecord:
     )
 
 
-def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
-    """Load the model once and export circuit/probe artifacts."""
+def _write_model_manifest(bundle: Any, config: PipelineConfig) -> Path:
+    """Write model/hook metadata shared by circuit and proof runs."""
 
-    progress(f"Loading model: {config.model.model_name}")
-    bundle = load_hooked_encoder(config.model)
-    progress(f"Model ready on {bundle.device} using {bundle.instrumentation_backend}")
     hook_points = summarize_hook_points(bundle.hooked_model)
     model_manifest_path = config.paths.manifests_dir / "model_hooked_encoder_manifest.json"
     write_json(
@@ -67,6 +75,16 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
             "hook_points_sample": hook_points,
         },
     )
+    return model_manifest_path
+
+
+def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
+    """Load the model once and export circuit/probe artifacts."""
+
+    progress(f"Loading model: {config.model.model_name}")
+    bundle = load_hooked_encoder(config.model)
+    progress(f"Model ready on {bundle.device} using {bundle.instrumentation_backend}")
+    model_manifest_path = _write_model_manifest(bundle, config)
 
     progress("Caching residual activations for probe tasks")
     activation_exports = cache_probe_residuals(bundle, config=config)
@@ -74,8 +92,6 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
     circuit_export = extract_qk_ov_matrices(bundle, config=config)
     progress("Training linear probes from cached residuals")
     probe_table = run_all_probes(config=config)
-    progress("Running strict mechanistic proof exports")
-    proof_exports = run_mechanistic_proof_exports(bundle, config=config)
     return {
         "model_manifest": str(model_manifest_path),
         "instrumentation_backend": bundle.instrumentation_backend,
@@ -97,6 +113,50 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
             "d_head": circuit_export.d_head,
         },
         "probe_table": str(probe_table),
+    }
+
+
+def _qk_archive_has_low_rank_factors(config: PipelineConfig) -> bool:
+    """Return whether the existing circuit archive contains W_Q/W_K factors."""
+
+    import numpy as np
+
+    archive_path = config.paths.circuits_dir / "qk_ov_matrices.npz"
+    if not archive_path.exists():
+        return False
+    with np.load(archive_path) as archive:
+        return "w_q" in archive.files and "w_k" in archive.files
+
+
+def _run_strict_proof_exports(config: PipelineConfig) -> dict[str, Any]:
+    """Load the model and run strict QK/enrichment/patching proof exports."""
+
+    progress(f"Loading model for strict mechanistic proofs: {config.model.model_name}")
+    bundle = load_hooked_encoder(config.model)
+    progress(f"Model ready on {bundle.device} using {bundle.instrumentation_backend}")
+    model_manifest_path = _write_model_manifest(bundle, config)
+
+    if not _qk_archive_has_low_rank_factors(config):
+        progress("Circuit archive is missing W_Q/W_K factors; refreshing QK/OV export before strict proofs")
+        circuit_export = extract_qk_ov_matrices(bundle, config=config)
+        circuit_summary: dict[str, Any] | None = {
+            "artifact_path": str(circuit_export.path),
+            "layers": list(circuit_export.layers),
+            "n_heads": circuit_export.n_heads,
+            "d_model": circuit_export.d_model,
+            "d_head": circuit_export.d_head,
+            "refreshed_for_low_rank_qk": True,
+        }
+    else:
+        circuit_summary = None
+
+    proof_exports = run_mechanistic_proof_exports(bundle, config=config)
+    return {
+        "model_manifest": str(model_manifest_path),
+        "instrumentation_backend": bundle.instrumentation_backend,
+        "model_name": bundle.model_name,
+        "device": bundle.device,
+        "circuit_refresh": circuit_summary,
         "proof_exports": proof_exports,
     }
 
@@ -190,6 +250,26 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
                 "metrics_path": _relative_to_project(details["probe_table"], config),
                 "metrics": _load_probe_metrics(details["probe_table"], config),
             },
+        }
+    elif step.name == "strict_mechanistic_proofs":
+        compact_details = {
+            "model": {
+                "name": details["model_name"],
+                "device": details["device"],
+                "instrumentation_backend": details["instrumentation_backend"],
+                "manifest": _relative_to_project(details["model_manifest"], config),
+            },
+            "circuit_refresh": (
+                {
+                    **details["circuit_refresh"],
+                    "artifact_path": _relative_to_project(
+                        details["circuit_refresh"]["artifact_path"],
+                        config,
+                    ),
+                }
+                if details.get("circuit_refresh") is not None
+                else None
+            ),
             "strict_proofs": {
                 "qk_alignment": {
                     key: _relative_to_project(path, config)
@@ -220,6 +300,7 @@ def _write_run_manifest(
     config: PipelineConfig,
     status: str,
     overwrite: bool,
+    from_step: str,
     steps: list[StepRecord],
     error: str | None = None,
 ) -> None:
@@ -230,6 +311,7 @@ def _write_run_manifest(
         "status": status,
         "project": "MINTS",
         "overwrite": overwrite,
+        "from_step": from_step,
         "model": {
             "name": config.model.model_name,
             "device": config.model.device,
@@ -261,9 +343,12 @@ def _write_run_manifest(
 def run_pipeline(
     config: PipelineConfig = DEFAULT_CONFIG,
     overwrite: bool = False,
+    from_step: str = "write_config",
 ) -> Path:
     """Run the complete reproducibility pipeline."""
 
+    if from_step not in PIPELINE_STEPS:
+        raise ValueError(f"Unknown from_step '{from_step}'. Expected one of: {', '.join(PIPELINE_STEPS)}")
     progress("Creating required data/results directories")
     config.ensure_paths()
     run_manifest_path = config.paths.results_dir / "pipeline_run.json"
@@ -310,12 +395,18 @@ def run_pipeline(
         return {"path": str(output_path)}
 
     try:
-        steps.append(_run_step("write_config", record_config))
-        steps.append(_run_step("ingest_hf_downstream", ingest_hf))
-        steps.append(_run_step("download_encode_ctcf", download_encode))
-        steps.append(_run_step("download_grch38", download_grch38))
-        steps.append(_run_step("prepare_ctcf_sequences", prepare_ctcf))
-        steps.append(_run_step("circuit_extraction_and_residual_probing", lambda: _run_circuit_and_probe_exports(config)))
+        step_functions: dict[str, Callable[[], dict[str, Any]]] = {
+            "write_config": record_config,
+            "ingest_hf_downstream": ingest_hf,
+            "download_encode_ctcf": download_encode,
+            "download_grch38": download_grch38,
+            "prepare_ctcf_sequences": prepare_ctcf,
+            "circuit_extraction_and_residual_probing": lambda: _run_circuit_and_probe_exports(config),
+            "strict_mechanistic_proofs": lambda: _run_strict_proof_exports(config),
+        }
+        start_index = PIPELINE_STEPS.index(from_step)
+        for step_name in PIPELINE_STEPS[start_index:]:
+            steps.append(_run_step(step_name, step_functions[step_name]))
     except Exception as exc:
         progress(f"Writing failed run manifest to {run_manifest_path}")
         _write_run_manifest(
@@ -323,6 +414,7 @@ def run_pipeline(
             config=config,
             status="failed",
             overwrite=overwrite,
+            from_step=from_step,
             steps=steps,
             error=f"{type(exc).__name__}: {exc}",
         )
@@ -334,6 +426,7 @@ def run_pipeline(
         config=config,
         status="completed",
         overwrite=overwrite,
+        from_step=from_step,
         steps=steps,
     )
     return run_manifest_path
