@@ -10,11 +10,11 @@
       5,
       11
     ],
-    "max_probe_test": 256,
-    "max_probe_train": 512,
+    "max_probe_test": null,
+    "max_probe_train": null,
     "probe_layer": 11
   },
-  "created_at": "2026-04-12T17:13:32+00:00",
+  "created_at": "2026-04-12T17:44:48+00:00",
   "data": {
     "encode_url_file": "data\\ENCODE4_v1.5.1_GRCh38.txt",
     "grch38_fasta_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz",
@@ -42,7 +42,7 @@
         "path": "results\\manifests\\pipeline_config.json"
       },
       "name": "write_config",
-      "seconds": 0.0,
+      "seconds": 0.001,
       "status": "completed"
     },
     {
@@ -69,7 +69,7 @@
         }
       },
       "name": "ingest_hf_downstream",
-      "seconds": 10.13,
+      "seconds": 10.579,
       "status": "completed"
     },
     {
@@ -94,7 +94,7 @@
         "output_dir": "data\\encode\\ctcf_gm12878"
       },
       "name": "download_encode_ctcf",
-      "seconds": 0.343,
+      "seconds": 0.3,
       "status": "completed"
     },
     {
@@ -102,7 +102,7 @@
         "path": "data\\genomes\\hg38.fa"
       },
       "name": "download_grch38",
-      "seconds": 3.662,
+      "seconds": 3.891,
       "status": "completed"
     },
     {
@@ -110,7 +110,7 @@
         "path": "data\\ctcf\\ctcf_gm12878_sequences.tsv"
       },
       "name": "prepare_ctcf_sequences",
-      "seconds": 2.597,
+      "seconds": 2.489,
       "status": "completed"
     },
     {
@@ -165,46 +165,54 @@
           "metrics": [
             {
               "accuracy": 0.8349056603773585,
-              "auprc": 0.9299118319571449,
-              "auroc": 0.9201673193307227,
+              "auprc": 0.9240738519505125,
+              "auroc": 0.9136703453186187,
               "layer": 11,
               "task": "promoter_tata",
               "test_examples": 212,
-              "train_examples": 512
+              "test_positive_rate": 0.5,
+              "train_examples": 5062,
+              "train_positive_rate": 0.5
             },
             {
-              "accuracy": 0.80859375,
-              "auprc": 0.9122641543745198,
-              "auroc": 0.9090576171875,
+              "accuracy": 0.8549562682215743,
+              "auprc": 0.9474626409312917,
+              "auroc": 0.9383398923917755,
               "layer": 11,
               "task": "promoter_no_tata",
-              "test_examples": 256,
-              "train_examples": 512
+              "test_examples": 1372,
+              "test_positive_rate": 0.5,
+              "train_examples": 30000,
+              "train_positive_rate": 0.49933333333333335
             },
             {
-              "accuracy": 0.75,
-              "auprc": 0.8436396678993628,
-              "auroc": 0.82086181640625,
+              "accuracy": 0.823,
+              "auprc": 0.9048906823046536,
+              "auroc": 0.8954418563300142,
               "layer": 11,
               "task": "splice_sites_donors",
-              "test_examples": 256,
-              "train_examples": 512
+              "test_examples": 3000,
+              "test_positive_rate": 0.49333333333333335,
+              "train_examples": 30000,
+              "train_positive_rate": 0.5028
             },
             {
-              "accuracy": 0.7109375,
-              "auprc": 0.8030653453906931,
-              "auroc": 0.8035888671875,
+              "accuracy": 0.809,
+              "auprc": 0.8953685706586534,
+              "auroc": 0.8847030841900528,
               "layer": 11,
               "task": "splice_sites_acceptors",
-              "test_examples": 256,
-              "train_examples": 512
+              "test_examples": 3000,
+              "test_positive_rate": 0.49166666666666664,
+              "train_examples": 30000,
+              "train_positive_rate": 0.5010333333333333
             }
           ],
           "metrics_path": "results\\tables\\linear_probe_metrics.csv"
         }
       },
       "name": "circuit_extraction_and_residual_probing",
-      "seconds": 31.049,
+      "seconds": 531.36,
       "status": "completed"
     }
   ]
