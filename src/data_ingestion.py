@@ -176,6 +176,22 @@ def _tokenize_dataset(dataset, tokenizer, max_length: int | None):
     return dataset.map(tokenize_batch, batched=True, desc="Tokenizing sequences")
 
 
+def _load_existing_dataset_dict(output_dir: Path):
+    """Load a saved DatasetDict, returning None for partial/corrupt outputs."""
+
+    from datasets import DatasetDict, load_from_disk
+
+    if not output_dir.exists():
+        return None
+    try:
+        existing = load_from_disk(str(output_dir))
+    except (FileNotFoundError, ValueError, OSError):
+        return None
+    if not isinstance(existing, DatasetDict):
+        return None
+    return existing
+
+
 def ingest_hf_downstream_tasks(
     config: PipelineConfig = DEFAULT_CONFIG,
     task_names: Iterable[str] | None = None,
@@ -218,9 +234,11 @@ def ingest_hf_downstream_tasks(
         if output_dir.exists() and overwrite:
             shutil.rmtree(output_dir)
         if output_dir.exists() and not overwrite:
-            existing = load_from_disk(str(output_dir))
-            summary[task] = {split: len(ds) for split, ds in existing.items()}
-            continue
+            existing = _load_existing_dataset_dict(output_dir)
+            if existing is not None:
+                summary[task] = {split: len(ds) for split, ds in existing.items()}
+                continue
+            shutil.rmtree(output_dir)
         tokenized.save_to_disk(str(output_dir))
         summary[task] = {split: len(ds) for split, ds in tokenized.items()}
 

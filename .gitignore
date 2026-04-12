@@ -207,3 +207,14 @@ marimo/_lsp/
 __marimo__/
 
 *.pkl
+
+# MINTS generated artifacts
+data/ctcf/
+data/encode/
+data/genomes/
+data/hf_downstream/
+
+# MINTS run-local results
+results/manifests/*_manifest.json
+results/manifests/pipeline_config.json
+results/manifests/pipeline_run.json
