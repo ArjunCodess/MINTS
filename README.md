@@ -56,16 +56,16 @@ The two data branches serve different roles:
 
 ### What we found
 
-The current checked run used a capped probe configuration before the default was changed to full-data mode. It confirmed that the infrastructure, model loading, circuit export, residual caching, and probe training path works end to end on the local RTX 4060 setup.
+The latest completed run used all available rows in the configured train/test splits for residual caching and probing. It confirmed that the infrastructure, model loading, circuit export, residual caching, and probe training path works end to end on the local RTX 4060 setup.
 
-- `promoter_tata`: AUROC `0.9202`
-- `promoter_no_tata`: AUROC `0.9091`
-- `splice_sites_donors`: AUROC `0.8209`
-- `splice_sites_acceptors`: AUROC `0.8036`
+- `promoter_tata`: AUROC `0.9137`, AUPRC `0.9241`, accuracy `0.8349`, `5062 / 212` train/test examples
+- `promoter_no_tata`: AUROC `0.9383`, AUPRC `0.9475`, accuracy `0.8550`, `30000 / 1372` train/test examples
+- `splice_sites_donors`: AUROC `0.8954`, AUPRC `0.9049`, accuracy `0.8230`, `30000 / 3000` train/test examples
+- `splice_sites_acceptors`: AUROC `0.8847`, AUPRC `0.8954`, accuracy `0.8090`, `30000 / 3000` train/test examples
 
-These numbers should be treated as an engineering validation of the pipeline, not the final scientific result. The default configuration now runs residual caching and probing on all available rows unless the CLI cap flags are provided.
+These numbers are a real positive result for the representation-level claim: the configured biological labels are linearly decodable from frozen layer-11 residual vectors. They do not prove that a specific attention head is a motif detector.
 
-The important result so far is operational: MINTS can load the genomic transformer, export interpretable internals, train residual probes, and write a reproducible run summary. The next scientific step is to run the full-data configuration and use the intervention utilities to test whether candidate heads causally restore motif-linked probe scores.
+The important result so far is precise: MINTS achieved residual decodability and QK/OV export feasibility. It has not yet achieved the stronger mechanistic target, because QK-to-motif correlations, motif-local attention enrichment, and activation-patching restoration heatmaps still need to be executed and validated.
 
 ## Running
 
@@ -198,7 +198,7 @@ Result bundles written by that run:
 - [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv)
 - `results/circuits/qk_ov_matrices.npz`
 
-HF downstream run summary:
+HF downstream full-run summary:
 
 Role in the project: primary labeled benchmark branch for promoter and splice-site probing
 
@@ -206,7 +206,24 @@ Role in the project: primary labeled benchmark branch for promoter and splice-si
 - `promoter_no_tata`: `30000` train rows, `1372` test rows
 - `splice_sites_donors`: `30000` train rows, `3000` test rows
 - `splice_sites_acceptors`: `30000` train rows, `3000` test rows
-- Current default: full-data probing unless capped through CLI flags
+- Probe layer: `11`
+- Runtime model backend: Hugging Face forward hooks
+- Runtime device: `cuda`
+- QK/OV export layers: `0`, `5`, `11`
+
+Layer-11 residual probe metrics:
+
+- `promoter_tata`: AUROC `0.9137`, AUPRC `0.9241`, accuracy `0.8349`
+- `promoter_no_tata`: AUROC `0.9383`, AUPRC `0.9475`, accuracy `0.8550`
+- `splice_sites_donors`: AUROC `0.8954`, AUPRC `0.9049`, accuracy `0.8230`
+- `splice_sites_acceptors`: AUROC `0.8847`, AUPRC `0.8954`, accuracy `0.8090`
+
+Theory comparison:
+
+- Achieved: residual decodability above the paper's AUROC `0.80` threshold on all four tasks.
+- Achieved: selected-layer QK/OV matrices were exported for downstream circuit tests.
+- Not yet achieved: proof that any specific attention head is a biological motif detector.
+- Still required: QK-to-motif correlation, motif-local attention enrichment, and causal restoration via activation patching.
 
 Model instrumentation summary:
 

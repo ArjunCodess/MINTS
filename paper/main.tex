@@ -41,7 +41,7 @@ Lucknow, Uttar Pradesh, India}
 \maketitle
 
 \begin{abstract}
-Genomic foundation models already learn useful biological regularities, but most evidence for this claim remains predictive or post hoc rather than mechanistic. At the same time, strict mechanistic interpretability has largely matured in the study of language models rather than nucleotide models. This paper positions small nucleotide transformers as a tractable setting for circuit-level reverse engineering on commodity hardware. We present a tokenization-aware mathematical framework for analyzing nucleotide transformers using QK and OV circuit decomposition, activation patching, and linear probing. We correct the causal restoration metric used for activation patching, formalize a layer-1 theorem for motif detection via QK circuits, and state an approximate extension for deeper layers under a linear decodability assumption. We also report preliminary implementation results from a reproducible DNABERT-2 pipeline: residual probes trained on capped promoter and splice-site subsets achieve AUROC values of 0.9202, 0.9091, 0.8209, and 0.8036. These results satisfy the paper's residual-decodability criterion but do not yet prove the existence of motif-detector circuits, because motif-local attention enrichment and causal patching restoration have not yet been completed end-to-end. The resulting formulation clarifies what evidence would be required to establish mechanistic motif detectors in genomic transformers and outlines a path from small-model studies to future long-context genomic analyses.
+Genomic foundation models already learn useful biological regularities, but most evidence for this claim remains predictive or post hoc rather than mechanistic. At the same time, strict mechanistic interpretability has largely matured in the study of language models rather than nucleotide models. This paper positions small nucleotide transformers as a tractable setting for circuit-level reverse engineering on commodity hardware. We present a tokenization-aware mathematical framework for analyzing nucleotide transformers using QK and OV circuit decomposition, activation patching, and linear probing. We correct the causal restoration metric used for activation patching, formalize a layer-1 theorem for motif detection via QK circuits, and state an approximate extension for deeper layers under a linear decodability assumption. We also report implementation results from a reproducible DNABERT-2 pipeline: full configured-split residual probes on promoter and splice-site tasks achieve AUROC values of 0.9137, 0.9383, 0.8954, and 0.8847. These results satisfy the paper's residual-decodability criterion but do not yet prove the existence of motif-detector circuits, because motif-local attention enrichment and causal patching restoration have not yet been completed end-to-end. The resulting formulation clarifies what evidence would be required to establish mechanistic motif detectors in genomic transformers and outlines a path from small-model studies to future long-context genomic analyses.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -61,7 +61,7 @@ Prior work in genomic deep learning has focused primarily on predictive performa
 
 The gap between predictive performance and mechanistic understanding has significant implications. Without understanding how models process nucleotide sequences, practitioners cannot trust model predictions in critical applications such as clinical variant interpretation or drug target identification. Furthermore, the inability to interpret model decisions limits the scientific utility of these tools for biological discovery.
 
-This paper makes the following contributions. First, it develops a tokenization-aware mathematical framework for analyzing attention mechanisms in nucleotide transformers, including formulations for QK and OV circuit decomposition. Second, it corrects the activation patching restoration metric and tightens the theoretical conditions under which a QK circuit can implement motif detection. Third, it defines explicit empirical criteria for claiming causal motif detection, residual-stream decodability, and circuit alignment with biological mechanisms. Fourth, it implements a reproducible DNABERT-2 pipeline that downloads genomic benchmark data, extracts QK/OV circuit matrices, caches frozen residual vectors, trains linear probes, and writes run summaries. Fifth, it reports preliminary probe results showing that promoter and splice-site labels are linearly decodable from layer-11 residual states in the current capped run, while explicitly separating this result from the stronger unproven claim that a specific attention head is a motif detector.
+This paper makes the following contributions. First, it develops a tokenization-aware mathematical framework for analyzing attention mechanisms in nucleotide transformers, including formulations for QK and OV circuit decomposition. Second, it corrects the activation patching restoration metric and tightens the theoretical conditions under which a QK circuit can implement motif detection. Third, it defines explicit empirical criteria for claiming causal motif detection, residual-stream decodability, and circuit alignment with biological mechanisms. Fourth, it implements a reproducible DNABERT-2 pipeline that downloads genomic benchmark data, extracts QK/OV circuit matrices, caches frozen residual vectors, trains linear probes, and writes run summaries. Fifth, it reports full configured-split probe results showing that promoter and splice-site labels are linearly decodable from layer-11 residual states, while explicitly separating this result from the stronger unproven claim that a specific attention head is a motif detector.
 
 \section{Related Work}
 \label{sec:related-work}
@@ -338,10 +338,10 @@ A QK circuit is treated as biologically meaningful only when three signals conve
 
 We implemented the proposed pipeline in the MINTS repository as a one-command reproducibility workflow. The pipeline ingests the revised Nucleotide Transformer downstream task dataset, downloads ENCODE GM12878 CTCF artifacts, prepares GRCh38-derived CTCF peak sequences, loads DNABERT-2, exports selected QK/OV circuit matrices, caches frozen residual-stream vectors, and trains logistic regression probes. The run summary is written to \texttt{results/pipeline\_run.json}.
 
-The latest completed run used \texttt{zhihan1996/DNABERT-2-117M} on CUDA through the Hugging Face forward-hook backend. It exported QK and OV matrices for layers 0, 5, and 11. Each exported layer has 12 heads with $d_{\mathrm{model}}=768$ and $d_{\mathrm{head}}=64$. For residual probing, the completed run used a capped configuration of 512 training examples per task and at most 256 test examples per task, except for the TATA promoter task where only 212 test examples were available. The current repository default has since been changed to full-data probing; therefore the numbers in Table~\ref{tab:probe-results} should be read as preliminary capped-run results rather than final full-data estimates.
+The latest completed run used \texttt{zhihan1996/DNABERT-2-117M} on CUDA through the Hugging Face forward-hook backend. It exported QK and OV matrices for layers 0, 5, and 11. Each exported layer has 12 heads with $d_{\mathrm{model}}=768$ and $d_{\mathrm{head}}=64$. For residual probing, the completed run used all rows in the configured train and test splits: 5,062/212 train/test examples for the TATA promoter task, 30,000/1,372 for the non-TATA promoter task, and 30,000/3,000 for each splice-site task. The positive class rates were close to balanced in all train and test splits, ranging from 0.4917 to 0.5028.
 
 \begin{table}[htbp]
-\caption{Preliminary Layer-11 Residual Probe Results from the Implemented Pipeline}
+\caption{Full Configured-Split Layer-11 Residual Probe Results from the Implemented Pipeline}
 \label{tab:probe-results}
 \centering
 \footnotesize
@@ -349,15 +349,15 @@ The latest completed run used \texttt{zhihan1996/DNABERT-2-117M} on CUDA through
 \toprule
 \textbf{Task} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{Acc.} & \textbf{Test n} \\
 \midrule
-promoter\_tata & 0.9202 & 0.9299 & 0.8349 & 212 \\
-promoter\_no\_tata & 0.9091 & 0.9123 & 0.8086 & 256 \\
-splice\_sites\_donors & 0.8209 & 0.8436 & 0.7500 & 256 \\
-splice\_sites\_acceptors & 0.8036 & 0.8031 & 0.7109 & 256 \\
+promoter\_tata & 0.9137 & 0.9241 & 0.8349 & 212 \\
+promoter\_no\_tata & 0.9383 & 0.9475 & 0.8550 & 1372 \\
+splice\_sites\_donors & 0.8954 & 0.9049 & 0.8230 & 3000 \\
+splice\_sites\_acceptors & 0.8847 & 0.8954 & 0.8090 & 3000 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-These results show that the selected biological task labels are linearly decodable from the frozen residual stream at layer 11 under the capped configuration. Under the success criteria in Table~\ref{tab:criteria}, all four tasks meet the residual-decodability threshold of AUROC $\geq 0.80$. This is a genuine positive result for the representation-level part of the theory: it supports the assumption that biologically meaningful task information is present in approximately linear directions in the residual stream.
+These results show that the selected biological task labels are linearly decodable from the frozen residual stream at layer 11 under the full configured-split run. Under the success criteria in Table~\ref{tab:criteria}, all four tasks meet the residual-decodability threshold of AUROC $\geq 0.80$. This is a genuine positive result for the representation-level part of the theory: it supports the assumption that biologically meaningful task information is present in approximately linear directions in the residual stream.
 
 However, this result is not sufficient to prove the existence of a biological motif detector head. The theory in Section~\ref{sec:methodology} requires stronger evidence than probe performance. In particular, the layer-1 theorem concerns QK alignment with a motif score, while the deeper-layer lemma requires an explicit motif direction and a margin condition. The current run exports the circuit matrices needed to test these conditions, but it does not yet report the QK-to-motif correlation. Similarly, the causal criterion in Table~\ref{tab:criteria} requires activation patching restoration, but the completed run has not yet produced layer-by-head restoration matrices for DNABERT-2. Therefore, the present achievement is best summarized as follows: the pipeline has demonstrated residual decodability and circuit-export feasibility, but it has not yet mathematically or causally established that any specific head is a motif detector.
 
@@ -366,7 +366,7 @@ The implementation also clarifies a practical limitation of applying language-mo
 \section{Interpretive Hypotheses}
 \label{sec:analysis}
 
-The preliminary results in Section~\ref{sec:implementation-results} motivate but do not prove the interpretive hypotheses below. The residual-probe AUROCs indicate that promoter and splice-site labels are linearly decodable from the frozen representation, which is consistent with the deeper-layer decodability lemma. The remaining question is whether that decodable information is carried by specific motif-local QK/OV circuits or by more distributed features.
+The implementation results in Section~\ref{sec:implementation-results} motivate but do not prove the interpretive hypotheses below. The residual-probe AUROCs indicate that promoter and splice-site labels are linearly decodable from the frozen representation, which is consistent with the deeper-layer decodability lemma. The remaining question is whether that decodable information is carried by specific motif-local QK/OV circuits or by more distributed features.
 
 \subsection{Expected Mechanism of Motif Detection}
 
@@ -390,7 +390,7 @@ For splice-site tasks, a plausible circuit organization consists of multiple sta
 
 This is a hypothesis about circuit organization, not an empirical claim about any specific trained model.
 
-The capped residual-probe results support only the weakest part of this organization: late residual states contain enough information for linear classification of donor and acceptor labels. They do not yet identify whether early heads implement local donor/acceptor detectors or whether intermediate layers integrate context in the proposed manner.
+The full configured-split residual-probe results support only the weakest part of this organization: late residual states contain enough information for linear classification of donor and acceptor labels. They do not yet identify whether early heads implement local donor/acceptor detectors or whether intermediate layers integrate context in the proposed manner.
 
 \subsection{Expected Alignment with Biological Knowledge}
 
@@ -415,16 +415,16 @@ Fourth, biological annotations are incomplete. Many regulatory elements remain u
 
 Fifth, the linear probing assumption that features are linearly encoded may not hold for all biological concepts. Nonlinear probing methods may reveal additional encoded features.
 
-Sixth, the empirical results reported here are preliminary and capped. They show residual decodability on four benchmark tasks and successful QK/OV export for selected DNABERT-2 layers, but they do not include full-data probe estimates, QK-to-motif correlation tests, motif-local attention enrichment, or completed causal patching heatmaps. The strongest mechanistic claim in the paper---the existence of a specific biological motif-detector head---therefore remains unproven.
+Sixth, the empirical results reported here show residual decodability on four benchmark tasks and successful QK/OV export for selected DNABERT-2 layers, but they do not include QK-to-motif correlation tests, motif-local attention enrichment, or completed causal patching heatmaps. The strongest mechanistic claim in the paper---the existence of a specific biological motif-detector head---therefore remains unproven.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
 This paper reframes the mechanistic study of nucleotide transformers as a precise, underexplored problem at the intersection of genomic foundation models and circuit-level interpretability. It provides a mathematically consistent framework for testing whether attention heads act as motif detectors and whether residual states encode biologically meaningful features, and it reports a preliminary implementation of that framework on DNABERT-2.
 
-The corrected patching metric, tokenization-aware formulation, layer-1 theorem, and deeper-layer lemma together specify what would count as credible evidence. The implemented pipeline achieves one part of this evidence stack: biological labels for promoter and splice-site tasks are linearly decodable from layer-11 residual representations, with capped-run AUROC values ranging from 0.8036 to 0.9202. It also exports the QK and OV matrices needed for future circuit tests. It does not yet achieve the stronger target of proving a motif detector, because the necessary QK-motif alignment, attention-enrichment, and causal-patching results remain to be executed and validated.
+The corrected patching metric, tokenization-aware formulation, layer-1 theorem, and deeper-layer lemma together specify what would count as credible evidence. The implemented pipeline achieves one part of this evidence stack: biological labels for promoter and splice-site tasks are linearly decodable from layer-11 residual representations, with full configured-split AUROC values ranging from 0.8847 to 0.9383. It also exports the QK and OV matrices needed for future circuit tests. It does not yet achieve the stronger target of proving a motif detector, because the necessary QK-motif alignment, attention-enrichment, and causal-patching results remain to be executed and validated.
 
-Future work should run the full-data protocol, compute motif-local attention enrichment and QK-to-motif correlations, complete activation-patching restoration heatmaps, compare tokenization schemes directly, and determine whether sparse long-context tracing can recover circuits over promoter, enhancer, and splicing windows at genomic scale.
+Future work should compute motif-local attention enrichment and QK-to-motif correlations, complete activation-patching restoration heatmaps, compare tokenization schemes directly, and determine whether sparse long-context tracing can recover circuits over promoter, enhancer, and splicing windows at genomic scale.
 
 \section*{Funding Statement}
 
