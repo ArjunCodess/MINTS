@@ -1,11 +1,11 @@
 # MINTS Mechanistic Interpretability Pipeline Plan
 
 ## Summary
-Build a 3-phase Python pipeline under `src/` with `main.py` as a CLI entrypoint. All downloaded/intermediate inputs go under `data/`; all metrics, caches, tables, plots, and manifests go under `results/`.
+Build a reproducible Python pipeline under `src/` with `main.py` as a single-command entrypoint. All downloaded/intermediate inputs go under `data/`; all metrics, caches, tables, plots, and manifests go under `results/`.
 
 Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_lens.HookedEncoder`, not `HookedTransformer`, because the selected model is BERT-style and TransformerLens documents `HookedTransformer` mainly for autoregressive models. Add a compatibility gate: fail fast with a clear error if the current TransformerLens version cannot load DNABERT-2’s custom `BertForMaskedLM`, and point to the custom hook fallback as future work.
 
-## Phase 1: Infrastructure, Model Wrapping, Data Ingestion
+## Infrastructure, Model Wrapping, Data Ingestion
 - Replace the current empty dependency setup with a Python 3.11/3.12 compatible environment. The existing `.venv` is Python 3.14 and has none of the required ML packages installed.
 - Add dependencies for `torch`, `transformers`, `datasets`, `transformer-lens`, `scikit-learn`, `pandas`, `numpy`, `matplotlib`, `seaborn`, `tqdm`, `requests`, `biopython`, and a genome interval reader such as `pyfaidx`.
 - Implement modular modules:
@@ -24,7 +24,7 @@ Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_len
 - For ENCODE, read URLs from `data/ENCODE4_v1.5.1_GRCh38.txt`, download only artifact URLs ending in `.bigWig`, `.bed.gz`, or `.bigBed`, and skip the metadata URL. Store files under `data/encode/ctcf_gm12878/`.
 - Add GRCh38 FASTA/twoBit acquisition as part of CTCF setup so CTCF peak/background intervals can be converted to model-ready DNA sequences. Save derived CTCF sequence tables under `data/ctcf/`.
 
-## Phase 2: Circuit Extraction and Residual Probing
+## Circuit Extraction and Residual Probing
 - Implement batched activation caching in `src/activations.py` using `model.run_with_cache()` on tokenized DNA sequences. Save compact cache-derived arrays, not full unbounded caches, under `results/activations/`.
 - Cache and export at minimum:
   - residual stream vectors per selected layer and position pooling strategy,
@@ -41,7 +41,7 @@ Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_len
   - report AUROC, AUPRC, accuracy, class balance, and confidence intervals where practical.
 - Implement attention enrichment in `src/enrichment.py` by mapping motif support indices from character coordinates to token positions, summing attention mass over motif-support positions, and normalizing by expected attention mass over matched non-motif positions. Save per-layer/head enrichment tables under `results/enrichment/`.
 
-## Phase 3: Causal Intervention and Activation Patching
+## Causal Intervention and Activation Patching
 - Implement `src/counterfactuals.py` for paired clean/corrupted sequence generation:
   - TATA: mutate `TATAAA`/TATA-like hits to a GC-balanced non-motif sequence.
   - Splice donor/acceptor: mutate canonical splice dinucleotides or annotated support windows.
