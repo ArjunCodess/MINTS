@@ -14,3 +14,5 @@ pyfaidx
 pytest
 accelerate
 einops
+triton; platform_system != "Windows"
+triton-windows; platform_system == "Windows"
