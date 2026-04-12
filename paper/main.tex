@@ -1,0 +1,407 @@
+\documentclass[conference]{IEEEtran}
+
+% Required packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{subfigure}
+\usepackage{float}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+
+% Custom commands
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\attention}{Attention}
+\DeclareMathOperator{\layernorm}{LayerNorm}
+
+\begin{document}
+
+\title{Mechanistic Interpretability of Transformer Architectures in Nucleotide Sequence Processing}
+
+\author{
+\IEEEauthorblockN{Arjun Vijay Prakash}
+\IEEEauthorblockA{Independent Researcher\\
+City Montessori School\\
+Lucknow, Uttar Pradesh, India}
+}
+
+\maketitle
+
+\begin{abstract}
+Genomic foundation models already learn useful biological regularities, but most evidence for this claim remains predictive or post hoc rather than mechanistic. At the same time, strict mechanistic interpretability has largely matured in the study of language models rather than nucleotide models. This paper positions small, custom-trained nucleotide transformers as a tractable setting for circuit-level reverse engineering on commodity hardware. We present a tokenization-aware mathematical framework for analyzing nucleotide transformers using QK and OV circuit decomposition, activation patching, and linear probing. We correct the causal restoration metric used for activation patching, formalize a layer-1 theorem for motif detection via QK circuits, and state an approximate extension for deeper layers under a linear decodability assumption. Because the current manuscript is framed as a methodology paper, we replace unexecuted empirical claims with explicit evaluation criteria for identifying motif-sensitive heads, causally important components, and biologically meaningful residual features. The resulting formulation clarifies what evidence would be required to establish mechanistic motif detectors in genomic transformers and outlines a path from small-model studies to future long-context genomic analyses.
+\end{abstract}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+\label{sec:introduction}
+
+The application of transformer architectures to nucleotide sequence analysis has achieved remarkable success in tasks including splice site prediction, transcription factor binding site identification, and regulatory element detection. Models such as DNABERT, Nucleotide Transformer, and SpliceAI demonstrate the predictive value of transformer-based sequence models in genomics \cite{ji2021dnabert,dallatorre2025nucleotide,jaganathan2019spliceai}. However, the internal mechanisms by which these models process genomic sequences remain poorly understood.
+
+Mechanistic interpretability provides a framework for reverse-engineering neural networks into formal, algorithmic subgraphs \cite{elhage2021framework,bereska2024review}. This approach has yielded significant insights in natural language processing, including the discovery of induction-like behaviors, modular circuits, and causal pathways. The application of these techniques to genomic transformers presents unique opportunities and challenges.
+
+While this topic is not untouched, the specific intersection of strict mechanistic interpretability and nucleotide sequence processing on small, custom-trained models remains underexplored. First, genomic sequence models already exist: DNABERT, GPN, Nucleotide Transformer, and recent interpretable RNA foundation models show that sequence models can learn motifs, gene structure, and related biological regularities from nucleotide data \cite{ji2021dnabert,benegas2023gpn,dallatorre2025nucleotide,yu2024plantrna}. Second, the most rigorous circuit-level tools in mechanistic interpretability---including QK/OV decomposition, causal tracing, activation patching, and attribution graphs---have been developed primarily in the context of language models \cite{elhage2021framework,meng2022locating,heimersheim2024patching,ameisen2025circuit}. Third, the field remains bottlenecked by scale: even recent frontier-model analyses report satisfying attribution-graph insight for only about a quarter of the prompts attempted, and long-context attention analysis remains computationally demanding \cite{lindsey2025biology,redondo2025stream}. These constraints make small genomic transformers attractive test beds for exact reverse engineering on consumer hardware.
+
+The fundamental problem addressed in this paper is whether transformers trained on nucleotide sequences develop internal representations that correspond to known biological mechanisms. Specifically, we investigate whether attention heads function as biological motif detectors, whether the residual stream encodes biologically meaningful features, and whether the computational circuits mirror established regulatory mechanisms.
+
+Prior work in genomic deep learning has focused primarily on predictive performance. DeepBind demonstrated that neural networks can learn motif-like position weight patterns for protein binding \cite{alipanahi2015deepbind}. SpliceAI showed that deep models with long-range sequence context improve splice site prediction \cite{jaganathan2019spliceai}. More recently, DNABERT, GPN, and Nucleotide Transformer extended sequence pretraining to genomic data \cite{ji2021dnabert,benegas2023gpn,dallatorre2025nucleotide}. However, these studies do not provide circuit-level explanations for how predictions are generated.
+
+The gap between predictive performance and mechanistic understanding has significant implications. Without understanding how models process nucleotide sequences, practitioners cannot trust model predictions in critical applications such as clinical variant interpretation or drug target identification. Furthermore, the inability to interpret model decisions limits the scientific utility of these tools for biological discovery.
+
+This paper makes the following contributions. First, it develops a tokenization-aware mathematical framework for analyzing attention mechanisms in nucleotide transformers, including formulations for QK and OV circuit decomposition. Second, it corrects the activation patching restoration metric and tightens the theoretical conditions under which a QK circuit can implement motif detection. Third, it defines explicit empirical criteria for claiming causal motif detection, residual-stream decodability, and circuit alignment with biological mechanisms. Fourth, it argues that small, custom-trained nucleotide models form a practical bridge between current mechanistic tools and future long-context genomic analysis.
+
+\section{Related Work}
+\label{sec:related-work}
+
+\subsection{Mechanistic Interpretability}
+
+Mechanistic interpretability emerged from circuit analysis work on neural networks and has since expanded to transformer architectures, where researchers have identified reusable attention patterns, localized computations, and increasingly detailed computational graphs \cite{elhage2021framework,bereska2024review}.
+
+Elhage et al. formalized a mathematical framework for understanding transformers, introducing the QK and OV circuit decomposition. This framework separates attention head computation into two components: the query-key circuit determines where attention is directed, while the output-value circuit determines what information is written to the residual stream \cite{elhage2021framework}.
+
+Activation patching, introduced in causal tracing work by Meng et al. and systematized by Heimersheim and Nanda, provides a causal intervention method for identifying which components are necessary for specific behaviors \cite{meng2022locating,heimersheim2024patching}.
+
+Recent attribution-graph work extends these ideas to frontier models, but also makes their current limits explicit. Anthropic's circuit tracing and biology studies emphasize that successful graphs still explain only a small fraction of total computation and provide satisfying insight for roughly one quarter of prompts attempted \cite{ameisen2025circuit,lindsey2025biology}. In parallel, Redondo Garc{\'\i}a et al. introduced SPARSE TRACING and the STREAM algorithm, which uses hierarchical pruning to achieve near-linear-time attention analysis and prunes 97--99\% of token interactions on long-context reasoning traces \cite{redondo2025stream}. We view these results as important scaling context rather than as evidence that long-context mechanistic interpretability is solved.
+
+\subsection{Genomic Transformers}
+
+DNABERT, introduced by Ji et al., applies the BERT architecture to DNA sequences using $k$-mer tokenization and demonstrates strong downstream performance on promoters, splice sites, and transcription factor binding tasks \cite{ji2021dnabert}.
+
+GPN shows that unsupervised genomic pretraining can recover gene structure and DNA motifs without direct supervision \cite{benegas2023gpn}. Nucleotide Transformer scales genomic pretraining to multiple species and larger model sizes, improving performance on a range of downstream genomics benchmarks \cite{dallatorre2025nucleotide}.
+
+SpliceAI demonstrates the predictive power of long-context sequence modeling for splice site prediction \cite{jaganathan2019spliceai}. Beyond DNA, interpretable RNA foundation models such as PlantRNA-FM show that large sequence models can also be paired with motif-level biological analyses in transcriptomic settings \cite{yu2024plantrna}.
+
+\subsection{Interpretability in Computational Biology}
+
+Prior work on interpretability in genomic deep learning has focused primarily on attribution methods and motif visualization. DeepBind produced motif-like filters from predictive models \cite{alipanahi2015deepbind}. DNABERT enables nucleotide-level importance visualization and motif inspection \cite{ji2021dnabert}. PlantRNA-FM couples a foundation model with biologically meaningful motif analyses in transcriptomes \cite{yu2024plantrna}.
+
+However, these approaches provide correlational rather than causal explanations. They identify which inputs influence outputs but do not explain how internal computations generate predictions. This gap motivates a study that treats genomic transformers as computational objects whose intermediate states, attention heads, and residual updates can be tested with causal interventions.
+
+\section{Methodology}
+\label{sec:methodology}
+
+\subsection{Problem Formulation}
+
+Let $\mathcal{X} = \{A, C, G, T\}^L$ denote the space of nucleotide sequences of length $L$. A tokenization map $\tau: \mathcal{X} \rightarrow \{1, \ldots, V\}^T$ maps a nucleotide sequence $\mathbf{x}$ to token indices $\mathbf{t} = (t_1, \ldots, t_T)$, where $V$ is the vocabulary size and $T$ is the resulting token length. For single-nucleotide tokenization, $V = 4$ (ignoring special tokens); for fixed $k$-mer tokenization, $V = 4^k$; and for learned subword schemes such as byte-pair encoding, $V$ is the learned vocabulary size. Let $\mathbf{E}_{\mathrm{tok}} \in \mathbb{R}^{V \times d}$ be the token embedding matrix and $\mathbf{P} \in \mathbb{R}^{T \times d}$ the positional encoding matrix. The initial hidden state is
+\begin{equation}
+\mathbf{H}^{(0)}_{j,:} = \mathbf{E}_{\mathrm{tok}}[t_j,:] + \mathbf{P}_{j,:}, \quad j = 1, \ldots, T.
+\end{equation}
+
+A bidirectional encoder-only transformer model $f_\theta: \mathcal{X} \rightarrow \mathcal{Y}$ maps sequences to predictions, where $\mathcal{Y}$ depends on the task (binary classification for binding sites, multi-class for splice sites, etc.). This bidirectional assumption is important because motif scores such as $s_m(j)$ may depend on tokens spanning a full local window around position $j$, which is compatible with encoder-style architectures such as DNABERT and Nucleotide Transformer but not with strictly causal masking. The transformer consists of $N$ layers, each containing $H$ attention heads.
+
+Each attention head $h$ in layer $l$ computes:
+\begin{equation}
+\begin{aligned}
+\mathbf{Q}_h^{(l)} &= \mathbf{H}^{(l-1)} \mathbf{W}_h^{Q,(l)}, \\
+\mathbf{K}_h^{(l)} &= \mathbf{H}^{(l-1)} \mathbf{W}_h^{K,(l)}, \\
+\mathbf{V}_h^{(l)} &= \mathbf{H}^{(l-1)} \mathbf{W}_h^{V,(l)}
+\end{aligned}
+\end{equation}
+where $\mathbf{H}^{(l-1)} \in \mathbb{R}^{T \times d}$ is the hidden state entering layer $l$, and $\mathbf{W}_h^{Q,(l)}, \mathbf{W}_h^{K,(l)}, \mathbf{W}_h^{V,(l)} \in \mathbb{R}^{d \times d_k}$ are learned projection matrices. This tokenization-aware formulation lets us reason explicitly about single-nucleotide, fixed $k$-mer, and learned subword vocabularies within the same notation.
+
+The attention weights are computed as:
+\begin{equation}
+\mathbf{A}_h^{(l)} = \softmax\left(\frac{\mathbf{Q}_h^{(l)} (\mathbf{K}_h^{(l)})^T}{\sqrt{d_k}}\right)
+\end{equation}
+
+The head output is:
+\begin{equation}
+\mathbf{O}_h^{(l)} = \mathbf{A}_h^{(l)} \mathbf{V}_h^{(l)} \mathbf{W}_h^{O,(l)}
+\end{equation}
+where $\mathbf{W}_h^{O,(l)} \in \mathbb{R}^{d_k \times d}$ is the output projection matrix.
+
+\subsection{QK and OV Circuit Decomposition}
+
+Following Elhage et al., we decompose each attention head into QK and OV circuits. The QK circuit determines the attention pattern:
+\begin{equation}
+\text{QK}_h^{(l)} = \mathbf{W}_h^{Q,(l)} (\mathbf{W}_h^{K,(l)})^T
+\end{equation}
+where $\text{QK}_h^{(l)} \in \mathbb{R}^{d \times d}$.
+
+The OV circuit determines what is written to the residual stream:
+\begin{equation}
+\text{OV}_h^{(l)} = \mathbf{W}_h^{V,(l)} \mathbf{W}_h^{O,(l)}
+\end{equation}
+where $\text{OV}_h^{(l)} \in \mathbb{R}^{d \times d}$.
+
+This decomposition allows us to analyze where attention is directed separately from what information is transmitted.
+
+\begin{definition}[Biological Motif Detector]
+An attention head $h$ in layer $l$ functions as a biological motif detector for motif $m$ if there exists a nonempty set of relevant query positions $\mathcal{Q}_m$ and a threshold $\tau$ such that, for each relevant query $i \in \mathcal{Q}_m$,
+\begin{equation}
+\begin{aligned}
+&\mathbb{E}\!\left[\sum_{j \in \mathrm{supp}_m(\mathbf{x})} \mathbf{A}_h^{(l)}[i,j] \,\middle|\, \mathrm{supp}_m(\mathbf{x}) \neq \varnothing\right] \geq \tau, \\
+&\mathbb{E}\!\left[\sum_{j \in \mathrm{supp}_m(\mathbf{x})} \mathbf{A}_h^{(l)}[i,j] \,\middle|\, \mathrm{supp}_m(\mathbf{x}) = \varnothing\right] < \tau.
+\end{aligned}
+\end{equation}
+where $\mathrm{supp}_m(\mathbf{x}) \subseteq \{1, \ldots, T\}$ denotes the set of key positions whose associated local sequence windows instantiate motif $m$. The relevant query position $i$ need not itself lie in $\mathrm{supp}_m(\mathbf{x})$.
+\end{definition}
+
+\subsection{Activation Patching for Causal Analysis}
+
+To establish causal relationships between attention heads and biological predictions, we employ activation patching. Given a clean input $\mathbf{x}_c$ containing a biological motif and a corrupted input $\mathbf{x}_{\text{corr}}$ without the motif, we patch activations from the clean run into the corrupted run.
+
+For attention head $h$ in layer $l$, the patching operation is:
+\begin{equation}
+\mathbf{O}_h^{(l),*} = \mathbf{M} \odot \mathbf{O}_h^{(l)}(\mathbf{x}_c) + (1 - \mathbf{M}) \odot \mathbf{O}_h^{(l)}(\mathbf{x}_{\text{corr}})
+\end{equation}
+where $\mathbf{M} \in \{0,1\}^{T \times d}$ is a mask selecting the token positions and hidden dimensions to patch, and $\odot$ denotes elementwise multiplication.
+
+The patching metric measures the restoration of the clean prediction:
+\begin{equation}
+\text{PM}(h, l) = \frac{f(\mathbf{x}_{\text{patched}}) - f(\mathbf{x}_{\text{corr}})}{f(\mathbf{x}_c) - f(\mathbf{x}_{\text{corr}})}
+\end{equation}
+where $f$ denotes the scalar target quantity of interest (for example, the logit of the positive class) and $f(\mathbf{x}_{\text{patched}})$ is the model output with patched activations. Under this normalization, $\text{PM}=0$ indicates no recovery, $\text{PM}=1$ indicates full recovery of the clean effect, and values below $0$ or above $1$ indicate under-restoration or over-restoration, respectively \cite{heimersheim2024patching}.
+
+\subsection{Linear Probing for Feature Extraction}
+
+To analyze what biological features are encoded in the residual stream, we train linear probes on frozen representations. For layer $l$, the probe is:
+\begin{equation}
+\hat{y} = \sigma(\mathbf{W}_p \mathbf{h}^{(l)} + b_p)
+\end{equation}
+where $\mathbf{h}^{(l)}$ is the hidden state, $\mathbf{W}_p \in \mathbb{R}^{k \times d}$, and $\sigma$ is the sigmoid function.
+
+The probe is trained to predict biological annotations including:
+\begin{itemize}
+\item Transcription factor binding sites
+\item Splice site positions
+\item GC content
+\item Conservation scores (phyloP)
+\item Known sequence motifs
+\end{itemize}
+
+Probe accuracy indicates whether the corresponding biological feature is linearly decodable from the representation.
+
+\subsection{Mathematical Framework for Biological Circuit Analysis}
+
+We formalize the relationship between transformer circuits and biological mechanisms through the following framework.
+
+\begin{definition}[Biological Circuit]
+A biological circuit is a subgraph of the transformer computation graph consisting of attention heads and MLP neurons that collectively implement a biological function $b: \mathcal{X} \rightarrow \{0, 1\}$.
+\end{definition}
+
+\begin{theorem}[Layer-1 Motif Detection via QK Circuits]
+Consider a layer-1 attention head operating on $\mathbf{H}^{(0)}$. Let $s_m(j)$ denote a scalar motif score associated with key position $j$; under single-nucleotide tokenization one has $T=L$, so the token index $j$ coincides exactly with the nucleotide position $j$. In that setting, one natural choice is
+\begin{equation}
+ s_m(j) = \sum_{t=0}^{k-1} \sum_{n \in \{A,C,G,T\}} \mathrm{PWM}_m[n, t] \cdot \mathbb{I}[x_{j+t} = n].
+\end{equation}
+If for a fixed query position $i$ there exist constants $a_i \in \mathbb{R}$ and $\gamma > 0$ such that
+\begin{equation}
+\mathbf{q}_i^T \mathbf{k}_j = a_i + \gamma s_m(j)
+\end{equation}
+for all admissible key positions $j$, then the induced attention distribution is monotonically increasing in $s_m(j)$. In particular, if motif-bearing positions are separated from background positions by a positive margin in $s_m$, the head is a motif detector for $m$.
+\end{theorem}
+
+\begin{proof}
+At layer 1, each key vector depends only on the token embedding and positional encoding at its location. By assumption, the score $\mathbf{q}_i^T \mathbf{k}_j$ is an affine function of the motif score $s_m(j)$. The actual attention logits are
+\begin{equation}
+\ell_{ij} = \frac{\mathbf{q}_i^T \mathbf{k}_j}{\sqrt{d_k}} = \frac{a_i}{\sqrt{d_k}} + \frac{\gamma}{\sqrt{d_k}} s_m(j).
+\end{equation}
+Thus the factor $1/\sqrt{d_k}$ is absorbed into the strictly positive constant $\tilde{\gamma} = \gamma / \sqrt{d_k}$, which preserves monotonicity. Because the exponential and softmax functions are strictly monotone in their inputs, the ordering of the scaled scores is preserved in the attention weights $\mathbf{A}_h^{(1)}[i,j]$. Therefore, positions with larger motif score receive larger attention mass. If every motif-bearing position exceeds every background position by a positive margin, then a threshold on attention mass separates the two classes, which is precisely the motif-detector condition.
+\end{proof}
+
+The previous theorem is intentionally restricted to layer 1, where the hidden state is still an explicit function of token and positional embeddings. For deeper layers, an additional decodability assumption is required. This assumption is consistent with the Linear Representation Hypothesis, which posits that semantically meaningful concepts can often be represented as approximately linear directions in activation space \cite{park2024linear}. The following lemma makes that dependence explicit and aligns the argument with these linear representation-style assumptions.
+
+\begin{lemma}[Approximate Extension Under Linear Decodability]
+Suppose that at layer $l-1$ there exists a vector $\mathbf{u}_m$ such that
+\begin{equation}
+\mathbf{u}_m^T \mathbf{h}_j^{(l-1)} = s_m(j) + \epsilon_j, \qquad |\epsilon_j| \leq \delta,
+\end{equation}
+and that the head score satisfies
+\begin{equation}
+\mathbf{q}_i^T \mathbf{k}_j = a_i + \gamma \mathbf{u}_m^T \mathbf{h}_j^{(l-1)}
+\end{equation}
+with $\gamma > 0$. If the motif/background margin in $s_m$ is strictly larger than $2\delta$, then the ordering between motif-bearing and background positions is preserved and the head remains an approximate motif detector.
+\end{lemma}
+
+Because
+\begin{equation}
+\begin{aligned}
+\mathbf{q}_i^T \mathbf{k}_j &= (\mathbf{h}_i^{(l-1)})^T \mathbf{W}_h^{Q,(l)} (\mathbf{W}_h^{K,(l)})^T \mathbf{h}_j^{(l-1)} \\
+&= (\mathbf{h}_i^{(l-1)})^T \mathrm{QK}_h^{(l)} \mathbf{h}_j^{(l-1)},
+\end{aligned}
+\end{equation}
+the assumption
+\begin{equation}
+\mathbf{q}_i^T \mathbf{k}_j = a_i + \gamma \mathbf{u}_m^T \mathbf{h}_j^{(l-1)}
+\end{equation}
+implies that the query-specific row of the QK circuit satisfies
+\begin{equation}
+(\mathbf{h}_i^{(l-1)})^T \mathrm{QK}_h^{(l)} = \mathbf{r}_i^T + \gamma \mathbf{u}_m^T,
+\end{equation}
+where $\mathbf{r}_i^T \mathbf{h}_j^{(l-1)} = a_i$ for all admissible key positions $j$. In the centered-representation or bias-augmented formulation, where the constant offset is represented separately, this reduces to the exact alignment condition
+\begin{equation}
+(\mathbf{h}_i^{(l-1)})^T \mathrm{QK}_h^{(l)} = \gamma \mathbf{u}_m^T.
+\end{equation}
+This equality makes explicit that the QK circuit acts as a linear transformation isolating the motif direction seen by the query.
+
+\begin{proof}
+For any motif-bearing position $j_m$ and background position $j_b$,
+\begin{equation}
+\mathbf{q}_i^T \mathbf{k}_{j_m} - \mathbf{q}_i^T \mathbf{k}_{j_b} = \gamma \big(s_m(j_m) - s_m(j_b) + \epsilon_{j_m} - \epsilon_{j_b}\big).
+\end{equation}
+The perturbation term lies in $[-2\gamma\delta, 2\gamma\delta]$. Hence a clean separation margin greater than $2\delta$ preserves the sign of the score difference, so softmax preserves the motif/background ordering under the same separation criterion.
+\end{proof}
+
+\begin{proposition}[Residual Stream Encoding]
+The residual stream at layer $l$ encodes biological feature $f$ if there exists a linear projection $\mathbf{w}_f$ such that:
+\begin{equation}
+\mathbf{w}_f^T \mathbf{h}_i^{(l)} = f(x_{i-w:i+w}) + \epsilon
+\end{equation}
+where $w$ is the context window and $\epsilon$ is approximation error.
+\end{proposition}
+
+\subsection{Experimental Setup}
+
+We propose instantiating the framework on three genomic transformer families:
+
+\textbf{DNABERT}: a 6-layer transformer with 12 attention heads per layer and fixed 6-mer tokenization \cite{ji2021dnabert}.
+
+\textbf{Nucleotide Transformer}: a larger multi-species transformer with learned genomic tokenization \cite{dallatorre2025nucleotide}.
+
+\textbf{Custom Splice Transformer}: a small model trained specifically for splice site prediction with single-nucleotide tokenization, intended as the primary tractable setting for exhaustive circuit analysis.
+
+For each model, the analysis requires:
+\begin{itemize}
+\item Attention patterns from all heads and layers
+\item Hidden states at each layer
+\item QK and OV circuit matrices
+\item Optional MLP activations for follow-up circuit tracing
+\end{itemize}
+
+Evaluation can be performed on benchmark datasets including:
+\begin{itemize}
+\item ENCODE ChIP-seq for transcription factor binding
+\item GENCODE annotations for splice sites
+\item JASPAR motifs and consensus sequences
+\item Synthetic sequences with implanted or deleted motifs
+\end{itemize}
+
+\section{Evaluation Protocol and Success Criteria}
+\label{sec:results}
+
+Because the current manuscript is framed as a methodology paper rather than a completed experimental report, this section specifies the evidence thresholds that would be required to support the central claims.
+
+\subsection{Candidate Head Screening}
+
+A head is promoted from exploratory inspection to mechanistic analysis only if it satisfies the criteria in Table~\ref{tab:criteria}. These thresholds should be fixed before inspecting held-out results to reduce post hoc threshold selection.
+
+\begin{table}[htbp]
+\caption{Pre-Registered Evidence Criteria for Candidate Motif Circuits}
+\label{tab:criteria}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{1.7cm}p{3.0cm}p{1.6cm}@{}}
+\toprule
+\textbf{Claim} & \textbf{Statistic} & \textbf{Threshold} \\
+\midrule
+Motif localization & Attention enrichment ratio $\rho_h = \mathbb{E}[a_{\mathrm{motif}}] / \mathbb{E}[a_{\mathrm{bg}}]$ & $\rho_h \geq 2.0$ \\
+Motif ranking & Correlation of QK score with motif score & $r \geq 0.5$, $q < 0.05$ \\
+Causal importance & Patching metric $\mathrm{PM}(h,l)$ & $\mathrm{PM} \geq 0.5$ \\
+Strong causal importance & Same as above & $\mathrm{PM} \geq 0.75$ \\
+Residual decodability & Probe AUROC or macro-$F_1$ above baseline & $\geq 0.80$ or $+0.10$ \\
+Robustness & Matched negative controls & No matched effect \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Here $a_{\mathrm{motif}}$ denotes attention mass assigned to motif-support positions and $a_{\mathrm{bg}}$ denotes matched background attention mass. Multiple testing should be controlled with permutation or false-discovery-rate corrections.
+
+\subsection{Causal Intervention Protocol}
+
+Clean and corrupted sequence pairs should differ only in the presence, absence, or mutation of a target motif. Each patching experiment should be accompanied by token-shuffled controls, norm-matched ablations, and replication across random seeds. A single high patching score is insufficient unless it co-occurs with motif-localized attention and a biologically interpretable OV readout.
+
+\subsection{Representation Probing Criteria}
+
+Claims about residual-stream encoding require probes to outperform simple baselines such as position-only or GC-content-only classifiers. Probe results should be reported with calibration, class balance, and random-label controls so that linear separability is not confused with dataset leakage.
+
+\subsection{Circuit Structure Criteria}
+
+A QK circuit is treated as biologically meaningful only when three signals converge: localized attention on motif-support positions, causal restoration under activation patching, and an OV readout that measurably shifts downstream logits or probe-relevant directions. This multi-criterion requirement reduces the risk of overinterpreting attention patterns alone.
+
+\section{Interpretive Hypotheses}
+\label{sec:analysis}
+
+If the criteria above are met, small nucleotide transformers should exhibit several interpretable behaviors that are consistent with known biological constraints.
+
+\subsection{Expected Mechanism of Motif Detection}
+
+Early layers, especially under single-nucleotide or fixed $k$-mer tokenization, should implement local pattern matching because token identity remains directly accessible in the residual stream. Under this hypothesis, motif-sensitive heads will have QK scores that track sequence match scores and OV circuits that write task-relevant evidence into downstream features.
+
+For motif $m$ of length $k$, one expects the candidate detector score at position $i$ to satisfy an approximation of the form
+\begin{equation}
+ s_i \approx \sum_{t=0}^{k-1} \mathbf{w}_m^T \mathbf{e}_{x_{i+t}} + b_m,
+\end{equation}
+where $\mathbf{w}_m$ is a motif-aligned direction and $\mathbf{e}_{x_{i+t}}$ is the embedding associated with nucleotide $x_{i+t}$ or the token covering that position.
+
+\subsection{Expected Circuit Organization}
+
+For splice-site tasks, a plausible circuit organization consists of multiple stages:
+
+\textbf{Early layers}: local detectors identify donor, acceptor, promoter, or composition signals.
+
+\textbf{Intermediate layers}: context integrators combine local motifs with surrounding sequence statistics.
+
+\textbf{Late layers}: aggregators pool evidence across the sequence for final prediction.
+
+This is a hypothesis about circuit organization, not an empirical claim about any specific trained model.
+
+\subsection{Expected Alignment with Biological Knowledge}
+
+Promoter or splice models may recover canonical motifs such as TATA-like promoter elements or GU--AG splice signals, but alignment with known biology should be treated as a testable outcome rather than presumed ground truth. Deviations are also informative: they may reflect data bias, alternate regulatory strategies, or tokenization artifacts.
+
+\subsection{Failure Cases}
+
+Polysemanticity and feature superposition may cause a single head to respond to multiple motifs or to context-dependent composites rather than a single biological primitive. Attention can also be gated by surrounding context, and some biological variables may remain sufficiently nonlinear or distributed that linear probes fail even when the model uses them.
+
+\section{Limitations}
+\label{sec:limitations}
+
+This study has several limitations. First, it is intentionally scoped to small and medium-sized models because current mechanistic tools do not yet provide exhaustive explanations of frontier systems. Recent attribution-graph analyses report satisfying insight for only about a quarter of prompts attempted and emphasize that even successful case studies recover only a subset of total computation \cite{ameisen2025circuit,lindsey2025biology}.
+
+Second, activation patching establishes causal importance but does not fully characterize the computational role of each head. Additional techniques such as path patching or full attribution-graph recovery are still needed for complete circuit characterization \cite{meng2022locating,heimersheim2024patching,ameisen2025circuit}.
+
+Simple co-activation statistics are not sufficient for this purpose. They can reveal which features tend to fire together, but they cannot distinguish correlation from causation or determine the direction of information flow between features. Single-feature causal patching is therefore required to test candidate circuit edges directly, yet scaling such interventions from isolated features to full attribution graphs across thousands of base pairs remains computationally prohibitive.
+
+Third, long genomic contexts remain challenging. Recent sparse tracing work suggests a path forward by achieving near-linear attention analysis and pruning 97--99\% of token interactions on long traces \cite{redondo2025stream}, but this capability has not yet been validated for genomic sequences or for the specific motif analyses proposed here.
+
+Fourth, biological annotations are incomplete. Many regulatory elements remain uncharacterized, and any motif-centered analysis is therefore limited to partially observed biology.
+
+Fifth, the linear probing assumption that features are linearly encoded may not hold for all biological concepts. Nonlinear probing methods may reveal additional encoded features.
+
+Sixth, this manuscript does not yet report executed training runs or fitted circuit decompositions; the empirical claims are therefore posed as falsifiable criteria rather than completed results.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper reframes the mechanistic study of nucleotide transformers as a precise, underexplored problem at the intersection of genomic foundation models and circuit-level interpretability. Rather than claiming completed empirical proof, it provides a mathematically consistent framework for testing whether attention heads act as motif detectors and whether residual states encode biologically meaningful features.
+
+The corrected patching metric, tokenization-aware formulation, layer-1 theorem, and deeper-layer lemma together specify what would count as credible evidence. Small, custom-trained nucleotide transformers therefore offer a tractable benchmark for causal interpretability in computational biology, while recent scalable tracing methods suggest a future path to longer genomic contexts.
+
+Future work should run the full protocol on trained models, compare tokenization schemes directly, and determine whether sparse long-context tracing can recover circuits over promoter, enhancer, and splicing windows at genomic scale.
+
+\section*{Funding Statement}
+
+This research was conducted independently and received no external funding.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\section*{Author Biography}
+
+Arjun Vijay Prakash is a student at City Montessori School, Lucknow, Uttar Pradesh, India. His research interests include neurosymbolic AI, formal logic, and clinical informatics, with a focus on uncertainty-aware prediction for structured medical datasets.
+
+\end{document}
