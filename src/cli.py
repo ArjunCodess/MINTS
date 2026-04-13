@@ -19,6 +19,8 @@ FROM_STEP_ALIASES = {
     "systematic_patching": "systematic_causal_intervention",
     "feature_search": "distributed_feature_search",
     "distributed_features": "distributed_feature_search",
+    "cross_model": "cross_model_tokenization_comparison",
+    "tokenization_comparison": "cross_model_tokenization_comparison",
 }
 
 
@@ -92,6 +94,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="Sparse autoencoder training epochs for distributed feature search. Defaults to 10.",
     )
     parser.add_argument(
+        "--max-cross-model-qk-alignment-sequences",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Limit CTCF sequences used for the cross-model QK/attention-enrichment comparison. "
+            "Omit this flag to scan all prepared CTCF sequences for both models."
+        ),
+    )
+    parser.add_argument(
         "--from-step",
         choices=(
             "all",
@@ -103,6 +115,8 @@ def build_parser() -> argparse.ArgumentParser:
             "systematic_patching",
             "feature_search",
             "distributed_features",
+            "cross_model",
+            "tokenization_comparison",
         ),
         default="all",
         help=(
@@ -131,6 +145,8 @@ def run(argv: list[str] | None = None) -> int:
         parser.error("--max-feature-search-sequences must be zero or a positive integer.")
     if args.sae_epochs is not None and args.sae_epochs <= 0:
         parser.error("--sae-epochs must be a positive integer.")
+    if args.max_cross_model_qk_alignment_sequences is not None and args.max_cross_model_qk_alignment_sequences <= 0:
+        parser.error("--max-cross-model-qk-alignment-sequences must be a positive integer.")
 
     config = PipelineConfig()
     from_step = FROM_STEP_ALIASES.get(args.from_step, args.from_step)
@@ -147,6 +163,7 @@ def run(argv: list[str] | None = None) -> int:
             max_patching_pairs=args.max_patching_pairs,
             max_feature_search_sequences=max_feature_search_sequences,
             sae_epochs=args.sae_epochs,
+            max_cross_model_qk_alignment_sequences=args.max_cross_model_qk_alignment_sequences,
         ),
     )
     manifest_path = run_pipeline(config=config, overwrite=args.overwrite, from_step=from_step)

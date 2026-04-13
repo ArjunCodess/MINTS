@@ -147,7 +147,33 @@ def token_offsets_for_sequence(tokenizer: Any, sequence: str) -> list[tuple[int,
     )
     offsets = encoded.get("offset_mapping")
     if offsets is None:
-        raise ValueError("Tokenizer did not return offset mappings; exact motif-to-token mapping is unavailable.")
+        tokenized = tokenizer(
+            sequence,
+            add_special_tokens=True,
+            truncation=False,
+        )
+        input_ids = tokenized.get("input_ids")
+        if input_ids is None or not hasattr(tokenizer, "convert_ids_to_tokens"):
+            raise ValueError("Tokenizer did not return offset mappings; exact motif-to-token mapping is unavailable.")
+        tokens = tokenizer.convert_ids_to_tokens(input_ids)
+        fallback_offsets: list[tuple[int, int]] = []
+        cursor = 0
+        for token in tokens:
+            token_text = str(token).upper()
+            if token_text.startswith("<") and token_text.endswith(">"):
+                fallback_offsets.append((0, 0))
+                continue
+            compact = token_text.replace(" ", "")
+            if compact and set(compact).issubset({"A", "C", "G", "T", "N"}):
+                start = cursor
+                end = min(len(sequence), cursor + len(compact))
+                fallback_offsets.append((start, end))
+                cursor = end
+            else:
+                fallback_offsets.append((0, 0))
+        if cursor == 0:
+            raise ValueError("Tokenizer did not return offsets and fallback nucleotide token mapping failed.")
+        return fallback_offsets
     return [(int(start), int(end)) for start, end in offsets]
 
 

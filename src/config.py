@@ -30,6 +30,7 @@ class ProjectPaths:
     counterfactuals_dir: Path = RESULTS_DIR / "counterfactuals"
     patching_dir: Path = RESULTS_DIR / "patching"
     distributed_features_dir: Path = RESULTS_DIR / "distributed_features"
+    cross_model_dir: Path = RESULTS_DIR / "cross_model"
     figures_dir: Path = RESULTS_DIR / "figures"
     tables_dir: Path = RESULTS_DIR / "tables"
     encode_url_file: Path = DATA_DIR / "ENCODE4_v1.5.1_GRCh38.txt"
@@ -53,6 +54,7 @@ class ProjectPaths:
             self.counterfactuals_dir,
             self.patching_dir,
             self.distributed_features_dir,
+            self.cross_model_dir,
             self.figures_dir,
             self.tables_dir,
             self.grch38_fasta.parent,
@@ -100,6 +102,7 @@ class DataConfig:
     max_qk_alignment_sequences: int | None = None
     max_patching_pairs: int = 500
     max_feature_search_sequences: int | None = 2048
+    max_cross_model_qk_alignment_sequences: int | None = None
     sae_dictionary_size: int = 512
     sae_epochs: int = 10
     sae_batch_size: int = 256

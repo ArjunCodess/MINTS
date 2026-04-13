@@ -11,7 +11,7 @@ import pandas as pd
 
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .enrichment import MotifSupport, _matched_background_indices
-from .modeling import LoadedModelBundle
+from .modeling import LoadedModelBundle, encode_sequences, encoder_layers, infer_attention_geometry
 from .motif_scoring import TokenMotifScores, score_ctcf_table, save_token_motif_scores
 from .utils import progress, utc_now_iso, write_json
 
@@ -436,8 +436,7 @@ def save_qk_attention_enrichment_outputs(
 
 
 def _encode_one(tokenizer: Any, sequence: str, device: str) -> dict[str, Any]:
-    encoded = tokenizer(sequence, return_tensors="pt", padding=True, truncation=True)
-    return {key: value.to(device) for key, value in encoded.items()}
+    return encode_sequences(tokenizer, sequence, device)
 
 
 def _capture_layer_inputs(
@@ -445,17 +444,21 @@ def _capture_layer_inputs(
     sequence: str,
     layer_indices: tuple[int, ...],
 ) -> dict[int, np.ndarray]:
-    """Capture unpadded DNABERT layer-input hidden states for one sequence."""
+    """Capture layer-input hidden states for one sequence."""
 
     captured: dict[int, np.ndarray] = {}
     handles = []
+    layers = encoder_layers(bundle.hf_model)
 
     for layer_idx in layer_indices:
-        layer = bundle.hf_model.encoder.layer[layer_idx]
+        layer = layers[layer_idx]
 
         def make_hook(idx: int):
             def hook(_module: Any, inputs: tuple[Any, ...]) -> None:
-                captured[idx] = inputs[0].detach().cpu().float().numpy()
+                value = inputs[0].detach().cpu().float().numpy()
+                if value.ndim == 3 and value.shape[0] == 1:
+                    value = value[0]
+                captured[idx] = value
 
             return hook
 
@@ -467,11 +470,19 @@ def _capture_layer_inputs(
         import torch
 
         with torch.no_grad():
-            bundle.hf_model(
-                input_ids=encoded["input_ids"],
-                attention_mask=encoded["attention_mask"],
-                output_all_encoded_layers=False,
-            )
+            try:
+                bundle.hf_model(
+                    input_ids=encoded["input_ids"],
+                    attention_mask=encoded.get("attention_mask"),
+                    output_all_encoded_layers=False,
+                )
+            except TypeError:
+                bundle.hf_model(
+                    input_ids=encoded["input_ids"],
+                    attention_mask=encoded.get("attention_mask"),
+                    output_hidden_states=True,
+                    return_dict=True,
+                )
     finally:
         for handle in handles:
             handle.remove()
@@ -498,7 +509,7 @@ def run_ctcf_qk_alignment(
     layer_indices = tuple(int(layer) for layer in qk_archive["layers"])
     if len(layer_indices) == 0:
         raise ValueError("QK archive does not contain any layer indices.")
-    d_head = int(bundle.hf_model.encoder.layer[layer_indices[0]].attention.self.attention_head_size)
+    _, d_head, _ = infer_attention_geometry(bundle.hf_model, layer_indices[0])
     use_low_rank = w_q_by_layer is not None and w_k_by_layer is not None
     if use_low_rank:
         progress("Using low-rank W_Q/W_K factors for strict QK proof scoring")

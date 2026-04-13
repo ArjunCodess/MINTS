@@ -12,6 +12,7 @@ from .config import DEFAULT_CONFIG, PipelineConfig
 from .ctcf import ensure_grch38_fasta, prepare_ctcf_sequences
 from .activations import cache_probe_residuals
 from .circuits import extract_qk_ov_matrices
+from .cross_model import run_cross_model_tokenization_comparison
 from .data_ingestion import download_encode_artifacts, ingest_hf_downstream_tasks
 from .distributed_features import run_distributed_feature_search
 from .mechanistic_proofs import run_mechanistic_proof_exports, run_systematic_causal_intervention_exports
@@ -30,6 +31,7 @@ PIPELINE_STEPS: tuple[str, ...] = (
     "strict_mechanistic_proofs",
     "systematic_causal_intervention",
     "distributed_feature_search",
+    "cross_model_tokenization_comparison",
 )
 
 
@@ -202,6 +204,13 @@ def _run_distributed_feature_search(config: PipelineConfig) -> dict[str, Any]:
     }
 
 
+def _run_cross_model_tokenization_comparison(config: PipelineConfig) -> dict[str, Any]:
+    """Run DNABERT-2 vs Nucleotide Transformer comparison benchmarks."""
+
+    report_path = run_cross_model_tokenization_comparison(config=config)
+    return {"report_path": str(report_path)}
+
+
 def _relative_to_project(path: str | Path, config: PipelineConfig) -> str:
     """Render a path relative to the repository root when possible."""
 
@@ -369,6 +378,8 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
                 for source, source_outputs in outputs["sources"].items()
             },
         }
+    elif step.name == "cross_model_tokenization_comparison":
+        compact_details = {"report_path": _relative_to_project(details["report_path"], config)}
     else:
         compact_details = details
 
@@ -419,6 +430,7 @@ def _write_run_manifest(
             "max_qk_alignment_sequences": config.data.max_qk_alignment_sequences,
             "max_patching_pairs": config.data.max_patching_pairs,
             "max_feature_search_sequences": config.data.max_feature_search_sequences,
+            "max_cross_model_qk_alignment_sequences": config.data.max_cross_model_qk_alignment_sequences,
             "sae_dictionary_size": config.data.sae_dictionary_size,
             "sae_epochs": config.data.sae_epochs,
             "sae_l1_coefficient": config.data.sae_l1_coefficient,
@@ -499,6 +511,7 @@ def run_pipeline(
             "strict_mechanistic_proofs": lambda: _run_strict_proof_exports(config),
             "systematic_causal_intervention": lambda: _run_systematic_causal_interventions(config),
             "distributed_feature_search": lambda: _run_distributed_feature_search(config),
+            "cross_model_tokenization_comparison": lambda: _run_cross_model_tokenization_comparison(config),
         }
         start_index = PIPELINE_STEPS.index(from_step)
         for step_name in PIPELINE_STEPS[start_index:]:

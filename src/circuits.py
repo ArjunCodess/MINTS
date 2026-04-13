@@ -9,7 +9,7 @@ from typing import Iterable
 import numpy as np
 
 from .config import DEFAULT_CONFIG, PipelineConfig
-from .modeling import LoadedModelBundle
+from .modeling import LoadedModelBundle, encoder_layers
 from .utils import progress, utc_now_iso, write_json
 
 
@@ -25,30 +25,65 @@ class CircuitExport:
 
 
 def _get_layer(bundle: LoadedModelBundle, layer_idx: int):
-    return bundle.hf_model.encoder.layer[layer_idx]
+    return encoder_layers(bundle.hf_model)[layer_idx]
 
 
 def _split_qkv(layer) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Return W_Q, W_K, W_V as [head, d_model, d_head] arrays."""
 
-    weight = layer.attention.self.Wqkv.weight.detach().cpu().float().numpy()
-    hidden3, d_model = weight.shape
-    hidden = hidden3 // 3
-    n_heads = layer.attention.self.num_attention_heads
-    d_head = hidden // n_heads
-    q, k, v = np.split(weight, 3, axis=0)
-    q = q.reshape(n_heads, d_head, d_model).transpose(0, 2, 1)
-    k = k.reshape(n_heads, d_head, d_model).transpose(0, 2, 1)
-    v = v.reshape(n_heads, d_head, d_model).transpose(0, 2, 1)
-    return q, k, v
+    attention = getattr(layer, "attention", None)
+    self_attn = getattr(attention, "self", attention)
+    if hasattr(self_attn, "Wqkv"):
+        weight = self_attn.Wqkv.weight.detach().cpu().float().numpy()
+        hidden3, d_model = weight.shape
+        hidden = hidden3 // 3
+        n_heads = int(self_attn.num_attention_heads)
+        d_head = hidden // n_heads
+        q, k, v = np.split(weight, 3, axis=0)
+        q = q.reshape(n_heads, d_head, d_model).transpose(0, 2, 1)
+        k = k.reshape(n_heads, d_head, d_model).transpose(0, 2, 1)
+        v = v.reshape(n_heads, d_head, d_model).transpose(0, 2, 1)
+        return q, k, v
+
+    q_proj = getattr(self_attn, "query", None) or getattr(self_attn, "q_proj", None)
+    k_proj = getattr(self_attn, "key", None) or getattr(self_attn, "k_proj", None)
+    v_proj = getattr(self_attn, "value", None) or getattr(self_attn, "v_proj", None)
+    if q_proj is None or k_proj is None or v_proj is None:
+        raise AttributeError("Could not locate separate Q/K/V projections for this attention layer.")
+
+    q_weight = q_proj.weight.detach().cpu().float().numpy()
+    k_weight = k_proj.weight.detach().cpu().float().numpy()
+    v_weight = v_proj.weight.detach().cpu().float().numpy()
+    out_dim, d_model = q_weight.shape
+    n_heads = getattr(self_attn, "num_attention_heads", None) or getattr(self_attn, "num_heads", None)
+    if n_heads is None:
+        raise AttributeError("Could not infer number of attention heads for this attention layer.")
+    n_heads = int(n_heads)
+    d_head = out_dim // n_heads
+
+    def split_heads(weight: np.ndarray) -> np.ndarray:
+        return weight.reshape(n_heads, d_head, d_model).transpose(0, 2, 1)
+
+    return split_heads(q_weight), split_heads(k_weight), split_heads(v_weight)
 
 
 def _split_o(layer) -> np.ndarray:
     """Return W_O as [head, d_head, d_model]."""
 
-    weight = layer.attention.output.dense.weight.detach().cpu().float().numpy()
+    attention = getattr(layer, "attention", None)
+    self_attn = getattr(attention, "self", attention)
+    output = getattr(attention, "output", None)
+    out_proj = getattr(output, "dense", None) if output is not None else None
+    if out_proj is None:
+        out_proj = getattr(self_attn, "out_proj", None) or getattr(attention, "out_proj", None)
+    if out_proj is None:
+        raise AttributeError("Could not locate attention output projection for this layer.")
+    weight = out_proj.weight.detach().cpu().float().numpy()
     d_model, hidden = weight.shape
-    n_heads = layer.attention.self.num_attention_heads
+    n_heads = getattr(self_attn, "num_attention_heads", None) or getattr(self_attn, "num_heads", None)
+    if n_heads is None:
+        raise AttributeError("Could not infer number of attention heads for this attention layer.")
+    n_heads = int(n_heads)
     d_head = hidden // n_heads
     return weight.reshape(d_model, n_heads, d_head).transpose(1, 2, 0)
 
