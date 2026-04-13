@@ -113,11 +113,40 @@ Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_len
   - save top aligned features, SAE checkpoints, training histories, and summary JSON under `results/distributed_features/`,
   - save top-feature alignment plots under `results/figures/`.
 
+## Cross-Model Tokenization Comparison
+- Add a model-comparison path that runs the same benchmark logic for:
+  - `zhihan1996/DNABERT-2-117M` with BPE tokenization,
+  - `InstaDeepAI/nucleotide-transformer-v2-100m-multi-species` with fixed 6-mer tokenization.
+- Keep DNABERT-2 as the primary/default model, and treat Nucleotide Transformer as a comparison backend.
+- For each model:
+  - load the Hugging Face tokenizer and encoder with the same data splits,
+  - cache frozen residual activations under `results/cross_model/<model_slug>/activations/`,
+  - train the same logistic residual probes and save metrics under `results/cross_model/<model_slug>/tables/`,
+  - extract compatible QK/OV circuit factors when the backend exposes Q/K/V/O weights,
+  - run the same CTCF QK-reconstructed matched attention enrichment benchmark,
+  - record explicit skip reasons if a backend does not expose compatible circuit weights or token offsets.
+- Save the consolidated comparison report to `results/tables/cross_model_tokenization_comparison.json` with:
+  - model names and tokenization family,
+  - tokenizer class,
+  - per-task AUROC/AUPRC/accuracy,
+  - best attention enrichment ratio and candidate-head count,
+  - DNABERT-vs-Nucleotide-Transformer metric deltas.
+
+## Sparse Autoencoder and MLP Feature Extraction
+- Keep distributed SAE feature search as the planned path for non-attention CTCF evidence:
+  - extract layer-11 residual stream vectors,
+  - extract layer-11 MLP/feed-forward activations,
+  - train sparse autoencoders with reconstruction MSE plus L1 activation sparsity,
+  - rank learned dictionary features against JASPAR 2024 CORE vertebrate CTCF motif scores for `MA0139.1`,
+  - save the top 10 biologically aligned features to `results/distributed_features/ctcf_sae_feature_alignment_top10.csv`.
+- Do not mix SAE feature search into cross-model comparison unless explicitly requested; the comparison path should remain focused on tokenization effects.
+
 ## Test Plan
 - Unit-test URL filtering, task alias normalization, motif mutation length preservation, coordinate-to-token mapping, QK/OV matrix shape checks, and restoration metric edge cases where `clean_logit == corrupted_logit`.
 - Unit-test JASPAR PWM loading/scoring, token-level motif support extraction, Pearson candidate filtering, matched-background enrichment, and head-output hook replacement.
 - Unit-test hierarchical sparse patch-position selection and batch restoration aggregation.
 - Unit-test centered-cosine feature ranking and sparse autoencoder output dimensions on toy activations.
+- Unit-test tokenization-family classification, cross-model delta computation, and model-specific result path construction.
 - Add smoke tests that run on 4-8 sequences per task and produce small result files in `results/test_runs/`.
 - Add integration tests for:
   - HF dataset filtering returns non-empty rows for all four canonical task names.
