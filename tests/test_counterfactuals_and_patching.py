@@ -6,6 +6,7 @@ from src.config import PipelineConfig, ProjectPaths
 from src.counterfactuals import char_span_to_token_span, generate_counterfactual_sequence
 from src.patching import (
     _replace_concatenated_head_slice,
+    hierarchical_sparse_patch_positions,
     layer_head_restoration_matrix,
     patch_head_output_tensor,
     restoration_metric,
@@ -120,6 +121,20 @@ def test_replace_concatenated_head_slice_preserves_other_heads() -> None:
     assert torch.allclose(patched[:, :2], torch.zeros((3, 2)))
     assert torch.allclose(patched[:, 2:4], torch.ones((3, 2)))
     assert torch.allclose(patched[:, 4:], torch.zeros((3, 2)))
+
+
+def test_hierarchical_sparse_patch_positions_keep_motif_and_log_context() -> None:
+    positions = hierarchical_sparse_patch_positions(
+        sequence_length=128,
+        motif_token_span=(60, 64),
+        max_positions=16,
+    )
+
+    assert 0 in positions
+    assert 127 in positions
+    assert set(range(60, 64)).issubset(positions)
+    assert len(positions) <= 16
+    assert positions == sorted(positions)
 
 
 def test_layer_head_restoration_matrix_averages_examples() -> None:
