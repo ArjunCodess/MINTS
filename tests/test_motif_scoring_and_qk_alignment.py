@@ -3,7 +3,7 @@ from pathlib import Path
 import numpy as np
 
 from src.config import PipelineConfig, ProjectPaths
-from src.motif_scoring import load_jaspar_ctcf_motif, score_sequence_tokens
+from src.motif_scoring import load_jaspar_ctcf_motif, score_sequence_tokens, token_offsets_for_sequence
 from src.qk_alignment import AlignmentThresholds, pearson_correlation, qk_alignment_table, qk_attention_maps, qk_key_scores
 
 
@@ -13,6 +13,17 @@ class ToyOffsetTokenizer:
         offsets.extend((idx, idx + 1) for idx in range(len(sequence)))
         offsets.append((0, 0))
         return {"offset_mapping": offsets}
+
+
+class ToyKmerTokenizer:
+    def __call__(self, sequence: str, **_kwargs):
+        tokens = ["<cls>"]
+        tokens.extend(sequence[idx : idx + 6] for idx in range(0, len(sequence), 6))
+        return {"input_ids": list(range(len(tokens)))}
+
+    def convert_ids_to_tokens(self, input_ids):
+        token_values = ["<cls>", "ACGTAC", "GTACGT", "AC"]
+        return [token_values[idx] for idx in input_ids]
 
 
 def tmp_config(tmp_path: Path) -> PipelineConfig:
@@ -66,6 +77,12 @@ def test_jaspar_ctcf_scores_align_to_model_tokens(tmp_path) -> None:
     assert np.isnan(record.token_scores[-1])
     assert record.support_tokens
     assert min(record.support_tokens) > 0
+
+
+def test_token_offsets_for_sequence_falls_back_to_fixed_kmers() -> None:
+    offsets = token_offsets_for_sequence(ToyKmerTokenizer(), "ACGTACGTACGTAC")
+
+    assert offsets == [(0, 0), (0, 6), (6, 12), (12, 14)]
 
 
 def test_qk_key_scores_and_attention_maps_are_well_formed() -> None:
