@@ -227,6 +227,11 @@ def _load_probe_metrics(path: str | Path, config: PipelineConfig) -> list[dict[s
     metrics_path = Path(path)
     if not metrics_path.exists():
         return []
+    def optional_float(value: str | None) -> float | None:
+        if value in (None, ""):
+            return None
+        return float(value)
+
     rows: list[dict[str, Any]] = []
     with metrics_path.open("r", encoding="utf-8", newline="") as handle:
         for row in csv.DictReader(handle):
@@ -235,8 +240,14 @@ def _load_probe_metrics(path: str | Path, config: PipelineConfig) -> list[dict[s
                     "task": row["task"],
                     "layer": int(row["layer"]),
                     "auroc": float(row["auroc"]),
+                    "auroc_ci_low": optional_float(row.get("auroc_ci_low")),
+                    "auroc_ci_high": optional_float(row.get("auroc_ci_high")),
                     "auprc": float(row["auprc"]),
+                    "auprc_ci_low": optional_float(row.get("auprc_ci_low")),
+                    "auprc_ci_high": optional_float(row.get("auprc_ci_high")),
                     "accuracy": float(row["accuracy"]),
+                    "accuracy_ci_low": optional_float(row.get("accuracy_ci_low")),
+                    "accuracy_ci_high": optional_float(row.get("accuracy_ci_high")),
                     "train_examples": int(row["train_examples"]),
                     "test_examples": int(row["test_examples"]),
                     "train_positive_rate": float(row["train_positive_rate"])
@@ -431,6 +442,8 @@ def _write_run_manifest(
             "max_patching_pairs": config.data.max_patching_pairs,
             "max_feature_search_sequences": config.data.max_feature_search_sequences,
             "max_cross_model_qk_alignment_sequences": config.data.max_cross_model_qk_alignment_sequences,
+            "probe_bootstrap_samples": config.data.probe_bootstrap_samples,
+            "probe_ci_level": config.data.probe_ci_level,
             "sae_dictionary_size": config.data.sae_dictionary_size,
             "sae_epochs": config.data.sae_epochs,
             "sae_l1_coefficient": config.data.sae_l1_coefficient,

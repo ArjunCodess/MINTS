@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 import numpy as np
 import pandas as pd
@@ -20,8 +21,14 @@ class ProbeResult:
     task: str
     layer: int
     auroc: float
+    auroc_ci_low: float
+    auroc_ci_high: float
     auprc: float
+    auprc_ci_low: float
+    auprc_ci_high: float
     accuracy: float
+    accuracy_ci_low: float
+    accuracy_ci_high: float
     train_examples: int
     test_examples: int
     train_positive_rate: float
@@ -40,6 +47,78 @@ def _features_for_layer(payload: dict[str, np.ndarray], layer: int) -> tuple[np.
         raise ValueError(f"Layer {layer} is not in cached layers {layers}.")
     layer_offset = layers.index(layer)
     return payload["residual_mean"][:, layer_offset, :], payload["labels"].astype(int)
+
+
+def _safe_binary_metric(
+    metric_fn: Callable[[np.ndarray, np.ndarray], float],
+    y_true: np.ndarray,
+    scores: np.ndarray,
+) -> float:
+    """Return a metric value, or NaN when a bootstrap sample is single-class."""
+
+    if np.unique(y_true).size < 2:
+        return float("nan")
+    return float(metric_fn(y_true, scores))
+
+
+def bootstrap_probe_confidence_intervals(
+    y_true: np.ndarray,
+    probabilities: np.ndarray,
+    predictions: np.ndarray,
+    seed: int,
+    n_bootstraps: int = 1000,
+    confidence_level: float = 0.95,
+) -> dict[str, tuple[float, float]]:
+    """Estimate deterministic percentile confidence intervals for probe metrics.
+
+    AUROC and AUPRC are undefined for bootstrap samples that contain only one
+    class. Those samples are ignored for the class-sensitive metrics but kept
+    for accuracy, which remains defined for any resample.
+    """
+
+    from sklearn.metrics import accuracy_score, average_precision_score, roc_auc_score
+
+    y_true = np.asarray(y_true, dtype=int)
+    probabilities = np.asarray(probabilities, dtype=float)
+    predictions = np.asarray(predictions, dtype=int)
+    if not (len(y_true) == len(probabilities) == len(predictions)):
+        raise ValueError("y_true, probabilities, and predictions must have the same length.")
+    if len(y_true) == 0:
+        raise ValueError("Cannot bootstrap probe metrics for an empty test set.")
+    if n_bootstraps <= 0:
+        return {
+            "auroc": (float("nan"), float("nan")),
+            "auprc": (float("nan"), float("nan")),
+            "accuracy": (float("nan"), float("nan")),
+        }
+    if not 0.0 < confidence_level < 1.0:
+        raise ValueError("confidence_level must be in the open interval (0, 1).")
+
+    rng = np.random.default_rng(seed)
+    metrics: dict[str, list[float]] = {"auroc": [], "auprc": [], "accuracy": []}
+    for _ in range(n_bootstraps):
+        indices = rng.integers(0, len(y_true), size=len(y_true))
+        sample_y = y_true[indices]
+        sample_prob = probabilities[indices]
+        sample_pred = predictions[indices]
+        metrics["auroc"].append(_safe_binary_metric(roc_auc_score, sample_y, sample_prob))
+        metrics["auprc"].append(_safe_binary_metric(average_precision_score, sample_y, sample_prob))
+        metrics["accuracy"].append(float(accuracy_score(sample_y, sample_pred)))
+
+    alpha = 1.0 - confidence_level
+    lower_q = 100.0 * (alpha / 2.0)
+    upper_q = 100.0 * (1.0 - alpha / 2.0)
+    intervals: dict[str, tuple[float, float]] = {}
+    for name, values in metrics.items():
+        finite = np.asarray([value for value in values if np.isfinite(value)], dtype=float)
+        if finite.size == 0:
+            intervals[name] = (float("nan"), float("nan"))
+        else:
+            intervals[name] = (
+                float(np.percentile(finite, lower_q)),
+                float(np.percentile(finite, upper_q)),
+            )
+    return intervals
 
 
 def train_logistic_probe_for_task(
@@ -81,14 +160,28 @@ def train_logistic_probe_for_task(
     auroc = float(roc_auc_score(y_test, probabilities))
     auprc = float(average_precision_score(y_test, probabilities))
     accuracy = float(accuracy_score(y_test, predictions))
+    intervals = bootstrap_probe_confidence_intervals(
+        y_true=y_test,
+        probabilities=probabilities,
+        predictions=predictions,
+        seed=config.data.seed,
+        n_bootstraps=config.data.probe_bootstrap_samples,
+        confidence_level=config.data.probe_ci_level,
+    )
     progress(f"Probe complete for {task}: AUROC={auroc:.4f}, AUPRC={auprc:.4f}, accuracy={accuracy:.4f}")
 
     return ProbeResult(
         task=task,
         layer=probe_layer,
         auroc=auroc,
+        auroc_ci_low=intervals["auroc"][0],
+        auroc_ci_high=intervals["auroc"][1],
         auprc=auprc,
+        auprc_ci_low=intervals["auprc"][0],
+        auprc_ci_high=intervals["auprc"][1],
         accuracy=accuracy,
+        accuracy_ci_low=intervals["accuracy"][0],
+        accuracy_ci_high=intervals["accuracy"][1],
         train_examples=int(len(y_train)),
         test_examples=int(len(y_test)),
         train_positive_rate=float(np.mean(y_train)),

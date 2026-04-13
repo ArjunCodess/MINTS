@@ -103,6 +103,8 @@ class DataConfig:
     max_patching_pairs: int = 500
     max_feature_search_sequences: int | None = 2048
     max_cross_model_qk_alignment_sequences: int | None = None
+    probe_bootstrap_samples: int = 1000
+    probe_ci_level: float = 0.95
     sae_dictionary_size: int = 512
     sae_epochs: int = 10
     sae_batch_size: int = 256

@@ -104,6 +104,20 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--probe-bootstrap-samples",
+        type=int,
+        default=1000,
+        metavar="N",
+        help="Bootstrap resamples for probe confidence intervals. Defaults to 1000. Use 0 to skip intervals.",
+    )
+    parser.add_argument(
+        "--probe-ci-level",
+        type=float,
+        default=0.95,
+        metavar="P",
+        help="Probe confidence interval level in the open interval (0, 1). Defaults to 0.95.",
+    )
+    parser.add_argument(
         "--from-step",
         choices=(
             "all",
@@ -147,6 +161,10 @@ def run(argv: list[str] | None = None) -> int:
         parser.error("--sae-epochs must be a positive integer.")
     if args.max_cross_model_qk_alignment_sequences is not None and args.max_cross_model_qk_alignment_sequences <= 0:
         parser.error("--max-cross-model-qk-alignment-sequences must be a positive integer.")
+    if args.probe_bootstrap_samples is not None and args.probe_bootstrap_samples < 0:
+        parser.error("--probe-bootstrap-samples must be zero or a positive integer.")
+    if args.probe_ci_level is not None and not 0.0 < args.probe_ci_level < 1.0:
+        parser.error("--probe-ci-level must be in the open interval (0, 1).")
 
     config = PipelineConfig()
     from_step = FROM_STEP_ALIASES.get(args.from_step, args.from_step)
@@ -164,6 +182,8 @@ def run(argv: list[str] | None = None) -> int:
             max_feature_search_sequences=max_feature_search_sequences,
             sae_epochs=args.sae_epochs,
             max_cross_model_qk_alignment_sequences=args.max_cross_model_qk_alignment_sequences,
+            probe_bootstrap_samples=args.probe_bootstrap_samples,
+            probe_ci_level=args.probe_ci_level,
         ),
     )
     manifest_path = run_pipeline(config=config, overwrite=args.overwrite, from_step=from_step)
