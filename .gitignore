@@ -220,6 +220,7 @@ results/manifests/pipeline_config.json
 results/manifests/pipeline_run.json
 results/activations/*.npz
 results/circuits/*.npz
+results/enrichment/ctcf_qk_alignment_token_motif_scores.csv
 results/**/*.pt
 results/**/*.pth
 results/**/*.safetensors
