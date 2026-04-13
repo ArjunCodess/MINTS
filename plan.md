@@ -86,9 +86,38 @@ Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_len
   - attention enrichment criterion passes,
   - causal restoration criterion passes.
 
+## Systematic Causal Intervention and Distributed Feature Search
+- Extend custom DNABERT-2 PyTorch forward-hook patching beyond the single-sequence promoter-TATA smoke test:
+  - select up to 500 token-shape-preserving clean/corrupted positive pairs for `promoter_tata`,
+  - select up to 500 token-shape-preserving clean/corrupted positive pairs for `splice_sites_donors`,
+  - cache clean attention-head outputs once per pair,
+  - rerun corrupted inputs while replacing one requested layer/head slice with the cached clean slice,
+  - compute `(patched_logit - corrupted_logit) / (clean_logit - corrupted_logit)` per pair and aggregate a global layer/head restoration heatmap per task.
+- Keep the scalar target consistent with the existing implementation:
+  - use the trained task-specific residual-probe decision function when the base model has no task-specific classifier head,
+  - report per-task mean restoration, finite-pair counts, max-restoration heads, and the fraction of unstable pairs with near-zero clean/corrupted denominator.
+- Implement hierarchical sparse position pruning inspired by the Stream long-context idea:
+  - preserve all motif-support token positions,
+  - add logarithmically spaced context anchors around the motif span,
+  - use the sparse position set when patching long contexts so the number of patched positions scales as `O(T log T)` or better rather than requiring dense all-position replacement.
+- Save systematic patching outputs under:
+  - `results/patching/<task>_batch_dnabert_activation_patching.csv`,
+  - `results/figures/<task>_batch_dnabert_activation_patching_heatmap.png`,
+  - `results/counterfactuals/<task>_batch_activation_patching_pairs.tsv`,
+  - `results/manifests/<task>_batch_dnabert_activation_patching_patching_manifest.json`.
+- Search for distributed CTCF features outside single attention heads:
+  - extract frozen layer-11 residual vectors for prepared ENCODE GM12878 CTCF sequences,
+  - hook the closest available layer-11 feed-forward/MLP module and mean-pool its output,
+  - train sparse autoencoders on residual and MLP activations with an L1 activation penalty,
+  - rank dictionary features by centered cosine similarity against sequence-level JASPAR CTCF motif scores,
+  - save top aligned features, SAE checkpoints, training histories, and summary JSON under `results/distributed_features/`,
+  - save top-feature alignment plots under `results/figures/`.
+
 ## Test Plan
 - Unit-test URL filtering, task alias normalization, motif mutation length preservation, coordinate-to-token mapping, QK/OV matrix shape checks, and restoration metric edge cases where `clean_logit == corrupted_logit`.
 - Unit-test JASPAR PWM loading/scoring, token-level motif support extraction, Pearson candidate filtering, matched-background enrichment, and head-output hook replacement.
+- Unit-test hierarchical sparse patch-position selection and batch restoration aggregation.
+- Unit-test centered-cosine feature ranking and sparse autoencoder output dimensions on toy activations.
 - Add smoke tests that run on 4-8 sequences per task and produce small result files in `results/test_runs/`.
 - Add integration tests for:
   - HF dataset filtering returns non-empty rows for all four canonical task names.
