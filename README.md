@@ -2,7 +2,7 @@
 
 **Mechanistic Interpretability for Nucleotide Transformer Sequences**
 
-**TL;DR:** MINTS is a reproducible mechanistic-interpretability pipeline for genomic transformers. It downloads nucleotide benchmark data, wraps DNABERT-2 with the best available hook backend, extracts QK/OV circuit matrices, probes frozen residual-stream features, generates motif-destroying counterfactuals, and provides activation-patching utilities for testing whether candidate heads causally restore biological signal.
+**TL;DR:** MINTS is a reproducible mechanistic-interpretability pipeline for genomic transformers. It downloads nucleotide benchmark data, wraps DNABERT-2 with the best available hook backend, extracts QK/OV circuit matrices, probes frozen residual-stream features, scores CTCF motif support from JASPAR, tests QK-to-motif alignment, computes matched attention enrichment, and runs custom forward-hook activation patching for causal restoration.
 
 MINTS is built around one question: can a nucleotide transformer be studied strongly enough that a motif detector is not just visualized, but supported by converging circuit, probing, enrichment, and causal-intervention evidence? The repository currently targets:
 
@@ -13,11 +13,12 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 
 ## Key Achievements
 
-- **One-Command Reproducibility:** `python main.py` orchestrates data ingestion, model wrapping, circuit extraction, residual probing, and run-summary generation from the repository root.
+- **One-Command Reproducibility:** `python main.py` orchestrates data ingestion, model wrapping, circuit extraction, residual probing, strict proof exports, and root run-summary generation from the repository root.
 - **Hooked Genomic Model Path:** Loads `zhihan1996/DNABERT-2-117M`, patches known environment compatibility issues, and falls back to a Hugging Face hook adapter when TransformerLens cannot fully wrap the custom BERT-style model.
 - **Circuit-Level Exports:** Extracts selected-layer `W_Q`, `W_K`, `W_V`, and `W_O` tensors and saves exact `QK` and `OV` matrices under `results/circuits/`.
 - **Probe-Ready Residual Caches:** Saves compact mean-pooled residual-stream arrays under `results/activations/` and trains logistic probes with AUROC, AUPRC, accuracy, example counts, and class balance.
-- **Causal-Intervention Utilities:** Provides deterministic counterfactual motif mutation, restoration-metric computation, layer/head restoration matrix export, and heatmap generation.
+- **Strict Motif-Detector Tests:** Scores JASPAR CTCF motif support across `51249` GM12878 CTCF sequences, correlates motif scores with QK-derived attention logits, flags heads using pre-registered thresholds, and exports matched-background enrichment heatmaps.
+- **Custom DNABERT Patching:** Runs PyTorch forward-hook head-output patching when TransformerLens patching is not compatible with DNABERT-2's custom architecture; the latest run found one promoter-TATA head above the partial-restoration threshold.
 
 ## Overview
 
@@ -45,7 +46,9 @@ The practical novelty is the evidence stack. MINTS keeps the model fixed, freeze
 4. GRCh38 sequence extraction creates CTCF sequence tables under `data/ctcf/`.
 5. DNABERT-2 is loaded, placed on CUDA when available, and wrapped with TransformerLens or the local hook adapter.
 6. Residual vectors are cached, QK/OV matrices are exported, and logistic probes are trained.
-7. Counterfactual and patching utilities can generate motif-destroying pairs and save layer/head restoration tables and heatmaps.
+7. JASPAR CTCF motif support is scored over ENCODE GM12878 CTCF sequences and aligned to model token positions.
+8. QK-derived motif alignment and matched attention enrichment tables are exported.
+9. A token-shape-preserving clean/corrupted promoter-TATA pair is selected for custom DNABERT forward-hook activation patching.
 
 ### Why there are two datasets
 
@@ -56,7 +59,7 @@ The two data branches serve different roles:
 
 ### What we found
 
-The latest completed run used all available rows in the configured train/test splits for residual caching and probing. It confirmed that the infrastructure, model loading, circuit export, residual caching, and probe training path works end to end on the local RTX 4060 setup.
+The latest completed run used all available rows in the configured train/test splits for residual caching and probing, and all `51249` prepared GM12878 CTCF sequences for the strict CTCF QK/enrichment scan. It confirmed that the infrastructure, model loading, circuit export, residual caching, probe training, QK motif scoring, matched enrichment, and custom activation patching path works end to end on the local RTX 4060 setup.
 
 - `promoter_tata`: AUROC `0.9137`, AUPRC `0.9241`, accuracy `0.8349`, `5062 / 212` train/test examples
 - `promoter_no_tata`: AUROC `0.9383`, AUPRC `0.9475`, accuracy `0.8550`, `30000 / 1372` train/test examples
@@ -65,7 +68,11 @@ The latest completed run used all available rows in the configured train/test sp
 
 These numbers are a real positive result for the representation-level claim: the configured biological labels are linearly decodable from frozen layer-11 residual vectors. They do not prove that a specific attention head is a motif detector.
 
-The important result so far is precise: MINTS achieved residual decodability and QK/OV export feasibility. It has not yet achieved the stronger mechanistic target, because QK-to-motif correlations, motif-local attention enrichment, and activation-patching restoration heatmaps still need to be executed and validated.
+The strict CTCF motif-detector test produced a negative result under the pre-registered thresholds. Across `36` tested heads from layers `0`, `5`, and `11`, `0` passed QK-to-motif alignment at `r >= 0.5, p < 0.05`; the best CTCF QK correlation was layer `11`, head `0`, with `r = 0.2119` over `1843874` finite token positions. Across the same `36` heads, `0` passed matched attention enrichment at `rho_h >= 2.0`; the best enrichment was layer `11`, head `3`, with `rho_h = 1.0209` over `256918` motif-support tokens and `256918` matched background tokens.
+
+The custom promoter-TATA activation-patching run did find partial causal restoration: layer `7`, head `8` achieved `PM = 0.5983`, above the `PM >= 0.5` causal-importance threshold but below the `PM >= 0.75` strong-causal threshold. This is not the same claim as a proved CTCF motif detector, because the CTCF QK/enrichment tests had no passing heads and the patching test used a promoter-TATA counterfactual pair.
+
+The important result is therefore precise: MINTS achieved residual decodability, QK/OV export, full CTCF QK/enrichment testing, and custom DNABERT patching. It did not prove the existence of a strict CTCF motif-detector head under the registered criteria.
 
 ## Running
 
@@ -96,11 +103,21 @@ Useful flags:
 - `--overwrite`: rebuild generated datasets and redownload artifacts when needed
 - `--max-probe-train`: cap train examples per task for activation caching and probing
 - `--max-probe-test`: cap test examples per task for activation caching and probing
+- `--max-qk-alignment-sequences`: cap CTCF sequences for QK motif-alignment exports
+- `--from-step`: start from a named checkpoint and continue forward
 - `--json`: print a machine-readable completion payload
 
 Notes:
 
 - Omit `--max-probe-train` and `--max-probe-test` for full-data probing.
+- Omit `--max-qk-alignment-sequences` to scan all prepared CTCF sequences.
+- Resume directly at the strict QK/motif proof work with:
+
+```bash
+python main.py --from-step strict_mechanistic_proofs
+```
+
+- Accepted `--from-step` values are `all`, `write_config`, `ingest_hf_downstream`, `download_encode_ctcf`, `download_grch38`, `prepare_ctcf_sequences`, `circuit_extraction_and_residual_probing`, and `strict_mechanistic_proofs`. Aliases `strict_qk_proof_inputs`, `strict_qk_proof`, and `strict_proofs` also map to `strict_mechanistic_proofs`.
 - CUDA is selected automatically when `torch.cuda.is_available()` is true.
 - Large binary arrays under `results/activations/` and `results/circuits/` are generated artifacts and are ignored by Git.
 
@@ -163,6 +180,8 @@ The pipeline writes a full artifact bundle under [`results/`](results):
 - `results/tables/linear_probe_metrics.csv`
 - `results/activations/`
 - `results/circuits/`
+- `results/enrichment/`
+- `results/qk_alignment/`
 - `results/counterfactuals/`
 - `results/patching/`
 - `results/figures/`
@@ -180,23 +199,36 @@ Detailed manifests include:
 - `ctcf_sequences_manifest.json`
 - `model_hooked_encoder_manifest.json`
 - `circuits_manifest.json`
+- `ctcf_qk_alignment_qk_alignment_manifest.json`
+- `ctcf_qk_alignment_matched_attention_enrichment_qk_attention_enrichment_manifest.json`
+- `promoter_tata_dnabert_activation_patching_patching_manifest.json`
 - `linear_probe_manifest.json`
 
 ## Latest Full Run
 
-The current committed summary file is:
+The current summary file is:
 
 ```bash
 results/pipeline_run.json
 ```
 
-That summary records the model, data sources, configured layers, artifact paths, and probe metrics for the latest completed local run.
+That summary records the model, data sources, configured layers, artifact paths, and probe metrics for the latest completed local run. The current run was created on `2026-04-13T05:35:06+00:00`, completed in `3261.229` seconds end to end, and spent `2739.109` seconds in the strict mechanistic proof step.
+The full pipeline writes its top-level run summary to `results/pipeline_run.json`; per-artifact manifests under `results/manifests/` are secondary details.
 
 Result bundles written by that run:
 
 - [`results/pipeline_run.json`](results/pipeline_run.json)
 - [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv)
 - `results/circuits/qk_ov_matrices.npz`
+- [`results/qk_alignment/ctcf_qk_alignment.csv`](results/qk_alignment/ctcf_qk_alignment.csv)
+- [`results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv`](results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv)
+- [`results/patching/promoter_tata_dnabert_activation_patching.csv`](results/patching/promoter_tata_dnabert_activation_patching.csv)
+- [`results/counterfactuals/promoter_tata_activation_patching_pair.tsv`](results/counterfactuals/promoter_tata_activation_patching_pair.tsv)
+- [`results/figures/ctcf_qk_alignment_pearson_heatmap.png`](results/figures/ctcf_qk_alignment_pearson_heatmap.png)
+- [`results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png`](results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png)
+- [`results/figures/promoter_tata_dnabert_activation_patching_heatmap.png`](results/figures/promoter_tata_dnabert_activation_patching_heatmap.png)
+
+The run also generates `results/enrichment/ctcf_qk_alignment_token_motif_scores.csv`, but it is intentionally not committed because the file is about `117 MB`. It is ignored in `.gitignore` and can be regenerated by rerunning the pipeline.
 
 HF downstream full-run summary:
 
@@ -210,6 +242,9 @@ Role in the project: primary labeled benchmark branch for promoter and splice-si
 - Runtime model backend: Hugging Face forward hooks
 - Runtime device: `cuda`
 - QK/OV export layers: `0`, `5`, `11`
+- Strict CTCF QK/enrichment sequences: `51249`
+- Strict CTCF motif-support tokens: `256918`
+- Strict CTCF finite QK/motif token positions: `1843874`
 
 Layer-11 residual probe metrics:
 
@@ -221,9 +256,26 @@ Layer-11 residual probe metrics:
 Theory comparison:
 
 - Achieved: residual decodability above the paper's AUROC `0.80` threshold on all four tasks.
-- Achieved: selected-layer QK/OV matrices were exported for downstream circuit tests.
-- Not yet achieved: proof that any specific attention head is a biological motif detector.
-- Still required: QK-to-motif correlation, motif-local attention enrichment, and causal restoration via activation patching.
+- Achieved: selected-layer QK/OV matrices and low-rank `W_Q/W_K` factors were exported for downstream circuit tests.
+- Achieved: full CTCF QK-to-motif correlation scan over layers `0`, `5`, and `11`.
+- Not achieved: CTCF QK-to-motif candidate criterion. Best head was layer `11`, head `0`, with `r = 0.2119`, below the `r >= 0.5` threshold.
+- Not achieved: CTCF matched attention enrichment criterion. Best head was layer `11`, head `3`, with `rho_h = 1.0209`, below the `rho_h >= 2.0` threshold.
+- Partially achieved: promoter-TATA causal restoration via custom activation patching. Best head was layer `7`, head `8`, with `PM = 0.5983`, above the `PM >= 0.5` threshold but below the `PM >= 0.75` strong threshold.
+- Overall conclusion: the run supports residual decodability and one promoter-TATA causal-restoration effect, but it does not prove a strict CTCF biological motif-detector head.
+
+Result visualizations:
+
+![CTCF QK-to-motif Pearson heatmap](results/figures/ctcf_qk_alignment_pearson_heatmap.png)
+
+CTCF QK-to-motif Pearson correlations across the tested layers and heads. No head reaches the registered `r >= 0.5` threshold.
+
+![CTCF matched attention enrichment heatmap](results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png)
+
+Matched motif/background CTCF attention-enrichment ratios. No head reaches the registered `rho_h >= 2.0` threshold.
+
+![Promoter-TATA activation patching heatmap](results/figures/promoter_tata_dnabert_activation_patching_heatmap.png)
+
+Custom DNABERT forward-hook activation-patching restoration scores. Layer `7`, head `8` is the strongest partial-restoration head with `PM = 0.5983`.
 
 Model instrumentation summary:
 
@@ -240,9 +292,12 @@ Intervention summary:
 Role in the project: causal validation utilities for candidate motif detectors
 
 - Counterfactual records preserve sequence length and mutation coordinates.
-- Restoration matrices are shaped by layer and head.
+- The executed custom patching target was `chr20:257674-257974|1`, mutating `TATAAA` at character span `[20, 26)` to `GCGCGC`.
+- The scalar target was the trained promoter-TATA residual-probe decision function.
+- The restoration matrix has `144` finite layer/head scores across `12` layers and `12` heads.
+- Best restoration was layer `7`, head `8`, with `PM = 0.5983`; mean restoration across all finite heads was `0.00463`.
 - Heatmaps are written to `results/figures/`.
-- TransformerLens head-output patching is used only when the active backend exposes the required patching utility.
+- The completed run used the custom DNABERT PyTorch forward-hook patcher because the active fallback backend does not expose the required TransformerLens head-output patching utility.
 
 ## Repository Layout
 
@@ -253,6 +308,9 @@ Role in the project: causal validation utilities for candidate motif detectors
 - [`src/data_ingestion.py`](src/data_ingestion.py): Hugging Face task filtering, tokenization, and ENCODE artifact handling
 - [`src/ctcf.py`](src/ctcf.py): GRCh38 FASTA handling and CTCF sequence extraction
 - [`src/modeling.py`](src/modeling.py): DNABERT-2 loading, compatibility patches, and hook adapter fallback
+- [`src/motif_scoring.py`](src/motif_scoring.py): JASPAR CTCF motif loading and token-level motif scoring
+- [`src/qk_alignment.py`](src/qk_alignment.py): QK-to-motif correlation and QK-reconstructed enrichment exports
+- [`src/mechanistic_proofs.py`](src/mechanistic_proofs.py): strict proof orchestration for alignment, enrichment, and custom patching
 - [`src/activations.py`](src/activations.py): residual-stream caching for probe features
 - [`src/circuits.py`](src/circuits.py): QK/OV matrix extraction
 - [`src/probing.py`](src/probing.py): frozen residual logistic probes
