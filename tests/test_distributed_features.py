@@ -1,7 +1,14 @@
 import numpy as np
+import pandas as pd
 
 from src.config import DataConfig, PipelineConfig, ProjectPaths
-from src.distributed_features import _centered_cosine, _rank_sae_features, train_sae_and_rank_features
+from src.distributed_features import (
+    SAETrainingResult,
+    _centered_cosine,
+    _combined_top_feature_table,
+    _rank_sae_features,
+    train_sae_and_rank_features,
+)
 
 
 def tmp_config(tmp_path) -> PipelineConfig:
@@ -20,6 +27,7 @@ def tmp_config(tmp_path) -> PipelineConfig:
         counterfactuals_dir=tmp_path / "results" / "counterfactuals",
         patching_dir=tmp_path / "results" / "patching",
         distributed_features_dir=tmp_path / "results" / "distributed_features",
+        cross_model_dir=tmp_path / "results" / "cross_model",
         figures_dir=tmp_path / "results" / "figures",
         tables_dir=tmp_path / "results" / "tables",
         encode_url_file=tmp_path / "data" / "ENCODE4_v1.5.1_GRCh38.txt",
@@ -63,3 +71,32 @@ def test_train_sae_and_rank_features_writes_artifacts(tmp_path) -> None:
     assert result.alignment_path.exists()
     assert result.figure_path.exists()
     assert result.summary["dictionary_size"] == 4
+
+
+def test_combined_top_feature_table_returns_global_top_10(tmp_path) -> None:
+    residual_path = tmp_path / "residual.csv"
+    mlp_path = tmp_path / "mlp.csv"
+    pd.DataFrame(
+        {
+            "source": ["residual"] * 12,
+            "feature": list(range(12)),
+            "ctcf_motif_cosine": np.linspace(0.0, 0.11, 12),
+        }
+    ).to_csv(residual_path, index=False)
+    pd.DataFrame(
+        {
+            "source": ["mlp"] * 12,
+            "feature": list(range(12)),
+            "ctcf_motif_cosine": np.linspace(0.2, 0.31, 12),
+        }
+    ).to_csv(mlp_path, index=False)
+    results = [
+        SAETrainingResult("residual", tmp_path / "r.pt", tmp_path / "r_hist.csv", residual_path, tmp_path / "r.png", {}),
+        SAETrainingResult("mlp", tmp_path / "m.pt", tmp_path / "m_hist.csv", mlp_path, tmp_path / "m.png", {}),
+    ]
+
+    table = _combined_top_feature_table(results, top_n=10)
+
+    assert len(table) == 10
+    assert set(table["source"]) == {"mlp"}
+    assert table["ctcf_motif_cosine"].is_monotonic_decreasing

@@ -256,6 +256,11 @@ def train_sae_and_rank_features(
     x, mean, std = _standardize_features(np.asarray(activations, dtype=np.float32))
     y = np.asarray(motif_scores, dtype=np.float32)
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    torch.manual_seed(int(config.data.seed))
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(int(config.data.seed))
+    loader_generator = torch.Generator()
+    loader_generator.manual_seed(int(config.data.seed))
     dictionary_size = min(int(config.data.sae_dictionary_size), max(1, x.shape[1] * 4))
     sae = SparseAutoencoder(input_dim=x.shape[1], dictionary_size=dictionary_size).to(device)
     optimizer = torch.optim.AdamW(sae.model.parameters(), lr=float(config.data.sae_learning_rate))
@@ -264,6 +269,7 @@ def train_sae_and_rank_features(
         batch_size=int(config.data.sae_batch_size),
         shuffle=True,
         drop_last=False,
+        generator=loader_generator,
     )
     history = []
     for epoch in range(int(config.data.sae_epochs)):
@@ -341,6 +347,18 @@ def train_sae_and_rank_features(
     )
 
 
+def _combined_top_feature_table(results: list[SAETrainingResult], top_n: int = 10) -> pd.DataFrame:
+    """Return the globally top motif-aligned SAE features across sources."""
+
+    if top_n <= 0:
+        raise ValueError("top_n must be positive.")
+    tables = [pd.read_csv(result.alignment_path) for result in results]
+    if not tables:
+        return pd.DataFrame()
+    combined = pd.concat(tables, ignore_index=True)
+    return combined.sort_values("ctcf_motif_cosine", ascending=False, na_position="last").head(top_n)
+
+
 def run_distributed_feature_search(
     bundle: LoadedModelBundle,
     config: PipelineConfig = DEFAULT_CONFIG,
@@ -359,7 +377,7 @@ def run_distributed_feature_search(
         train_sae_and_rank_features(payload["residual"], motif_scores, "residual", config=config),
         train_sae_and_rank_features(payload["mlp"], motif_scores, "mlp", config=config),
     ]
-    combined = pd.concat([pd.read_csv(result.alignment_path).head(10) for result in results], ignore_index=True)
+    combined = _combined_top_feature_table(results, top_n=10)
     combined_path = config.paths.distributed_features_dir / "ctcf_sae_feature_alignment_top10.csv"
     combined.to_csv(combined_path, index=False)
     summary = {
