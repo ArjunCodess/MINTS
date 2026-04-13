@@ -12,9 +12,10 @@
     ],
     "max_probe_test": null,
     "max_probe_train": null,
+    "max_qk_alignment_sequences": null,
     "probe_layer": 11
   },
-  "created_at": "2026-04-12T17:44:48+00:00",
+  "created_at": "2026-04-13T05:35:06+00:00",
   "data": {
     "encode_url_file": "data\\ENCODE4_v1.5.1_GRCh38.txt",
     "grch38_fasta_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz",
@@ -27,6 +28,7 @@
       "splice_sites_acceptors"
     ]
   },
+  "from_step": "write_config",
   "model": {
     "device": "auto",
     "name": "zhihan1996/DNABERT-2-117M",
@@ -69,7 +71,7 @@
         }
       },
       "name": "ingest_hf_downstream",
-      "seconds": 10.579,
+      "seconds": 10.608,
       "status": "completed"
     },
     {
@@ -94,7 +96,7 @@
         "output_dir": "data\\encode\\ctcf_gm12878"
       },
       "name": "download_encode_ctcf",
-      "seconds": 0.3,
+      "seconds": 0.251,
       "status": "completed"
     },
     {
@@ -102,7 +104,7 @@
         "path": "data\\genomes\\hg38.fa"
       },
       "name": "download_grch38",
-      "seconds": 3.891,
+      "seconds": 2.859,
       "status": "completed"
     },
     {
@@ -110,7 +112,7 @@
         "path": "data\\ctcf\\ctcf_gm12878_sequences.tsv"
       },
       "name": "prepare_ctcf_sequences",
-      "seconds": 2.489,
+      "seconds": 1.282,
       "status": "completed"
     },
     {
@@ -212,7 +214,110 @@
         }
       },
       "name": "circuit_extraction_and_residual_probing",
-      "seconds": 531.36,
+      "seconds": 507.119,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "circuit_refresh": null,
+        "model": {
+          "device": "cuda",
+          "instrumentation_backend": "huggingface_forward_hooks",
+          "manifest": "results\\manifests\\model_hooked_encoder_manifest.json",
+          "name": "zhihan1996/DNABERT-2-117M"
+        },
+        "strict_proofs": {
+          "activation_patching": {
+            "figure": "results\\figures\\promoter_tata_dnabert_activation_patching_heatmap.png",
+            "manifest": "results\\manifests\\promoter_tata_dnabert_activation_patching_patching_manifest.json",
+            "table": "results\\patching\\promoter_tata_dnabert_activation_patching.csv"
+          },
+          "patching_pair": "results\\counterfactuals\\promoter_tata_activation_patching_pair.tsv",
+          "patching_pair_summary": {
+            "clean_subsequence": "TATAAA",
+            "corrupted_subsequence": "GCGCGC",
+            "end": 26,
+            "motif_name": "TATA-like",
+            "sequence_id": "chr20:257674-257974|1",
+            "start": 20,
+            "task": "promoter_tata"
+          },
+          "qk_alignment": {
+            "enrichment_figure": "results\\figures\\ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png",
+            "enrichment_manifest": "results\\manifests\\ctcf_qk_alignment_matched_attention_enrichment_qk_attention_enrichment_manifest.json",
+            "enrichment_table": "results\\enrichment\\ctcf_qk_alignment_matched_attention_enrichment.csv",
+            "figure": "results\\figures\\ctcf_qk_alignment_pearson_heatmap.png",
+            "manifest": "results\\manifests\\ctcf_qk_alignment_qk_alignment_manifest.json",
+            "motif_scores": "results\\enrichment\\ctcf_qk_alignment_token_motif_scores.csv",
+            "table": "results\\qk_alignment\\ctcf_qk_alignment.csv"
+          },
+          "summary": {
+            "activation_patching": {
+              "finite_scores": 144,
+              "max_restoration": 0.598316689985873,
+              "mean_restoration": 0.004630945791566216,
+              "top_heads": [
+                {
+                  "head": 8,
+                  "layer": 7,
+                  "restoration": 0.598316689985873
+                },
+                {
+                  "head": 0,
+                  "layer": 11,
+                  "restoration": 0.330411968860123
+                },
+                {
+                  "head": 7,
+                  "layer": 1,
+                  "restoration": 0.2238840351484846
+                },
+                {
+                  "head": 2,
+                  "layer": 10,
+                  "restoration": 0.2133264870818138
+                },
+                {
+                  "head": 1,
+                  "layer": 5,
+                  "restoration": 0.2117815021208678
+                },
+                {
+                  "head": 4,
+                  "layer": 4,
+                  "restoration": 0.1751725375625517
+                },
+                {
+                  "head": 0,
+                  "layer": 1,
+                  "restoration": 0.1559694799680118
+                },
+                {
+                  "head": 6,
+                  "layer": 3,
+                  "restoration": 0.1322211483515452
+                },
+                {
+                  "head": 2,
+                  "layer": 7,
+                  "restoration": 0.1283235657148122
+                },
+                {
+                  "head": 8,
+                  "layer": 0,
+                  "restoration": 0.118704190630762
+                }
+              ]
+            },
+            "attention_enrichment_candidate_count": 0,
+            "attention_enrichment_candidates": [],
+            "qk_alignment_candidate_count": 0,
+            "qk_alignment_candidates": []
+          }
+        }
+      },
+      "name": "strict_mechanistic_proofs",
+      "seconds": 2739.109,
       "status": "completed"
     }
   ]
