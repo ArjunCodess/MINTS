@@ -41,7 +41,7 @@ Lucknow, Uttar Pradesh, India}
 \maketitle
 
 \begin{abstract}
-Genomic foundation models already learn useful biological regularities, but most evidence for this claim remains predictive or post hoc rather than mechanistic. At the same time, strict mechanistic interpretability has largely matured in the study of language models rather than nucleotide models. This paper positions small nucleotide transformers as a tractable setting for circuit-level reverse engineering on commodity hardware. We present a tokenization-aware mathematical framework for analyzing nucleotide transformers using QK and OV circuit decomposition, activation patching, and linear probing. We correct the causal restoration metric used for activation patching, formalize a layer-1 theorem for motif detection via QK circuits, and state an approximate extension for deeper layers under a linear decodability assumption. We also report implementation results from a reproducible DNABERT-2 pipeline: full configured-split residual probes on promoter and splice-site tasks achieve AUROC values of 0.9137, 0.9383, 0.8954, and 0.8847. These results satisfy the paper's residual-decodability criterion but do not yet prove the existence of motif-detector circuits, because motif-local attention enrichment and causal patching restoration have not yet been completed end-to-end. The resulting formulation clarifies what evidence would be required to establish mechanistic motif detectors in genomic transformers and outlines a path from small-model studies to future long-context genomic analyses.
+Genomic foundation models already learn useful biological regularities, but most evidence for this claim remains predictive or post hoc rather than mechanistic. At the same time, strict mechanistic interpretability has largely matured in the study of language models rather than nucleotide models. This paper positions small nucleotide transformers as a tractable setting for circuit-level reverse engineering on commodity hardware. We present a tokenization-aware mathematical framework for analyzing nucleotide transformers using QK and OV circuit decomposition, activation patching, and linear probing. We correct the causal restoration metric used for activation patching, formalize a layer-1 theorem for motif detection via QK circuits, and state an approximate extension for deeper layers under a linear decodability assumption. We also report implementation results from a reproducible DNABERT-2 pipeline. Full configured-split residual probes on promoter and splice-site tasks achieve AUROC values of 0.9137, 0.9383, 0.8954, and 0.8847, satisfying the paper's residual-decodability criterion. A full CTCF strict-proof scan over 51,249 GM12878 CTCF sequences produces no head meeting the pre-registered QK-to-motif criterion ($r \geq 0.5$, $p<0.05$) and no head meeting the matched attention-enrichment criterion ($\rho_h \geq 2.0$). Custom DNABERT forward-hook patching on a promoter-TATA counterfactual identifies one partially restoring head with $\mathrm{PM}=0.5983$. Thus, the pipeline verifies residual decodability and one promoter-TATA causal-restoration effect, but it does not prove the existence of a strict CTCF motif-detector head. The result clarifies the evidential gap between useful genomic representations and mechanistic motif-detector proofs.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -61,7 +61,7 @@ Prior work in genomic deep learning has focused primarily on predictive performa
 
 The gap between predictive performance and mechanistic understanding has significant implications. Without understanding how models process nucleotide sequences, practitioners cannot trust model predictions in critical applications such as clinical variant interpretation or drug target identification. Furthermore, the inability to interpret model decisions limits the scientific utility of these tools for biological discovery.
 
-This paper makes the following contributions. First, it develops a tokenization-aware mathematical framework for analyzing attention mechanisms in nucleotide transformers, including formulations for QK and OV circuit decomposition. Second, it corrects the activation patching restoration metric and tightens the theoretical conditions under which a QK circuit can implement motif detection. Third, it defines explicit empirical criteria for claiming causal motif detection, residual-stream decodability, and circuit alignment with biological mechanisms. Fourth, it implements a reproducible DNABERT-2 pipeline that downloads genomic benchmark data, extracts QK/OV circuit matrices, caches frozen residual vectors, trains linear probes, and writes run summaries. Fifth, it reports full configured-split probe results showing that promoter and splice-site labels are linearly decodable from layer-11 residual states, while explicitly separating this result from the stronger unproven claim that a specific attention head is a motif detector.
+This paper makes the following contributions. First, it develops a tokenization-aware mathematical framework for analyzing attention mechanisms in nucleotide transformers, including formulations for QK and OV circuit decomposition. Second, it corrects the activation patching restoration metric and tightens the theoretical conditions under which a QK circuit can implement motif detection. Third, it defines explicit empirical criteria for claiming causal motif detection, residual-stream decodability, and circuit alignment with biological mechanisms. Fourth, it implements a reproducible DNABERT-2 pipeline that downloads genomic benchmark data, extracts QK/OV circuit matrices, caches frozen residual vectors, trains linear probes, scores JASPAR CTCF motifs, computes QK-to-motif alignment and matched attention enrichment, and performs custom forward-hook activation patching. Fifth, it reports a completed full-data run showing that promoter and splice-site labels are linearly decodable from layer-11 residual states, while the CTCF strict motif-detector criteria fail under the registered thresholds. This negative result is part of the contribution: it prevents the representation-level success from being misreported as a proof of a specific motif-detector head.
 
 \section{Related Work}
 \label{sec:related-work}
@@ -281,7 +281,7 @@ For each model, the analysis requires:
 \item Optional MLP activations for follow-up circuit tracing
 \end{itemize}
 
-The current repository implementation instantiates the framework on \texttt{zhihan1996/DNABERT-2-117M}. The run uses CUDA when available, exports QK and OV matrices for layers 0, 5, and 11, and caches mean-pooled residual vectors from the same layers. Because the installed TransformerLens backend does not fully support DNABERT-2's custom BERT-style implementation, the current run uses a Hugging Face forward-hook adapter for residual extraction and direct weight extraction for QK/OV matrices. This preserves the residual-probing and circuit-matrix parts of the framework, but it also means that TransformerLens-style per-head attention-pattern and head-output patching are not yet fully available in the executed run.
+The current repository implementation instantiates the framework on \texttt{zhihan1996/DNABERT-2-117M}. The run uses CUDA when available, exports QK and OV matrices for layers 0, 5, and 11, and caches mean-pooled residual vectors from the same layers. Because the installed TransformerLens backend does not fully support DNABERT-2's custom BERT-style implementation, the current run uses a Hugging Face forward-hook adapter for residual extraction, direct weight extraction for QK/OV matrices, low-rank $W_Q/W_K$ factor scoring for QK alignment, and custom PyTorch forward hooks for DNABERT attention-output patching. This preserves the residual-probing, circuit-matrix, QK-alignment, enrichment, and custom causal-intervention parts of the framework even when TransformerLens-style per-head patching utilities are unavailable.
 
 Evaluation can be performed on benchmark datasets including:
 \begin{itemize}
@@ -294,7 +294,7 @@ Evaluation can be performed on benchmark datasets including:
 \section{Evaluation Protocol and Success Criteria}
 \label{sec:results}
 
-Because preliminary probe results alone are not sufficient for mechanistic proof, this section specifies the evidence thresholds that would be required to support the paper's strongest claims.
+Because probe results alone are not sufficient for mechanistic proof, this section specifies the evidence thresholds required to support the paper's strongest claims.
 
 \subsection{Candidate Head Screening}
 
@@ -310,7 +310,7 @@ A head is promoted from exploratory inspection to mechanistic analysis only if i
 \textbf{Claim} & \textbf{Statistic} & \textbf{Threshold} \\
 \midrule
 Motif localization & Attention enrichment ratio $\rho_h = \mathbb{E}[a_{\mathrm{motif}}] / \mathbb{E}[a_{\mathrm{bg}}]$ & $\rho_h \geq 2.0$ \\
-Motif ranking & Correlation of QK score with motif score & $r \geq 0.5$, $q < 0.05$ \\
+Motif ranking & Correlation of QK score with motif score & $r \geq 0.5$, $p < 0.05$ \\
 Causal importance & Patching metric $\mathrm{PM}(h,l)$ & $\mathrm{PM} \geq 0.5$ \\
 Strong causal importance & Same as above & $\mathrm{PM} \geq 0.75$ \\
 Residual decodability & Probe AUROC or macro-$F_1$ above baseline & $\geq 0.80$ or $+0.10$ \\
@@ -333,12 +333,12 @@ Claims about residual-stream encoding require probes to outperform simple baseli
 
 A QK circuit is treated as biologically meaningful only when three signals converge: localized attention on motif-support positions, causal restoration under activation patching, and an OV readout that measurably shifts downstream logits or probe-relevant directions. This multi-criterion requirement reduces the risk of overinterpreting attention patterns alone.
 
-\section{Project Implementation and Preliminary Results}
+\section{Project Implementation and Results}
 \label{sec:implementation-results}
 
-We implemented the proposed pipeline in the MINTS repository as a one-command reproducibility workflow. The pipeline ingests the revised Nucleotide Transformer downstream task dataset, downloads ENCODE GM12878 CTCF artifacts, prepares GRCh38-derived CTCF peak sequences, loads DNABERT-2, exports selected QK/OV circuit matrices, caches frozen residual-stream vectors, and trains logistic regression probes. The run summary is written to \texttt{results/pipeline\_run.json}.
+We implemented the proposed pipeline in the MINTS repository as a one-command reproducibility workflow. The pipeline ingests the revised Nucleotide Transformer downstream task dataset, downloads ENCODE GM12878 CTCF artifacts, prepares GRCh38-derived CTCF peak sequences, loads DNABERT-2, exports selected QK/OV circuit matrices and $W_Q/W_K$ factors, caches frozen residual-stream vectors, trains logistic regression probes, computes CTCF QK-to-motif alignment, computes matched attention enrichment, and runs custom forward-hook activation patching. The root run summary is written to \texttt{results/pipeline\_run.json}; the QK-alignment, enrichment, patching, and heatmap artifacts are written under \texttt{results/qk\_alignment/}, \texttt{results/enrichment/}, \texttt{results/patching/}, and \texttt{results/figures/}.
 
-The latest completed run used \texttt{zhihan1996/DNABERT-2-117M} on CUDA through the Hugging Face forward-hook backend. It exported QK and OV matrices for layers 0, 5, and 11. Each exported layer has 12 heads with $d_{\mathrm{model}}=768$ and $d_{\mathrm{head}}=64$. For residual probing, the completed run used all rows in the configured train and test splits: 5,062/212 train/test examples for the TATA promoter task, 30,000/1,372 for the non-TATA promoter task, and 30,000/3,000 for each splice-site task. The positive class rates were close to balanced in all train and test splits, ranging from 0.4917 to 0.5028.
+The latest completed run was executed on April 13, 2026 and used \texttt{zhihan1996/DNABERT-2-117M} on CUDA through the Hugging Face forward-hook backend. It completed from the repository entrypoint \texttt{python main.py} in 3,261.229 seconds, with 2,739.109 seconds spent in the strict proof step. It exported QK and OV matrices for layers 0, 5, and 11. Each exported layer has 12 heads with $d_{\mathrm{model}}=768$ and $d_{\mathrm{head}}=64$. For residual probing, the completed run used all rows in the configured train and test splits: 5,062/212 train/test examples for the TATA promoter task, 30,000/1,372 for the non-TATA promoter task, and 30,000/3,000 for each splice-site task. The positive class rates were close to balanced in all train and test splits, ranging from 0.4917 to 0.5028.
 
 \begin{table}[htbp]
 \caption{Full Configured-Split Layer-11 Residual Probe Results from the Implemented Pipeline}
@@ -359,14 +359,54 @@ splice\_sites\_acceptors & 0.8847 & 0.8954 & 0.8090 & 3000 \\
 
 These results show that the selected biological task labels are linearly decodable from the frozen residual stream at layer 11 under the full configured-split run. Under the success criteria in Table~\ref{tab:criteria}, all four tasks meet the residual-decodability threshold of AUROC $\geq 0.80$. This is a genuine positive result for the representation-level part of the theory: it supports the assumption that biologically meaningful task information is present in approximately linear directions in the residual stream.
 
-However, this result is not sufficient to prove the existence of a biological motif detector head. The theory in Section~\ref{sec:methodology} requires stronger evidence than probe performance. In particular, the layer-1 theorem concerns QK alignment with a motif score, while the deeper-layer lemma requires an explicit motif direction and a margin condition. The current run exports the circuit matrices needed to test these conditions, but it does not yet report the QK-to-motif correlation. Similarly, the causal criterion in Table~\ref{tab:criteria} requires activation patching restoration, but the completed run has not yet produced layer-by-head restoration matrices for DNABERT-2. Therefore, the present achievement is best summarized as follows: the pipeline has demonstrated residual decodability and circuit-export feasibility, but it has not yet mathematically or causally established that any specific head is a motif detector.
+The strict CTCF scan used all 51,249 prepared GM12878 CTCF peak sequences. JASPAR CTCF motif scoring produced 256,918 motif-support tokens and 1,843,874 finite token positions for QK-to-motif correlation. Table~\ref{tab:strict-results} summarizes the results against the criteria from Table~\ref{tab:criteria}.
 
-The implementation also clarifies a practical limitation of applying language-model interpretability tools directly to genomic BERT-style models. DNABERT-2 can be loaded and analyzed through residual hooks and direct weight extraction, but the current TransformerLens environment does not expose all per-head attention-output tensors needed for direct \texttt{get\_act\_patch\_attn\_head\_out\_by\_pos} experiments. For that reason, the repository now includes counterfactual generation and restoration-metric utilities, while treating full TransformerLens head-output patching as a backend-dependent step.
+\begin{table*}[htbp]
+\caption{Strict Mechanistic Evidence Summary from the Completed DNABERT-2 Run}
+\label{tab:strict-results}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{2.7cm}p{4.7cm}p{3.9cm}p{2.3cm}@{}}
+\toprule
+\textbf{Evidence channel} & \textbf{Executed test} & \textbf{Best observed result} & \textbf{Criterion met?} \\
+\midrule
+Residual decodability & Layer-11 logistic probes on four benchmark tasks & AUROC range 0.8847--0.9383 & Yes \\
+CTCF QK alignment & 36 heads across layers 0, 5, 11; Pearson correlation with JASPAR CTCF token scores & Best: layer 11 head 0, $r=0.2119$, $p \approx 0$, $n=1{,}843{,}874$ & No \\
+CTCF attention enrichment & 36 heads across layers 0, 5, 11; matched motif/background attention mass & Best: layer 11 head 3, $\rho_h=1.0209$, 256,918 support tokens & No \\
+Promoter-TATA patching & 144 layer/head interventions on a TATAAA $\rightarrow$ GCGCGC counterfactual & Best: layer 7 head 8, $\mathrm{PM}=0.5983$ & Partial \\
+Strong patching & Same promoter-TATA interventions & No head reached $\mathrm{PM}\geq0.75$ & No \\
+Strict CTCF motif detector & Same head must pass CTCF QK alignment, CTCF enrichment, and causal restoration & No CTCF QK or enrichment candidate heads & No \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure*}[htbp]
+\centering
+\subfigure[CTCF QK-to-motif Pearson correlations.]{
+  \includegraphics[width=0.31\textwidth]{../results/figures/ctcf_qk_alignment_pearson_heatmap.png}
+}
+\hfill
+\subfigure[CTCF matched attention-enrichment ratios.]{
+  \includegraphics[width=0.31\textwidth]{../results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png}
+}
+\hfill
+\subfigure[Promoter-TATA activation-patching restoration.]{
+  \includegraphics[width=0.31\textwidth]{../results/figures/promoter_tata_dnabert_activation_patching_heatmap.png}
+}
+\caption{Mechanistic evidence heatmaps from the completed MINTS run. Panels (a) and (b) show the negative CTCF strict-proof result: no tested head reaches the registered QK-alignment threshold $r \geq 0.5$ or matched-enrichment threshold $\rho_h \geq 2.0$. Panel (c) shows the separate promoter-TATA patching experiment, where layer 7 head 8 is the strongest partial-restoration head with $\mathrm{PM}=0.5983$.}
+\label{fig:mechanistic-heatmaps}
+\end{figure*}
+
+The CTCF result is a negative strict-proof result, as visualized in Fig.~\ref{fig:mechanistic-heatmaps}(a--b). Although several correlations are statistically nonzero because the scan contains more than 1.8 million finite token positions, the largest effect size, $r=0.2119$, is well below the pre-registered $r \geq 0.5$ threshold. Similarly, the largest matched enrichment ratio, $\rho_h=1.0209$, is close to background and far below the $\rho_h \geq 2.0$ threshold. Thus, none of the tested CTCF heads is promoted to a strict motif-detector candidate.
+
+The promoter-TATA patching result in Fig.~\ref{fig:mechanistic-heatmaps}(c) is a separate positive causal signal, not a complete motif-detector proof. The executed clean/corrupted pair was \texttt{chr20:257674-257974|1}, where the clean subsequence \texttt{TATAAA} at character span $[20,26)$ was replaced by \texttt{GCGCGC}. The scalar target was the trained promoter-TATA residual-probe decision function. The best intervention, layer 7 head 8, restored 59.83\% of the clean-minus-corrupted effect. This crosses the causal-importance threshold $\mathrm{PM} \geq 0.5$ but not the strong-causal threshold $\mathrm{PM} \geq 0.75$. Because the CTCF QK and enrichment tests produced no passing candidate heads, and because this patching run targets a promoter-TATA pair rather than a CTCF pair, the completed run does not prove a strict CTCF biological motif-detector head.
+
+The implementation also clarifies a practical limitation of applying language-model interpretability tools directly to genomic BERT-style models. DNABERT-2 can be loaded and analyzed through residual hooks and direct weight extraction, but the current TransformerLens environment does not expose all per-head attention-output tensors needed for direct \texttt{get\_act\_patch\_attn\_head\_out\_by\_pos} experiments. For that reason, the repository uses custom DNABERT forward hooks for the executed head-output patching experiment while retaining TransformerLens wrapping when the backend permits it.
 
 \section{Interpretive Hypotheses}
 \label{sec:analysis}
 
-The implementation results in Section~\ref{sec:implementation-results} motivate but do not prove the interpretive hypotheses below. The residual-probe AUROCs indicate that promoter and splice-site labels are linearly decodable from the frozen representation, which is consistent with the deeper-layer decodability lemma. The remaining question is whether that decodable information is carried by specific motif-local QK/OV circuits or by more distributed features.
+The implementation results in Section~\ref{sec:implementation-results} motivate but do not prove the interpretive hypotheses below. The residual-probe AUROCs indicate that promoter and splice-site labels are linearly decodable from the frozen representation, which is consistent with the deeper-layer decodability lemma. The completed CTCF QK/enrichment scan also shows that this decodable biological information should not be assumed to reside in simple motif-local QK heads: under the registered criteria, no tested CTCF head passed the QK-alignment or matched-enrichment threshold. The remaining question is whether the useful information is carried by different layers, MLP features, distributed residual directions, task-specific non-CTCF circuits, or motifs not captured by the single JASPAR CTCF PWM test.
 
 \subsection{Expected Mechanism of Motif Detection}
 
@@ -388,9 +428,9 @@ For splice-site tasks, a plausible circuit organization consists of multiple sta
 
 \textbf{Late layers}: aggregators pool evidence across the sequence for final prediction.
 
-This is a hypothesis about circuit organization, not an empirical claim about any specific trained model.
+This is a hypothesis about circuit organization, not an empirical claim about DNABERT-2. In the completed CTCF scan, layers 0, 5, and 11 did not contain a head satisfying the strict CTCF motif-detector thresholds.
 
-The full configured-split residual-probe results support only the weakest part of this organization: late residual states contain enough information for linear classification of donor and acceptor labels. They do not yet identify whether early heads implement local donor/acceptor detectors or whether intermediate layers integrate context in the proposed manner.
+The full configured-split residual-probe results support only the weakest part of this organization: late residual states contain enough information for linear classification of donor and acceptor labels. The custom promoter-TATA patching result adds evidence that one head can causally restore part of a task-relevant probe signal for a TATAAA mutation. However, the run still does not identify a complete local donor, acceptor, promoter, or CTCF detector circuit satisfying all QK, enrichment, and causal criteria.
 
 \subsection{Expected Alignment with Biological Knowledge}
 
@@ -415,16 +455,16 @@ Fourth, biological annotations are incomplete. Many regulatory elements remain u
 
 Fifth, the linear probing assumption that features are linearly encoded may not hold for all biological concepts. Nonlinear probing methods may reveal additional encoded features.
 
-Sixth, the empirical results reported here show residual decodability on four benchmark tasks and successful QK/OV export for selected DNABERT-2 layers, but they do not include QK-to-motif correlation tests, motif-local attention enrichment, or completed causal patching heatmaps. The strongest mechanistic claim in the paper---the existence of a specific biological motif-detector head---therefore remains unproven.
+Sixth, the empirical results reported here show residual decodability on four benchmark tasks, successful QK/OV export for selected DNABERT-2 layers, a completed CTCF QK-to-motif scan, a completed matched attention-enrichment scan, and a completed custom promoter-TATA patching heatmap. The strongest mechanistic claim in the paper---the existence of a specific strict CTCF biological motif-detector head---is not supported by these results. The negative CTCF result is informative, but it is not a universal impossibility theorem: it applies to the selected DNABERT-2 model, the exported layers 0, 5, and 11, the prepared GM12878 CTCF intervals, the JASPAR MA0139.1 scoring procedure, and the registered thresholds.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper reframes the mechanistic study of nucleotide transformers as a precise, underexplored problem at the intersection of genomic foundation models and circuit-level interpretability. It provides a mathematically consistent framework for testing whether attention heads act as motif detectors and whether residual states encode biologically meaningful features, and it reports a preliminary implementation of that framework on DNABERT-2.
+This paper reframes the mechanistic study of nucleotide transformers as a precise, underexplored problem at the intersection of genomic foundation models and circuit-level interpretability. It provides a mathematically consistent framework for testing whether attention heads act as motif detectors and whether residual states encode biologically meaningful features, and it reports a completed full-data implementation of that framework on DNABERT-2 for the configured tasks.
 
-The corrected patching metric, tokenization-aware formulation, layer-1 theorem, and deeper-layer lemma together specify what would count as credible evidence. The implemented pipeline achieves one part of this evidence stack: biological labels for promoter and splice-site tasks are linearly decodable from layer-11 residual representations, with full configured-split AUROC values ranging from 0.8847 to 0.9383. It also exports the QK and OV matrices needed for future circuit tests. It does not yet achieve the stronger target of proving a motif detector, because the necessary QK-motif alignment, attention-enrichment, and causal-patching results remain to be executed and validated.
+The corrected patching metric, tokenization-aware formulation, layer-1 theorem, and deeper-layer lemma together specify what would count as credible evidence. The implemented pipeline achieves the residual-decodability part of this evidence stack: biological labels for promoter and splice-site tasks are linearly decodable from layer-11 residual representations, with full configured-split AUROC values ranging from 0.8847 to 0.9383. It also completes the CTCF QK/enrichment tests and the promoter-TATA custom patching test. The strict CTCF motif-detector proof fails under the registered thresholds: no tested head reaches the QK alignment or attention-enrichment criterion. The promoter-TATA patching experiment does identify one partially restoring head, layer 7 head 8 with $\mathrm{PM}=0.5983$, but this is not sufficient to establish a complete motif-detector circuit.
 
-Future work should compute motif-local attention enrichment and QK-to-motif correlations, complete activation-patching restoration heatmaps, compare tokenization schemes directly, and determine whether sparse long-context tracing can recover circuits over promoter, enhancer, and splicing windows at genomic scale.
+Future work should extend QK/enrichment scans beyond layers 0, 5, and 11; run motif-specific patching for CTCF as well as promoter and splice motifs; add OV readout analysis and matched negative controls; compare tokenization schemes directly; and determine whether sparse long-context tracing can recover circuits over promoter, enhancer, and splicing windows at genomic scale.
 
 \section*{Funding Statement}
 
