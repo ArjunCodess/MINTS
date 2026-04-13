@@ -9,7 +9,7 @@ import pandas as pd
 
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .counterfactuals import MutationRecord, generate_counterfactual_sequence, save_counterfactual_pairs
-from .patching import run_custom_dnabert_activation_patching
+from .patching import run_batch_dnabert_activation_patching, run_custom_dnabert_activation_patching
 from .qk_alignment import run_ctcf_qk_alignment
 from .utils import progress
 
@@ -175,3 +175,60 @@ def run_mechanistic_proof_exports(
             "activation_patching": _patching_summary(patching_outputs["table"]),
         },
     }
+
+
+def _batch_patching_summary(path: str | Path) -> dict[str, Any]:
+    """Summarize a systematic batch-patching table."""
+
+    table_path = Path(path)
+    if not table_path.exists():
+        return {}
+    table = pd.read_csv(table_path)
+    if "restoration" not in table.columns:
+        return {}
+    finite = table.dropna(subset=["restoration"])
+    if finite.empty:
+        return {"finite_scores": 0, "max_restoration": None, "top_heads": []}
+    top = finite.sort_values("restoration", ascending=False).head(10)
+    return {
+        "finite_scores": int(len(finite)),
+        "max_restoration": float(finite["restoration"].max()),
+        "mean_restoration": float(finite["restoration"].mean()),
+        "pairs": int(finite["pairs"].iloc[0]) if "pairs" in finite.columns else None,
+        "denominator_failures": int(finite["denominator_failures"].iloc[0])
+        if "denominator_failures" in finite.columns
+        else None,
+        "top_heads": [
+            {
+                "layer": int(row.layer),
+                "head": int(row.head),
+                "restoration": float(row.restoration),
+            }
+            for row in top.itertuples(index=False)
+        ],
+    }
+
+
+def run_systematic_causal_intervention_exports(
+    bundle: Any,
+    config: PipelineConfig = DEFAULT_CONFIG,
+) -> dict[str, Any]:
+    """Run batch denoising activation patching for the configured causal tasks."""
+
+    tasks = ("promoter_tata", "splice_sites_donors")
+    outputs: dict[str, Any] = {}
+    for task in tasks:
+        progress(f"Running systematic denoising activation patching for {task}")
+        task_outputs = run_batch_dnabert_activation_patching(
+            bundle=bundle,
+            task=task,
+            config=config,
+            max_pairs=config.data.max_patching_pairs,
+            sparse_positions=True,
+            output_stem=f"{task}_batch_dnabert_activation_patching",
+        )
+        outputs[task] = {
+            **{key: str(value) for key, value in task_outputs.items()},
+            "summary": _batch_patching_summary(task_outputs["table"]),
+        }
+    return outputs

@@ -29,6 +29,7 @@ class ProjectPaths:
     qk_alignment_dir: Path = RESULTS_DIR / "qk_alignment"
     counterfactuals_dir: Path = RESULTS_DIR / "counterfactuals"
     patching_dir: Path = RESULTS_DIR / "patching"
+    distributed_features_dir: Path = RESULTS_DIR / "distributed_features"
     figures_dir: Path = RESULTS_DIR / "figures"
     tables_dir: Path = RESULTS_DIR / "tables"
     encode_url_file: Path = DATA_DIR / "ENCODE4_v1.5.1_GRCh38.txt"
@@ -51,6 +52,7 @@ class ProjectPaths:
             self.qk_alignment_dir,
             self.counterfactuals_dir,
             self.patching_dir,
+            self.distributed_features_dir,
             self.figures_dir,
             self.tables_dir,
             self.grch38_fasta.parent,
@@ -96,6 +98,13 @@ class DataConfig:
     max_probe_train: int | None = None
     max_probe_test: int | None = None
     max_qk_alignment_sequences: int | None = None
+    max_patching_pairs: int = 500
+    max_feature_search_sequences: int | None = 2048
+    sae_dictionary_size: int = 512
+    sae_epochs: int = 10
+    sae_batch_size: int = 256
+    sae_learning_rate: float = 1e-3
+    sae_l1_coefficient: float = 1e-3
     circuit_layers: tuple[int, ...] = (0, 5, 11)
 
     def canonical_task(self, task_name: str) -> str:

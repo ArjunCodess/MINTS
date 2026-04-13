@@ -208,6 +208,71 @@ def load_hf_components(config: ModelConfig = DEFAULT_CONFIG.model) -> tuple[Any,
     return tokenizer, hf_model, device
 
 
+def encode_sequences(tokenizer: Any, sequences: list[str] | str, device: str, max_length: int | None = None) -> dict[str, Any]:
+    """Tokenize one or more DNA sequences and move tensors to the runtime device."""
+
+    kwargs: dict[str, Any] = {
+        "padding": True,
+        "truncation": True,
+        "return_tensors": "pt",
+    }
+    if max_length is not None:
+        kwargs["max_length"] = max_length
+    encoded = tokenizer(sequences, **kwargs)
+    return {key: value.to(device) for key, value in encoded.items()}
+
+
+def forward_hidden_states(model: Any, encoded: dict[str, Any]) -> list[Any]:
+    """Run an encoder model and return hidden states as a list.
+
+    DNABERT-2's remote code exposes hidden states through
+    `output_all_encoded_layers=True`, while standard Hugging Face encoders use
+    `output_hidden_states=True`. This helper normalizes both paths for probing
+    and hook-based intervention code.
+    """
+
+    try:
+        outputs = model(
+            input_ids=encoded["input_ids"],
+            attention_mask=encoded.get("attention_mask"),
+            output_all_encoded_layers=True,
+        )
+        hidden = outputs[0]
+        if isinstance(hidden, (list, tuple)):
+            return list(hidden)
+    except TypeError:
+        pass
+
+    outputs = model(
+        input_ids=encoded["input_ids"],
+        attention_mask=encoded.get("attention_mask"),
+        output_hidden_states=True,
+        return_dict=True,
+    )
+    hidden_states = getattr(outputs, "hidden_states", None)
+    if hidden_states is None:
+        raise RuntimeError("Model output did not expose hidden states.")
+    # Standard HF models include the embedding output at index 0. Dropping it
+    # keeps layer indices aligned with DNABERT-style encoded-layer lists.
+    return list(hidden_states[1:]) if len(hidden_states) > 1 else list(hidden_states)
+
+
+def encoder_layers(model: Any) -> list[Any]:
+    """Return encoder layers for BERT/ESM-style Hugging Face models."""
+
+    encoder = getattr(model, "encoder", None)
+    if encoder is None and hasattr(model, "base_model"):
+        encoder = getattr(model.base_model, "encoder", None)
+    if encoder is None and hasattr(model, "esm"):
+        encoder = getattr(model.esm, "encoder", None)
+    layers = getattr(encoder, "layer", None)
+    if layers is None:
+        layers = getattr(encoder, "layers", None)
+    if layers is None:
+        raise AttributeError("Could not locate encoder layers on the loaded model.")
+    return list(layers)
+
+
 def _select_hooked_encoder_class() -> Any:
     """Import TransformerLens' encoder wrapper."""
 

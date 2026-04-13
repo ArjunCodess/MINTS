@@ -13,7 +13,8 @@ from .ctcf import ensure_grch38_fasta, prepare_ctcf_sequences
 from .activations import cache_probe_residuals
 from .circuits import extract_qk_ov_matrices
 from .data_ingestion import download_encode_artifacts, ingest_hf_downstream_tasks
-from .mechanistic_proofs import run_mechanistic_proof_exports
+from .distributed_features import run_distributed_feature_search
+from .mechanistic_proofs import run_mechanistic_proof_exports, run_systematic_causal_intervention_exports
 from .modeling import load_hooked_encoder, summarize_hook_points
 from .probing import run_all_probes
 from .utils import progress, utc_now_iso, write_json
@@ -27,6 +28,8 @@ PIPELINE_STEPS: tuple[str, ...] = (
     "prepare_ctcf_sequences",
     "circuit_extraction_and_residual_probing",
     "strict_mechanistic_proofs",
+    "systematic_causal_intervention",
+    "distributed_feature_search",
 )
 
 
@@ -161,6 +164,44 @@ def _run_strict_proof_exports(config: PipelineConfig) -> dict[str, Any]:
     }
 
 
+def _run_systematic_causal_interventions(config: PipelineConfig) -> dict[str, Any]:
+    """Load the model and run batch denoising activation patching."""
+
+    progress(f"Loading model for systematic causal interventions: {config.model.model_name}")
+    bundle = load_hooked_encoder(config.model)
+    progress(f"Model ready on {bundle.device} using {bundle.instrumentation_backend}")
+    model_manifest_path = _write_model_manifest(bundle, config)
+    outputs = run_systematic_causal_intervention_exports(bundle, config=config)
+    return {
+        "model_manifest": str(model_manifest_path),
+        "instrumentation_backend": bundle.instrumentation_backend,
+        "model_name": bundle.model_name,
+        "device": bundle.device,
+        "systematic_interventions": outputs,
+    }
+
+
+def _run_distributed_feature_search(config: PipelineConfig) -> dict[str, Any]:
+    """Load the model and run residual/MLP sparse feature search."""
+
+    progress(f"Loading model for distributed feature search: {config.model.model_name}")
+    bundle = load_hooked_encoder(config.model)
+    progress(f"Model ready on {bundle.device} using {bundle.instrumentation_backend}")
+    model_manifest_path = _write_model_manifest(bundle, config)
+    outputs = run_distributed_feature_search(
+        bundle,
+        config=config,
+        max_sequences=config.data.max_feature_search_sequences,
+    )
+    return {
+        "model_manifest": str(model_manifest_path),
+        "instrumentation_backend": bundle.instrumentation_backend,
+        "model_name": bundle.model_name,
+        "device": bundle.device,
+        "distributed_features": outputs,
+    }
+
+
 def _relative_to_project(path: str | Path, config: PipelineConfig) -> str:
     """Render a path relative to the repository root when possible."""
 
@@ -284,6 +325,50 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
                 "summary": details["proof_exports"].get("summary", {}),
             },
         }
+    elif step.name == "systematic_causal_intervention":
+        compact_details = {
+            "model": {
+                "name": details["model_name"],
+                "device": details["device"],
+                "instrumentation_backend": details["instrumentation_backend"],
+                "manifest": _relative_to_project(details["model_manifest"], config),
+            },
+            "tasks": {
+                task: {
+                    key: (
+                        _relative_to_project(value, config)
+                        if key in {"table", "figure", "manifest", "pairs"}
+                        else value
+                    )
+                    for key, value in outputs.items()
+                }
+                for task, outputs in details["systematic_interventions"].items()
+            },
+        }
+    elif step.name == "distributed_feature_search":
+        outputs = details["distributed_features"]
+        compact_details = {
+            "model": {
+                "name": details["model_name"],
+                "device": details["device"],
+                "instrumentation_backend": details["instrumentation_backend"],
+                "manifest": _relative_to_project(details["model_manifest"], config),
+            },
+            "activation_path": _relative_to_project(outputs["activation_path"], config),
+            "summary_path": _relative_to_project(outputs["summary_path"], config),
+            "combined_alignment_path": _relative_to_project(outputs["combined_alignment_path"], config),
+            "sources": {
+                source: {
+                    key: (
+                        _relative_to_project(value, config)
+                        if key in {"checkpoint", "history", "alignment", "figure"}
+                        else value
+                    )
+                    for key, value in source_outputs.items()
+                }
+                for source, source_outputs in outputs["sources"].items()
+            },
+        }
     else:
         compact_details = details
 
@@ -332,6 +417,11 @@ def _write_run_manifest(
             "max_probe_train": config.data.max_probe_train,
             "max_probe_test": config.data.max_probe_test,
             "max_qk_alignment_sequences": config.data.max_qk_alignment_sequences,
+            "max_patching_pairs": config.data.max_patching_pairs,
+            "max_feature_search_sequences": config.data.max_feature_search_sequences,
+            "sae_dictionary_size": config.data.sae_dictionary_size,
+            "sae_epochs": config.data.sae_epochs,
+            "sae_l1_coefficient": config.data.sae_l1_coefficient,
         },
         "steps": [_compact_step(step, config) for step in steps],
     }
@@ -351,7 +441,11 @@ def run_pipeline(
         raise ValueError(f"Unknown from_step '{from_step}'. Expected one of: {', '.join(PIPELINE_STEPS)}")
     progress("Creating required data/results directories")
     config.ensure_paths()
-    run_manifest_path = config.paths.results_dir / "pipeline_run.json"
+    run_manifest_path = (
+        config.paths.results_dir / "pipeline_run.json"
+        if from_step == "write_config"
+        else config.paths.results_dir / f"pipeline_run_{from_step}.json"
+    )
     steps: list[StepRecord] = []
 
     def record_config() -> dict[str, Any]:
@@ -403,6 +497,8 @@ def run_pipeline(
             "prepare_ctcf_sequences": prepare_ctcf,
             "circuit_extraction_and_residual_probing": lambda: _run_circuit_and_probe_exports(config),
             "strict_mechanistic_proofs": lambda: _run_strict_proof_exports(config),
+            "systematic_causal_intervention": lambda: _run_systematic_causal_interventions(config),
+            "distributed_feature_search": lambda: _run_distributed_feature_search(config),
         }
         start_index = PIPELINE_STEPS.index(from_step)
         for step_name in PIPELINE_STEPS[start_index:]:

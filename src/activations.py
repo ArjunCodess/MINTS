@@ -10,7 +10,7 @@ import numpy as np
 
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .data_ingestion import canonicalize_task_name
-from .modeling import LoadedModelBundle
+from .modeling import LoadedModelBundle, encode_sequences, forward_hidden_states
 from .utils import progress, utc_now_iso, write_json
 
 
@@ -135,14 +135,8 @@ def cache_task_split_residuals(
         for batch_index, start in enumerate(range(0, len(dataset), config.data.batch_size), start=1):
             batch = dataset[start : start + config.data.batch_size]
             batch_sequences = list(batch["sequence"])
-            encoded = _collate_sequences(tokenizer, batch_sequences, config.data.token_max_length)
-            encoded = {key: value.to(bundle.device) for key, value in encoded.items()}
-            outputs = model(
-                input_ids=encoded["input_ids"],
-                attention_mask=encoded["attention_mask"],
-                output_all_encoded_layers=True,
-            )
-            encoded_layers = outputs[0]
+            encoded = encode_sequences(tokenizer, batch_sequences, bundle.device, config.data.token_max_length)
+            encoded_layers = forward_hidden_states(model, encoded)
             pooled_layers = []
             for layer_idx in layer_indices:
                 hidden = encoded_layers[layer_idx]
