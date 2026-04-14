@@ -11,7 +11,7 @@ from typing import Any, Callable
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .ctcf import ensure_grch38_fasta, prepare_ctcf_sequences
 from .activations import cache_probe_residuals
-from .circuits import extract_qk_ov_matrices
+from .circuits import analyze_tata_ov_readout, extract_qk_ov_matrices
 from .cross_model import run_cross_model_tokenization_comparison
 from .data_ingestion import download_encode_artifacts, ingest_hf_downstream_tasks
 from .distributed_features import run_distributed_feature_search
@@ -97,6 +97,14 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
     circuit_export = extract_qk_ov_matrices(bundle, config=config)
     progress("Training linear probes from cached residuals")
     probe_table = run_all_probes(config=config)
+    progress("Analyzing OV readout alignment for the promoter-TATA restoring head")
+    ov_readout = analyze_tata_ov_readout(
+        config=config,
+        circuit_path=circuit_export.path,
+        task="promoter_tata",
+        layer=2,
+        head=7,
+    )
     return {
         "model_manifest": str(model_manifest_path),
         "instrumentation_backend": bundle.instrumentation_backend,
@@ -118,6 +126,7 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
             "d_head": circuit_export.d_head,
         },
         "probe_table": str(probe_table),
+        "ov_readout": ov_readout,
     }
 
 
@@ -310,6 +319,14 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
             "probes": {
                 "metrics_path": _relative_to_project(details["probe_table"], config),
                 "metrics": _load_probe_metrics(details["probe_table"], config),
+            },
+            "ov_readout": {
+                key: (
+                    _relative_to_project(value, config)
+                    if key in {"table", "figure", "manifest"}
+                    else value
+                )
+                for key, value in details["ov_readout"].items()
             },
         }
     elif step.name == "strict_mechanistic_proofs":

@@ -110,7 +110,7 @@ class DataConfig:
     sae_batch_size: int = 256
     sae_learning_rate: float = 1e-3
     sae_l1_coefficient: float = 1e-3
-    circuit_layers: tuple[int, ...] = (0, 5, 11)
+    circuit_layers: tuple[int, ...] = tuple(range(12))
 
     def canonical_task(self, task_name: str) -> str:
         """Return the canonical task identifier used by the HF dataset."""

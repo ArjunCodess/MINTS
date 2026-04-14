@@ -1,5 +1,6 @@
 import numpy as np
 
+from src.circuits import ov_probe_alignment_table
 from src.enrichment import MotifSupport, attention_enrichment_ratio, matched_attention_enrichment_from_records
 
 
@@ -55,3 +56,23 @@ def test_matched_attention_enrichment_flags_motif_focused_head() -> None:
     assert bool(head0["passes_attention_enrichment"])
     assert np.isclose(head1["rho"], 1.0)
     assert not bool(head1["passes_attention_enrichment"])
+
+
+def test_ov_probe_alignment_reports_output_write_direction() -> None:
+    probe_direction = np.array([1.0, 0.0, 0.0], dtype=np.float64)
+    ov = np.diag([3.0, 2.0, 1.0]).astype(np.float64)
+
+    table, summary = ov_probe_alignment_table(
+        ov_matrix=ov,
+        probe_direction=probe_direction,
+        layer=2,
+        head=7,
+        top_n=3,
+    )
+
+    assert len(table) == 3
+    assert summary["layer"] == 2
+    assert summary["head"] == 7
+    assert np.isclose(summary["top_output_write_abs_cosine"], 1.0)
+    assert int(table.iloc[0]["singular_index"]) == 0
+    assert np.isclose(table.iloc[0]["output_write_singular_abs_cosine"], 1.0)
