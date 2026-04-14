@@ -11,6 +11,8 @@ from src.patching import (
     patch_head_output_tensor,
     restoration_metric,
     save_restoration_matrix,
+    stream_sparse_attention_mask,
+    stream_sparse_patch_positions,
 )
 
 
@@ -134,6 +136,41 @@ def test_hierarchical_sparse_patch_positions_keep_motif_and_log_context() -> Non
     assert 127 in positions
     assert set(range(60, 64)).issubset(positions)
     assert len(positions) <= 16
+    assert positions == sorted(positions)
+
+
+def test_stream_sparse_attention_mask_refines_to_top_key_blocks() -> None:
+    key_scores = np.zeros(128, dtype=np.float64)
+    key_scores[72:80] = 10.0
+
+    sparse = stream_sparse_attention_mask(
+        sequence_length=128,
+        key_scores=key_scores,
+        query_block_size=16,
+        min_key_block_size=8,
+        top_k=1,
+        locality_weight=0.0,
+    )
+
+    hot_key_block = [idx for idx, block in enumerate(sparse.key_blocks) if block == (72, 80)][0]
+    assert sparse.mask.shape == (8, 16)
+    assert sparse.mask[:, hot_key_block].all()
+    assert sparse.metadata["algorithm"] == "stream_hierarchical_block_refinement"
+    assert sparse.metadata["density"] < 0.2
+
+
+def test_stream_sparse_patch_positions_keeps_motif_under_cap() -> None:
+    positions = stream_sparse_patch_positions(
+        sequence_length=100_000,
+        motif_token_span=(50_000, 50_006),
+        max_positions=64,
+        top_k=2,
+    )
+
+    assert set(range(50_000, 50_006)).issubset(positions)
+    assert 0 in positions
+    assert 99_999 in positions
+    assert len(positions) <= 64
     assert positions == sorted(positions)
 
 

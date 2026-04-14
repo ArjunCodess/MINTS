@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 
@@ -13,6 +14,23 @@ from .counterfactuals import MutationRecord, generate_counterfactual_sequence, s
 from .data_ingestion import canonicalize_task_name
 from .modeling import encode_sequences, encoder_layers, forward_hidden_states
 from .utils import progress, utc_now_iso, write_json
+
+
+@dataclass(frozen=True)
+class StreamSparseMask:
+    """Hierarchical sparse attention-mask estimate for long-context tracing.
+
+    The mask is block-level rather than token-level. Rows are query blocks and
+    columns are key blocks at the final refinement resolution. A `True` entry
+    means that the key block survived hierarchical top-k pruning for that query
+    block.
+    """
+
+    mask: np.ndarray
+    query_blocks: tuple[tuple[int, int], ...]
+    key_blocks: tuple[tuple[int, int], ...]
+    selected_key_blocks_by_query: tuple[tuple[int, ...], ...]
+    metadata: dict[str, int | float | str | None]
 
 
 def restoration_metric(
@@ -305,17 +323,200 @@ def _replace_concatenated_head_slice(output, clean_output, head_idx: int, d_head
     return patched
 
 
-def hierarchical_sparse_patch_positions(
+def _partition_blocks(length: int, block_size: int) -> tuple[tuple[int, int], ...]:
+    """Partition `[0, length)` into contiguous half-open blocks."""
+
+    if length <= 0:
+        return ()
+    if block_size <= 0:
+        raise ValueError("block_size must be positive.")
+    return tuple((start, min(length, start + block_size)) for start in range(0, length, block_size))
+
+
+def _overlap_length(a: tuple[int, int], b: tuple[int, int]) -> int:
+    """Return token overlap length between two half-open intervals."""
+
+    return max(0, min(a[1], b[1]) - max(a[0], b[0]))
+
+
+def _score_stream_key_block(
+    key_block: tuple[int, int],
+    query_block: tuple[int, int],
+    key_scores: np.ndarray,
+    motif_token_span: tuple[int, int] | None,
+    motif_bonus: float,
+    locality_weight: float,
+) -> float:
+    """Score one candidate key block for a query block during refinement."""
+
+    start, end = key_block
+    if start >= end:
+        return float("-inf")
+    block_scores = key_scores[start:end]
+    finite = block_scores[np.isfinite(block_scores)]
+    score = float(np.max(finite)) if finite.size else 0.0
+    if motif_token_span is not None and _overlap_length(key_block, motif_token_span) > 0:
+        score += float(motif_bonus)
+
+    query_center = 0.5 * (query_block[0] + query_block[1] - 1)
+    key_center = 0.5 * (start + end - 1)
+    score += float(locality_weight) / (1.0 + abs(query_center - key_center))
+    return score
+
+
+def stream_sparse_attention_mask(
+    sequence_length: int,
+    *,
+    key_scores: np.ndarray | None = None,
+    motif_token_span: tuple[int, int] | None = None,
+    query_block_size: int = 64,
+    min_key_block_size: int = 64,
+    top_k: int = 4,
+    refinement_rounds: int | None = None,
+    motif_bonus: float = 1.0,
+    locality_weight: float = 0.05,
+) -> StreamSparseMask:
+    """Estimate a sparse attention mask with STREAM-style block refinement.
+
+    This is a practical hierarchical pruning routine inspired by STREAM-style
+    sparse tracing. For each query block, the algorithm starts from the full
+    key range, recursively bisects surviving key blocks, scores the child
+    blocks, and keeps only the top-k blocks per query at each refinement level.
+    With fixed `top_k`, each query block scores `O(top_k log T)` key blocks
+    instead of all `T` keys.
+
+    `key_scores` can encode prior importance such as motif scores or cheap
+    proxy salience. When omitted, the refinement falls back to motif overlap
+    plus local context, which is still useful for long-context denoising
+    patching where the biological perturbation span is known.
+    """
+
+    if sequence_length <= 0:
+        empty = np.zeros((0, 0), dtype=bool)
+        return StreamSparseMask(
+            mask=empty,
+            query_blocks=(),
+            key_blocks=(),
+            selected_key_blocks_by_query=(),
+            metadata={
+                "sequence_length": int(sequence_length),
+                "query_block_size": int(query_block_size),
+                "min_key_block_size": int(min_key_block_size),
+                "top_k": int(top_k),
+                "refinement_rounds": 0,
+                "algorithm": "stream_hierarchical_block_refinement",
+            },
+        )
+    if query_block_size <= 0 or min_key_block_size <= 0:
+        raise ValueError("query_block_size and min_key_block_size must be positive.")
+    if top_k <= 0:
+        raise ValueError("top_k must be positive.")
+
+    if key_scores is None:
+        score_vector = np.zeros(sequence_length, dtype=np.float64)
+    else:
+        score_vector = np.asarray(key_scores, dtype=np.float64).reshape(-1)
+        if score_vector.shape[0] != sequence_length:
+            raise ValueError(
+                f"key_scores length {score_vector.shape[0]} does not match sequence_length {sequence_length}."
+            )
+    if motif_token_span is not None:
+        start, end = motif_token_span
+        start = max(0, min(sequence_length, int(start)))
+        end = max(start + 1, min(sequence_length, int(end)))
+        motif_span = (start, end)
+    else:
+        motif_span = None
+
+    query_blocks = _partition_blocks(sequence_length, query_block_size)
+    key_blocks = _partition_blocks(sequence_length, min_key_block_size)
+    if refinement_rounds is None:
+        refinement_rounds = int(np.ceil(np.log2(max(1, sequence_length / min_key_block_size))))
+    refinement_rounds = max(1, int(refinement_rounds))
+
+    mask = np.zeros((len(query_blocks), len(key_blocks)), dtype=bool)
+    selected_by_query: list[tuple[int, ...]] = []
+    for query_idx, query_block in enumerate(query_blocks):
+        candidates: list[tuple[int, int]] = [(0, sequence_length)]
+        for _ in range(refinement_rounds):
+            children: list[tuple[int, int]] = []
+            for start, end in candidates:
+                if end - start <= min_key_block_size:
+                    children.append((start, end))
+                    continue
+                midpoint = start + ((end - start) // 2)
+                midpoint = max(start + 1, min(end - 1, midpoint))
+                children.append((start, midpoint))
+                children.append((midpoint, end))
+            ranked = sorted(
+                children,
+                key=lambda block: (
+                    _score_stream_key_block(
+                        block,
+                        query_block,
+                        score_vector,
+                        motif_span,
+                        motif_bonus,
+                        locality_weight,
+                    ),
+                    -(block[1] - block[0]),
+                    -block[0],
+                ),
+                reverse=True,
+            )
+            candidates = ranked[: min(top_k, len(ranked))]
+            if all(end - start <= min_key_block_size for start, end in candidates):
+                break
+
+        selected_indices: set[int] = set()
+        for candidate in candidates:
+            first_block = max(0, candidate[0] // min_key_block_size)
+            last_block = min(len(key_blocks), int(np.ceil(candidate[1] / min_key_block_size)))
+            selected_indices.update(range(first_block, last_block))
+        if motif_span is not None:
+            first_block = max(0, motif_span[0] // min_key_block_size)
+            last_block = min(len(key_blocks), int(np.ceil(motif_span[1] / min_key_block_size)))
+            selected_indices.update(range(first_block, last_block))
+        selected_tuple = tuple(sorted(selected_indices))
+        selected_by_query.append(selected_tuple)
+        if selected_tuple:
+            mask[query_idx, list(selected_tuple)] = True
+
+    metadata = {
+        "sequence_length": int(sequence_length),
+        "query_block_size": int(query_block_size),
+        "min_key_block_size": int(min_key_block_size),
+        "top_k": int(top_k),
+        "refinement_rounds": int(refinement_rounds),
+        "query_blocks": int(len(query_blocks)),
+        "key_blocks": int(len(key_blocks)),
+        "selected_block_entries": int(mask.sum()),
+        "density": float(mask.mean()) if mask.size else 0.0,
+        "algorithm": "stream_hierarchical_block_refinement",
+    }
+    return StreamSparseMask(
+        mask=mask,
+        query_blocks=query_blocks,
+        key_blocks=key_blocks,
+        selected_key_blocks_by_query=tuple(selected_by_query),
+        metadata=metadata,
+    )
+
+
+def stream_sparse_patch_positions(
     sequence_length: int,
     motif_token_span: tuple[int, int] | None = None,
     max_positions: int | None = None,
+    top_k: int = 4,
+    min_key_block_size: int | None = None,
 ) -> list[int]:
-    """Choose sparse token positions for long-context denoising patching.
+    """Convert a STREAM-style block mask into sparse token patch positions.
 
-    The selector keeps all motif-support tokens, then adds logarithmically
-    spaced anchors expanding left and right from the motif center. This is a
-    practical Stream-inspired pruning rule: it avoids dense all-position
-    replacement while preserving local motif evidence and multiscale context.
+    Head-output patching replaces query-position activations, while STREAM
+    produces query-key block structure. For intervention efficiency we retain
+    token positions from selected query blocks near the perturbation and from
+    their surviving key blocks. This keeps the known motif span, sequence
+    endpoints, and the highest-priority blocks under a `max_positions` cap.
     """
 
     if sequence_length <= 0:
@@ -328,26 +529,67 @@ def hierarchical_sparse_patch_positions(
         start = max(0, min(sequence_length, int(start)))
         end = max(start + 1, min(sequence_length, int(end)))
 
-    positions: set[int] = set(range(start, end))
-    center = (start + end - 1) // 2
-    stride = 1
-    while len(positions) < sequence_length and (center - stride >= 0 or center + stride < sequence_length):
-        if center - stride >= 0:
-            positions.add(center - stride)
-        if center + stride < sequence_length:
-            positions.add(center + stride)
-        stride *= 2
-        if max_positions is not None and len(positions) >= max_positions:
-            break
+    if max_positions is not None and max_positions <= 0:
+        raise ValueError("max_positions must be positive when provided.")
+    if min_key_block_size is None:
+        if max_positions is None:
+            min_key_block_size = max(1, int(np.ceil(np.sqrt(sequence_length))))
+        else:
+            min_key_block_size = max(1, int(np.ceil(sequence_length / max(max_positions, 1))))
+    query_block_size = max(1, int(min_key_block_size))
+    sparse_mask = stream_sparse_attention_mask(
+        sequence_length=sequence_length,
+        motif_token_span=(start, end),
+        query_block_size=query_block_size,
+        min_key_block_size=int(min_key_block_size),
+        top_k=top_k,
+    )
 
-    positions.add(0)
-    positions.add(sequence_length - 1)
-    ordered = sorted(positions)
+    motif_query_rows = [
+        idx for idx, block in enumerate(sparse_mask.query_blocks) if _overlap_length(block, (start, end)) > 0
+    ]
+    if not motif_query_rows and sparse_mask.query_blocks:
+        center = (start + end - 1) // 2
+        motif_query_rows = [
+            min(
+                range(len(sparse_mask.query_blocks)),
+                key=lambda idx: abs(0.5 * (sparse_mask.query_blocks[idx][0] + sparse_mask.query_blocks[idx][1] - 1) - center),
+            )
+        ]
+
+    positions: set[int] = set(range(start, end)) | {0, sequence_length - 1}
+    for query_idx in motif_query_rows:
+        query_block = sparse_mask.query_blocks[query_idx]
+        positions.update(range(query_block[0], query_block[1]))
+        for key_block_idx in sparse_mask.selected_key_blocks_by_query[query_idx]:
+            key_block = sparse_mask.key_blocks[key_block_idx]
+            positions.update(range(key_block[0], key_block[1]))
+
+    ordered = sorted(pos for pos in positions if 0 <= pos < sequence_length)
     if max_positions is not None and len(ordered) > max_positions:
         must_keep = sorted(set(range(start, end)) | {0, sequence_length - 1})
-        remaining = [pos for pos in ordered if pos not in must_keep]
-        ordered = sorted((must_keep + remaining)[:max_positions])
+        center = (start + end - 1) // 2
+        remaining = sorted(
+            [pos for pos in ordered if pos not in must_keep],
+            key=lambda pos: (abs(pos - center), pos),
+        )
+        budget = max(0, max_positions - len(must_keep))
+        ordered = sorted(must_keep + remaining[:budget])
     return ordered
+
+
+def hierarchical_sparse_patch_positions(
+    sequence_length: int,
+    motif_token_span: tuple[int, int] | None = None,
+    max_positions: int | None = None,
+) -> list[int]:
+    """Backward-compatible wrapper around the STREAM sparse selector."""
+
+    return stream_sparse_patch_positions(
+        sequence_length=sequence_length,
+        motif_token_span=motif_token_span,
+        max_positions=max_positions,
+    )
 
 
 def _replace_concatenated_head_slice_at_positions(
@@ -593,6 +835,7 @@ def run_batch_dnabert_activation_patching(
     n_heads = int(encoder_layer_list[layers[0]].attention.self.num_attention_heads)
     per_pair_restoration = np.full((len(records), len(layers), n_heads), np.nan, dtype=np.float64)
     denominator_failures = 0
+    sparse_position_counts: list[int] = []
 
     for pair_idx, record in enumerate(records):
         clean_score = _score_sequence_with_probe(bundle, record.clean_sequence, scorer, config)
@@ -615,11 +858,13 @@ def run_batch_dnabert_activation_patching(
                 )
             except Exception:
                 motif_span = None
-            positions = hierarchical_sparse_patch_positions(
+            positions = stream_sparse_patch_positions(
                 sequence_length=token_count,
                 motif_token_span=motif_span,
                 max_positions=max(8, int(np.ceil(np.log2(max(token_count, 2))) * 4)),
+                top_k=4,
             )
+            sparse_position_counts.append(len(positions))
 
         for layer_offset, layer_idx in enumerate(layers):
             for head_idx in range(n_heads):
@@ -654,6 +899,14 @@ def run_batch_dnabert_activation_patching(
             "pairs": len(records),
             "denominator_failures": int(denominator_failures),
             "sparse_positions": bool(sparse_positions),
+            "sparse_mask_algorithm": (
+                "stream_hierarchical_block_refinement" if sparse_positions else None
+            ),
+            "sparse_position_count_min": int(min(sparse_position_counts)) if sparse_position_counts else None,
+            "sparse_position_count_max": int(max(sparse_position_counts)) if sparse_position_counts else None,
+            "sparse_position_count_mean": (
+                float(np.mean(sparse_position_counts)) if sparse_position_counts else None
+            ),
             "layers": list(layers),
             "n_heads": n_heads,
             "table_path": str(outputs["table"]),
