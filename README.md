@@ -12,10 +12,11 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 
 - **One-command reproducibility:** `python main.py` runs data checks, model loading, residual probing, QK/OV export, strict CTCF scans, systematic patching, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
-- **Negative strict CTCF proof:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`.
-- **Causal patching signal:** Batch DNABERT forward-hook patching found strong promoter-TATA restoration, with best mean restoration `PM = 1.4216` at layer `2`, head `7` over `327` pairs. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5285` over `500` pairs.
+- **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
+- **Causal patching signal:** Batch DNABERT forward-hook patching found strong promoter-TATA restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
+- **OV readout audit:** The previously suspected TATA-restoring layer `2`, head `7` does not directly align strongly with the trained TATA residual-probe direction; its top OV output-write singular-vector cosine is only `0.1261`, and the probe self-gain is `-0.0326`.
 - **Cross-model tokenization comparison:** On the same residual-probe benchmark, DNABERT-2 BPE strongly outperformed Nucleotide Transformer fixed 6-mer tokenization in this pipeline, with AUROC deltas from `+0.2408` to `+0.3259` in favor of DNABERT-2.
-- **Distributed feature search:** SAE feature search ran over `2,048` CTCF sequences and produced residual/MLP feature rankings, but the top CTCF motif cosine was only `0.0884`; this is weak alignment, not a discovered monosemantic CTCF feature.
+- **Distributed feature search:** SAE feature search ran over `2,048` CTCF sequences with the corrected DNABERT GLU MLP hook. The residual stream has shape `2048 x 768`, the MLP post-activation features have shape `2048 x 3072`, and the top CTCF motif cosine is still weak at `0.1158`.
 
 ## Overview
 
@@ -37,7 +38,7 @@ The novel contribution is the combination of computational biology ground truth 
 2. Hugging Face downstream tasks are filtered and tokenized into `data/hf_downstream/`.
 3. ENCODE GM12878 CTCF artifacts and GRCh38 sequence tables are prepared under `data/`.
 4. DNABERT-2 is loaded on CUDA when available through Hugging Face forward hooks after TransformerLens compatibility fallback.
-5. Residual vectors are cached for layers `0`, `5`, and `11`; QK/OV matrices are exported for the same layers.
+5. Residual vectors are cached for layers `0`, `5`, and `11`; QK/OV matrices are exported for all `12` DNABERT-2 layers.
 6. Logistic probes are trained on frozen layer-11 residual vectors.
 7. JASPAR `MA0139.1` CTCF motif scores are aligned to model token positions across GM12878 CTCF sequences.
 8. QK-to-motif Pearson correlations and matched motif/background enrichment ratios are computed.
@@ -48,22 +49,22 @@ The novel contribution is the combination of computational biology ground truth 
 
 ## Latest Full Run
 
-The latest full run started at `2026-04-13 21:00:22` and ended at `2026-04-14 00:04:34` local time (`Asia/Calcutta`). The root manifest timestamp is `2026-04-13T18:34:34+00:00`. The manifest reports `11,051.958` seconds, or `3.070` hours, across all pipeline steps.
+The latest full run started at `2026-04-14 13:27:07` and ended at `2026-04-14 21:26:30` local time (`Asia/Calcutta`). The root manifest timestamp is `2026-04-14T15:56:30+00:00`. The manifest reports `28,760.213` seconds, or `7.989` hours, across all pipeline steps; the wall-clock log span is `7h 59m 23s`.
 
 Runtime breakdown:
 
 - `write_config`: `0.001s`
-- `ingest_hf_downstream`: `17.821s`
-- `download_encode_ctcf`: `0.250s`
-- `download_grch38`: `2.895s`
-- `prepare_ctcf_sequences`: `1.103s`
-- `circuit_extraction_and_residual_probing`: `497.519s`
-- `strict_mechanistic_proofs`: `2857.587s`
-- `systematic_causal_intervention`: `1863.729s`
-- `distributed_feature_search`: `39.111s`
-- `cross_model_tokenization_comparison`: `5771.942s`
+- `ingest_hf_downstream`: `10.607s`
+- `download_encode_ctcf`: `0.258s`
+- `download_grch38`: `2.805s`
+- `prepare_ctcf_sequences`: `2.356s`
+- `circuit_extraction_and_residual_probing`: `659.838s`
+- `strict_mechanistic_proofs`: `9475.141s`
+- `systematic_causal_intervention`: `1344.551s`
+- `distributed_feature_search`: `33.110s`
+- `cross_model_tokenization_comparison`: `17231.546s`
 
-The `results/` tree now contains `120` files in the local artifact inventory, including `56` JSON summaries/manifests, `20` CSV tables, `3` TSV counterfactual-pair tables, `11` PNG figures, `28` NPZ activation/circuit archives, and `2` SAE checkpoint files. The large reproducible NPZ/PT/token-motif artifacts are intentionally ignored by Git; after the ignore rules are applied, the largest still-untracked review artifact is about `0.62 MB`.
+I inspected the full `results/` tree for this documentation update. It contains `125` files totaling about `4.71 GB`: `58` JSON files, `22` CSV files, `3` TSV files, `12` PNG figures, `28` NPZ archives, and `2` PyTorch SAE checkpoints. The large reproducible NPZ/PT/token-motif artifacts are intentionally ignored by Git.
 
 ## Main Results
 
@@ -84,12 +85,12 @@ Interpretation: the biological labels are linearly decodable from frozen DNABERT
 
 The strict CTCF scan used all `51,249` prepared GM12878 CTCF sequences.
 
-- DNABERT-2 QK scan: `36` heads from layers `0`, `5`, and `11`
-- Best DNABERT-2 QK-to-motif correlation: layer `11`, head `0`, `r = 0.2119`, `n = 1,843,874`, `p ~= 0`
+- DNABERT-2 QK scan: `144` heads across all layers `0-11`
+- Best DNABERT-2 QK-to-motif correlation: layer `1`, head `10`, `r = 0.3004`, `n = 1,843,874`, `p ~= 0`
 - Passing DNABERT-2 QK candidates: `0`
-- Best DNABERT-2 matched enrichment: layer `11`, head `3`, `rho_h = 1.0209`
+- Best DNABERT-2 matched enrichment: layer `6`, head `3`, `rho_h = 1.3130`
 - Passing DNABERT-2 enrichment candidates: `0`
-- Motif-support/background tokens in DNABERT-2 enrichment: `256,918 / 256,918`
+- Motif-support/background tokens in DNABERT-2 enrichment after BPE span correction: `281,915 / 281,915`
 
 Interpretation: the QK correlations are statistically nonzero because the scan is very large, but the effect sizes are far below the registered `r >= 0.5` criterion. The enrichment ratios are close to background. The run does not prove a strict CTCF motif-detector head.
 
@@ -111,10 +112,22 @@ Batch denoising patching is more important for the current run:
 
 | Task | Pairs | Best layer/head | Best PM | Mean PM | Denominator failures |
 |---|---:|---:|---:|---:|---:|
-| `promoter_tata` | `327` | layer `2`, head `7` | `1.4216` | `0.1434` | `0` |
-| `splice_sites_donors` | `500` | layer `1`, head `8` | `0.5285` | `0.0076` | `0` |
+| `promoter_tata` | `327` | layer `4`, head `8` | `1.4029` | `0.1604` | `0` |
+| `splice_sites_donors` | `500` | layer `1`, head `8` | `0.5485` | `0.0157` | `0` |
 
 Interpretation: promoter-TATA has a strong causal restoration signal under batch patching, including over-restoration above `1.0`. Splice donor has a weaker but threshold-crossing best head. These are task-specific causal signals; they do not rescue the failed CTCF strict motif-detector claim.
+
+The OV readout audit for the earlier candidate layer `2`, head `7` found weak direct alignment with the trained TATA residual-probe direction:
+
+- Top OV output-write singular-vector absolute cosine: `0.1261`
+- Top OV input/read singular-vector absolute cosine in the exported top-25 table: `0.0577`
+- Manifest-level top input/read absolute cosine across all singular vectors: `0.1205`
+- Probe self-gain through the OV matrix: `-0.0326`
+- Spectral norm: `6.8211`
+
+Interpretation: layer `2`, head `7` can contribute to TATA restoration, but its OV matrix is not simply writing along the trained TATA-promoter probe direction.
+
+![TATA layer-2 head-7 OV readout alignment](results/figures/tata_l2h7_ov_probe_alignment.png)
 
 ![Promoter-TATA batch activation patching heatmap](results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png)
 
@@ -125,14 +138,15 @@ Interpretation: promoter-TATA has a strong causal restoration signal under batch
 The distributed feature search trained sparse autoencoders on `2,048` CTCF sequences:
 
 - Residual activation shape: `2048 x 768`
-- MLP activation shape: `2048 x 768`
+- MLP post-activation feature shape: `2048 x 3072`
+- MLP hook target: `mlp.gated_layers.post_activation_glu`
 - Dictionary size: `512`
 - Epochs: `10`
-- Best CTCF motif cosine: `0.0884`
-- Top feature: `31`
-- Top activation frequency: `0.5049`
+- Best residual CTCF motif cosine: `0.0884`, feature `31`, activation frequency `0.5049`
+- Best MLP CTCF motif cosine: `0.1158`, feature `414`, activation frequency `0.4795`
+- Global top-10 SAE features: `5` MLP features and `5` residual features
 
-Important caveat: the saved residual and MLP activation arrays are numerically identical in this run (`max abs diff = 0.0`). That means the SAE result should be interpreted as a preliminary distributed-feature search on the captured layer-11 activation stream, not as evidence that a distinct MLP subspace was isolated.
+The corrected run no longer has the residual/MLP identity bug: residual and MLP tensors have different shapes, and the activation manifest records `residual_mlp_same_shape = false`.
 
 Interpretation: no strong monosemantic CTCF SAE feature was found. The weak top cosine is consistent with the broader result that CTCF information is not isolated in a simple attention-head detector in this configuration.
 
@@ -158,10 +172,10 @@ Probe comparison:
 
 CTCF strict-scan comparison:
 
-- DNABERT-2 best QK correlation: `r = 0.2119`
+- DNABERT-2 best QK correlation in the latest all-layer primary scan: `r = 0.3004`
 - Nucleotide Transformer best QK correlation: `r = 0.0192`
-- DNABERT-2 best enrichment: `rho_h = 1.0209`
-- Nucleotide Transformer best enrichment: `rho_h = 1.00005`
+- DNABERT-2 best enrichment in the latest all-layer primary scan: `rho_h = 1.3130`
+- Nucleotide Transformer best enrichment: `rho_h = 1.00009`
 - Passing QK/enrichment candidates for either model: `0`
 
 Interpretation: in this exact benchmark, DNABERT-2 BPE is much more linearly probeable than the Nucleotide Transformer fixed-6mer backend. However, neither model yields a strict CTCF motif-detector head under the registered thresholds.
@@ -245,6 +259,7 @@ Primary outputs:
 - [`results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv`](results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv)
 - [`results/patching/promoter_tata_batch_dnabert_activation_patching.csv`](results/patching/promoter_tata_batch_dnabert_activation_patching.csv)
 - [`results/patching/splice_sites_donors_batch_dnabert_activation_patching.csv`](results/patching/splice_sites_donors_batch_dnabert_activation_patching.csv)
+- [`results/tables/tata_l2h7_ov_probe_alignment.csv`](results/tables/tata_l2h7_ov_probe_alignment.csv)
 - [`results/distributed_features/ctcf_sae_feature_alignment_top10.csv`](results/distributed_features/ctcf_sae_feature_alignment_top10.csv)
 
 Important figures:
@@ -254,6 +269,7 @@ Important figures:
 - [`results/figures/promoter_tata_dnabert_activation_patching_heatmap.png`](results/figures/promoter_tata_dnabert_activation_patching_heatmap.png)
 - [`results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png`](results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png)
 - [`results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png`](results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png)
+- [`results/figures/tata_l2h7_ov_probe_alignment.png`](results/figures/tata_l2h7_ov_probe_alignment.png)
 - [`results/figures/ctcf_residual_sae_top10_alignment.png`](results/figures/ctcf_residual_sae_top10_alignment.png)
 - [`results/figures/ctcf_mlp_sae_top10_alignment.png`](results/figures/ctcf_mlp_sae_top10_alignment.png)
 
@@ -269,17 +285,21 @@ Do not commit these generated artifact classes:
 
 Examples from the latest run:
 
-- `results/enrichment/ctcf_qk_alignment_token_motif_scores.csv` (`111.85 MB`)
-- `results/cross_model/zhihan1996__dnabert_2_117m/enrichment/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_token_motif_scores.csv` (`111.85 MB`)
-- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/enrichment/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_token_motif_scores.csv` (`92.08 MB`)
-- `results/cross_model/zhihan1996__dnabert_2_117m/activations/splice_sites_donors_train_residual_mean.npz` (`251.93 MB`)
-- `results/cross_model/zhihan1996__dnabert_2_117m/activations/splice_sites_acceptors_train_residual_mean.npz` (`251.92 MB`)
-- `results/cross_model/zhihan1996__dnabert_2_117m/activations/promoter_no_tata_train_residual_mean.npz` (`248.83 MB`)
-- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_donors_train_residual_mean.npz` (`171.84 MB`)
-- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_acceptors_train_residual_mean.npz` (`171.84 MB`)
-- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/promoter_no_tata_train_residual_mean.npz` (`168.40 MB`)
-- `results/cross_model/zhihan1996__dnabert_2_117m/circuits/qk_ov_matrices.npz` (`162.83 MB`)
-- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/circuits/qk_ov_matrices.npz` (`94.59 MB`)
+- `results/circuits/qk_ov_matrices.npz` (`651.20 MiB`)
+- `results/cross_model/zhihan1996__dnabert_2_117m/circuits/qk_ov_matrices.npz` (`651.20 MiB`)
+- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/circuits/qk_ov_matrices.npz` (`378.37 MiB`)
+- `results/enrichment/ctcf_qk_alignment_token_motif_scores.csv` (`121.10 MiB`)
+- `results/enrichment/ctcf_bpe_corrected_qk_alignment_token_motif_scores.csv` (`121.10 MiB`)
+- `results/cross_model/zhihan1996__dnabert_2_117m/enrichment/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_token_motif_scores.csv` (`121.10 MiB`)
+- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/enrichment/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_token_motif_scores.csv` (`99.83 MiB`)
+- `results/cross_model/zhihan1996__dnabert_2_117m/activations/splice_sites_donors_train_residual_mean.npz` (`251.93 MiB`)
+- `results/cross_model/zhihan1996__dnabert_2_117m/activations/splice_sites_acceptors_train_residual_mean.npz` (`251.92 MiB`)
+- `results/cross_model/zhihan1996__dnabert_2_117m/activations/promoter_no_tata_train_residual_mean.npz` (`248.83 MiB`)
+- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_donors_train_residual_mean.npz` (`171.84 MiB`)
+- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_acceptors_train_residual_mean.npz` (`171.84 MiB`)
+- `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/promoter_no_tata_train_residual_mean.npz` (`168.40 MiB`)
+- `results/distributed_features/ctcf_layer11_residual_mlp_activations.npz` (`27.97 MiB`)
+- `results/distributed_features/ctcf_mlp_sae.pt` (`12.05 MiB`)
 
 These files can be regenerated by rerunning `python main.py`. The repository keeps the small CSV/JSON summaries and figures that are useful for review.
 
