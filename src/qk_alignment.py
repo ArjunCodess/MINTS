@@ -422,7 +422,10 @@ def save_qk_attention_enrichment_outputs(
     fig.savefig(figure_path, dpi=200)
     plt.close(fig)
 
-    manifest_path = config.paths.manifests_dir / f"{output_stem}_qk_attention_enrichment_manifest.json"
+    # Keep this manifest name deliberately short. Cross-model runs already put
+    # artifacts under a model-specific directory, and appending the full
+    # output stem here can exceed Windows/Git path limits for long model IDs.
+    manifest_path = config.paths.manifests_dir / "qk_enrich_manifest.json"
     write_json(
         manifest_path,
         {

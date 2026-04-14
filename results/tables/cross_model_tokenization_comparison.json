@@ -1,0 +1,359 @@
+{
+  "attention_enrichment_delta": {
+    "base_best_rho": 1.0208611197609645,
+    "base_candidate_heads": 0,
+    "base_model": "zhihan1996/DNABERT-2-117M",
+    "comparison_best_rho": 1.000045589712934,
+    "comparison_candidate_heads": 0,
+    "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+    "delta_best_rho_comparison_minus_base": -0.020815530048030606,
+    "delta_candidate_heads_comparison_minus_base": 0
+  },
+  "created_at": "2026-04-13T18:34:34+00:00",
+  "models": {
+    "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species": {
+      "attention_enrichment": {
+        "best_rho": 1.000045589712934,
+        "candidate_heads": 0,
+        "mean_rho": 0.9999986651947447,
+        "status": "completed",
+        "top_heads": [
+          {
+            "head": 14,
+            "layer": 11,
+            "rho": 1.000045589712934
+          },
+          {
+            "head": 4,
+            "layer": 11,
+            "rho": 1.0000224787252778
+          },
+          {
+            "head": 0,
+            "layer": 11,
+            "rho": 1.0000215982571734
+          },
+          {
+            "head": 11,
+            "layer": 5,
+            "rho": 1.0000171313754858
+          },
+          {
+            "head": 3,
+            "layer": 5,
+            "rho": 1.0000162750637491
+          },
+          {
+            "head": 7,
+            "layer": 5,
+            "rho": 1.0000120711901137
+          },
+          {
+            "head": 15,
+            "layer": 5,
+            "rho": 1.0000114022466395
+          },
+          {
+            "head": 6,
+            "layer": 5,
+            "rho": 1.000009248795069
+          },
+          {
+            "head": 5,
+            "layer": 5,
+            "rho": 1.000007576619649
+          },
+          {
+            "head": 1,
+            "layer": 11,
+            "rho": 1.0000074663803131
+          }
+        ]
+      },
+      "circuit_path": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\circuits\\qk_ov_matrices.npz",
+      "device": "cuda",
+      "instrumentation_backend": "huggingface_forward_hooks",
+      "instrumentation_error": "ValueError: InstaDeepAI/nucleotide-transformer-v2-100m-multi-species not found. Valid official model names (excl aliases): ['gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl', 'distilgpt2', 'facebook/opt-125m', 'facebook/opt-1.3b', 'facebook/opt-2.7b', 'facebook/opt-6.7b', 'facebook/opt-13b', 'facebook/opt-30b', 'facebook/opt-66b', 'EleutherAI/gpt-neo-125M', 'EleutherAI/gpt-neo-1.3B', 'EleutherAI/gpt-neo-2.7B', 'EleutherAI/gpt-j-6B', 'EleutherAI/gpt-neox-20b', 'stanford-crfm/alias-gpt2-small-x21', 'stanford-crfm/battlestar-gpt2-small-x49', 'stanford-crfm/caprica-gpt2-small-x81', 'stanford-crfm/darkmatter-gpt2-small-x343', 'stanford-crfm/expanse-gpt2-small-x777', 'stanford-crfm/arwen-gpt2-medium-x21', 'stanford-crfm/beren-gpt2-medium-x49', 'stanford-crfm/celebrimbor-gpt2-medium-x81', 'stanford-crfm/durin-gpt2-medium-x343', 'stanford-crfm/eowyn-gpt2-medium-x777', 'EleutherAI/pythia-14m', 'EleutherAI/pythia-31m', 'EleutherAI/pythia-70m', 'EleutherAI/pythia-160m', 'EleutherAI/pythia-410m', 'EleutherAI/pythia-1b', 'EleutherAI/pythia-1.4b', 'EleutherAI/pythia-2.8b', 'EleutherAI/pythia-6.9b', 'EleutherAI/pythia-12b', 'EleutherAI/pythia-70m-deduped', 'EleutherAI/pythia-160m-deduped', 'EleutherAI/pythia-410m-deduped', 'EleutherAI/pythia-1b-deduped', 'EleutherAI/pythia-1.4b-deduped', 'EleutherAI/pythia-2.8b-deduped', 'EleutherAI/pythia-6.9b-deduped', 'EleutherAI/pythia-12b-deduped', 'EleutherAI/pythia-70m-v0', 'EleutherAI/pythia-160m-v0', 'EleutherAI/pythia-410m-v0', 'EleutherAI/pythia-1b-v0', 'EleutherAI/pythia-1.4b-v0', 'EleutherAI/pythia-2.8b-v0', 'EleutherAI/pythia-6.9b-v0', 'EleutherAI/pythia-12b-v0', 'EleutherAI/pythia-70m-deduped-v0', 'EleutherAI/pythia-160m-deduped-v0', 'EleutherAI/pythia-410m-deduped-v0', 'EleutherAI/pythia-1b-deduped-v0', 'EleutherAI/pythia-1.4b-deduped-v0', 'EleutherAI/pythia-2.8b-deduped-v0', 'EleutherAI/pythia-6.9b-deduped-v0', 'EleutherAI/pythia-12b-deduped-v0', 'EleutherAI/pythia-160m-seed1', 'EleutherAI/pythia-160m-seed2', 'EleutherAI/pythia-160m-seed3', 'NeelNanda/SoLU_1L_v9_old', 'NeelNanda/SoLU_2L_v10_old', 'NeelNanda/SoLU_4L_v11_old', 'NeelNanda/SoLU_6L_v13_old', 'NeelNanda/SoLU_8L_v21_old', 'NeelNanda/SoLU_10L_v22_old', 'NeelNanda/SoLU_12L_v23_old', 'NeelNanda/SoLU_1L512W_C4_Code', 'NeelNanda/SoLU_2L512W_C4_Code', 'NeelNanda/SoLU_3L512W_C4_Code', 'NeelNanda/SoLU_4L512W_C4_Code', 'NeelNanda/SoLU_6L768W_C4_Code', 'NeelNanda/SoLU_8L1024W_C4_Code', 'NeelNanda/SoLU_10L1280W_C4_Code', 'NeelNanda/SoLU_12L1536W_C4_Code', 'NeelNanda/GELU_1L512W_C4_Code', 'NeelNanda/GELU_2L512W_C4_Code', 'NeelNanda/GELU_3L512W_C4_Code', 'NeelNanda/GELU_4L512W_C4_Code', 'NeelNanda/Attn_Only_1L512W_C4_Code', 'NeelNanda/Attn_Only_2L512W_C4_Code', 'NeelNanda/Attn_Only_3L512W_C4_Code', 'NeelNanda/Attn_Only_4L512W_C4_Code', 'NeelNanda/Attn-Only-2L512W-Shortformer-6B-big-lr', 'NeelNanda/SoLU_1L512W_Wiki_Finetune', 'NeelNanda/SoLU_4L512W_Wiki_Finetune', 'ArthurConmy/redwood_attn_2l', 'llama-7b-hf', 'llama-13b-hf', 'llama-30b-hf', 'llama-65b-hf', 'meta-llama/Llama-2-7b-hf', 'meta-llama/Llama-2-7b-chat-hf', 'meta-llama/Llama-2-13b-hf', 'meta-llama/Llama-2-13b-chat-hf', 'meta-llama/Llama-2-70b-chat-hf', 'codellama/CodeLlama-7b-hf', 'codellama/CodeLlama-7b-Python-hf', 'codellama/CodeLlama-7b-Instruct-hf', 'meta-llama/Meta-Llama-3-8B', 'meta-llama/Meta-Llama-3-8B-Instruct', 'meta-llama/Meta-Llama-3-70B', 'meta-llama/Meta-Llama-3-70B-Instruct', 'meta-llama/Llama-3.1-70B', 'meta-llama/Llama-3.1-8B', 'meta-llama/Llama-3.1-8B-Instruct', 'meta-llama/Llama-3.1-70B-Instruct', 'meta-llama/Llama-3.2-1B', 'meta-llama/Llama-3.2-3B', 'meta-llama/Llama-3.2-1B-Instruct', 'meta-llama/Llama-3.2-3B-Instruct', 'meta-llama/Llama-3.3-70B-Instruct', 'Baidicoot/Othello-GPT-Transformer-Lens', 'google-bert/bert-base-cased', 'google-bert/bert-base-uncased', 'google-bert/bert-large-cased', 'google-bert/bert-large-uncased', 'roneneldan/TinyStories-1M', 'roneneldan/TinyStories-3M', 'roneneldan/TinyStories-8M', 'roneneldan/TinyStories-28M', 'roneneldan/TinyStories-33M', 'roneneldan/TinyStories-Instruct-1M', 'roneneldan/TinyStories-Instruct-3M', 'roneneldan/TinyStories-Instruct-8M', 'roneneldan/TinyStories-Instruct-28M', 'roneneldan/TinyStories-Instruct-33M', 'roneneldan/TinyStories-1Layer-21M', 'roneneldan/TinyStories-2Layers-33M', 'roneneldan/TinyStories-Instuct-1Layer-21M', 'roneneldan/TinyStories-Instruct-2Layers-33M', 'stabilityai/stablelm-base-alpha-3b', 'stabilityai/stablelm-base-alpha-7b', 'stabilityai/stablelm-tuned-alpha-3b', 'stabilityai/stablelm-tuned-alpha-7b', 'mistralai/Mistral-7B-v0.1', 'mistralai/Mistral-7B-Instruct-v0.1', 'mistralai/Mistral-Small-24B-Base-2501', 'mistralai/Mistral-Nemo-Base-2407', 'mistralai/Mixtral-8x7B-v0.1', 'mistralai/Mixtral-8x7B-Instruct-v0.1', 'bigscience/bloom-560m', 'bigscience/bloom-1b1', 'bigscience/bloom-1b7', 'bigscience/bloom-3b', 'bigscience/bloom-7b1', 'bigcode/santacoder', 'Qwen/Qwen-1_8B', 'Qwen/Qwen-7B', 'Qwen/Qwen-14B', 'Qwen/Qwen-1_8B-Chat', 'Qwen/Qwen-7B-Chat', 'Qwen/Qwen-14B-Chat', 'Qwen/Qwen1.5-0.5B', 'Qwen/Qwen1.5-0.5B-Chat', 'Qwen/Qwen1.5-1.8B', 'Qwen/Qwen1.5-1.8B-Chat', 'Qwen/Qwen1.5-4B', 'Qwen/Qwen1.5-4B-Chat', 'Qwen/Qwen1.5-7B', 'Qwen/Qwen1.5-7B-Chat', 'Qwen/Qwen1.5-14B', 'Qwen/Qwen1.5-14B-Chat', 'Qwen/Qwen2-0.5B', 'Qwen/Qwen2-0.5B-Instruct', 'Qwen/Qwen2-1.5B', 'Qwen/Qwen2-1.5B-Instruct', 'Qwen/Qwen2-7B', 'Qwen/Qwen2-7B-Instruct', 'Qwen/Qwen2.5-0.5B', 'Qwen/Qwen2.5-0.5B-Instruct', 'Qwen/Qwen2.5-1.5B', 'Qwen/Qwen2.5-1.5B-Instruct', 'Qwen/Qwen2.5-3B', 'Qwen/Qwen2.5-3B-Instruct', 'Qwen/Qwen2.5-7B', 'Qwen/Qwen2.5-7B-Instruct', 'Qwen/Qwen2.5-14B', 'Qwen/Qwen2.5-14B-Instruct', 'Qwen/Qwen2.5-32B', 'Qwen/Qwen2.5-32B-Instruct', 'Qwen/Qwen2.5-72B', 'Qwen/Qwen2.5-72B-Instruct', 'Qwen/QwQ-32B-Preview', 'Qwen/Qwen3-0.6B', 'Qwen/Qwen3-1.7B', 'Qwen/Qwen3-4B', 'Qwen/Qwen3-8B', 'Qwen/Qwen3-14B', 'microsoft/phi-1', 'microsoft/phi-1_5', 'microsoft/phi-2', 'microsoft/Phi-3-mini-4k-instruct', 'microsoft/phi-4', 'google/gemma-2b', 'google/gemma-7b', 'google/gemma-2b-it', 'google/gemma-7b-it', 'google/gemma-2-2b', 'google/gemma-2-2b-it', 'google/gemma-2-9b', 'google/gemma-2-9b-it', 'google/gemma-2-27b', 'google/gemma-2-27b-it', '01-ai/Yi-6B', '01-ai/Yi-34B', '01-ai/Yi-6B-Chat', '01-ai/Yi-34B-Chat', 'google-t5/t5-small', 'google-t5/t5-base', 'google-t5/t5-large', 'ai-forever/mGPT']",
+      "model_name": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "model_slug": "instadeepai__nucleotide_transformer_v2_100m_multi_species",
+      "probe_metrics": [
+        {
+          "accuracy": 0.5990566037735849,
+          "auprc": 0.6702955351266658,
+          "auroc": 0.6502313990744037,
+          "layer": 11,
+          "task": "promoter_tata",
+          "test_examples": 212,
+          "train_examples": 5062
+        },
+        {
+          "accuracy": 0.641399416909621,
+          "auprc": 0.6995974625046174,
+          "auroc": 0.6975579902931601,
+          "layer": 11,
+          "task": "promoter_no_tata",
+          "test_examples": 1372,
+          "train_examples": 30000
+        },
+        {
+          "accuracy": 0.5623333333333334,
+          "auprc": 0.5576790814982467,
+          "auroc": 0.5695150248933143,
+          "layer": 11,
+          "task": "splice_sites_donors",
+          "test_examples": 3000,
+          "train_examples": 30000
+        },
+        {
+          "accuracy": 0.5396666666666666,
+          "auprc": 0.5496397079647775,
+          "auroc": 0.5647239788830231,
+          "layer": 11,
+          "task": "splice_sites_acceptors",
+          "test_examples": 3000,
+          "train_examples": 30000
+        }
+      ],
+      "probe_metrics_path": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\tables\\linear_probe_metrics.csv",
+      "qk_alignment_outputs": {
+        "enrichment_figure": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\figures\\instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png",
+        "enrichment_manifest": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\manifests\\qk_enrich_manifest.json",
+        "enrichment_table": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\enrichment\\instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_matched_attention_enrichment.csv",
+        "figure": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\figures\\instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_pearson_heatmap.png",
+        "manifest": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\manifests\\instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_qk_alignment_manifest.json",
+        "motif_scores": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\enrichment\\instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_token_motif_scores.csv",
+        "table": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\qk_alignment\\instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment.csv"
+      },
+      "result_root": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species",
+      "tokenization_family": "fixed_6mer",
+      "tokenizer_class": "EsmTokenizer"
+    },
+    "zhihan1996/DNABERT-2-117M": {
+      "attention_enrichment": {
+        "best_rho": 1.0208611197609645,
+        "candidate_heads": 0,
+        "mean_rho": 0.9923180376555722,
+        "status": "completed",
+        "top_heads": [
+          {
+            "head": 3,
+            "layer": 11,
+            "rho": 1.0208611197609645
+          },
+          {
+            "head": 0,
+            "layer": 5,
+            "rho": 1.0151635043716307
+          },
+          {
+            "head": 11,
+            "layer": 5,
+            "rho": 1.0128383769470746
+          },
+          {
+            "head": 2,
+            "layer": 5,
+            "rho": 1.0117724692104848
+          },
+          {
+            "head": 10,
+            "layer": 11,
+            "rho": 1.0062025847691172
+          },
+          {
+            "head": 9,
+            "layer": 11,
+            "rho": 1.0053472406026047
+          },
+          {
+            "head": 7,
+            "layer": 11,
+            "rho": 1.004565368300672
+          },
+          {
+            "head": 2,
+            "layer": 11,
+            "rho": 1.0027111111901623
+          },
+          {
+            "head": 9,
+            "layer": 5,
+            "rho": 1.0021676569517022
+          },
+          {
+            "head": 8,
+            "layer": 11,
+            "rho": 1.0020496228009197
+          }
+        ]
+      },
+      "circuit_path": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\circuits\\qk_ov_matrices.npz",
+      "device": "cuda",
+      "instrumentation_backend": "huggingface_forward_hooks",
+      "instrumentation_error": "ValueError: zhihan1996/DNABERT-2-117M not found. Valid official model names (excl aliases): ['gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl', 'distilgpt2', 'facebook/opt-125m', 'facebook/opt-1.3b', 'facebook/opt-2.7b', 'facebook/opt-6.7b', 'facebook/opt-13b', 'facebook/opt-30b', 'facebook/opt-66b', 'EleutherAI/gpt-neo-125M', 'EleutherAI/gpt-neo-1.3B', 'EleutherAI/gpt-neo-2.7B', 'EleutherAI/gpt-j-6B', 'EleutherAI/gpt-neox-20b', 'stanford-crfm/alias-gpt2-small-x21', 'stanford-crfm/battlestar-gpt2-small-x49', 'stanford-crfm/caprica-gpt2-small-x81', 'stanford-crfm/darkmatter-gpt2-small-x343', 'stanford-crfm/expanse-gpt2-small-x777', 'stanford-crfm/arwen-gpt2-medium-x21', 'stanford-crfm/beren-gpt2-medium-x49', 'stanford-crfm/celebrimbor-gpt2-medium-x81', 'stanford-crfm/durin-gpt2-medium-x343', 'stanford-crfm/eowyn-gpt2-medium-x777', 'EleutherAI/pythia-14m', 'EleutherAI/pythia-31m', 'EleutherAI/pythia-70m', 'EleutherAI/pythia-160m', 'EleutherAI/pythia-410m', 'EleutherAI/pythia-1b', 'EleutherAI/pythia-1.4b', 'EleutherAI/pythia-2.8b', 'EleutherAI/pythia-6.9b', 'EleutherAI/pythia-12b', 'EleutherAI/pythia-70m-deduped', 'EleutherAI/pythia-160m-deduped', 'EleutherAI/pythia-410m-deduped', 'EleutherAI/pythia-1b-deduped', 'EleutherAI/pythia-1.4b-deduped', 'EleutherAI/pythia-2.8b-deduped', 'EleutherAI/pythia-6.9b-deduped', 'EleutherAI/pythia-12b-deduped', 'EleutherAI/pythia-70m-v0', 'EleutherAI/pythia-160m-v0', 'EleutherAI/pythia-410m-v0', 'EleutherAI/pythia-1b-v0', 'EleutherAI/pythia-1.4b-v0', 'EleutherAI/pythia-2.8b-v0', 'EleutherAI/pythia-6.9b-v0', 'EleutherAI/pythia-12b-v0', 'EleutherAI/pythia-70m-deduped-v0', 'EleutherAI/pythia-160m-deduped-v0', 'EleutherAI/pythia-410m-deduped-v0', 'EleutherAI/pythia-1b-deduped-v0', 'EleutherAI/pythia-1.4b-deduped-v0', 'EleutherAI/pythia-2.8b-deduped-v0', 'EleutherAI/pythia-6.9b-deduped-v0', 'EleutherAI/pythia-12b-deduped-v0', 'EleutherAI/pythia-160m-seed1', 'EleutherAI/pythia-160m-seed2', 'EleutherAI/pythia-160m-seed3', 'NeelNanda/SoLU_1L_v9_old', 'NeelNanda/SoLU_2L_v10_old', 'NeelNanda/SoLU_4L_v11_old', 'NeelNanda/SoLU_6L_v13_old', 'NeelNanda/SoLU_8L_v21_old', 'NeelNanda/SoLU_10L_v22_old', 'NeelNanda/SoLU_12L_v23_old', 'NeelNanda/SoLU_1L512W_C4_Code', 'NeelNanda/SoLU_2L512W_C4_Code', 'NeelNanda/SoLU_3L512W_C4_Code', 'NeelNanda/SoLU_4L512W_C4_Code', 'NeelNanda/SoLU_6L768W_C4_Code', 'NeelNanda/SoLU_8L1024W_C4_Code', 'NeelNanda/SoLU_10L1280W_C4_Code', 'NeelNanda/SoLU_12L1536W_C4_Code', 'NeelNanda/GELU_1L512W_C4_Code', 'NeelNanda/GELU_2L512W_C4_Code', 'NeelNanda/GELU_3L512W_C4_Code', 'NeelNanda/GELU_4L512W_C4_Code', 'NeelNanda/Attn_Only_1L512W_C4_Code', 'NeelNanda/Attn_Only_2L512W_C4_Code', 'NeelNanda/Attn_Only_3L512W_C4_Code', 'NeelNanda/Attn_Only_4L512W_C4_Code', 'NeelNanda/Attn-Only-2L512W-Shortformer-6B-big-lr', 'NeelNanda/SoLU_1L512W_Wiki_Finetune', 'NeelNanda/SoLU_4L512W_Wiki_Finetune', 'ArthurConmy/redwood_attn_2l', 'llama-7b-hf', 'llama-13b-hf', 'llama-30b-hf', 'llama-65b-hf', 'meta-llama/Llama-2-7b-hf', 'meta-llama/Llama-2-7b-chat-hf', 'meta-llama/Llama-2-13b-hf', 'meta-llama/Llama-2-13b-chat-hf', 'meta-llama/Llama-2-70b-chat-hf', 'codellama/CodeLlama-7b-hf', 'codellama/CodeLlama-7b-Python-hf', 'codellama/CodeLlama-7b-Instruct-hf', 'meta-llama/Meta-Llama-3-8B', 'meta-llama/Meta-Llama-3-8B-Instruct', 'meta-llama/Meta-Llama-3-70B', 'meta-llama/Meta-Llama-3-70B-Instruct', 'meta-llama/Llama-3.1-70B', 'meta-llama/Llama-3.1-8B', 'meta-llama/Llama-3.1-8B-Instruct', 'meta-llama/Llama-3.1-70B-Instruct', 'meta-llama/Llama-3.2-1B', 'meta-llama/Llama-3.2-3B', 'meta-llama/Llama-3.2-1B-Instruct', 'meta-llama/Llama-3.2-3B-Instruct', 'meta-llama/Llama-3.3-70B-Instruct', 'Baidicoot/Othello-GPT-Transformer-Lens', 'google-bert/bert-base-cased', 'google-bert/bert-base-uncased', 'google-bert/bert-large-cased', 'google-bert/bert-large-uncased', 'roneneldan/TinyStories-1M', 'roneneldan/TinyStories-3M', 'roneneldan/TinyStories-8M', 'roneneldan/TinyStories-28M', 'roneneldan/TinyStories-33M', 'roneneldan/TinyStories-Instruct-1M', 'roneneldan/TinyStories-Instruct-3M', 'roneneldan/TinyStories-Instruct-8M', 'roneneldan/TinyStories-Instruct-28M', 'roneneldan/TinyStories-Instruct-33M', 'roneneldan/TinyStories-1Layer-21M', 'roneneldan/TinyStories-2Layers-33M', 'roneneldan/TinyStories-Instuct-1Layer-21M', 'roneneldan/TinyStories-Instruct-2Layers-33M', 'stabilityai/stablelm-base-alpha-3b', 'stabilityai/stablelm-base-alpha-7b', 'stabilityai/stablelm-tuned-alpha-3b', 'stabilityai/stablelm-tuned-alpha-7b', 'mistralai/Mistral-7B-v0.1', 'mistralai/Mistral-7B-Instruct-v0.1', 'mistralai/Mistral-Small-24B-Base-2501', 'mistralai/Mistral-Nemo-Base-2407', 'mistralai/Mixtral-8x7B-v0.1', 'mistralai/Mixtral-8x7B-Instruct-v0.1', 'bigscience/bloom-560m', 'bigscience/bloom-1b1', 'bigscience/bloom-1b7', 'bigscience/bloom-3b', 'bigscience/bloom-7b1', 'bigcode/santacoder', 'Qwen/Qwen-1_8B', 'Qwen/Qwen-7B', 'Qwen/Qwen-14B', 'Qwen/Qwen-1_8B-Chat', 'Qwen/Qwen-7B-Chat', 'Qwen/Qwen-14B-Chat', 'Qwen/Qwen1.5-0.5B', 'Qwen/Qwen1.5-0.5B-Chat', 'Qwen/Qwen1.5-1.8B', 'Qwen/Qwen1.5-1.8B-Chat', 'Qwen/Qwen1.5-4B', 'Qwen/Qwen1.5-4B-Chat', 'Qwen/Qwen1.5-7B', 'Qwen/Qwen1.5-7B-Chat', 'Qwen/Qwen1.5-14B', 'Qwen/Qwen1.5-14B-Chat', 'Qwen/Qwen2-0.5B', 'Qwen/Qwen2-0.5B-Instruct', 'Qwen/Qwen2-1.5B', 'Qwen/Qwen2-1.5B-Instruct', 'Qwen/Qwen2-7B', 'Qwen/Qwen2-7B-Instruct', 'Qwen/Qwen2.5-0.5B', 'Qwen/Qwen2.5-0.5B-Instruct', 'Qwen/Qwen2.5-1.5B', 'Qwen/Qwen2.5-1.5B-Instruct', 'Qwen/Qwen2.5-3B', 'Qwen/Qwen2.5-3B-Instruct', 'Qwen/Qwen2.5-7B', 'Qwen/Qwen2.5-7B-Instruct', 'Qwen/Qwen2.5-14B', 'Qwen/Qwen2.5-14B-Instruct', 'Qwen/Qwen2.5-32B', 'Qwen/Qwen2.5-32B-Instruct', 'Qwen/Qwen2.5-72B', 'Qwen/Qwen2.5-72B-Instruct', 'Qwen/QwQ-32B-Preview', 'Qwen/Qwen3-0.6B', 'Qwen/Qwen3-1.7B', 'Qwen/Qwen3-4B', 'Qwen/Qwen3-8B', 'Qwen/Qwen3-14B', 'microsoft/phi-1', 'microsoft/phi-1_5', 'microsoft/phi-2', 'microsoft/Phi-3-mini-4k-instruct', 'microsoft/phi-4', 'google/gemma-2b', 'google/gemma-7b', 'google/gemma-2b-it', 'google/gemma-7b-it', 'google/gemma-2-2b', 'google/gemma-2-2b-it', 'google/gemma-2-9b', 'google/gemma-2-9b-it', 'google/gemma-2-27b', 'google/gemma-2-27b-it', '01-ai/Yi-6B', '01-ai/Yi-34B', '01-ai/Yi-6B-Chat', '01-ai/Yi-34B-Chat', 'google-t5/t5-small', 'google-t5/t5-base', 'google-t5/t5-large', 'ai-forever/mGPT']",
+      "model_name": "zhihan1996/DNABERT-2-117M",
+      "model_slug": "zhihan1996__dnabert_2_117m",
+      "probe_metrics": [
+        {
+          "accuracy": 0.8349056603773585,
+          "auprc": 0.9240738519505124,
+          "auroc": 0.9136703453186188,
+          "layer": 11,
+          "task": "promoter_tata",
+          "test_examples": 212,
+          "train_examples": 5062
+        },
+        {
+          "accuracy": 0.8549562682215743,
+          "auprc": 0.9474626409312916,
+          "auroc": 0.9383398923917756,
+          "layer": 11,
+          "task": "promoter_no_tata",
+          "test_examples": 1372,
+          "train_examples": 30000
+        },
+        {
+          "accuracy": 0.823,
+          "auprc": 0.9048906823046536,
+          "auroc": 0.8954418563300142,
+          "layer": 11,
+          "task": "splice_sites_donors",
+          "test_examples": 3000,
+          "train_examples": 30000
+        },
+        {
+          "accuracy": 0.809,
+          "auprc": 0.8953685706586534,
+          "auroc": 0.8847030841900528,
+          "layer": 11,
+          "task": "splice_sites_acceptors",
+          "test_examples": 3000,
+          "train_examples": 30000
+        }
+      ],
+      "probe_metrics_path": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\tables\\linear_probe_metrics.csv",
+      "qk_alignment_outputs": {
+        "enrichment_figure": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\figures\\zhihan1996__dnabert_2_117m_ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png",
+        "enrichment_manifest": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\manifests\\qk_enrich_manifest.json",
+        "enrichment_table": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\enrichment\\zhihan1996__dnabert_2_117m_ctcf_qk_alignment_matched_attention_enrichment.csv",
+        "figure": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\figures\\zhihan1996__dnabert_2_117m_ctcf_qk_alignment_pearson_heatmap.png",
+        "manifest": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\manifests\\zhihan1996__dnabert_2_117m_ctcf_qk_alignment_qk_alignment_manifest.json",
+        "motif_scores": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\enrichment\\zhihan1996__dnabert_2_117m_ctcf_qk_alignment_token_motif_scores.csv",
+        "table": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\qk_alignment\\zhihan1996__dnabert_2_117m_ctcf_qk_alignment.csv"
+      },
+      "result_root": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m",
+      "tokenization_family": "BPE",
+      "tokenizer_class": "TokenizersBackend"
+    }
+  },
+  "probe_metric_deltas": [
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.9383398923917756,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.6975579902931601,
+      "delta_comparison_minus_base": -0.2407819020986155,
+      "metric": "auroc",
+      "task": "promoter_no_tata"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.9474626409312916,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.6995974625046174,
+      "delta_comparison_minus_base": -0.24786517842667422,
+      "metric": "auprc",
+      "task": "promoter_no_tata"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.8549562682215743,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.641399416909621,
+      "delta_comparison_minus_base": -0.21355685131195334,
+      "metric": "accuracy",
+      "task": "promoter_no_tata"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.9136703453186188,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.6502313990744037,
+      "delta_comparison_minus_base": -0.26343894624421504,
+      "metric": "auroc",
+      "task": "promoter_tata"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.9240738519505124,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.6702955351266658,
+      "delta_comparison_minus_base": -0.25377831682384655,
+      "metric": "auprc",
+      "task": "promoter_tata"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.8349056603773585,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.5990566037735849,
+      "delta_comparison_minus_base": -0.23584905660377353,
+      "metric": "accuracy",
+      "task": "promoter_tata"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.8847030841900528,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.5647239788830231,
+      "delta_comparison_minus_base": -0.3199791053070298,
+      "metric": "auroc",
+      "task": "splice_sites_acceptors"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.8953685706586534,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.5496397079647775,
+      "delta_comparison_minus_base": -0.3457288626938759,
+      "metric": "auprc",
+      "task": "splice_sites_acceptors"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.809,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.5396666666666666,
+      "delta_comparison_minus_base": -0.2693333333333334,
+      "metric": "accuracy",
+      "task": "splice_sites_acceptors"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.8954418563300142,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.5695150248933143,
+      "delta_comparison_minus_base": -0.32592683143669987,
+      "metric": "auroc",
+      "task": "splice_sites_donors"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.9048906823046536,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.5576790814982467,
+      "delta_comparison_minus_base": -0.3472116008064069,
+      "metric": "auprc",
+      "task": "splice_sites_donors"
+    },
+    {
+      "base_model": "zhihan1996/DNABERT-2-117M",
+      "base_value": 0.823,
+      "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
+      "comparison_value": 0.5623333333333334,
+      "delta_comparison_minus_base": -0.2606666666666666,
+      "metric": "accuracy",
+      "task": "splice_sites_donors"
+    }
+  ]
+}

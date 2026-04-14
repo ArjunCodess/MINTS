@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-04-13T17:07:39+00:00",
+  "d_head": 64,
+  "d_model": 768,
+  "layers": [
+    0,
+    5,
+    11
+  ],
+  "n_heads": 12,
+  "ov_shape": [
+    3,
+    12,
+    768,
+    768
+  ],
+  "path": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\zhihan1996__dnabert_2_117m\\circuits\\qk_ov_matrices.npz",
+  "qk_shape": [
+    3,
+    12,
+    768,
+    768
+  ],
+  "w_k_shape": [
+    3,
+    12,
+    768,
+    64
+  ],
+  "w_q_shape": [
+    3,
+    12,
+    768,
+    64
+  ]
+}

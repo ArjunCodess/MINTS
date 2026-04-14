@@ -1,0 +1,22 @@
+{
+  "attention_patterns_note": "DNABERT-2 is running through the Hugging Face forward-hook backend; TransformerLens-style per-head attention-pattern tensors are not exposed.",
+  "attention_patterns_supported": false,
+  "created_at": "2026-04-13T18:07:20+00:00",
+  "head_outputs_note": "The DNABERT-2 implementation uses unpadded attention internals; head output decomposition is deferred to the circuit matrix export.",
+  "head_outputs_supported": false,
+  "layers": [
+    0,
+    5,
+    11
+  ],
+  "n_examples": 30000,
+  "path": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\cross_model\\instadeepai__nucleotide_transformer_v2_100m_multi_species\\activations\\splice_sites_acceptors_train_residual_mean.npz",
+  "pooling": "mean",
+  "shape": [
+    30000,
+    3,
+    512
+  ],
+  "split": "train",
+  "task": "splice_sites_acceptors"
+}

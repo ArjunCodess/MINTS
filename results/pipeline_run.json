@@ -10,12 +10,20 @@
       5,
       11
     ],
+    "max_cross_model_qk_alignment_sequences": null,
+    "max_feature_search_sequences": 2048,
+    "max_patching_pairs": 500,
     "max_probe_test": null,
     "max_probe_train": null,
     "max_qk_alignment_sequences": null,
-    "probe_layer": 11
+    "probe_bootstrap_samples": 1000,
+    "probe_ci_level": 0.95,
+    "probe_layer": 11,
+    "sae_dictionary_size": 512,
+    "sae_epochs": 10,
+    "sae_l1_coefficient": 0.001
   },
-  "created_at": "2026-04-13T05:35:06+00:00",
+  "created_at": "2026-04-13T18:34:34+00:00",
   "data": {
     "encode_url_file": "data\\ENCODE4_v1.5.1_GRCh38.txt",
     "grch38_fasta_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz",
@@ -71,7 +79,7 @@
         }
       },
       "name": "ingest_hf_downstream",
-      "seconds": 10.608,
+      "seconds": 17.821,
       "status": "completed"
     },
     {
@@ -96,7 +104,7 @@
         "output_dir": "data\\encode\\ctcf_gm12878"
       },
       "name": "download_encode_ctcf",
-      "seconds": 0.251,
+      "seconds": 0.25,
       "status": "completed"
     },
     {
@@ -104,7 +112,7 @@
         "path": "data\\genomes\\hg38.fa"
       },
       "name": "download_grch38",
-      "seconds": 2.859,
+      "seconds": 2.895,
       "status": "completed"
     },
     {
@@ -112,7 +120,7 @@
         "path": "data\\ctcf\\ctcf_gm12878_sequences.tsv"
       },
       "name": "prepare_ctcf_sequences",
-      "seconds": 1.282,
+      "seconds": 1.103,
       "status": "completed"
     },
     {
@@ -167,8 +175,14 @@
           "metrics": [
             {
               "accuracy": 0.8349056603773585,
+              "accuracy_ci_high": 0.8867924528301887,
+              "accuracy_ci_low": 0.7830188679245284,
               "auprc": 0.9240738519505125,
+              "auprc_ci_high": 0.9556821456338246,
+              "auprc_ci_low": 0.8874461784311747,
               "auroc": 0.9136703453186187,
+              "auroc_ci_high": 0.9474839833959899,
+              "auroc_ci_low": 0.8751000808984968,
               "layer": 11,
               "task": "promoter_tata",
               "test_examples": 212,
@@ -178,8 +192,14 @@
             },
             {
               "accuracy": 0.8549562682215743,
+              "accuracy_ci_high": 0.8731778425655977,
+              "accuracy_ci_low": 0.8367346938775511,
               "auprc": 0.9474626409312917,
+              "auprc_ci_high": 0.9576895240605057,
+              "auprc_ci_low": 0.9363528427562573,
               "auroc": 0.9383398923917755,
+              "auroc_ci_high": 0.9498702770174562,
+              "auroc_ci_low": 0.9253391934054597,
               "layer": 11,
               "task": "promoter_no_tata",
               "test_examples": 1372,
@@ -189,8 +209,14 @@
             },
             {
               "accuracy": 0.823,
+              "accuracy_ci_high": 0.835675,
+              "accuracy_ci_low": 0.81,
               "auprc": 0.9048906823046536,
+              "auprc_ci_high": 0.9190780767693405,
+              "auprc_ci_low": 0.8894648570507969,
               "auroc": 0.8954418563300142,
+              "auroc_ci_high": 0.9059598648860814,
+              "auroc_ci_low": 0.883861362632746,
               "layer": 11,
               "task": "splice_sites_donors",
               "test_examples": 3000,
@@ -200,8 +226,14 @@
             },
             {
               "accuracy": 0.809,
+              "accuracy_ci_high": 0.8233416666666666,
+              "accuracy_ci_low": 0.793,
               "auprc": 0.8953685706586534,
+              "auprc_ci_high": 0.9084575423053249,
+              "auprc_ci_low": 0.8801684802301033,
               "auroc": 0.8847030841900528,
+              "auroc_ci_high": 0.8959102376874364,
+              "auroc_ci_low": 0.8723475161957086,
               "layer": 11,
               "task": "splice_sites_acceptors",
               "test_examples": 3000,
@@ -214,7 +246,7 @@
         }
       },
       "name": "circuit_extraction_and_residual_probing",
-      "seconds": 507.119,
+      "seconds": 497.519,
       "status": "completed"
     },
     {
@@ -244,7 +276,7 @@
           },
           "qk_alignment": {
             "enrichment_figure": "results\\figures\\ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png",
-            "enrichment_manifest": "results\\manifests\\ctcf_qk_alignment_matched_attention_enrichment_qk_attention_enrichment_manifest.json",
+            "enrichment_manifest": "results\\manifests\\qk_enrich_manifest.json",
             "enrichment_table": "results\\enrichment\\ctcf_qk_alignment_matched_attention_enrichment.csv",
             "figure": "results\\figures\\ctcf_qk_alignment_pearson_heatmap.png",
             "manifest": "results\\manifests\\ctcf_qk_alignment_qk_alignment_manifest.json",
@@ -317,7 +349,214 @@
         }
       },
       "name": "strict_mechanistic_proofs",
-      "seconds": 2739.109,
+      "seconds": 2857.587,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "model": {
+          "device": "cuda",
+          "instrumentation_backend": "huggingface_forward_hooks",
+          "manifest": "results\\manifests\\model_hooked_encoder_manifest.json",
+          "name": "zhihan1996/DNABERT-2-117M"
+        },
+        "tasks": {
+          "promoter_tata": {
+            "figure": "results\\figures\\promoter_tata_batch_dnabert_activation_patching_heatmap.png",
+            "manifest": "results\\manifests\\promoter_tata_batch_dnabert_activation_patching_patching_manifest.json",
+            "pairs": "results\\counterfactuals\\promoter_tata_batch_activation_patching_pairs.tsv",
+            "summary": {
+              "denominator_failures": 0,
+              "finite_scores": 144,
+              "max_restoration": 1.42161777297363,
+              "mean_restoration": 0.1434153644719593,
+              "pairs": 327,
+              "top_heads": [
+                {
+                  "head": 7,
+                  "layer": 2,
+                  "restoration": 1.42161777297363
+                },
+                {
+                  "head": 8,
+                  "layer": 4,
+                  "restoration": 1.4141260997447498
+                },
+                {
+                  "head": 0,
+                  "layer": 4,
+                  "restoration": 1.3346417893947344
+                },
+                {
+                  "head": 8,
+                  "layer": 6,
+                  "restoration": 1.3259533780761656
+                },
+                {
+                  "head": 10,
+                  "layer": 4,
+                  "restoration": 1.2139059838587367
+                },
+                {
+                  "head": 0,
+                  "layer": 1,
+                  "restoration": 1.1532768124309525
+                },
+                {
+                  "head": 2,
+                  "layer": 7,
+                  "restoration": 1.0828312152656014
+                },
+                {
+                  "head": 4,
+                  "layer": 4,
+                  "restoration": 1.0757184848092818
+                },
+                {
+                  "head": 10,
+                  "layer": 1,
+                  "restoration": 1.050265128750467
+                },
+                {
+                  "head": 1,
+                  "layer": 3,
+                  "restoration": 1.0327447372507006
+                }
+              ]
+            },
+            "table": "results\\patching\\promoter_tata_batch_dnabert_activation_patching.csv"
+          },
+          "splice_sites_donors": {
+            "figure": "results\\figures\\splice_sites_donors_batch_dnabert_activation_patching_heatmap.png",
+            "manifest": "results\\manifests\\splice_sites_donors_batch_dnabert_activation_patching_patching_manifest.json",
+            "pairs": "results\\counterfactuals\\splice_sites_donors_batch_activation_patching_pairs.tsv",
+            "summary": {
+              "denominator_failures": 0,
+              "finite_scores": 144,
+              "max_restoration": 0.5284981071359018,
+              "mean_restoration": 0.007606285093127835,
+              "pairs": 500,
+              "top_heads": [
+                {
+                  "head": 8,
+                  "layer": 1,
+                  "restoration": 0.5284981071359018
+                },
+                {
+                  "head": 8,
+                  "layer": 2,
+                  "restoration": 0.2563364177676694
+                },
+                {
+                  "head": 11,
+                  "layer": 10,
+                  "restoration": 0.1722704978368782
+                },
+                {
+                  "head": 6,
+                  "layer": 5,
+                  "restoration": 0.1543204586732481
+                },
+                {
+                  "head": 7,
+                  "layer": 6,
+                  "restoration": 0.1492570004900618
+                },
+                {
+                  "head": 8,
+                  "layer": 3,
+                  "restoration": 0.1442784698570003
+                },
+                {
+                  "head": 10,
+                  "layer": 7,
+                  "restoration": 0.1326126663105114
+                },
+                {
+                  "head": 1,
+                  "layer": 7,
+                  "restoration": 0.1153186108064083
+                },
+                {
+                  "head": 9,
+                  "layer": 7,
+                  "restoration": 0.1091919041984804
+                },
+                {
+                  "head": 1,
+                  "layer": 2,
+                  "restoration": 0.1080560997865041
+                }
+              ]
+            },
+            "table": "results\\patching\\splice_sites_donors_batch_dnabert_activation_patching.csv"
+          }
+        }
+      },
+      "name": "systematic_causal_intervention",
+      "seconds": 1863.729,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "activation_path": "results\\distributed_features\\ctcf_layer11_residual_mlp_activations.npz",
+        "combined_alignment_path": "results\\distributed_features\\ctcf_sae_feature_alignment_top10.csv",
+        "model": {
+          "device": "cuda",
+          "instrumentation_backend": "huggingface_forward_hooks",
+          "manifest": "results\\manifests\\model_hooked_encoder_manifest.json",
+          "name": "zhihan1996/DNABERT-2-117M"
+        },
+        "sources": {
+          "mlp": {
+            "alignment": "results\\distributed_features\\ctcf_mlp_sae_feature_alignment.csv",
+            "checkpoint": "results\\distributed_features\\ctcf_mlp_sae.pt",
+            "figure": "results\\figures\\ctcf_mlp_sae_top10_alignment.png",
+            "history": "results\\distributed_features\\ctcf_mlp_sae_training_history.csv",
+            "summary": {
+              "alignment": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\distributed_features\\ctcf_mlp_sae_feature_alignment.csv",
+              "checkpoint": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\distributed_features\\ctcf_mlp_sae.pt",
+              "dictionary_size": 512,
+              "examples": 2048,
+              "figure": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\figures\\ctcf_mlp_sae_top10_alignment.png",
+              "history": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\distributed_features\\ctcf_mlp_sae_training_history.csv",
+              "input_dim": 768,
+              "source": "mlp",
+              "top_ctcf_motif_cosine": 0.08843702350173013,
+              "top_feature": 31
+            }
+          },
+          "residual": {
+            "alignment": "results\\distributed_features\\ctcf_residual_sae_feature_alignment.csv",
+            "checkpoint": "results\\distributed_features\\ctcf_residual_sae.pt",
+            "figure": "results\\figures\\ctcf_residual_sae_top10_alignment.png",
+            "history": "results\\distributed_features\\ctcf_residual_sae_training_history.csv",
+            "summary": {
+              "alignment": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\distributed_features\\ctcf_residual_sae_feature_alignment.csv",
+              "checkpoint": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\distributed_features\\ctcf_residual_sae.pt",
+              "dictionary_size": 512,
+              "examples": 2048,
+              "figure": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\figures\\ctcf_residual_sae_top10_alignment.png",
+              "history": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\distributed_features\\ctcf_residual_sae_training_history.csv",
+              "input_dim": 768,
+              "source": "residual",
+              "top_ctcf_motif_cosine": 0.08843702350173013,
+              "top_feature": 31
+            }
+          }
+        },
+        "summary_path": "results\\distributed_features\\ctcf_distributed_feature_search_summary.json"
+      },
+      "name": "distributed_feature_search",
+      "seconds": 39.111,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "report_path": "results\\tables\\cross_model_tokenization_comparison.json"
+      },
+      "name": "cross_model_tokenization_comparison",
+      "seconds": 5771.942,
       "status": "completed"
     }
   ]
