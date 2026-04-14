@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import torch
 
 from src.config import DataConfig, PipelineConfig, ProjectPaths
 from src.distributed_features import (
@@ -7,6 +8,7 @@ from src.distributed_features import (
     _centered_cosine,
     _combined_top_feature_table,
     _rank_sae_features,
+    _resolve_mlp_post_activation_target,
     train_sae_and_rank_features,
 )
 
@@ -100,3 +102,44 @@ def test_combined_top_feature_table_returns_global_top_10(tmp_path) -> None:
     assert len(table) == 10
     assert set(table["source"]) == {"mlp"}
     assert table["ctcf_motif_cosine"].is_monotonic_decreasing
+
+
+def test_dnabert_glu_hook_target_returns_post_activation_features() -> None:
+    class Config:
+        intermediate_size = 2
+
+    class DummyGLU(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.config = Config()
+            self.gated_layers = torch.nn.Linear(3, 4, bias=False)
+            self.act = torch.nn.GELU(approximate="none")
+            self.dropout = torch.nn.Dropout(0.0)
+
+    class DummyLayer:
+        def __init__(self) -> None:
+            self.mlp = DummyGLU()
+
+    layer = DummyLayer()
+    target = _resolve_mlp_post_activation_target(layer)
+    raw_gated_output = torch.tensor([[1.0, -1.0, 2.0, 3.0]])
+
+    transformed = target.transform(target.module, (), raw_gated_output)
+    expected = layer.mlp.act(raw_gated_output[:, :2]) * raw_gated_output[:, 2:]
+
+    assert target.name == "mlp.gated_layers.post_activation_glu"
+    assert target.module is layer.mlp.gated_layers
+    assert transformed.shape == (1, 2)
+    assert torch.allclose(transformed, expected)
+
+
+def test_mlp_hook_target_refuses_full_layer_fallback() -> None:
+    class DummyLayer:
+        pass
+
+    try:
+        _resolve_mlp_post_activation_target(DummyLayer())
+    except AttributeError as exc:
+        assert "Refusing" in str(exc)
+    else:
+        raise AssertionError("Expected hook target resolution to fail for layers without MLP internals.")

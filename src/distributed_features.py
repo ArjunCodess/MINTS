@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import numpy as np
 import pandas as pd
@@ -33,6 +33,19 @@ class SAETrainingResult:
     summary: dict[str, Any]
 
 
+@dataclass(frozen=True)
+class MLPPostActivationTarget:
+    """Forward-hook target for a true MLP hidden feature tensor.
+
+    `module` is the PyTorch submodule to hook. `transform` converts that
+    module's raw output into the activation tensor used for SAE training.
+    """
+
+    module: Any
+    name: str
+    transform: Callable[[Any, Any, Any], Any]
+
+
 def _as_tensor_output(output: Any):
     """Normalize module outputs that may be tensors or tuples."""
 
@@ -47,18 +60,92 @@ def _as_tensor_output(output: Any):
     raise TypeError(f"Could not locate a tensor in module output of type {type(output)!r}.")
 
 
-def _find_feed_forward_module(layer: Any) -> Any:
-    """Return the closest available feed-forward/MLP module in a DNABERT block."""
+def _identity_tensor_transform(_module: Any, _inputs: Any, output: Any):
+    """Return a detached tensor from a hook output without changing semantics."""
 
-    for name in ("mlp", "ffn", "feed_forward", "intermediate"):
-        module = getattr(layer, name, None)
-        if module is not None:
-            return module
-    attention = getattr(layer, "attention", None)
-    output = getattr(attention, "output", None) if attention is not None else None
-    if output is not None:
-        return output
-    return layer
+    return _as_tensor_output(output).detach()
+
+
+def _dnabert_glu_post_activation_transform(mlp_module: Any) -> Callable[[Any, Any, Any], Any]:
+    """Build a transform for DNABERT-2/MosaicBERT GLU MLP hidden features.
+
+    DNABERT-2's `BertGatedLinearUnitMLP.forward` computes:
+
+    `hidden = gated_layers(x)`
+    `post_activation = GELU(hidden[:intermediate]) * hidden[intermediate:]`
+    `output = layernorm(wo(dropout(post_activation)) + residual)`
+
+    The previous pipeline hooked the final `mlp` module output, which is after
+    `wo`, residual addition, and layer norm. That can equal the residual stream
+    tensor saved for probing. This transform isolates the post-activation GLU
+    hidden features before the output projection and residual update.
+    """
+
+    def transform(_module: Any, _inputs: Any, output: Any):
+        hidden = _as_tensor_output(output)
+        configured_size = getattr(getattr(mlp_module, "config", None), "intermediate_size", None)
+        if configured_size is None:
+            intermediate_size = hidden.shape[-1] // 2
+        else:
+            intermediate_size = int(configured_size)
+        if hidden.shape[-1] < intermediate_size * 2:
+            raise ValueError(
+                "DNABERT GLU gated layer output is too narrow for configured "
+                f"intermediate_size={intermediate_size}: shape={tuple(hidden.shape)}."
+            )
+        gated = hidden[..., :intermediate_size]
+        non_gated = hidden[..., intermediate_size : intermediate_size * 2]
+        activated = mlp_module.act(gated)
+        post_activation = activated * non_gated
+        dropout = getattr(mlp_module, "dropout", None)
+        if dropout is not None and not dropout.training:
+            post_activation = dropout(post_activation)
+        return post_activation.detach()
+
+    return transform
+
+
+def _resolve_mlp_post_activation_target(layer: Any) -> MLPPostActivationTarget:
+    """Return a hook target that captures MLP post-activation features.
+
+    The resolver intentionally avoids falling back to the full layer or final
+    MLP block output. Those outputs include residual additions and layer norms
+    in DNABERT-2 and are not valid MLP-hidden features for an SAE dictionary.
+    """
+
+    mlp = getattr(layer, "mlp", None)
+    if mlp is not None and hasattr(mlp, "gated_layers") and hasattr(mlp, "act"):
+        return MLPPostActivationTarget(
+            module=mlp.gated_layers,
+            name="mlp.gated_layers.post_activation_glu",
+            transform=_dnabert_glu_post_activation_transform(mlp),
+        )
+
+    for container_name in ("mlp", "ffn", "feed_forward"):
+        container = getattr(layer, container_name, None)
+        if container is None:
+            continue
+        for activation_name in ("intermediate", "act", "activation"):
+            module = getattr(container, activation_name, None)
+            if module is not None:
+                return MLPPostActivationTarget(
+                    module=module,
+                    name=f"{container_name}.{activation_name}",
+                    transform=_identity_tensor_transform,
+                )
+
+    intermediate = getattr(layer, "intermediate", None)
+    if intermediate is not None:
+        return MLPPostActivationTarget(
+            module=intermediate,
+            name="intermediate",
+            transform=_identity_tensor_transform,
+        )
+
+    raise AttributeError(
+        "Could not locate a post-activation MLP hook target. Refusing to use "
+        "the full block or final MLP output because that can duplicate the residual stream."
+    )
 
 
 def _mean_pool_any(hidden, attention_mask=None) -> np.ndarray:
@@ -107,7 +194,8 @@ def extract_ctcf_residual_and_mlp_activations(
     progress(f"Scoring CTCF motif targets for distributed feature search: max_sequences={sequence_limit}")
     motif_records = score_ctcf_table(bundle.tokenizer, config=config, max_sequences=sequence_limit)
     layers = encoder_layers(bundle.hf_model)
-    mlp_module = _find_feed_forward_module(layers[layer_idx])
+    mlp_target = _resolve_mlp_post_activation_target(layers[layer_idx])
+    progress(f"Using MLP post-activation hook target: layer={layer_idx}, target={mlp_target.name}")
     residual_rows: list[np.ndarray] = []
     mlp_rows: list[np.ndarray] = []
     motif_scores: list[float] = []
@@ -117,9 +205,9 @@ def extract_ctcf_residual_and_mlp_activations(
         captured: dict[str, Any] = {}
 
         def hook(_module, _inputs, output):
-            captured["mlp"] = _as_tensor_output(output).detach()
+            captured["mlp"] = mlp_target.transform(_module, _inputs, output)
 
-        handle = mlp_module.register_forward_hook(hook)
+        handle = mlp_target.module.register_forward_hook(hook)
         try:
             encoded = encode_sequences(bundle.tokenizer, record.sequence, bundle.device, config.data.token_max_length)
             bundle.hf_model.eval()
@@ -138,13 +226,21 @@ def extract_ctcf_residual_and_mlp_activations(
 
     output_path = config.paths.distributed_features_dir / "ctcf_layer11_residual_mlp_activations.npz"
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    residual_array = np.asarray(residual_rows, dtype=np.float32)
+    mlp_array = np.asarray(mlp_rows, dtype=np.float32)
     np.savez_compressed(
         output_path,
-        residual=np.asarray(residual_rows, dtype=np.float32),
-        mlp=np.asarray(mlp_rows, dtype=np.float32),
+        residual=residual_array,
+        mlp=mlp_array,
         motif_scores=np.asarray(motif_scores, dtype=np.float32),
         sequence_ids=np.asarray(sequence_ids),
         layer=np.asarray([layer_idx], dtype=np.int64),
+    )
+    same_shape = residual_array.shape == mlp_array.shape
+    max_abs_diff = (
+        float(np.max(np.abs(residual_array - mlp_array)))
+        if same_shape and residual_array.size and mlp_array.size
+        else None
     )
     write_json(
         config.paths.manifests_dir / "ctcf_distributed_feature_activations_manifest.json",
@@ -153,6 +249,11 @@ def extract_ctcf_residual_and_mlp_activations(
             "path": str(output_path),
             "layer": layer_idx,
             "records": len(sequence_ids),
+            "mlp_hook_target": mlp_target.name,
+            "residual_shape": list(residual_array.shape),
+            "mlp_shape": list(mlp_array.shape),
+            "residual_mlp_same_shape": bool(same_shape),
+            "residual_mlp_max_abs_diff": max_abs_diff,
             "sources": ["residual", "mlp"],
         },
     )
