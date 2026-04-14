@@ -25,6 +25,23 @@ JASPAR_2024_CTCF_URL = "https://jaspar2024.elixir.no/api/v1/matrix/MA0139.1.jasp
 
 
 @dataclass(frozen=True)
+class MotifTokenSupport:
+    """One nucleotide motif hit mapped onto the exact overlapping model tokens.
+
+    DNABERT-2 uses variable-length BPE tokens, so a 19 bp JASPAR motif cannot be
+    treated as one token or as a fixed number of k-mers. The character span is
+    half-open in nucleotide coordinates, and the token span is half-open in the
+    model-token coordinates used by hidden states and attention maps.
+    """
+
+    motif_start: int
+    motif_end: int
+    token_start: int
+    token_end: int
+    score: float
+
+
+@dataclass(frozen=True)
 class TokenMotifScores:
     """Motif evidence projected from nucleotide positions to token positions."""
 
@@ -34,6 +51,7 @@ class TokenMotifScores:
     token_scores: np.ndarray
     token_offsets: list[tuple[int, int]]
     support_tokens: list[int]
+    support_spans: list[MotifTokenSupport]
     threshold: float
 
 
@@ -198,6 +216,54 @@ def aggregate_start_scores_to_tokens(
     return token_scores
 
 
+def token_indices_overlapping_char_span(
+    token_offsets: list[tuple[int, int]],
+    char_start: int,
+    char_end: int,
+) -> list[int]:
+    """Return BPE token indices whose nucleotide offsets overlap a motif span.
+
+    The overlap test is interval-based, not token-text-based. This is the
+    critical DNABERT-2 alignment step: for a JASPAR hit spanning
+    `[char_start, char_end)`, every BPE token with non-zero intersection with
+    that nucleotide interval is part of the biological support set.
+    """
+
+    if char_end <= char_start:
+        raise ValueError("char_end must be greater than char_start.")
+    return [
+        token_idx
+        for token_idx, (token_start, token_end) in enumerate(token_offsets)
+        if token_end > token_start and token_start < char_end and token_end > char_start
+    ]
+
+
+def motif_support_spans_from_start_scores(
+    start_scores: np.ndarray,
+    motif_length: int,
+    token_offsets: list[tuple[int, int]],
+    threshold: float,
+) -> list[MotifTokenSupport]:
+    """Map thresholded nucleotide-level motif hits to BPE token intervals."""
+
+    supports: list[MotifTokenSupport] = []
+    for motif_start in np.flatnonzero(np.isfinite(start_scores) & (start_scores >= threshold)):
+        motif_end = int(motif_start) + int(motif_length)
+        token_indices = token_indices_overlapping_char_span(token_offsets, int(motif_start), motif_end)
+        if not token_indices:
+            continue
+        supports.append(
+            MotifTokenSupport(
+                motif_start=int(motif_start),
+                motif_end=motif_end,
+                token_start=int(min(token_indices)),
+                token_end=int(max(token_indices) + 1),
+                score=float(start_scores[motif_start]),
+            )
+        )
+    return supports
+
+
 def score_sequence_tokens(
     sequence: str,
     tokenizer: Any,
@@ -213,9 +279,14 @@ def score_sequence_tokens(
     start_scores = scan_sequence_with_pssm(sequence, pssm)
     offsets = token_offsets_for_sequence(tokenizer, sequence)
     token_scores = aggregate_start_scores_to_tokens(start_scores, int(pssm.length), offsets)
-    support_tokens = [
-        token_idx for token_idx, score in enumerate(token_scores) if np.isfinite(score) and score >= support_threshold
-    ]
+    support_spans = motif_support_spans_from_start_scores(start_scores, int(pssm.length), offsets, support_threshold)
+    support_tokens = sorted(
+        {
+            token_idx
+            for support in support_spans
+            for token_idx in range(support.token_start, support.token_end)
+        }
+    )
     return TokenMotifScores(
         sequence_index=sequence_index,
         sequence_id=sequence_id,
@@ -223,21 +294,22 @@ def score_sequence_tokens(
         token_scores=token_scores,
         token_offsets=offsets,
         support_tokens=support_tokens,
+        support_spans=support_spans,
         threshold=float(support_threshold),
     )
 
 
 def motif_supports_from_scores(scores: Iterable[TokenMotifScores], motif_name: str = "CTCF") -> list[MotifSupport]:
-    """Convert token-level motif evidence into one-token support records."""
+    """Convert nucleotide motif hits into exact BPE token support intervals."""
 
     supports: list[MotifSupport] = []
     for record in scores:
-        for token_idx in record.support_tokens:
+        for support in record.support_spans:
             supports.append(
                 MotifSupport(
                     sequence_index=record.sequence_index,
-                    token_start=token_idx,
-                    token_end=token_idx + 1,
+                    token_start=support.token_start,
+                    token_end=support.token_end,
                     motif_name=motif_name,
                 )
             )
@@ -297,6 +369,14 @@ def save_token_motif_scores(
     rows: list[dict[str, Any]] = []
     for record in records:
         support_tokens = set(record.support_tokens)
+        support_span_counts = [0 for _ in record.token_scores]
+        support_span_labels = [[] for _ in record.token_scores]
+        for support in record.support_spans:
+            label = f"{support.motif_start}-{support.motif_end}:{support.score:.6g}"
+            for token_idx in range(support.token_start, support.token_end):
+                if 0 <= token_idx < len(record.token_scores):
+                    support_span_counts[token_idx] += 1
+                    support_span_labels[token_idx].append(label)
         for token_idx, score in enumerate(record.token_scores):
             start, end = record.token_offsets[token_idx]
             rows.append(
@@ -308,6 +388,8 @@ def save_token_motif_scores(
                     "char_end": end,
                     "motif_score": float(score) if np.isfinite(score) else np.nan,
                     "is_support": token_idx in support_tokens,
+                    "support_span_count": support_span_counts[token_idx],
+                    "support_char_spans": ";".join(support_span_labels[token_idx]),
                     "threshold": record.threshold,
                 }
             )
@@ -319,6 +401,7 @@ def save_token_motif_scores(
             "created_at": utc_now_iso(),
             "path": str(output_path),
             "records": len(records),
+            "support_span_count": int(sum(len(record.support_spans) for record in records)),
             "matrix_id": JASPAR_CTCF_ID,
             "jaspar_url": JASPAR_2024_CTCF_URL,
         },

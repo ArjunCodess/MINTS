@@ -145,6 +145,23 @@ def qk_attention_maps_from_factors(
     return weights / np.clip(denominator, a_min=np.finfo(np.float64).tiny, a_max=None)
 
 
+def _record_support_intervals(record: TokenMotifScores, key_pos: int) -> list[tuple[int, int]]:
+    """Return valid half-open BPE token intervals for one motif-scored sequence."""
+
+    support_spans = getattr(record, "support_spans", None)
+    if support_spans:
+        intervals = [(int(support.token_start), int(support.token_end)) for support in support_spans]
+    else:
+        intervals = [(int(token_idx), int(token_idx) + 1) for token_idx in getattr(record, "support_tokens", [])]
+    valid: list[tuple[int, int]] = []
+    for start, end in intervals:
+        clipped_start = max(0, start)
+        clipped_end = min(key_pos, end)
+        if clipped_start < clipped_end:
+            valid.append((clipped_start, clipped_end))
+    return valid
+
+
 def qk_alignment_table(
     qk_by_layer: np.ndarray,
     layer_indices: Iterable[int],
@@ -554,7 +571,7 @@ def run_ctcf_qk_alignment(
     for idx, record in enumerate(motif_records, start=1):
         captured = _capture_layer_inputs(bundle, record.sequence, layer_indices)
         motif_scores = np.asarray(record.token_scores, dtype=np.float64)
-        if record.support_tokens:
+        if _record_support_intervals(record, len(motif_scores)):
             any_supports = True
         for layer_offset, layer_idx in enumerate(layer_indices):
             hidden = captured[layer_idx]
@@ -582,22 +599,21 @@ def run_ctcf_qk_alignment(
                 stats["sum_y2"][head_idx] += np.square(y_valid).sum()
                 stats["sum_xy"][head_idx] += (x_valid * y_valid).sum()
 
-            if record.support_tokens:
+            support_intervals = _record_support_intervals(record, hidden.shape[0])
+            if support_intervals:
                 if use_low_rank:
                     attention_heads = qk_attention_maps_from_factors(hidden, w_q_layer, w_k_layer, d_head=d_head)
                 else:
                     attention_heads = qk_attention_maps(hidden, qk_layer, d_head=d_head)
                 key_pos = attention_heads.shape[-1]
                 enrich = enrichment_stats[layer_idx]
-                for token_idx in record.support_tokens:
-                    if token_idx >= key_pos:
-                        continue
-                    background = _matched_background_indices(key_pos, token_idx, token_idx + 1)
+                for start, end in support_intervals:
+                    background = _matched_background_indices(key_pos, start, end)
                     if len(background) == 0:
                         continue
-                    enrich["motif_mass"] += attention_heads[:, :, token_idx : token_idx + 1].sum(axis=(1, 2))
+                    enrich["motif_mass"] += attention_heads[:, :, start:end].sum(axis=(1, 2))
                     enrich["background_mass"] += attention_heads[:, :, background].sum(axis=(1, 2))
-                    enrich["support_tokens"] += 1
+                    enrich["support_tokens"] += end - start
                     enrich["background_tokens"] += int(len(background))
         if idx == 1 or idx == len(motif_records) or idx % report_every == 0:
             progress(f"Processed strict QK proof inputs for {idx}/{len(motif_records)} CTCF sequences")

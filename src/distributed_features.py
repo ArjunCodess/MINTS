@@ -242,6 +242,11 @@ def extract_ctcf_residual_and_mlp_activations(
         if same_shape and residual_array.size and mlp_array.size
         else None
     )
+    if max_abs_diff is not None and max_abs_diff <= 1e-8:
+        raise RuntimeError(
+            "MLP activations are numerically identical to residual activations. "
+            "The feed-forward hook target is not valid for SAE training."
+        )
     write_json(
         config.paths.manifests_dir / "ctcf_distributed_feature_activations_manifest.json",
         {

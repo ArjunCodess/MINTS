@@ -3,7 +3,14 @@ from pathlib import Path
 import numpy as np
 
 from src.config import PipelineConfig, ProjectPaths
-from src.motif_scoring import load_jaspar_ctcf_motif, score_sequence_tokens, token_offsets_for_sequence
+from src.motif_scoring import (
+    load_jaspar_ctcf_motif,
+    motif_support_spans_from_start_scores,
+    motif_supports_from_scores,
+    score_sequence_tokens,
+    token_indices_overlapping_char_span,
+    token_offsets_for_sequence,
+)
 from src.qk_alignment import AlignmentThresholds, pearson_correlation, qk_alignment_table, qk_attention_maps, qk_key_scores
 
 
@@ -77,6 +84,46 @@ def test_jaspar_ctcf_scores_align_to_model_tokens(tmp_path) -> None:
     assert np.isnan(record.token_scores[-1])
     assert record.support_tokens
     assert min(record.support_tokens) > 0
+    assert record.support_spans
+    assert all(span.token_start < span.token_end for span in record.support_spans)
+
+
+def test_bpe_token_overlap_maps_full_motif_span_to_intersecting_tokens() -> None:
+    offsets = [(0, 0), (0, 5), (5, 12), (12, 20), (20, 25), (25, 30)]
+
+    overlapping = token_indices_overlapping_char_span(offsets, char_start=4, char_end=23)
+
+    assert overlapping == [1, 2, 3, 4]
+
+
+def test_motif_supports_use_bpe_intervals_not_single_tokens() -> None:
+    offsets = [(0, 0), (0, 5), (5, 12), (12, 20), (20, 25), (25, 30)]
+    start_scores = np.full(30, -np.inf)
+    start_scores[4] = 9.0
+
+    support_spans = motif_support_spans_from_start_scores(
+        start_scores=start_scores,
+        motif_length=19,
+        token_offsets=offsets,
+        threshold=5.0,
+    )
+
+    assert len(support_spans) == 1
+    assert support_spans[0].motif_start == 4
+    assert support_spans[0].motif_end == 23
+    assert support_spans[0].token_start == 1
+    assert support_spans[0].token_end == 5
+
+    record = type(
+        "Record",
+        (),
+        {"sequence_index": 0, "support_spans": support_spans},
+    )()
+    supports = motif_supports_from_scores([record])
+
+    assert len(supports) == 1
+    assert supports[0].token_start == 1
+    assert supports[0].token_end == 5
 
 
 def test_token_offsets_for_sequence_falls_back_to_fixed_kmers() -> None:

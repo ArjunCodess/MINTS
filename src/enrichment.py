@@ -14,7 +14,12 @@ from .utils import utc_now_iso, write_json
 
 @dataclass(frozen=True)
 class MotifSupport:
-    """Token-level support interval for a motif instance."""
+    """Half-open model-token support interval for one motif instance.
+
+    For DNABERT-2, a support interval may span multiple BPE tokens because a
+    JASPAR motif is defined in nucleotide coordinates rather than token
+    coordinates.
+    """
 
     sequence_index: int
     token_start: int
