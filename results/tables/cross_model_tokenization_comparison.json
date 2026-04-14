@@ -1,72 +1,72 @@
 {
   "attention_enrichment_delta": {
-    "base_best_rho": 1.0208611197609645,
+    "base_best_rho": 1.3130489892426245,
     "base_candidate_heads": 0,
     "base_model": "zhihan1996/DNABERT-2-117M",
-    "comparison_best_rho": 1.000045589712934,
+    "comparison_best_rho": 1.0000912160699158,
     "comparison_candidate_heads": 0,
     "comparison_model": "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species",
-    "delta_best_rho_comparison_minus_base": -0.020815530048030606,
+    "delta_best_rho_comparison_minus_base": -0.3129577731727087,
     "delta_candidate_heads_comparison_minus_base": 0
   },
-  "created_at": "2026-04-13T18:34:34+00:00",
+  "created_at": "2026-04-14T15:56:30+00:00",
   "models": {
     "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species": {
       "attention_enrichment": {
-        "best_rho": 1.000045589712934,
+        "best_rho": 1.0000912160699158,
         "candidate_heads": 0,
-        "mean_rho": 0.9999986651947447,
+        "mean_rho": 0.9999963665317684,
         "status": "completed",
         "top_heads": [
           {
-            "head": 14,
+            "head": 0,
             "layer": 11,
-            "rho": 1.000045589712934
-          },
-          {
-            "head": 4,
-            "layer": 11,
-            "rho": 1.0000224787252778
+            "rho": 1.0000912160699158
           },
           {
             "head": 0,
-            "layer": 11,
-            "rho": 1.0000215982571734
+            "layer": 10,
+            "rho": 1.00008173444385
+          },
+          {
+            "head": 2,
+            "layer": 8,
+            "rho": 1.0000779050954651
+          },
+          {
+            "head": 8,
+            "layer": 9,
+            "rho": 1.0000726590622226
           },
           {
             "head": 11,
-            "layer": 5,
-            "rho": 1.0000171313754858
+            "layer": 8,
+            "rho": 1.000060447027331
           },
           {
-            "head": 3,
-            "layer": 5,
-            "rho": 1.0000162750637491
+            "head": 10,
+            "layer": 7,
+            "rho": 1.0000575275903594
           },
           {
-            "head": 7,
-            "layer": 5,
-            "rho": 1.0000120711901137
+            "head": 4,
+            "layer": 7,
+            "rho": 1.0000568604490336
           },
           {
-            "head": 15,
-            "layer": 5,
-            "rho": 1.0000114022466395
+            "head": 0,
+            "layer": 9,
+            "rho": 1.000054927415722
           },
           {
             "head": 6,
-            "layer": 5,
-            "rho": 1.000009248795069
+            "layer": 6,
+            "rho": 1.000053456701751
           },
           {
-            "head": 5,
-            "layer": 5,
-            "rho": 1.000007576619649
-          },
-          {
-            "head": 1,
-            "layer": 11,
-            "rho": 1.0000074663803131
+            "head": 0,
+            "layer": 8,
+            "rho": 1.000053366538954
           }
         ]
       },
@@ -130,60 +130,60 @@
     },
     "zhihan1996/DNABERT-2-117M": {
       "attention_enrichment": {
-        "best_rho": 1.0208611197609645,
+        "best_rho": 1.3130489892426245,
         "candidate_heads": 0,
-        "mean_rho": 0.9923180376555722,
+        "mean_rho": 0.9764908037541077,
         "status": "completed",
         "top_heads": [
           {
             "head": 3,
-            "layer": 11,
-            "rho": 1.0208611197609645
-          },
-          {
-            "head": 0,
-            "layer": 5,
-            "rho": 1.0151635043716307
-          },
-          {
-            "head": 11,
-            "layer": 5,
-            "rho": 1.0128383769470746
-          },
-          {
-            "head": 2,
-            "layer": 5,
-            "rho": 1.0117724692104848
-          },
-          {
-            "head": 10,
-            "layer": 11,
-            "rho": 1.0062025847691172
-          },
-          {
-            "head": 9,
-            "layer": 11,
-            "rho": 1.0053472406026047
+            "layer": 6,
+            "rho": 1.3130489892426245
           },
           {
             "head": 7,
-            "layer": 11,
-            "rho": 1.004565368300672
+            "layer": 4,
+            "rho": 1.1732851169574234
           },
           {
-            "head": 2,
-            "layer": 11,
-            "rho": 1.0027111111901623
+            "head": 3,
+            "layer": 10,
+            "rho": 1.1172279622436192
           },
           {
             "head": 9,
-            "layer": 5,
-            "rho": 1.0021676569517022
+            "layer": 6,
+            "rho": 1.079395912777247
           },
           {
-            "head": 8,
-            "layer": 11,
-            "rho": 1.0020496228009197
+            "head": 6,
+            "layer": 7,
+            "rho": 1.0787745572661016
+          },
+          {
+            "head": 5,
+            "layer": 5,
+            "rho": 1.0686578014310917
+          },
+          {
+            "head": 5,
+            "layer": 8,
+            "rho": 1.0674998248334846
+          },
+          {
+            "head": 6,
+            "layer": 6,
+            "rho": 1.0562426888740053
+          },
+          {
+            "head": 10,
+            "layer": 8,
+            "rho": 1.0529838276901198
+          },
+          {
+            "head": 7,
+            "layer": 5,
+            "rho": 1.0521551914507383
           }
         ]
       },

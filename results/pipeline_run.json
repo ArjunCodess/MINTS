@@ -7,7 +7,16 @@
     ],
     "circuit_layers": [
       0,
+      1,
+      2,
+      3,
+      4,
       5,
+      6,
+      7,
+      8,
+      9,
+      10,
       11
     ],
     "max_cross_model_qk_alignment_sequences": null,
@@ -23,7 +32,7 @@
     "sae_epochs": 10,
     "sae_l1_coefficient": 0.001
   },
-  "created_at": "2026-04-13T18:34:34+00:00",
+  "created_at": "2026-04-14T15:56:30+00:00",
   "data": {
     "encode_url_file": "data\\ENCODE4_v1.5.1_GRCh38.txt",
     "grch38_fasta_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz",
@@ -79,7 +88,7 @@
         }
       },
       "name": "ingest_hf_downstream",
-      "seconds": 17.821,
+      "seconds": 10.607,
       "status": "completed"
     },
     {
@@ -104,7 +113,7 @@
         "output_dir": "data\\encode\\ctcf_gm12878"
       },
       "name": "download_encode_ctcf",
-      "seconds": 0.25,
+      "seconds": 0.258,
       "status": "completed"
     },
     {
@@ -112,7 +121,7 @@
         "path": "data\\genomes\\hg38.fa"
       },
       "name": "download_grch38",
-      "seconds": 2.895,
+      "seconds": 2.805,
       "status": "completed"
     },
     {
@@ -120,7 +129,7 @@
         "path": "data\\ctcf\\ctcf_gm12878_sequences.tsv"
       },
       "name": "prepare_ctcf_sequences",
-      "seconds": 1.103,
+      "seconds": 2.356,
       "status": "completed"
     },
     {
@@ -160,7 +169,16 @@
           "d_model": 768,
           "layers": [
             0,
+            1,
+            2,
+            3,
+            4,
             5,
+            6,
+            7,
+            8,
+            9,
+            10,
             11
           ],
           "n_heads": 12
@@ -170,6 +188,27 @@
           "instrumentation_backend": "huggingface_forward_hooks",
           "manifest": "results\\manifests\\model_hooked_encoder_manifest.json",
           "name": "zhihan1996/DNABERT-2-117M"
+        },
+        "ov_readout": {
+          "figure": "results\\figures\\tata_l2h7_ov_probe_alignment.png",
+          "manifest": "results\\manifests\\tata_l2h7_ov_readout_manifest.json",
+          "summary": {
+            "d_model": 768,
+            "direction_norm_before_normalization": 202.8860407514749,
+            "head": 7,
+            "layer": 2,
+            "probe_layer": 11,
+            "probe_read_direction_norm": 0.4296030460940892,
+            "probe_self_gain": -0.03263880886513199,
+            "singular_vectors": 768,
+            "spectral_norm": 6.821075454521598,
+            "task": "promoter_tata",
+            "top_input_left_abs_cosine": 0.12053867675560478,
+            "top_output_write_abs_cosine": 0.12611455566058075,
+            "train_examples": 5062,
+            "train_positive_rate": 0.5
+          },
+          "table": "results\\tables\\tata_l2h7_ov_probe_alignment.csv"
         },
         "probes": {
           "metrics": [
@@ -246,7 +285,7 @@
         }
       },
       "name": "circuit_extraction_and_residual_probing",
-      "seconds": 497.519,
+      "seconds": 659.838,
       "status": "completed"
     },
     {
@@ -349,7 +388,7 @@
         }
       },
       "name": "strict_mechanistic_proofs",
-      "seconds": 2857.587,
+      "seconds": 9475.141,
       "status": "completed"
     },
     {
@@ -368,59 +407,59 @@
             "summary": {
               "denominator_failures": 0,
               "finite_scores": 144,
-              "max_restoration": 1.42161777297363,
-              "mean_restoration": 0.1434153644719593,
+              "max_restoration": 1.4028715758042842,
+              "mean_restoration": 0.16043613743611168,
               "pairs": 327,
               "top_heads": [
                 {
-                  "head": 7,
-                  "layer": 2,
-                  "restoration": 1.42161777297363
-                },
-                {
                   "head": 8,
                   "layer": 4,
-                  "restoration": 1.4141260997447498
-                },
-                {
-                  "head": 0,
-                  "layer": 4,
-                  "restoration": 1.3346417893947344
+                  "restoration": 1.4028715758042842
                 },
                 {
                   "head": 8,
                   "layer": 6,
-                  "restoration": 1.3259533780761656
+                  "restoration": 1.3790819890006054
                 },
                 {
-                  "head": 10,
-                  "layer": 4,
-                  "restoration": 1.2139059838587367
+                  "head": 7,
+                  "layer": 2,
+                  "restoration": 1.3641587999731368
                 },
                 {
                   "head": 0,
-                  "layer": 1,
-                  "restoration": 1.1532768124309525
-                },
-                {
-                  "head": 2,
-                  "layer": 7,
-                  "restoration": 1.0828312152656014
-                },
-                {
-                  "head": 4,
                   "layer": 4,
-                  "restoration": 1.0757184848092818
+                  "restoration": 1.3171404920064202
                 },
                 {
                   "head": 10,
-                  "layer": 1,
-                  "restoration": 1.050265128750467
+                  "layer": 4,
+                  "restoration": 1.2421410607839234
                 },
                 {
                   "head": 1,
                   "layer": 3,
-                  "restoration": 1.0327447372507006
+                  "restoration": 1.214960589909801
+                },
+                {
+                  "head": 2,
+                  "layer": 3,
+                  "restoration": 1.1480684163885342
+                },
+                {
+                  "head": 0,
+                  "layer": 1,
+                  "restoration": 1.1130317340577904
+                },
+                {
+                  "head": 4,
+                  "layer": 4,
+                  "restoration": 1.089250252335936
+                },
+                {
+                  "head": 2,
+                  "layer": 7,
+                  "restoration": 1.0884373045773024
                 }
               ]
             },
@@ -433,59 +472,59 @@
             "summary": {
               "denominator_failures": 0,
               "finite_scores": 144,
-              "max_restoration": 0.5284981071359018,
-              "mean_restoration": 0.007606285093127835,
+              "max_restoration": 0.548538463353492,
+              "mean_restoration": 0.015689842955153806,
               "pairs": 500,
               "top_heads": [
                 {
                   "head": 8,
                   "layer": 1,
-                  "restoration": 0.5284981071359018
+                  "restoration": 0.548538463353492
                 },
                 {
                   "head": 8,
                   "layer": 2,
-                  "restoration": 0.2563364177676694
+                  "restoration": 0.2800836622460778
                 },
                 {
                   "head": 11,
                   "layer": 10,
-                  "restoration": 0.1722704978368782
+                  "restoration": 0.2560074382474946
                 },
                 {
-                  "head": 6,
-                  "layer": 5,
-                  "restoration": 0.1543204586732481
-                },
-                {
-                  "head": 7,
-                  "layer": 6,
-                  "restoration": 0.1492570004900618
-                },
-                {
-                  "head": 8,
-                  "layer": 3,
-                  "restoration": 0.1442784698570003
+                  "head": 9,
+                  "layer": 4,
+                  "restoration": 0.2273323637452791
                 },
                 {
                   "head": 10,
                   "layer": 7,
-                  "restoration": 0.1326126663105114
+                  "restoration": 0.2137106420561747
                 },
                 {
-                  "head": 1,
-                  "layer": 7,
-                  "restoration": 0.1153186108064083
-                },
-                {
-                  "head": 9,
-                  "layer": 7,
-                  "restoration": 0.1091919041984804
-                },
-                {
-                  "head": 1,
+                  "head": 11,
                   "layer": 2,
-                  "restoration": 0.1080560997865041
+                  "restoration": 0.1837661224321913
+                },
+                {
+                  "head": 8,
+                  "layer": 3,
+                  "restoration": 0.1804702808358176
+                },
+                {
+                  "head": 6,
+                  "layer": 4,
+                  "restoration": 0.1736327908173684
+                },
+                {
+                  "head": 6,
+                  "layer": 5,
+                  "restoration": 0.1637954377497053
+                },
+                {
+                  "head": 7,
+                  "layer": 2,
+                  "restoration": 0.1605089631160604
                 }
               ]
             },
@@ -494,7 +533,7 @@
         }
       },
       "name": "systematic_causal_intervention",
-      "seconds": 1863.729,
+      "seconds": 1344.551,
       "status": "completed"
     },
     {
@@ -520,10 +559,10 @@
               "examples": 2048,
               "figure": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\figures\\ctcf_mlp_sae_top10_alignment.png",
               "history": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\distributed_features\\ctcf_mlp_sae_training_history.csv",
-              "input_dim": 768,
+              "input_dim": 3072,
               "source": "mlp",
-              "top_ctcf_motif_cosine": 0.08843702350173013,
-              "top_feature": 31
+              "top_ctcf_motif_cosine": 0.11583357065447206,
+              "top_feature": 414
             }
           },
           "residual": {
@@ -548,7 +587,7 @@
         "summary_path": "results\\distributed_features\\ctcf_distributed_feature_search_summary.json"
       },
       "name": "distributed_feature_search",
-      "seconds": 39.111,
+      "seconds": 33.11,
       "status": "completed"
     },
     {
@@ -556,7 +595,7 @@
         "report_path": "results\\tables\\cross_model_tokenization_comparison.json"
       },
       "name": "cross_model_tokenization_comparison",
-      "seconds": 5771.942,
+      "seconds": 17231.546,
       "status": "completed"
     }
   ]
