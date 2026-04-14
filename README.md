@@ -13,9 +13,9 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 - **One-command reproducibility:** `python main.py` runs data checks, model loading, residual probing, QK/OV export, strict CTCF scans, systematic patching, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
 - **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
-- **Causal patching signal:** Batch DNABERT forward-hook patching found strong promoter-TATA restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
+- **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
 - **OV readout audit:** The previously suspected TATA-restoring layer `2`, head `7` does not directly align strongly with the trained TATA residual-probe direction; its top OV output-write singular-vector cosine is only `0.1261`, and the probe self-gain is `-0.0326`.
-- **Cross-model tokenization comparison:** On the same residual-probe benchmark, DNABERT-2 BPE strongly outperformed Nucleotide Transformer fixed 6-mer tokenization in this pipeline, with AUROC deltas from `+0.2408` to `+0.3259` in favor of DNABERT-2.
+- **Cross-model tokenization comparison:** On the same residual-probe benchmark, DNABERT-2 BPE outperformed the tested Nucleotide Transformer v2 100M fixed-6mer backend in this pipeline, with AUROC deltas from `+0.2408` to `+0.3259` in favor of DNABERT-2. This is a pipeline-level comparison of these two checkpoints, not a general claim about all Nucleotide Transformer models or all fixed-6mer tokenizers.
 - **Distributed feature search:** SAE feature search ran over `2,048` CTCF sequences with the corrected DNABERT GLU MLP hook. The residual stream has shape `2048 x 768`, the MLP post-activation features have shape `2048 x 3072`, and the top CTCF motif cosine is still weak at `0.1158`.
 
 ## Overview
@@ -115,7 +115,7 @@ Batch denoising patching is more important for the current run:
 | `promoter_tata` | `327` | layer `4`, head `8` | `1.4029` | `0.1604` | `0` |
 | `splice_sites_donors` | `500` | layer `1`, head `8` | `0.5485` | `0.0157` | `0` |
 
-Interpretation: promoter-TATA has a strong causal restoration signal under batch patching, including over-restoration above `1.0`. Splice donor has a weaker but threshold-crossing best head. These are task-specific causal signals; they do not rescue the failed CTCF strict motif-detector claim.
+Interpretation: promoter-TATA has a strong causal signal under batch patching, but the best mean `PM = 1.4029` is an over-restoration result rather than a clean `PM = 1` recovery. That can mean the patched head activation amplifies the probe direction in the corrupted context, or it can reflect denominator sensitivity, probe geometry, or out-of-distribution patched states. Splice donor has a weaker but threshold-crossing best head. These are task-specific causal signals; they do not rescue the failed CTCF strict motif-detector claim.
 
 The OV readout audit for the earlier candidate layer `2`, head `7` found weak direct alignment with the trained TATA residual-probe direction:
 
@@ -178,7 +178,7 @@ CTCF strict-scan comparison:
 - Nucleotide Transformer best enrichment: `rho_h = 1.00009`
 - Passing QK/enrichment candidates for either model: `0`
 
-Interpretation: in this exact benchmark, DNABERT-2 BPE is much more linearly probeable than the Nucleotide Transformer fixed-6mer backend. However, neither model yields a strict CTCF motif-detector head under the registered thresholds.
+Interpretation: in this exact benchmark and implementation, DNABERT-2 produced higher residual-probe scores than the tested Nucleotide Transformer v2 100M fixed-6mer backend. This comparison is not meant as a universal statement about Nucleotide Transformer pretraining, all fixed-6mer models, or fine-tuned NT variants. However, neither tested backend yields a strict CTCF motif-detector head under the registered thresholds.
 
 ## Running
 
