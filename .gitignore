@@ -218,9 +218,10 @@ data/hf_downstream/
 results/manifests/*_manifest.json
 results/manifests/pipeline_config.json
 results/manifests/pipeline_run.json
-results/activations/*.npz
-results/circuits/*.npz
-results/enrichment/ctcf_qk_alignment_token_motif_scores.csv
+results/**/activations/*.npz
+results/**/circuits/*.npz
+results/distributed_features/*.npz
+results/**/enrichment/*token_motif_scores.csv
 results/**/*.pt
 results/**/*.pth
 results/**/*.safetensors
