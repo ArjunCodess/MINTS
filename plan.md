@@ -5,6 +5,19 @@ Build a reproducible Python pipeline under `src/` with `main.py` as a single-com
 
 Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_lens.HookedEncoder`, not `HookedTransformer`, because the selected model is BERT-style and TransformerLens documents `HookedTransformer` mainly for autoregressive models. Add a compatibility gate: fail fast with a clear error if the current TransformerLens version cannot load DNABERT-2’s custom `BertForMaskedLM`, and point to the custom hook fallback as future work.
 
+## April 2026 Probe-Framing Feedback from Kiho Park
+
+Kiho Park ([kihopark.github.io](https://kihopark.github.io/)), a PhD candidate in Statistics at the University of Chicago whose research focuses on geometric and causal structure in representations, gave feedback on the MINTS probe framing. His central point was that a high linear-probe score shows that a label is linearly decodable from the representation, but does not by itself identify whether the probe is using a causal biological feature or a correlated signal in the training distribution.
+
+Implementation notes from that feedback:
+
+- State the representation claim as linear decodability from the frozen residual stream, not as proof of a causal feature.
+- Explicitly warn that a probe may rely on correlated distributional signals.
+- Add probe controls for GC-content-only classifiers, position-only metadata classifiers, matched negatives, random-label probes, and distribution-shift generalization.
+- Treat distribution-shift performance as evidence about robustness, not as a definitive causal test.
+- Position the project as workshop-suitable after tightening contribution framing and making the probe claims precise; Kiho suggested the ICML 2026 mechanistic interpretability workshop as a possible target.
+- Add a narrow rerun path for the new controls so they can be recomputed from cached residual activations without rerunning the full DNABERT pipeline.
+
 ## Infrastructure, Model Wrapping, Data Ingestion
 - Replace the current empty dependency setup with a Python 3.11/3.12 compatible environment. The existing `.venv` is Python 3.14 and has none of the required ML packages installed.
 - Add dependencies for `torch`, `transformers`, `datasets`, `transformer-lens`, `scikit-learn`, `pandas`, `numpy`, `matplotlib`, `seaborn`, `tqdm`, `requests`, `biopython`, and a genome interval reader such as `pyfaidx`.
@@ -39,6 +52,16 @@ Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_len
   - train logistic regression probes for `promoter_tata`, `promoter_no_tata`, splice donor/acceptor, and CTCF binding examples,
   - use stratified train/test splits or provided dataset splits,
   - report AUROC, AUPRC, accuracy, class balance, and confidence intervals where practical.
+- Extend `src/probing.py` with Kiho Park-inspired interpretability controls:
+  - GC-content-only logistic baselines using sequence-composition features,
+  - position-only logistic baselines when cached dataset names expose genomic coordinates,
+  - residual-probe evaluation on GC-matched positive/negative test subsets,
+  - random-label residual probes trained on shuffled train labels,
+  - GC-content distribution-shift probes trained on low-GC and tested on high-GC examples, and vice versa,
+  - a manifest recording that these controls were added to distinguish decodability from causal-feature claims.
+- Add a CLI rerun path:
+  - `python main.py --only-probe-controls` reruns only cached-residual probe controls.
+  - `python main.py --from-step probe_controls` runs controls and then continues through later full-pipeline steps.
 - Implement attention enrichment in `src/enrichment.py` by mapping motif support indices from character coordinates to token positions, summing attention mass over motif-support positions, and normalizing by expected attention mass over matched non-motif positions. Save per-layer/head enrichment tables under `results/enrichment/`.
 
 ## Causal Intervention and Activation Patching
@@ -144,6 +167,7 @@ Use `zhihan1996/DNABERT-2-117M` as the primary model and target `transformer_len
 ## Test Plan
 - Unit-test URL filtering, task alias normalization, motif mutation length preservation, coordinate-to-token mapping, QK/OV matrix shape checks, and restoration metric edge cases where `clean_logit == corrupted_logit`.
 - Unit-test JASPAR PWM loading/scoring, token-level motif support extraction, Pearson candidate filtering, matched-background enrichment, and head-output hook replacement.
+- Unit-test probe controls on toy cached activations so GC-only, position-only, matched-negative, random-label, and manifest attribution rows are written without loading a transformer.
 - Unit-test hierarchical sparse patch-position selection and batch restoration aggregation.
 - Unit-test centered-cosine feature ranking and sparse autoencoder output dimensions on toy activations.
 - Unit-test tokenization-family classification, cross-model delta computation, and model-specific result path construction.
