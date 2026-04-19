@@ -12,6 +12,8 @@ from .reproduce import PIPELINE_STEPS, run_pipeline
 
 FROM_STEP_ALIASES = {
     "all": "write_config",
+    "probe_control": "probe_controls",
+    "linear_probe_controls": "probe_controls",
     "strict_qk_proof_inputs": "strict_mechanistic_proofs",
     "strict_qk_proof": "strict_mechanistic_proofs",
     "strict_proofs": "strict_mechanistic_proofs",
@@ -118,10 +120,27 @@ def build_parser() -> argparse.ArgumentParser:
         help="Probe confidence interval level in the open interval (0, 1). Defaults to 0.95.",
     )
     parser.add_argument(
+        "--probe-control-random-label-runs",
+        type=int,
+        default=8,
+        metavar="N",
+        help="Random-label residual-probe control repeats. Defaults to 8. Use 0 to skip.",
+    )
+    parser.add_argument(
+        "--only-probe-controls",
+        action="store_true",
+        help=(
+            "Run only the cached-residual probe controls and exit. "
+            "Requires results/activations/*_residual_mean.npz from a prior probe-cache run."
+        ),
+    )
+    parser.add_argument(
         "--from-step",
         choices=(
             "all",
             *PIPELINE_STEPS,
+            "probe_control",
+            "linear_probe_controls",
             "strict_qk_proof_inputs",
             "strict_qk_proof",
             "strict_proofs",
@@ -165,6 +184,8 @@ def run(argv: list[str] | None = None) -> int:
         parser.error("--probe-bootstrap-samples must be zero or a positive integer.")
     if args.probe_ci_level is not None and not 0.0 < args.probe_ci_level < 1.0:
         parser.error("--probe-ci-level must be in the open interval (0, 1).")
+    if args.probe_control_random_label_runs is not None and args.probe_control_random_label_runs < 0:
+        parser.error("--probe-control-random-label-runs must be zero or a positive integer.")
 
     config = PipelineConfig()
     from_step = FROM_STEP_ALIASES.get(args.from_step, args.from_step)
@@ -184,8 +205,23 @@ def run(argv: list[str] | None = None) -> int:
             max_cross_model_qk_alignment_sequences=args.max_cross_model_qk_alignment_sequences,
             probe_bootstrap_samples=args.probe_bootstrap_samples,
             probe_ci_level=args.probe_ci_level,
+            probe_control_random_label_runs=args.probe_control_random_label_runs,
         ),
     )
+    if args.only_probe_controls:
+        from .probing import run_probe_controls
+
+        control_path = run_probe_controls(config=config)
+        payload = {
+            "message": f"Completed MINTS probe controls. Table: {control_path}",
+            "table": str(control_path),
+        }
+        if args.json:
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            print(payload["message"])
+        return 0
+
     manifest_path = run_pipeline(config=config, overwrite=args.overwrite, from_step=from_step)
     payload = {
         "message": f"Completed MINTS reproducibility run. Manifest: {manifest_path}",

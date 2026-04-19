@@ -105,6 +105,7 @@ class DataConfig:
     max_cross_model_qk_alignment_sequences: int | None = None
     probe_bootstrap_samples: int = 1000
     probe_ci_level: float = 0.95
+    probe_control_random_label_runs: int = 8
     sae_dictionary_size: int = 512
     sae_epochs: int = 10
     sae_batch_size: int = 256

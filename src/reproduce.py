@@ -17,7 +17,7 @@ from .data_ingestion import download_encode_artifacts, ingest_hf_downstream_task
 from .distributed_features import run_distributed_feature_search
 from .mechanistic_proofs import run_mechanistic_proof_exports, run_systematic_causal_intervention_exports
 from .modeling import load_hooked_encoder, summarize_hook_points
-from .probing import run_all_probes
+from .probing import run_all_probes, run_probe_controls
 from .utils import progress, utc_now_iso, write_json
 
 
@@ -28,6 +28,7 @@ PIPELINE_STEPS: tuple[str, ...] = (
     "download_grch38",
     "prepare_ctcf_sequences",
     "circuit_extraction_and_residual_probing",
+    "probe_controls",
     "strict_mechanistic_proofs",
     "systematic_causal_intervention",
     "distributed_feature_search",
@@ -128,6 +129,13 @@ def _run_circuit_and_probe_exports(config: PipelineConfig) -> dict[str, Any]:
         "probe_table": str(probe_table),
         "ov_readout": ov_readout,
     }
+
+
+def _run_probe_control_exports(config: PipelineConfig) -> dict[str, Any]:
+    """Run probe controls from cached residual activations."""
+
+    control_table = run_probe_controls(config=config)
+    return {"control_table": str(control_table)}
 
 
 def _qk_archive_has_low_rank_factors(config: PipelineConfig) -> bool:
@@ -329,6 +337,15 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
                 for key, value in details["ov_readout"].items()
             },
         }
+    elif step.name == "probe_controls":
+        compact_details = {
+            "control_table": _relative_to_project(details["control_table"], config),
+            "suggested_by": "Kiho Park",
+            "reason": (
+                "Probe scores establish linear decodability; controls test whether "
+                "simple correlated signals or distribution shifts explain the result."
+            ),
+        }
     elif step.name == "strict_mechanistic_proofs":
         compact_details = {
             "model": {
@@ -461,6 +478,7 @@ def _write_run_manifest(
             "max_cross_model_qk_alignment_sequences": config.data.max_cross_model_qk_alignment_sequences,
             "probe_bootstrap_samples": config.data.probe_bootstrap_samples,
             "probe_ci_level": config.data.probe_ci_level,
+            "probe_control_random_label_runs": config.data.probe_control_random_label_runs,
             "sae_dictionary_size": config.data.sae_dictionary_size,
             "sae_epochs": config.data.sae_epochs,
             "sae_l1_coefficient": config.data.sae_l1_coefficient,
@@ -538,6 +556,7 @@ def run_pipeline(
             "download_grch38": download_grch38,
             "prepare_ctcf_sequences": prepare_ctcf,
             "circuit_extraction_and_residual_probing": lambda: _run_circuit_and_probe_exports(config),
+            "probe_controls": lambda: _run_probe_control_exports(config),
             "strict_mechanistic_proofs": lambda: _run_strict_proof_exports(config),
             "systematic_causal_intervention": lambda: _run_systematic_causal_interventions(config),
             "distributed_feature_search": lambda: _run_distributed_feature_search(config),
