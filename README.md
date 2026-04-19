@@ -6,12 +6,17 @@
 
 MINTS asks a narrow question: can we move from "this genomic transformer predicts biological labels" to "this specific circuit component implements a biological motif detector"? The current answer is useful but disciplined: DNABERT-2 strongly encodes promoter and splice-site labels in its layer-11 residual stream, but the completed strict CTCF scan does **not** prove a single CTCF motif-detector attention head.
 
+Probe-interpretation controls were added after feedback from [Kiho Park](https://kihopark.github.io/), whose work on representation geometry motivated the distinction used here: a high linear-probe score establishes label decodability from the representation, not that the probe has found a causal biological feature. The new controls test GC-content baselines, position-only metadata baselines, GC-matched negatives, random-label probes, and GC-content distribution shifts.
+
+Kiho also suggested that, after tightening the contribution framing and making the probe claims precise, this project could be shaped toward a mechanistic interpretability workshop submission such as the ICML 2026 mechanistic interpretability workshop.
+
 The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [`paper/main.tex`](paper/main.tex).
 
 ## Key Achievements
 
 - **One-command reproducibility:** `python main.py` runs data checks, model loading, residual probing, QK/OV export, strict CTCF scans, systematic patching, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
+- **Probe interpretation controls:** The cached-residual control pass writes [`results/tables/linear_probe_controls.csv`](results/tables/linear_probe_controls.csv), covering GC-content-only probes, position-only metadata probes when coordinates are available, GC-matched test negatives, random-label residual probes, and GC distribution-shift probes.
 - **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
 - **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
 - **OV readout audit:** The previously suspected TATA-restoring layer `2`, head `7` does not directly align strongly with the trained TATA residual-probe direction; its top OV output-write singular-vector cosine is only `0.1261`, and the probe self-gain is `-0.0326`.
@@ -40,12 +45,13 @@ The novel contribution is the combination of computational biology ground truth 
 4. DNABERT-2 is loaded on CUDA when available through Hugging Face forward hooks after TransformerLens compatibility fallback.
 5. Residual vectors are cached for layers `0`, `5`, and `11`; QK/OV matrices are exported for all `12` DNABERT-2 layers.
 6. Logistic probes are trained on frozen layer-11 residual vectors.
-7. JASPAR `MA0139.1` CTCF motif scores are aligned to model token positions across GM12878 CTCF sequences.
-8. QK-to-motif Pearson correlations and matched motif/background enrichment ratios are computed.
-9. Clean/corrupted motif pairs are generated for activation patching.
-10. Batch denoising patching runs across all `12 x 12` DNABERT-2 layer/head positions.
-11. Sparse autoencoders are trained on CTCF residual/MLP activation exports for distributed-feature search.
-12. DNABERT-2 is compared with `InstaDeepAI/nucleotide-transformer-v2-100m-multi-species` using the same probe and CTCF enrichment workflow.
+7. Probe controls are run from cached activations to test correlated distributional signals.
+8. JASPAR `MA0139.1` CTCF motif scores are aligned to model token positions across GM12878 CTCF sequences.
+9. QK-to-motif Pearson correlations and matched motif/background enrichment ratios are computed.
+10. Clean/corrupted motif pairs are generated for activation patching.
+11. Batch denoising patching runs across all `12 x 12` DNABERT-2 layer/head positions.
+12. Sparse autoencoders are trained on CTCF residual/MLP activation exports for distributed-feature search.
+13. DNABERT-2 is compared with `InstaDeepAI/nucleotide-transformer-v2-100m-multi-species` using the same probe and CTCF enrichment workflow.
 
 ## Latest Full Run
 
@@ -79,7 +85,15 @@ Layer-11 residual vectors are strongly predictive for all four configured biolog
 | `splice_sites_donors` | `30000 / 3000` | `0.8954` | `0.8839-0.9060` | `0.9049` | `0.8895-0.9191` | `0.8230` |
 | `splice_sites_acceptors` | `30000 / 3000` | `0.8847` | `0.8723-0.8959` | `0.8954` | `0.8802-0.9085` | `0.8090` |
 
-Interpretation: the biological labels are linearly decodable from frozen DNABERT-2 residual states. This supports representation-level biological encoding, but not a localized motif-detector proof.
+Interpretation: the biological labels are linearly decodable from frozen DNABERT-2 residual states. Following Kiho Park's feedback, this is interpreted as decodability rather than causal feature identification: the probe could exploit causal biological structure, correlated sequence composition, genomic-position artifacts, or other distributional signals. The new control pass is designed to check those alternatives before strengthening the representation claim.
+
+Run the probe-control pass after residual caches exist:
+
+```bash
+python main.py --only-probe-controls
+```
+
+This writes `results/tables/linear_probe_controls.csv` and `results/manifests/linear_probe_controls_manifest.json`.
 
 ### Strict CTCF QK and Enrichment
 
@@ -214,16 +228,22 @@ Useful flags:
 - `--max-cross-model-qk-alignment-sequences`: cap CTCF sequences for cross-model QK/enrichment comparison
 - `--probe-bootstrap-samples`: bootstrap resamples for probe confidence intervals
 - `--probe-ci-level`: probe confidence interval level
+- `--probe-control-random-label-runs`: number of random-label residual-probe repeats in the control pass
+- `--only-probe-controls`: rerun only the cached-residual probe controls without loading the model or continuing through later pipeline steps
 - `--from-step`: start from a named checkpoint and continue forward
 - `--json`: print a machine-readable completion payload
 
 Resume from a later checkpoint:
 
 ```bash
+python main.py --only-probe-controls
+python main.py --from-step probe_controls
 python main.py --from-step systematic_causal_intervention
 python main.py --from-step distributed_feature_search
 python main.py --from-step cross_model_tokenization_comparison
 ```
+
+Use `--only-probe-controls` when you want to rerun just the new Kiho Park-inspired probe controls from existing activation caches. Use `--from-step probe_controls` when you want to run those controls and then continue with the rest of the full pipeline.
 
 ## Data
 
@@ -254,6 +274,7 @@ Primary outputs:
 
 - [`results/pipeline_run.json`](results/pipeline_run.json)
 - [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv)
+- `results/tables/linear_probe_controls.csv`
 - [`results/tables/cross_model_tokenization_comparison.json`](results/tables/cross_model_tokenization_comparison.json)
 - [`results/qk_alignment/ctcf_qk_alignment.csv`](results/qk_alignment/ctcf_qk_alignment.csv)
 - [`results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv`](results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv)
@@ -317,7 +338,7 @@ These files can be regenerated by rerunning `python main.py`. The repository kee
 - [`src/mechanistic_proofs.py`](src/mechanistic_proofs.py): strict proof and systematic patching orchestration
 - [`src/activations.py`](src/activations.py): residual-stream caching for probe features
 - [`src/circuits.py`](src/circuits.py): QK/OV matrix extraction
-- [`src/probing.py`](src/probing.py): frozen residual logistic probes with bootstrap confidence intervals
+- [`src/probing.py`](src/probing.py): frozen residual logistic probes, bootstrap confidence intervals, and probe-control reruns for GC content, position metadata, matched negatives, random labels, and GC shifts
 - [`src/enrichment.py`](src/enrichment.py): motif-support attention enrichment utilities
 - [`src/counterfactuals.py`](src/counterfactuals.py): motif-destroying clean/corrupted sequence pairs
 - [`src/patching.py`](src/patching.py): restoration metrics, tensor patching, batch patching, and heatmap export
