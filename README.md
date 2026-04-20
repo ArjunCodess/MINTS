@@ -95,6 +95,17 @@ python main.py --only-probe-controls
 
 This writes `results/tables/linear_probe_controls.csv` and `results/manifests/linear_probe_controls_manifest.json`.
 
+Probe-control results from the updated run:
+
+| Task | Residual probe AUROC | GC-only AUROC | Position-only AUROC | GC-matched residual AUROC | Random-label AUROC mean | GC-shift AUROC range |
+|---|---:|---:|---:|---:|---:|---:|
+| `promoter_tata` | `0.9137` | `0.8956` | `0.4136` | `0.9137` | `0.4700` | `0.6182-0.8030` |
+| `promoter_no_tata` | `0.9383` | `0.9088` | `0.3865` | `0.9383` | `0.5129` | `0.6312-0.8368` |
+| `splice_sites_donors` | `0.8954` | `0.6560` | `0.4414` | `0.8944` | `0.5064` | `0.8432-0.8669` |
+| `splice_sites_acceptors` | `0.8847` | `0.6361` | `0.4461` | `0.8838` | `0.5005` | `0.8573-0.8580` |
+
+Control interpretation: these controls were added from Kiho Park's suggestion to ask what variation the probe is exploiting. Random-label probes collapse to chance and position-only metadata does not explain the result. For splice donor and acceptor tasks, residual probes exceed GC-only baselines by about `+0.25` AUROC on GC-matched test subsets and remain strong under GC-content shifts, supporting a real residual-representation signal beyond simple composition. For promoter tasks, however, GC-only baselines are already very high (`0.8956` and `0.9088` AUROC), and the residual probe is only `+0.0181` to `+0.0296` AUROC above GC-only on the GC-matched controls. The promoter result is still linearly decodable, but its biological interpretation should be more cautious: DNABERT-2 may be using promoter-relevant sequence composition or other GC-correlated signals, not only a clean promoter motif feature.
+
 ### Strict CTCF QK and Enrichment
 
 The strict CTCF scan used all `51,249` prepared GM12878 CTCF sequences.
