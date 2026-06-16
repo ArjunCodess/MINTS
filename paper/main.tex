@@ -67,22 +67,24 @@ and the head output is $A_h^{(l)}H^{(l-1)}W_h^VW_h^O$. Following transformer-cir
 An attention head is treated as a candidate biological motif detector only when three signals converge. It must assign elevated attention mass to motif-support positions, its QK scores must rank motif-support tokens above matched background tokens, and patching its activation must restore the task-relevant scalar in motif-destroying counterfactuals. The registered thresholds used here are in Table~\ref{tab:criteria}. These thresholds intentionally make attention alone insufficient.
 
 \begin{table}[t]
-\caption{Registered evidence criteria for candidate motif circuits.}
+\caption{Registered evidence criteria for candidate motif circuits. Thresholds are conservative screens: they are designed to prevent upgrading weak correlations, near-background attention, or unstable patching effects into motif-detector claims.}
 \label{tab:criteria}
 \centering
 \small
-\begin{tabular}{@{}lll@{}}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llll@{}}
 \toprule
-Claim & Statistic & Threshold \\
+Claim & Statistic & Threshold & Purpose and scale \\
 \midrule
-Motif localization & Attention enrichment ratio $\rho_h$ & $\rho_h \geq 2.0$ \\
-Motif ranking & QK/motif Pearson correlation & $r \geq 0.5,\;p<0.05$ \\
-Causal importance & Patching metric $\mathrm{PM}(h,l)$ & $\mathrm{PM}\geq0.5$ \\
-Strong causal importance & Same & $\mathrm{PM}\geq0.75$ \\
-Residual decodability & Probe AUROC or macro-$F_1$ & $\geq0.80$ or $+0.10$ \\
-Robustness & Matched negative controls & No matched artifact \\
+Motif localization & Attention enrichment ratio $\rho_h$ & $\rho_h \geq 2.0$ & Requires at least doubled motif-support attention over matched background. \\
+Motif ranking & QK/motif Pearson correlation & $r \geq 0.5,\;p<0.05$ & Requires a large effect size, not merely significance from millions of tokens. \\
+Causal importance & Patching metric $\mathrm{PM}(h,l)$ & $\mathrm{PM}\geq0.5$ & Requires at least half restoration of the clean-minus-corrupted target effect. \\
+Strong causal importance & Same & $\mathrm{PM}\geq0.75$ & Marks stronger recovery while leaving room below exact full restoration. \\
+Residual decodability & Probe AUROC or macro-$F_1$ & $\geq0.80$ or $+0.10$ & Establishes diagnostic readout quality, not circuit use by the model. \\
+Robustness & Matched negative controls & No matched artifact & Requires simple controls not to explain the candidate signal. \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \paragraph{Activation patching.}
@@ -179,6 +181,30 @@ The CTCF scan produced 281,915 motif-support tokens and 1,843,874 finite token p
 
 The negative CTCF result is not a failure of the pipeline; it is the point of using a registered evidence stack. With more than 1.8 million finite token positions, small correlations can be statistically nonzero while remaining too small to support a mechanistic claim. The all-layer enrichment scan similarly prevents a common attention-overinterpretation mistake: a head can have visible structure without assigning enough mass to matched motif-support positions to count as a motif-local detector.
 
+\paragraph{Threshold sensitivity supports the conservative conclusion.}
+Table~\ref{tab:threshold-sensitivity} and Figure~\ref{fig:threshold-sensitivity} summarize threshold sweeps over QK correlation, matched enrichment, and auxiliary patching metrics. Relaxing the QK threshold alone yields 31 heads at $r\geq0.1$, five at $r\geq0.2$, one at $r\geq0.3$, and none at $r\geq0.4$. Relaxing matched enrichment alone yields three heads at $\rho_h\geq1.1$, one at $\rho_h\geq1.25$, and none at $\rho_h\geq1.5$. The strict CTCF chain remains negative: no head jointly passes QK and enrichment once $r\geq0.2$, even with $\rho_h\geq1.1$, and the most permissive joint count at $r\geq0.1,\rho_h\geq1.1$ is two heads, equal to the 95th percentile of a permuted-head alignment null. The promoter and splice patching thresholds are more permissive because those are auxiliary task-specific interventions, not CTCF motif-detector proof.
+
+\begin{table}[t]
+\caption{Threshold sensitivity summary. Counts are heads passing each single-metric threshold, except the joint row, which requires both CTCF QK and enrichment. The permuted-head null shuffles enrichment-pass labels against QK-pass labels 1,000 times.}
+\label{tab:threshold-sensitivity}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Target & Sweep & Permissive count & Registered/strict count & Best value & Null reference \\
+\midrule
+CTCF & QK $r$ & 31 at $r\geq0.1$ & 0 at $r\geq0.5$ & 0.3004 & Motif-shuffle null requires per-token QK scores \\
+CTCF & Enrichment $\rho_h$ & 3 at $\rho_h\geq1.1$ & 0 at $\rho_h\geq2.0$ & 1.3130 & Position-matched background mean $\rho_h\approx1.00$ \\
+CTCF & Joint QK/enrichment & 2 at $r\geq0.1,\rho_h\geq1.1$ & 0 at $r\geq0.5,\rho_h\geq2.0$ & -- & Permuted-head 95th percentile is 2 at the permissive setting \\
+Promoter-TATA & Patching $\mathrm{PM}$ & 40 at $\mathrm{PM}\geq0.25$ & 16 at $\mathrm{PM}\geq0.75$ & 1.4029 & Auxiliary task-specific signal \\
+Splice donor & Patching $\mathrm{PM}$ & 3 at $\mathrm{PM}\geq0.25$ & 0 at $\mathrm{PM}\geq0.75$ & 0.5485 & Auxiliary task-specific signal \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
 \begin{table}[t]
 \caption{Strict mechanistic evidence summary from the completed run.}
 \label{tab:strict-results}
@@ -220,6 +246,13 @@ Strict CTCF detector & QK, enrichment, and causal evidence in one head & No pass
 \end{minipage}
 \caption{Mechanistic evidence heatmaps. Left: DNABERT-2 CTCF QK-to-motif correlations. Middle: matched attention-enrichment ratios. Right: promoter-TATA batch patching. The CTCF heatmaps show a negative strict-proof result, while the TATA patching heatmap shows task-specific causal over-restoration.}
 \label{fig:mechanistic-heatmaps}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../results/figures/threshold_sensitivity.png}
+\caption{Threshold sensitivity for QK alignment, matched attention enrichment, auxiliary patching, and joint CTCF QK/enrichment counts. Individual relaxed screens admit a small number of heads, but the strict CTCF chain remains negative under registered thresholds and under joint relaxation once $r\geq0.2$.}
+\label{fig:threshold-sensitivity}
 \end{figure}
 
 \paragraph{Auxiliary promoter/splice patching gives task-specific causal signals.}
@@ -309,6 +342,7 @@ Important verification artifacts include:
 \item \path{results/tables/downstream_task_performance.csv}
 \item \path{results/tables/target_alignment_table.csv}
 \item \path{results/tables/review_issue_matrix.csv}
+\item \path{results/tables/threshold_sensitivity.csv}
 \item \path{results/qk_alignment/ctcf_qk_alignment.csv}
 \item \path{results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv}
 \item \path{results/patching/promoter_tata_batch_dnabert_activation_patching.csv}
