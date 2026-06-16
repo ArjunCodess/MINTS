@@ -39,6 +39,25 @@ Genomic transformer predictions alone do not prove biological mechanisms. A high
 
 The novel contribution is the combination of computational biology ground truth with mechanistic circuit tests on a reproducible local pipeline. The current run shows why this matters: the representation-level story is positive, but the strict single-head CTCF motif-detector story fails. That negative result is scientifically useful because it prevents an overclaim.
 
+### Biology and tokenization primer
+
+MINTS uses biological motifs as concrete mechanistic hypotheses. CTCF is the strict test case because it has a curated JASPAR binding motif and public ENCODE GM12878 peak calls. TATA boxes and splice donor sites are used for auxiliary perturbation tests because their sequence edits are compact and task-relevant.
+
+| Term | Meaning |
+|---|---|
+| Motif | Recurring DNA pattern associated with a biological function |
+| PWM | Position weight matrix for scoring motif-like DNA windows |
+| JASPAR | Public motif database; this project uses CTCF matrix `MA0139.1` |
+| CTCF | DNA-binding protein involved in chromatin organization and regulatory insulation |
+| TATA box | A/T-rich promoter element used for promoter perturbation tests |
+| Promoter | Regulatory DNA region near a gene start site |
+| Splice donor/acceptor | Intron boundary signals, usually `GT` and `AG` in genomic DNA |
+| Nucleotide token | Model input unit covering one or more DNA characters |
+| k-mer | Fixed-length DNA substring, such as a 6-mer |
+| BPE | Learned variable-length tokenizer; DNABERT-2 BPE tokens can span different nucleotide counts |
+
+Token support is interval-based. A motif hit spans a half-open nucleotide interval `[a, b)`, and a model token spans `[u, v)`. The token supports the motif when `max(0, min(v, b) - max(u, a)) >= 1`, meaning at least one nucleotide base overlaps. Special tokens with zero-width offsets stay aligned to hidden states but do not receive motif support.
+
 ### How it works
 
 1. The pipeline reads [`src/config.py`](src/config.py) and creates `data/` and `results/` directories.
