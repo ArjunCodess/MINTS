@@ -16,7 +16,7 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 
 - **One-command reproducibility:** `python main.py` runs the full configured pipeline without debug caps: data checks, model loading, residual probing, QK/OV export, task-performance baselines, probe controls, strict CTCF scans, systematic patching, threshold sensitivity, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
-- **Performance context before mechanism:** Raw-sequence baselines are reported separately in [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv): GC-only AUROC ranges from `0.6361` to `0.9088`, and TF-IDF `3-6`-mer AUROC ranges from `0.7956` to `0.9406`. The frozen DNABERT readout is kept as diagnostic decodability evidence, not end-to-end fine-tuned task performance.
+- **Performance context before mechanism:** Raw-sequence baselines and frozen DNABERT sequence-head results are reported separately in [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv): GC-only AUROC ranges from `0.6361` to `0.9088`, TF-IDF `3-6`-mer AUROC ranges from `0.7956` to `0.9406`, and the frozen DNABERT layer-11 sequence head ranges from `0.8847` to `0.9383`. Residual readouts remain diagnostic decodability evidence, not full encoder fine-tuning.
 - **Probe interpretation controls:** The cached-residual control pass writes [`results/tables/linear_probe_controls.csv`](results/tables/linear_probe_controls.csv), covering GC-content-only probes, position-only metadata probes when coordinates are available, GC-matched test negatives, random-label residual probes, and GC distribution-shift probes.
 - **Threshold sensitivity:** [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv) and [`results/figures/threshold_sensitivity.png`](results/figures/threshold_sensitivity.png) show that individual relaxed CTCF QK/enrichment screens admit a few heads, but the joint CTCF result stays negative once `r >= 0.2`, even with `rho_h >= 1.1`.
 - **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
@@ -99,14 +99,14 @@ I inspected the full `results/` tree for this documentation update. It contains 
 
 Before mechanistic claims, the revision now reports raw-sequence performance context:
 
-| Task | GC AUROC | 3-6-mer AUROC | Frozen DNABERT readout AUROC |
-|---|---:|---:|---:|
-| `promoter_tata` | `0.8955` | `0.9297` | `0.9137` |
-| `promoter_no_tata` | `0.9088` | `0.9406` | `0.9383` |
-| `splice_sites_donors` | `0.6560` | `0.8185` | `0.8954` |
-| `splice_sites_acceptors` | `0.6361` | `0.7956` | `0.8847` |
+| Task | GC AUROC | 3-6-mer AUROC | Frozen DNABERT sequence-head AUROC | Frozen DNABERT readout AUROC |
+|---|---:|---:|---:|---:|
+| `promoter_tata` | `0.8955` | `0.9297` | `0.9137` | `0.9137` |
+| `promoter_no_tata` | `0.9088` | `0.9406` | `0.9383` | `0.9383` |
+| `splice_sites_donors` | `0.6560` | `0.8185` | `0.8954` | `0.8954` |
+| `splice_sites_acceptors` | `0.6361` | `0.7956` | `0.8847` | `0.8847` |
 
-The GC and k-mer columns are task baselines from raw sequence alone. The frozen DNABERT column is a layer-11 residual readout and remains diagnostic decodability evidence, not a fine-tuned sequence-classification-head result.
+The GC and k-mer columns are task baselines from raw sequence alone. The frozen DNABERT sequence head is a balanced logistic classifier trained on cached layer-11 sequence embeddings. The readout column is retained as residual decodability context. Neither column is full encoder fine-tuning.
 
 Layer-11 residual vectors are strongly predictive for all four configured biological tasks:
 
@@ -175,7 +175,7 @@ Threshold sensitivity from [`results/tables/threshold_sensitivity.csv`](results/
 | CTCF enrichment `rho_h` | `3` heads at `rho_h >= 1.1` | `0` heads at `rho_h >= 2.0` | `1.3130` |
 | Joint CTCF QK/enrichment | `2` heads at `r >= 0.1`, `rho_h >= 1.1` | `0` heads at registered thresholds | n/a |
 
-The permissive joint count equals the 95th percentile of a 1,000-run permuted-head alignment null. No head jointly passes once the QK threshold is relaxed only to `r >= 0.2`, even when enrichment is relaxed to `rho_h >= 1.1`.
+The permissive joint count equals the 95th percentile of a 1,000-run permuted-head alignment null. No head jointly passes once the QK threshold is relaxed only to `r >= 0.2`, even when enrichment is relaxed to `rho_h >= 1.1`. Token-level motif-score calibration also stays conservative: the observed motif-support count is `256,918`, compared with a shuffled-score null 95th percentile of `36,093.05`, and the nearest-GC non-support background has `0` tokens above the motif-support threshold.
 
 The integrated evidence ledger is saved at [`results/tables/evidence_ledger.csv`](results/tables/evidence_ledger.csv). It maps each claim to the required evidence, observed result, supported interpretation, and limitation, so the strict CTCF conclusion is not mixed with the auxiliary promoter/splice results.
 
@@ -288,7 +288,7 @@ python main.py
 Run a capped debug pass:
 
 ```bash
-python main.py --max-probe-train 512 --max-probe-test 256 --max-qk-alignment-sequences 128 --max-cross-model-qk-alignment-sequences 128 --max-feature-search-sequences 128 --sae-epochs 1
+python main.py --max-probe-train 512 --max-probe-test 256 --max-qk-alignment-sequences 128 --max-patching-pairs 32 --max-cross-model-qk-alignment-sequences 128 --max-feature-search-sequences 128 --sae-epochs 1
 ```
 
 Useful flags:
@@ -305,7 +305,7 @@ Useful flags:
 - `--probe-ci-level`: probe confidence interval level
 - `--probe-control-random-label-runs`: number of random-label residual-probe repeats in the control pass
 - `--only-probe-controls`: rerun only the cached-residual probe controls without loading the model or continuing through later pipeline steps
-- `--only-task-performance`: rerun only raw-sequence GC/k-mer task baselines and join existing frozen-readout metrics when available
+- `--only-task-performance`: rerun raw-sequence GC/k-mer task baselines, train the cached frozen DNABERT sequence head, and join existing frozen-readout metrics when available
 - `--only-threshold-sensitivity`: rerun threshold sweeps and available null-calibration summaries from existing result tables
 - `--from-step`: start from a named checkpoint and continue forward
 - `--json`: print a machine-readable completion payload
