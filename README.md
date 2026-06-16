@@ -16,6 +16,7 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 
 - **One-command reproducibility:** `python main.py` runs data checks, model loading, residual probing, QK/OV export, strict CTCF scans, systematic patching, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
+- **Performance context before mechanism:** Raw-sequence baselines are reported separately in [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv): GC-only AUROC ranges from `0.6361` to `0.9088`, and TF-IDF `3-6`-mer AUROC ranges from `0.7956` to `0.9406`. The frozen DNABERT readout is kept as diagnostic decodability evidence, not end-to-end fine-tuned task performance.
 - **Probe interpretation controls:** The cached-residual control pass writes [`results/tables/linear_probe_controls.csv`](results/tables/linear_probe_controls.csv), covering GC-content-only probes, position-only metadata probes when coordinates are available, GC-matched test negatives, random-label residual probes, and GC distribution-shift probes.
 - **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
 - **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
@@ -76,6 +77,17 @@ I inspected the full `results/` tree for this documentation update. It contains 
 
 ### DNABERT-2 Residual Probes
 
+Before mechanistic claims, the revision now reports raw-sequence performance context:
+
+| Task | GC AUROC | 3-6-mer AUROC | Frozen DNABERT readout AUROC |
+|---|---:|---:|---:|
+| `promoter_tata` | `0.8955` | `0.9297` | `0.9137` |
+| `promoter_no_tata` | `0.9088` | `0.9406` | `0.9383` |
+| `splice_sites_donors` | `0.6560` | `0.8185` | `0.8954` |
+| `splice_sites_acceptors` | `0.6361` | `0.7956` | `0.8847` |
+
+The GC and k-mer columns are task baselines from raw sequence alone. The frozen DNABERT column is a layer-11 residual readout and remains diagnostic decodability evidence, not a fine-tuned sequence-classification-head result.
+
 Layer-11 residual vectors are strongly predictive for all four configured biological tasks:
 
 | Task | Train / Test | AUROC | 95% CI | AUPRC | 95% CI | Accuracy |
@@ -94,6 +106,14 @@ python main.py --only-probe-controls
 ```
 
 This writes `results/tables/linear_probe_controls.csv` and `results/manifests/linear_probe_controls_manifest.json`.
+
+Regenerate the performance-context table:
+
+```bash
+python main.py --only-task-performance
+```
+
+This writes `results/tables/downstream_task_performance.csv` and `results/manifests/downstream_task_performance_manifest.json`.
 
 Probe-control results from the updated run:
 
@@ -241,6 +261,7 @@ Useful flags:
 - `--probe-ci-level`: probe confidence interval level
 - `--probe-control-random-label-runs`: number of random-label residual-probe repeats in the control pass
 - `--only-probe-controls`: rerun only the cached-residual probe controls without loading the model or continuing through later pipeline steps
+- `--only-task-performance`: rerun only raw-sequence GC/k-mer task baselines and join existing frozen-readout metrics when available
 - `--from-step`: start from a named checkpoint and continue forward
 - `--json`: print a machine-readable completion payload
 
@@ -285,6 +306,9 @@ Primary outputs:
 
 - [`results/pipeline_run.json`](results/pipeline_run.json)
 - [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv)
+- [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv)
+- [`results/tables/target_alignment_table.csv`](results/tables/target_alignment_table.csv)
+- [`results/tables/review_issue_matrix.csv`](results/tables/review_issue_matrix.csv)
 - `results/tables/linear_probe_controls.csv`
 - [`results/tables/cross_model_tokenization_comparison.json`](results/tables/cross_model_tokenization_comparison.json)
 - [`results/qk_alignment/ctcf_qk_alignment.csv`](results/qk_alignment/ctcf_qk_alignment.csv)
