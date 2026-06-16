@@ -40,6 +40,8 @@ Transformer models for nucleotide sequences now perform well on regulatory and s
 
 Nucleotide transformers are a useful setting for this question. Known motifs give natural ground-truth hypotheses: a motif can specify where a component would need to attend, what feature it would need to read, and which perturbation should matter. They also expose a common interpretability risk. Attention maps, motif visualizations, and high probe scores can suggest a biological mechanism even when the model is using GC content, genomic-coordinate artifacts, distributed features, or another correlated signal. MINTS is designed to make the required evidence explicit.
 
+The motifs used here are intentionally canonical. CTCF is a DNA-binding factor with a well-studied binding motif and public ENCODE peak calls in GM12878 cells, making it a natural strict test case for motif-local attention. The TATA box is a short promoter-associated sequence whose mutation gives a simple promoter perturbation. Splice donor and acceptor dinucleotides mark exon-intron boundaries and give compact sequence edits for task-level causal tests. These examples are not meant to exhaust regulatory biology; they are selected because a correct circuit-level claim should specify nucleotide support, token support, and an intervention target.
+
 This paper contributes a calibrated evidence standard and a completed case study. MINTS separates three claims that are often conflated: residual decodability, task-level causal restoration under activation patching, and strict circuit-level motif detection. The primary strict test is CTCF: under the registered QK-alignment and matched-enrichment criteria, neither tested backend yields a CTCF attention head that should be called a strict motif detector. The promoter and splice analyses play a supporting role by showing that task labels can be decodable and that interventions can produce task-specific causal signals without establishing the stricter CTCF circuit claim.
 
 \section{Related Work and Positioning}
@@ -52,6 +54,35 @@ MINTS is positioned between these literatures. It does not claim to solve genomi
 
 \section{Methods and Evidence Criteria}
 
+\paragraph{Biology primer.}
+Table~\ref{tab:biology-glossary} defines the biological and tokenization terms used in the evidence stack.
+
+\begin{table}[t]
+\caption{Glossary for mechanistic-interpretability readers.}
+\label{tab:biology-glossary}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}p{2.0cm}p{10.4cm}@{}}
+\toprule
+Term & Meaning in this paper \\
+\midrule
+Motif & A recurring DNA pattern associated with a biological function, such as transcription-factor binding or splice recognition. \\
+PWM & Position weight matrix: a per-position nucleotide model used to score how well a DNA window matches a motif. \\
+JASPAR & A public database of curated transcription-factor binding motifs; MINTS uses the MA0139.1 CTCF matrix. \\
+CTCF & CCCTC-binding factor, a DNA-binding protein involved in chromatin organization and regulatory insulation. \\
+TATA box & A short A/T-rich promoter element used here for promoter perturbation and patching tests. \\
+Promoter & A regulatory DNA region near a gene start site that can influence transcription initiation. \\
+Splice donor/acceptor & Boundary signals at the start and end of introns; donor sites usually contain GT and acceptor sites usually contain AG in genomic DNA. \\
+Nucleotide token & A model input unit corresponding to one or more DNA characters after tokenization. \\
+$k$-mer & A fixed-length DNA substring of length $k$, such as a 6-mer token. \\
+BPE & Byte-pair encoding, a learned variable-length tokenizer; DNABERT-2 BPE tokens can cover different numbers of nucleotides. \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
 \paragraph{Transformer circuits.}
 Let $\tau(x)=(t_1,\ldots,t_T)$ tokenize a nucleotide sequence into vocabulary items. The initial hidden state is
 \begin{equation}
@@ -62,6 +93,27 @@ For head $h$ in layer $l$, with hidden state $H^{(l-1)}$, the attention pattern 
 A_h^{(l)}=\softmax\left(\frac{H^{(l-1)} W_h^Q (W_h^K)^T (H^{(l-1)})^T}{\sqrt{d_k}}\right),
 \end{equation}
 and the head output is $A_h^{(l)}H^{(l-1)}W_h^VW_h^O$. Following transformer-circuit notation \citep{elhage2021framework}, the QK circuit $W_h^Q(W_h^K)^T$ controls attention scores, while the OV circuit $W_h^VW_h^O$ controls what is written to the residual stream. For nucleotide models, tokenization matters: a motif position may correspond to one nucleotide token, a fixed $k$-mer token, or a learned BPE span.
+
+\paragraph{Tokenization-aware motif support.}
+The strict CTCF tests use nucleotide coordinates as ground truth and then map them to model-token coordinates. Let a motif hit span the half-open nucleotide interval $[a,b)$ and let token $j$ span $[u_j,v_j)$. Token $j$ supports the motif when
+\begin{equation}
+\max(0,\min(v_j,b)-\max(u_j,a))\geq 1,
+\end{equation}
+that is, when the token overlaps the motif interval by at least one nucleotide. Special tokens with zero-width offsets are retained for hidden-state alignment but receive no motif support. This rule is implemented in \texttt{src/motif\_scoring.py} and recorded in token-score manifests as \texttt{token\_support\_min\_overlap\_bp=1}.
+
+\begin{center}
+\fbox{\begin{minipage}{0.93\linewidth}
+\small
+\textbf{Sequence-to-token support mapping.}
+\begin{enumerate}
+\item Score each nucleotide window with the JASPAR CTCF PWM and mark motif windows above the deterministic support threshold.
+\item Convert each motif window to a half-open nucleotide interval $[a,b)$.
+\item Tokenize the same sequence with offsets, retaining zero-width special tokens for alignment.
+\item Mark every token whose nucleotide interval overlaps $[a,b)$ by at least one base.
+\item Use the resulting token-support intervals for QK/motif correlation and matched attention-enrichment tests.
+\end{enumerate}
+\end{minipage}}
+\end{center}
 
 \paragraph{Strict motif-detector criterion.}
 An attention head is treated as a candidate biological motif detector only when three signals converge. It must assign elevated attention mass to motif-support positions, its QK scores must rank motif-support tokens above matched background tokens, and patching its activation must restore the task-relevant scalar in motif-destroying counterfactuals. The registered thresholds used here are in Table~\ref{tab:criteria}. These thresholds intentionally make attention alone insufficient.
@@ -373,8 +425,8 @@ mV6D & Clarity & Paper read as several analyses. & Abstract/introduction now sta
 mV6D & Target mismatch & Promoter/splice evidence blurred into CTCF claims. & Promoter/splice patching is auxiliary; CTCF remains the strict chain. & Addressed \\
 C5jL & Missing performance & Mechanistic claims lacked predictive context. & Added GC and 3--6-mer baselines plus frozen-readout context before mechanism. & Partial \\
 C5jL & MI contribution & Venue contribution needed sharpening. & Contribution is now a falsifiable standard for motif-detector claims. & Addressed \\
-C5jL & Thresholds & Registered thresholds need scale/sensitivity. & Kept as conservative standards here; sensitivity/null analysis remains future work. & Deferred \\
-ndFG & Undefined biology & Motifs and biological terms need more support. & Motifs are motivated in the introduction; a full glossary and token-mapping description remain future work. & Partial \\
+C5jL & Thresholds & Registered thresholds need scale/sensitivity. & Added threshold purposes, sweeps, and available null calibration. & Addressed \\
+ndFG & Undefined biology & Motifs and biological terms need more support. & Added motif rationale, glossary, and nucleotide-to-token support rule. & Addressed \\
 ndFG & Limited scope & Conclusions could overstate selected models/motifs. & Limitations and target ledger state the scoped negative CTCF result. & Addressed \\
 \bottomrule
 \end{tabular}
