@@ -768,7 +768,7 @@ def run_custom_dnabert_activation_patching(
 def _select_patching_pairs_for_task(
     bundle,
     task: str,
-    max_pairs: int,
+    max_pairs: int | None,
     config: PipelineConfig,
 ) -> list[MutationRecord]:
     """Select positive examples whose counterfactuals preserve tokenizer shape."""
@@ -782,7 +782,7 @@ def _select_patching_pairs_for_task(
         if split_name not in dataset:
             continue
         for row_idx, row in enumerate(dataset[split_name]):
-            if len(records) >= max_pairs:
+            if max_pairs is not None and len(records) >= max_pairs:
                 return records
             if int(row["label"]) != 1:
                 continue
@@ -820,8 +820,8 @@ def run_batch_dnabert_activation_patching(
     """
 
     task = canonicalize_task_name(task, config.data)
-    pair_limit = int(max_pairs or config.data.max_patching_pairs)
-    if pair_limit <= 0:
+    pair_limit = max_pairs if max_pairs is not None else config.data.max_patching_pairs
+    if pair_limit is not None and pair_limit <= 0:
         raise ValueError("max_pairs must be positive.")
 
     records = _select_patching_pairs_for_task(bundle, task=task, max_pairs=pair_limit, config=config)

@@ -14,7 +14,7 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 
 ## Key Achievements
 
-- **One-command reproducibility:** `python main.py` runs data checks, model loading, residual probing, QK/OV export, strict CTCF scans, systematic patching, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
+- **One-command reproducibility:** `python main.py` runs the full configured pipeline without debug caps: data checks, model loading, residual probing, QK/OV export, task-performance baselines, probe controls, strict CTCF scans, systematic patching, threshold sensitivity, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
 - **Performance context before mechanism:** Raw-sequence baselines are reported separately in [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv): GC-only AUROC ranges from `0.6361` to `0.9088`, and TF-IDF `3-6`-mer AUROC ranges from `0.7956` to `0.9406`. The frozen DNABERT readout is kept as diagnostic decodability evidence, not end-to-end fine-tuned task performance.
 - **Probe interpretation controls:** The cached-residual control pass writes [`results/tables/linear_probe_controls.csv`](results/tables/linear_probe_controls.csv), covering GC-content-only probes, position-only metadata probes when coordinates are available, GC-matched test negatives, random-label residual probes, and GC distribution-shift probes.
@@ -274,8 +274,8 @@ Useful flags:
 - `--max-probe-train`: cap train examples per task for activation caching and probing
 - `--max-probe-test`: cap test examples per task for activation caching and probing
 - `--max-qk-alignment-sequences`: cap CTCF sequences for strict QK motif-alignment exports
-- `--max-patching-pairs`: cap systematic denoising activation-patching pairs per task
-- `--max-feature-search-sequences`: cap CTCF sequences for residual/MLP SAE feature search
+- `--max-patching-pairs`: cap systematic denoising activation-patching pairs per task; omitted means all token-shape-preserving pairs
+- `--max-feature-search-sequences`: cap CTCF sequences for residual/MLP SAE feature search; omitted means all prepared CTCF sequences
 - `--sae-epochs`: control SAE training epochs
 - `--max-cross-model-qk-alignment-sequences`: cap CTCF sequences for cross-model QK/enrichment comparison
 - `--probe-bootstrap-samples`: bootstrap resamples for probe confidence intervals

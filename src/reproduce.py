@@ -18,6 +18,8 @@ from .distributed_features import run_distributed_feature_search
 from .mechanistic_proofs import run_mechanistic_proof_exports, run_systematic_causal_intervention_exports
 from .modeling import load_hooked_encoder, summarize_hook_points
 from .probing import run_all_probes, run_probe_controls
+from .task_performance import evaluate_task_performance_context
+from .threshold_sensitivity import run_threshold_sensitivity
 from .utils import progress, utc_now_iso, write_json
 
 
@@ -28,9 +30,11 @@ PIPELINE_STEPS: tuple[str, ...] = (
     "download_grch38",
     "prepare_ctcf_sequences",
     "circuit_extraction_and_residual_probing",
+    "downstream_task_performance",
     "probe_controls",
     "strict_mechanistic_proofs",
     "systematic_causal_intervention",
+    "threshold_sensitivity",
     "distributed_feature_search",
     "cross_model_tokenization_comparison",
 )
@@ -138,6 +142,13 @@ def _run_probe_control_exports(config: PipelineConfig) -> dict[str, Any]:
     return {"control_table": str(control_table)}
 
 
+def _run_task_performance_exports(config: PipelineConfig) -> dict[str, Any]:
+    """Run raw-sequence baselines and frozen-readout context."""
+
+    table_path = evaluate_task_performance_context(config=config)
+    return {"table": str(table_path)}
+
+
 def _qk_archive_has_low_rank_factors(config: PipelineConfig) -> bool:
     """Return whether the existing circuit archive contains W_Q/W_K factors."""
 
@@ -197,6 +208,17 @@ def _run_systematic_causal_interventions(config: PipelineConfig) -> dict[str, An
         "model_name": bundle.model_name,
         "device": bundle.device,
         "systematic_interventions": outputs,
+    }
+
+
+def _run_threshold_sensitivity_exports(config: PipelineConfig) -> dict[str, Any]:
+    """Run threshold sweeps from generated QK, enrichment, and patching tables."""
+
+    outputs = run_threshold_sensitivity(config=config)
+    return {
+        "table": str(outputs.table),
+        "figure": str(outputs.figure),
+        "manifest": str(outputs.manifest),
     }
 
 
@@ -556,9 +578,11 @@ def run_pipeline(
             "download_grch38": download_grch38,
             "prepare_ctcf_sequences": prepare_ctcf,
             "circuit_extraction_and_residual_probing": lambda: _run_circuit_and_probe_exports(config),
+            "downstream_task_performance": lambda: _run_task_performance_exports(config),
             "probe_controls": lambda: _run_probe_control_exports(config),
             "strict_mechanistic_proofs": lambda: _run_strict_proof_exports(config),
             "systematic_causal_intervention": lambda: _run_systematic_causal_interventions(config),
+            "threshold_sensitivity": lambda: _run_threshold_sensitivity_exports(config),
             "distributed_feature_search": lambda: _run_distributed_feature_search(config),
             "cross_model_tokenization_comparison": lambda: _run_cross_model_tokenization_comparison(config),
         }

@@ -71,21 +71,21 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--max-patching-pairs",
         type=int,
-        default=500,
+        default=None,
         metavar="N",
         help=(
             "Limit systematic denoising activation-patching pairs per configured task. "
-            "Defaults to 500."
+            "Omit this flag to use all token-shape-preserving pairs."
         ),
     )
     parser.add_argument(
         "--max-feature-search-sequences",
         type=int,
-        default=2048,
+        default=None,
         metavar="N",
         help=(
             "Limit CTCF sequences used for residual/MLP sparse feature search. "
-            "Defaults to 2048. Use 0 to scan all prepared CTCF sequences."
+            "Omit this flag, or pass 0, to scan all prepared CTCF sequences."
         ),
     )
     parser.add_argument(
