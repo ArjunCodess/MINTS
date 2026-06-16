@@ -177,6 +177,10 @@ Threshold sensitivity from [`results/tables/threshold_sensitivity.csv`](results/
 
 The permissive joint count equals the 95th percentile of a 1,000-run permuted-head alignment null. No head jointly passes once the QK threshold is relaxed only to `r >= 0.2`, even when enrichment is relaxed to `rho_h >= 1.1`.
 
+The integrated evidence ledger is saved at [`results/tables/evidence_ledger.csv`](results/tables/evidence_ledger.csv). It maps each claim to the required evidence, observed result, supported interpretation, and limitation, so the strict CTCF conclusion is not mixed with the auxiliary promoter/splice results.
+
+Mechanistic-interpretability takeaway: probes and attention maps are useful hypothesis generators, but they can overstate biological mechanism when used alone. MINTS keeps the claim levels separate: residual decodability, task-specific causal restoration, motif-local attention, and strict circuit-level motif detection. The CTCF result is negative under the strict claim, which is the intended safeguard against false-positive motif-detector stories.
+
 ![CTCF QK-to-motif Pearson heatmap](results/figures/ctcf_qk_alignment_pearson_heatmap.png)
 
 ![CTCF matched attention enrichment heatmap](results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png)
@@ -350,6 +354,7 @@ Primary outputs:
 - [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv)
 - [`results/tables/target_alignment_table.csv`](results/tables/target_alignment_table.csv)
 - [`results/tables/review_issue_matrix.csv`](results/tables/review_issue_matrix.csv)
+- [`results/tables/evidence_ledger.csv`](results/tables/evidence_ledger.csv)
 - [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv)
 - `results/tables/linear_probe_controls.csv`
 - [`results/tables/cross_model_tokenization_comparison.json`](results/tables/cross_model_tokenization_comparison.json)

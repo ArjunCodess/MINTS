@@ -258,26 +258,26 @@ Splice donor & Patching $\mathrm{PM}$ & 3 at $\mathrm{PM}\geq0.25$ & 0 at $\math
 \end{table}
 
 \begin{table}[t]
-\caption{Strict mechanistic evidence summary from the completed run.}
-\label{tab:strict-results}
+\caption{Evidence ledger. Each row states the claim, the required evidence standard, the observed result, the supported interpretation, and the main limitation.}
+\label{tab:evidence-ledger}
 \centering
 \scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{2.4cm}p{4.3cm}p{4.0cm}p{1.3cm}@{}}
+\setlength{\tabcolsep}{2pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}p{2.2cm}p{3.2cm}p{3.0cm}p{3.4cm}p{3.0cm}@{}}
 \toprule
-Evidence channel & Executed test & Best observed result & Met? \\
+Claim & Required evidence & Observed result & Interpretation & Limitation \\
 \midrule
-Residual decodability & Layer-11 probes on four benchmark tasks & AUROC range 0.8847--0.9383 & Yes \\
-Probe controls & GC, position, matched, random-label, and shift controls & Splice robust; promoter close to strong GC baselines & Mixed \\
-CTCF QK alignment & 144 DNABERT-2 heads vs. BPE-correct CTCF scores & Best $r=0.3004$ & No \\
-CTCF enrichment & Matched motif/background attention mass & Best $\rho_h=1.3130$ & No \\
-Promoter-TATA patching & 327 batch denoising pairs & Best mean $\mathrm{PM}=1.4029$ & Yes \\
-Splice-donor patching & 500 batch denoising pairs & Best mean $\mathrm{PM}=0.5485$ & Partial \\
-OV readout audit & TATA probe direction vs. OV singular vectors & Top cosine 0.1261; self-gain $-0.0326$ & Weak \\
-CTCF SAE search & Residual and MLP sparse features & Best motif cosine 0.1158 & Weak \\
-Strict CTCF detector & QK, enrichment, and causal evidence in one head & No passing QK/enrichment candidate & No \\
+Promoter and splice labels are decodable from DNABERT-2 residual states & Strong residual readout plus controls against trivial artifacts & Layer-11 AUROC range 0.8847--0.9383; random-label and position controls near chance & Residual states contain task-relevant information & Promoter tasks remain close to strong GC and k-mer baselines \\
+Splice residual decodability is not explained by GC alone & Matched and shifted GC controls should preserve the readout advantage & Splice probes remain about 0.25 AUROC above GC-only matched controls & Stronger evidence for non-composition residual signal on splice tasks & Still a probe result, not a localized circuit \\
+Promoter-TATA patching identifies task-specific causal signal & Head-level patching should restore a corrupted scalar target across many pairs & Best mean $\mathrm{PM}=1.4029$ over 327 usable pairs & A head can causally amplify the promoter-TATA readout under patching & Over-restoration and probe geometry prevent a simple full-recovery claim \\
+Splice-donor patching identifies a weaker causal signal & Patching should restore a corrupted splice-donor scalar target & Best mean $\mathrm{PM}=0.5485$ over 500 usable pairs & Partial task-specific causal signal exists & Effect is small on average and not tied to QK/enrichment motif evidence \\
+DNABERT-2 has a strict CTCF motif-detector head & One head should pass QK/motif ranking, motif-local enrichment, and causal evidence & Best QK $r=0.3004$; best $\rho_h=1.3130$; no passing candidate & The strict single-head CTCF detector claim is not supported & Negative result is scoped to selected model, motif scorer, data, and thresholds \\
+Relaxed CTCF thresholds do not rescue the strict claim & Sensitivity sweep should reveal whether conclusions depend on the registered cutoffs & No joint QK/enrichment pass once $r\geq0.2$, even at $\rho_h\geq1.1$ & The negative CTCF conclusion is not an artifact of one conservative cutoff & Motif-shuffle and GC-matched nulls require raw artifacts not currently persisted \\
+SAE and OV audits do not reveal a simple alternate CTCF circuit & Output-write or sparse features should align strongly with the biological target & TATA OV cosine 0.1261; CTCF SAE best cosine 0.1158 & Auxiliary audits remain consistent with a distributed or absent simple motif circuit & Audits are not exhaustive circuit discovery \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \begin{figure}[t]
@@ -313,11 +313,17 @@ Batch promoter-TATA patching over 327 usable pairs identifies layer 4 head 8 wit
 \paragraph{OV, SAE, and cross-model audits remain conservative.}
 The TATA OV readout audit for layer 2 head 7 finds only weak alignment with the trained TATA probe direction: the top output-write singular-vector cosine is 0.1261 and the probe self-gain through the OV matrix is $-0.0326$. Sparse-autoencoder CTCF feature search is also weak, with best residual and MLP motif cosines of 0.0884 and 0.1158. In the protocol-level cross-model comparison, DNABERT-2 residual probes outperform the tested Nucleotide Transformer backend on the same tasks, but this is a checkpoint- and protocol-specific result, not a general claim about tokenization families or all Nucleotide Transformer variants.
 
+\section{What This Teaches Mechanistic Interpretability}
+
+The main lesson is that representation-level success and component-level mechanism are different claims. A residual probe can reveal that a biological label is linearly accessible while leaving open whether the model uses that direction, whether the feature is distributed, or whether the signal is driven by composition. Likewise, attention and motif visualizations can suggest a biological story without showing that a head's QK circuit ranks motif-support tokens or that intervention on the head changes the relevant behavior.
+
+MINTS treats biological motifs as useful test cases precisely because they provide external ground truth. A motif defines nucleotide support, gives a concrete perturbation target, and lets us ask whether model-token support agrees with circuit behavior. The negative CTCF result is therefore informative rather than merely null: it shows that strict evidence stacks can prevent a plausible but unsupported motif-detector story. For mechanistic interpretability, the practical recommendation is to report claims at the level they are actually supported: decodability, task-specific causal signal, motif-local attention, or strict circuit-level motif detection.
+
 \section{Limitations}
 
-This study is intentionally scoped to small and medium genomic transformers and does not claim exhaustive explanation. Current large-model circuit-tracing work also emphasizes partial recovery of computation rather than complete mechanistic accounts \citep{ameisen2025circuit,lindsey2025biology}. The strict CTCF failure applies to the selected models, CTCF intervals, motif scorer, BPE span alignment, and registered thresholds; it is not an impossibility theorem for all models or motifs.
+This study is intentionally scoped to small and medium genomic transformers and does not claim exhaustive explanation. Current large-model circuit-tracing work also emphasizes partial recovery of computation rather than complete mechanistic accounts \citep{ameisen2025circuit,lindsey2025biology}. The strict CTCF failure applies to the selected checkpoints, GM12878 CTCF intervals, JASPAR MA0139.1 motif scorer, BPE span-alignment rule, selected causal targets, and registered thresholds. It is not an impossibility theorem for all genomic transformers, all CTCF representations, all cell types, all motif scorers, or all circuit decompositions.
 
-Linear probes remain limited evidence. They can reveal decodable information while exploiting correlated sequence composition, split artifacts, or metadata. The added GC, position, matched, random-label, and shift controls reduce this risk, especially for splice-site tasks, but promoter decodability remains entangled with GC composition. Activation patching is causal but incomplete: head-level restoration does not characterize the full circuit, and over-restoration can reflect denominator sensitivity, probe geometry, or out-of-distribution patched states. Finally, biological annotations are incomplete, and a single JASPAR PWM cannot represent all relevant regulatory mechanisms.
+Linear probes remain limited evidence. They can reveal decodable information while exploiting correlated sequence composition, split artifacts, or metadata. The added GC, position, matched, random-label, and shift controls reduce this risk, especially for splice-site tasks, but promoter decodability remains entangled with GC composition. Activation patching is causal but incomplete: head-level restoration does not characterize the full circuit, and over-restoration can reflect denominator sensitivity, probe geometry, or out-of-distribution patched states. The threshold-sensitivity table reduces concern that the CTCF conclusion depends on one arbitrary cutoff, but it does not replace new data-generating null experiments. Finally, biological annotations are incomplete, and a single JASPAR PWM cannot represent all relevant regulatory mechanisms.
 
 \section{Conclusion}
 
@@ -394,6 +400,7 @@ Important verification artifacts include:
 \item \path{results/tables/downstream_task_performance.csv}
 \item \path{results/tables/target_alignment_table.csv}
 \item \path{results/tables/review_issue_matrix.csv}
+\item \path{results/tables/evidence_ledger.csv}
 \item \path{results/tables/threshold_sensitivity.csv}
 \item \path{results/qk_alignment/ctcf_qk_alignment.csv}
 \item \path{results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv}
@@ -406,7 +413,7 @@ The heatmaps used in the paper are generated under \path{results/figures/}.
 
 The full configured-split residual probe AUROCs are 0.9137 for TATA promoters, 0.9383 for non-TATA promoters, 0.8954 for splice donors, and 0.8847 for splice acceptors. The corresponding AUPRC values are 0.9241, 0.9475, 0.9049, and 0.8954.
 
-\section{Review-Triage Matrix}
+\section{Response-to-Review Checklist}
 
 Table~\ref{tab:review-triage} records the review issue matrix used to guide the revision. The anonymized reviewer IDs are treated as issue sources rather than as claims about reviewer intent.
 
@@ -428,6 +435,29 @@ C5jL & MI contribution & Venue contribution needed sharpening. & Contribution is
 C5jL & Thresholds & Registered thresholds need scale/sensitivity. & Added threshold purposes, sweeps, and available null calibration. & Addressed \\
 ndFG & Undefined biology & Motifs and biological terms need more support. & Added motif rationale, glossary, and nucleotide-to-token support rule. & Addressed \\
 ndFG & Limited scope & Conclusions could overstate selected models/motifs. & Limitations and target ledger state the scoped negative CTCF result. & Addressed \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h]
+\caption{Response-to-review checklist with exact fixes.}
+\label{tab:response-checklist}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}p{2.1cm}p{3.8cm}p{5.0cm}p{3.2cm}@{}}
+\toprule
+Concern & Exact fix & Where it appears & Artifact \\
+\midrule
+Writing clarity & Reframed the paper around one calibrated evidence-standard claim and one primary negative CTCF case study & Abstract, Introduction, target-alignment ledger, evidence ledger & \path{results/tables/evidence_ledger.csv} \\
+Target mismatch & Separated CTCF strict motif-detector evidence from promoter/splice auxiliary decodability and patching evidence & Target-alignment table and evidence ledger & \path{results/tables/target_alignment_table.csv} \\
+Missing performance context & Added GC and 3--6-mer raw-sequence baselines before mechanistic claims and kept frozen readouts labeled as residual decodability & Predictive performance context subsection & \path{results/tables/downstream_task_performance.csv} \\
+Weak MI contribution & Stated the contribution as a falsifiable standard for motif-detector claims rather than broad genomic interpretability & Introduction, Related Work, and ``What This Teaches Mechanistic Interpretability'' & Manuscript text \\
+Threshold justification & Added threshold purposes, sensitivity sweeps, and available null calibration & Criteria table and threshold-sensitivity subsection & \path{results/tables/threshold_sensitivity.csv} \\
+Undefined biology & Added motif rationale, glossary, and nucleotide-to-token overlap rule & Introduction and Methods glossary/mapping block & \path{src/motif_scoring.py} \\
+Limited scope & Strengthened limitations to selected checkpoints, intervals, scorer, tokenization rule, causal targets, and thresholds; removed impossibility framing & Limitations and Conclusion & Manuscript text \\
 \bottomrule
 \end{tabular}
 }
