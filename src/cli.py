@@ -135,6 +135,14 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--only-task-performance",
+        action="store_true",
+        help=(
+            "Run only downstream task-performance context baselines and exit. "
+            "Requires cached data/hf_downstream task datasets."
+        ),
+    )
+    parser.add_argument(
         "--from-step",
         choices=(
             "all",
@@ -215,6 +223,19 @@ def run(argv: list[str] | None = None) -> int:
         payload = {
             "message": f"Completed MINTS probe controls. Table: {control_path}",
             "table": str(control_path),
+        }
+        if args.json:
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            print(payload["message"])
+        return 0
+    if args.only_task_performance:
+        from .task_performance import evaluate_task_performance_context
+
+        table_path = evaluate_task_performance_context(config=config)
+        payload = {
+            "message": f"Completed MINTS task-performance context. Table: {table_path}",
+            "table": str(table_path),
         }
         if args.json:
             print(json.dumps(payload, indent=2, sort_keys=True))
