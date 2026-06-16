@@ -157,30 +157,30 @@ The primary model is \texttt{zhihan1996/DNABERT-2-117M}, an encoder-style genomi
 
 The residual-probe tasks are TATA promoter, non-TATA promoter, splice donor, and splice acceptor classification. The configured splits contain 5,062/212 train/test examples for TATA promoters, 30,000/1,372 for non-TATA promoters, and 30,000/3,000 for each splice task. The strict CTCF scan uses 51,249 prepared GM12878 CTCF peak sequences and the JASPAR MA0139.1 CTCF motif, aligned to exact overlapping DNABERT-2 BPE token spans. Batch patching uses motif-destroying clean/corrupted pairs for promoter-TATA and splice-donor tasks.
 
-The current artifact does not include a fine-tuned DNABERT-2 sequence-classification head. To avoid treating probes as end-to-end model performance, we therefore report two raw-sequence predictive baselines before the mechanistic evidence: a GC-content logistic classifier using GC fraction, GC skew, and sequence length, and a TF-IDF 3--6-mer logistic classifier. Frozen DNABERT-2 residual readouts are shown beside these baselines only as representation context.
+To avoid treating probes as end-to-end model performance, we report raw-sequence predictive baselines and a frozen DNABERT-2 sequence head before the mechanistic evidence. The raw-sequence baselines are a GC-content logistic classifier using GC fraction, GC skew, and sequence length, and a TF-IDF 3--6-mer logistic classifier. The frozen DNABERT-2 sequence head is a balanced logistic classifier trained on cached layer-11 sequence embeddings. Frozen residual readouts are shown beside these baselines only as representation context; neither DNABERT column is full encoder fine-tuning.
 
 The pipeline writes small review-facing CSV, JSON, and figure artifacts while treating large activation, circuit-matrix, token-score, and sparse-autoencoder files as reproducible generated outputs. The full run takes about eight hours on the tested CUDA setup. The most expensive stages are the cross-model comparison and strict all-layer CTCF scans, so the appendix includes both full reproduction commands and a reduced smoke-run command for checking the code path on a smaller subset.
 
 \section{Results}
 
 \paragraph{Predictive performance context before mechanism.}
-Table~\ref{tab:task-performance} separates task predictability from mechanistic evidence. The raw-sequence baselines are strong, especially on promoter tasks: a simple GC-content classifier already reaches 0.8955--0.9088 AUROC, and a 3--6-mer classifier reaches 0.9297--0.9406 AUROC. Splice tasks are less explained by composition alone, but k-mer baselines still recover substantial signal. The frozen DNABERT-2 layer-11 readout is included to show that the pretrained representation is predictive, but it remains a residual-decoding result, not a fine-tuned classifier-head result and not a circuit explanation.
+Table~\ref{tab:task-performance} separates task predictability from mechanistic evidence. The raw-sequence baselines are strong, especially on promoter tasks: a simple GC-content classifier already reaches 0.8955--0.9088 AUROC, and a 3--6-mer classifier reaches 0.9297--0.9406 AUROC. Splice tasks are less explained by composition alone, but k-mer baselines still recover substantial signal. The frozen DNABERT-2 layer-11 sequence head reaches 0.8847--0.9383 AUROC. The residual readout is included to show that the pretrained representation is predictive, but it remains a residual-decoding result rather than a circuit explanation.
 
 \begin{table}[t]
-\caption{Predictive task context before mechanistic analysis. GC-only and 3--6-mer rows are raw-sequence baselines. Frozen DNABERT-2 readout is a layer-11 residual classifier and is reported as diagnostic decodability evidence, not as end-to-end task performance.}
+\caption{Predictive task context before mechanistic analysis. GC-only and 3--6-mer rows are raw-sequence baselines. The frozen DNABERT-2 sequence head is trained on cached layer-11 sequence embeddings; the residual readout is reported separately as diagnostic decodability evidence.}
 \label{tab:task-performance}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}lrrrrrrrrr@{}}
+\begin{tabular}{@{}lrrrrrrrrrr@{}}
 \toprule
-Task & Train & Test & GC AUROC & GC AUPRC & GC Acc. & k-mer AUROC & k-mer AUPRC & k-mer Acc. & DNABERT readout AUROC \\
+Task & Train & Test & GC AUROC & GC AUPRC & GC Acc. & k-mer AUROC & k-mer AUPRC & k-mer Acc. & Seq-head AUROC & Readout AUROC \\
 \midrule
-promoter\_tata & 5,062 & 212 & 0.8955 & 0.9040 & 0.8019 & 0.9297 & 0.9378 & 0.8255 & 0.9137 \\
-promoter\_no\_tata & 30,000 & 1,372 & 0.9088 & 0.9218 & 0.8316 & 0.9406 & 0.9482 & 0.8652 & 0.9383 \\
-splice\_sites\_donors & 30,000 & 3,000 & 0.6560 & 0.6892 & 0.6013 & 0.8185 & 0.8093 & 0.7430 & 0.8954 \\
-splice\_sites\_acceptors & 30,000 & 3,000 & 0.6361 & 0.6343 & 0.5883 & 0.7956 & 0.7792 & 0.7220 & 0.8847 \\
+promoter\_tata & 5,062 & 212 & 0.8955 & 0.9040 & 0.8019 & 0.9297 & 0.9378 & 0.8255 & 0.9137 & 0.9137 \\
+promoter\_no\_tata & 30,000 & 1,372 & 0.9088 & 0.9218 & 0.8316 & 0.9406 & 0.9482 & 0.8652 & 0.9383 & 0.9383 \\
+splice\_sites\_donors & 30,000 & 3,000 & 0.6560 & 0.6892 & 0.6013 & 0.8185 & 0.8093 & 0.7430 & 0.8954 & 0.8954 \\
+splice\_sites\_acceptors & 30,000 & 3,000 & 0.6361 & 0.6343 & 0.5883 & 0.7956 & 0.7792 & 0.7220 & 0.8847 & 0.8847 \\
 \bottomrule
 \end{tabular}
 }
@@ -221,8 +221,8 @@ splice\_sites\_acceptors & 0.8847 & 0.6361 & 0.4461 & 0.8838 & 0.5005 & 0.8573--
 Target & Performance & Probe & QK & Enrichment & Patching & OV & SAE & Role \\
 \midrule
 CTCF & 51,249-sequence strict scan; no classifier target & No CTCF residual classifier used as strict evidence & Best $r=0.3004$; fail & Best $\rho_h=1.3130$; fail & No candidate promoted after failed QK/enrichment & No aligned OV claim & Best cosine 0.1158; weak & Primary strict chain \\
-Promoter-TATA & GC 0.8955; k-mer 0.9297; readout 0.9137 AUROC & Decodable, but close to strong baselines & Not target-aligned in current artifact & Not target-aligned & Best $\mathrm{PM}=1.4029$; over-restores & L2H7 output cosine 0.1261; weak & Not promoter-specific & Auxiliary causal evidence \\
-Splice donor & GC 0.6560; k-mer 0.8185; readout 0.8954 AUROC & Decodable beyond GC and k-mer & Not target-aligned in current artifact & Not target-aligned & Best $\mathrm{PM}=0.5485$; partial & Not audited & Not splice-specific & Auxiliary causal evidence \\
+Promoter-TATA & GC 0.8955; k-mer 0.9297; seq-head/readout 0.9137 AUROC & Decodable, but close to strong baselines & Not target-aligned in current artifact & Not target-aligned & Best $\mathrm{PM}=1.4029$; over-restores & L2H7 output cosine 0.1261; weak & Not promoter-specific & Auxiliary causal evidence \\
+Splice donor & GC 0.6560; k-mer 0.8185; seq-head/readout 0.8954 AUROC & Decodable beyond GC and k-mer & Not target-aligned in current artifact & Not target-aligned & Best $\mathrm{PM}=0.5485$; partial & Not audited & Not splice-specific & Auxiliary causal evidence \\
 \bottomrule
 \end{tabular}
 }
@@ -234,10 +234,10 @@ The CTCF scan produced 281,915 motif-support tokens and 1,843,874 finite token p
 The negative CTCF result is not a failure of the pipeline; it is the point of using a registered evidence stack. With more than 1.8 million finite token positions, small correlations can be statistically nonzero while remaining too small to support a mechanistic claim. The all-layer enrichment scan similarly prevents a common attention-overinterpretation mistake: a head can have visible structure without assigning enough mass to matched motif-support positions to count as a motif-local detector.
 
 \paragraph{Threshold sensitivity supports the conservative conclusion.}
-Table~\ref{tab:threshold-sensitivity} and Figure~\ref{fig:threshold-sensitivity} summarize threshold sweeps over QK correlation, matched enrichment, and auxiliary patching metrics. Relaxing the QK threshold alone yields 31 heads at $r\geq0.1$, five at $r\geq0.2$, one at $r\geq0.3$, and none at $r\geq0.4$. Relaxing matched enrichment alone yields three heads at $\rho_h\geq1.1$, one at $\rho_h\geq1.25$, and none at $\rho_h\geq1.5$. The strict CTCF chain remains negative: no head jointly passes QK and enrichment once $r\geq0.2$, even with $\rho_h\geq1.1$, and the most permissive joint count at $r\geq0.1,\rho_h\geq1.1$ is two heads, equal to the 95th percentile of a permuted-head alignment null. The promoter and splice patching thresholds are more permissive because those are auxiliary task-specific interventions, not CTCF motif-detector proof.
+Table~\ref{tab:threshold-sensitivity} and Figure~\ref{fig:threshold-sensitivity} summarize threshold sweeps over QK correlation, matched enrichment, and auxiliary patching metrics. Relaxing the QK threshold alone yields 31 heads at $r\geq0.1$, five at $r\geq0.2$, one at $r\geq0.3$, and none at $r\geq0.4$. Relaxing matched enrichment alone yields three heads at $\rho_h\geq1.1$, one at $\rho_h\geq1.25$, and none at $\rho_h\geq1.5$. The strict CTCF chain remains negative: no head jointly passes QK and enrichment once $r\geq0.2$, even with $\rho_h\geq1.1$, and the most permissive joint count at $r\geq0.1,\rho_h\geq1.1$ is two heads, equal to the 95th percentile of a permuted-head alignment null. Token-level motif-score nulls provide an additional calibration: the observed support-token count is 256,918, compared with a shuffled-score 95th percentile of 36,093.05 and zero nearest-GC non-support tokens above the motif-support threshold. The promoter and splice patching thresholds are more permissive because those are auxiliary task-specific interventions, not CTCF motif-detector proof.
 
 \begin{table}[t]
-\caption{Threshold sensitivity summary. Counts are heads passing each single-metric threshold, except the joint row, which requires both CTCF QK and enrichment. The permuted-head null shuffles enrichment-pass labels against QK-pass labels 1,000 times.}
+\caption{Threshold sensitivity summary. Counts are heads passing each single-metric threshold, except the joint row, which requires both CTCF QK and enrichment. Null references include permuted head alignment plus token-level motif-score and GC-matched background calibration.}
 \label{tab:threshold-sensitivity}
 \centering
 \scriptsize
@@ -247,7 +247,7 @@ Table~\ref{tab:threshold-sensitivity} and Figure~\ref{fig:threshold-sensitivity}
 \toprule
 Target & Sweep & Permissive count & Registered/strict count & Best value & Null reference \\
 \midrule
-CTCF & QK $r$ & 31 at $r\geq0.1$ & 0 at $r\geq0.5$ & 0.3004 & Motif-shuffle null requires per-token QK scores \\
+CTCF & QK $r$ & 31 at $r\geq0.1$ & 0 at $r\geq0.5$ & 0.3004 & Motif-score shuffle: 256,918 observed vs 36,093.05 p95 \\
 CTCF & Enrichment $\rho_h$ & 3 at $\rho_h\geq1.1$ & 0 at $\rho_h\geq2.0$ & 1.3130 & Position-matched background mean $\rho_h\approx1.00$ \\
 CTCF & Joint QK/enrichment & 2 at $r\geq0.1,\rho_h\geq1.1$ & 0 at $r\geq0.5,\rho_h\geq2.0$ & -- & Permuted-head 95th percentile is 2 at the permissive setting \\
 Promoter-TATA & Patching $\mathrm{PM}$ & 40 at $\mathrm{PM}\geq0.25$ & 16 at $\mathrm{PM}\geq0.75$ & 1.4029 & Auxiliary task-specific signal \\
@@ -273,7 +273,7 @@ Splice residual decodability is not explained by GC alone & Matched and shifted 
 Promoter-TATA patching identifies task-specific causal signal & Head-level patching should restore a corrupted scalar target across many pairs & Best mean $\mathrm{PM}=1.4029$ over 327 usable pairs & A head can causally amplify the promoter-TATA readout under patching & Over-restoration and probe geometry prevent a simple full-recovery claim \\
 Splice-donor patching identifies a weaker causal signal & Patching should restore a corrupted splice-donor scalar target & Best mean $\mathrm{PM}=0.5485$ over 500 usable pairs & Partial task-specific causal signal exists & Effect is small on average and not tied to QK/enrichment motif evidence \\
 DNABERT-2 has a strict CTCF motif-detector head & One head should pass QK/motif ranking, motif-local enrichment, and causal evidence & Best QK $r=0.3004$; best $\rho_h=1.3130$; no passing candidate & The strict single-head CTCF detector claim is not supported & Negative result is scoped to selected model, motif scorer, data, and thresholds \\
-Relaxed CTCF thresholds do not rescue the strict claim & Sensitivity sweep should reveal whether conclusions depend on the registered cutoffs & No joint QK/enrichment pass once $r\geq0.2$, even at $\rho_h\geq1.1$ & The negative CTCF conclusion is not an artifact of one conservative cutoff & Motif-shuffle and GC-matched nulls require raw artifacts not currently persisted \\
+Relaxed CTCF thresholds do not rescue the strict claim & Sensitivity sweep should reveal whether conclusions depend on the registered cutoffs & No joint QK/enrichment pass once $r\geq0.2$, even at $\rho_h\geq1.1$ & The negative CTCF conclusion is not an artifact of one conservative cutoff & Per-head shuffled QK-score nulls require raw per-token QK vectors \\
 SAE and OV audits do not reveal a simple alternate CTCF circuit & Output-write or sparse features should align strongly with the biological target & TATA OV cosine 0.1261; CTCF SAE best cosine 0.1158 & Auxiliary audits remain consistent with a distributed or absent simple motif circuit & Audits are not exhaustive circuit discovery \\
 \bottomrule
 \end{tabular}
@@ -388,6 +388,7 @@ A smaller smoke run is:
 \begin{verbatim}
 python main.py --max-probe-train 512 --max-probe-test 256
   --max-qk-alignment-sequences 128
+  --max-patching-pairs 32
   --max-cross-model-qk-alignment-sequences 128
   --max-feature-search-sequences 128 --sae-epochs 1
 \end{verbatim}
@@ -430,7 +431,7 @@ ID & Issue & Concern & Resolution & Status \\
 \midrule
 mV6D & Clarity & Paper read as several analyses. & Abstract/introduction now state one calibrated evidence-standard claim; Results opens with task context and a target ledger. & Addressed \\
 mV6D & Target mismatch & Promoter/splice evidence blurred into CTCF claims. & Promoter/splice patching is auxiliary; CTCF remains the strict chain. & Addressed \\
-C5jL & Missing performance & Mechanistic claims lacked predictive context. & Added GC and 3--6-mer baselines plus frozen-readout context before mechanism. & Partial \\
+C5jL & Missing performance & Mechanistic claims lacked predictive context. & Added GC and 3--6-mer baselines, a frozen DNABERT sequence head, and frozen-readout context before mechanism. & Addressed \\
 C5jL & MI contribution & Venue contribution needed sharpening. & Contribution is now a falsifiable standard for motif-detector claims. & Addressed \\
 C5jL & Thresholds & Registered thresholds need scale/sensitivity. & Added threshold purposes, sweeps, and available null calibration. & Addressed \\
 ndFG & Undefined biology & Motifs and biological terms need more support. & Added motif rationale, glossary, and nucleotide-to-token support rule. & Addressed \\
@@ -453,7 +454,7 @@ Concern & Exact fix & Where it appears & Artifact \\
 \midrule
 Writing clarity & Reframed the paper around one calibrated evidence-standard claim and one primary negative CTCF case study & Abstract, Introduction, target-alignment ledger, evidence ledger & \path{results/tables/evidence_ledger.csv} \\
 Target mismatch & Separated CTCF strict motif-detector evidence from promoter/splice auxiliary decodability and patching evidence & Target-alignment table and evidence ledger & \path{results/tables/target_alignment_table.csv} \\
-Missing performance context & Added GC and 3--6-mer raw-sequence baselines before mechanistic claims and kept frozen readouts labeled as residual decodability & Predictive performance context subsection & \path{results/tables/downstream_task_performance.csv} \\
+Missing performance context & Added GC and 3--6-mer raw-sequence baselines plus a frozen DNABERT sequence head before mechanistic claims, while keeping frozen readouts labeled as residual decodability & Predictive performance context subsection & \path{results/tables/downstream_task_performance.csv} \\
 Weak MI contribution & Stated the contribution as a falsifiable standard for motif-detector claims rather than broad genomic interpretability & Introduction, Related Work, and ``What This Teaches Mechanistic Interpretability'' & Manuscript text \\
 Threshold justification & Added threshold purposes, sensitivity sweeps, and available null calibration & Criteria table and threshold-sensitivity subsection & \path{results/tables/threshold_sensitivity.csv} \\
 Undefined biology & Added motif rationale, glossary, and nucleotide-to-token overlap rule & Introduction and Methods glossary/mapping block & \path{src/motif_scoring.py} \\
