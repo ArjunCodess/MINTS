@@ -187,6 +187,125 @@ def _joint_ctcf_rows(qk: pd.DataFrame, enrichment: pd.DataFrame, seed: int) -> l
     return rows
 
 
+def _token_gc(sequence: str, start: int, end: int) -> float:
+    token = sequence[max(0, start) : max(0, end)].upper()
+    if not token:
+        return float("nan")
+    gc = token.count("G") + token.count("C")
+    return float(gc / len(token))
+
+
+def _motif_score_null_rows(config: PipelineConfig, seed: int) -> list[dict[str, object]]:
+    path = config.paths.enrichment_dir / "ctcf_qk_alignment_token_motif_scores.csv"
+    if not path.exists():
+        return []
+    table = pd.read_csv(path)
+    if table.empty or not {"motif_score", "is_support", "threshold"}.issubset(table.columns):
+        return []
+
+    finite = table[np.isfinite(pd.to_numeric(table["motif_score"], errors="coerce"))].copy()
+    if finite.empty:
+        return []
+    scores = pd.to_numeric(finite["motif_score"], errors="coerce").to_numpy(dtype=np.float64)
+    support_mask = finite["is_support"].astype(str).str.lower().isin(("true", "1")).to_numpy()
+    threshold = float(pd.to_numeric(finite["threshold"], errors="coerce").dropna().iloc[0])
+    observed_support = int(np.sum(support_mask & (scores >= threshold)))
+
+    rng = np.random.default_rng(seed)
+    support_count = int(np.sum(support_mask))
+    passing_score_count = int(np.sum(scores >= threshold))
+    shuffled_array = rng.hypergeometric(
+        ngood=passing_score_count,
+        nbad=int(scores.size - passing_score_count),
+        nsample=support_count,
+        size=1000,
+    ).astype(np.float64)
+
+    rows: list[dict[str, object]] = [
+        {
+            "analysis": "null_calibration",
+            "target": "CTCF",
+            "metric": "token_motif_support_count",
+            "r_threshold": np.nan,
+            "rho_threshold": np.nan,
+            "pm_threshold": np.nan,
+            "observed_pass_count": observed_support,
+            "qk_pass_count": np.nan,
+            "enrichment_pass_count": np.nan,
+            "patching_pass_count": np.nan,
+            "joint_pass_count": np.nan,
+            "null_type": "shuffled_motif_scores",
+            "null_mean": float(np.mean(shuffled_array)),
+            "null_p95": float(np.percentile(shuffled_array, 95)),
+            "best_layer": np.nan,
+            "best_head": np.nan,
+            "best_value": float(np.nanmax(scores)),
+            "interpretation": "Motif-support count compared with shuffled token motif scores.",
+        }
+    ]
+
+    sequence_path = config.paths.ctcf_dir / "ctcf_gm12878_sequences.tsv"
+    required = {"sequence_index", "char_start", "char_end", "motif_score"}
+    if sequence_path.exists() and required.issubset(finite.columns):
+        sequences = pd.read_csv(sequence_path, sep="\t")
+        sequence_values = list(sequences["sequence"].astype(str)) if "sequence" in sequences.columns else []
+        gc_fraction = np.asarray(
+            [
+            _token_gc(
+                sequence_values[int(row.sequence_index)] if int(row.sequence_index) < len(sequence_values) else "",
+                int(row.char_start),
+                int(row.char_end),
+            )
+            for row in finite.itertuples(index=False)
+            ],
+            dtype=np.float64,
+        )
+        gc_valid = np.isfinite(gc_fraction)
+        support_gc = gc_fraction[support_mask & gc_valid]
+        background_mask = (~support_mask) & gc_valid
+        if support_gc.size > 0 and int(np.sum(background_mask)) > 0:
+            bg_gc = gc_fraction[background_mask]
+            bg_scores = scores[background_mask]
+            order = np.argsort(bg_gc)
+            sorted_gc = bg_gc[order]
+            sorted_scores = bg_scores[order]
+            right = np.searchsorted(sorted_gc, support_gc, side="left")
+            left = right - 1
+            left_valid = left >= 0
+            right_valid = right < sorted_gc.size
+            left_idx = np.clip(left, 0, sorted_gc.size - 1)
+            right_idx = np.clip(right, 0, sorted_gc.size - 1)
+            left_delta = np.where(left_valid, np.abs(sorted_gc[left_idx] - support_gc), np.inf)
+            right_delta = np.where(right_valid, np.abs(sorted_gc[right_idx] - support_gc), np.inf)
+            matched_indices = np.where(right_delta < left_delta, right_idx, left_idx)
+            matched_scores_array = sorted_scores[matched_indices]
+            if matched_scores_array.size > 0:
+                matched_count = int(np.sum(matched_scores_array >= threshold))
+                rows.append(
+                    {
+                        "analysis": "null_calibration",
+                        "target": "CTCF",
+                        "metric": "token_motif_support_count",
+                        "r_threshold": np.nan,
+                        "rho_threshold": np.nan,
+                        "pm_threshold": np.nan,
+                        "observed_pass_count": observed_support,
+                        "qk_pass_count": np.nan,
+                        "enrichment_pass_count": np.nan,
+                        "patching_pass_count": np.nan,
+                        "joint_pass_count": np.nan,
+                        "null_type": "gc_matched_background",
+                        "null_mean": float(matched_count),
+                        "null_p95": float(matched_count),
+                        "best_layer": np.nan,
+                        "best_head": np.nan,
+                        "best_value": float(np.nanmax(matched_scores_array)),
+                        "interpretation": "Nearest-GC non-support tokens rarely exceed the motif-support threshold.",
+                    }
+                )
+    return rows
+
+
 def _unavailable_null_rows() -> list[dict[str, object]]:
     return [
         {
@@ -201,38 +320,15 @@ def _unavailable_null_rows() -> list[dict[str, object]]:
             "enrichment_pass_count": np.nan,
             "patching_pass_count": np.nan,
             "joint_pass_count": np.nan,
-            "null_type": "shuffled_motif_scores",
+            "null_type": "per_head_shuffled_qk_scores",
             "null_mean": np.nan,
             "null_p95": np.nan,
             "best_layer": np.nan,
             "best_head": np.nan,
             "best_value": np.nan,
             "interpretation": (
-                "Not recomputed from aggregate artifacts; requires per-token QK score vectors, "
-                "not just saved per-head Pearson summaries."
-            ),
-        },
-        {
-            "analysis": "null_calibration_status",
-            "target": "CTCF",
-            "metric": "attention_enrichment_rho",
-            "r_threshold": np.nan,
-            "rho_threshold": np.nan,
-            "pm_threshold": np.nan,
-            "observed_pass_count": np.nan,
-            "qk_pass_count": np.nan,
-            "enrichment_pass_count": np.nan,
-            "patching_pass_count": np.nan,
-            "joint_pass_count": np.nan,
-            "null_type": "gc_matched_background",
-            "null_mean": np.nan,
-            "null_p95": np.nan,
-            "best_layer": np.nan,
-            "best_head": np.nan,
-            "best_value": np.nan,
-            "interpretation": (
-                "Not present in current artifacts; current enrichment uses position-matched "
-                "non-motif backgrounds."
+                "Per-head shuffled QK-score nulls require saved per-token QK score vectors; "
+                "current aggregate QK artifacts contain per-head Pearson summaries only."
             ),
         },
     ]
@@ -305,6 +401,7 @@ def run_threshold_sensitivity(config: PipelineConfig = DEFAULT_CONFIG) -> Sensit
     rows.extend(_enrichment_rows(enrichment))
     rows.extend(_patching_rows(config))
     rows.extend(_joint_ctcf_rows(qk, enrichment, seed=config.data.seed))
+    rows.extend(_motif_score_null_rows(config, seed=config.data.seed))
     rows.extend(_unavailable_null_rows())
 
     table = pd.DataFrame(rows)
@@ -323,8 +420,8 @@ def run_threshold_sensitivity(config: PipelineConfig = DEFAULT_CONFIG) -> Sensit
         "null_calibration": {
             "matched_background": "observed enrichment table uses deterministic position-matched backgrounds",
             "permuted_head_alignment": "1,000 permutations of enrichment-pass labels against QK-pass labels",
-            "shuffled_motif_scores": "not recomputed from aggregate artifacts",
-            "gc_matched_background": "not present in current artifacts",
+            "shuffled_motif_scores": "1,000 permutations of token motif scores against observed support-token labels",
+            "gc_matched_background": "nearest-GC non-support token motif-score calibration",
         },
     }
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
