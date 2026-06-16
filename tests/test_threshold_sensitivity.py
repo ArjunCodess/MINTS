@@ -54,6 +54,19 @@ def test_run_threshold_sensitivity_writes_table_and_figure(tmp_path) -> None:
             {"layer": 0, "head": 1, "restoration": 0.1, "task": "promoter_tata", "pairs": 4, "denominator_failures": 0},
         ]
     ).to_csv(config.paths.patching_dir / "promoter_tata_batch_dnabert_activation_patching.csv", index=False)
+    pd.DataFrame(
+        [
+            {"sequence_index": 0, "token_index": 0, "char_start": 0, "char_end": 4, "motif_score": 9.0, "threshold": 8.0, "is_support": True},
+            {"sequence_index": 0, "token_index": 1, "char_start": 4, "char_end": 8, "motif_score": 2.0, "threshold": 8.0, "is_support": False},
+            {"sequence_index": 1, "token_index": 0, "char_start": 0, "char_end": 4, "motif_score": 7.0, "threshold": 8.0, "is_support": True},
+            {"sequence_index": 1, "token_index": 1, "char_start": 4, "char_end": 8, "motif_score": 1.0, "threshold": 8.0, "is_support": False},
+        ]
+    ).to_csv(config.paths.enrichment_dir / "ctcf_qk_alignment_token_motif_scores.csv", index=False)
+    pd.DataFrame({"sequence": ["ACGTACGT", "GGGGCCCC"]}).to_csv(
+        config.paths.ctcf_dir / "ctcf_gm12878_sequences.tsv",
+        sep="\t",
+        index=False,
+    )
 
     outputs = run_threshold_sensitivity(config=config)
     table = pd.read_csv(outputs.table)
@@ -62,5 +75,6 @@ def test_run_threshold_sensitivity_writes_table_and_figure(tmp_path) -> None:
     assert outputs.manifest.exists()
     assert "joint_ctcf_sensitivity" in set(table["analysis"])
     assert "shuffled_motif_scores" in set(table["null_type"].dropna())
+    assert "gc_matched_background" in set(table["null_type"].dropna())
     qk_row = table[(table["metric"] == "qk_pearson_r") & (table["r_threshold"] == 0.5)].iloc[0]
     assert int(qk_row["observed_pass_count"]) == 1
