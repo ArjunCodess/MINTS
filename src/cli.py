@@ -143,6 +143,13 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--only-threshold-sensitivity",
+        action="store_true",
+        help=(
+            "Run only threshold sensitivity and null-calibration summaries from existing result tables."
+        ),
+    )
+    parser.add_argument(
         "--from-step",
         choices=(
             "all",
@@ -236,6 +243,21 @@ def run(argv: list[str] | None = None) -> int:
         payload = {
             "message": f"Completed MINTS task-performance context. Table: {table_path}",
             "table": str(table_path),
+        }
+        if args.json:
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            print(payload["message"])
+        return 0
+    if args.only_threshold_sensitivity:
+        from .threshold_sensitivity import run_threshold_sensitivity
+
+        outputs = run_threshold_sensitivity(config=config)
+        payload = {
+            "message": f"Completed MINTS threshold sensitivity. Table: {outputs.table}",
+            "table": str(outputs.table),
+            "figure": str(outputs.figure),
+            "manifest": str(outputs.manifest),
         }
         if args.json:
             print(json.dumps(payload, indent=2, sort_keys=True))
