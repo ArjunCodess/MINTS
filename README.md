@@ -18,6 +18,7 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
 - **Performance context before mechanism:** Raw-sequence baselines are reported separately in [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv): GC-only AUROC ranges from `0.6361` to `0.9088`, and TF-IDF `3-6`-mer AUROC ranges from `0.7956` to `0.9406`. The frozen DNABERT readout is kept as diagnostic decodability evidence, not end-to-end fine-tuned task performance.
 - **Probe interpretation controls:** The cached-residual control pass writes [`results/tables/linear_probe_controls.csv`](results/tables/linear_probe_controls.csv), covering GC-content-only probes, position-only metadata probes when coordinates are available, GC-matched test negatives, random-label residual probes, and GC distribution-shift probes.
+- **Threshold sensitivity:** [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv) and [`results/figures/threshold_sensitivity.png`](results/figures/threshold_sensitivity.png) show that individual relaxed CTCF QK/enrichment screens admit a few heads, but the joint CTCF result stays negative once `r >= 0.2`, even with `rho_h >= 1.1`.
 - **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
 - **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
 - **OV readout audit:** The previously suspected TATA-restoring layer `2`, head `7` does not directly align strongly with the trained TATA residual-probe direction; its top OV output-write singular-vector cosine is only `0.1261`, and the probe self-gain is `-0.0326`.
@@ -115,6 +116,14 @@ python main.py --only-task-performance
 
 This writes `results/tables/downstream_task_performance.csv` and `results/manifests/downstream_task_performance_manifest.json`.
 
+Regenerate the threshold-sensitivity summary:
+
+```bash
+python main.py --only-threshold-sensitivity
+```
+
+This writes `results/tables/threshold_sensitivity.csv`, `results/figures/threshold_sensitivity.png`, and `results/manifests/threshold_sensitivity_manifest.json`.
+
 Probe-control results from the updated run:
 
 | Task | Residual probe AUROC | GC-only AUROC | Position-only AUROC | GC-matched residual AUROC | Random-label AUROC mean | GC-shift AUROC range |
@@ -139,9 +148,21 @@ The strict CTCF scan used all `51,249` prepared GM12878 CTCF sequences.
 
 Interpretation: the QK correlations are statistically nonzero because the scan is very large, but the effect sizes are far below the registered `r >= 0.5` criterion. The enrichment ratios are close to background. The run does not prove a strict CTCF motif-detector head.
 
+Threshold sensitivity from [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv):
+
+| Sweep | Permissive count | Strict count | Best value |
+|---|---:|---:|---:|
+| CTCF QK `r` | `31` heads at `r >= 0.1` | `0` heads at `r >= 0.5` | `0.3004` |
+| CTCF enrichment `rho_h` | `3` heads at `rho_h >= 1.1` | `0` heads at `rho_h >= 2.0` | `1.3130` |
+| Joint CTCF QK/enrichment | `2` heads at `r >= 0.1`, `rho_h >= 1.1` | `0` heads at registered thresholds | n/a |
+
+The permissive joint count equals the 95th percentile of a 1,000-run permuted-head alignment null. No head jointly passes once the QK threshold is relaxed only to `r >= 0.2`, even when enrichment is relaxed to `rho_h >= 1.1`.
+
 ![CTCF QK-to-motif Pearson heatmap](results/figures/ctcf_qk_alignment_pearson_heatmap.png)
 
 ![CTCF matched attention enrichment heatmap](results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png)
+
+![Threshold sensitivity](results/figures/threshold_sensitivity.png)
 
 ### Activation Patching
 
@@ -262,6 +283,7 @@ Useful flags:
 - `--probe-control-random-label-runs`: number of random-label residual-probe repeats in the control pass
 - `--only-probe-controls`: rerun only the cached-residual probe controls without loading the model or continuing through later pipeline steps
 - `--only-task-performance`: rerun only raw-sequence GC/k-mer task baselines and join existing frozen-readout metrics when available
+- `--only-threshold-sensitivity`: rerun threshold sweeps and available null-calibration summaries from existing result tables
 - `--from-step`: start from a named checkpoint and continue forward
 - `--json`: print a machine-readable completion payload
 
@@ -309,6 +331,7 @@ Primary outputs:
 - [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv)
 - [`results/tables/target_alignment_table.csv`](results/tables/target_alignment_table.csv)
 - [`results/tables/review_issue_matrix.csv`](results/tables/review_issue_matrix.csv)
+- [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv)
 - `results/tables/linear_probe_controls.csv`
 - [`results/tables/cross_model_tokenization_comparison.json`](results/tables/cross_model_tokenization_comparison.json)
 - [`results/qk_alignment/ctcf_qk_alignment.csv`](results/qk_alignment/ctcf_qk_alignment.csv)
@@ -322,6 +345,7 @@ Important figures:
 
 - [`results/figures/ctcf_qk_alignment_pearson_heatmap.png`](results/figures/ctcf_qk_alignment_pearson_heatmap.png)
 - [`results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png`](results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png)
+- [`results/figures/threshold_sensitivity.png`](results/figures/threshold_sensitivity.png)
 - [`results/figures/promoter_tata_dnabert_activation_patching_heatmap.png`](results/figures/promoter_tata_dnabert_activation_patching_heatmap.png)
 - [`results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png`](results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png)
 - [`results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png`](results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png)
