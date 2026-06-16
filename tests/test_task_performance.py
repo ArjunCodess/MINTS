@@ -63,6 +63,36 @@ def test_evaluate_task_performance_context_writes_table(tmp_path) -> None:
         }
     )
     dataset.save_to_disk(str(paths.hf_downstream_dir / "promoter_tata"))
+    paths.activations_dir.mkdir(parents=True, exist_ok=True)
+    train_features = [
+        [0.0, 0.0],
+        [0.1, 0.0],
+        [0.0, 0.1],
+        [0.1, 0.1],
+        [2.0, 2.0],
+        [2.1, 2.0],
+        [2.0, 2.1],
+        [2.1, 2.1],
+    ]
+    test_features = [[0.0, 0.0], [0.1, 0.0], [2.0, 2.0], [2.1, 2.0]]
+    import numpy as np
+
+    np.savez(
+        paths.activations_dir / "promoter_tata_train_residual_mean.npz",
+        residual_mean=np.asarray(train_features, dtype=np.float32)[:, None, :],
+        labels=np.asarray([0, 0, 0, 0, 1, 1, 1, 1], dtype=int),
+        names=np.asarray([f"train_{idx}" for idx in range(8)]),
+        sequences=np.asarray(dataset["train"]["sequence"]),
+        layers=np.asarray([11], dtype=int),
+    )
+    np.savez(
+        paths.activations_dir / "promoter_tata_test_residual_mean.npz",
+        residual_mean=np.asarray(test_features, dtype=np.float32)[:, None, :],
+        labels=np.asarray([0, 0, 1, 1], dtype=int),
+        names=np.asarray([f"test_{idx}" for idx in range(4)]),
+        sequences=np.asarray(dataset["test"]["sequence"]),
+        layers=np.asarray([11], dtype=int),
+    )
 
     table_path = evaluate_task_performance_context(config=config)
     table_text = table_path.read_text(encoding="utf-8")
@@ -72,5 +102,6 @@ def test_evaluate_task_performance_context_writes_table(tmp_path) -> None:
 
     assert "promoter_tata" in table_text
     assert "kmer_tfidf_3_6_auroc" in table_text
-    assert "not_run_in_current_artifact" in table_text
+    assert "dnabert_sequence_head_auroc" in table_text
+    assert "frozen_dnabert_l11_sequence_head" in table_text
     assert "downstream_task_performance.csv" in manifest_text
