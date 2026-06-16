@@ -28,6 +28,9 @@ class TaskPerformanceResult:
     kmer_tfidf_3_6_auroc: float
     kmer_tfidf_3_6_auprc: float
     kmer_tfidf_3_6_accuracy: float
+    dnabert_sequence_head_auroc: float
+    dnabert_sequence_head_auprc: float
+    dnabert_sequence_head_accuracy: float
     frozen_dnabert_l11_readout_auroc: float
     frozen_dnabert_l11_readout_auprc: float
     frozen_dnabert_l11_readout_accuracy: float
@@ -111,6 +114,42 @@ def _load_probe_readout_metrics(config: PipelineConfig) -> dict[str, dict[str, f
     }
 
 
+def _layer_features(payload: dict[str, np.ndarray], layer: int) -> tuple[np.ndarray, np.ndarray]:
+    layers = np.asarray(payload["layers"], dtype=int)
+    matches = np.flatnonzero(layers == int(layer))
+    if matches.size == 0:
+        raise ValueError(f"Cached activation file does not contain layer {layer}.")
+    features = np.asarray(payload["residual_mean"][:, int(matches[0]), :], dtype=np.float32)
+    labels = np.asarray(payload["labels"], dtype=int)
+    return features, labels
+
+
+def _fit_cached_dnabert_sequence_head(task: str, config: PipelineConfig) -> tuple[dict[str, float], str]:
+    """Train a frozen-encoder sequence-classification head from cached embeddings."""
+
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.pipeline import make_pipeline
+
+    train_path = config.paths.activations_dir / f"{task}_train_residual_mean.npz"
+    test_path = config.paths.activations_dir / f"{task}_test_residual_mean.npz"
+    if not train_path.exists() or not test_path.exists():
+        return (
+            {"auroc": np.nan, "auprc": np.nan, "accuracy": np.nan},
+            "missing_cached_dnabert_activations",
+        )
+    with np.load(train_path, allow_pickle=True) as train_payload, np.load(test_path, allow_pickle=True) as test_payload:
+        x_train, y_train = _layer_features(train_payload, config.data.probe_layer)
+        x_test, y_test = _layer_features(test_payload, config.data.probe_layer)
+    classifier = make_pipeline(
+        StandardScaler(),
+        LogisticRegression(max_iter=2000, class_weight="balanced", random_state=config.data.seed),
+    )
+    classifier.fit(x_train, y_train)
+    probabilities = classifier.predict_proba(x_test)[:, 1]
+    return _classification_metrics(y_test, probabilities), "frozen_dnabert_l11_sequence_head"
+
+
 def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -> Path:
     """Write the downstream-performance context table.
 
@@ -137,6 +176,7 @@ def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -
 
         gc = _fit_gc_baseline(train_sequences, y_train, test_sequences, y_test, seed=config.data.seed)
         kmer = _fit_kmer_baseline(train_sequences, y_train, test_sequences, y_test, seed=config.data.seed)
+        sequence_head, sequence_head_status = _fit_cached_dnabert_sequence_head(task, config)
         readout = readout_metrics.get(task, {})
         rows.append(
             TaskPerformanceResult(
@@ -149,13 +189,17 @@ def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -
                 kmer_tfidf_3_6_auroc=kmer["auroc"],
                 kmer_tfidf_3_6_auprc=kmer["auprc"],
                 kmer_tfidf_3_6_accuracy=kmer["accuracy"],
+                dnabert_sequence_head_auroc=sequence_head["auroc"],
+                dnabert_sequence_head_auprc=sequence_head["auprc"],
+                dnabert_sequence_head_accuracy=sequence_head["accuracy"],
                 frozen_dnabert_l11_readout_auroc=float(readout.get("auroc", np.nan)),
                 frozen_dnabert_l11_readout_auprc=float(readout.get("auprc", np.nan)),
                 frozen_dnabert_l11_readout_accuracy=float(readout.get("accuracy", np.nan)),
-                sequence_classifier_status="not_run_in_current_artifact",
+                sequence_classifier_status=sequence_head_status,
                 notes=(
-                    "GC and k-mer are raw-sequence baselines; frozen DNABERT readout is residual "
-                    "decodability, not end-to-end fine-tuned task performance."
+                    "GC and k-mer are raw-sequence baselines; DNABERT sequence-head metrics train "
+                    "a frozen-encoder classifier head from cached layer-11 sequence embeddings; "
+                    "frozen readout metrics are retained as residual decodability context."
                 ),
             )
         )
@@ -169,12 +213,16 @@ def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -
         "baselines": {
             "gc_only": "logistic regression over GC fraction, GC skew, and sequence length",
             "kmer_tfidf_3_6": "TF-IDF character 3-6-mer logistic regression with max_features=50000",
+            "dnabert_sequence_head": (
+                "balanced logistic sequence-classification head trained on cached frozen DNABERT-2 "
+                "layer-11 sequence embeddings"
+            ),
             "frozen_dnabert_l11_readout": (
                 "existing layer-11 residual readout from linear_probe_metrics.csv; "
                 "reported separately from task baselines"
             ),
         },
-        "sequence_classifier_status": "not_run_in_current_artifact",
+        "sequence_classifier_status": sorted({row.sequence_classifier_status for row in rows}),
     }
     (config.paths.manifests_dir / "downstream_task_performance_manifest.json").write_text(
         json.dumps(manifest, indent=2),
