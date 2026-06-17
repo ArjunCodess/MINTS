@@ -39,6 +39,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="Replace existing generated datasets and downloaded artifacts.",
     )
     parser.add_argument(
+        "--device",
+        default="auto",
+        help=(
+            "Runtime torch device for model inference. Use 'cuda' for an NVIDIA GPU, "
+            "'cuda:0' for a specific GPU, 'cpu' to force CPU, or 'auto' to choose CUDA when available."
+        ),
+    )
+    parser.add_argument(
         "--max-probe-train",
         type=int,
         default=None,
@@ -209,6 +217,7 @@ def run(argv: list[str] | None = None) -> int:
     )
     config = replace(
         config,
+        model=replace(config.model, device=args.device),
         data=replace(
             config.data,
             max_probe_train=args.max_probe_train,
