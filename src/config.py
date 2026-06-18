@@ -100,8 +100,8 @@ class DataConfig:
     max_probe_train: int | None = None
     max_probe_test: int | None = None
     max_qk_alignment_sequences: int | None = None
-    max_patching_pairs: int = 500
-    max_feature_search_sequences: int | None = 2048
+    max_patching_pairs: int | None = None
+    max_feature_search_sequences: int | None = None
     max_cross_model_qk_alignment_sequences: int | None = None
     probe_bootstrap_samples: int = 1000
     probe_ci_level: float = 0.95

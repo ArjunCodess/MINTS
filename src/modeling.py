@@ -91,9 +91,16 @@ class ModelCompatibilityError(RuntimeError):
 def _resolve_device(device: str) -> str:
     """Resolve `auto` to the best locally available torch device."""
 
-    if device != "auto":
-        return device
     import torch
+
+    if device != "auto":
+        if device.startswith("cuda") and not torch.cuda.is_available():
+            raise RuntimeError(
+                "CUDA was requested, but PyTorch does not see a CUDA device. "
+                "Install a CUDA-enabled PyTorch build for your NVIDIA driver, "
+                "then rerun with --device cuda."
+            )
+        return device
 
     return "cuda" if torch.cuda.is_available() else "cpu"
 

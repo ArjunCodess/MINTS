@@ -96,6 +96,16 @@ def test_bpe_token_overlap_maps_full_motif_span_to_intersecting_tokens() -> None
     assert overlapping == [1, 2, 3, 4]
 
 
+def test_token_overlap_uses_documented_minimum_base_threshold() -> None:
+    offsets = [(0, 0), (0, 5), (5, 12), (12, 20), (20, 25)]
+
+    one_base_overlap = token_indices_overlapping_char_span(offsets, char_start=4, char_end=13)
+    two_base_overlap = token_indices_overlapping_char_span(offsets, char_start=4, char_end=13, min_overlap_bp=2)
+
+    assert one_base_overlap == [1, 2, 3]
+    assert two_base_overlap == [2]
+
+
 def test_motif_supports_use_bpe_intervals_not_single_tokens() -> None:
     offsets = [(0, 0), (0, 5), (5, 12), (12, 20), (20, 25), (25, 30)]
     start_scores = np.full(30, -np.inf)

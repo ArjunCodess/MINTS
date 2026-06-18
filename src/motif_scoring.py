@@ -22,6 +22,7 @@ from .utils import progress, utc_now_iso, write_json
 
 JASPAR_CTCF_ID = "MA0139.1"
 JASPAR_2024_CTCF_URL = "https://jaspar2024.elixir.no/api/v1/matrix/MA0139.1.jaspar"
+MIN_TOKEN_SUPPORT_OVERLAP_BP = 1
 
 
 @dataclass(frozen=True)
@@ -220,21 +221,26 @@ def token_indices_overlapping_char_span(
     token_offsets: list[tuple[int, int]],
     char_start: int,
     char_end: int,
+    min_overlap_bp: int = MIN_TOKEN_SUPPORT_OVERLAP_BP,
 ) -> list[int]:
     """Return BPE token indices whose nucleotide offsets overlap a motif span.
 
     The overlap test is interval-based, not token-text-based. This is the
     critical DNABERT-2 alignment step: for a JASPAR hit spanning
     `[char_start, char_end)`, every BPE token with non-zero intersection with
-    that nucleotide interval is part of the biological support set.
+    that nucleotide interval is part of the biological support set. The default
+    support threshold is at least one overlapping nucleotide base.
     """
 
     if char_end <= char_start:
         raise ValueError("char_end must be greater than char_start.")
+    if min_overlap_bp <= 0:
+        raise ValueError("min_overlap_bp must be a positive integer.")
     return [
         token_idx
         for token_idx, (token_start, token_end) in enumerate(token_offsets)
-        if token_end > token_start and token_start < char_end and token_end > char_start
+        if token_end > token_start
+        and max(0, min(token_end, char_end) - max(token_start, char_start)) >= min_overlap_bp
     ]
 
 
@@ -404,6 +410,7 @@ def save_token_motif_scores(
             "support_span_count": int(sum(len(record.support_spans) for record in records)),
             "matrix_id": JASPAR_CTCF_ID,
             "jaspar_url": JASPAR_2024_CTCF_URL,
+            "token_support_min_overlap_bp": MIN_TOKEN_SUPPORT_OVERLAP_BP,
         },
     )
     progress(f"Wrote token motif scores: {output_path}")

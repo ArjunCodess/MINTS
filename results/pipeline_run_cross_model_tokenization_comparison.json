@@ -33,7 +33,7 @@
     "sae_epochs": 10,
     "sae_l1_coefficient": 0.001
   },
-  "created_at": "2026-06-17T07:52:38+00:00",
+  "created_at": "2026-06-18T07:41:27+00:00",
   "data": {
     "encode_url_file": "data\\ENCODE4_v1.5.1_GRCh38.txt",
     "grch38_fasta_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz",
@@ -46,24 +46,23 @@
       "splice_sites_acceptors"
     ]
   },
-  "error": "ModuleNotFoundError: No module named 'transformers'",
-  "from_step": "write_config",
+  "from_step": "cross_model_tokenization_comparison",
   "model": {
-    "device": "cuda:0",
+    "device": "cuda",
     "name": "zhihan1996/DNABERT-2-117M",
     "revision": null,
     "trust_remote_code": true
   },
   "overwrite": false,
   "project": "MINTS",
-  "status": "failed",
+  "status": "completed",
   "steps": [
     {
       "details": {
-        "path": "results\\manifests\\pipeline_config.json"
+        "report_path": "results\\tables\\cross_model_tokenization_comparison.json"
       },
-      "name": "write_config",
-      "seconds": 0.001,
+      "name": "cross_model_tokenization_comparison",
+      "seconds": 15591.074,
       "status": "completed"
     }
   ]

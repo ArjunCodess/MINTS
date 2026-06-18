@@ -9,7 +9,7 @@
     "delta_best_rho_comparison_minus_base": -0.3129577731727087,
     "delta_candidate_heads_comparison_minus_base": 0
   },
-  "created_at": "2026-04-14T15:56:30+00:00",
+  "created_at": "2026-06-18T07:41:27+00:00",
   "models": {
     "InstaDeepAI/nucleotide-transformer-v2-100m-multi-species": {
       "attention_enrichment": {

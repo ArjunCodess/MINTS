@@ -39,6 +39,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="Replace existing generated datasets and downloaded artifacts.",
     )
     parser.add_argument(
+        "--device",
+        default="auto",
+        help=(
+            "Runtime torch device for model inference. Use 'cuda' for an NVIDIA GPU, "
+            "'cuda:0' for a specific GPU, 'cpu' to force CPU, or 'auto' to choose CUDA when available."
+        ),
+    )
+    parser.add_argument(
         "--max-probe-train",
         type=int,
         default=None,
@@ -71,21 +79,21 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--max-patching-pairs",
         type=int,
-        default=500,
+        default=None,
         metavar="N",
         help=(
             "Limit systematic denoising activation-patching pairs per configured task. "
-            "Defaults to 500."
+            "Omit this flag to use all token-shape-preserving pairs."
         ),
     )
     parser.add_argument(
         "--max-feature-search-sequences",
         type=int,
-        default=2048,
+        default=None,
         metavar="N",
         help=(
             "Limit CTCF sequences used for residual/MLP sparse feature search. "
-            "Defaults to 2048. Use 0 to scan all prepared CTCF sequences."
+            "Omit this flag, or pass 0, to scan all prepared CTCF sequences."
         ),
     )
     parser.add_argument(
@@ -132,6 +140,21 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Run only the cached-residual probe controls and exit. "
             "Requires results/activations/*_residual_mean.npz from a prior probe-cache run."
+        ),
+    )
+    parser.add_argument(
+        "--only-task-performance",
+        action="store_true",
+        help=(
+            "Run only downstream task-performance context baselines and exit. "
+            "Requires cached data/hf_downstream task datasets."
+        ),
+    )
+    parser.add_argument(
+        "--only-threshold-sensitivity",
+        action="store_true",
+        help=(
+            "Run only threshold sensitivity and null-calibration summaries from existing result tables."
         ),
     )
     parser.add_argument(
@@ -194,6 +217,7 @@ def run(argv: list[str] | None = None) -> int:
     )
     config = replace(
         config,
+        model=replace(config.model, device=args.device),
         data=replace(
             config.data,
             max_probe_train=args.max_probe_train,
@@ -215,6 +239,34 @@ def run(argv: list[str] | None = None) -> int:
         payload = {
             "message": f"Completed MINTS probe controls. Table: {control_path}",
             "table": str(control_path),
+        }
+        if args.json:
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            print(payload["message"])
+        return 0
+    if args.only_task_performance:
+        from .task_performance import evaluate_task_performance_context
+
+        table_path = evaluate_task_performance_context(config=config)
+        payload = {
+            "message": f"Completed MINTS task-performance context. Table: {table_path}",
+            "table": str(table_path),
+        }
+        if args.json:
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            print(payload["message"])
+        return 0
+    if args.only_threshold_sensitivity:
+        from .threshold_sensitivity import run_threshold_sensitivity
+
+        outputs = run_threshold_sensitivity(config=config)
+        payload = {
+            "message": f"Completed MINTS threshold sensitivity. Table: {outputs.table}",
+            "table": str(outputs.table),
+            "figure": str(outputs.figure),
+            "manifest": str(outputs.manifest),
         }
         if args.json:
             print(json.dumps(payload, indent=2, sort_keys=True))

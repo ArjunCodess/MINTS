@@ -14,14 +14,16 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 
 ## Key Achievements
 
-- **One-command reproducibility:** `python main.py` runs data checks, model loading, residual probing, QK/OV export, strict CTCF scans, systematic patching, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
+- **One-command reproducibility:** `python main.py` runs the full configured pipeline without debug caps: data checks, model loading, residual probing, QK/OV export, task-performance baselines, probe controls, strict CTCF scans, systematic patching, threshold sensitivity, SAE feature search, cross-model comparison, and writes [`results/pipeline_run.json`](results/pipeline_run.json).
 - **Strong residual decodability:** DNABERT-2 layer-11 probes reach AUROC `0.9137`, `0.9383`, `0.8954`, and `0.8847` on promoter/splice tasks, with bootstrap confidence intervals in [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv).
+- **Performance context before mechanism:** Raw-sequence baselines and frozen DNABERT sequence-head results are reported separately in [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv): GC-only AUROC ranges from `0.6361` to `0.9088`, TF-IDF `3-6`-mer AUROC ranges from `0.7956` to `0.9406`, and the frozen DNABERT layer-11 sequence head ranges from `0.8847` to `0.9383`. Residual readouts remain diagnostic decodability evidence, not full encoder fine-tuning.
 - **Probe interpretation controls:** The cached-residual control pass writes [`results/tables/linear_probe_controls.csv`](results/tables/linear_probe_controls.csv), covering GC-content-only probes, position-only metadata probes when coordinates are available, GC-matched test negatives, random-label residual probes, and GC distribution-shift probes.
+- **Threshold sensitivity:** [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv) and [`results/figures/threshold_sensitivity.png`](results/figures/threshold_sensitivity.png) show that individual relaxed CTCF QK/enrichment screens admit a few heads, but the joint CTCF result stays negative once `r >= 0.2`, even with `rho_h >= 1.1`.
 - **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
-- **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
+- **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. The full splice-donor rerun over `13,303` pairs no longer finds a threshold-crossing head; its best mean restoration is `PM = 0.1657` at layer `7`, head `0`.
 - **OV readout audit:** The previously suspected TATA-restoring layer `2`, head `7` does not directly align strongly with the trained TATA residual-probe direction; its top OV output-write singular-vector cosine is only `0.1261`, and the probe self-gain is `-0.0326`.
 - **Cross-model tokenization comparison:** On the same residual-probe benchmark, DNABERT-2 BPE outperformed the tested Nucleotide Transformer v2 100M fixed-6mer backend in this pipeline, with AUROC deltas from `+0.2408` to `+0.3259` in favor of DNABERT-2. This is a pipeline-level comparison of these two checkpoints, not a general claim about all Nucleotide Transformer models or all fixed-6mer tokenizers.
-- **Distributed feature search:** SAE feature search ran over `2,048` CTCF sequences with the corrected DNABERT GLU MLP hook. The residual stream has shape `2048 x 768`, the MLP post-activation features have shape `2048 x 3072`, and the top CTCF motif cosine is still weak at `0.1158`.
+- **Distributed feature search:** SAE feature search ran over all `51,249` CTCF sequences with the corrected DNABERT GLU MLP hook. The residual stream has shape `51249 x 768`, the MLP post-activation features have shape `51249 x 3072`, and the top CTCF motif cosine is still weak at `0.1092`.
 
 ## Overview
 
@@ -36,6 +38,25 @@ Genomic transformer predictions alone do not prove biological mechanisms. A high
 ### What is novel here
 
 The novel contribution is the combination of computational biology ground truth with mechanistic circuit tests on a reproducible local pipeline. The current run shows why this matters: the representation-level story is positive, but the strict single-head CTCF motif-detector story fails. That negative result is scientifically useful because it prevents an overclaim.
+
+### Biology and tokenization primer
+
+MINTS uses biological motifs as concrete mechanistic hypotheses. CTCF is the strict test case because it has a curated JASPAR binding motif and public ENCODE GM12878 peak calls. TATA boxes and splice donor sites are used for auxiliary perturbation tests because their sequence edits are compact and task-relevant.
+
+| Term | Meaning |
+|---|---|
+| Motif | Recurring DNA pattern associated with a biological function |
+| PWM | Position weight matrix for scoring motif-like DNA windows |
+| JASPAR | Public motif database; this project uses CTCF matrix `MA0139.1` |
+| CTCF | DNA-binding protein involved in chromatin organization and regulatory insulation |
+| TATA box | A/T-rich promoter element used for promoter perturbation tests |
+| Promoter | Regulatory DNA region near a gene start site |
+| Splice donor/acceptor | Intron boundary signals, usually `GT` and `AG` in genomic DNA |
+| Nucleotide token | Model input unit covering one or more DNA characters |
+| k-mer | Fixed-length DNA substring, such as a 6-mer |
+| BPE | Learned variable-length tokenizer; DNABERT-2 BPE tokens can span different nucleotide counts |
+
+Token support is interval-based. A motif hit spans a half-open nucleotide interval `[a, b)`, and a model token spans `[u, v)`. The token supports the motif when `max(0, min(v, b) - max(u, a)) >= 1`, meaning at least one nucleotide base overlaps. Special tokens with zero-width offsets stay aligned to hidden states but do not receive motif support.
 
 ### How it works
 
@@ -55,26 +76,42 @@ The novel contribution is the combination of computational biology ground truth 
 
 ## Latest Full Run
 
-The latest full run started at `2026-04-14 13:27:07` and ended at `2026-04-14 21:26:30` local time (`Asia/Calcutta`). The root manifest timestamp is `2026-04-14T15:56:30+00:00`. The manifest reports `28,760.213` seconds, or `7.989` hours, across all pipeline steps; the wall-clock log span is `7h 59m 23s`.
+The latest completed results were produced across two June 2026 log files. The first run covered `write_config` through `distributed_feature_search` from `2026-06-17 13:37:04` to `2026-06-17 23:26:04` local time (`Asia/Calcutta`). A first `cross_model_tokenization_comparison` attempt then ran from `2026-06-17 23:26:04` to the last recorded line at `2026-06-18 02:27:59`, reaching `49,000 / 51,249` DNABERT-2 CTCF sequences before that work was discarded. The completed cross-model rerun started at `2026-06-18 08:51:36` and ended at `2026-06-18 13:11:27`; its manifest timestamp is `2026-06-18T07:41:27+00:00`.
+
+Removing the overlapping discarded cross-model attempt, the non-overlapping completed pipeline time is `50,930.636` seconds, or `14h 08m 50.636s` (`14.147` hours). The wall-clock span from the first logged step to the final completed rerun is `23h 34m 23s`; machine-busy time including the discarded overlap is `17h 10m 46s`.
 
 Runtime breakdown:
 
 - `write_config`: `0.001s`
-- `ingest_hf_downstream`: `10.607s`
-- `download_encode_ctcf`: `0.258s`
-- `download_grch38`: `2.805s`
-- `prepare_ctcf_sequences`: `2.356s`
-- `circuit_extraction_and_residual_probing`: `659.838s`
-- `strict_mechanistic_proofs`: `9475.141s`
-- `systematic_causal_intervention`: `1344.551s`
-- `distributed_feature_search`: `33.110s`
-- `cross_model_tokenization_comparison`: `17231.546s`
+- `ingest_hf_downstream`: `10.133s`
+- `download_encode_ctcf`: `0.264s`
+- `download_grch38`: `3.489s`
+- `prepare_ctcf_sequences`: `2.463s`
+- `circuit_extraction_and_residual_probing`: `615.719s`
+- `downstream_task_performance`: `138.986s`
+- `probe_controls`: `98.232s`
+- `strict_mechanistic_proofs`: `10331.598s`
+- `systematic_causal_intervention`: `23616.074s`
+- `threshold_sensitivity`: `5.762s`
+- `distributed_feature_search`: `516.841s`
+- `cross_model_tokenization_comparison`: `15591.074s` from the completed rerun in [`results/pipeline_run_cross_model_tokenization_comparison.json`](results/pipeline_run_cross_model_tokenization_comparison.json)
 
-I inspected the full `results/` tree for this documentation update. It contains `125` files totaling about `4.71 GB`: `58` JSON files, `22` CSV files, `3` TSV files, `12` PNG figures, `28` NPZ archives, and `2` PyTorch SAE checkpoints. The large reproducible NPZ/PT/token-motif artifacts are intentionally ignored by Git.
+I inspected the full `results/` tree for this documentation update. It contains `136` files totaling about `5.06 GiB`: `62` JSON files, `28` CSV files, `3` TSV files, `13` PNG figures, `28` NPZ archives, and `2` PyTorch SAE checkpoints. The large reproducible NPZ/PT/token-motif artifacts are intentionally ignored by Git.
 
 ## Main Results
 
 ### DNABERT-2 Residual Probes
+
+Before mechanistic claims, the revision now reports raw-sequence performance context:
+
+| Task | GC AUROC | 3-6-mer AUROC | Frozen DNABERT sequence-head AUROC | Frozen DNABERT readout AUROC |
+|---|---:|---:|---:|---:|
+| `promoter_tata` | `0.8955` | `0.9297` | `0.9137` | `0.9137` |
+| `promoter_no_tata` | `0.9088` | `0.9406` | `0.9383` | `0.9383` |
+| `splice_sites_donors` | `0.6560` | `0.8185` | `0.8954` | `0.8954` |
+| `splice_sites_acceptors` | `0.6361` | `0.7956` | `0.8847` | `0.8847` |
+
+The GC and k-mer columns are task baselines from raw sequence alone. The frozen DNABERT sequence head is a balanced logistic classifier trained on cached layer-11 sequence embeddings. The readout column is retained as residual decodability context. Neither column is full encoder fine-tuning.
 
 Layer-11 residual vectors are strongly predictive for all four configured biological tasks:
 
@@ -94,6 +131,22 @@ python main.py --only-probe-controls
 ```
 
 This writes `results/tables/linear_probe_controls.csv` and `results/manifests/linear_probe_controls_manifest.json`.
+
+Regenerate the performance-context table:
+
+```bash
+python main.py --only-task-performance
+```
+
+This writes `results/tables/downstream_task_performance.csv` and `results/manifests/downstream_task_performance_manifest.json`.
+
+Regenerate the threshold-sensitivity summary:
+
+```bash
+python main.py --only-threshold-sensitivity
+```
+
+This writes `results/tables/threshold_sensitivity.csv`, `results/figures/threshold_sensitivity.png`, and `results/manifests/threshold_sensitivity_manifest.json`.
 
 Probe-control results from the updated run:
 
@@ -119,9 +172,25 @@ The strict CTCF scan used all `51,249` prepared GM12878 CTCF sequences.
 
 Interpretation: the QK correlations are statistically nonzero because the scan is very large, but the effect sizes are far below the registered `r >= 0.5` criterion. The enrichment ratios are close to background. The run does not prove a strict CTCF motif-detector head.
 
+Threshold sensitivity from [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv):
+
+| Sweep | Permissive count | Strict count | Best value |
+|---|---:|---:|---:|
+| CTCF QK `r` | `31` heads at `r >= 0.1` | `0` heads at `r >= 0.5` | `0.3004` |
+| CTCF enrichment `rho_h` | `3` heads at `rho_h >= 1.1` | `0` heads at `rho_h >= 2.0` | `1.3130` |
+| Joint CTCF QK/enrichment | `2` heads at `r >= 0.1`, `rho_h >= 1.1` | `0` heads at registered thresholds | n/a |
+
+The permissive joint count equals the 95th percentile of a 1,000-run permuted-head alignment null. No head jointly passes once the QK threshold is relaxed only to `r >= 0.2`, even when enrichment is relaxed to `rho_h >= 1.1`. Token-level motif-score calibration also stays conservative: the observed motif-support count is `256,918`, compared with a shuffled-score null 95th percentile of `36,093.05`, and the nearest-GC non-support background has `0` tokens above the motif-support threshold.
+
+The integrated evidence ledger is saved at [`results/tables/evidence_ledger.csv`](results/tables/evidence_ledger.csv). It maps each claim to the required evidence, observed result, supported interpretation, and limitation, so the strict CTCF conclusion is not mixed with the auxiliary promoter/splice results.
+
+Mechanistic-interpretability takeaway: probes and attention maps are useful hypothesis generators, but they can overstate biological mechanism when used alone. MINTS keeps the claim levels separate: residual decodability, task-specific causal restoration, motif-local attention, and strict circuit-level motif detection. The CTCF result is negative under the strict claim, which is the intended safeguard against false-positive motif-detector stories.
+
 ![CTCF QK-to-motif Pearson heatmap](results/figures/ctcf_qk_alignment_pearson_heatmap.png)
 
 ![CTCF matched attention enrichment heatmap](results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png)
+
+![Threshold sensitivity](results/figures/threshold_sensitivity.png)
 
 ### Activation Patching
 
@@ -138,9 +207,9 @@ Batch denoising patching is more important for the current run:
 | Task | Pairs | Best layer/head | Best PM | Mean PM | Denominator failures |
 |---|---:|---:|---:|---:|---:|
 | `promoter_tata` | `327` | layer `4`, head `8` | `1.4029` | `0.1604` | `0` |
-| `splice_sites_donors` | `500` | layer `1`, head `8` | `0.5485` | `0.0157` | `0` |
+| `splice_sites_donors` | `13,303` | layer `7`, head `0` | `0.1657` | `0.0062` | `0` |
 
-Interpretation: promoter-TATA has a strong causal signal under batch patching, but the best mean `PM = 1.4029` is an over-restoration result rather than a clean `PM = 1` recovery. That can mean the patched head activation amplifies the probe direction in the corrupted context, or it can reflect denominator sensitivity, probe geometry, or out-of-distribution patched states. Splice donor has a weaker but threshold-crossing best head. These are task-specific causal signals; they do not rescue the failed CTCF strict motif-detector claim.
+Interpretation: promoter-TATA has a strong causal signal under batch patching, but the best mean `PM = 1.4029` is an over-restoration result rather than a clean `PM = 1` recovery. That can mean the patched head activation amplifies the probe direction in the corrupted context, or it can reflect denominator sensitivity, probe geometry, or out-of-distribution patched states. The full splice-donor rerun does not show a threshold-crossing head; its best restoration is modest and its average restoration across heads is near zero. These task-specific interventions do not rescue the failed CTCF strict motif-detector claim.
 
 The OV readout audit for the earlier candidate layer `2`, head `7` found weak direct alignment with the trained TATA residual-probe direction:
 
@@ -160,16 +229,16 @@ Interpretation: layer `2`, head `7` can contribute to TATA restoration, but its 
 
 ### Distributed SAE Feature Search
 
-The distributed feature search trained sparse autoencoders on `2,048` CTCF sequences:
+The distributed feature search trained sparse autoencoders on all `51,249` CTCF sequences:
 
-- Residual activation shape: `2048 x 768`
-- MLP post-activation feature shape: `2048 x 3072`
+- Residual activation shape: `51249 x 768`
+- MLP post-activation feature shape: `51249 x 3072`
 - MLP hook target: `mlp.gated_layers.post_activation_glu`
 - Dictionary size: `512`
 - Epochs: `10`
-- Best residual CTCF motif cosine: `0.0884`, feature `31`, activation frequency `0.5049`
-- Best MLP CTCF motif cosine: `0.1158`, feature `414`, activation frequency `0.4795`
-- Global top-10 SAE features: `5` MLP features and `5` residual features
+- Best residual CTCF motif cosine: `0.1092`, feature `353`, activation frequency `0.9747`
+- Best MLP CTCF motif cosine: `0.0906`, feature `41`, activation frequency `0.9438`
+- Global top-10 SAE features: `4` MLP features and `6` residual features
 
 The corrected run no longer has the residual/MLP identity bug: residual and MLP tensors have different shapes, and the activation manifest records `residual_mlp_same_shape = false`.
 
@@ -224,7 +293,7 @@ python main.py
 Run a capped debug pass:
 
 ```bash
-python main.py --max-probe-train 512 --max-probe-test 256 --max-qk-alignment-sequences 128 --max-cross-model-qk-alignment-sequences 128 --max-feature-search-sequences 128 --sae-epochs 1
+python main.py --max-probe-train 512 --max-probe-test 256 --max-qk-alignment-sequences 128 --max-patching-pairs 32 --max-cross-model-qk-alignment-sequences 128 --max-feature-search-sequences 128 --sae-epochs 1
 ```
 
 Useful flags:
@@ -233,14 +302,16 @@ Useful flags:
 - `--max-probe-train`: cap train examples per task for activation caching and probing
 - `--max-probe-test`: cap test examples per task for activation caching and probing
 - `--max-qk-alignment-sequences`: cap CTCF sequences for strict QK motif-alignment exports
-- `--max-patching-pairs`: cap systematic denoising activation-patching pairs per task
-- `--max-feature-search-sequences`: cap CTCF sequences for residual/MLP SAE feature search
+- `--max-patching-pairs`: cap systematic denoising activation-patching pairs per task; omitted means all token-shape-preserving pairs
+- `--max-feature-search-sequences`: cap CTCF sequences for residual/MLP SAE feature search; omitted means all prepared CTCF sequences
 - `--sae-epochs`: control SAE training epochs
 - `--max-cross-model-qk-alignment-sequences`: cap CTCF sequences for cross-model QK/enrichment comparison
 - `--probe-bootstrap-samples`: bootstrap resamples for probe confidence intervals
 - `--probe-ci-level`: probe confidence interval level
 - `--probe-control-random-label-runs`: number of random-label residual-probe repeats in the control pass
 - `--only-probe-controls`: rerun only the cached-residual probe controls without loading the model or continuing through later pipeline steps
+- `--only-task-performance`: rerun raw-sequence GC/k-mer task baselines, train the cached frozen DNABERT sequence head, and join existing frozen-readout metrics when available
+- `--only-threshold-sensitivity`: rerun threshold sweeps and available null-calibration summaries from existing result tables
 - `--from-step`: start from a named checkpoint and continue forward
 - `--json`: print a machine-readable completion payload
 
@@ -284,7 +355,13 @@ CTCF-derived sequence tables are written under:
 Primary outputs:
 
 - [`results/pipeline_run.json`](results/pipeline_run.json)
+- [`results/pipeline_run_cross_model_tokenization_comparison.json`](results/pipeline_run_cross_model_tokenization_comparison.json)
 - [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv)
+- [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv)
+- [`results/tables/target_alignment_table.csv`](results/tables/target_alignment_table.csv)
+- [`results/tables/review_issue_matrix.csv`](results/tables/review_issue_matrix.csv)
+- [`results/tables/evidence_ledger.csv`](results/tables/evidence_ledger.csv)
+- [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv)
 - `results/tables/linear_probe_controls.csv`
 - [`results/tables/cross_model_tokenization_comparison.json`](results/tables/cross_model_tokenization_comparison.json)
 - [`results/qk_alignment/ctcf_qk_alignment.csv`](results/qk_alignment/ctcf_qk_alignment.csv)
@@ -298,6 +375,7 @@ Important figures:
 
 - [`results/figures/ctcf_qk_alignment_pearson_heatmap.png`](results/figures/ctcf_qk_alignment_pearson_heatmap.png)
 - [`results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png`](results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png)
+- [`results/figures/threshold_sensitivity.png`](results/figures/threshold_sensitivity.png)
 - [`results/figures/promoter_tata_dnabert_activation_patching_heatmap.png`](results/figures/promoter_tata_dnabert_activation_patching_heatmap.png)
 - [`results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png`](results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png)
 - [`results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png`](results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png)
@@ -330,7 +408,7 @@ Examples from the latest run:
 - `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_donors_train_residual_mean.npz` (`171.84 MiB`)
 - `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_acceptors_train_residual_mean.npz` (`171.84 MiB`)
 - `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/promoter_no_tata_train_residual_mean.npz` (`168.40 MiB`)
-- `results/distributed_features/ctcf_layer11_residual_mlp_activations.npz` (`27.97 MiB`)
+- `results/distributed_features/ctcf_layer11_residual_mlp_activations.npz` (`699.91 MiB`)
 - `results/distributed_features/ctcf_mlp_sae.pt` (`12.05 MiB`)
 
 These files can be regenerated by rerunning `python main.py`. The repository keeps the small CSV/JSON summaries and figures that are useful for review.
