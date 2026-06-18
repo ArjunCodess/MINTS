@@ -20,10 +20,10 @@ The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [
 - **Probe interpretation controls:** The cached-residual control pass writes [`results/tables/linear_probe_controls.csv`](results/tables/linear_probe_controls.csv), covering GC-content-only probes, position-only metadata probes when coordinates are available, GC-matched test negatives, random-label residual probes, and GC distribution-shift probes.
 - **Threshold sensitivity:** [`results/tables/threshold_sensitivity.csv`](results/tables/threshold_sensitivity.csv) and [`results/figures/threshold_sensitivity.png`](results/figures/threshold_sensitivity.png) show that individual relaxed CTCF QK/enrichment screens admit a few heads, but the joint CTCF result stays negative once `r >= 0.2`, even with `rho_h >= 1.1`.
 - **Negative strict CTCF proof after BPE alignment:** Across the full `51,249` GM12878 CTCF sequence scan, no tested DNABERT-2 head passed the registered CTCF QK criterion `r >= 0.5, p < 0.05`, and no head passed matched attention enrichment `rho_h >= 2.0`. The best all-layer DNABERT-2 values were `r = 0.3004` and `rho_h = 1.3130`.
-- **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. Splice-donor patching found a weaker but threshold-crossing best head, layer `1`, head `8`, with `PM = 0.5485` over `500` pairs.
+- **Causal patching signal:** Batch DNABERT forward-hook patching found promoter-TATA over-restoration, with best mean restoration `PM = 1.4029` at layer `4`, head `8` over `327` pairs. Because `PM > 1` overshoots the clean-minus-corrupted effect, this is treated as a strong but methodologically sensitive signal rather than a simple "full restoration" result. The full splice-donor rerun over `13,303` pairs no longer finds a threshold-crossing head; its best mean restoration is `PM = 0.1657` at layer `7`, head `0`.
 - **OV readout audit:** The previously suspected TATA-restoring layer `2`, head `7` does not directly align strongly with the trained TATA residual-probe direction; its top OV output-write singular-vector cosine is only `0.1261`, and the probe self-gain is `-0.0326`.
 - **Cross-model tokenization comparison:** On the same residual-probe benchmark, DNABERT-2 BPE outperformed the tested Nucleotide Transformer v2 100M fixed-6mer backend in this pipeline, with AUROC deltas from `+0.2408` to `+0.3259` in favor of DNABERT-2. This is a pipeline-level comparison of these two checkpoints, not a general claim about all Nucleotide Transformer models or all fixed-6mer tokenizers.
-- **Distributed feature search:** SAE feature search ran over `2,048` CTCF sequences with the corrected DNABERT GLU MLP hook. The residual stream has shape `2048 x 768`, the MLP post-activation features have shape `2048 x 3072`, and the top CTCF motif cosine is still weak at `0.1158`.
+- **Distributed feature search:** SAE feature search ran over all `51,249` CTCF sequences with the corrected DNABERT GLU MLP hook. The residual stream has shape `51249 x 768`, the MLP post-activation features have shape `51249 x 3072`, and the top CTCF motif cosine is still weak at `0.1092`.
 
 ## Overview
 
@@ -76,22 +76,27 @@ Token support is interval-based. A motif hit spans a half-open nucleotide interv
 
 ## Latest Full Run
 
-The latest full run started at `2026-04-14 13:27:07` and ended at `2026-04-14 21:26:30` local time (`Asia/Calcutta`). The root manifest timestamp is `2026-04-14T15:56:30+00:00`. The manifest reports `28,760.213` seconds, or `7.989` hours, across all pipeline steps; the wall-clock log span is `7h 59m 23s`.
+The latest completed results were produced across two June 2026 log files. The first run covered `write_config` through `distributed_feature_search` from `2026-06-17 13:37:04` to `2026-06-17 23:26:04` local time (`Asia/Calcutta`). A first `cross_model_tokenization_comparison` attempt then ran from `2026-06-17 23:26:04` to the last recorded line at `2026-06-18 02:27:59`, reaching `49,000 / 51,249` DNABERT-2 CTCF sequences before that work was discarded. The completed cross-model rerun started at `2026-06-18 08:51:36` and ended at `2026-06-18 13:11:27`; its manifest timestamp is `2026-06-18T07:41:27+00:00`.
+
+Removing the overlapping discarded cross-model attempt, the non-overlapping completed pipeline time is `50,930.636` seconds, or `14h 08m 50.636s` (`14.147` hours). The wall-clock span from the first logged step to the final completed rerun is `23h 34m 23s`; machine-busy time including the discarded overlap is `17h 10m 46s`.
 
 Runtime breakdown:
 
 - `write_config`: `0.001s`
-- `ingest_hf_downstream`: `10.607s`
-- `download_encode_ctcf`: `0.258s`
-- `download_grch38`: `2.805s`
-- `prepare_ctcf_sequences`: `2.356s`
-- `circuit_extraction_and_residual_probing`: `659.838s`
-- `strict_mechanistic_proofs`: `9475.141s`
-- `systematic_causal_intervention`: `1344.551s`
-- `distributed_feature_search`: `33.110s`
-- `cross_model_tokenization_comparison`: `17231.546s`
+- `ingest_hf_downstream`: `10.133s`
+- `download_encode_ctcf`: `0.264s`
+- `download_grch38`: `3.489s`
+- `prepare_ctcf_sequences`: `2.463s`
+- `circuit_extraction_and_residual_probing`: `615.719s`
+- `downstream_task_performance`: `138.986s`
+- `probe_controls`: `98.232s`
+- `strict_mechanistic_proofs`: `10331.598s`
+- `systematic_causal_intervention`: `23616.074s`
+- `threshold_sensitivity`: `5.762s`
+- `distributed_feature_search`: `516.841s`
+- `cross_model_tokenization_comparison`: `15591.074s` from the completed rerun in [`results/pipeline_run_cross_model_tokenization_comparison.json`](results/pipeline_run_cross_model_tokenization_comparison.json)
 
-I inspected the full `results/` tree for this documentation update. It contains `125` files totaling about `4.71 GB`: `58` JSON files, `22` CSV files, `3` TSV files, `12` PNG figures, `28` NPZ archives, and `2` PyTorch SAE checkpoints. The large reproducible NPZ/PT/token-motif artifacts are intentionally ignored by Git.
+I inspected the full `results/` tree for this documentation update. It contains `136` files totaling about `5.06 GiB`: `62` JSON files, `28` CSV files, `3` TSV files, `13` PNG figures, `28` NPZ archives, and `2` PyTorch SAE checkpoints. The large reproducible NPZ/PT/token-motif artifacts are intentionally ignored by Git.
 
 ## Main Results
 
@@ -202,9 +207,9 @@ Batch denoising patching is more important for the current run:
 | Task | Pairs | Best layer/head | Best PM | Mean PM | Denominator failures |
 |---|---:|---:|---:|---:|---:|
 | `promoter_tata` | `327` | layer `4`, head `8` | `1.4029` | `0.1604` | `0` |
-| `splice_sites_donors` | `500` | layer `1`, head `8` | `0.5485` | `0.0157` | `0` |
+| `splice_sites_donors` | `13,303` | layer `7`, head `0` | `0.1657` | `0.0062` | `0` |
 
-Interpretation: promoter-TATA has a strong causal signal under batch patching, but the best mean `PM = 1.4029` is an over-restoration result rather than a clean `PM = 1` recovery. That can mean the patched head activation amplifies the probe direction in the corrupted context, or it can reflect denominator sensitivity, probe geometry, or out-of-distribution patched states. Splice donor has a weaker but threshold-crossing best head. These are task-specific causal signals; they do not rescue the failed CTCF strict motif-detector claim.
+Interpretation: promoter-TATA has a strong causal signal under batch patching, but the best mean `PM = 1.4029` is an over-restoration result rather than a clean `PM = 1` recovery. That can mean the patched head activation amplifies the probe direction in the corrupted context, or it can reflect denominator sensitivity, probe geometry, or out-of-distribution patched states. The full splice-donor rerun does not show a threshold-crossing head; its best restoration is modest and its average restoration across heads is near zero. These task-specific interventions do not rescue the failed CTCF strict motif-detector claim.
 
 The OV readout audit for the earlier candidate layer `2`, head `7` found weak direct alignment with the trained TATA residual-probe direction:
 
@@ -224,16 +229,16 @@ Interpretation: layer `2`, head `7` can contribute to TATA restoration, but its 
 
 ### Distributed SAE Feature Search
 
-The distributed feature search trained sparse autoencoders on `2,048` CTCF sequences:
+The distributed feature search trained sparse autoencoders on all `51,249` CTCF sequences:
 
-- Residual activation shape: `2048 x 768`
-- MLP post-activation feature shape: `2048 x 3072`
+- Residual activation shape: `51249 x 768`
+- MLP post-activation feature shape: `51249 x 3072`
 - MLP hook target: `mlp.gated_layers.post_activation_glu`
 - Dictionary size: `512`
 - Epochs: `10`
-- Best residual CTCF motif cosine: `0.0884`, feature `31`, activation frequency `0.5049`
-- Best MLP CTCF motif cosine: `0.1158`, feature `414`, activation frequency `0.4795`
-- Global top-10 SAE features: `5` MLP features and `5` residual features
+- Best residual CTCF motif cosine: `0.1092`, feature `353`, activation frequency `0.9747`
+- Best MLP CTCF motif cosine: `0.0906`, feature `41`, activation frequency `0.9438`
+- Global top-10 SAE features: `4` MLP features and `6` residual features
 
 The corrected run no longer has the residual/MLP identity bug: residual and MLP tensors have different shapes, and the activation manifest records `residual_mlp_same_shape = false`.
 
@@ -350,6 +355,7 @@ CTCF-derived sequence tables are written under:
 Primary outputs:
 
 - [`results/pipeline_run.json`](results/pipeline_run.json)
+- [`results/pipeline_run_cross_model_tokenization_comparison.json`](results/pipeline_run_cross_model_tokenization_comparison.json)
 - [`results/tables/linear_probe_metrics.csv`](results/tables/linear_probe_metrics.csv)
 - [`results/tables/downstream_task_performance.csv`](results/tables/downstream_task_performance.csv)
 - [`results/tables/target_alignment_table.csv`](results/tables/target_alignment_table.csv)
@@ -402,7 +408,7 @@ Examples from the latest run:
 - `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_donors_train_residual_mean.npz` (`171.84 MiB`)
 - `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/splice_sites_acceptors_train_residual_mean.npz` (`171.84 MiB`)
 - `results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/activations/promoter_no_tata_train_residual_mean.npz` (`168.40 MiB`)
-- `results/distributed_features/ctcf_layer11_residual_mlp_activations.npz` (`27.97 MiB`)
+- `results/distributed_features/ctcf_layer11_residual_mlp_activations.npz` (`699.91 MiB`)
 - `results/distributed_features/ctcf_mlp_sae.pt` (`12.05 MiB`)
 
 These files can be regenerated by rerunning `python main.py`. The repository keeps the small CSV/JSON summaries and figures that are useful for review.
