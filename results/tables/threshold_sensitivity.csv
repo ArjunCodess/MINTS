@@ -12,10 +12,10 @@ single_metric_sensitivity,promoter_tata,patching_pm,,,0.25,40.0,,,40.0,,,,,4.0,8
 single_metric_sensitivity,promoter_tata,patching_pm,,,0.5,20.0,,,20.0,,,,,4.0,8.0,1.4028715758042842,Task-specific patching sensitivity; not part of the strict CTCF chain.
 single_metric_sensitivity,promoter_tata,patching_pm,,,0.75,16.0,,,16.0,,,,,4.0,8.0,1.4028715758042842,Task-specific patching sensitivity; not part of the strict CTCF chain.
 single_metric_sensitivity,promoter_tata,patching_pm,,,1.0,10.0,,,10.0,,,,,4.0,8.0,1.4028715758042842,Task-specific patching sensitivity; not part of the strict CTCF chain.
-single_metric_sensitivity,splice_sites_donors,patching_pm,,,0.25,3.0,,,3.0,,,,,1.0,8.0,0.548538463353492,Task-specific patching sensitivity; not part of the strict CTCF chain.
-single_metric_sensitivity,splice_sites_donors,patching_pm,,,0.5,1.0,,,1.0,,,,,1.0,8.0,0.548538463353492,Task-specific patching sensitivity; not part of the strict CTCF chain.
-single_metric_sensitivity,splice_sites_donors,patching_pm,,,0.75,0.0,,,0.0,,,,,1.0,8.0,0.548538463353492,Task-specific patching sensitivity; not part of the strict CTCF chain.
-single_metric_sensitivity,splice_sites_donors,patching_pm,,,1.0,0.0,,,0.0,,,,,1.0,8.0,0.548538463353492,Task-specific patching sensitivity; not part of the strict CTCF chain.
+single_metric_sensitivity,splice_sites_donors,patching_pm,,,0.25,0.0,,,0.0,,,,,7.0,0.0,0.1657470605000487,Task-specific patching sensitivity; not part of the strict CTCF chain.
+single_metric_sensitivity,splice_sites_donors,patching_pm,,,0.5,0.0,,,0.0,,,,,7.0,0.0,0.1657470605000487,Task-specific patching sensitivity; not part of the strict CTCF chain.
+single_metric_sensitivity,splice_sites_donors,patching_pm,,,0.75,0.0,,,0.0,,,,,7.0,0.0,0.1657470605000487,Task-specific patching sensitivity; not part of the strict CTCF chain.
+single_metric_sensitivity,splice_sites_donors,patching_pm,,,1.0,0.0,,,0.0,,,,,7.0,0.0,0.1657470605000487,Task-specific patching sensitivity; not part of the strict CTCF chain.
 joint_ctcf_sensitivity,CTCF,qk_and_enrichment,0.1,1.1,,2.0,31.0,3.0,,2.0,permuted_head_alignment,0.662,2.0,,,,Joint CTCF QK/enrichment count under threshold relaxation.
 joint_ctcf_sensitivity,CTCF,qk_and_enrichment,0.1,1.25,,1.0,31.0,1.0,,1.0,permuted_head_alignment,0.228,1.0,,,,Joint CTCF QK/enrichment count under threshold relaxation.
 joint_ctcf_sensitivity,CTCF,qk_and_enrichment,0.1,1.5,,0.0,31.0,0.0,,0.0,permuted_head_alignment,0.0,0.0,,,,Joint CTCF QK/enrichment count under threshold relaxation.
@@ -36,5 +36,6 @@ joint_ctcf_sensitivity,CTCF,qk_and_enrichment,0.5,1.1,,0.0,0.0,3.0,,0.0,permuted
 joint_ctcf_sensitivity,CTCF,qk_and_enrichment,0.5,1.25,,0.0,0.0,1.0,,0.0,permuted_head_alignment,0.0,0.0,,,,Joint CTCF QK/enrichment count under threshold relaxation.
 joint_ctcf_sensitivity,CTCF,qk_and_enrichment,0.5,1.5,,0.0,0.0,0.0,,0.0,permuted_head_alignment,0.0,0.0,,,,Joint CTCF QK/enrichment count under threshold relaxation.
 joint_ctcf_sensitivity,CTCF,qk_and_enrichment,0.5,2.0,,0.0,0.0,0.0,,0.0,permuted_head_alignment,0.0,0.0,,,,Joint CTCF QK/enrichment count under threshold relaxation.
-null_calibration_status,CTCF,qk_pearson_r,,,,,,,,,shuffled_motif_scores,,,,,,"Not recomputed from aggregate artifacts; requires per-token QK score vectors, not just saved per-head Pearson summaries."
-null_calibration_status,CTCF,attention_enrichment_rho,,,,,,,,,gc_matched_background,,,,,,Not present in current artifacts; current enrichment uses position-matched non-motif backgrounds.
+null_calibration,CTCF,token_motif_support_count,,,,256918.0,,,,,shuffled_motif_scores,35805.412,36093.05,,,25.34024429321289,Motif-support count compared with shuffled token motif scores.
+null_calibration,CTCF,token_motif_support_count,,,,256918.0,,,,,gc_matched_background,0.0,0.0,,,4.055717945098877,Nearest-GC non-support tokens rarely exceed the motif-support threshold.
+null_calibration_status,CTCF,qk_pearson_r,,,,,,,,,per_head_shuffled_qk_scores,,,,,,Per-head shuffled QK-score nulls require saved per-token QK score vectors; current aggregate QK artifacts contain per-head Pearson summaries only.

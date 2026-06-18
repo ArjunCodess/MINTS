@@ -1,0 +1,1412 @@
+(.venv) PS C:\Users\USER\desktop\code\mints> python main.py --device cuda
+[MINTS 13:37:04] Creating required data/results directories
+[MINTS 13:37:04] Starting step: write_config
+[MINTS 13:37:04] Writing config snapshot to C:\Users\USER\Desktop\code\MINTS\results\manifests\pipeline_config.json
+[MINTS 13:37:04] Completed step: write_config in 0.001s
+[MINTS 13:37:04] Starting step: ingest_hf_downstream
+[MINTS 13:37:04] Preparing Hugging Face downstream task datasets
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Resolving data files: 100%|████████████████████████████████████████████████████████████████████████| 18/18 [00:00<00:00, 29793.79it/s]
+Resolving data files: 100%|████████████████████████████████████████████████████████████████████████| 18/18 [00:00<00:00, 55390.66it/s]
+[MINTS 13:37:14] Preparing HF downstream task: promoter_tata
+[MINTS 13:37:14] Filtering train split for task=promoter_tata
+[MINTS 13:37:14] Filtering test split for task=promoter_tata
+[MINTS 13:37:14] Reusing cached tokenized dataset for promoter_tata: {'train': 5062, 'test': 212}
+[MINTS 13:37:14] Preparing HF downstream task: promoter_no_tata
+[MINTS 13:37:14] Filtering train split for task=promoter_no_tata
+[MINTS 13:37:14] Filtering test split for task=promoter_no_tata
+[MINTS 13:37:14] Reusing cached tokenized dataset for promoter_no_tata: {'train': 30000, 'test': 1372}
+[MINTS 13:37:14] Preparing HF downstream task: splice_sites_donors
+[MINTS 13:37:14] Filtering train split for task=splice_sites_donors
+[MINTS 13:37:14] Filtering test split for task=splice_sites_donors
+[MINTS 13:37:14] Reusing cached tokenized dataset for splice_sites_donors: {'train': 30000, 'test': 3000}
+[MINTS 13:37:14] Preparing HF downstream task: splice_sites_acceptors
+[MINTS 13:37:14] Filtering train split for task=splice_sites_acceptors
+[MINTS 13:37:14] Filtering test split for task=splice_sites_acceptors
+[MINTS 13:37:14] Reusing cached tokenized dataset for splice_sites_acceptors: {'train': 30000, 'test': 3000}
+[MINTS 13:37:14] Completed step: ingest_hf_downstream in 10.133s
+[MINTS 13:37:14] Starting step: download_encode_ctcf
+[MINTS 13:37:14] Checking ENCODE CTCF artifacts
+[MINTS 13:37:14] Checking ENCODE artifact: ENCFF680XUD.bigWig
+[MINTS 13:37:14] Checking ENCODE artifact: ENCFF827JRI.bed.gz
+[MINTS 13:37:14] Checking ENCODE artifact: ENCFF511URZ.bigBed
+[MINTS 13:37:14] Completed step: download_encode_ctcf in 0.264s
+[MINTS 13:37:14] Starting step: download_grch38
+[MINTS 13:37:14] Checking GRCh38 FASTA
+[MINTS 13:37:18] Completed step: download_grch38 in 3.489s
+[MINTS 13:37:18] Starting step: prepare_ctcf_sequences
+[MINTS 13:37:18] Preparing CTCF peak sequence table
+[MINTS 13:37:20] Completed step: prepare_ctcf_sequences in 2.463s
+[MINTS 13:37:20] Starting step: circuit_extraction_and_residual_probing
+[MINTS 13:37:20] Loading model: zhihan1996/DNABERT-2-117M
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████| 136/136 [00:00<00:00, 34226.89it/s]
+BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     |
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.decoder.bias               | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.decoder.weight             | UNEXPECTED |
+pooler.dense.bias                          | MISSING    |
+pooler.dense.weight                        | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 13:37:26] Model ready on cuda using huggingface_forward_hooks
+[MINTS 13:37:26] Caching residual activations for probe tasks
+[MINTS 13:37:26] Starting residual-cache exports for task: promoter_tata
+[MINTS 13:37:26] Loading cached dataset split: promoter_tata/train
+[MINTS 13:37:26] Caching residuals for promoter_tata/train: 5062 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:37:26] promoter_tata/train: cached 8/5062 examples
+[MINTS 13:37:28] promoter_tata/train: cached 504/5062 examples
+[MINTS 13:37:30] promoter_tata/train: cached 1008/5062 examples
+[MINTS 13:37:32] promoter_tata/train: cached 1512/5062 examples
+[MINTS 13:37:34] promoter_tata/train: cached 2016/5062 examples
+[MINTS 13:37:36] promoter_tata/train: cached 2520/5062 examples
+[MINTS 13:37:38] promoter_tata/train: cached 3024/5062 examples
+[MINTS 13:37:40] promoter_tata/train: cached 3528/5062 examples
+[MINTS 13:37:42] promoter_tata/train: cached 4032/5062 examples
+[MINTS 13:37:43] promoter_tata/train: cached 4536/5062 examples
+[MINTS 13:37:45] promoter_tata/train: cached 5040/5062 examples
+[MINTS 13:37:45] promoter_tata/train: cached 5062/5062 examples
+[MINTS 13:37:45] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\promoter_tata_train_residual_mean.npz
+[MINTS 13:37:47] Finished residual cache for promoter_tata/train: shape=[5062, 3, 768]
+[MINTS 13:37:47] Loading cached dataset split: promoter_tata/test
+[MINTS 13:37:47] Caching residuals for promoter_tata/test: 212 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:37:47] promoter_tata/test: cached 8/212 examples
+[MINTS 13:37:47] promoter_tata/test: cached 16/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 32/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 48/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 64/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 80/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 96/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 112/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 128/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 144/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 160/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 176/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 192/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 208/212 examples
+[MINTS 13:37:48] promoter_tata/test: cached 212/212 examples
+[MINTS 13:37:48] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\promoter_tata_test_residual_mean.npz
+[MINTS 13:37:48] Finished residual cache for promoter_tata/test: shape=[212, 3, 768]
+[MINTS 13:37:48] Finished residual-cache exports for task: promoter_tata
+[MINTS 13:37:48] Starting residual-cache exports for task: promoter_no_tata
+[MINTS 13:37:48] Loading cached dataset split: promoter_no_tata/train
+[MINTS 13:37:48] Caching residuals for promoter_no_tata/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:37:48] promoter_no_tata/train: cached 8/30000 examples
+[MINTS 13:37:59] promoter_no_tata/train: cached 3000/30000 examples
+[MINTS 13:38:10] promoter_no_tata/train: cached 6000/30000 examples
+[MINTS 13:38:21] promoter_no_tata/train: cached 9000/30000 examples
+[MINTS 13:38:31] promoter_no_tata/train: cached 12000/30000 examples
+[MINTS 13:38:43] promoter_no_tata/train: cached 15000/30000 examples
+[MINTS 13:38:54] promoter_no_tata/train: cached 18000/30000 examples
+[MINTS 13:39:05] promoter_no_tata/train: cached 21000/30000 examples
+[MINTS 13:39:16] promoter_no_tata/train: cached 24000/30000 examples
+[MINTS 13:39:27] promoter_no_tata/train: cached 27000/30000 examples
+[MINTS 13:39:38] promoter_no_tata/train: cached 30000/30000 examples
+[MINTS 13:39:38] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\promoter_no_tata_train_residual_mean.npz
+[MINTS 13:39:48] Finished residual cache for promoter_no_tata/train: shape=[30000, 3, 768]
+[MINTS 13:39:48] Loading cached dataset split: promoter_no_tata/test
+[MINTS 13:39:48] Caching residuals for promoter_no_tata/test: 1372 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:39:49] promoter_no_tata/test: cached 8/1372 examples
+[MINTS 13:39:49] promoter_no_tata/test: cached 136/1372 examples
+[MINTS 13:39:50] promoter_no_tata/test: cached 272/1372 examples
+[MINTS 13:39:50] promoter_no_tata/test: cached 408/1372 examples
+[MINTS 13:39:51] promoter_no_tata/test: cached 544/1372 examples
+[MINTS 13:39:51] promoter_no_tata/test: cached 680/1372 examples
+[MINTS 13:39:52] promoter_no_tata/test: cached 816/1372 examples
+[MINTS 13:39:52] promoter_no_tata/test: cached 952/1372 examples
+[MINTS 13:39:53] promoter_no_tata/test: cached 1088/1372 examples
+[MINTS 13:39:53] promoter_no_tata/test: cached 1224/1372 examples
+[MINTS 13:39:54] promoter_no_tata/test: cached 1360/1372 examples
+[MINTS 13:39:54] promoter_no_tata/test: cached 1372/1372 examples
+[MINTS 13:39:54] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\promoter_no_tata_test_residual_mean.npz
+[MINTS 13:39:54] Finished residual cache for promoter_no_tata/test: shape=[1372, 3, 768]
+[MINTS 13:39:54] Finished residual-cache exports for task: promoter_no_tata
+[MINTS 13:39:54] Starting residual-cache exports for task: splice_sites_donors
+[MINTS 13:39:54] Loading cached dataset split: splice_sites_donors/train
+[MINTS 13:39:54] Caching residuals for splice_sites_donors/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:39:55] splice_sites_donors/train: cached 8/30000 examples
+[MINTS 13:40:12] splice_sites_donors/train: cached 3000/30000 examples
+[MINTS 13:40:29] splice_sites_donors/train: cached 6000/30000 examples
+[MINTS 13:40:46] splice_sites_donors/train: cached 9000/30000 examples
+[MINTS 13:41:03] splice_sites_donors/train: cached 12000/30000 examples
+[MINTS 13:41:21] splice_sites_donors/train: cached 15000/30000 examples
+[MINTS 13:41:38] splice_sites_donors/train: cached 18000/30000 examples
+[MINTS 13:41:55] splice_sites_donors/train: cached 21000/30000 examples
+[MINTS 13:42:12] splice_sites_donors/train: cached 24000/30000 examples
+[MINTS 13:42:30] splice_sites_donors/train: cached 27000/30000 examples
+[MINTS 13:42:47] splice_sites_donors/train: cached 30000/30000 examples
+[MINTS 13:42:47] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\splice_sites_donors_train_residual_mean.npz
+[MINTS 13:43:00] Finished residual cache for splice_sites_donors/train: shape=[30000, 3, 768]
+[MINTS 13:43:00] Loading cached dataset split: splice_sites_donors/test
+[MINTS 13:43:00] Caching residuals for splice_sites_donors/test: 3000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:43:00] splice_sites_donors/test: cached 8/3000 examples
+[MINTS 13:43:01] splice_sites_donors/test: cached 296/3000 examples
+[MINTS 13:43:03] splice_sites_donors/test: cached 592/3000 examples
+[MINTS 13:43:05] splice_sites_donors/test: cached 888/3000 examples
+[MINTS 13:43:07] splice_sites_donors/test: cached 1184/3000 examples
+[MINTS 13:43:08] splice_sites_donors/test: cached 1480/3000 examples
+[MINTS 13:43:10] splice_sites_donors/test: cached 1776/3000 examples
+[MINTS 13:43:12] splice_sites_donors/test: cached 2072/3000 examples
+[MINTS 13:43:14] splice_sites_donors/test: cached 2368/3000 examples
+[MINTS 13:43:15] splice_sites_donors/test: cached 2664/3000 examples
+[MINTS 13:43:17] splice_sites_donors/test: cached 2960/3000 examples
+[MINTS 13:43:17] splice_sites_donors/test: cached 3000/3000 examples
+[MINTS 13:43:17] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\splice_sites_donors_test_residual_mean.npz
+[MINTS 13:43:18] Finished residual cache for splice_sites_donors/test: shape=[3000, 3, 768]
+[MINTS 13:43:18] Finished residual-cache exports for task: splice_sites_donors
+[MINTS 13:43:18] Starting residual-cache exports for task: splice_sites_acceptors
+[MINTS 13:43:18] Loading cached dataset split: splice_sites_acceptors/train
+[MINTS 13:43:18] Caching residuals for splice_sites_acceptors/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:43:19] splice_sites_acceptors/train: cached 8/30000 examples
+[MINTS 13:43:36] splice_sites_acceptors/train: cached 3000/30000 examples
+[MINTS 13:43:53] splice_sites_acceptors/train: cached 6000/30000 examples
+[MINTS 13:44:10] splice_sites_acceptors/train: cached 9000/30000 examples
+[MINTS 13:44:27] splice_sites_acceptors/train: cached 12000/30000 examples
+[MINTS 13:44:44] splice_sites_acceptors/train: cached 15000/30000 examples
+[MINTS 13:45:01] splice_sites_acceptors/train: cached 18000/30000 examples
+[MINTS 13:45:18] splice_sites_acceptors/train: cached 21000/30000 examples
+[MINTS 13:45:35] splice_sites_acceptors/train: cached 24000/30000 examples
+[MINTS 13:45:52] splice_sites_acceptors/train: cached 27000/30000 examples
+[MINTS 13:46:10] splice_sites_acceptors/train: cached 30000/30000 examples
+[MINTS 13:46:11] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\splice_sites_acceptors_train_residual_mean.npz
+[MINTS 13:46:24] Finished residual cache for splice_sites_acceptors/train: shape=[30000, 3, 768]
+[MINTS 13:46:25] Loading cached dataset split: splice_sites_acceptors/test
+[MINTS 13:46:25] Caching residuals for splice_sites_acceptors/test: 3000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 13:46:25] splice_sites_acceptors/test: cached 8/3000 examples
+[MINTS 13:46:26] splice_sites_acceptors/test: cached 296/3000 examples
+[MINTS 13:46:28] splice_sites_acceptors/test: cached 592/3000 examples
+[MINTS 13:46:30] splice_sites_acceptors/test: cached 888/3000 examples
+[MINTS 13:46:32] splice_sites_acceptors/test: cached 1184/3000 examples
+[MINTS 13:46:35] splice_sites_acceptors/test: cached 1480/3000 examples
+[MINTS 13:46:37] splice_sites_acceptors/test: cached 1776/3000 examples
+[MINTS 13:46:39] splice_sites_acceptors/test: cached 2072/3000 examples
+[MINTS 13:46:41] splice_sites_acceptors/test: cached 2368/3000 examples
+[MINTS 13:46:42] splice_sites_acceptors/test: cached 2664/3000 examples
+[MINTS 13:46:44] splice_sites_acceptors/test: cached 2960/3000 examples
+[MINTS 13:46:45] splice_sites_acceptors/test: cached 3000/3000 examples
+[MINTS 13:46:45] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\activations\splice_sites_acceptors_test_residual_mean.npz
+[MINTS 13:46:46] Finished residual cache for splice_sites_acceptors/test: shape=[3000, 3, 768]
+[MINTS 13:46:46] Finished residual-cache exports for task: splice_sites_acceptors
+[MINTS 13:46:46] Extracting QK/OV circuit matrices
+[MINTS 13:46:46] Extracting QK/OV matrices for layer 0
+[MINTS 13:46:47] Extracting QK/OV matrices for layer 1
+[MINTS 13:46:47] Extracting QK/OV matrices for layer 2
+[MINTS 13:46:47] Extracting QK/OV matrices for layer 3
+[MINTS 13:46:47] Extracting QK/OV matrices for layer 4
+[MINTS 13:46:48] Extracting QK/OV matrices for layer 5
+[MINTS 13:46:48] Extracting QK/OV matrices for layer 6
+[MINTS 13:46:48] Extracting QK/OV matrices for layer 7
+[MINTS 13:46:49] Extracting QK/OV matrices for layer 8
+[MINTS 13:46:49] Extracting QK/OV matrices for layer 9
+[MINTS 13:46:50] Extracting QK/OV matrices for layer 10
+[MINTS 13:46:50] Extracting QK/OV matrices for layer 11
+[MINTS 13:46:50] Writing QK/OV matrix archive: C:\Users\USER\Desktop\code\MINTS\results\circuits\qk_ov_matrices.npz
+[MINTS 13:47:16] Finished QK/OV export: layers=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], heads=12, d_model=768, d_head=64
+[MINTS 13:47:17] Training linear probes from cached residuals
+[MINTS 13:47:17] Loading residual caches for probe: task=promoter_tata, layer=11
+[MINTS 13:47:17] Training probe for promoter_tata: train=5062, test=212, train_pos_rate=0.500, test_pos_rate=0.500
+[MINTS 13:47:18] Probe complete for promoter_tata: AUROC=0.9137, AUPRC=0.9241, accuracy=0.8349
+[MINTS 13:47:18] Loading residual caches for probe: task=promoter_no_tata, layer=11
+[MINTS 13:47:19] Training probe for promoter_no_tata: train=30000, test=1372, train_pos_rate=0.499, test_pos_rate=0.500
+[MINTS 13:47:23] Probe complete for promoter_no_tata: AUROC=0.9383, AUPRC=0.9475, accuracy=0.8550
+[MINTS 13:47:23] Loading residual caches for probe: task=splice_sites_donors, layer=11
+[MINTS 13:47:24] Training probe for splice_sites_donors: train=30000, test=3000, train_pos_rate=0.503, test_pos_rate=0.493
+[MINTS 13:47:28] Probe complete for splice_sites_donors: AUROC=0.8954, AUPRC=0.9049, accuracy=0.8230
+[MINTS 13:47:28] Loading residual caches for probe: task=splice_sites_acceptors, layer=11
+[MINTS 13:47:29] Training probe for splice_sites_acceptors: train=30000, test=3000, train_pos_rate=0.501, test_pos_rate=0.492
+[MINTS 13:47:33] Probe complete for splice_sites_acceptors: AUROC=0.8847, AUPRC=0.8954, accuracy=0.8090
+[MINTS 13:47:33] Writing probe metrics table: C:\Users\USER\Desktop\code\MINTS\results\tables\linear_probe_metrics.csv
+[MINTS 13:47:33] Analyzing OV readout alignment for the promoter-TATA restoring head
+[MINTS 13:47:33] Analyzing OV readout alignment for promoter_tata: layer=2, head=7
+[MINTS 13:47:36] Finished TATA OV readout analysis: top_output_abs_cos=0.1261, probe_self_gain=-0.0326
+[MINTS 13:47:36] Completed step: circuit_extraction_and_residual_probing in 615.719s
+[MINTS 13:47:36] Starting step: downstream_task_performance
+[MINTS 13:47:36] Evaluating downstream task baselines: promoter_tata
+[MINTS 13:47:39] Evaluating downstream task baselines: promoter_no_tata
+[MINTS 13:48:08] Evaluating downstream task baselines: splice_sites_donors
+[MINTS 13:48:52] Evaluating downstream task baselines: splice_sites_acceptors
+[MINTS 13:49:55] Completed step: downstream_task_performance in 138.986s
+[MINTS 13:49:55] Starting step: probe_controls
+[MINTS 13:49:55] Running probe controls for promoter_tata: layer=11
+[MINTS 13:50:00] Running probe controls for promoter_no_tata: layer=11
+[MINTS 13:50:26] Running probe controls for splice_sites_donors: layer=11
+[MINTS 13:51:02] Running probe controls for splice_sites_acceptors: layer=11
+[MINTS 13:51:33] Writing probe-control metrics table: C:\Users\USER\Desktop\code\MINTS\results\tables\linear_probe_controls.csv
+[MINTS 13:51:33] Completed step: probe_controls in 98.232s
+[MINTS 13:51:33] Starting step: strict_mechanistic_proofs
+[MINTS 13:51:33] Loading model for strict mechanistic proofs: zhihan1996/DNABERT-2-117M
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████| 136/136 [00:00<00:00, 35309.52it/s]
+BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     |
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.decoder.bias               | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.decoder.weight             | UNEXPECTED |
+pooler.dense.bias                          | MISSING    |
+pooler.dense.weight                        | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 13:51:38] Model ready on cuda using huggingface_forward_hooks
+[MINTS 13:51:38] Running CTCF motif scoring, QK alignment, and matched attention enrichment
+[MINTS 13:51:39] Using low-rank W_Q/W_K factors for strict QK proof scoring
+[MINTS 13:51:39] Scoring CTCF motif support for up to all sequences
+[MINTS 13:53:17] Wrote token motif scores: C:\Users\USER\Desktop\code\MINTS\results\enrichment\ctcf_qk_alignment_token_motif_scores.csv
+[MINTS 13:53:18] Processed strict QK proof inputs for 1/51249 CTCF sequences
+[MINTS 13:57:50] Processed strict QK proof inputs for 1000/51249 CTCF sequences
+[MINTS 14:02:10] Processed strict QK proof inputs for 2000/51249 CTCF sequences
+[MINTS 14:06:08] Processed strict QK proof inputs for 3000/51249 CTCF sequences
+[MINTS 14:10:03] Processed strict QK proof inputs for 4000/51249 CTCF sequences
+[MINTS 14:13:57] Processed strict QK proof inputs for 5000/51249 CTCF sequences
+[MINTS 14:17:57] Processed strict QK proof inputs for 6000/51249 CTCF sequences
+[MINTS 14:21:52] Processed strict QK proof inputs for 7000/51249 CTCF sequences
+[MINTS 14:25:30] Processed strict QK proof inputs for 8000/51249 CTCF sequences
+[MINTS 14:29:07] Processed strict QK proof inputs for 9000/51249 CTCF sequences
+[MINTS 14:32:33] Processed strict QK proof inputs for 10000/51249 CTCF sequences
+[MINTS 14:36:00] Processed strict QK proof inputs for 11000/51249 CTCF sequences
+[MINTS 14:39:27] Processed strict QK proof inputs for 12000/51249 CTCF sequences
+[MINTS 14:42:54] Processed strict QK proof inputs for 13000/51249 CTCF sequences
+[MINTS 14:46:00] Processed strict QK proof inputs for 14000/51249 CTCF sequences
+[MINTS 14:49:08] Processed strict QK proof inputs for 15000/51249 CTCF sequences
+[MINTS 14:52:04] Processed strict QK proof inputs for 16000/51249 CTCF sequences
+[MINTS 14:54:50] Processed strict QK proof inputs for 17000/51249 CTCF sequences
+[MINTS 14:58:10] Processed strict QK proof inputs for 18000/51249 CTCF sequences
+[MINTS 15:01:04] Processed strict QK proof inputs for 19000/51249 CTCF sequences
+[MINTS 15:02:43] Processed strict QK proof inputs for 20000/51249 CTCF sequences
+[MINTS 15:04:35] Processed strict QK proof inputs for 21000/51249 CTCF sequences
+[MINTS 15:06:42] Processed strict QK proof inputs for 22000/51249 CTCF sequences
+[MINTS 15:08:57] Processed strict QK proof inputs for 23000/51249 CTCF sequences
+[MINTS 15:11:41] Processed strict QK proof inputs for 24000/51249 CTCF sequences
+[MINTS 15:14:24] Processed strict QK proof inputs for 25000/51249 CTCF sequences
+[MINTS 15:17:10] Processed strict QK proof inputs for 26000/51249 CTCF sequences
+[MINTS 15:19:58] Processed strict QK proof inputs for 27000/51249 CTCF sequences
+[MINTS 15:22:49] Processed strict QK proof inputs for 28000/51249 CTCF sequences
+[MINTS 15:25:28] Processed strict QK proof inputs for 29000/51249 CTCF sequences
+[MINTS 15:28:10] Processed strict QK proof inputs for 30000/51249 CTCF sequences
+[MINTS 15:30:58] Processed strict QK proof inputs for 31000/51249 CTCF sequences
+[MINTS 15:33:44] Processed strict QK proof inputs for 32000/51249 CTCF sequences
+[MINTS 15:36:25] Processed strict QK proof inputs for 33000/51249 CTCF sequences
+[MINTS 15:39:04] Processed strict QK proof inputs for 34000/51249 CTCF sequences
+[MINTS 15:41:53] Processed strict QK proof inputs for 35000/51249 CTCF sequences
+[MINTS 15:44:39] Processed strict QK proof inputs for 36000/51249 CTCF sequences
+[MINTS 15:47:53] Processed strict QK proof inputs for 37000/51249 CTCF sequences
+[MINTS 15:51:14] Processed strict QK proof inputs for 38000/51249 CTCF sequences
+[MINTS 15:54:35] Processed strict QK proof inputs for 39000/51249 CTCF sequences
+[MINTS 15:57:53] Processed strict QK proof inputs for 40000/51249 CTCF sequences
+[MINTS 16:01:12] Processed strict QK proof inputs for 41000/51249 CTCF sequences
+[MINTS 16:04:30] Processed strict QK proof inputs for 42000/51249 CTCF sequences
+[MINTS 16:07:45] Processed strict QK proof inputs for 43000/51249 CTCF sequences
+[MINTS 16:10:59] Processed strict QK proof inputs for 44000/51249 CTCF sequences
+[MINTS 16:15:12] Processed strict QK proof inputs for 45000/51249 CTCF sequences
+[MINTS 16:20:12] Processed strict QK proof inputs for 46000/51249 CTCF sequences
+[MINTS 16:25:12] Processed strict QK proof inputs for 47000/51249 CTCF sequences
+[MINTS 16:29:53] Processed strict QK proof inputs for 48000/51249 CTCF sequences
+[MINTS 16:34:09] Processed strict QK proof inputs for 49000/51249 CTCF sequences
+[MINTS 16:38:33] Processed strict QK proof inputs for 50000/51249 CTCF sequences
+[MINTS 16:42:44] Processed strict QK proof inputs for 51000/51249 CTCF sequences
+[MINTS 16:43:39] Processed strict QK proof inputs for 51249/51249 CTCF sequences
+[MINTS 16:43:39] Computing final QK/motif Pearson tables from streaming statistics
+[MINTS 16:43:40] Writing matched CTCF attention enrichment from streaming QK-reconstructed statistics
+[MINTS 16:43:41] Selecting a clean/corrupted promoter-TATA pair for custom activation patching
+[MINTS 16:43:41] Running DNABERT forward-hook activation patching across all layers and heads
+[MINTS 16:43:41] Training probe scorer for activation patching task=promoter_tata
+[MINTS 16:43:42] Custom patching complete for layer 0
+[MINTS 16:43:42] Custom patching complete for layer 1
+[MINTS 16:43:42] Custom patching complete for layer 2
+[MINTS 16:43:43] Custom patching complete for layer 3
+[MINTS 16:43:43] Custom patching complete for layer 4
+[MINTS 16:43:43] Custom patching complete for layer 5
+[MINTS 16:43:43] Custom patching complete for layer 6
+[MINTS 16:43:43] Custom patching complete for layer 7
+[MINTS 16:43:43] Custom patching complete for layer 8
+[MINTS 16:43:44] Custom patching complete for layer 9
+[MINTS 16:43:44] Custom patching complete for layer 10
+[MINTS 16:43:44] Custom patching complete for layer 11
+[MINTS 16:43:44] Completed step: strict_mechanistic_proofs in 10331.598s
+[MINTS 16:43:44] Starting step: systematic_causal_intervention
+[MINTS 16:43:44] Loading model for systematic causal interventions: zhihan1996/DNABERT-2-117M
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████| 136/136 [00:00<00:00, 31072.30it/s]
+BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     |
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.decoder.bias               | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.decoder.weight             | UNEXPECTED |
+pooler.dense.bias                          | MISSING    |
+pooler.dense.weight                        | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 16:43:50] Model ready on cuda using huggingface_forward_hooks
+[MINTS 16:43:50] Running systematic denoising activation patching for promoter_tata
+[MINTS 16:43:54] promoter_tata: batch patching processed 1/327 pairs
+[MINTS 16:44:51] promoter_tata: batch patching processed 25/327 pairs
+[MINTS 16:45:50] promoter_tata: batch patching processed 50/327 pairs
+[MINTS 16:46:49] promoter_tata: batch patching processed 75/327 pairs
+[MINTS 16:47:48] promoter_tata: batch patching processed 100/327 pairs
+[MINTS 16:48:47] promoter_tata: batch patching processed 125/327 pairs
+[MINTS 16:49:45] promoter_tata: batch patching processed 150/327 pairs
+[MINTS 16:50:43] promoter_tata: batch patching processed 175/327 pairs
+[MINTS 16:51:41] promoter_tata: batch patching processed 200/327 pairs
+[MINTS 16:52:39] promoter_tata: batch patching processed 225/327 pairs
+[MINTS 16:53:37] promoter_tata: batch patching processed 250/327 pairs
+[MINTS 16:54:37] promoter_tata: batch patching processed 275/327 pairs
+[MINTS 16:55:31] promoter_tata: batch patching processed 300/327 pairs
+[MINTS 16:56:31] promoter_tata: batch patching processed 325/327 pairs
+[MINTS 16:56:36] promoter_tata: batch patching processed 327/327 pairs
+[MINTS 16:56:36] Running systematic denoising activation patching for splice_sites_donors
+[MINTS 16:57:05] splice_sites_donors: batch patching processed 1/13303 pairs
+[MINTS 16:58:09] splice_sites_donors: batch patching processed 25/13303 pairs
+[MINTS 16:59:09] splice_sites_donors: batch patching processed 50/13303 pairs
+[MINTS 17:00:09] splice_sites_donors: batch patching processed 75/13303 pairs
+[MINTS 17:01:10] splice_sites_donors: batch patching processed 100/13303 pairs
+[MINTS 17:02:12] splice_sites_donors: batch patching processed 125/13303 pairs
+[MINTS 17:03:12] splice_sites_donors: batch patching processed 150/13303 pairs
+[MINTS 17:04:18] splice_sites_donors: batch patching processed 175/13303 pairs
+[MINTS 17:05:20] splice_sites_donors: batch patching processed 200/13303 pairs
+[MINTS 17:06:21] splice_sites_donors: batch patching processed 225/13303 pairs
+[MINTS 17:07:22] splice_sites_donors: batch patching processed 250/13303 pairs
+[MINTS 17:08:22] splice_sites_donors: batch patching processed 275/13303 pairs
+[MINTS 17:09:20] splice_sites_donors: batch patching processed 300/13303 pairs
+[MINTS 17:10:19] splice_sites_donors: batch patching processed 325/13303 pairs
+[MINTS 17:11:18] splice_sites_donors: batch patching processed 350/13303 pairs
+[MINTS 17:12:19] splice_sites_donors: batch patching processed 375/13303 pairs
+[MINTS 17:13:24] splice_sites_donors: batch patching processed 400/13303 pairs
+[MINTS 17:14:23] splice_sites_donors: batch patching processed 425/13303 pairs
+[MINTS 17:15:23] splice_sites_donors: batch patching processed 450/13303 pairs
+[MINTS 17:16:28] splice_sites_donors: batch patching processed 475/13303 pairs
+[MINTS 17:17:30] splice_sites_donors: batch patching processed 500/13303 pairs
+[MINTS 17:18:35] splice_sites_donors: batch patching processed 525/13303 pairs
+[MINTS 17:19:37] splice_sites_donors: batch patching processed 550/13303 pairs
+[MINTS 17:20:37] splice_sites_donors: batch patching processed 575/13303 pairs
+[MINTS 17:21:38] splice_sites_donors: batch patching processed 600/13303 pairs
+[MINTS 17:22:41] splice_sites_donors: batch patching processed 625/13303 pairs
+[MINTS 17:23:43] splice_sites_donors: batch patching processed 650/13303 pairs
+[MINTS 17:24:48] splice_sites_donors: batch patching processed 675/13303 pairs
+[MINTS 17:25:49] splice_sites_donors: batch patching processed 700/13303 pairs
+[MINTS 17:26:49] splice_sites_donors: batch patching processed 725/13303 pairs
+[MINTS 17:27:49] splice_sites_donors: batch patching processed 750/13303 pairs
+[MINTS 17:28:55] splice_sites_donors: batch patching processed 775/13303 pairs
+[MINTS 17:30:01] splice_sites_donors: batch patching processed 800/13303 pairs
+[MINTS 17:31:03] splice_sites_donors: batch patching processed 825/13303 pairs
+[MINTS 17:32:07] splice_sites_donors: batch patching processed 850/13303 pairs
+[MINTS 17:33:09] splice_sites_donors: batch patching processed 875/13303 pairs
+[MINTS 17:34:11] splice_sites_donors: batch patching processed 900/13303 pairs
+[MINTS 17:35:12] splice_sites_donors: batch patching processed 925/13303 pairs
+[MINTS 17:36:01] splice_sites_donors: batch patching processed 950/13303 pairs
+[MINTS 17:36:44] splice_sites_donors: batch patching processed 975/13303 pairs
+[MINTS 17:37:27] splice_sites_donors: batch patching processed 1000/13303 pairs
+[MINTS 17:38:09] splice_sites_donors: batch patching processed 1025/13303 pairs
+[MINTS 17:38:52] splice_sites_donors: batch patching processed 1050/13303 pairs
+[MINTS 17:39:34] splice_sites_donors: batch patching processed 1075/13303 pairs
+[MINTS 17:40:16] splice_sites_donors: batch patching processed 1100/13303 pairs
+[MINTS 17:40:58] splice_sites_donors: batch patching processed 1125/13303 pairs
+[MINTS 17:41:42] splice_sites_donors: batch patching processed 1150/13303 pairs
+[MINTS 17:42:24] splice_sites_donors: batch patching processed 1175/13303 pairs
+[MINTS 17:43:09] splice_sites_donors: batch patching processed 1200/13303 pairs
+[MINTS 17:43:50] splice_sites_donors: batch patching processed 1225/13303 pairs
+[MINTS 17:44:31] splice_sites_donors: batch patching processed 1250/13303 pairs
+[MINTS 17:45:13] splice_sites_donors: batch patching processed 1275/13303 pairs
+[MINTS 17:45:53] splice_sites_donors: batch patching processed 1300/13303 pairs
+[MINTS 17:46:33] splice_sites_donors: batch patching processed 1325/13303 pairs
+[MINTS 17:47:12] splice_sites_donors: batch patching processed 1350/13303 pairs
+[MINTS 17:47:52] splice_sites_donors: batch patching processed 1375/13303 pairs
+[MINTS 17:48:31] splice_sites_donors: batch patching processed 1400/13303 pairs
+[MINTS 17:49:11] splice_sites_donors: batch patching processed 1425/13303 pairs
+[MINTS 17:49:50] splice_sites_donors: batch patching processed 1450/13303 pairs
+[MINTS 17:50:31] splice_sites_donors: batch patching processed 1475/13303 pairs
+[MINTS 17:51:10] splice_sites_donors: batch patching processed 1500/13303 pairs
+[MINTS 17:51:49] splice_sites_donors: batch patching processed 1525/13303 pairs
+[MINTS 17:52:31] splice_sites_donors: batch patching processed 1550/13303 pairs
+[MINTS 17:53:25] splice_sites_donors: batch patching processed 1575/13303 pairs
+[MINTS 17:54:23] splice_sites_donors: batch patching processed 1600/13303 pairs
+[MINTS 17:55:23] splice_sites_donors: batch patching processed 1625/13303 pairs
+[MINTS 17:56:23] splice_sites_donors: batch patching processed 1650/13303 pairs
+[MINTS 17:57:22] splice_sites_donors: batch patching processed 1675/13303 pairs
+[MINTS 17:58:22] splice_sites_donors: batch patching processed 1700/13303 pairs
+[MINTS 17:59:20] splice_sites_donors: batch patching processed 1725/13303 pairs
+[MINTS 18:00:18] splice_sites_donors: batch patching processed 1750/13303 pairs
+[MINTS 18:01:15] splice_sites_donors: batch patching processed 1775/13303 pairs
+[MINTS 18:02:06] splice_sites_donors: batch patching processed 1800/13303 pairs
+[MINTS 18:02:48] splice_sites_donors: batch patching processed 1825/13303 pairs
+[MINTS 18:03:31] splice_sites_donors: batch patching processed 1850/13303 pairs
+[MINTS 18:04:11] splice_sites_donors: batch patching processed 1875/13303 pairs
+[MINTS 18:04:52] splice_sites_donors: batch patching processed 1900/13303 pairs
+[MINTS 18:05:34] splice_sites_donors: batch patching processed 1925/13303 pairs
+[MINTS 18:06:17] splice_sites_donors: batch patching processed 1950/13303 pairs
+[MINTS 18:07:01] splice_sites_donors: batch patching processed 1975/13303 pairs
+[MINTS 18:07:45] splice_sites_donors: batch patching processed 2000/13303 pairs
+[MINTS 18:08:26] splice_sites_donors: batch patching processed 2025/13303 pairs
+[MINTS 18:09:06] splice_sites_donors: batch patching processed 2050/13303 pairs
+[MINTS 18:09:52] splice_sites_donors: batch patching processed 2075/13303 pairs
+[MINTS 18:10:36] splice_sites_donors: batch patching processed 2100/13303 pairs
+[MINTS 18:11:20] splice_sites_donors: batch patching processed 2125/13303 pairs
+[MINTS 18:12:04] splice_sites_donors: batch patching processed 2150/13303 pairs
+[MINTS 18:12:47] splice_sites_donors: batch patching processed 2175/13303 pairs
+[MINTS 18:13:28] splice_sites_donors: batch patching processed 2200/13303 pairs
+[MINTS 18:14:11] splice_sites_donors: batch patching processed 2225/13303 pairs
+[MINTS 18:14:53] splice_sites_donors: batch patching processed 2250/13303 pairs
+[MINTS 18:15:33] splice_sites_donors: batch patching processed 2275/13303 pairs
+[MINTS 18:16:14] splice_sites_donors: batch patching processed 2300/13303 pairs
+[MINTS 18:16:57] splice_sites_donors: batch patching processed 2325/13303 pairs
+[MINTS 18:17:38] splice_sites_donors: batch patching processed 2350/13303 pairs
+[MINTS 18:18:19] splice_sites_donors: batch patching processed 2375/13303 pairs
+[MINTS 18:19:01] splice_sites_donors: batch patching processed 2400/13303 pairs
+[MINTS 18:19:42] splice_sites_donors: batch patching processed 2425/13303 pairs
+[MINTS 18:20:22] splice_sites_donors: batch patching processed 2450/13303 pairs
+[MINTS 18:21:02] splice_sites_donors: batch patching processed 2475/13303 pairs
+[MINTS 18:21:42] splice_sites_donors: batch patching processed 2500/13303 pairs
+[MINTS 18:22:22] splice_sites_donors: batch patching processed 2525/13303 pairs
+[MINTS 18:23:03] splice_sites_donors: batch patching processed 2550/13303 pairs
+[MINTS 18:23:42] splice_sites_donors: batch patching processed 2575/13303 pairs
+[MINTS 18:24:22] splice_sites_donors: batch patching processed 2600/13303 pairs
+[MINTS 18:25:04] splice_sites_donors: batch patching processed 2625/13303 pairs
+[MINTS 18:25:45] splice_sites_donors: batch patching processed 2650/13303 pairs
+[MINTS 18:26:29] splice_sites_donors: batch patching processed 2675/13303 pairs
+[MINTS 18:27:11] splice_sites_donors: batch patching processed 2700/13303 pairs
+[MINTS 18:27:51] splice_sites_donors: batch patching processed 2725/13303 pairs
+[MINTS 18:28:33] splice_sites_donors: batch patching processed 2750/13303 pairs
+[MINTS 18:29:15] splice_sites_donors: batch patching processed 2775/13303 pairs
+[MINTS 18:29:58] splice_sites_donors: batch patching processed 2800/13303 pairs
+[MINTS 18:30:41] splice_sites_donors: batch patching processed 2825/13303 pairs
+[MINTS 18:31:23] splice_sites_donors: batch patching processed 2850/13303 pairs
+[MINTS 18:32:05] splice_sites_donors: batch patching processed 2875/13303 pairs
+[MINTS 18:32:46] splice_sites_donors: batch patching processed 2900/13303 pairs
+[MINTS 18:33:29] splice_sites_donors: batch patching processed 2925/13303 pairs
+[MINTS 18:34:12] splice_sites_donors: batch patching processed 2950/13303 pairs
+[MINTS 18:34:54] splice_sites_donors: batch patching processed 2975/13303 pairs
+[MINTS 18:35:36] splice_sites_donors: batch patching processed 3000/13303 pairs
+[MINTS 18:36:17] splice_sites_donors: batch patching processed 3025/13303 pairs
+[MINTS 18:36:58] splice_sites_donors: batch patching processed 3050/13303 pairs
+[MINTS 18:37:40] splice_sites_donors: batch patching processed 3075/13303 pairs
+[MINTS 18:38:21] splice_sites_donors: batch patching processed 3100/13303 pairs
+[MINTS 18:39:04] splice_sites_donors: batch patching processed 3125/13303 pairs
+[MINTS 18:39:45] splice_sites_donors: batch patching processed 3150/13303 pairs
+[MINTS 18:40:27] splice_sites_donors: batch patching processed 3175/13303 pairs
+[MINTS 18:41:09] splice_sites_donors: batch patching processed 3200/13303 pairs
+[MINTS 18:41:50] splice_sites_donors: batch patching processed 3225/13303 pairs
+[MINTS 18:42:32] splice_sites_donors: batch patching processed 3250/13303 pairs
+[MINTS 18:43:13] splice_sites_donors: batch patching processed 3275/13303 pairs
+[MINTS 18:43:56] splice_sites_donors: batch patching processed 3300/13303 pairs
+[MINTS 18:44:38] splice_sites_donors: batch patching processed 3325/13303 pairs
+[MINTS 18:45:18] splice_sites_donors: batch patching processed 3350/13303 pairs
+[MINTS 18:45:59] splice_sites_donors: batch patching processed 3375/13303 pairs
+[MINTS 18:46:42] splice_sites_donors: batch patching processed 3400/13303 pairs
+[MINTS 18:47:23] splice_sites_donors: batch patching processed 3425/13303 pairs
+[MINTS 18:48:03] splice_sites_donors: batch patching processed 3450/13303 pairs
+[MINTS 18:48:46] splice_sites_donors: batch patching processed 3475/13303 pairs
+[MINTS 18:49:28] splice_sites_donors: batch patching processed 3500/13303 pairs
+[MINTS 18:50:10] splice_sites_donors: batch patching processed 3525/13303 pairs
+[MINTS 18:50:53] splice_sites_donors: batch patching processed 3550/13303 pairs
+[MINTS 18:51:34] splice_sites_donors: batch patching processed 3575/13303 pairs
+[MINTS 18:52:17] splice_sites_donors: batch patching processed 3600/13303 pairs
+[MINTS 18:53:00] splice_sites_donors: batch patching processed 3625/13303 pairs
+[MINTS 18:53:42] splice_sites_donors: batch patching processed 3650/13303 pairs
+[MINTS 18:54:25] splice_sites_donors: batch patching processed 3675/13303 pairs
+[MINTS 18:55:11] splice_sites_donors: batch patching processed 3700/13303 pairs
+[MINTS 18:55:54] splice_sites_donors: batch patching processed 3725/13303 pairs
+[MINTS 18:56:34] splice_sites_donors: batch patching processed 3750/13303 pairs
+[MINTS 18:57:15] splice_sites_donors: batch patching processed 3775/13303 pairs
+[MINTS 18:57:55] splice_sites_donors: batch patching processed 3800/13303 pairs
+[MINTS 18:58:36] splice_sites_donors: batch patching processed 3825/13303 pairs
+[MINTS 18:59:17] splice_sites_donors: batch patching processed 3850/13303 pairs
+[MINTS 18:59:58] splice_sites_donors: batch patching processed 3875/13303 pairs
+[MINTS 19:00:39] splice_sites_donors: batch patching processed 3900/13303 pairs
+[MINTS 19:01:19] splice_sites_donors: batch patching processed 3925/13303 pairs
+[MINTS 19:02:01] splice_sites_donors: batch patching processed 3950/13303 pairs
+[MINTS 19:02:43] splice_sites_donors: batch patching processed 3975/13303 pairs
+[MINTS 19:03:24] splice_sites_donors: batch patching processed 4000/13303 pairs
+[MINTS 19:04:05] splice_sites_donors: batch patching processed 4025/13303 pairs
+[MINTS 19:04:46] splice_sites_donors: batch patching processed 4050/13303 pairs
+[MINTS 19:05:27] splice_sites_donors: batch patching processed 4075/13303 pairs
+[MINTS 19:06:09] splice_sites_donors: batch patching processed 4100/13303 pairs
+[MINTS 19:06:49] splice_sites_donors: batch patching processed 4125/13303 pairs
+[MINTS 19:07:29] splice_sites_donors: batch patching processed 4150/13303 pairs
+[MINTS 19:08:10] splice_sites_donors: batch patching processed 4175/13303 pairs
+[MINTS 19:08:51] splice_sites_donors: batch patching processed 4200/13303 pairs
+[MINTS 19:09:32] splice_sites_donors: batch patching processed 4225/13303 pairs
+[MINTS 19:10:13] splice_sites_donors: batch patching processed 4250/13303 pairs
+[MINTS 19:10:54] splice_sites_donors: batch patching processed 4275/13303 pairs
+[MINTS 19:11:36] splice_sites_donors: batch patching processed 4300/13303 pairs
+[MINTS 19:12:16] splice_sites_donors: batch patching processed 4325/13303 pairs
+[MINTS 19:12:57] splice_sites_donors: batch patching processed 4350/13303 pairs
+[MINTS 19:13:38] splice_sites_donors: batch patching processed 4375/13303 pairs
+[MINTS 19:14:21] splice_sites_donors: batch patching processed 4400/13303 pairs
+[MINTS 19:15:02] splice_sites_donors: batch patching processed 4425/13303 pairs
+[MINTS 19:15:42] splice_sites_donors: batch patching processed 4450/13303 pairs
+[MINTS 19:16:23] splice_sites_donors: batch patching processed 4475/13303 pairs
+[MINTS 19:17:06] splice_sites_donors: batch patching processed 4500/13303 pairs
+[MINTS 19:17:47] splice_sites_donors: batch patching processed 4525/13303 pairs
+[MINTS 19:18:29] splice_sites_donors: batch patching processed 4550/13303 pairs
+[MINTS 19:19:10] splice_sites_donors: batch patching processed 4575/13303 pairs
+[MINTS 19:19:52] splice_sites_donors: batch patching processed 4600/13303 pairs
+[MINTS 19:20:34] splice_sites_donors: batch patching processed 4625/13303 pairs
+[MINTS 19:21:18] splice_sites_donors: batch patching processed 4650/13303 pairs
+[MINTS 19:21:59] splice_sites_donors: batch patching processed 4675/13303 pairs
+[MINTS 19:22:41] splice_sites_donors: batch patching processed 4700/13303 pairs
+[MINTS 19:23:24] splice_sites_donors: batch patching processed 4725/13303 pairs
+[MINTS 19:24:05] splice_sites_donors: batch patching processed 4750/13303 pairs
+[MINTS 19:24:45] splice_sites_donors: batch patching processed 4775/13303 pairs
+[MINTS 19:25:26] splice_sites_donors: batch patching processed 4800/13303 pairs
+[MINTS 19:26:07] splice_sites_donors: batch patching processed 4825/13303 pairs
+[MINTS 19:26:46] splice_sites_donors: batch patching processed 4850/13303 pairs
+[MINTS 19:27:27] splice_sites_donors: batch patching processed 4875/13303 pairs
+[MINTS 19:28:09] splice_sites_donors: batch patching processed 4900/13303 pairs
+[MINTS 19:28:50] splice_sites_donors: batch patching processed 4925/13303 pairs
+[MINTS 19:29:31] splice_sites_donors: batch patching processed 4950/13303 pairs
+[MINTS 19:30:13] splice_sites_donors: batch patching processed 4975/13303 pairs
+[MINTS 19:30:54] splice_sites_donors: batch patching processed 5000/13303 pairs
+[MINTS 19:31:35] splice_sites_donors: batch patching processed 5025/13303 pairs
+[MINTS 19:32:16] splice_sites_donors: batch patching processed 5050/13303 pairs
+[MINTS 19:32:57] splice_sites_donors: batch patching processed 5075/13303 pairs
+[MINTS 19:33:39] splice_sites_donors: batch patching processed 5100/13303 pairs
+[MINTS 19:34:21] splice_sites_donors: batch patching processed 5125/13303 pairs
+[MINTS 19:35:03] splice_sites_donors: batch patching processed 5150/13303 pairs
+[MINTS 19:35:44] splice_sites_donors: batch patching processed 5175/13303 pairs
+[MINTS 19:36:27] splice_sites_donors: batch patching processed 5200/13303 pairs
+[MINTS 19:37:09] splice_sites_donors: batch patching processed 5225/13303 pairs
+[MINTS 19:37:51] splice_sites_donors: batch patching processed 5250/13303 pairs
+[MINTS 19:38:32] splice_sites_donors: batch patching processed 5275/13303 pairs
+[MINTS 19:39:14] splice_sites_donors: batch patching processed 5300/13303 pairs
+[MINTS 19:39:56] splice_sites_donors: batch patching processed 5325/13303 pairs
+[MINTS 19:40:37] splice_sites_donors: batch patching processed 5350/13303 pairs
+[MINTS 19:41:19] splice_sites_donors: batch patching processed 5375/13303 pairs
+[MINTS 19:42:01] splice_sites_donors: batch patching processed 5400/13303 pairs
+[MINTS 19:42:42] splice_sites_donors: batch patching processed 5425/13303 pairs
+[MINTS 19:43:25] splice_sites_donors: batch patching processed 5450/13303 pairs
+[MINTS 19:44:06] splice_sites_donors: batch patching processed 5475/13303 pairs
+[MINTS 19:44:48] splice_sites_donors: batch patching processed 5500/13303 pairs
+[MINTS 19:45:30] splice_sites_donors: batch patching processed 5525/13303 pairs
+[MINTS 19:46:11] splice_sites_donors: batch patching processed 5550/13303 pairs
+[MINTS 19:46:53] splice_sites_donors: batch patching processed 5575/13303 pairs
+[MINTS 19:47:34] splice_sites_donors: batch patching processed 5600/13303 pairs
+[MINTS 19:48:16] splice_sites_donors: batch patching processed 5625/13303 pairs
+[MINTS 19:48:57] splice_sites_donors: batch patching processed 5650/13303 pairs
+[MINTS 19:49:39] splice_sites_donors: batch patching processed 5675/13303 pairs
+[MINTS 19:50:19] splice_sites_donors: batch patching processed 5700/13303 pairs
+[MINTS 19:51:00] splice_sites_donors: batch patching processed 5725/13303 pairs
+[MINTS 19:51:42] splice_sites_donors: batch patching processed 5750/13303 pairs
+[MINTS 19:52:23] splice_sites_donors: batch patching processed 5775/13303 pairs
+[MINTS 19:53:04] splice_sites_donors: batch patching processed 5800/13303 pairs
+[MINTS 19:53:46] splice_sites_donors: batch patching processed 5825/13303 pairs
+[MINTS 19:54:27] splice_sites_donors: batch patching processed 5850/13303 pairs
+[MINTS 19:55:08] splice_sites_donors: batch patching processed 5875/13303 pairs
+[MINTS 19:55:50] splice_sites_donors: batch patching processed 5900/13303 pairs
+[MINTS 19:56:32] splice_sites_donors: batch patching processed 5925/13303 pairs
+[MINTS 19:57:13] splice_sites_donors: batch patching processed 5950/13303 pairs
+[MINTS 19:57:54] splice_sites_donors: batch patching processed 5975/13303 pairs
+[MINTS 19:58:36] splice_sites_donors: batch patching processed 6000/13303 pairs
+[MINTS 19:59:18] splice_sites_donors: batch patching processed 6025/13303 pairs
+[MINTS 19:59:59] splice_sites_donors: batch patching processed 6050/13303 pairs
+[MINTS 20:00:40] splice_sites_donors: batch patching processed 6075/13303 pairs
+[MINTS 20:01:22] splice_sites_donors: batch patching processed 6100/13303 pairs
+[MINTS 20:02:03] splice_sites_donors: batch patching processed 6125/13303 pairs
+[MINTS 20:02:45] splice_sites_donors: batch patching processed 6150/13303 pairs
+[MINTS 20:03:27] splice_sites_donors: batch patching processed 6175/13303 pairs
+[MINTS 20:04:08] splice_sites_donors: batch patching processed 6200/13303 pairs
+[MINTS 20:04:49] splice_sites_donors: batch patching processed 6225/13303 pairs
+[MINTS 20:05:31] splice_sites_donors: batch patching processed 6250/13303 pairs
+[MINTS 20:06:12] splice_sites_donors: batch patching processed 6275/13303 pairs
+[MINTS 20:06:53] splice_sites_donors: batch patching processed 6300/13303 pairs
+[MINTS 20:07:35] splice_sites_donors: batch patching processed 6325/13303 pairs
+[MINTS 20:08:17] splice_sites_donors: batch patching processed 6350/13303 pairs
+[MINTS 20:08:56] splice_sites_donors: batch patching processed 6375/13303 pairs
+[MINTS 20:09:38] splice_sites_donors: batch patching processed 6400/13303 pairs
+[MINTS 20:10:20] splice_sites_donors: batch patching processed 6425/13303 pairs
+[MINTS 20:11:01] splice_sites_donors: batch patching processed 6450/13303 pairs
+[MINTS 20:11:41] splice_sites_donors: batch patching processed 6475/13303 pairs
+[MINTS 20:12:24] splice_sites_donors: batch patching processed 6500/13303 pairs
+[MINTS 20:13:05] splice_sites_donors: batch patching processed 6525/13303 pairs
+[MINTS 20:13:46] splice_sites_donors: batch patching processed 6550/13303 pairs
+[MINTS 20:14:27] splice_sites_donors: batch patching processed 6575/13303 pairs
+[MINTS 20:15:08] splice_sites_donors: batch patching processed 6600/13303 pairs
+[MINTS 20:15:48] splice_sites_donors: batch patching processed 6625/13303 pairs
+[MINTS 20:16:32] splice_sites_donors: batch patching processed 6650/13303 pairs
+[MINTS 20:17:15] splice_sites_donors: batch patching processed 6675/13303 pairs
+[MINTS 20:17:57] splice_sites_donors: batch patching processed 6700/13303 pairs
+[MINTS 20:18:39] splice_sites_donors: batch patching processed 6725/13303 pairs
+[MINTS 20:19:21] splice_sites_donors: batch patching processed 6750/13303 pairs
+[MINTS 20:20:03] splice_sites_donors: batch patching processed 6775/13303 pairs
+[MINTS 20:20:43] splice_sites_donors: batch patching processed 6800/13303 pairs
+[MINTS 20:21:22] splice_sites_donors: batch patching processed 6825/13303 pairs
+[MINTS 20:22:02] splice_sites_donors: batch patching processed 6850/13303 pairs
+[MINTS 20:22:42] splice_sites_donors: batch patching processed 6875/13303 pairs
+[MINTS 20:23:22] splice_sites_donors: batch patching processed 6900/13303 pairs
+[MINTS 20:24:02] splice_sites_donors: batch patching processed 6925/13303 pairs
+[MINTS 20:24:42] splice_sites_donors: batch patching processed 6950/13303 pairs
+[MINTS 20:25:21] splice_sites_donors: batch patching processed 6975/13303 pairs
+[MINTS 20:26:01] splice_sites_donors: batch patching processed 7000/13303 pairs
+[MINTS 20:26:41] splice_sites_donors: batch patching processed 7025/13303 pairs
+[MINTS 20:27:21] splice_sites_donors: batch patching processed 7050/13303 pairs
+[MINTS 20:28:01] splice_sites_donors: batch patching processed 7075/13303 pairs
+[MINTS 20:28:41] splice_sites_donors: batch patching processed 7100/13303 pairs
+[MINTS 20:29:21] splice_sites_donors: batch patching processed 7125/13303 pairs
+[MINTS 20:30:01] splice_sites_donors: batch patching processed 7150/13303 pairs
+[MINTS 20:30:41] splice_sites_donors: batch patching processed 7175/13303 pairs
+[MINTS 20:31:21] splice_sites_donors: batch patching processed 7200/13303 pairs
+[MINTS 20:32:01] splice_sites_donors: batch patching processed 7225/13303 pairs
+[MINTS 20:32:41] splice_sites_donors: batch patching processed 7250/13303 pairs
+[MINTS 20:33:21] splice_sites_donors: batch patching processed 7275/13303 pairs
+[MINTS 20:34:01] splice_sites_donors: batch patching processed 7300/13303 pairs
+[MINTS 20:34:40] splice_sites_donors: batch patching processed 7325/13303 pairs
+[MINTS 20:35:20] splice_sites_donors: batch patching processed 7350/13303 pairs
+[MINTS 20:36:00] splice_sites_donors: batch patching processed 7375/13303 pairs
+[MINTS 20:36:40] splice_sites_donors: batch patching processed 7400/13303 pairs
+[MINTS 20:37:19] splice_sites_donors: batch patching processed 7425/13303 pairs
+[MINTS 20:38:00] splice_sites_donors: batch patching processed 7450/13303 pairs
+[MINTS 20:38:39] splice_sites_donors: batch patching processed 7475/13303 pairs
+[MINTS 20:39:19] splice_sites_donors: batch patching processed 7500/13303 pairs
+[MINTS 20:39:58] splice_sites_donors: batch patching processed 7525/13303 pairs
+[MINTS 20:40:39] splice_sites_donors: batch patching processed 7550/13303 pairs
+[MINTS 20:41:20] splice_sites_donors: batch patching processed 7575/13303 pairs
+[MINTS 20:42:00] splice_sites_donors: batch patching processed 7600/13303 pairs
+[MINTS 20:42:40] splice_sites_donors: batch patching processed 7625/13303 pairs
+[MINTS 20:43:20] splice_sites_donors: batch patching processed 7650/13303 pairs
+[MINTS 20:44:01] splice_sites_donors: batch patching processed 7675/13303 pairs
+[MINTS 20:44:42] splice_sites_donors: batch patching processed 7700/13303 pairs
+[MINTS 20:45:22] splice_sites_donors: batch patching processed 7725/13303 pairs
+[MINTS 20:46:03] splice_sites_donors: batch patching processed 7750/13303 pairs
+[MINTS 20:46:43] splice_sites_donors: batch patching processed 7775/13303 pairs
+[MINTS 20:47:24] splice_sites_donors: batch patching processed 7800/13303 pairs
+[MINTS 20:48:03] splice_sites_donors: batch patching processed 7825/13303 pairs
+[MINTS 20:48:43] splice_sites_donors: batch patching processed 7850/13303 pairs
+[MINTS 20:49:23] splice_sites_donors: batch patching processed 7875/13303 pairs
+[MINTS 20:50:02] splice_sites_donors: batch patching processed 7900/13303 pairs
+[MINTS 20:50:42] splice_sites_donors: batch patching processed 7925/13303 pairs
+[MINTS 20:51:21] splice_sites_donors: batch patching processed 7950/13303 pairs
+[MINTS 20:52:00] splice_sites_donors: batch patching processed 7975/13303 pairs
+[MINTS 20:52:40] splice_sites_donors: batch patching processed 8000/13303 pairs
+[MINTS 20:53:20] splice_sites_donors: batch patching processed 8025/13303 pairs
+[MINTS 20:54:00] splice_sites_donors: batch patching processed 8050/13303 pairs
+[MINTS 20:54:40] splice_sites_donors: batch patching processed 8075/13303 pairs
+[MINTS 20:55:20] splice_sites_donors: batch patching processed 8100/13303 pairs
+[MINTS 20:55:59] splice_sites_donors: batch patching processed 8125/13303 pairs
+[MINTS 20:56:39] splice_sites_donors: batch patching processed 8150/13303 pairs
+[MINTS 20:57:19] splice_sites_donors: batch patching processed 8175/13303 pairs
+[MINTS 20:57:59] splice_sites_donors: batch patching processed 8200/13303 pairs
+[MINTS 20:58:41] splice_sites_donors: batch patching processed 8225/13303 pairs
+[MINTS 20:59:22] splice_sites_donors: batch patching processed 8250/13303 pairs
+[MINTS 21:00:02] splice_sites_donors: batch patching processed 8275/13303 pairs
+[MINTS 21:00:44] splice_sites_donors: batch patching processed 8300/13303 pairs
+[MINTS 21:01:24] splice_sites_donors: batch patching processed 8325/13303 pairs
+[MINTS 21:02:06] splice_sites_donors: batch patching processed 8350/13303 pairs
+[MINTS 21:02:47] splice_sites_donors: batch patching processed 8375/13303 pairs
+[MINTS 21:03:28] splice_sites_donors: batch patching processed 8400/13303 pairs
+[MINTS 21:04:08] splice_sites_donors: batch patching processed 8425/13303 pairs
+[MINTS 21:04:49] splice_sites_donors: batch patching processed 8450/13303 pairs
+[MINTS 21:05:29] splice_sites_donors: batch patching processed 8475/13303 pairs
+[MINTS 21:06:09] splice_sites_donors: batch patching processed 8500/13303 pairs
+[MINTS 21:06:48] splice_sites_donors: batch patching processed 8525/13303 pairs
+[MINTS 21:07:28] splice_sites_donors: batch patching processed 8550/13303 pairs
+[MINTS 21:08:08] splice_sites_donors: batch patching processed 8575/13303 pairs
+[MINTS 21:08:49] splice_sites_donors: batch patching processed 8600/13303 pairs
+[MINTS 21:09:29] splice_sites_donors: batch patching processed 8625/13303 pairs
+[MINTS 21:10:08] splice_sites_donors: batch patching processed 8650/13303 pairs
+[MINTS 21:10:47] splice_sites_donors: batch patching processed 8675/13303 pairs
+[MINTS 21:11:27] splice_sites_donors: batch patching processed 8700/13303 pairs
+[MINTS 21:12:07] splice_sites_donors: batch patching processed 8725/13303 pairs
+[MINTS 21:12:47] splice_sites_donors: batch patching processed 8750/13303 pairs
+[MINTS 21:13:27] splice_sites_donors: batch patching processed 8775/13303 pairs
+[MINTS 21:14:06] splice_sites_donors: batch patching processed 8800/13303 pairs
+[MINTS 21:14:47] splice_sites_donors: batch patching processed 8825/13303 pairs
+[MINTS 21:15:26] splice_sites_donors: batch patching processed 8850/13303 pairs
+[MINTS 21:16:06] splice_sites_donors: batch patching processed 8875/13303 pairs
+[MINTS 21:16:46] splice_sites_donors: batch patching processed 8900/13303 pairs
+[MINTS 21:17:25] splice_sites_donors: batch patching processed 8925/13303 pairs
+[MINTS 21:18:05] splice_sites_donors: batch patching processed 8950/13303 pairs
+[MINTS 21:18:45] splice_sites_donors: batch patching processed 8975/13303 pairs
+[MINTS 21:19:24] splice_sites_donors: batch patching processed 9000/13303 pairs
+[MINTS 21:20:03] splice_sites_donors: batch patching processed 9025/13303 pairs
+[MINTS 21:20:43] splice_sites_donors: batch patching processed 9050/13303 pairs
+[MINTS 21:21:23] splice_sites_donors: batch patching processed 9075/13303 pairs
+[MINTS 21:22:03] splice_sites_donors: batch patching processed 9100/13303 pairs
+[MINTS 21:22:43] splice_sites_donors: batch patching processed 9125/13303 pairs
+[MINTS 21:23:23] splice_sites_donors: batch patching processed 9150/13303 pairs
+[MINTS 21:24:03] splice_sites_donors: batch patching processed 9175/13303 pairs
+[MINTS 21:24:43] splice_sites_donors: batch patching processed 9200/13303 pairs
+[MINTS 21:25:23] splice_sites_donors: batch patching processed 9225/13303 pairs
+[MINTS 21:26:02] splice_sites_donors: batch patching processed 9250/13303 pairs
+[MINTS 21:26:42] splice_sites_donors: batch patching processed 9275/13303 pairs
+[MINTS 21:27:21] splice_sites_donors: batch patching processed 9300/13303 pairs
+[MINTS 21:28:01] splice_sites_donors: batch patching processed 9325/13303 pairs
+[MINTS 21:28:41] splice_sites_donors: batch patching processed 9350/13303 pairs
+[MINTS 21:29:21] splice_sites_donors: batch patching processed 9375/13303 pairs
+[MINTS 21:30:01] splice_sites_donors: batch patching processed 9400/13303 pairs
+[MINTS 21:30:40] splice_sites_donors: batch patching processed 9425/13303 pairs
+[MINTS 21:31:20] splice_sites_donors: batch patching processed 9450/13303 pairs
+[MINTS 21:32:00] splice_sites_donors: batch patching processed 9475/13303 pairs
+[MINTS 21:32:40] splice_sites_donors: batch patching processed 9500/13303 pairs
+[MINTS 21:33:19] splice_sites_donors: batch patching processed 9525/13303 pairs
+[MINTS 21:33:58] splice_sites_donors: batch patching processed 9550/13303 pairs
+[MINTS 21:34:38] splice_sites_donors: batch patching processed 9575/13303 pairs
+[MINTS 21:35:18] splice_sites_donors: batch patching processed 9600/13303 pairs
+[MINTS 21:35:57] splice_sites_donors: batch patching processed 9625/13303 pairs
+[MINTS 21:36:36] splice_sites_donors: batch patching processed 9650/13303 pairs
+[MINTS 21:37:17] splice_sites_donors: batch patching processed 9675/13303 pairs
+[MINTS 21:38:10] splice_sites_donors: batch patching processed 9700/13303 pairs
+[MINTS 21:38:53] splice_sites_donors: batch patching processed 9725/13303 pairs
+[MINTS 21:39:35] splice_sites_donors: batch patching processed 9750/13303 pairs
+[MINTS 21:40:16] splice_sites_donors: batch patching processed 9775/13303 pairs
+[MINTS 21:40:57] splice_sites_donors: batch patching processed 9800/13303 pairs
+[MINTS 21:41:39] splice_sites_donors: batch patching processed 9825/13303 pairs
+[MINTS 21:42:21] splice_sites_donors: batch patching processed 9850/13303 pairs
+[MINTS 21:43:03] splice_sites_donors: batch patching processed 9875/13303 pairs
+[MINTS 21:43:45] splice_sites_donors: batch patching processed 9900/13303 pairs
+[MINTS 21:44:27] splice_sites_donors: batch patching processed 9925/13303 pairs
+[MINTS 21:45:09] splice_sites_donors: batch patching processed 9950/13303 pairs
+[MINTS 21:45:51] splice_sites_donors: batch patching processed 9975/13303 pairs
+[MINTS 21:46:36] splice_sites_donors: batch patching processed 10000/13303 pairs
+[MINTS 21:47:18] splice_sites_donors: batch patching processed 10025/13303 pairs
+[MINTS 21:48:01] splice_sites_donors: batch patching processed 10050/13303 pairs
+[MINTS 21:48:43] splice_sites_donors: batch patching processed 10075/13303 pairs
+[MINTS 21:49:25] splice_sites_donors: batch patching processed 10100/13303 pairs
+[MINTS 21:50:07] splice_sites_donors: batch patching processed 10125/13303 pairs
+[MINTS 21:50:49] splice_sites_donors: batch patching processed 10150/13303 pairs
+[MINTS 21:51:30] splice_sites_donors: batch patching processed 10175/13303 pairs
+[MINTS 21:52:12] splice_sites_donors: batch patching processed 10200/13303 pairs
+[MINTS 21:52:54] splice_sites_donors: batch patching processed 10225/13303 pairs
+[MINTS 21:53:34] splice_sites_donors: batch patching processed 10250/13303 pairs
+[MINTS 21:54:15] splice_sites_donors: batch patching processed 10275/13303 pairs
+[MINTS 21:54:57] splice_sites_donors: batch patching processed 10300/13303 pairs
+[MINTS 21:55:39] splice_sites_donors: batch patching processed 10325/13303 pairs
+[MINTS 21:56:20] splice_sites_donors: batch patching processed 10350/13303 pairs
+[MINTS 21:57:01] splice_sites_donors: batch patching processed 10375/13303 pairs
+[MINTS 21:57:43] splice_sites_donors: batch patching processed 10400/13303 pairs
+[MINTS 21:58:25] splice_sites_donors: batch patching processed 10425/13303 pairs
+[MINTS 21:59:07] splice_sites_donors: batch patching processed 10450/13303 pairs
+[MINTS 21:59:49] splice_sites_donors: batch patching processed 10475/13303 pairs
+[MINTS 22:00:31] splice_sites_donors: batch patching processed 10500/13303 pairs
+[MINTS 22:01:12] splice_sites_donors: batch patching processed 10525/13303 pairs
+[MINTS 22:01:54] splice_sites_donors: batch patching processed 10550/13303 pairs
+[MINTS 22:02:36] splice_sites_donors: batch patching processed 10575/13303 pairs
+[MINTS 22:03:16] splice_sites_donors: batch patching processed 10600/13303 pairs
+[MINTS 22:03:57] splice_sites_donors: batch patching processed 10625/13303 pairs
+[MINTS 22:04:39] splice_sites_donors: batch patching processed 10650/13303 pairs
+[MINTS 22:05:19] splice_sites_donors: batch patching processed 10675/13303 pairs
+[MINTS 22:05:59] splice_sites_donors: batch patching processed 10700/13303 pairs
+[MINTS 22:06:40] splice_sites_donors: batch patching processed 10725/13303 pairs
+[MINTS 22:07:22] splice_sites_donors: batch patching processed 10750/13303 pairs
+[MINTS 22:08:02] splice_sites_donors: batch patching processed 10775/13303 pairs
+[MINTS 22:08:42] splice_sites_donors: batch patching processed 10800/13303 pairs
+[MINTS 22:09:23] splice_sites_donors: batch patching processed 10825/13303 pairs
+[MINTS 22:10:05] splice_sites_donors: batch patching processed 10850/13303 pairs
+[MINTS 22:10:46] splice_sites_donors: batch patching processed 10875/13303 pairs
+[MINTS 22:11:26] splice_sites_donors: batch patching processed 10900/13303 pairs
+[MINTS 22:12:08] splice_sites_donors: batch patching processed 10925/13303 pairs
+[MINTS 22:12:48] splice_sites_donors: batch patching processed 10950/13303 pairs
+[MINTS 22:13:28] splice_sites_donors: batch patching processed 10975/13303 pairs
+[MINTS 22:14:09] splice_sites_donors: batch patching processed 11000/13303 pairs
+[MINTS 22:14:49] splice_sites_donors: batch patching processed 11025/13303 pairs
+[MINTS 22:15:30] splice_sites_donors: batch patching processed 11050/13303 pairs
+[MINTS 22:16:10] splice_sites_donors: batch patching processed 11075/13303 pairs
+[MINTS 22:16:51] splice_sites_donors: batch patching processed 11100/13303 pairs
+[MINTS 22:17:31] splice_sites_donors: batch patching processed 11125/13303 pairs
+[MINTS 22:18:12] splice_sites_donors: batch patching processed 11150/13303 pairs
+[MINTS 22:18:53] splice_sites_donors: batch patching processed 11175/13303 pairs
+[MINTS 22:19:33] splice_sites_donors: batch patching processed 11200/13303 pairs
+[MINTS 22:20:13] splice_sites_donors: batch patching processed 11225/13303 pairs
+[MINTS 22:20:53] splice_sites_donors: batch patching processed 11250/13303 pairs
+[MINTS 22:21:34] splice_sites_donors: batch patching processed 11275/13303 pairs
+[MINTS 22:22:13] splice_sites_donors: batch patching processed 11300/13303 pairs
+[MINTS 22:22:54] splice_sites_donors: batch patching processed 11325/13303 pairs
+[MINTS 22:23:36] splice_sites_donors: batch patching processed 11350/13303 pairs
+[MINTS 22:24:17] splice_sites_donors: batch patching processed 11375/13303 pairs
+[MINTS 22:24:57] splice_sites_donors: batch patching processed 11400/13303 pairs
+[MINTS 22:25:37] splice_sites_donors: batch patching processed 11425/13303 pairs
+[MINTS 22:26:19] splice_sites_donors: batch patching processed 11450/13303 pairs
+[MINTS 22:26:59] splice_sites_donors: batch patching processed 11475/13303 pairs
+[MINTS 22:27:38] splice_sites_donors: batch patching processed 11500/13303 pairs
+[MINTS 22:28:18] splice_sites_donors: batch patching processed 11525/13303 pairs
+[MINTS 22:28:57] splice_sites_donors: batch patching processed 11550/13303 pairs
+[MINTS 22:29:37] splice_sites_donors: batch patching processed 11575/13303 pairs
+[MINTS 22:30:17] splice_sites_donors: batch patching processed 11600/13303 pairs
+[MINTS 22:30:57] splice_sites_donors: batch patching processed 11625/13303 pairs
+[MINTS 22:31:36] splice_sites_donors: batch patching processed 11650/13303 pairs
+[MINTS 22:32:16] splice_sites_donors: batch patching processed 11675/13303 pairs
+[MINTS 22:32:56] splice_sites_donors: batch patching processed 11700/13303 pairs
+[MINTS 22:33:37] splice_sites_donors: batch patching processed 11725/13303 pairs
+[MINTS 22:34:18] splice_sites_donors: batch patching processed 11750/13303 pairs
+[MINTS 22:34:59] splice_sites_donors: batch patching processed 11775/13303 pairs
+[MINTS 22:35:46] splice_sites_donors: batch patching processed 11800/13303 pairs
+[MINTS 22:36:28] splice_sites_donors: batch patching processed 11825/13303 pairs
+[MINTS 22:37:10] splice_sites_donors: batch patching processed 11850/13303 pairs
+[MINTS 22:37:51] splice_sites_donors: batch patching processed 11875/13303 pairs
+[MINTS 22:38:31] splice_sites_donors: batch patching processed 11900/13303 pairs
+[MINTS 22:39:13] splice_sites_donors: batch patching processed 11925/13303 pairs
+[MINTS 22:39:55] splice_sites_donors: batch patching processed 11950/13303 pairs
+[MINTS 22:40:36] splice_sites_donors: batch patching processed 11975/13303 pairs
+[MINTS 22:41:17] splice_sites_donors: batch patching processed 12000/13303 pairs
+[MINTS 22:41:58] splice_sites_donors: batch patching processed 12025/13303 pairs
+[MINTS 22:42:39] splice_sites_donors: batch patching processed 12050/13303 pairs
+[MINTS 22:43:21] splice_sites_donors: batch patching processed 12075/13303 pairs
+[MINTS 22:44:01] splice_sites_donors: batch patching processed 12100/13303 pairs
+[MINTS 22:44:41] splice_sites_donors: batch patching processed 12125/13303 pairs
+[MINTS 22:45:22] splice_sites_donors: batch patching processed 12150/13303 pairs
+[MINTS 22:46:03] splice_sites_donors: batch patching processed 12175/13303 pairs
+[MINTS 22:46:46] splice_sites_donors: batch patching processed 12200/13303 pairs
+[MINTS 22:47:27] splice_sites_donors: batch patching processed 12225/13303 pairs
+[MINTS 22:48:08] splice_sites_donors: batch patching processed 12250/13303 pairs
+[MINTS 22:48:50] splice_sites_donors: batch patching processed 12275/13303 pairs
+[MINTS 22:49:32] splice_sites_donors: batch patching processed 12300/13303 pairs
+[MINTS 22:50:13] splice_sites_donors: batch patching processed 12325/13303 pairs
+[MINTS 22:50:55] splice_sites_donors: batch patching processed 12350/13303 pairs
+[MINTS 22:51:37] splice_sites_donors: batch patching processed 12375/13303 pairs
+[MINTS 22:52:19] splice_sites_donors: batch patching processed 12400/13303 pairs
+[MINTS 22:53:01] splice_sites_donors: batch patching processed 12425/13303 pairs
+[MINTS 22:53:42] splice_sites_donors: batch patching processed 12450/13303 pairs
+[MINTS 22:54:25] splice_sites_donors: batch patching processed 12475/13303 pairs
+[MINTS 22:55:06] splice_sites_donors: batch patching processed 12500/13303 pairs
+[MINTS 22:55:48] splice_sites_donors: batch patching processed 12525/13303 pairs
+[MINTS 22:56:28] splice_sites_donors: batch patching processed 12550/13303 pairs
+[MINTS 22:57:10] splice_sites_donors: batch patching processed 12575/13303 pairs
+[MINTS 22:57:49] splice_sites_donors: batch patching processed 12600/13303 pairs
+[MINTS 22:58:29] splice_sites_donors: batch patching processed 12625/13303 pairs
+[MINTS 22:59:10] splice_sites_donors: batch patching processed 12650/13303 pairs
+[MINTS 22:59:52] splice_sites_donors: batch patching processed 12675/13303 pairs
+[MINTS 23:00:33] splice_sites_donors: batch patching processed 12700/13303 pairs
+[MINTS 23:01:15] splice_sites_donors: batch patching processed 12725/13303 pairs
+[MINTS 23:01:56] splice_sites_donors: batch patching processed 12750/13303 pairs
+[MINTS 23:02:38] splice_sites_donors: batch patching processed 12775/13303 pairs
+[MINTS 23:03:19] splice_sites_donors: batch patching processed 12800/13303 pairs
+[MINTS 23:04:01] splice_sites_donors: batch patching processed 12825/13303 pairs
+[MINTS 23:04:42] splice_sites_donors: batch patching processed 12850/13303 pairs
+[MINTS 23:05:22] splice_sites_donors: batch patching processed 12875/13303 pairs
+[MINTS 23:06:04] splice_sites_donors: batch patching processed 12900/13303 pairs
+[MINTS 23:06:46] splice_sites_donors: batch patching processed 12925/13303 pairs
+[MINTS 23:07:28] splice_sites_donors: batch patching processed 12950/13303 pairs
+[MINTS 23:08:11] splice_sites_donors: batch patching processed 12975/13303 pairs
+[MINTS 23:08:54] splice_sites_donors: batch patching processed 13000/13303 pairs
+[MINTS 23:09:36] splice_sites_donors: batch patching processed 13025/13303 pairs
+[MINTS 23:10:18] splice_sites_donors: batch patching processed 13050/13303 pairs
+[MINTS 23:11:01] splice_sites_donors: batch patching processed 13075/13303 pairs
+[MINTS 23:11:42] splice_sites_donors: batch patching processed 13100/13303 pairs
+[MINTS 23:12:24] splice_sites_donors: batch patching processed 13125/13303 pairs
+[MINTS 23:13:05] splice_sites_donors: batch patching processed 13150/13303 pairs
+[MINTS 23:13:47] splice_sites_donors: batch patching processed 13175/13303 pairs
+[MINTS 23:14:28] splice_sites_donors: batch patching processed 13200/13303 pairs
+[MINTS 23:15:09] splice_sites_donors: batch patching processed 13225/13303 pairs
+[MINTS 23:15:51] splice_sites_donors: batch patching processed 13250/13303 pairs
+[MINTS 23:16:34] splice_sites_donors: batch patching processed 13275/13303 pairs
+[MINTS 23:17:16] splice_sites_donors: batch patching processed 13300/13303 pairs
+[MINTS 23:17:21] splice_sites_donors: batch patching processed 13303/13303 pairs
+[MINTS 23:17:21] Completed step: systematic_causal_intervention in 23616.074s
+[MINTS 23:17:21] Starting step: threshold_sensitivity
+[MINTS 23:17:21] Loading QK, enrichment, and patching tables for threshold sensitivity
+[MINTS 23:17:27] Completed step: threshold_sensitivity in 5.762s
+[MINTS 23:17:27] Starting step: distributed_feature_search
+[MINTS 23:17:27] Loading model for distributed feature search: zhihan1996/DNABERT-2-117M
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████| 136/136 [00:00<00:00, 70807.52it/s]
+BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     |
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.decoder.bias               | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.decoder.weight             | UNEXPECTED |
+pooler.dense.bias                          | MISSING    |
+pooler.dense.weight                        | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 23:17:32] Model ready on cuda using huggingface_forward_hooks
+[MINTS 23:17:32] Scoring CTCF motif targets for distributed feature search: max_sequences=None
+[MINTS 23:18:26] Using MLP post-activation hook target: layer=11, target=mlp.gated_layers.post_activation_glu
+[MINTS 23:18:26] Distributed feature extraction processed 1/51249 CTCF sequences
+[MINTS 23:18:28] Distributed feature extraction processed 250/51249 CTCF sequences
+[MINTS 23:18:30] Distributed feature extraction processed 500/51249 CTCF sequences
+[MINTS 23:18:32] Distributed feature extraction processed 750/51249 CTCF sequences
+[MINTS 23:18:34] Distributed feature extraction processed 1000/51249 CTCF sequences
+[MINTS 23:18:36] Distributed feature extraction processed 1250/51249 CTCF sequences
+[MINTS 23:18:38] Distributed feature extraction processed 1500/51249 CTCF sequences
+[MINTS 23:18:40] Distributed feature extraction processed 1750/51249 CTCF sequences
+[MINTS 23:18:42] Distributed feature extraction processed 2000/51249 CTCF sequences
+[MINTS 23:18:44] Distributed feature extraction processed 2250/51249 CTCF sequences
+[MINTS 23:18:47] Distributed feature extraction processed 2500/51249 CTCF sequences
+[MINTS 23:18:48] Distributed feature extraction processed 2750/51249 CTCF sequences
+[MINTS 23:18:51] Distributed feature extraction processed 3000/51249 CTCF sequences
+[MINTS 23:18:53] Distributed feature extraction processed 3250/51249 CTCF sequences
+[MINTS 23:18:55] Distributed feature extraction processed 3500/51249 CTCF sequences
+[MINTS 23:18:57] Distributed feature extraction processed 3750/51249 CTCF sequences
+[MINTS 23:18:59] Distributed feature extraction processed 4000/51249 CTCF sequences
+[MINTS 23:19:01] Distributed feature extraction processed 4250/51249 CTCF sequences
+[MINTS 23:19:03] Distributed feature extraction processed 4500/51249 CTCF sequences
+[MINTS 23:19:05] Distributed feature extraction processed 4750/51249 CTCF sequences
+[MINTS 23:19:08] Distributed feature extraction processed 5000/51249 CTCF sequences
+[MINTS 23:19:10] Distributed feature extraction processed 5250/51249 CTCF sequences
+[MINTS 23:19:12] Distributed feature extraction processed 5500/51249 CTCF sequences
+[MINTS 23:19:14] Distributed feature extraction processed 5750/51249 CTCF sequences
+[MINTS 23:19:16] Distributed feature extraction processed 6000/51249 CTCF sequences
+[MINTS 23:19:18] Distributed feature extraction processed 6250/51249 CTCF sequences
+[MINTS 23:19:20] Distributed feature extraction processed 6500/51249 CTCF sequences
+[MINTS 23:19:22] Distributed feature extraction processed 6750/51249 CTCF sequences
+[MINTS 23:19:24] Distributed feature extraction processed 7000/51249 CTCF sequences
+[MINTS 23:19:26] Distributed feature extraction processed 7250/51249 CTCF sequences
+[MINTS 23:19:28] Distributed feature extraction processed 7500/51249 CTCF sequences
+[MINTS 23:19:30] Distributed feature extraction processed 7750/51249 CTCF sequences
+[MINTS 23:19:32] Distributed feature extraction processed 8000/51249 CTCF sequences
+[MINTS 23:19:34] Distributed feature extraction processed 8250/51249 CTCF sequences
+[MINTS 23:19:36] Distributed feature extraction processed 8500/51249 CTCF sequences
+[MINTS 23:19:38] Distributed feature extraction processed 8750/51249 CTCF sequences
+[MINTS 23:19:40] Distributed feature extraction processed 9000/51249 CTCF sequences
+[MINTS 23:19:42] Distributed feature extraction processed 9250/51249 CTCF sequences
+[MINTS 23:19:44] Distributed feature extraction processed 9500/51249 CTCF sequences
+[MINTS 23:19:46] Distributed feature extraction processed 9750/51249 CTCF sequences
+[MINTS 23:19:48] Distributed feature extraction processed 10000/51249 CTCF sequences
+[MINTS 23:19:50] Distributed feature extraction processed 10250/51249 CTCF sequences
+[MINTS 23:19:52] Distributed feature extraction processed 10500/51249 CTCF sequences
+[MINTS 23:19:54] Distributed feature extraction processed 10750/51249 CTCF sequences
+[MINTS 23:19:56] Distributed feature extraction processed 11000/51249 CTCF sequences
+[MINTS 23:19:58] Distributed feature extraction processed 11250/51249 CTCF sequences
+[MINTS 23:20:00] Distributed feature extraction processed 11500/51249 CTCF sequences
+[MINTS 23:20:02] Distributed feature extraction processed 11750/51249 CTCF sequences
+[MINTS 23:20:04] Distributed feature extraction processed 12000/51249 CTCF sequences
+[MINTS 23:20:06] Distributed feature extraction processed 12250/51249 CTCF sequences
+[MINTS 23:20:08] Distributed feature extraction processed 12500/51249 CTCF sequences
+[MINTS 23:20:10] Distributed feature extraction processed 12750/51249 CTCF sequences
+[MINTS 23:20:13] Distributed feature extraction processed 13000/51249 CTCF sequences
+[MINTS 23:20:15] Distributed feature extraction processed 13250/51249 CTCF sequences
+[MINTS 23:20:16] Distributed feature extraction processed 13500/51249 CTCF sequences
+[MINTS 23:20:18] Distributed feature extraction processed 13750/51249 CTCF sequences
+[MINTS 23:20:20] Distributed feature extraction processed 14000/51249 CTCF sequences
+[MINTS 23:20:22] Distributed feature extraction processed 14250/51249 CTCF sequences
+[MINTS 23:20:24] Distributed feature extraction processed 14500/51249 CTCF sequences
+[MINTS 23:20:26] Distributed feature extraction processed 14750/51249 CTCF sequences
+[MINTS 23:20:28] Distributed feature extraction processed 15000/51249 CTCF sequences
+[MINTS 23:20:30] Distributed feature extraction processed 15250/51249 CTCF sequences
+[MINTS 23:20:32] Distributed feature extraction processed 15500/51249 CTCF sequences
+[MINTS 23:20:34] Distributed feature extraction processed 15750/51249 CTCF sequences
+[MINTS 23:20:36] Distributed feature extraction processed 16000/51249 CTCF sequences
+[MINTS 23:20:38] Distributed feature extraction processed 16250/51249 CTCF sequences
+[MINTS 23:20:40] Distributed feature extraction processed 16500/51249 CTCF sequences
+[MINTS 23:20:42] Distributed feature extraction processed 16750/51249 CTCF sequences
+[MINTS 23:20:44] Distributed feature extraction processed 17000/51249 CTCF sequences
+[MINTS 23:20:46] Distributed feature extraction processed 17250/51249 CTCF sequences
+[MINTS 23:20:48] Distributed feature extraction processed 17500/51249 CTCF sequences
+[MINTS 23:20:50] Distributed feature extraction processed 17750/51249 CTCF sequences
+[MINTS 23:20:52] Distributed feature extraction processed 18000/51249 CTCF sequences
+[MINTS 23:20:54] Distributed feature extraction processed 18250/51249 CTCF sequences
+[MINTS 23:20:56] Distributed feature extraction processed 18500/51249 CTCF sequences
+[MINTS 23:20:58] Distributed feature extraction processed 18750/51249 CTCF sequences
+[MINTS 23:21:00] Distributed feature extraction processed 19000/51249 CTCF sequences
+[MINTS 23:21:02] Distributed feature extraction processed 19250/51249 CTCF sequences
+[MINTS 23:21:03] Distributed feature extraction processed 19500/51249 CTCF sequences
+[MINTS 23:21:05] Distributed feature extraction processed 19750/51249 CTCF sequences
+[MINTS 23:21:07] Distributed feature extraction processed 20000/51249 CTCF sequences
+[MINTS 23:21:09] Distributed feature extraction processed 20250/51249 CTCF sequences
+[MINTS 23:21:11] Distributed feature extraction processed 20500/51249 CTCF sequences
+[MINTS 23:21:13] Distributed feature extraction processed 20750/51249 CTCF sequences
+[MINTS 23:21:15] Distributed feature extraction processed 21000/51249 CTCF sequences
+[MINTS 23:21:17] Distributed feature extraction processed 21250/51249 CTCF sequences
+[MINTS 23:21:19] Distributed feature extraction processed 21500/51249 CTCF sequences
+[MINTS 23:21:21] Distributed feature extraction processed 21750/51249 CTCF sequences
+[MINTS 23:21:23] Distributed feature extraction processed 22000/51249 CTCF sequences
+[MINTS 23:21:25] Distributed feature extraction processed 22250/51249 CTCF sequences
+[MINTS 23:21:27] Distributed feature extraction processed 22500/51249 CTCF sequences
+[MINTS 23:21:29] Distributed feature extraction processed 22750/51249 CTCF sequences
+[MINTS 23:21:31] Distributed feature extraction processed 23000/51249 CTCF sequences
+[MINTS 23:21:33] Distributed feature extraction processed 23250/51249 CTCF sequences
+[MINTS 23:21:35] Distributed feature extraction processed 23500/51249 CTCF sequences
+[MINTS 23:21:37] Distributed feature extraction processed 23750/51249 CTCF sequences
+[MINTS 23:21:39] Distributed feature extraction processed 24000/51249 CTCF sequences
+[MINTS 23:21:41] Distributed feature extraction processed 24250/51249 CTCF sequences
+[MINTS 23:21:44] Distributed feature extraction processed 24500/51249 CTCF sequences
+[MINTS 23:21:46] Distributed feature extraction processed 24750/51249 CTCF sequences
+[MINTS 23:21:48] Distributed feature extraction processed 25000/51249 CTCF sequences
+[MINTS 23:21:50] Distributed feature extraction processed 25250/51249 CTCF sequences
+[MINTS 23:21:52] Distributed feature extraction processed 25500/51249 CTCF sequences
+[MINTS 23:21:54] Distributed feature extraction processed 25750/51249 CTCF sequences
+[MINTS 23:21:56] Distributed feature extraction processed 26000/51249 CTCF sequences
+[MINTS 23:21:58] Distributed feature extraction processed 26250/51249 CTCF sequences
+[MINTS 23:22:00] Distributed feature extraction processed 26500/51249 CTCF sequences
+[MINTS 23:22:02] Distributed feature extraction processed 26750/51249 CTCF sequences
+[MINTS 23:22:04] Distributed feature extraction processed 27000/51249 CTCF sequences
+[MINTS 23:22:07] Distributed feature extraction processed 27250/51249 CTCF sequences
+[MINTS 23:22:09] Distributed feature extraction processed 27500/51249 CTCF sequences
+[MINTS 23:22:11] Distributed feature extraction processed 27750/51249 CTCF sequences
+[MINTS 23:22:13] Distributed feature extraction processed 28000/51249 CTCF sequences
+[MINTS 23:22:15] Distributed feature extraction processed 28250/51249 CTCF sequences
+[MINTS 23:22:17] Distributed feature extraction processed 28500/51249 CTCF sequences
+[MINTS 23:22:19] Distributed feature extraction processed 28750/51249 CTCF sequences
+[MINTS 23:22:21] Distributed feature extraction processed 29000/51249 CTCF sequences
+[MINTS 23:22:24] Distributed feature extraction processed 29250/51249 CTCF sequences
+[MINTS 23:22:26] Distributed feature extraction processed 29500/51249 CTCF sequences
+[MINTS 23:22:28] Distributed feature extraction processed 29750/51249 CTCF sequences
+[MINTS 23:22:30] Distributed feature extraction processed 30000/51249 CTCF sequences
+[MINTS 23:22:32] Distributed feature extraction processed 30250/51249 CTCF sequences
+[MINTS 23:22:34] Distributed feature extraction processed 30500/51249 CTCF sequences
+[MINTS 23:22:36] Distributed feature extraction processed 30750/51249 CTCF sequences
+[MINTS 23:22:38] Distributed feature extraction processed 31000/51249 CTCF sequences
+[MINTS 23:22:40] Distributed feature extraction processed 31250/51249 CTCF sequences
+[MINTS 23:22:42] Distributed feature extraction processed 31500/51249 CTCF sequences
+[MINTS 23:22:45] Distributed feature extraction processed 31750/51249 CTCF sequences
+[MINTS 23:22:47] Distributed feature extraction processed 32000/51249 CTCF sequences
+[MINTS 23:22:49] Distributed feature extraction processed 32250/51249 CTCF sequences
+[MINTS 23:22:51] Distributed feature extraction processed 32500/51249 CTCF sequences
+[MINTS 23:22:53] Distributed feature extraction processed 32750/51249 CTCF sequences
+[MINTS 23:22:55] Distributed feature extraction processed 33000/51249 CTCF sequences
+[MINTS 23:22:57] Distributed feature extraction processed 33250/51249 CTCF sequences
+[MINTS 23:22:59] Distributed feature extraction processed 33500/51249 CTCF sequences
+[MINTS 23:23:01] Distributed feature extraction processed 33750/51249 CTCF sequences
+[MINTS 23:23:03] Distributed feature extraction processed 34000/51249 CTCF sequences
+[MINTS 23:23:05] Distributed feature extraction processed 34250/51249 CTCF sequences
+[MINTS 23:23:07] Distributed feature extraction processed 34500/51249 CTCF sequences
+[MINTS 23:23:09] Distributed feature extraction processed 34750/51249 CTCF sequences
+[MINTS 23:23:11] Distributed feature extraction processed 35000/51249 CTCF sequences
+[MINTS 23:23:13] Distributed feature extraction processed 35250/51249 CTCF sequences
+[MINTS 23:23:15] Distributed feature extraction processed 35500/51249 CTCF sequences
+[MINTS 23:23:18] Distributed feature extraction processed 35750/51249 CTCF sequences
+[MINTS 23:23:20] Distributed feature extraction processed 36000/51249 CTCF sequences
+[MINTS 23:23:22] Distributed feature extraction processed 36250/51249 CTCF sequences
+[MINTS 23:23:24] Distributed feature extraction processed 36500/51249 CTCF sequences
+[MINTS 23:23:26] Distributed feature extraction processed 36750/51249 CTCF sequences
+[MINTS 23:23:28] Distributed feature extraction processed 37000/51249 CTCF sequences
+[MINTS 23:23:30] Distributed feature extraction processed 37250/51249 CTCF sequences
+[MINTS 23:23:32] Distributed feature extraction processed 37500/51249 CTCF sequences
+[MINTS 23:23:34] Distributed feature extraction processed 37750/51249 CTCF sequences
+[MINTS 23:23:36] Distributed feature extraction processed 38000/51249 CTCF sequences
+[MINTS 23:23:38] Distributed feature extraction processed 38250/51249 CTCF sequences
+[MINTS 23:23:40] Distributed feature extraction processed 38500/51249 CTCF sequences
+[MINTS 23:23:42] Distributed feature extraction processed 38750/51249 CTCF sequences
+[MINTS 23:23:45] Distributed feature extraction processed 39000/51249 CTCF sequences
+[MINTS 23:23:47] Distributed feature extraction processed 39250/51249 CTCF sequences
+[MINTS 23:23:49] Distributed feature extraction processed 39500/51249 CTCF sequences
+[MINTS 23:23:51] Distributed feature extraction processed 39750/51249 CTCF sequences
+[MINTS 23:23:53] Distributed feature extraction processed 40000/51249 CTCF sequences
+[MINTS 23:23:55] Distributed feature extraction processed 40250/51249 CTCF sequences
+[MINTS 23:23:57] Distributed feature extraction processed 40500/51249 CTCF sequences
+[MINTS 23:23:59] Distributed feature extraction processed 40750/51249 CTCF sequences
+[MINTS 23:24:02] Distributed feature extraction processed 41000/51249 CTCF sequences
+[MINTS 23:24:04] Distributed feature extraction processed 41250/51249 CTCF sequences
+[MINTS 23:24:06] Distributed feature extraction processed 41500/51249 CTCF sequences
+[MINTS 23:24:08] Distributed feature extraction processed 41750/51249 CTCF sequences
+[MINTS 23:24:10] Distributed feature extraction processed 42000/51249 CTCF sequences
+[MINTS 23:24:12] Distributed feature extraction processed 42250/51249 CTCF sequences
+[MINTS 23:24:14] Distributed feature extraction processed 42500/51249 CTCF sequences
+[MINTS 23:24:16] Distributed feature extraction processed 42750/51249 CTCF sequences
+[MINTS 23:24:18] Distributed feature extraction processed 43000/51249 CTCF sequences
+[MINTS 23:24:21] Distributed feature extraction processed 43250/51249 CTCF sequences
+[MINTS 23:24:23] Distributed feature extraction processed 43500/51249 CTCF sequences
+[MINTS 23:24:25] Distributed feature extraction processed 43750/51249 CTCF sequences
+[MINTS 23:24:27] Distributed feature extraction processed 44000/51249 CTCF sequences
+[MINTS 23:24:29] Distributed feature extraction processed 44250/51249 CTCF sequences
+[MINTS 23:24:31] Distributed feature extraction processed 44500/51249 CTCF sequences
+[MINTS 23:24:33] Distributed feature extraction processed 44750/51249 CTCF sequences
+[MINTS 23:24:36] Distributed feature extraction processed 45000/51249 CTCF sequences
+[MINTS 23:24:38] Distributed feature extraction processed 45250/51249 CTCF sequences
+[MINTS 23:24:40] Distributed feature extraction processed 45500/51249 CTCF sequences
+[MINTS 23:24:42] Distributed feature extraction processed 45750/51249 CTCF sequences
+[MINTS 23:24:44] Distributed feature extraction processed 46000/51249 CTCF sequences
+[MINTS 23:24:46] Distributed feature extraction processed 46250/51249 CTCF sequences
+[MINTS 23:24:48] Distributed feature extraction processed 46500/51249 CTCF sequences
+[MINTS 23:24:50] Distributed feature extraction processed 46750/51249 CTCF sequences
+[MINTS 23:24:53] Distributed feature extraction processed 47000/51249 CTCF sequences
+[MINTS 23:24:55] Distributed feature extraction processed 47250/51249 CTCF sequences
+[MINTS 23:24:57] Distributed feature extraction processed 47500/51249 CTCF sequences
+[MINTS 23:25:00] Distributed feature extraction processed 47750/51249 CTCF sequences
+[MINTS 23:25:02] Distributed feature extraction processed 48000/51249 CTCF sequences
+[MINTS 23:25:04] Distributed feature extraction processed 48250/51249 CTCF sequences
+[MINTS 23:25:07] Distributed feature extraction processed 48500/51249 CTCF sequences
+[MINTS 23:25:09] Distributed feature extraction processed 48750/51249 CTCF sequences
+[MINTS 23:25:11] Distributed feature extraction processed 49000/51249 CTCF sequences
+[MINTS 23:25:13] Distributed feature extraction processed 49250/51249 CTCF sequences
+[MINTS 23:25:15] Distributed feature extraction processed 49500/51249 CTCF sequences
+[MINTS 23:25:17] Distributed feature extraction processed 49750/51249 CTCF sequences
+[MINTS 23:25:19] Distributed feature extraction processed 50000/51249 CTCF sequences
+[MINTS 23:25:21] Distributed feature extraction processed 50250/51249 CTCF sequences
+[MINTS 23:25:23] Distributed feature extraction processed 50500/51249 CTCF sequences
+[MINTS 23:25:26] Distributed feature extraction processed 50750/51249 CTCF sequences
+[MINTS 23:25:28] Distributed feature extraction processed 51000/51249 CTCF sequences
+[MINTS 23:25:30] Distributed feature extraction processed 51249/51249 CTCF sequences
+[MINTS 23:25:48] SAE residual: epoch 1/10, mse=0.39979, l1=0.46854
+[MINTS 23:25:48] SAE residual: epoch 2/10, mse=0.19397, l1=0.58677
+[MINTS 23:25:49] SAE residual: epoch 3/10, mse=0.13857, l1=0.65671
+[MINTS 23:25:49] SAE residual: epoch 4/10, mse=0.09582, l1=0.74084
+[MINTS 23:25:49] SAE residual: epoch 5/10, mse=0.06670, l1=0.83375
+[MINTS 23:25:50] SAE residual: epoch 6/10, mse=0.05149, l1=0.91376
+[MINTS 23:25:50] SAE residual: epoch 7/10, mse=0.04863, l1=0.97515
+[MINTS 23:25:51] SAE residual: epoch 8/10, mse=0.04104, l1=1.01937
+[MINTS 23:25:51] SAE residual: epoch 9/10, mse=0.03873, l1=1.05398
+[MINTS 23:25:52] SAE residual: epoch 10/10, mse=0.03810, l1=1.08140
+[MINTS 23:25:56] SAE mlp: epoch 1/10, mse=0.58439, l1=0.51833
+[MINTS 23:25:57] SAE mlp: epoch 2/10, mse=0.42535, l1=0.68470
+[MINTS 23:25:58] SAE mlp: epoch 3/10, mse=0.38332, l1=0.78020
+[MINTS 23:25:59] SAE mlp: epoch 4/10, mse=0.35671, l1=0.86179
+[MINTS 23:25:59] SAE mlp: epoch 5/10, mse=0.33571, l1=0.94230
+[MINTS 23:26:00] SAE mlp: epoch 6/10, mse=0.32174, l1=1.01846
+[MINTS 23:26:01] SAE mlp: epoch 7/10, mse=0.31212, l1=1.08123
+[MINTS 23:26:01] SAE mlp: epoch 8/10, mse=0.30661, l1=1.13294
+[MINTS 23:26:02] SAE mlp: epoch 9/10, mse=0.30278, l1=1.17204
+[MINTS 23:26:03] SAE mlp: epoch 10/10, mse=0.30149, l1=1.20231
+[MINTS 23:26:04] Completed step: distributed_feature_search in 516.841s
+[MINTS 23:26:04] Starting step: cross_model_tokenization_comparison
+[MINTS 23:26:04] Cross-model comparison loading zhihan1996/DNABERT-2-117M
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████| 136/136 [00:00<00:00, 47357.85it/s]
+BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     |
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |
+cls.predictions.decoder.bias               | UNEXPECTED |
+cls.predictions.transform.dense.bias       | UNEXPECTED |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |
+cls.predictions.decoder.weight             | UNEXPECTED |
+pooler.dense.bias                          | MISSING    |
+pooler.dense.weight                        | MISSING    |
+
+Notes:
+- UNEXPECTED:   can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:      those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 23:26:09] Cross-model benchmark ready: model=zhihan1996/DNABERT-2-117M, tokenization=BPE, device=cuda
+[MINTS 23:26:09] Starting residual-cache exports for task: promoter_tata
+[MINTS 23:26:09] Loading cached dataset split: promoter_tata/train
+[MINTS 23:26:09] Caching residuals for promoter_tata/train: 5062 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:26:09] promoter_tata/train: cached 8/5062 examples
+[MINTS 23:26:11] promoter_tata/train: cached 504/5062 examples
+[MINTS 23:26:12] promoter_tata/train: cached 1008/5062 examples
+[MINTS 23:26:14] promoter_tata/train: cached 1512/5062 examples
+[MINTS 23:26:15] promoter_tata/train: cached 2016/5062 examples
+[MINTS 23:26:17] promoter_tata/train: cached 2520/5062 examples
+[MINTS 23:26:19] promoter_tata/train: cached 3024/5062 examples
+[MINTS 23:26:20] promoter_tata/train: cached 3528/5062 examples
+[MINTS 23:26:22] promoter_tata/train: cached 4032/5062 examples
+[MINTS 23:26:23] promoter_tata/train: cached 4536/5062 examples
+[MINTS 23:26:25] promoter_tata/train: cached 5040/5062 examples
+[MINTS 23:26:25] promoter_tata/train: cached 5062/5062 examples
+[MINTS 23:26:25] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\promoter_tata_train_residual_mean.npz
+[MINTS 23:26:26] Finished residual cache for promoter_tata/train: shape=[5062, 3, 768]
+[MINTS 23:26:26] Loading cached dataset split: promoter_tata/test
+[MINTS 23:26:26] Caching residuals for promoter_tata/test: 212 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:26:26] promoter_tata/test: cached 8/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 16/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 32/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 48/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 64/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 80/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 96/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 112/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 128/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 144/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 160/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 176/212 examples
+[MINTS 23:26:26] promoter_tata/test: cached 192/212 examples
+[MINTS 23:26:27] promoter_tata/test: cached 208/212 examples
+[MINTS 23:26:27] promoter_tata/test: cached 212/212 examples
+[MINTS 23:26:27] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\promoter_tata_test_residual_mean.npz
+[MINTS 23:26:27] Finished residual cache for promoter_tata/test: shape=[212, 3, 768]
+[MINTS 23:26:27] Finished residual-cache exports for task: promoter_tata
+[MINTS 23:26:27] Starting residual-cache exports for task: promoter_no_tata
+[MINTS 23:26:27] Loading cached dataset split: promoter_no_tata/train
+[MINTS 23:26:27] Caching residuals for promoter_no_tata/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:26:27] promoter_no_tata/train: cached 8/30000 examples
+[MINTS 23:26:36] promoter_no_tata/train: cached 3000/30000 examples
+[MINTS 23:26:45] promoter_no_tata/train: cached 6000/30000 examples
+[MINTS 23:26:55] promoter_no_tata/train: cached 9000/30000 examples
+[MINTS 23:27:04] promoter_no_tata/train: cached 12000/30000 examples
+[MINTS 23:27:14] promoter_no_tata/train: cached 15000/30000 examples
+[MINTS 23:27:23] promoter_no_tata/train: cached 18000/30000 examples
+[MINTS 23:27:33] promoter_no_tata/train: cached 21000/30000 examples
+[MINTS 23:27:42] promoter_no_tata/train: cached 24000/30000 examples
+[MINTS 23:27:51] promoter_no_tata/train: cached 27000/30000 examples
+[MINTS 23:28:00] promoter_no_tata/train: cached 30000/30000 examples
+[MINTS 23:28:00] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\promoter_no_tata_train_residual_mean.npz
+[MINTS 23:28:07] Finished residual cache for promoter_no_tata/train: shape=[30000, 3, 768]
+[MINTS 23:28:07] Loading cached dataset split: promoter_no_tata/test
+[MINTS 23:28:07] Caching residuals for promoter_no_tata/test: 1372 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:28:07] promoter_no_tata/test: cached 8/1372 examples
+[MINTS 23:28:07] promoter_no_tata/test: cached 136/1372 examples
+[MINTS 23:28:08] promoter_no_tata/test: cached 272/1372 examples
+[MINTS 23:28:08] promoter_no_tata/test: cached 408/1372 examples
+[MINTS 23:28:09] promoter_no_tata/test: cached 544/1372 examples
+[MINTS 23:28:09] promoter_no_tata/test: cached 680/1372 examples
+[MINTS 23:28:10] promoter_no_tata/test: cached 816/1372 examples
+[MINTS 23:28:10] promoter_no_tata/test: cached 952/1372 examples
+[MINTS 23:28:10] promoter_no_tata/test: cached 1088/1372 examples
+[MINTS 23:28:11] promoter_no_tata/test: cached 1224/1372 examples
+[MINTS 23:28:11] promoter_no_tata/test: cached 1360/1372 examples
+[MINTS 23:28:11] promoter_no_tata/test: cached 1372/1372 examples
+[MINTS 23:28:11] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\promoter_no_tata_test_residual_mean.npz
+[MINTS 23:28:12] Finished residual cache for promoter_no_tata/test: shape=[1372, 3, 768]
+[MINTS 23:28:12] Finished residual-cache exports for task: promoter_no_tata
+[MINTS 23:28:12] Starting residual-cache exports for task: splice_sites_donors
+[MINTS 23:28:12] Loading cached dataset split: splice_sites_donors/train
+[MINTS 23:28:12] Caching residuals for splice_sites_donors/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:28:12] splice_sites_donors/train: cached 8/30000 examples
+[MINTS 23:28:27] splice_sites_donors/train: cached 3000/30000 examples
+[MINTS 23:28:43] splice_sites_donors/train: cached 6000/30000 examples
+[MINTS 23:29:00] splice_sites_donors/train: cached 9000/30000 examples
+[MINTS 23:29:17] splice_sites_donors/train: cached 12000/30000 examples
+[MINTS 23:29:33] splice_sites_donors/train: cached 15000/30000 examples
+[MINTS 23:29:49] splice_sites_donors/train: cached 18000/30000 examples
+[MINTS 23:30:05] splice_sites_donors/train: cached 21000/30000 examples
+[MINTS 23:30:20] splice_sites_donors/train: cached 24000/30000 examples
+[MINTS 23:30:36] splice_sites_donors/train: cached 27000/30000 examples
+[MINTS 23:30:53] splice_sites_donors/train: cached 30000/30000 examples
+[MINTS 23:30:53] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\splice_sites_donors_train_residual_mean.npz
+[MINTS 23:31:00] Finished residual cache for splice_sites_donors/train: shape=[30000, 3, 768]
+[MINTS 23:31:00] Loading cached dataset split: splice_sites_donors/test
+[MINTS 23:31:00] Caching residuals for splice_sites_donors/test: 3000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:31:00] splice_sites_donors/test: cached 8/3000 examples
+[MINTS 23:31:01] splice_sites_donors/test: cached 296/3000 examples
+[MINTS 23:31:03] splice_sites_donors/test: cached 592/3000 examples
+[MINTS 23:31:04] splice_sites_donors/test: cached 888/3000 examples
+[MINTS 23:31:06] splice_sites_donors/test: cached 1184/3000 examples
+[MINTS 23:31:08] splice_sites_donors/test: cached 1480/3000 examples
+[MINTS 23:31:09] splice_sites_donors/test: cached 1776/3000 examples
+[MINTS 23:31:11] splice_sites_donors/test: cached 2072/3000 examples
+[MINTS 23:31:12] splice_sites_donors/test: cached 2368/3000 examples
+[MINTS 23:31:14] splice_sites_donors/test: cached 2664/3000 examples
+[MINTS 23:31:15] splice_sites_donors/test: cached 2960/3000 examples
+[MINTS 23:31:16] splice_sites_donors/test: cached 3000/3000 examples
+[MINTS 23:31:16] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\splice_sites_donors_test_residual_mean.npz
+[MINTS 23:31:16] Finished residual cache for splice_sites_donors/test: shape=[3000, 3, 768]
+[MINTS 23:31:16] Finished residual-cache exports for task: splice_sites_donors
+[MINTS 23:31:16] Starting residual-cache exports for task: splice_sites_acceptors
+[MINTS 23:31:16] Loading cached dataset split: splice_sites_acceptors/train
+[MINTS 23:31:16] Caching residuals for splice_sites_acceptors/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:31:17] splice_sites_acceptors/train: cached 8/30000 examples
+[MINTS 23:31:33] splice_sites_acceptors/train: cached 3000/30000 examples
+[MINTS 23:31:49] splice_sites_acceptors/train: cached 6000/30000 examples
+[MINTS 23:32:04] splice_sites_acceptors/train: cached 9000/30000 examples
+[MINTS 23:32:20] splice_sites_acceptors/train: cached 12000/30000 examples
+[MINTS 23:32:36] splice_sites_acceptors/train: cached 15000/30000 examples
+[MINTS 23:32:52] splice_sites_acceptors/train: cached 18000/30000 examples
+[MINTS 23:33:08] splice_sites_acceptors/train: cached 21000/30000 examples
+[MINTS 23:33:24] splice_sites_acceptors/train: cached 24000/30000 examples
+[MINTS 23:33:39] splice_sites_acceptors/train: cached 27000/30000 examples
+[MINTS 23:33:55] splice_sites_acceptors/train: cached 30000/30000 examples
+[MINTS 23:33:55] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\splice_sites_acceptors_train_residual_mean.npz
+[MINTS 23:34:02] Finished residual cache for splice_sites_acceptors/train: shape=[30000, 3, 768]
+[MINTS 23:34:02] Loading cached dataset split: splice_sites_acceptors/test
+[MINTS 23:34:02] Caching residuals for splice_sites_acceptors/test: 3000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 23:34:03] splice_sites_acceptors/test: cached 8/3000 examples
+[MINTS 23:34:04] splice_sites_acceptors/test: cached 296/3000 examples
+[MINTS 23:34:06] splice_sites_acceptors/test: cached 592/3000 examples
+[MINTS 23:34:07] splice_sites_acceptors/test: cached 888/3000 examples
+[MINTS 23:34:09] splice_sites_acceptors/test: cached 1184/3000 examples
+[MINTS 23:34:10] splice_sites_acceptors/test: cached 1480/3000 examples
+[MINTS 23:34:12] splice_sites_acceptors/test: cached 1776/3000 examples
+[MINTS 23:34:13] splice_sites_acceptors/test: cached 2072/3000 examples
+[MINTS 23:34:15] splice_sites_acceptors/test: cached 2368/3000 examples
+[MINTS 23:34:16] splice_sites_acceptors/test: cached 2664/3000 examples
+[MINTS 23:34:18] splice_sites_acceptors/test: cached 2960/3000 examples
+[MINTS 23:34:18] splice_sites_acceptors/test: cached 3000/3000 examples
+[MINTS 23:34:18] Writing residual cache: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\activations\splice_sites_acceptors_test_residual_mean.npz
+[MINTS 23:34:19] Finished residual cache for splice_sites_acceptors/test: shape=[3000, 3, 768]
+[MINTS 23:34:19] Finished residual-cache exports for task: splice_sites_acceptors
+[MINTS 23:34:19] Loading residual caches for probe: task=promoter_tata, layer=11
+[MINTS 23:34:19] Training probe for promoter_tata: train=5062, test=212, train_pos_rate=0.500, test_pos_rate=0.500
+[MINTS 23:34:20] Probe complete for promoter_tata: AUROC=0.9137, AUPRC=0.9241, accuracy=0.8349
+[MINTS 23:34:20] Loading residual caches for probe: task=promoter_no_tata, layer=11
+[MINTS 23:34:21] Training probe for promoter_no_tata: train=30000, test=1372, train_pos_rate=0.499, test_pos_rate=0.500
+[MINTS 23:34:24] Probe complete for promoter_no_tata: AUROC=0.9383, AUPRC=0.9475, accuracy=0.8550
+[MINTS 23:34:25] Loading residual caches for probe: task=splice_sites_donors, layer=11
+[MINTS 23:34:25] Training probe for splice_sites_donors: train=30000, test=3000, train_pos_rate=0.503, test_pos_rate=0.493
+[MINTS 23:34:30] Probe complete for splice_sites_donors: AUROC=0.8954, AUPRC=0.9049, accuracy=0.8230
+[MINTS 23:34:30] Loading residual caches for probe: task=splice_sites_acceptors, layer=11
+[MINTS 23:34:31] Training probe for splice_sites_acceptors: train=30000, test=3000, train_pos_rate=0.501, test_pos_rate=0.492
+[MINTS 23:34:34] Probe complete for splice_sites_acceptors: AUROC=0.8847, AUPRC=0.8954, accuracy=0.8090
+[MINTS 23:34:34] Writing probe metrics table: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\tables\linear_probe_metrics.csv
+[MINTS 23:34:34] Extracting QK/OV matrices for layer 0
+[MINTS 23:34:34] Extracting QK/OV matrices for layer 1
+[MINTS 23:34:35] Extracting QK/OV matrices for layer 2
+[MINTS 23:34:35] Extracting QK/OV matrices for layer 3
+[MINTS 23:34:35] Extracting QK/OV matrices for layer 4
+[MINTS 23:34:35] Extracting QK/OV matrices for layer 5
+[MINTS 23:34:35] Extracting QK/OV matrices for layer 6
+[MINTS 23:34:35] Extracting QK/OV matrices for layer 7
+[MINTS 23:34:36] Extracting QK/OV matrices for layer 8
+[MINTS 23:34:36] Extracting QK/OV matrices for layer 9
+[MINTS 23:34:36] Extracting QK/OV matrices for layer 10
+[MINTS 23:34:36] Extracting QK/OV matrices for layer 11
+[MINTS 23:34:36] Writing QK/OV matrix archive: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\circuits\qk_ov_matrices.npz
+[MINTS 23:34:52] Finished QK/OV export: layers=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], heads=12, d_model=768, d_head=64
+[MINTS 23:34:53] Using low-rank W_Q/W_K factors for strict QK proof scoring
+[MINTS 23:34:53] Scoring CTCF motif support for up to all sequences
+[MINTS 23:35:55] Wrote token motif scores: C:\Users\USER\Desktop\code\MINTS\results\cross_model\zhihan1996__dnabert_2_117m\enrichment\zhihan1996__dnabert_2_117m_ctcf_qk_alignment_token_motif_scores.csv
+[MINTS 23:35:55] Processed strict QK proof inputs for 1/51249 CTCF sequences
+[MINTS 23:38:46] Processed strict QK proof inputs for 1000/51249 CTCF sequences
+[MINTS 23:41:30] Processed strict QK proof inputs for 2000/51249 CTCF sequences
+[MINTS 23:44:01] Processed strict QK proof inputs for 3000/51249 CTCF sequences
+[MINTS 23:46:30] Processed strict QK proof inputs for 4000/51249 CTCF sequences
+[MINTS 23:49:07] Processed strict QK proof inputs for 5000/51249 CTCF sequences
+[MINTS 23:51:28] Processed strict QK proof inputs for 6000/51249 CTCF sequences
+[MINTS 23:53:53] Processed strict QK proof inputs for 7000/51249 CTCF sequences
+[MINTS 23:56:14] Processed strict QK proof inputs for 8000/51249 CTCF sequences
+[MINTS 23:58:32] Processed strict QK proof inputs for 9000/51249 CTCF sequences
+[MINTS 00:01:38] Processed strict QK proof inputs for 10000/51249 CTCF sequences
+[MINTS 00:05:02] Processed strict QK proof inputs for 11000/51249 CTCF sequences
+[MINTS 00:08:19] Processed strict QK proof inputs for 12000/51249 CTCF sequences
+[MINTS 00:11:36] Processed strict QK proof inputs for 13000/51249 CTCF sequences
+[MINTS 00:14:38] Processed strict QK proof inputs for 14000/51249 CTCF sequences
+[MINTS 00:17:36] Processed strict QK proof inputs for 15000/51249 CTCF sequences
+[MINTS 00:20:22] Processed strict QK proof inputs for 16000/51249 CTCF sequences
+[MINTS 00:23:03] Processed strict QK proof inputs for 17000/51249 CTCF sequences
+[MINTS 00:25:38] Processed strict QK proof inputs for 18000/51249 CTCF sequences
+[MINTS 00:28:14] Processed strict QK proof inputs for 19000/51249 CTCF sequences
+[MINTS 00:30:49] Processed strict QK proof inputs for 20000/51249 CTCF sequences
+[MINTS 00:33:43] Processed strict QK proof inputs for 21000/51249 CTCF sequences
+[MINTS 00:37:17] Processed strict QK proof inputs for 22000/51249 CTCF sequences
+[MINTS 00:41:10] Processed strict QK proof inputs for 23000/51249 CTCF sequences
+[MINTS 00:45:21] Processed strict QK proof inputs for 24000/51249 CTCF sequences
+[MINTS 00:49:54] Processed strict QK proof inputs for 25000/51249 CTCF sequences
+[MINTS 00:54:20] Processed strict QK proof inputs for 26000/51249 CTCF sequences
+[MINTS 00:58:41] Processed strict QK proof inputs for 27000/51249 CTCF sequences
+[MINTS 01:03:08] Processed strict QK proof inputs for 28000/51249 CTCF sequences
+[MINTS 01:07:27] Processed strict QK proof inputs for 29000/51249 CTCF sequences
+[MINTS 01:11:54] Processed strict QK proof inputs for 30000/51249 CTCF sequences
+[MINTS 01:16:10] Processed strict QK proof inputs for 31000/51249 CTCF sequences
+[MINTS 01:20:35] Processed strict QK proof inputs for 32000/51249 CTCF sequences
+[MINTS 01:25:15] Processed strict QK proof inputs for 33000/51249 CTCF sequences
+[MINTS 01:29:58] Processed strict QK proof inputs for 34000/51249 CTCF sequences
+[MINTS 01:34:30] Processed strict QK proof inputs for 35000/51249 CTCF sequences
+[MINTS 01:39:15] Processed strict QK proof inputs for 36000/51249 CTCF sequences
+[MINTS 01:43:37] Processed strict QK proof inputs for 37000/51249 CTCF sequences
+[MINTS 01:48:09] Processed strict QK proof inputs for 38000/51249 CTCF sequences
+[MINTS 01:52:35] Processed strict QK proof inputs for 39000/51249 CTCF sequences
+[MINTS 01:57:05] Processed strict QK proof inputs for 40000/51249 CTCF sequences
+[MINTS 02:00:59] Processed strict QK proof inputs for 41000/51249 CTCF sequences
+[MINTS 02:04:00] Processed strict QK proof inputs for 42000/51249 CTCF sequences
+[MINTS 02:06:44] Processed strict QK proof inputs for 43000/51249 CTCF sequences
+[MINTS 02:09:32] Processed strict QK proof inputs for 44000/51249 CTCF sequences
+[MINTS 02:12:21] Processed strict QK proof inputs for 45000/51249 CTCF sequences
+[MINTS 02:15:35] Processed strict QK proof inputs for 46000/51249 CTCF sequences
+[MINTS 02:19:47] Processed strict QK proof inputs for 47000/51249 CTCF sequences
+[MINTS 02:23:49] Processed strict QK proof inputs for 48000/51249 CTCF sequences
+[MINTS 02:27:59] Processed strict QK proof inputs for 49000/51249 CTCF sequences

@@ -1,0 +1,58 @@
+(.venv) PS C:\Users\USER\Desktop\code\MINTS> git status                                                    
+On branch implement-icml-mi-reviews                                   
+Your branch is up to date with 'origin/implement-icml-mi-reviews'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   results/counterfactuals/splice_sites_donors_batch_activation_patching_pairs.tsv
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/circuits_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_qk_alignment_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_token_motif_scores_motif_scores_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/linear_probe_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_no_tata_test_activations_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_no_tata_train_activations_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_tata_test_activations_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_tata_train_activations_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/qk_enrich_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_acceptors_test_activations_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_acceptors_train_activations_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_donors_test_activations_manifest.json
+        modified:   results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_donors_train_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/circuits_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/linear_probe_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_no_tata_test_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_no_tata_train_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_tata_test_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_tata_train_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/qk_enrich_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_acceptors_test_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_acceptors_train_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_donors_test_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_donors_train_activations_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_qk_alignment_manifest.json
+        modified:   results/cross_model/zhihan1996__dnabert_2_117m/manifests/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_token_motif_scores_motif_scores_manifest.json
+        modified:   results/distributed_features/ctcf_distributed_feature_search_summary.json
+        modified:   results/distributed_features/ctcf_mlp_sae_feature_alignment.csv
+        modified:   results/distributed_features/ctcf_mlp_sae_training_history.csv
+        modified:   results/distributed_features/ctcf_residual_sae_feature_alignment.csv
+        modified:   results/distributed_features/ctcf_residual_sae_training_history.csv
+        modified:   results/distributed_features/ctcf_sae_feature_alignment_top10.csv
+        modified:   results/figures/ctcf_mlp_sae_top10_alignment.png
+        modified:   results/figures/ctcf_residual_sae_top10_alignment.png
+        modified:   results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png
+        modified:   results/figures/threshold_sensitivity.png
+        modified:   results/patching/splice_sites_donors_batch_dnabert_activation_patching.csv
+        modified:   results/pipeline_run.json
+        modified:   results/tables/cross_model_tokenization_comparison.json
+        modified:   results/tables/downstream_task_performance.csv
+        modified:   results/tables/threshold_sensitivity.csv
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        logs.txt
+        logs1.txt
+        results/pipeline_run_cross_model_tokenization_comparison.json
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(.venv) PS C:\Users\USER\Desktop\code\MINTS> 
