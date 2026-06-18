@@ -31,7 +31,7 @@
 \maketitle
 
 \begin{abstract}
-Genomic foundation models often make biological labels linearly accessible, but decodability alone does not identify an internal mechanism. We study whether attention heads in nucleotide transformers can be justified as biological motif detectors under a strict mechanistic evidence standard. MINTS applies tokenization-aware QK/OV circuit analysis, residual-stream probing with controls, matched attention enrichment, activation patching, and sparse feature search to DNABERT-2 and a tested Nucleotide Transformer backend. Before making mechanistic claims, we report raw-sequence task baselines: GC-only AUROC ranges from 0.6361 to 0.9088, and 3--6-mer TF-IDF AUROC ranges from 0.7956 to 0.9406. DNABERT-2 layer-11 residual readouts achieve AUROC values of 0.9137, 0.9383, 0.8954, and 0.8847 on promoter and splice-site tasks, showing strong label decodability rather than a circuit-level explanation. Controls sharpen this interpretation: random-label and position-only probes are near chance; splice-site probes remain about 0.25 AUROC above GC-only controls; promoter probes are close to strong GC/k-mer baselines and should be interpreted cautiously. The primary strict test is negative: across 51,249 GM12878 CTCF sequences, no DNABERT-2 head meets the registered QK-to-motif criterion or matched attention-enrichment criterion. Batch activation patching finds promoter-TATA over-restoration and weaker splice-donor restoration, but these task-specific causal signals do not establish a CTCF motif-detector circuit. The results provide a calibrated evidence standard for nucleotide-transformer interpretability and show where representation-level success falls short of a strict motif-detector claim.
+Genomic foundation models often make biological labels linearly accessible, but decodability alone does not identify an internal mechanism. We study whether attention heads in nucleotide transformers can be justified as biological motif detectors under a strict mechanistic evidence standard. MINTS applies tokenization-aware QK/OV circuit analysis, residual-stream probing with controls, matched attention enrichment, activation patching, and sparse feature search to DNABERT-2 and a tested Nucleotide Transformer backend. Before making mechanistic claims, we report raw-sequence task baselines: GC-only AUROC ranges from 0.6361 to 0.9088, and 3--6-mer TF-IDF AUROC ranges from 0.7956 to 0.9406. DNABERT-2 layer-11 residual readouts achieve AUROC values of 0.9137, 0.9383, 0.8954, and 0.8847 on promoter and splice-site tasks, showing strong label decodability rather than a circuit-level explanation. Controls sharpen this interpretation: random-label and position-only probes are near chance; splice-site probes remain about 0.25 AUROC above GC-only controls; promoter probes are close to strong GC/k-mer baselines and should be interpreted cautiously. The primary strict test is negative: across 51,249 GM12878 CTCF sequences, no DNABERT-2 head meets the registered QK-to-motif criterion or matched attention-enrichment criterion. Batch activation patching finds promoter-TATA over-restoration, while the full splice-donor rerun no longer produces threshold-crossing restoration. These task-specific interventions do not establish a CTCF motif-detector circuit. The results provide a calibrated evidence standard for nucleotide-transformer interpretability and show where representation-level success falls short of a strict motif-detector claim.
 \end{abstract}
 
 \section{Introduction}
@@ -159,7 +159,7 @@ The residual-probe tasks are TATA promoter, non-TATA promoter, splice donor, and
 
 To avoid treating probes as end-to-end model performance, we report raw-sequence predictive baselines and a frozen DNABERT-2 sequence head before the mechanistic evidence. The raw-sequence baselines are a GC-content logistic classifier using GC fraction, GC skew, and sequence length, and a TF-IDF 3--6-mer logistic classifier. The frozen DNABERT-2 sequence head is a balanced logistic classifier trained on cached layer-11 sequence embeddings. Frozen residual readouts are shown beside these baselines only as representation context; neither DNABERT column is full encoder fine-tuning.
 
-The pipeline writes small review-facing CSV, JSON, and figure artifacts while treating large activation, circuit-matrix, token-score, and sparse-autoencoder files as reproducible generated outputs. The full run takes about eight hours on the tested CUDA setup. The most expensive stages are the cross-model comparison and strict all-layer CTCF scans, so the appendix includes both full reproduction commands and a reduced smoke-run command for checking the code path on a smaller subset.
+The pipeline writes small review-facing CSV, JSON, and figure artifacts while treating large activation, circuit-matrix, token-score, and sparse-autoencoder files as reproducible generated outputs. The June 2026 completed results required about 14.15 non-overlapping compute hours on the tested CUDA setup after excluding a discarded overlapping cross-model attempt. The most expensive stages are systematic causal intervention, cross-model comparison, and strict all-layer CTCF scans, so the appendix includes both full reproduction commands and a reduced smoke-run command for checking the code path on a smaller subset.
 
 \section{Results}
 
@@ -220,9 +220,9 @@ splice\_sites\_acceptors & 0.8847 & 0.6361 & 0.4461 & 0.8838 & 0.5005 & 0.8573--
 \toprule
 Target & Performance & Probe & QK & Enrichment & Patching & OV & SAE & Role \\
 \midrule
-CTCF & 51,249-sequence strict scan; no classifier target & No CTCF residual classifier used as strict evidence & Best $r=0.3004$; fail & Best $\rho_h=1.3130$; fail & No candidate promoted after failed QK/enrichment & No aligned OV claim & Best cosine 0.1158; weak & Primary strict chain \\
+CTCF & 51,249-sequence strict scan; no classifier target & No CTCF residual classifier used as strict evidence & Best $r=0.3004$; fail & Best $\rho_h=1.3130$; fail & No candidate promoted after failed QK/enrichment & No aligned OV claim & Best cosine 0.1092; weak & Primary strict chain \\
 Promoter-TATA & GC 0.8955; k-mer 0.9297; seq-head/readout 0.9137 AUROC & Decodable, but close to strong baselines & Not target-aligned in current artifact & Not target-aligned & Best $\mathrm{PM}=1.4029$; over-restores & L2H7 output cosine 0.1261; weak & Not promoter-specific & Auxiliary causal evidence \\
-Splice donor & GC 0.6560; k-mer 0.8185; seq-head/readout 0.8954 AUROC & Decodable beyond GC and k-mer & Not target-aligned in current artifact & Not target-aligned & Best $\mathrm{PM}=0.5485$; partial & Not audited & Not splice-specific & Auxiliary causal evidence \\
+Splice donor & GC 0.6560; k-mer 0.8185; seq-head/readout 0.8954 AUROC & Decodable beyond GC and k-mer & Not target-aligned in current artifact & Not target-aligned & Best $\mathrm{PM}=0.1657$; below causal threshold & Not audited & Not splice-specific & Auxiliary negative-control evidence \\
 \bottomrule
 \end{tabular}
 }
@@ -251,7 +251,7 @@ CTCF & QK $r$ & 31 at $r\geq0.1$ & 0 at $r\geq0.5$ & 0.3004 & Motif-score shuffl
 CTCF & Enrichment $\rho_h$ & 3 at $\rho_h\geq1.1$ & 0 at $\rho_h\geq2.0$ & 1.3130 & Position-matched background mean $\rho_h\approx1.00$ \\
 CTCF & Joint QK/enrichment & 2 at $r\geq0.1,\rho_h\geq1.1$ & 0 at $r\geq0.5,\rho_h\geq2.0$ & -- & Permuted-head 95th percentile is 2 at the permissive setting \\
 Promoter-TATA & Patching $\mathrm{PM}$ & 40 at $\mathrm{PM}\geq0.25$ & 16 at $\mathrm{PM}\geq0.75$ & 1.4029 & Auxiliary task-specific signal \\
-Splice donor & Patching $\mathrm{PM}$ & 3 at $\mathrm{PM}\geq0.25$ & 0 at $\mathrm{PM}\geq0.75$ & 0.5485 & Auxiliary task-specific signal \\
+Splice donor & Patching $\mathrm{PM}$ & 0 at $\mathrm{PM}\geq0.25$ & 0 at $\mathrm{PM}\geq0.75$ & 0.1657 & Auxiliary task-specific negative result \\
 \bottomrule
 \end{tabular}
 }
@@ -271,10 +271,10 @@ Claim & Required evidence & Observed result & Interpretation & Limitation \\
 Promoter and splice labels are decodable from DNABERT-2 residual states & Strong residual readout plus controls against trivial artifacts & Layer-11 AUROC range 0.8847--0.9383; random-label and position controls near chance & Residual states contain task-relevant information & Promoter tasks remain close to strong GC and k-mer baselines \\
 Splice residual decodability is not explained by GC alone & Matched and shifted GC controls should preserve the readout advantage & Splice probes remain about 0.25 AUROC above GC-only matched controls & Stronger evidence for non-composition residual signal on splice tasks & Still a probe result, not a localized circuit \\
 Promoter-TATA patching identifies task-specific causal signal & Head-level patching should restore a corrupted scalar target across many pairs & Best mean $\mathrm{PM}=1.4029$ over 327 usable pairs & A head can causally amplify the promoter-TATA readout under patching & Over-restoration and probe geometry prevent a simple full-recovery claim \\
-Splice-donor patching identifies a weaker causal signal & Patching should restore a corrupted splice-donor scalar target & Best mean $\mathrm{PM}=0.5485$ over 500 usable pairs & Partial task-specific causal signal exists & Effect is small on average and not tied to QK/enrichment motif evidence \\
+Splice-donor patching does not identify a threshold-crossing causal head in the full rerun & Patching should restore a corrupted splice-donor scalar target & Best mean $\mathrm{PM}=0.1657$ over 13,303 usable pairs & The splice-donor intervention is weak despite strong residual decodability & Effect is small on average and not tied to QK/enrichment motif evidence \\
 DNABERT-2 has a strict CTCF motif-detector head & One head should pass QK/motif ranking, motif-local enrichment, and causal evidence & Best QK $r=0.3004$; best $\rho_h=1.3130$; no passing candidate & The strict single-head CTCF detector claim is not supported & Negative result is scoped to selected model, motif scorer, data, and thresholds \\
 Relaxed CTCF thresholds do not rescue the strict claim & Sensitivity sweep should reveal whether conclusions depend on the registered cutoffs & No joint QK/enrichment pass once $r\geq0.2$, even at $\rho_h\geq1.1$ & The negative CTCF conclusion is not an artifact of one conservative cutoff & Per-head shuffled QK-score nulls require raw per-token QK vectors \\
-SAE and OV audits do not reveal a simple alternate CTCF circuit & Output-write or sparse features should align strongly with the biological target & TATA OV cosine 0.1261; CTCF SAE best cosine 0.1158 & Auxiliary audits remain consistent with a distributed or absent simple motif circuit & Audits are not exhaustive circuit discovery \\
+SAE and OV audits do not reveal a simple alternate CTCF circuit & Output-write or sparse features should align strongly with the biological target & TATA OV cosine 0.1261; CTCF SAE best cosine 0.1092 & Auxiliary audits remain consistent with a distributed or absent simple motif circuit & Audits are not exhaustive circuit discovery \\
 \bottomrule
 \end{tabular}
 }
@@ -308,10 +308,10 @@ SAE and OV audits do not reveal a simple alternate CTCF circuit & Output-write o
 \end{figure}
 
 \paragraph{Auxiliary promoter/splice patching gives task-specific causal signals.}
-Batch promoter-TATA patching over 327 usable pairs identifies layer 4 head 8 with mean $\mathrm{PM}=1.4029$; layer 6 head 8 and layer 2 head 7 are also high. Because $\mathrm{PM}>1$ overshoots the clean-minus-corrupted effect, this is a methodologically sensitive causal signal rather than a simple full-recovery story. Batch splice-donor patching over 500 pairs identifies layer 1 head 8 with mean $\mathrm{PM}=0.5485$, a weaker but threshold-crossing effect. These interventions support task-relevant internal computation, but they do not identify a strict CTCF motif detector because the CTCF QK and enrichment screens have no passing head.
+Batch promoter-TATA patching over 327 usable pairs identifies layer 4 head 8 with mean $\mathrm{PM}=1.4029$; layer 6 head 8 and layer 2 head 7 are also high. Because $\mathrm{PM}>1$ overshoots the clean-minus-corrupted effect, this is a methodologically sensitive causal signal rather than a simple full-recovery story. Batch splice-donor patching over 13,303 usable pairs identifies layer 7 head 0 as the largest restoration, but its mean $\mathrm{PM}=0.1657$ is below the causal threshold and the mean across heads is 0.0062. These interventions do not identify a strict CTCF motif detector because the CTCF QK and enrichment screens have no passing head.
 
 \paragraph{OV, SAE, and cross-model audits remain conservative.}
-The TATA OV readout audit for layer 2 head 7 finds only weak alignment with the trained TATA probe direction: the top output-write singular-vector cosine is 0.1261 and the probe self-gain through the OV matrix is $-0.0326$. Sparse-autoencoder CTCF feature search is also weak, with best residual and MLP motif cosines of 0.0884 and 0.1158. In the protocol-level cross-model comparison, DNABERT-2 residual probes outperform the tested Nucleotide Transformer backend on the same tasks, but this is a checkpoint- and protocol-specific result, not a general claim about tokenization families or all Nucleotide Transformer variants.
+The TATA OV readout audit for layer 2 head 7 finds only weak alignment with the trained TATA probe direction: the top output-write singular-vector cosine is 0.1261 and the probe self-gain through the OV matrix is $-0.0326$. Sparse-autoencoder CTCF feature search is also weak across all 51,249 CTCF sequences, with best residual and MLP motif cosines of 0.1092 and 0.0906. In the protocol-level cross-model comparison, DNABERT-2 residual probes outperform the tested Nucleotide Transformer backend on the same tasks, but this is a checkpoint- and protocol-specific result, not a general claim about tokenization families or all Nucleotide Transformer variants.
 
 \section{What This Teaches Mechanistic Interpretability}
 
@@ -371,7 +371,7 @@ For motif-bearing $j_m$ and background $j_b$, the score difference is proportion
 
 \section{Implementation and Reproducibility Details}
 
-The completed run started at 13:27:07 local time on April 14, 2026 and ended at 21:26:30 local time the same day. The manifest reports 28,760.213 seconds, or 7.989 hours. The longest steps were cross-model tokenization comparison, strict mechanistic proofs, and systematic causal intervention. The inspected result tree contains 125 files totaling about 4.71 GB, including CSV/JSON summaries, figures, NPZ archives, and sparse-autoencoder checkpoints.
+The completed June 2026 result set was reconstructed from two log files. The first run covered \texttt{write\_config} through \texttt{distributed\_feature\_search} from 13:37:04 to 23:26:04 local time on June 17, 2026. A first \texttt{cross\_model\_tokenization\_comparison} attempt then ran until 02:27:59 on June 18 and reached 49,000 of 51,249 DNABERT-2 CTCF sequences, but that work was discarded because the cross-model stage was rerun from the start. The completed cross-model rerun ran from 08:51:36 to 13:11:27 on June 18, 2026, and its manifest reports 15,591.074 seconds. Removing the discarded overlap gives 50,930.636 seconds of completed pipeline time, or 14h 08m 50.636s. The wall-clock span from first logged step to final completed rerun was 23h 34m 23s. The inspected result tree contains 136 files totaling about 5.06 GiB, including CSV/JSON summaries, figures, NPZ archives, and sparse-autoencoder checkpoints.
 
 The anonymized project repository is available at \url{https://anonymous.4open.science/r/MINTS/}. It contains the project code, configuration, local paper source, and reproduction instructions. The repository currently serves as the single source of truth for the submitted code; an explicit repository license has not yet been added.
 
@@ -396,6 +396,7 @@ python main.py --max-probe-train 512 --max-probe-test 256
 Important verification artifacts include:
 \begin{itemize}
 \item \path{results/pipeline_run.json}
+\item \path{results/pipeline_run_cross_model_tokenization_comparison.json}
 \item \path{results/tables/linear_probe_metrics.csv}
 \item \path{results/tables/linear_probe_controls.csv}
 \item \path{results/tables/downstream_task_performance.csv}
@@ -464,7 +465,7 @@ Limited scope & Strengthened limitations to selected checkpoints, intervals, sco
 }
 \end{table}
 
-For promoter-TATA batch patching, 327 token-shape-preserving pairs were usable with no near-zero denominator failures. The best mean score was layer 4 head 8 with $\mathrm{PM}=1.4029$, followed by layer 6 head 8 with $\mathrm{PM}=1.3791$ and layer 2 head 7 with $\mathrm{PM}=1.3642$. For splice donors, 500 pairs were usable with no denominator failures, and the strongest mean restoration was layer 1 head 8 with $\mathrm{PM}=0.5485$.
+For promoter-TATA batch patching, 327 token-shape-preserving pairs were usable with no near-zero denominator failures. The best mean score was layer 4 head 8 with $\mathrm{PM}=1.4029$, followed by layer 6 head 8 with $\mathrm{PM}=1.3791$ and layer 2 head 7 with $\mathrm{PM}=1.3642$. For splice donors, 13,303 pairs were usable with no denominator failures, and the strongest mean restoration was layer 7 head 0 with $\mathrm{PM}=0.1657$.
 
 For the tested Nucleotide Transformer backend, residual-probe AUROCs were 0.6502, 0.6976, 0.5695, and 0.5647 on the same four tasks. DNABERT-2 therefore outperformed this backend by 0.2408--0.3259 AUROC in this protocol. This comparison should not be read as a general ranking of tokenizers or genomic transformer families.
 
