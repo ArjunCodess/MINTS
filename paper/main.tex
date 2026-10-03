@@ -6,7 +6,7 @@
 \makeatother
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,booktabs,graphicx,microtype,url,placeins}
-\input{../results/review/numbers}
+\input{results}
 \title{MINTS: What Evidence Supports a Genomic Attention Head as a Motif Detector?}
 \author{Anonymous Author}
 \begin{document}
@@ -79,7 +79,7 @@ We use locally saved partitions of \path{InstaDeepAI/nucleotide_transformer_down
 \centering\small
 \caption{Exact stored class counts. Membership, coordinates, sequence hashes, and orientation-canonical hashes are saved as JSONL.}
 \label{tab:dataset}
-\input{../results/review/dataset_table}
+\DatasetTable
 \end{table}
 
 Checks find no shared chromosomes, overlapping windows, identical sequences, or reverse-complement duplicates across stored train/test partitions. An exhaustive equal-length Hamming screen finds no cross-partition pair with at most two substitutions in either orientation. This does not cover indels, shifted windows, or longer-range homology. No reverse-complement augmentation is introduced. Chromosome-held-out evaluation cannot rule out reference-genome overlap in pretraining.
@@ -93,7 +93,7 @@ Table~\ref{tab:task-performance} shows higher point AUROC for the k-mer classifi
 \centering\footnotesize\setlength{\tabcolsep}{3pt}
 \caption{Held-out AUROC with 95\% sequence-bootstrap intervals, generated from saved per-sequence predictions.}
 \label{tab:task-performance}
-\input{../results/review/table3}
+\PerformanceTable
 \end{table}
 
 \paragraph{Composition matching changes the promoter result.}
@@ -102,7 +102,7 @@ Table~\ref{tab:probe-controls} retains the historical match for auditability and
 \centering\footnotesize\setlength{\tabcolsep}{3pt}
 \caption{Readout AUROC and 95\% sequence-bootstrap intervals. Full, historical, and caliper populations differ; retained counts and composition diagnostics accompany the predictions.}
 \label{tab:probe-controls}
-\input{../results/review/table4}
+\ControlTable
 \end{table}
 
 \paragraph{CTCF screen failure is scoped to this assay.}
@@ -113,7 +113,7 @@ The maximum historical QK correlation is \BestQK{} and reconstructed enrichment 
 \centering\small
 \caption{Heads passing both descriptive cutoffs in the historical reconstructed-attention assay. No significance or confidence interval is assigned to a count of screened heads.}
 \label{tab:sweep}
-\input{../results/review/threshold_table}
+\ThresholdTable
 \end{table}
 
 \paragraph{Native attention associates with motif-present peaks.}
@@ -130,7 +130,7 @@ The earlier \HistoricalTATAPairs{} TATA pairs contain \HistoricalTATATrain{} tra
 \centering\small
 \caption{Exploratory test-only TATA probe patching, ranked by mean PM. Intervals bootstrap pairs and are marginal, without correction for choosing maxima across 144 heads.}
 \label{tab:patching}
-\input{../results/review/patching_table}
+\PatchingTable
 \end{table}
 \begin{figure}[t]
 \centering\includegraphics[width=\linewidth]{../results/review/heldout_patching.png}

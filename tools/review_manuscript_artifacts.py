@@ -13,8 +13,8 @@ out=root/"results/review"
 audit=json.loads((out/"correctness_audit.json").read_text())
 counts=audit["motif_count_stages"]
 metrics=pd.read_csv(out/"classification_metrics.csv")
-(out/"table3.tex").write_text(tex_table(metrics,dict(gc="GC",kmer="$3$--$6$-mer",probe="Frozen readout")),encoding="utf-8")
-(out/"table4.tex").write_text(tex_table(metrics,dict(probe="Full",historical_gc_probe="Historical matching",caliper_gc_probe="GC caliper")),encoding="utf-8")
+tables={"PerformanceTable":tex_table(metrics,dict(gc="GC",kmer="$3$--$6$-mer",probe="Frozen readout")),
+        "ControlTable":tex_table(metrics,dict(probe="Full",historical_gc_probe="Historical matching",caliper_gc_probe="GC caliper"))}
 names={"sequences":"CTCFSequences","unique_motif_support_tokens":"UniqueSupport","motif_hit_token_occurrences":"HitOccurrences",
        "finite_token_rows":"FiniteTokens","token_rows":"TokenRows","motif_absent_sequences":"AbsentSequences"}
 macros=["\\newcommand{\\"+macro+"}{"+f"{counts[key]:,}"+"}" for key,macro in names.items()]
@@ -27,13 +27,12 @@ qk=pd.read_csv(root/"results/qk_alignment/ctcf_qk_alignment.csv")
 enrich=pd.read_csv(root/"results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv")
 macros.extend([r"\newcommand{\BestQK}{"+f"{qk.pearson_r.max():.4f}"+"}",
                r"\newcommand{\BestEnrichment}{"+f"{enrich.rho.max():.4f}"+"}"])
-(out/"numbers.tex").write_text("\n".join(macros)+"\n",encoding="utf-8")
 lines=[r"\begin{tabular}{lrrrr}",r"\toprule",r"Task & Train positive & Train negative & Test positive & Test negative \\",r"\midrule"]
 for task,report in audit["splits"].items():
     balance=report["class_counts"]
     label={"promoter_tata":"TATA promoter","promoter_no_tata":"Other promoter","splice_sites_donors":"Splice donor","splice_sites_acceptors":"Splice acceptor"}[task]
     lines.append(label+" & "+" & ".join(f"{balance[s][c]:,}" for s,c in [("train","1"),("train","0"),("test","1"),("test","0")])+r" \\")
-(out/"dataset_table.tex").write_text("\n".join(lines+[r"\bottomrule",r"\end{tabular}"])+"\n",encoding="utf-8")
+tables["DatasetTable"]="\n".join(lines+[r"\bottomrule",r"\end{tabular}"])
 sweep=[]
 for r in [.1,.2,.3,.4,.5]:
     for ratio in [1.1,1.25,1.5,2.]:
@@ -43,7 +42,7 @@ pd.DataFrame(sweep).to_csv(out/"ctcf_threshold_sweep.csv",index=False)
 lines=[r"\begin{tabular}{lrrrr}",r"\toprule",r"QK $r$ cutoff & Ratio $1.1$ & Ratio $1.25$ & Ratio $1.5$ & Ratio $2.0$ \\",r"\midrule"]
 for r in [.1,.2,.3,.4,.5]:
     lines.append(str(r)+" & "+" & ".join(str(row["heads"]) for row in sweep if row["r_threshold"]==r)+r" \\")
-(out/"threshold_table.tex").write_text("\n".join(lines+[r"\bottomrule",r"\end{tabular}"])+"\n",encoding="utf-8")
+tables["ThresholdTable"]="\n".join(lines+[r"\bottomrule",r"\end{tabular}"])
 patchroot=root/"results/cross_model/review_tata_heldout/patching"
 table=pd.read_csv(patchroot/"promoter_tata_batch_dnabert_activation_patching.csv")
 effects=np.load(patchroot/"promoter_tata_batch_dnabert_activation_patching_pair_effects.npz")
@@ -61,7 +60,7 @@ summary=dict(pairs=len(denominator),best_layer=int(best.layer),best_head=int(bes
 lines=[r"\begin{tabular}{lrrrr}",r"\toprule",r"Layer/head & Mean PM & Median PM & Mean 95\% CI & Pairs \\",r"\midrule"]
 for row in table.sort_values("restoration",ascending=False).head(3).itertuples():
     lines.append(f"{row.layer}/{row.head} & {row.restoration:.4f} & {row.median_restoration:.4f} & [{row.mean_ci_low:.4f}, {row.mean_ci_high:.4f}] & {row.pairs}"+r" \\")
-(out/"patching_table.tex").write_text("\n".join(lines+[r"\bottomrule",r"\end{tabular}"])+"\n",encoding="utf-8")
+tables["PatchingTable"]="\n".join(lines+[r"\bottomrule",r"\end{tabular}"])
 # Figure source retains every pair, including overshoots and sign-sensitive effects.
 import matplotlib
 matplotlib.use("Agg")
@@ -92,13 +91,12 @@ positive=native[(native.mean_present_minus_absent>0)&(native.holm_p<.05)]
 best_native=native.sort_values("mean_present_minus_absent",ascending=False).iloc[0]
 native_macros={"NativePairs":control["valid_pairs"],"NativePositiveHeads":len(positive),
                "NativeBestLayer":int(best_native.layer),"NativeBestHead":int(best_native["head"])}
-with (out/"numbers.tex").open("a",encoding="utf-8") as stream:
-    for name,value in native_macros.items():
-        stream.write("\\newcommand{\\"+name+"}{"+f"{value:,}"+"}\n")
-    for name,value in [("NativeBestContrast",best_native.mean_present_minus_absent),
-                       ("NativeBestLow",best_native.ci_low),("NativeBestHigh",best_native.ci_high),
-                       ("NativeBestHolm",best_native.holm_p)]:
-        stream.write("\\newcommand{\\"+name+"}{"+f"{value:.4f}"+"}\n")
+for name,value in native_macros.items():
+    macros.append("\\newcommand{\\"+name+"}{"+f"{value:,}"+"}")
+for name,value in [("NativeBestContrast",best_native.mean_present_minus_absent),
+                   ("NativeBestLow",best_native.ci_low),("NativeBestHigh",best_native.ci_high),
+                   ("NativeBestHolm",best_native.holm_p)]:
+    macros.append("\\newcommand{\\"+name+"}{"+f"{value:.4f}"+"}")
 display=native.sort_values("mean_present_minus_absent",ascending=False).head(8).iloc[::-1]
 fig,axis=plt.subplots(figsize=(7,3))
 y=np.arange(len(display))
@@ -112,6 +110,12 @@ fig.tight_layout()
 fig.savefig(out/"ctcf_native_controls.png",dpi=180)
 plt.close(fig)
 import hashlib
+tex_path=root/"paper/results.tex"
+header="% Generated from saved results by tools/review_manuscript_artifacts.py.\n"
+definitions=["\\newcommand{\\"+name+"}{%\n"+body.rstrip()+"\n}" for name,body in tables.items()]
+tex_path.write_text(header+"\n".join(macros)+"\n\n"+"\n\n".join(definitions)+"\n",encoding="utf-8",newline="\n")
 manifest=json.loads((out/"tables_manifest.json").read_text())
-manifest["artifacts"]={name:hashlib.sha256((out/name).read_bytes()).hexdigest() for name in manifest["artifacts"]}
+manifest["artifacts"]={name:hashlib.sha256((out/name).read_bytes()).hexdigest() for name in manifest["artifacts"] if not name.endswith(".tex")}
+manifest["paper_results"]={"path":"paper/results.tex","sha256":hashlib.sha256(tex_path.read_bytes()).hexdigest(),
+                         "command":"python tools/review_manuscript_artifacts.py"}
 (out/"tables_manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")

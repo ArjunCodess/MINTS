@@ -84,12 +84,10 @@ def main():
     table = pd.DataFrame(rows)
     table.to_csv(OUT / "classification_metrics.csv", index=False)
     (OUT / "gc_matching_diagnostics.json").write_text(json.dumps(matching, indent=2),encoding="utf-8")
-    (OUT / "table3.tex").write_text(tex_table(table, dict(gc="GC",kmer="$3$--$6$-mer",probe="Frozen readout")),encoding="utf-8")
-    (OUT / "table4.tex").write_text(tex_table(table, dict(probe="Full",historical_gc_probe="Historical matching",caliper_gc_probe="GC caliper")),encoding="utf-8")
     manifest = dict(command=".venv/Scripts/python.exe tools/review_tables.py", seed=1729, bootstrap_samples=1000,
                     bootstrap_unit="test sequence; fixed trained model", confidence_level=0.95, seconds=time.perf_counter()-started,
                     caliper_status="0.02 chosen heuristically during October review, not preregistered",
-                    artifacts={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in OUT.glob("*") if p.suffix in [".csv",".tex"]})
+                    artifacts={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in OUT.glob("*.csv")})
     (OUT / "tables_manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
 
 
