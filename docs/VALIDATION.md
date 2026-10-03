@@ -1,25 +1,17 @@
-# Build and validation
+# Build
 
-Run the artifact-generation commands in [README](../README.md) from the repository root, using dependencies from `requirements.txt`. The two `requirements-review-*.lock` files capture the tested environments; the existing snapshot used CUDA, while the clean snapshot used CPU. The review generators require the saved datasets, token scores, and activation caches.
+The paper loads `paper/results.tex` once. It defines the numerical variables and table bodies; figures use the saved PNGs in `results/review/`.
 
-## Build the paper
-
-Use an existing LaTeX installation, then copy the compiled PDF to its published repository path:
+To regenerate these from the saved CSV/JSON/NPZ results and build the PDF:
 
 ```powershell
-latexmk -pdf -g -cd -interaction=nonstopmode -halt-on-error -outdir=review-build paper/main.tex
+python tools/review_manuscript_artifacts.py
+latexmk -pdf -cd -interaction=nonstopmode -halt-on-error -outdir=review-build paper/main.tex
 Copy-Item -LiteralPath paper/review-build/main.pdf -Destination paper/main.pdf
-python tools/review_pdf.py
-python tools/review_submission.py
-python tools/review_finalize.py
 ```
 
-PDF inspection requires a Python environment with `pypdf`; the recorded run used the bundled document runtime. The scanner verifies PDF text, metadata, annotations, and generated tables. Finalization hashes outputs and builds the anonymous source archive. [The artifact manifest](../results/review/final_artifact_manifest.json) maps tables and figures to their saved sources.
+No PDF-extraction or packaging step is required. [The table manifest](../results/review/tables_manifest.json) records the generated TeX file's source command and hash.
 
-## Full pipeline and execution records
+To rerun the scientific analyses, use the commands in [README](../README.md). They require the saved datasets, activation caches, token scores, and dependencies in `requirements.txt`. The two dependency snapshots capture the tested CUDA and clean CPU environments. Run tests with `python -m pytest -q`.
 
-`python main.py` runs the original pipeline. `python tools/review_full_pipeline.py` runs it in an isolated data/result tree and refuses to overwrite an existing run. Preserve a failed run and use a new directory before retrying.
-
-Record any execution with `python tools/review_command.py <command> <arguments>`. [The command ledger](../results/review/commands.jsonl) stores argv, exit status, runtime, and log paths. Initial exploratory commands preceded logging; the first serial log also suffered a filename collision, so subsequent runs use unique filenames.
-
-All 53 tests passed and the revised PDF compiled successfully. The clean full pipeline failed during ENCODE download with disk exhaustion after installation and ingestion succeeded; [its failure manifest](../results/review/failed_full_pipeline_manifest.json) and logs are retained. The temporary clean environment was removed after saving package versions and test output. These review builds are not a completed clean encoder reproduction.
+`python main.py` runs the full pipeline; `python tools/review_full_pipeline.py` uses an isolated output tree. The earlier clean run failed during ENCODE download with disk exhaustion after installation and ingestion succeeded. Its [failure manifest](../results/review/failed_full_pipeline_manifest.json), [command ledger](../results/review/commands.jsonl), and logs remain available. The ledger covers instrumented historical runs, not every exploratory command.

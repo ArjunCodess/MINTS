@@ -5,7 +5,6 @@ from src.integrity import assert_disjoint_splits, near_duplicate_pairs
 from src.inference import holm_adjust, validate_metric
 from src.probing import _matched_gc_indices
 from tools.review_audit import count_stages
-from tools.review_submission import stale_findings
 from tools.review_tables import tex_table
 from tools.review_ctcf_controls import match_controls, paired_inference
 
@@ -52,9 +51,7 @@ def test_metric_ranges_distinguish_ratio_from_correlation():
     assert np.allclose(holm_adjust([.01,.04,.03]), [.03,.06,.06])
 
 
-def test_submission_remnants_and_numeric_generation():
-    assert stale_findings("Response-to-Review Checklist: mV6D. preregistered thresholds")
-    assert not stale_findings("No head passed the motif-local screens; thresholds were heuristic.")
+def test_numeric_table_generation():
     rows=pd.DataFrame([dict(task="promoter_tata",method="probe",auroc=.7,auroc_ci_low=.6,auroc_ci_high=.8)])
     assert "0.7000 [0.6000, 0.8000]" in tex_table(rows,dict(probe="Readout"))
 
