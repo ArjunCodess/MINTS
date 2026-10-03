@@ -18,7 +18,7 @@ from .utils import progress, utc_now_iso, write_json
 
 @dataclass(frozen=True)
 class AlignmentThresholds:
-    """Pre-registered QK-to-motif candidate thresholds."""
+    """Historical heuristic QK screens; no preregistration evidence."""
 
     min_r: float = 0.5
     max_p: float = 0.05
