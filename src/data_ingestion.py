@@ -11,6 +11,7 @@ from urllib.parse import unquote, urlparse
 
 from .config import DEFAULT_CONFIG, DataConfig, PipelineConfig
 from .utils import progress, sha256_file, utc_now_iso, write_json
+from .integrity import assert_disjoint_splits
 
 
 ENCODE_DOWNLOAD_RE = re.compile(r"^https://www\.encodeproject\.org/files/[^/]+/@@download/[^\"']+$")
@@ -239,12 +240,15 @@ def ingest_hf_downstream_tasks(
         if output_dir.exists() and not overwrite:
             existing = _load_existing_dataset_dict(output_dir)
             if existing is not None:
+                assert_disjoint_splits({split: list(ds) for split, ds in existing.items()})
                 summary[task] = {split: len(ds) for split, ds in existing.items()}
                 progress(f"Reusing cached tokenized dataset for {task}: {summary[task]}")
                 continue
             progress(f"Removing partial cached dataset for {task}: {output_dir}")
             shutil.rmtree(output_dir)
         progress(f"Saving tokenized dataset for {task} to {output_dir}")
+        split_audit = assert_disjoint_splits({split: list(ds) for split, ds in tokenized.items()})
+        write_json(config.paths.manifests_dir / f"{task}_split_audit.json", split_audit)
         tokenized.save_to_disk(str(output_dir))
         summary[task] = {split: len(ds) for split, ds in tokenized.items()}
 
