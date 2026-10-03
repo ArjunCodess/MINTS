@@ -1,0 +1,22 @@
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]Loading weights: 100%|##########| 136/136 [00:00<00:00, 76260.07it/s]
+[1mBertModel LOAD REPORT[0m from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+pooler.dense.bias                          | MISSING    | 
+pooler.dense.weight                        | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 02:36:11] promoter_tata: batch patching processed 1/10 pairs
+[MINTS 02:36:32] promoter_tata: batch patching processed 10/10 pairs

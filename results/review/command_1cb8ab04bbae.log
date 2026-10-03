@@ -1,0 +1,217 @@
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LC_ALL = "C.UTF-8",
+	LC_CTYPE = "C.UTF-8",
+	LC_NUMERIC = (unset),
+	LC_COLLATE = (unset),
+	LC_TIME = (unset),
+	LC_MONETARY = (unset),
+	LANG = "C.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the system default locale ("English_India.1252").
+Initial Win CP for (console input, console output, system): (CP437, CP65001, CP1252)
+I changed them all to CP1252
+Rc files read:
+  NONE
+Latexmk: This is Latexmk, John Collins, 15 June 2025. Version 4.87.
+Latexmk: Changing directory to 'C:/Users/USER/Desktop/code/MINTS/paper/'
+Force everything to be remade.
+Latexmk: applying rule 'bibtex review-build/main'...
+Rule 'bibtex review-build/main':  Reasons for rerun
+Category 'other':
+  Rerun of 'bibtex review-build/main' forced or previously required:
+    Reason or flag: 'go_mode'
+
+------------
+Run number 1 of rule 'bibtex review-build/main'
+------------
+====== ENV{BIBINPUTS} changed to 'C:/Users/USER/Desktop/code/MINTS/paper;review-build;C:\Users\USER\Desktop\code\MINTS\paper\review-build;'
+Latexmk: Change directory to 'review-build/'.
+To assist finding of files in document directory, I set
+  BIBINPUTS='C:/Users/USER/Desktop/code/MINTS/paper;review-build;C:\Users\USER\Desktop\code\MINTS\paper\review-build;'
+  BSTINPUTS='C:/Users/USER/Desktop/code/MINTS/paper;'.
+------------
+Running 'bibtex  "main.aux"'
+------------
+This is BibTeX, Version 0.99e (MiKTeX 25.12)
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: references.bib
+Latexmk: Change directory back to 'C:/Users/USER/Desktop/code/MINTS/paper'
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Category 'other':
+  Rerun of 'pdflatex' forced or previously required:
+    Reason or flag: 'go_mode'
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder -output-directory="review-build"  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo))
+(neurips_2026.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/environ\environ.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/trimspaces\trimspaces.st
+y)) (C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)))
+ (C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd))
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty))
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty))
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cf
+g)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def)
+))
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdft
+ex.def)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg)
+) (C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/placeins\placeins.sty)
+(../results/review/numbers.tex)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdft
+ex.def) (C:\Users\USER\Desktop\code\MINTS\paper\review-build\main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mki
+i
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-ba
+se.sty
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cf
+g)) (C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ptm.cfg
+) (C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd)
+(C:\Users\USER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg)
+[1{C:/Users/USER/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/USE
+R/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2]
+(../results/review/dataset_table.tex) [3] (../results/review/table3.tex)
+(../results/review/table4.tex) (../results/review/threshold_table.tex) [4]
+(../results/review/patching_table.tex) [5 <../results/review/ctcf_native_contro
+ls.png>] [6 <../results/review/heldout_patching.png>]
+(C:\Users\USER\Desktop\code\MINTS\paper\review-build\main.bbl) [7]
+(C:\Users\USER\Desktop\code\MINTS\paper\review-build\main.aux) ) <C:\Users\USER
+\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk><C:/Users/
+USER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C
+:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7
+.pfb><C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmmi9.pfb><C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr10.pfb><C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb><C:/Users/USER/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb><C:/Users/USER/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/USER/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/USER/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/USER/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/USER/AppData/Local
+/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/USER/AppData/Local/
+Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on C:\Users\USER\Desktop\code\MINTS\paper\review-build\main.pdf 
+(7 pages, 238862 bytes).
+Transcript written on C:\Users\USER\Desktop\code\MINTS\paper\review-build\main.
+log.
+Latexmk: Getting log file 'review-build/main.log'
+Latexmk: Examining 'review-build/main.fls'
+Latexmk: Examining 'review-build/main.log'
+Latexmk: Found input bbl file 'review-build/main.bbl'
+Latexmk: Log file says output to 'review-build/main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+  ===Source file 'review-build/main.bbl' for 'pdflatex'
+Latexmk: Found bibliography file(s):
+  ./references.bib
+Latexmk: All targets (review-build/main.pdf) are up-to-date
+Latexmk: Undoing directory change
+
+Reverting Windows console CPs to (in,out) = (437,65001)

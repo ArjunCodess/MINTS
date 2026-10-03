@@ -229,3 +229,12 @@ results/**/*.bin
 results/**/*.arrow
 results/**/*.parquet
 results/**/*.tmp
+
+# Isolated review execution environments and test/build intermediates
+.venv-review/
+results/review/test-tmp-*/
+results/review/full_run/
+paper/review-build/
+results/review/pip-cache/
+results/review/page-*.png
+!results/review/command_*.log

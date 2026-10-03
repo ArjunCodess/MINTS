@@ -1,0 +1,194 @@
+Exception in thread Thread-auto_conversion:
+Exception in thread Thread-auto_conversion:
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Traceback (most recent call last):
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+httpcore.ConnectError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+  File "C:\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+
+The above exception was the direct cause of the following exception:
+
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+Traceback (most recent call last):
+httpcore.ConnectError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+
+The above exception was the direct cause of the following exception:
+
+  File "C:\Python314\Lib\threading.py", line 1081, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+Traceback (most recent call last):
+  File "C:\Python314\Lib\threading.py", line 1023, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\transformers\safetensors_conversion.py", line 117, in auto_conversion
+    raise e
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\transformers\safetensors_conversion.py", line 96, in auto_conversion
+    sha = get_conversion_pr_reference(api, pretrained_model_name_or_path, **cached_file_kwargs)
+  File "C:\Python314\Lib\threading.py", line 1081, in _bootstrap_inner
+    self._context.run(self.run)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\transformers\safetensors_conversion.py", line 60, in get_conversion_pr_reference
+    private = api.model_info(model_id).private
+              ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python314\Lib\threading.py", line 1023, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\huggingface_hub\utils\_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\transformers\safetensors_conversion.py", line 117, in auto_conversion
+    raise e
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\huggingface_hub\hf_api.py", line 3145, in model_info
+    r = get_session().get(path, headers=headers, timeout=timeout, params=params)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\transformers\safetensors_conversion.py", line 96, in auto_conversion
+    sha = get_conversion_pr_reference(api, pretrained_model_name_or_path, **cached_file_kwargs)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 1053, in get
+    return self.request(
+           ~~~~~~~~~~~~^
+        "GET",
+        ^^^^^^
+    ...<7 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\transformers\safetensors_conversion.py", line 60, in get_conversion_pr_reference
+    private = api.model_info(model_id).private
+              ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\huggingface_hub\utils\_validators.py", line 88, in _inner_fn
+    return fn(*args, **kwargs)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\huggingface_hub\hf_api.py", line 3145, in model_info
+    r = get_session().get(path, headers=headers, timeout=timeout, params=params)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 19134.73it/s]  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 1053, in get
+    return self.request(
+           ~~~~~~~~~~~~^
+        "GET",
+        ^^^^^^
+    ...<7 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+httpx.ConnectError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\USER\Desktop\code\MINTS\.venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions
+[1mBertModel LOAD REPORT[0m from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+pooler.dense.bias                          | MISSING    | 
+pooler.dense.weight                        | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 19:11:01] promoter_tata: batch patching processed 1/10 pairs
+[MINTS 19:11:15] promoter_tata: batch patching processed 10/10 pairs

@@ -1,0 +1,62 @@
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]Loading weights: 100%|##########| 136/136 [00:00<00:00, 70851.49it/s]
+[1mBertModel LOAD REPORT[0m from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+pooler.dense.weight                        | MISSING    | 
+pooler.dense.bias                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+1/5220 pairs; valid=1
+251/5220 pairs; valid=251
+501/5220 pairs; valid=501
+751/5220 pairs; valid=751
+1001/5220 pairs; valid=1001
+1251/5220 pairs; valid=1251
+1501/5220 pairs; valid=1501
+1751/5220 pairs; valid=1751
+2001/5220 pairs; valid=2001
+2251/5220 pairs; valid=2251
+2501/5220 pairs; valid=2501
+2751/5220 pairs; valid=2751
+3001/5220 pairs; valid=3001
+3251/5220 pairs; valid=3251
+3501/5220 pairs; valid=3501
+3751/5220 pairs; valid=3751
+4001/5220 pairs; valid=4001
+4251/5220 pairs; valid=4251
+4501/5220 pairs; valid=4501
+4751/5220 pairs; valid=4751
+5001/5220 pairs; valid=5001
+{
+  "revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "device": "cuda",
+  "seed": 1729,
+  "eligible_absent_peaks": 5344,
+  "matched_pairs": 5220,
+  "valid_pairs": 5220,
+  "excluded_pairs": [],
+  "max_native_context_error": 0.0,
+  "query_positions": "all nucleotide-spanning tokens, excludes specials",
+  "aggregation_unit": "matched sequence pair",
+  "score": "native attention mean over real query positions and target keys, times number of real keys",
+  "control": "first connected motif support span projected to relative position in motif-absent peak",
+  "matching": "same chromosome; GC within .02; nucleotide length within 5%; without replacement",
+  "inference": "two-sided paired sign flips, 9999 permutations, Holm over 144 heads; 1000 pair-bootstrap marginal intervals",
+  "assumptions": "observational matching; sequence-pair exchangeability conditional on matching; within-chromosome dependence not modeled",
+  "claim_boundary": "association of native attention with motif-present peak intervals, not motif detection or causal use",
+  "seconds": 241.07270330000028,
+  "inputs": {
+    "data\\ctcf\\ctcf_gm12878_sequences.tsv": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459",
+    "results\\enrichment\\ctcf_qk_alignment_token_motif_scores.csv": "f0c93a177768c9cecf922096af02ffe074a80bd21bfd7813cc443266dd8c6a0c"
+  }
+}

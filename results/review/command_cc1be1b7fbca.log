@@ -1,0 +1,81 @@
+{
+  "seconds": 22.064640200012946,
+  "counts": {
+    "token_rows": 1946372,
+    "finite_token_rows": 1843874,
+    "unique_motif_support_tokens": 256918,
+    "finite_unique_motif_support_tokens": 256918,
+    "thresholded_unique_motif_support_tokens": 256918,
+    "motif_hit_token_occurrences": 281915,
+    "sequences": 51249,
+    "motif_absent_sequences": 5344
+  },
+  "patching": {
+    "promoter_tata": {
+      "pairs": 327,
+      "unique_clean_sequences": 327,
+      "split_membership": {
+        "test": 10,
+        "train": 317
+      },
+      "duplicate_sequence_ids": 0,
+      "scalar_target": "trained standardized logistic residual probe decision function; not native model output",
+      "pair_distributions_status": "not saved in submitted run; means cannot reconstruct pair-level uncertainty"
+    },
+    "splice_sites_donors": {
+      "pairs": 13303,
+      "unique_clean_sequences": 13295,
+      "split_membership": {
+        "test": 1182,
+        "train": 12121
+      },
+      "duplicate_sequence_ids": 0,
+      "scalar_target": "trained standardized logistic residual probe decision function; not native model output",
+      "pair_distributions_status": "not saved in submitted run; means cannot reconstruct pair-level uncertainty"
+    }
+  },
+  "gc_matching": {
+    "promoter_tata": {
+      "full_count": 212,
+      "matched_count": 212,
+      "is_full_set": true
+    },
+    "promoter_no_tata": {
+      "full_count": 1372,
+      "matched_count": 1372,
+      "is_full_set": true
+    },
+    "splice_sites_donors": {
+      "full_count": 3000,
+      "matched_count": 2960,
+      "is_full_set": false
+    },
+    "splice_sites_acceptors": {
+      "full_count": 3000,
+      "matched_count": 2950,
+      "is_full_set": false
+    }
+  },
+  "split_issues": {
+    "promoter_tata": {
+      "shared_chromosomes": 0,
+      "cross_split_sequence_or_reverse_complement_duplicates": 0,
+      "cross_split_overlapping_windows": 0
+    },
+    "promoter_no_tata": {
+      "shared_chromosomes": 0,
+      "cross_split_sequence_or_reverse_complement_duplicates": 0,
+      "cross_split_overlapping_windows": 0
+    },
+    "splice_sites_donors": {
+      "shared_chromosomes": 0,
+      "cross_split_sequence_or_reverse_complement_duplicates": 0,
+      "cross_split_overlapping_windows": 0
+    },
+    "splice_sites_acceptors": {
+      "shared_chromosomes": 0,
+      "cross_split_sequence_or_reverse_complement_duplicates": 0,
+      "cross_split_overlapping_windows": 0
+    }
+  }
+}

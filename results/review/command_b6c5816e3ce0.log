@@ -1,0 +1,3 @@
+Ignoring triton: markers 'platform_system != "Windows"' don't match your environment
+ERROR: Could not find a version that satisfies the requirement torch (from versions: none)
+ERROR: No matching distribution found for torch
