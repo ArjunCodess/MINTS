@@ -87,7 +87,7 @@ def _select_patching_pair(
     if not dataset_path.exists():
         raise FileNotFoundError(f"Task dataset not found for activation patching: {dataset_path}")
     dataset = load_from_disk(str(dataset_path))
-    for split_name in ("test", "train"):
+    for split_name in ("test",):
         if split_name not in dataset:
             continue
         split = dataset[split_name]

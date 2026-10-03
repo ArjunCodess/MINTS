@@ -778,7 +778,7 @@ def _select_patching_pairs_for_task(
     task = canonicalize_task_name(task, config.data)
     dataset = load_from_disk(str(config.paths.hf_downstream_dir / task))
     records: list[MutationRecord] = []
-    for split_name in ("test", "train"):
+    for split_name in ("test",):
         if split_name not in dataset:
             continue
         for row_idx, row in enumerate(dataset[split_name]):
@@ -790,7 +790,7 @@ def _select_patching_pairs_for_task(
                 record = generate_counterfactual_sequence(
                     sequence=str(row["sequence"]),
                     task=task,
-                    sequence_id=str(row.get("name", f"{split_name}_{row_idx}")),
+                    sequence_id=f"{split_name}:{row_idx}:" + str(row.get("name", "")),
                     allow_center_fallback=False,
                     config=config,
                 )
@@ -834,12 +834,17 @@ def run_batch_dnabert_activation_patching(
     layers = layer_indices or tuple(range(len(encoder_layer_list)))
     n_heads = int(encoder_layer_list[layers[0]].attention.self.num_attention_heads)
     per_pair_restoration = np.full((len(records), len(layers), n_heads), np.nan, dtype=np.float64)
+    per_pair_patched_scores = np.full_like(per_pair_restoration, np.nan)
     denominator_failures = 0
     sparse_position_counts: list[int] = []
+    clean_scores = np.full(len(records), np.nan)
+    corrupted_scores = np.full(len(records), np.nan)
 
     for pair_idx, record in enumerate(records):
         clean_score = _score_sequence_with_probe(bundle, record.clean_sequence, scorer, config)
         corrupted_score = _score_sequence_with_probe(bundle, record.corrupted_sequence, scorer, config)
+        clean_scores[pair_idx] = clean_score
+        corrupted_scores[pair_idx] = corrupted_score
         if abs(clean_score - corrupted_score) <= 1e-8:
             denominator_failures += 1
         clean_cache = _cache_clean_attention_self_outputs(bundle, record.clean_sequence, layers)
@@ -883,18 +888,28 @@ def run_batch_dnabert_activation_patching(
                     corrupted_score,
                     patched_score,
                 )
+                per_pair_patched_scores[pair_idx, layer_offset, head_idx] = patched_score
         if pair_idx == 0 or pair_idx + 1 == len(records) or (pair_idx + 1) % 25 == 0:
             progress(f"{task}: batch patching processed {pair_idx + 1}/{len(records)} pairs")
 
     restoration = np.nanmean(per_pair_restoration, axis=0)
     stem = output_stem or f"{task}_batch_dnabert_activation_patching"
     outputs = save_restoration_matrix(restoration, stem, config=config)
+    pair_effect_path = config.paths.patching_dir / f"{stem}_pair_effects.npz"
+    np.savez_compressed(pair_effect_path, restoration=per_pair_restoration,
+                        patched_scores=per_pair_patched_scores,
+                        clean_scores=clean_scores, corrupted_scores=corrupted_scores,
+                        denominator=clean_scores-corrupted_scores,
+                        sequence_ids=np.asarray([r.sequence_id for r in records]), layers=np.asarray(layers))
     write_json(
         outputs["manifest"],
         {
             "created_at": utc_now_iso(),
             "task": task,
             "target": "linear_probe_decision_function",
+            "partition": "test_only",
+            "pair_effects_path": str(pair_effect_path),
+            "interpretation": "effects on trained probe; not pretrained native behavior; PM>1 may be off-manifold",
             "pair_table": str(pair_path),
             "pairs": len(records),
             "denominator_failures": int(denominator_failures),
@@ -919,6 +934,17 @@ def run_batch_dnabert_activation_patching(
     rows["task"] = task
     rows["pairs"] = len(records)
     rows["denominator_failures"] = int(denominator_failures)
+    from .inference import bootstrap_mean_interval
+    medians, low, high = [], [], []
+    for row in rows.itertuples():
+        values = per_pair_restoration[:, layers.index(int(row.layer)), int(row.head)]
+        medians.append(float(np.nanmedian(values)))
+        interval = bootstrap_mean_interval(values, seed=config.data.seed)
+        low.append(interval[0])
+        high.append(interval[1])
+    rows["median_restoration"] = medians
+    rows["mean_ci_low"] = low
+    rows["mean_ci_high"] = high
     rows.to_csv(outputs["table"], index=False)
     outputs["pairs"] = pair_path
     return outputs
