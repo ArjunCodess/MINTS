@@ -13,6 +13,7 @@ import pandas as pd
 from .config import DEFAULT_CONFIG, PipelineConfig
 from .data_ingestion import canonicalize_task_name
 from .utils import progress, utc_now_iso, write_json
+from .integrity import assert_disjoint_splits
 
 
 @dataclass(frozen=True)
@@ -252,8 +253,14 @@ def _matched_gc_indices(
     sequences: np.ndarray,
     labels: np.ndarray,
     seed: int,
+    caliper: float | None = 0.02,
 ) -> np.ndarray:
-    """Return a balanced test subset with one nearest-GC negative per positive."""
+    """Match without replacement within a GC-fraction caliper.
+
+    The 0.02 caliper was introduced during the October 2026 review revision.
+    Passing None reproduces the historical unconstrained matching, which can
+    merely reorder a balanced test set and cannot control GC confounding.
+    """
 
     labels = np.asarray(labels, dtype=int)
     gc_values = np.asarray([_sequence_gc_fraction(sequence) for sequence in sequences], dtype=np.float64)
@@ -272,6 +279,8 @@ def _matched_gc_indices(
             break
         neg_gc = gc_values[np.asarray(available, dtype=np.int64)]
         best_offset = int(np.argmin(np.abs(neg_gc - gc_values[pos_idx])))
+        if caliper is not None and abs(neg_gc[best_offset] - gc_values[pos_idx]) > caliper:
+            continue
         neg_idx = available.pop(best_offset)
         selected.extend([pos_idx, int(neg_idx)])
     selected_array = np.asarray(selected, dtype=np.int64)
@@ -392,6 +401,14 @@ def train_logistic_probe_for_task(
     progress(f"Loading residual caches for probe: task={task}, layer={probe_layer}")
     train_payload = _load_activation_file(config.paths.activations_dir / f"{task}_train_residual_mean.npz")
     test_payload = _load_activation_file(config.paths.activations_dir / f"{task}_test_residual_mean.npz")
+    if (config.paths.hf_downstream_dir / task).exists():
+        from datasets import load_from_disk
+        saved = load_from_disk(str(config.paths.hf_downstream_dir / task))
+        assert_disjoint_splits({split: list(ds) for split, ds in saved.items()})
+        for split, payload in [("train", train_payload), ("test", test_payload)]:
+            members = {(str(row["name"]), str(row["sequence"]).upper(), int(row["label"])) for row in saved[split]}
+            if not all((str(n),str(s).upper(),int(y)) in members for n,s,y in zip(payload["names"],payload["sequences"],payload["labels"])):
+                raise ValueError(f"Activation cache does not belong to {task}/{split}")
     x_train, y_train = _features_for_layer(train_payload, probe_layer)
     x_test, y_test = _features_for_layer(test_payload, probe_layer)
     progress(
@@ -565,7 +582,7 @@ def run_probe_controls_for_task(
                 matched_residual_metrics,
                 y_train,
                 y_test[matched_indices],
-                notes="main residual probe evaluated on a balanced nearest-GC positive/negative test subset",
+                notes="nearest-GC pairs without replacement within 0.02 GC fraction; post-review heuristic; assess residual imbalance",
             )
         )
         matched_gc_metrics = _fit_evaluate_classifier(
