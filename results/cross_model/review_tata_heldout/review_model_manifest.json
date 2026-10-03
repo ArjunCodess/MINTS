@@ -1,0 +1,11 @@
+{
+  "device": "cuda",
+  "historical_checkpoint_identity": "unpinned; current snapshot does not establish historical identity",
+  "model": "zhihan1996/DNABERT-2-117M",
+  "pooling": "attention-mask mean including special tokens",
+  "revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "scalar": "trained standardized logistic probe decision function",
+  "seed": 1729,
+  "tokenizer_class": "TokenizersBackend",
+  "training_cache_sha256": "8bff54bf6e77f4424ca7d94ace4282ab8845f5501538549c01e4dc4b923aa410"
+}

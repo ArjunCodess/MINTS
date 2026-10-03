@@ -1,0 +1,35 @@
+{
+  "pairs": 10,
+  "best_layer": 2,
+  "best_head": 7,
+  "best_mean": 0.3499138895039633,
+  "median": 0.0297794426964841,
+  "mean_ci": [
+    -0.0264429079838672,
+    0.9909042202648622
+  ],
+  "denominator_quantiles": [
+    -1.9014460499518167,
+    -1.3050233180044606,
+    -0.44295320155906537,
+    0.40234445974127514,
+    2.602615868944583
+  ],
+  "negative_denominators": 7,
+  "positive_denominators": 3,
+  "denominators_near_zero": 0,
+  "pm_greater_than_one": 34,
+  "min_absolute_denominator": 0.1172208607947762,
+  "selection_warning": "largest observed mean selected over 144 heads; intervals are marginal and do not certify selected-head significance",
+  "selected_head_absolute_effect_quantiles": [
+    -0.3684396853417097,
+    0.002642623549065082,
+    0.07737363331234981,
+    0.16986047546244848,
+    0.21356434308510241
+  ],
+  "selected_head_absolute_effect_mean_ci": [
+    -0.06789228184472344,
+    0.13058640439901462
+  ]
+}
