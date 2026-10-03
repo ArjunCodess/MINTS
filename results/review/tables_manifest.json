@@ -1,0 +1,26 @@
+{
+  "command": ".venv/Scripts/python.exe tools/review_tables.py",
+  "seed": 1729,
+  "bootstrap_samples": 1000,
+  "bootstrap_unit": "test sequence; fixed trained model",
+  "confidence_level": 0.95,
+  "seconds": 121.21562919999997,
+  "caliper_status": "0.02 chosen heuristically during October review, not preregistered",
+  "artifacts": {
+    "classification_metrics.csv": "cfc078925c75eeb10a08435f7feb50ad1aa373c1952e550df5ce25dfe2df83ac",
+    "ctcf_genomic_control_pairs.csv": "f67aff6c44c27993987e4bfd949abf8cd8d0b440d2fab9e7fbee77af239d2512",
+    "ctcf_native_control_inference.csv": "9e9ad0eb1ae4e5f4cb5270efb4d217dc4917bde9b8924a99ad1f05015bbb156a",
+    "ctcf_threshold_sweep.csv": "be1fd5c99a347380a083cc993e213c6a314a121ac3d470e210254b773e15835b",
+    "dataset_table.tex": "07dd42496fd95b55ca6ce7db626482e09bef6446d487a76a592b1970a2315ba2",
+    "heldout_pair_plot_data.csv": "f0bd2e8333623a32f6a3d1e12bda31bb9134a7db15d408ddd6d977e62e8947be",
+    "numbers.tex": "2e90c94ced5b5802d1ca029555cf8ccac71428b7445e526281dfe43da02c8ad7",
+    "patching_table.tex": "f5758b8faaa939343fe454d9e7d0cdda484e891aea5f569e20b1fe4b809e3183",
+    "promoter_no_tata_predictions.csv": "213c7a1b3fe2abf81fa529479cce2e16685404c719575789a7e82f8b85737a88",
+    "promoter_tata_predictions.csv": "60503e0de7e73ba0bebf134b4e0377d84b902d8603968c8f945903f61d1c24fb",
+    "splice_sites_acceptors_predictions.csv": "29c99ee846f3c0253e5ea8abad808a476105349c1873dc3c060acf3e93d7f210",
+    "splice_sites_donors_predictions.csv": "19f915ceb76386e28e5d54bf84da1b33378d329f32ab6f5f0089586068196c88",
+    "table3.tex": "327397251d1bf1764d60f3fef7ce966790d735310a33f8b28ae182db30452378",
+    "table4.tex": "52dbde81e6cbf8d8b1eb942f49f7831d2c6f3003840d3d906b62d2249cec8b87",
+    "threshold_table.tex": "8140e688985ce2df66eb0e025a5a64d5248570c10a0efac30d803d97bfd5b424"
+  }
+}

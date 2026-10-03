@@ -1,0 +1,46 @@
+[
+  {
+    "task": "promoter_tata",
+    "full_count": 212,
+    "historical_count": 212,
+    "caliper_count": 82,
+    "caliper": 0.02,
+    "full_positive_mean_gc": 0.5972327044025157,
+    "full_negative_mean_gc": 0.4232389937106918,
+    "matched_positive_mean_gc": 0.4976422764227642,
+    "matched_negative_mean_gc": 0.4967479674796747
+  },
+  {
+    "task": "promoter_no_tata",
+    "full_count": 1372,
+    "historical_count": 1372,
+    "caliper_count": 456,
+    "caliper": 0.02,
+    "full_positive_mean_gc": 0.6270068027210884,
+    "full_negative_mean_gc": 0.4196161321671526,
+    "matched_positive_mean_gc": 0.4960380116959065,
+    "matched_negative_mean_gc": 0.49520467836257315
+  },
+  {
+    "task": "splice_sites_donors",
+    "full_count": 3000,
+    "historical_count": 2960,
+    "caliper_count": 2256,
+    "caliper": 0.02,
+    "full_positive_mean_gc": 0.48226576576576574,
+    "full_negative_mean_gc": 0.42188048245614035,
+    "matched_positive_mean_gc": 0.43725620567375884,
+    "matched_negative_mean_gc": 0.4365913120567376
+  },
+  {
+    "task": "splice_sites_acceptors",
+    "full_count": 3000,
+    "historical_count": 2950,
+    "caliper_count": 2352,
+    "caliper": 0.02,
+    "full_positive_mean_gc": 0.4674723163841808,
+    "full_negative_mean_gc": 0.4223114754098361,
+    "matched_positive_mean_gc": 0.43645408163265303,
+    "matched_negative_mean_gc": 0.43571853741496597
+  }
+]
