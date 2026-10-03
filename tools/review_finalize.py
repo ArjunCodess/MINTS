@@ -1,4 +1,4 @@
-"""Hash final outputs, assemble anonymous source package, and render command ledger."""
+"""Hash final outputs and assemble the anonymous source package."""
 from pathlib import Path
 import hashlib
 import json
@@ -47,12 +47,4 @@ manifest=dict(submission_commit="7112ec22b770c1651f24d33ac5f45fda3e986324",branc
               anonymous_package=[p.relative_to(root).as_posix() for p in package],
               package_scope="Manuscript sources, generated inserts, figures and PDF only; excludes author-identifying internal review docs and historical results.")
 (out/"final_artifact_manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
-records=[json.loads(line) for line in (out/"commands.jsonl").read_text().splitlines()]
-lines=["# Instrumented command history","","Exact argv, exit status, runtime and logs. Discovery reads and initial Git attempts preceded this ledger; see VALIDATION.md for the recording limitation.","",
-       "| UTC timestamp | Exact argv | Exit | Seconds | Log |","|---|---|---|---|---|"]
-for record in records:
-    argv=json.dumps(record["argv"],ensure_ascii=False).replace("|","\\|")
-    log=record["log"].replace("\\","/")
-    lines.append(f'| {record["timestamp"]} | `{argv}` | {record["exit_status"]} | {record["seconds"]:.3f} | [{log}](../{log}) |')
-(root/"docs/COMMAND_HISTORY.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
-print(f"Hashed {len(manifest['sha256'])} files; packaged {len(package)} files; recorded {len(records)} commands")
+print(f"Hashed {len(manifest['sha256'])} files; packaged {len(package)} files")

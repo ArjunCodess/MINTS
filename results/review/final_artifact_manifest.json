@@ -124,7 +124,7 @@
     "tools/review_audit.py": "74a77b9c065c5c28111ab5c855c9e7e897a2b5c7f13000f71923960030cb52f5",
     "tools/review_command.py": "9b66be1849313ddadf30796f677e36d6c1a72029570f33399721f0335c5fcc00",
     "tools/review_ctcf_controls.py": "b812251e9ecc909e9c8337cea0d9f02284b7bca67826bb68fe418cc06d832aed",
-    "tools/review_finalize.py": "a02f7892c4e975b63703358c408df8b132d7cd336b0117b642b412218e20b523",
+    "tools/review_finalize.py": "ca55d27c0e5b2a0b34ea8c64d9f61d4a100cebcde286578a2af9679b7547e909",
     "tools/review_full_pipeline.py": "aed691316b6a2c8c1f845634c826d9f8b41b77231fc670294e9cfb24268e9ff2",
     "tools/review_manuscript_artifacts.py": "0a74b8a0ddfef843f9cabd24209d5f9c0c5b643040dabcf39114e02a5c7aa3ee",
     "tools/review_patching.py": "eeacbd0a2e8d3461d439998e002d769b5dcb81729a57fa4a654cda34d6697a49",
