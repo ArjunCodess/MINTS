@@ -1,0 +1,315 @@
+{
+  "generated_by": "python tools/review_manuscript_artifacts.py",
+  "claims": [
+    {
+      "claim": "Fixed-classifier held-out prediction",
+      "status": "supported with sequence-bootstrap intervals",
+      "evidence": [
+        "classification_metrics.csv",
+        "*_predictions.csv"
+      ],
+      "boundary": "no training/checkpoint variability or causal mechanism"
+    },
+    {
+      "claim": "Historical GC equality and motif-count reconciliation",
+      "status": "reproduced",
+      "evidence": [
+        "correctness_audit.json",
+        "gc_matching_diagnostics.json"
+      ],
+      "boundary": "historical promoter matching is the full membership reordered"
+    },
+    {
+      "claim": "Disjoint stored partitions",
+      "status": "supported under specified checks",
+      "evidence": [
+        "correctness_audit.json",
+        "*_membership.jsonl"
+      ],
+      "boundary": "exact/RC, coordinate overlap, chromosome and equal-length <=2 substitutions; no indel/homology/pretraining guarantee"
+    },
+    {
+      "claim": "No head passed historical motif-local screens",
+      "status": "descriptive only",
+      "evidence": [
+        "ctcf_threshold_sweep.csv"
+      ],
+      "boundary": "weight-only reconstruction; invalid token-level significance withdrawn"
+    },
+    {
+      "claim": "Native attention and sequence-QK conditional associations",
+      "status": "sequence-pair inference completed",
+      "evidence": [
+        "ctcf_native_control_inference.csv",
+        "ctcf_sequence_qk_inference.csv",
+        "ctcf_native_control_scores.npz",
+        "ctcf_native_controls_manifest.json"
+      ],
+      "boundary": "separate Holm families; observational exchangeability; marginal displayed-head intervals"
+    },
+    {
+      "claim": "Held-out TATA probe restoration",
+      "status": "exploratory",
+      "evidence": [
+        "heldout_patching_summary.json",
+        "heldout_pair_plot_data.csv"
+      ],
+      "boundary": "ten selected test pairs; trained probe; composition edits and uncertain nucleotide alignment"
+    },
+    {
+      "claim": "No biological motif detector exists",
+      "status": "removed",
+      "evidence": [],
+      "boundary": "screen failure cannot establish absence"
+    },
+    {
+      "claim": "Native CTCF causal effect",
+      "status": "not claimed",
+      "evidence": [],
+      "boundary": "no validated native CTCF output"
+    },
+    {
+      "claim": "Cross-model ranking or Spearman rho above one",
+      "status": "removed",
+      "evidence": [
+        "correctness_audit.json"
+      ],
+      "boundary": "stored rho is an enrichment ratio; NT comparison not validated"
+    },
+    {
+      "claim": "Preregistered thresholds",
+      "status": "removed",
+      "evidence": [],
+      "boundary": "heuristic thresholds; no timestamped preregistration evidence"
+    }
+  ],
+  "source_hashes": {
+    "results/review/correctness_audit.json": "7a54b97d24b4c5d6d17c8e9e0c77ed5865f5c090c2e39b6e43139f9be6f736cd",
+    "results/review/classification_metrics.csv": "0dce0095adaa55381b23265c6e4d10e1599425903c2ab059182972a895106c5b",
+    "results/qk_alignment/ctcf_qk_alignment.csv": "ca64d6ef36b5d9fb1448a0edefba057b8a3efb603ab8fed2ab0146f8eb0e43c0",
+    "results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv": "14a709449e7d79ef274ef6f6478b952e887df91876d6a2536522b9480785ab2a",
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching.csv": "77767d52f196ab849ec2c3d7ccda17449e8ddcfe70ce382174218dee90842c77",
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_pair_effects.npz": "c3e3fd399085ee3a0f3b4dbc88256c039a6f8b1e25483e3d660cef73aead77d5",
+    "results/review/ctcf_native_control_inference.csv": "9e9ad0eb1ae4e5f4cb5270efb4d217dc4917bde9b8924a99ad1f05015bbb156a",
+    "results/review/ctcf_native_controls_manifest.json": "ac4d0c18a62a3f079da4e720ebf114c8cfad8c6bf36681e4aa72defe5d0fcb28",
+    "results/review/ctcf_sequence_qk_inference.csv": "1fe402ca60fe8ccc7042c4c11de512a78242b7c97706fb7d6b7db5a88697d01b",
+    "results/review/pinned_dataset_comparison.json": "39c361bd1f2a54c8c96cc28739d8eceeffc4dbe2d6312cdcc98708ce9fcc04b6",
+    "results/review/upstream_dataset_snapshot.json": "05602747905eb4136c89f204733a2759a35fbcff537442925131e03b8ccc7803",
+    "results/review/reference_verification.json": "738ffefc0255e71724108d859662303673ec4bfea5a8e5814bef1b86d17ddfa6",
+    "paper/references.bib": "a9604c0a244dc2bee1904a63b3d6cbfc1a21a555967712b21bc4b76f8e38c068",
+    "results/review/clean_result_import.json": "fae39e411b9872869a03b109e2625a9ed58c2e22bdaa68466e61260d0b34ef6e",
+    "results/review/clean_reproduction.json": "73602808fcf739e32acf1407370ab0beecdffa394217e1946bd93ffe37c82eaf",
+    "results/review/clean_input_comparison.json": "028c62bbec9dac90a98b9265e25831a72ef036d2a12da964d227797369f0c214",
+    "results/review/clean_feature_comparison.json": "d61a38a9a4b07e0e89aaff153bc5c9ecaf0a6f2fd3b673d653c0f5fcc8eb689b",
+    "results/review/clean_screen_comparison.json": "b9d25eb590999c62beab7021ca4245055cce0bd35034bd79afcfdd43f31c643d",
+    "results/review/donor_sequence_cluster_summary.json": "31bc6443f9d314f0406c98265da66c5168d2c287f668f3faabcef58f71905c2c",
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json": "a6e371afa6b4141041701a291cf436362553e4a0ba22db7a1e2d4844a8f93562"
+  },
+  "remaining_limitations": [
+    "Independent upstream label reconstruction is incomplete",
+    "Native CTCF causality is not established",
+    "Clean reproduction completed through recorded resumptions; earlier failures and source changes are preserved"
+  ],
+  "review_concerns": [
+    {
+      "concern": "Duplicate Seq-head/Readout and Table 3/4 provenance",
+      "evidence": [
+        "correctness_audit.json",
+        "tables_manifest.json"
+      ],
+      "code": [
+        "src/task_performance.py",
+        "tools/review_tables.py",
+        "tools/review_manuscript_artifacts.py"
+      ],
+      "manuscript": "Predictive comparisons and result tables",
+      "status": "corrected; single frozen readout"
+    },
+    {
+      "concern": "Full versus GC-matched AUROC equality",
+      "evidence": [
+        "gc_matching_diagnostics.json",
+        "*_predictions.csv"
+      ],
+      "code": [
+        "src/probing.py",
+        "tools/review_tables.py"
+      ],
+      "manuscript": "Composition matching changes the promoter result",
+      "status": "membership equality explained; caliper population regenerated"
+    },
+    {
+      "concern": "281915 versus 256918 motif counts",
+      "evidence": [
+        "correctness_audit.json",
+        "clean_input_comparison.json"
+      ],
+      "code": [
+        "src/motif_scoring.py",
+        "tools/review_audit.py"
+      ],
+      "manuscript": "Nucleotide-to-token alignment and CTCF count stages",
+      "status": "unique support versus hit occurrences reconciled"
+    },
+    {
+      "concern": "Invalid Nucleotide Transformer comparison",
+      "evidence": [
+        "correctness_audit.json"
+      ],
+      "code": [
+        "src/reproduce.py",
+        "src/cli.py"
+      ],
+      "manuscript": "Interpretation and limitations",
+      "status": "comparison removed; no cross-model claim"
+    },
+    {
+      "concern": "327 patching pairs versus 212 test examples",
+      "evidence": [
+        "correctness_audit.json",
+        "heldout_patching_summary.json"
+      ],
+      "code": [
+        "src/patching.py",
+        "tools/review_patching.py"
+      ],
+      "manuscript": "Patching is a held-out probe experiment",
+      "status": "historical pooling explained; test-only pairs enforced"
+    },
+    {
+      "concern": "Old tables and submission remnants",
+      "evidence": [
+        "command_final63_tests.log"
+      ],
+      "code": [
+        "tests/test_review_integrity.py"
+      ],
+      "manuscript": "Rewritten manuscript; old appendices removed",
+      "status": "source scan enforced; no PDF inspection"
+    },
+    {
+      "concern": "Dataset sources, partitions, duplication and leakage",
+      "evidence": [
+        "*_membership.jsonl",
+        "pinned_dataset_comparison.json",
+        "upstream_dataset_snapshot.json"
+      ],
+      "code": [
+        "src/data_ingestion.py",
+        "src/integrity.py"
+      ],
+      "manuscript": "Datasets and audit scope",
+      "status": "analyzed membership documented and checked; independent upstream label reconstruction remains limited"
+    },
+    {
+      "concern": "CTCF assay definitions and motif-absent controls",
+      "evidence": [
+        "ctcf_native_controls_manifest.json",
+        "ctcf_genomic_control_pairs.csv"
+      ],
+      "code": [
+        "tools/review_ctcf_controls.py"
+      ],
+      "manuscript": "Historical assay, native attention and sequence-level content QK",
+      "status": "implemented; observational assumptions stated"
+    },
+    {
+      "concern": "Sequence-level uncertainty and 144-head selection",
+      "evidence": [
+        "ctcf_native_control_inference.csv",
+        "ctcf_sequence_qk_inference.csv",
+        "classification_metrics.csv"
+      ],
+      "code": [
+        "src/inference.py",
+        "tools/review_ctcf_controls.py"
+      ],
+      "manuscript": "Uncertainty and selection and main tables",
+      "status": "pair/sequence resampling and separate Holm families implemented"
+    },
+    {
+      "concern": "Registration claims and threshold robustness",
+      "evidence": [
+        "ctcf_threshold_sweep.csv"
+      ],
+      "code": [
+        "src/threshold_sensitivity.py",
+        "tools/review_manuscript_artifacts.py"
+      ],
+      "manuscript": "Evidence and output targets and threshold sweep",
+      "status": "heuristic status stated; invalid null interpretations withdrawn"
+    },
+    {
+      "concern": "Incomplete CTCF causal evidence",
+      "evidence": [],
+      "code": [
+        "src/reproduce.py"
+      ],
+      "manuscript": "Conclusion and limitations",
+      "status": "conclusion narrowed to specified screen failure; no validated native CTCF causal target"
+    },
+    {
+      "concern": "Patching scalar, denominator distributions and PM overshoot",
+      "evidence": [
+        "heldout_patching_summary.json",
+        "heldout_pair_plot_data.csv"
+      ],
+      "code": [
+        "src/patching.py",
+        "tools/review_manuscript_artifacts.py"
+      ],
+      "manuscript": "Patching procedure and results",
+      "status": "probe target and exploratory uncertainty explicit; off-manifold geometry unmeasured"
+    },
+    {
+      "concern": "K-mer superiority and choice of 3-to-6-mers",
+      "evidence": [
+        "classification_metrics.csv"
+      ],
+      "code": [
+        "tools/review_tables.py"
+      ],
+      "manuscript": "Predictive comparisons and Prediction is context",
+      "status": "point advantage stated; heuristic range and fixed-classifier uncertainty stated"
+    },
+    {
+      "concern": "Motivation, biology, theory and claim boundaries",
+      "evidence": [
+        "claim_evidence_audit.json"
+      ],
+      "code": [
+        "paper/main.tex"
+      ],
+      "manuscript": "Abstract, introduction, methods and limitations",
+      "status": "rewritten; conditional theory and cross-model claims moderated"
+    },
+    {
+      "concern": "Licenses and research declarations",
+      "evidence": [
+        "LICENSE",
+        "upstream_dataset_snapshot.json"
+      ],
+      "code": [
+        "paper/main.tex"
+      ],
+      "manuscript": "Availability, licenses, and declarations",
+      "status": "author-reported funding/conflicts included; unverified terms and AI history disclosed"
+    },
+    {
+      "concern": "Clean reproducibility, commands and failures",
+      "evidence": [
+        "commands.jsonl",
+        "clean_reproduction.json",
+        "clean_input_comparison.json",
+        "clean_cuda_retry_exit.json"
+      ],
+      "code": [
+        "tools/review_full_pipeline.py",
+        "src/reproduce.py"
+      ],
+      "manuscript": "Availability and limitations",
+      "status": "all 13 required stages completed after recorded repairs and resumptions; failures retained"
+    }
+  ],
+  "anonymization_scope": "Manuscript source is anonymous. The repository MIT copyright names the author and Git preserves provenance; no anonymous source archive is claimed."
+}
