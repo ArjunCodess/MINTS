@@ -126,3 +126,72 @@ def test_manuscript_import_rejects_an_unfinished_run(tmp_path):
                            "--input-run-directory",str(tmp_path)],capture_output=True,text=True,timeout=30)
     assert result.returncode!=0
     assert "Cannot import incomplete scientific run" in result.stderr
+
+
+def test_reported_classifier_metrics_recompute_from_saved_predictions():
+    from pathlib import Path
+    from sklearn.metrics import roc_auc_score, average_precision_score, accuracy_score
+    out=Path(__file__).resolve().parents[1]/"results/review"
+    metrics=pd.read_csv(out/"classification_metrics.csv")
+    for task,rows in metrics.groupby("task"):
+        predictions=pd.read_csv(out/f"{task}_predictions.csv")
+        for row in rows.itertuples():
+            subset=predictions
+            if row.method=="historical_gc_probe":
+                subset=subset[subset.historical_gc_selected]
+            elif row.method.startswith("caliper_gc_"):
+                subset=subset[subset.gc_caliper_selected]
+            column={"gc":"gc_probability", "kmer":"kmer_probability",
+                    "caliper_gc_baseline":"gc_probability"}.get(row.method,"probe_probability")
+            y,score=subset.label.to_numpy(),subset[column].to_numpy()
+            assert len(y)==row.test_examples
+            assert np.isclose(roc_auc_score(y,score),row.auroc,atol=1e-12,rtol=0)
+            assert np.isclose(average_precision_score(y,score),row.auprc,atol=1e-12,rtol=0)
+            assert np.isclose(accuracy_score(y,score>=.5),row.accuracy,atol=1e-12,rtol=0)
+
+
+def test_native_and_qk_summaries_match_raw_sequence_pairs():
+    from pathlib import Path
+    out=Path(__file__).resolve().parents[1]/"results/review"
+    with np.load(out/"ctcf_native_control_scores.npz") as saved:
+        for filename,key in [("ctcf_native_control_inference.csv","scores"),
+                             ("ctcf_sequence_qk_inference.csv","qk_correlations")]:
+            values=saved[key].astype(float)
+            values=values[np.isfinite(values).all(axis=(1,2,3))]
+            table=pd.read_csv(out/filename).sort_values(["layer","head"])
+            means=(values[:,0]-values[:,1]).mean(axis=0).reshape(-1)
+            assert len(table)==144 and (table.pairs==len(values)).all()
+            # Native scores were differenced in float32 before inference;
+            # recomputation in float64 can differ by that rounding precision.
+            assert np.allclose(means,table.mean_present_minus_absent,atol=5e-8,rtol=0)
+            if key=="qk_correlations":
+                assert np.allclose(values[:,0].mean(axis=0).reshape(-1),table.mean_present_r,atol=1e-12,rtol=0)
+            p=table.permutation_p.to_numpy()
+            assert np.isfinite(p).all() and ((p>=0)&(p<=1)).all()
+            order=np.argsort(p)
+            expected=np.asarray([min(1.,max((len(p)-j)*p[order[j]] for j in range(i+1)))
+                                 for i in range(len(p))])
+            assert np.allclose(table.holm_p.to_numpy()[order],expected,atol=1e-12,rtol=0)
+
+
+def test_heldout_patching_interpretation_matches_raw_scores():
+    from pathlib import Path
+    import json
+    root=Path(__file__).resolve().parents[1]
+    patchroot=root/"results/cross_model/review_tata_heldout/patching"
+    stem="promoter_tata_batch_dnabert_activation_patching"
+    with np.load(patchroot/(stem+"_pair_effects.npz")) as saved:
+        assert all(str(identity).startswith("test:") for identity in saved["sequence_ids"])
+        denominator=saved["denominator"]
+        assert np.allclose(denominator,saved["clean_scores"]-saved["corrupted_scores"])
+        expected=(saved["patched_scores"]-saved["corrupted_scores"][:,None,None])/denominator[:,None,None]
+        assert np.allclose(saved["restoration"],expected,atol=1e-12,rtol=0)
+        table=pd.read_csv(patchroot/(stem+".csv"))
+        for row in table.itertuples():
+            values=expected[:,row.layer,row.head]
+            assert np.isclose(row.restoration,values.mean(),atol=1e-12,rtol=0)
+            assert np.isclose(row.median_restoration,np.median(values),atol=1e-12,rtol=0)
+        summary=json.loads((root/"results/review/heldout_patching_summary.json").read_text())
+        assert summary["pm_greater_than_one"]==int((expected>1).sum())
+        assert summary["negative_denominators"]==int((denominator<0).sum())
+        assert summary["positive_denominators"]==int((denominator>0).sum())
