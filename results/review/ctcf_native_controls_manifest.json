@@ -1,4 +1,13 @@
 {
+  "command": [
+    "G:\\mints-repro-20261004\\venv\\Scripts\\python.exe",
+    "tools/review_full_pipeline.py",
+    "--run-directory",
+    "G:/mints-repro-20261004/run",
+    "--from-step",
+    "strict_mechanistic_proofs"
+  ],
+  "entrypoint": "tools.review_ctcf_controls.main(config)",
   "revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
   "device": "cuda",
   "seed": 1729,
@@ -13,11 +22,15 @@
   "control": "first connected motif support span projected to relative position in motif-absent peak",
   "matching": "same chromosome; GC within .02; nucleotide length within 5%; without replacement",
   "inference": "two-sided paired sign flips, 9999 permutations, Holm over 144 heads; 1000 pair-bootstrap marginal intervals",
+  "qk_score": "Pearson r within each sequence between continuous maximum-overlap PWM scores and scaled projection-bias-inclusive QK averaged over nucleotide queries; ALiBi excluded",
+  "qk_valid_pairs": 5220,
+  "qk_undefined_pairs": 0,
+  "qk_inference": "present-minus-absent sequence-r contrasts; separate Holm family of 144 heads, 9999 sign flips; 1000 pair bootstraps; present means also have marginal intervals",
   "assumptions": "observational matching; sequence-pair exchangeability conditional on matching; within-chromosome dependence not modeled",
   "claim_boundary": "association of native attention with motif-present peak intervals, not motif detection or causal use",
-  "seconds": 300.4101539999974,
+  "seconds": 308.2978218999924,
   "inputs": {
-    "data\\ctcf\\ctcf_gm12878_sequences.tsv": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459",
-    "results\\enrichment\\ctcf_qk_alignment_token_motif_scores.csv": "f0c93a177768c9cecf922096af02ffe074a80bd21bfd7813cc443266dd8c6a0c"
+    "G:\\mints-repro-20261004\\run\\data\\ctcf\\ctcf_gm12878_sequences.tsv": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459",
+    "G:\\mints-repro-20261004\\run\\results\\enrichment\\ctcf_qk_alignment_token_motif_scores.csv": "f0c93a177768c9cecf922096af02ffe074a80bd21bfd7813cc443266dd8c6a0c"
   }
 }
