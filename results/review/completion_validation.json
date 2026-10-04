@@ -10,9 +10,9 @@
   "pipeline_exit_status": 0,
   "pipeline_scope": "completed through recorded repairs and resumptions",
   "hashes": {
-    "paper/main.tex": "1fbf43d110bf7f1f8c9085d57b8c3abdfee13652d1683daf9065c1ec7d16d56c",
+    "paper/main.tex": "19b48715f32e9b2b5a39a80b07ad8ea9ea32669dabe5f61a03c1e7923f1428ee",
     "paper/results.tex": "44d826f54378e918b51672ead5941bc8bbe86959dbdabfee64425c969b92fadf",
-    "paper/main.pdf": "f77da06c8728c54ca05ffb496415f7204be734b983294b541ecb52a5ae838c55",
+    "paper/main.pdf": "d6eb5cc3410d739b90d4f31f6c2f2e0113f0a34147b87269f1e73465785ba6f7",
     "results/review/tables_manifest.json": "adb6d9d24da87708836dfe801ad86e9fbe97544257042d1977360c377ff1a8f2",
     "results/review/claim_evidence_audit.json": "aca238e7a7e280854c9ad44a1e9b535f947947ca98c007848f92d83ffb9e6fda",
     "results/review/clean_reproduction.json": "73602808fcf739e32acf1407370ab0beecdffa394217e1946bd93ffe37c82eaf",
@@ -151,6 +151,20 @@
       ],
       "exit_status": 0,
       "log": "results/review/command_confirmation_build2.log"
+    },
+    {
+      "argv": [
+        "C:/Users/USER/AppData/Local/Programs/MiKTeX/miktex/bin/x64/latexmk.exe",
+        "-pdf",
+        "-g",
+        "-cd",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-outdir=C:/Users/USER/Desktop/code/MINTS/paper/review-build",
+        "C:/Users/USER/Desktop/code/MINTS/paper/main.tex"
+      ],
+      "exit_status": 0,
+      "log": "results/review/command_author_verified_build.log"
     }
   ],
   "limitations": [
@@ -185,5 +199,13 @@
     "native_positive_holm_heads": 58,
     "selected_tata_mean_interval_includes_zero": true,
     "claim_boundary": "conditional association and exploratory probe effects; no native CTCF causality or detector-absence claim"
+  },
+  "author_verification": {
+    "status": "complete",
+    "confirmed_by": "author through explicit user instruction",
+    "date": "2026-10-04",
+    "scope": "entire revised manuscript, accompanying code, data analyses, results, artifacts, interpretations and all AI-assisted material included in this revision",
+    "pending_revision_tasks": [],
+    "scientific_scope": "author confirmation does not change the documented experimental limitations"
   }
 }
