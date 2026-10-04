@@ -1,0 +1,215 @@
+
+=================================== ERRORS ====================================
+_________________ ERROR collecting results/review/test-tmp-1 __________________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-1'
+_________________ ERROR collecting results/review/test-tmp-2 __________________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-2'
+_________________ ERROR collecting results/review/test-tmp-3 __________________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-3'
+_______________ ERROR collecting results/review/test-tmp-clean ________________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-clean'
+______________ ERROR collecting results/review/test-tmp-clean-2 _______________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-clean-2'
+_______________ ERROR collecting results/review/test-tmp-commit _______________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-commit'
+_____________ ERROR collecting results/review/test-tmp-completion _____________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-completion'
+____________ ERROR collecting results/review/test-tmp-completion2 _____________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-completion2'
+____________ ERROR collecting results/review/test-tmp-completion3 _____________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-completion3'
+____________ ERROR collecting results/review/test-tmp-completion4 _____________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-completion4'
+____________ ERROR collecting results/review/test-tmp-docs-cleanup ____________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-docs-cleanup'
+_______________ ERROR collecting results/review/test-tmp-final ________________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-final'
+_____________ ERROR collecting results/review/test-tmp-simple-tex _____________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-simple-tex'
+____________ ERROR collecting results/review/test-tmp-task-commit _____________
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\runner.py:406: in collect
+    return list(collector.collect())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\main.py:569: in collect
+    for direntry in scandir(self.path):
+                    ^^^^^^^^^^^^^^^^^^
+G:\mints-repro-20261004\venv\Lib\site-packages\_pytest\pathlib.py:954: in scandir
+    scandir_iter = os.scandir(path)
+                   ^^^^^^^^^^^^^^^^
+E   PermissionError: [WinError 5] Access is denied: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\test-tmp-task-commit'
+=========================== short test summary info ===========================
+ERROR results/review/test-tmp-1 - PermissionError: [WinError 5] Access is den...
+ERROR results/review/test-tmp-2 - PermissionError: [WinError 5] Access is den...
+ERROR results/review/test-tmp-3 - PermissionError: [WinError 5] Access is den...
+ERROR results/review/test-tmp-clean - PermissionError: [WinError 5] Access is...
+ERROR results/review/test-tmp-clean-2 - PermissionError: [WinError 5] Access ...
+ERROR results/review/test-tmp-commit - PermissionError: [WinError 5] Access i...
+ERROR results/review/test-tmp-completion - PermissionError: [WinError 5] Acce...
+ERROR results/review/test-tmp-completion2 - PermissionError: [WinError 5] Acc...
+ERROR results/review/test-tmp-completion3 - PermissionError: [WinError 5] Acc...
+ERROR results/review/test-tmp-completion4 - PermissionError: [WinError 5] Acc...
+ERROR results/review/test-tmp-docs-cleanup - PermissionError: [WinError 5] Ac...
+ERROR results/review/test-tmp-final - PermissionError: [WinError 5] Access is...
+ERROR results/review/test-tmp-simple-tex - PermissionError: [WinError 5] Acce...
+ERROR results/review/test-tmp-task-commit - PermissionError: [WinError 5] Acc...
+!!!!!!!!!!!!!!!!!! Interrupted: 14 errors during collection !!!!!!!!!!!!!!!!!!!
+14 errors in 28.29s

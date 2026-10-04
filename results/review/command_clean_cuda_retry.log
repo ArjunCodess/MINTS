@@ -1,0 +1,275 @@
+[MINTS 10:51:40] Creating required data/results directories
+[MINTS 10:51:40] Starting step: strict_mechanistic_proofs
+[MINTS 10:51:40] Loading model for strict mechanistic proofs: zhihan1996/DNABERT-2-117M
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 43764.41it/s]
+[transformers] BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+pooler.dense.weight                        | MISSING    | 
+pooler.dense.bias                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[MINTS 10:51:45] Model ready on cuda using huggingface_forward_hooks
+[MINTS 10:51:45] Running CTCF motif scoring, QK alignment, and matched attention enrichment
+[MINTS 10:51:46] Using low-rank W_Q/W_K factors for strict QK proof scoring
+[MINTS 10:51:46] Batching historical factor QK across layers on CUDA
+[MINTS 10:51:46] Scoring CTCF motif support for up to all sequences
+[MINTS 10:53:03] Wrote token motif scores: G:\mints-repro-20261004\run\results\enrichment\ctcf_qk_alignment_token_motif_scores.csv
+[MINTS 10:53:03] Processed strict QK proof inputs for 1/51249 CTCF sequences
+[MINTS 10:53:24] Processed strict QK proof inputs for 1000/51249 CTCF sequences
+[MINTS 10:53:45] Processed strict QK proof inputs for 2000/51249 CTCF sequences
+[MINTS 10:54:07] Processed strict QK proof inputs for 3000/51249 CTCF sequences
+[MINTS 10:54:20] Processed strict QK proof inputs for 4000/51249 CTCF sequences
+[MINTS 10:54:32] Processed strict QK proof inputs for 5000/51249 CTCF sequences
+[MINTS 10:54:43] Processed strict QK proof inputs for 6000/51249 CTCF sequences
+[MINTS 10:54:54] Processed strict QK proof inputs for 7000/51249 CTCF sequences
+[MINTS 10:55:05] Processed strict QK proof inputs for 8000/51249 CTCF sequences
+[MINTS 10:55:16] Processed strict QK proof inputs for 9000/51249 CTCF sequences
+[MINTS 10:55:27] Processed strict QK proof inputs for 10000/51249 CTCF sequences
+[MINTS 10:55:38] Processed strict QK proof inputs for 11000/51249 CTCF sequences
+[MINTS 10:55:49] Processed strict QK proof inputs for 12000/51249 CTCF sequences
+[MINTS 10:56:00] Processed strict QK proof inputs for 13000/51249 CTCF sequences
+[MINTS 10:56:10] Processed strict QK proof inputs for 14000/51249 CTCF sequences
+[MINTS 10:56:22] Processed strict QK proof inputs for 15000/51249 CTCF sequences
+[MINTS 10:56:33] Processed strict QK proof inputs for 16000/51249 CTCF sequences
+[MINTS 10:56:43] Processed strict QK proof inputs for 17000/51249 CTCF sequences
+[MINTS 10:56:54] Processed strict QK proof inputs for 18000/51249 CTCF sequences
+[MINTS 10:57:05] Processed strict QK proof inputs for 19000/51249 CTCF sequences
+[MINTS 10:57:15] Processed strict QK proof inputs for 20000/51249 CTCF sequences
+[MINTS 10:57:26] Processed strict QK proof inputs for 21000/51249 CTCF sequences
+[MINTS 10:57:37] Processed strict QK proof inputs for 22000/51249 CTCF sequences
+[MINTS 10:57:48] Processed strict QK proof inputs for 23000/51249 CTCF sequences
+[MINTS 10:57:59] Processed strict QK proof inputs for 24000/51249 CTCF sequences
+[MINTS 10:58:11] Processed strict QK proof inputs for 25000/51249 CTCF sequences
+[MINTS 10:58:22] Processed strict QK proof inputs for 26000/51249 CTCF sequences
+[MINTS 10:58:33] Processed strict QK proof inputs for 27000/51249 CTCF sequences
+[MINTS 10:58:44] Processed strict QK proof inputs for 28000/51249 CTCF sequences
+[MINTS 10:58:56] Processed strict QK proof inputs for 29000/51249 CTCF sequences
+[MINTS 10:59:07] Processed strict QK proof inputs for 30000/51249 CTCF sequences
+[MINTS 10:59:19] Processed strict QK proof inputs for 31000/51249 CTCF sequences
+[MINTS 10:59:30] Processed strict QK proof inputs for 32000/51249 CTCF sequences
+[MINTS 10:59:41] Processed strict QK proof inputs for 33000/51249 CTCF sequences
+[MINTS 10:59:52] Processed strict QK proof inputs for 34000/51249 CTCF sequences
+[MINTS 11:00:04] Processed strict QK proof inputs for 35000/51249 CTCF sequences
+[MINTS 11:00:15] Processed strict QK proof inputs for 36000/51249 CTCF sequences
+[MINTS 11:00:29] Processed strict QK proof inputs for 37000/51249 CTCF sequences
+[MINTS 11:00:50] Processed strict QK proof inputs for 38000/51249 CTCF sequences
+[MINTS 11:01:12] Processed strict QK proof inputs for 39000/51249 CTCF sequences
+[MINTS 11:01:34] Processed strict QK proof inputs for 40000/51249 CTCF sequences
+[MINTS 11:01:56] Processed strict QK proof inputs for 41000/51249 CTCF sequences
+[MINTS 11:02:17] Processed strict QK proof inputs for 42000/51249 CTCF sequences
+[MINTS 11:02:39] Processed strict QK proof inputs for 43000/51249 CTCF sequences
+[MINTS 11:03:01] Processed strict QK proof inputs for 44000/51249 CTCF sequences
+[MINTS 11:03:21] Processed strict QK proof inputs for 45000/51249 CTCF sequences
+[MINTS 11:03:42] Processed strict QK proof inputs for 46000/51249 CTCF sequences
+[MINTS 11:04:03] Processed strict QK proof inputs for 47000/51249 CTCF sequences
+[MINTS 11:04:23] Processed strict QK proof inputs for 48000/51249 CTCF sequences
+[MINTS 11:04:44] Processed strict QK proof inputs for 49000/51249 CTCF sequences
+[MINTS 11:05:04] Processed strict QK proof inputs for 50000/51249 CTCF sequences
+[MINTS 11:05:24] Processed strict QK proof inputs for 51000/51249 CTCF sequences
+[MINTS 11:05:29] Processed strict QK proof inputs for 51249/51249 CTCF sequences
+[MINTS 11:05:29] Computing final QK/motif Pearson tables from streaming statistics
+[MINTS 11:05:31] Writing matched CTCF attention enrichment from streaming QK-reconstructed statistics
+[MINTS 11:05:31] Selecting a clean/corrupted promoter-TATA pair for custom activation patching
+[MINTS 11:05:31] Running DNABERT forward-hook activation patching across all layers and heads
+[MINTS 11:05:31] Training probe scorer for activation patching task=promoter_tata
+[MINTS 11:05:33] Custom patching complete for layer 0
+[MINTS 11:05:33] Custom patching complete for layer 1
+[MINTS 11:05:33] Custom patching complete for layer 2
+[MINTS 11:05:33] Custom patching complete for layer 3
+[MINTS 11:05:33] Custom patching complete for layer 4
+[MINTS 11:05:33] Custom patching complete for layer 5
+[MINTS 11:05:33] Custom patching complete for layer 6
+[MINTS 11:05:34] Custom patching complete for layer 7
+[MINTS 11:05:34] Custom patching complete for layer 8
+[MINTS 11:05:34] Custom patching complete for layer 9
+[MINTS 11:05:34] Custom patching complete for layer 10
+[MINTS 11:05:34] Custom patching complete for layer 11
+[MINTS 11:05:34] Completed step: strict_mechanistic_proofs in 833.763s
+[MINTS 11:05:34] Starting step: systematic_causal_intervention
+[MINTS 11:05:34] Loading model for systematic causal interventions: zhihan1996/DNABERT-2-117M
+[transformers] BertForMaskedLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From \U0001f449v4.50\U0001f448 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 26402.47it/s]
+[transformers] BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+pooler.dense.weight                        | MISSING    | 
+pooler.dense.bias                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[MINTS 11:05:36] Model ready on cuda using huggingface_forward_hooks
+[MINTS 11:05:36] Running systematic denoising activation patching for promoter_tata
+[MINTS 11:05:39] promoter_tata: batch patching processed 1/10 pairs
+[MINTS 11:06:00] promoter_tata: batch patching processed 10/10 pairs
+[MINTS 11:06:02] Running systematic denoising activation patching for splice_sites_donors
+[MINTS 11:06:16] splice_sites_donors: batch patching processed 1/1182 pairs
+[MINTS 11:07:11] splice_sites_donors: batch patching processed 25/1182 pairs
+[MINTS 11:07:53] splice_sites_donors: batch patching processed 50/1182 pairs
+[MINTS 11:08:35] splice_sites_donors: batch patching processed 75/1182 pairs
+[MINTS 11:09:16] splice_sites_donors: batch patching processed 100/1182 pairs
+[MINTS 11:09:58] splice_sites_donors: batch patching processed 125/1182 pairs
+[MINTS 11:10:40] splice_sites_donors: batch patching processed 150/1182 pairs
+[MINTS 11:11:22] splice_sites_donors: batch patching processed 175/1182 pairs
+[MINTS 11:12:03] splice_sites_donors: batch patching processed 200/1182 pairs
+[MINTS 11:12:44] splice_sites_donors: batch patching processed 225/1182 pairs
+[MINTS 11:13:25] splice_sites_donors: batch patching processed 250/1182 pairs
+[MINTS 11:14:06] splice_sites_donors: batch patching processed 275/1182 pairs
+[MINTS 11:14:48] splice_sites_donors: batch patching processed 300/1182 pairs
+[MINTS 11:15:29] splice_sites_donors: batch patching processed 325/1182 pairs
+[MINTS 11:16:10] splice_sites_donors: batch patching processed 350/1182 pairs
+[MINTS 11:16:52] splice_sites_donors: batch patching processed 375/1182 pairs
+[MINTS 11:17:33] splice_sites_donors: batch patching processed 400/1182 pairs
+[MINTS 11:18:14] splice_sites_donors: batch patching processed 425/1182 pairs
+[MINTS 11:19:14] splice_sites_donors: batch patching processed 450/1182 pairs
+[MINTS 11:20:13] splice_sites_donors: batch patching processed 475/1182 pairs
+[MINTS 11:21:13] splice_sites_donors: batch patching processed 500/1182 pairs
+[MINTS 11:22:13] splice_sites_donors: batch patching processed 525/1182 pairs
+[MINTS 11:23:13] splice_sites_donors: batch patching processed 550/1182 pairs
+[MINTS 11:24:14] splice_sites_donors: batch patching processed 575/1182 pairs
+[MINTS 11:25:15] splice_sites_donors: batch patching processed 600/1182 pairs
+[MINTS 11:26:16] splice_sites_donors: batch patching processed 625/1182 pairs
+[MINTS 11:27:19] splice_sites_donors: batch patching processed 650/1182 pairs
+[MINTS 11:28:22] splice_sites_donors: batch patching processed 675/1182 pairs
+[MINTS 11:29:27] splice_sites_donors: batch patching processed 700/1182 pairs
+[MINTS 11:30:33] splice_sites_donors: batch patching processed 725/1182 pairs
+[MINTS 11:31:32] splice_sites_donors: batch patching processed 750/1182 pairs
+[MINTS 11:32:19] splice_sites_donors: batch patching processed 775/1182 pairs
+[MINTS 11:33:08] splice_sites_donors: batch patching processed 800/1182 pairs
+[MINTS 11:33:54] splice_sites_donors: batch patching processed 825/1182 pairs
+[MINTS 11:34:41] splice_sites_donors: batch patching processed 850/1182 pairs
+[MINTS 11:35:26] splice_sites_donors: batch patching processed 875/1182 pairs
+[MINTS 11:36:08] splice_sites_donors: batch patching processed 900/1182 pairs
+[MINTS 11:36:50] splice_sites_donors: batch patching processed 925/1182 pairs
+[MINTS 11:37:31] splice_sites_donors: batch patching processed 950/1182 pairs
+[MINTS 11:38:12] splice_sites_donors: batch patching processed 975/1182 pairs
+[MINTS 11:38:55] splice_sites_donors: batch patching processed 1000/1182 pairs
+[MINTS 11:39:38] splice_sites_donors: batch patching processed 1025/1182 pairs
+[MINTS 11:40:20] splice_sites_donors: batch patching processed 1050/1182 pairs
+[MINTS 11:41:02] splice_sites_donors: batch patching processed 1075/1182 pairs
+[MINTS 11:41:43] splice_sites_donors: batch patching processed 1100/1182 pairs
+[MINTS 11:42:25] splice_sites_donors: batch patching processed 1125/1182 pairs
+[MINTS 11:43:08] splice_sites_donors: batch patching processed 1150/1182 pairs
+[MINTS 11:43:50] splice_sites_donors: batch patching processed 1175/1182 pairs
+[MINTS 11:44:01] splice_sites_donors: batch patching processed 1182/1182 pairs
+[MINTS 11:44:03] Completed step: systematic_causal_intervention in 2308.734s
+[MINTS 11:44:03] Starting step: threshold_sensitivity
+[MINTS 11:44:03] Loading QK, enrichment, and patching tables for threshold sensitivity
+[MINTS 11:44:04] Completed step: threshold_sensitivity in 0.436s
+[MINTS 11:44:04] Starting step: sequence_genomic_controls
+[transformers] BertForMaskedLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From \U0001f449v4.50\U0001f448 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 44401.44it/s]
+[transformers] BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+pooler.dense.weight                        | MISSING    | 
+pooler.dense.bias                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+1/5220 pairs; valid=1
+251/5220 pairs; valid=251
+501/5220 pairs; valid=501
+751/5220 pairs; valid=751
+1001/5220 pairs; valid=1001
+1251/5220 pairs; valid=1251
+1501/5220 pairs; valid=1501
+1751/5220 pairs; valid=1751
+2001/5220 pairs; valid=2001
+2251/5220 pairs; valid=2251
+2501/5220 pairs; valid=2501
+2751/5220 pairs; valid=2751
+3001/5220 pairs; valid=3001
+3251/5220 pairs; valid=3251
+3501/5220 pairs; valid=3501
+3751/5220 pairs; valid=3751
+4001/5220 pairs; valid=4001
+4251/5220 pairs; valid=4251
+4501/5220 pairs; valid=4501
+4751/5220 pairs; valid=4751
+5001/5220 pairs; valid=5001
+{
+  "command": [
+    "G:\\mints-repro-20261004\\venv\\Scripts\\python.exe",
+    "tools/review_full_pipeline.py",
+    "--run-directory",
+    "G:/mints-repro-20261004/run",
+    "--from-step",
+    "strict_mechanistic_proofs"
+  ],
+  "entrypoint": "tools.review_ctcf_controls.main(config)",
+  "revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "device": "cuda",
+  "seed": 1729,
+  "eligible_absent_peaks": 5344,
+  "matched_pairs": 5220,
+  "valid_pairs": 5220,
+  "excluded_pairs": [],
+  "max_native_context_error": 0.0,
+  "query_positions": "all nucleotide-spanning tokens, excludes specials",
+  "aggregation_unit": "matched sequence pair",
+  "score": "native attention mean over real query positions and target keys, times number of real keys",
+  "control": "first connected motif support span projected to relative position in motif-absent peak",
+  "matching": "same chromosome; GC within .02; nucleotide length within 5%; without replacement",
+  "inference": "two-sided paired sign flips, 9999 permutations, Holm over 144 heads; 1000 pair-bootstrap marginal intervals",
+  "qk_score": "Pearson r within each sequence between continuous maximum-overlap PWM scores and scaled projection-bias-inclusive QK averaged over nucleotide queries; ALiBi excluded",
+  "qk_valid_pairs": 5220,
+  "qk_undefined_pairs": 0,
+  "qk_inference": "present-minus-absent sequence-r contrasts; separate Holm family of 144 heads, 9999 sign flips; 1000 pair bootstraps; present means also have marginal intervals",
+  "assumptions": "observational matching; sequence-pair exchangeability conditional on matching; within-chromosome dependence not modeled",
+  "claim_boundary": "association of native attention with motif-present peak intervals, not motif detection or causal use",
+  "seconds": 308.2978218999924,
+  "inputs": {
+    "G:\\mints-repro-20261004\\run\\data\\ctcf\\ctcf_gm12878_sequences.tsv": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459",
+    "G:\\mints-repro-20261004\\run\\results\\enrichment\\ctcf_qk_alignment_token_motif_scores.csv": "f0c93a177768c9cecf922096af02ffe074a80bd21bfd7813cc443266dd8c6a0c"
+  }
+}
+[MINTS 11:49:12] Completed step: sequence_genomic_controls in 308.695s
+[MINTS 11:49:12] Starting step: sequence_classifier_intervals
+promoter_tata
+promoter_no_tata
+splice_sites_donors
+splice_sites_acceptors
+[MINTS 11:53:01] Completed step: sequence_classifier_intervals in 228.532s
+[MINTS 11:53:01] Writing completed run manifest to G:\mints-repro-20261004\run\results\pipeline_run_strict_mechanistic_proofs.json
