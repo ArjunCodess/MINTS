@@ -111,9 +111,9 @@ def qk_key_scores_from_factors(
         raise ValueError("QK factors and hidden states have incompatible d_model dimensions.")
 
     scale = np.sqrt(float(d_head or w_q.shape[-1]))
-    q_proj = np.einsum("td,hdf->htf", hidden, w_q)
-    k_proj = np.einsum("td,hdf->htf", hidden, w_k)
-    scores = np.einsum("hqf,hkf->hqk", q_proj, k_proj) / scale
+    q_proj = hidden @ w_q
+    k_proj = hidden @ w_k
+    scores = (q_proj @ k_proj.transpose(0,2,1)) / scale
     return scores.mean(axis=1)
 
 
@@ -136,9 +136,9 @@ def qk_attention_maps_from_factors(
         raise ValueError("QK factors and hidden states have incompatible d_model dimensions.")
 
     scale = np.sqrt(float(d_head or w_q.shape[-1]))
-    q_proj = np.einsum("td,hdf->htf", hidden, w_q)
-    k_proj = np.einsum("td,hdf->htf", hidden, w_k)
-    logits = np.einsum("hqf,hkf->hqk", q_proj, k_proj) / scale
+    q_proj = hidden @ w_q
+    k_proj = hidden @ w_k
+    logits = (q_proj @ k_proj.transpose(0,2,1)) / scale
     logits = logits - np.max(logits, axis=-1, keepdims=True)
     weights = np.exp(logits)
     denominator = weights.sum(axis=-1, keepdims=True)
@@ -160,6 +160,30 @@ def _record_support_intervals(record: TokenMotifScores, key_pos: int) -> list[tu
         if clipped_start < clipped_end:
             valid.append((clipped_start, clipped_end))
     return valid
+
+
+class BatchedFactorQK:
+    """Evaluate the same historical factor assay across layers on one device."""
+
+    def __init__(self, w_q, w_k, device, d_head):
+        import torch
+        self.torch = torch
+        self.device = device
+        self.w_q = torch.as_tensor(w_q, dtype=torch.float32, device=device)
+        self.w_k = torch.as_tensor(w_k, dtype=torch.float32, device=device)
+        self.scale = np.sqrt(float(d_head))
+
+    def __call__(self, hidden_inputs):
+        torch = self.torch
+        with torch.no_grad():
+            hidden = (torch.stack(hidden_inputs) if torch.is_tensor(hidden_inputs[0]) else
+                      torch.as_tensor(np.stack(hidden_inputs), dtype=torch.float32, device=self.device))
+            queries = hidden[:, None] @ self.w_q
+            keys = hidden[:, None] @ self.w_k
+            logits = (queries @ keys.transpose(-1, -2)) / self.scale
+            key_scores = logits.mean(dim=-2).cpu().numpy()
+            attention = torch.softmax(logits, dim=-1).cpu().numpy()
+        return key_scores, attention
 
 
 def qk_alignment_table(
@@ -463,6 +487,7 @@ def _capture_layer_inputs(
     bundle: LoadedModelBundle,
     sequence: str,
     layer_indices: tuple[int, ...],
+    device_tensors: bool = False,
 ) -> dict[int, np.ndarray]:
     """Capture layer-input hidden states for one sequence."""
 
@@ -475,7 +500,9 @@ def _capture_layer_inputs(
 
         def make_hook(idx: int):
             def hook(_module: Any, inputs: tuple[Any, ...]) -> None:
-                value = inputs[0].detach().cpu().float().numpy()
+                value = inputs[0].detach().float()
+                if not device_tensors:
+                    value = value.cpu().numpy()
                 if value.ndim == 3 and value.shape[0] == 1:
                     value = value[0]
                 captured[idx] = value
@@ -535,6 +562,10 @@ def run_ctcf_qk_alignment(
         progress("Using low-rank W_Q/W_K factors for strict QK proof scoring")
     else:
         progress("Using dense QK matrices for strict QK proof scoring; rerun circuit export for faster W_Q/W_K factors")
+    batched_factors = None
+    if use_low_rank and str(bundle.device).startswith("cuda"):
+        batched_factors = BatchedFactorQK(w_q_by_layer, w_k_by_layer, bundle.device, d_head)
+        progress("Batching historical factor QK across layers on CUDA")
 
     limit_text = "all" if max_sequences is None else str(max_sequences)
     progress(f"Scoring CTCF motif support for up to {limit_text} sequences")
@@ -569,14 +600,20 @@ def run_ctcf_qk_alignment(
     any_supports = False
     report_every = 1000
     for idx, record in enumerate(motif_records, start=1):
-        captured = _capture_layer_inputs(bundle, record.sequence, layer_indices)
+        captured = _capture_layer_inputs(bundle, record.sequence, layer_indices,
+                                         device_tensors=batched_factors is not None)
+        batched_scores, batched_attention = (None, None)
+        if batched_factors is not None:
+            batched_scores, batched_attention = batched_factors([captured[layer] for layer in layer_indices])
         motif_scores = np.asarray(record.token_scores, dtype=np.float64)
         if _record_support_intervals(record, len(motif_scores)):
             any_supports = True
         for layer_offset, layer_idx in enumerate(layer_indices):
             hidden = captured[layer_idx]
             qk_layer = qk_by_layer[layer_offset]
-            if use_low_rank:
+            if batched_scores is not None:
+                key_scores = batched_scores[layer_offset]
+            elif use_low_rank:
                 w_q_layer = w_q_by_layer[layer_offset]
                 w_k_layer = w_k_by_layer[layer_offset]
                 key_scores = qk_key_scores_from_factors(hidden, w_q_layer, w_k_layer, d_head=d_head)
@@ -601,7 +638,9 @@ def run_ctcf_qk_alignment(
 
             support_intervals = _record_support_intervals(record, hidden.shape[0])
             if support_intervals:
-                if use_low_rank:
+                if batched_attention is not None:
+                    attention_heads = batched_attention[layer_offset]
+                elif use_low_rank:
                     attention_heads = qk_attention_maps_from_factors(hidden, w_q_layer, w_k_layer, d_head=d_head)
                 else:
                     attention_heads = qk_attention_maps(hidden, qk_layer, d_head=d_head)

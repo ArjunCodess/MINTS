@@ -2,6 +2,23 @@ from pathlib import Path
 
 import numpy as np
 
+
+def test_vectorized_qk_agrees_with_original_contraction_at_model_dimensions():
+    from src.qk_alignment import qk_key_scores_from_factors,qk_attention_maps_from_factors
+    from threadpoolctl import threadpool_limits
+    rng=np.random.default_rng(1729)
+    hidden=rng.normal(size=(40,768)).astype(np.float32)
+    q=rng.normal(scale=.02,size=(12,768,64)).astype(np.float32)
+    k=rng.normal(scale=.02,size=(12,768,64)).astype(np.float32)
+    qp=np.einsum("td,hdf->htf",hidden,q)
+    kp=np.einsum("td,hdf->htf",hidden,k)
+    logits=np.einsum("hqf,hkf->hqk",qp,kp)/8
+    weights=np.exp(logits-logits.max(axis=-1,keepdims=True))
+    expected=weights/weights.sum(axis=-1,keepdims=True)
+    with threadpool_limits(limits=1,user_api="blas"):
+        np.testing.assert_allclose(qk_key_scores_from_factors(hidden,q,k),logits.mean(axis=1),atol=5e-6,rtol=5e-5)
+        np.testing.assert_allclose(qk_attention_maps_from_factors(hidden,q,k),expected,atol=5e-6,rtol=5e-5)
+
 from src.config import PipelineConfig, ProjectPaths
 from src.motif_scoring import (
     load_jaspar_ctcf_motif,
@@ -155,7 +172,7 @@ def test_qk_key_scores_and_attention_maps_are_well_formed() -> None:
     assert np.allclose(attention.sum(axis=-1), 1.0)
 
 
-def test_qk_alignment_table_applies_preregistered_thresholds() -> None:
+def test_qk_alignment_table_applies_heuristic_thresholds() -> None:
     hidden = np.asarray([[1.0, 0.0, 0.0], [0.0, 2.0, 0.0], [0.0, 0.0, 3.0]])
     qk_by_layer = np.ones((1, 1, 3, 3), dtype=np.float64)
     motif_record = type(
@@ -184,3 +201,18 @@ def test_pearson_correlation_rejects_degenerate_vectors() -> None:
 
     assert np.isnan(r_value)
     assert np.isnan(p_value)
+
+
+def test_batched_factor_qk_matches_separate_layer_calculations():
+    import torch
+    from src.qk_alignment import BatchedFactorQK, qk_key_scores_from_factors, qk_attention_maps_from_factors
+    rng=np.random.default_rng(1729)
+    hidden=rng.normal(size=(2,40,768)).astype(np.float32)
+    q=rng.normal(scale=.02,size=(2,12,768,64)).astype(np.float32)
+    k=rng.normal(scale=.02,size=q.shape).astype(np.float32)
+    expected_scores=np.stack([qk_key_scores_from_factors(x,a,b) for x,a,b in zip(hidden,q,k)])
+    expected_attention=np.stack([qk_attention_maps_from_factors(x,a,b) for x,a,b in zip(hidden,q,k)])
+    for device in ["cpu"]+(["cuda"] if torch.cuda.is_available() else []):
+        scores,attention=BatchedFactorQK(q,k,device,64)(hidden)
+        np.testing.assert_allclose(scores,expected_scores,atol=5e-6,rtol=5e-5)
+        np.testing.assert_allclose(attention,expected_attention,atol=5e-6,rtol=5e-5)
