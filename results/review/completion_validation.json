@@ -1,0 +1,114 @@
+{
+  "status": "passed",
+  "tests": 66,
+  "test_exit_status": 0,
+  "test_seconds": 77.01,
+  "test_warnings": "two upstream seaborn pending deprecation warnings",
+  "paper_build_exit_status": 0,
+  "paper_compiler_warnings": [],
+  "required_pipeline_stages": 13,
+  "pipeline_exit_status": 0,
+  "pipeline_scope": "completed through recorded repairs and resumptions",
+  "hashes": {
+    "paper/main.tex": "4f8b22960e57f33f487248c5fd6a50af298bb742f1879d3d6ca7137ad5d49825",
+    "paper/results.tex": "3cc5a973baf8a8c898b154756d2874eff22daa99f18fa3973e725d6a908cc2ef",
+    "paper/main.pdf": "a33d879595e4bc02a08ddb77a18c38ea1eda1bf6fabcabc65814d3b8f755b798",
+    "results/review/tables_manifest.json": "ee10d42e646a8912f1e291ab0b1823837cb8924d3704c1f5852f7c4a1efa0b8c",
+    "results/review/claim_evidence_audit.json": "aca238e7a7e280854c9ad44a1e9b535f947947ca98c007848f92d83ffb9e6fda",
+    "results/review/clean_reproduction.json": "73602808fcf739e32acf1407370ab0beecdffa394217e1946bd93ffe37c82eaf"
+  },
+  "commands": [
+    {
+      "argv": [
+        "G:/mints-repro-20261004/venv/Scripts/python.exe",
+        "tools/review_full_pipeline.py",
+        "--run-directory",
+        "G:/mints-repro-20261004/run",
+        "--from-step",
+        "strict_mechanistic_proofs"
+      ],
+      "exit_status": 0,
+      "log": "results/review/command_clean_cuda_retry.log"
+    },
+    {
+      "argv": [
+        "G:/mints-repro-20261004/venv/Scripts/python.exe",
+        "tools/review_patching.py",
+        "--summarize-run",
+        "G:/mints-repro-20261004/run"
+      ],
+      "exit_status": 0,
+      "log": "results/review/command_sequence_cluster_summary.log"
+    },
+    {
+      "argv": [
+        "G:/mints-repro-20261004/venv/Scripts/python.exe",
+        "tools/review_manuscript_artifacts.py",
+        "--input-run-directory",
+        "G:/mints-repro-20261004/run"
+      ],
+      "exit_status": 1,
+      "log": "results/review/command_clean_result_import.log"
+    },
+    {
+      "argv": [
+        "G:/mints-repro-20261004/venv/Scripts/python.exe",
+        "tools/review_manuscript_artifacts.py",
+        "--input-run-directory",
+        "G:/mints-repro-20261004/run"
+      ],
+      "exit_status": 1,
+      "log": "results/review/command_clean_result_import2.log"
+    },
+    {
+      "argv": [
+        "G:/mints-repro-20261004/venv/Scripts/python.exe",
+        "tools/review_manuscript_artifacts.py",
+        "--input-run-directory",
+        "G:/mints-repro-20261004/run"
+      ],
+      "exit_status": 0,
+      "log": "results/review/command_clean_result_import3.log"
+    },
+    {
+      "argv": [
+        "G:/mints-repro-20261004/venv/Scripts/python.exe",
+        "tools/review_manuscript_artifacts.py"
+      ],
+      "exit_status": 0,
+      "log": "results/review/command_completion_export.log"
+    },
+    {
+      "argv": [
+        "G:/mints-repro-20261004/venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp=results/review/test-tmp-completion66"
+      ],
+      "exit_status": 0,
+      "log": "results/review/command_completion_suite.log"
+    },
+    {
+      "argv": [
+        "C:/Users/USER/AppData/Local/Programs/MiKTeX/miktex/bin/x64/latexmk.exe",
+        "-pdf",
+        "-g",
+        "-cd",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-outdir=C:/Users/USER/Desktop/code/MINTS/paper/review-build",
+        "C:/Users/USER/Desktop/code/MINTS/paper/main.tex"
+      ],
+      "exit_status": 0,
+      "log": "results/review/command_completion_paper.log"
+    }
+  ],
+  "limitations": [
+    "native CTCF causal target not validated",
+    "NT comparison withdrawn",
+    "independent upstream label reconstruction incomplete",
+    "historical checkpoint provenance not recovered",
+    "command ledger covers substantive validation and instrumented runs, not every exploratory read"
+  ]
+}

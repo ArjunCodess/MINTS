@@ -1,0 +1,9 @@
+.............................................................            [100%]
+============================== warnings summary ===============================
+tests/test_counterfactuals_and_patching.py::test_save_restoration_matrix_writes_table_and_heatmap
+tests/test_smoke_runs.py::test_smoke_artifacts_can_be_written_under_test_runs
+  G:\mints-repro-20261004\venv\Lib\site-packages\seaborn\matrix.py:243: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    self.cmap.set_bad(bad)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+61 passed, 2 warnings in 17.27s
