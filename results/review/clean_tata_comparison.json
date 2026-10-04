@@ -1,0 +1,27 @@
+{
+  "old_best": {
+    "layer": 2,
+    "head": 7,
+    "restoration": 0.3499138895039633,
+    "task": "promoter_tata",
+    "pairs": 10,
+    "denominator_failures": 0,
+    "median_restoration": 0.0297794426964841,
+    "mean_ci_low": -0.0264429079838672,
+    "mean_ci_high": 0.9909042202648622
+  },
+  "fresh_best": {
+    "layer": 2,
+    "head": 7,
+    "restoration": 0.3610606790623344,
+    "task": "promoter_tata",
+    "pairs": 10,
+    "denominator_failures": 0,
+    "median_restoration": 0.0305564240160703,
+    "mean_ci_low": -0.0264943761380609,
+    "mean_ci_high": 1.0249569141540236
+  },
+  "maximum_absolute_head_mean_difference": 0.02147123759126801,
+  "pair_ids_identical": true,
+  "denominator_max_difference": 0.005316300958463582
+}

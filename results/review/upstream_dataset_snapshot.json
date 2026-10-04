@@ -1,0 +1,234 @@
+{
+  "url": "https://huggingface.co/api/datasets/InstaDeepAI/nucleotide_transformer_downstream_tasks_revised",
+  "sha": "851f9946252e90c665cdb3cc3eedb78f1f26197c",
+  "cardData": {},
+  "siblings": [
+    {
+      "rfilename": ".gitattributes"
+    },
+    {
+      "rfilename": "H2AFZ/test.parquet"
+    },
+    {
+      "rfilename": "H2AFZ/train.parquet"
+    },
+    {
+      "rfilename": "H3K27ac/test.fna"
+    },
+    {
+      "rfilename": "H3K27ac/test.parquet"
+    },
+    {
+      "rfilename": "H3K27ac/train.fna"
+    },
+    {
+      "rfilename": "H3K27ac/train.parquet"
+    },
+    {
+      "rfilename": "H3K27me3/test.fna"
+    },
+    {
+      "rfilename": "H3K27me3/test.parquet"
+    },
+    {
+      "rfilename": "H3K27me3/train.fna"
+    },
+    {
+      "rfilename": "H3K27me3/train.parquet"
+    },
+    {
+      "rfilename": "H3K36me3/test.fna"
+    },
+    {
+      "rfilename": "H3K36me3/test.parquet"
+    },
+    {
+      "rfilename": "H3K36me3/train.fna"
+    },
+    {
+      "rfilename": "H3K36me3/train.parquet"
+    },
+    {
+      "rfilename": "H3K4me1/test.fna"
+    },
+    {
+      "rfilename": "H3K4me1/test.parquet"
+    },
+    {
+      "rfilename": "H3K4me1/train.fna"
+    },
+    {
+      "rfilename": "H3K4me1/train.parquet"
+    },
+    {
+      "rfilename": "H3K4me2/test.fna"
+    },
+    {
+      "rfilename": "H3K4me2/test.parquet"
+    },
+    {
+      "rfilename": "H3K4me2/train.fna"
+    },
+    {
+      "rfilename": "H3K4me2/train.parquet"
+    },
+    {
+      "rfilename": "H3K4me3/test.fna"
+    },
+    {
+      "rfilename": "H3K4me3/test.parquet"
+    },
+    {
+      "rfilename": "H3K4me3/train.fna"
+    },
+    {
+      "rfilename": "H3K4me3/train.parquet"
+    },
+    {
+      "rfilename": "H3K9ac/test.fna"
+    },
+    {
+      "rfilename": "H3K9ac/test.parquet"
+    },
+    {
+      "rfilename": "H3K9ac/train.fna"
+    },
+    {
+      "rfilename": "H3K9ac/train.parquet"
+    },
+    {
+      "rfilename": "H3K9me3/test.fna"
+    },
+    {
+      "rfilename": "H3K9me3/test.parquet"
+    },
+    {
+      "rfilename": "H3K9me3/train.fna"
+    },
+    {
+      "rfilename": "H3K9me3/train.parquet"
+    },
+    {
+      "rfilename": "H4K20me1/test.fna"
+    },
+    {
+      "rfilename": "H4K20me1/test.parquet"
+    },
+    {
+      "rfilename": "H4K20me1/train.fna"
+    },
+    {
+      "rfilename": "H4K20me1/train.parquet"
+    },
+    {
+      "rfilename": "README.md"
+    },
+    {
+      "rfilename": "enhancers/test.fna"
+    },
+    {
+      "rfilename": "enhancers/test.parquet"
+    },
+    {
+      "rfilename": "enhancers/train.fna"
+    },
+    {
+      "rfilename": "enhancers/train.parquet"
+    },
+    {
+      "rfilename": "enhancers_types/test.fna"
+    },
+    {
+      "rfilename": "enhancers_types/test.parquet"
+    },
+    {
+      "rfilename": "enhancers_types/train.fna"
+    },
+    {
+      "rfilename": "enhancers_types/train.parquet"
+    },
+    {
+      "rfilename": "promoter_all/test.fna"
+    },
+    {
+      "rfilename": "promoter_all/test.parquet"
+    },
+    {
+      "rfilename": "promoter_all/train.fna"
+    },
+    {
+      "rfilename": "promoter_all/train.parquet"
+    },
+    {
+      "rfilename": "promoter_no_tata/test.fna"
+    },
+    {
+      "rfilename": "promoter_no_tata/test.parquet"
+    },
+    {
+      "rfilename": "promoter_no_tata/train.fna"
+    },
+    {
+      "rfilename": "promoter_no_tata/train.parquet"
+    },
+    {
+      "rfilename": "promoter_tata/test.fna"
+    },
+    {
+      "rfilename": "promoter_tata/test.parquet"
+    },
+    {
+      "rfilename": "promoter_tata/train.fna"
+    },
+    {
+      "rfilename": "promoter_tata/train.parquet"
+    },
+    {
+      "rfilename": "splice_sites_acceptors/test.fna"
+    },
+    {
+      "rfilename": "splice_sites_acceptors/test.parquet"
+    },
+    {
+      "rfilename": "splice_sites_acceptors/train.fna"
+    },
+    {
+      "rfilename": "splice_sites_acceptors/train.parquet"
+    },
+    {
+      "rfilename": "splice_sites_all/test.fna"
+    },
+    {
+      "rfilename": "splice_sites_all/test.parquet"
+    },
+    {
+      "rfilename": "splice_sites_all/train.fna"
+    },
+    {
+      "rfilename": "splice_sites_all/train.parquet"
+    },
+    {
+      "rfilename": "splice_sites_donors/test.fna"
+    },
+    {
+      "rfilename": "splice_sites_donors/test.parquet"
+    },
+    {
+      "rfilename": "splice_sites_donors/train.fna"
+    },
+    {
+      "rfilename": "splice_sites_donors/train.parquet"
+    }
+  ],
+  "card_url": "https://huggingface.co/datasets/InstaDeepAI/nucleotide_transformer_downstream_tasks_revised/raw/851f9946252e90c665cdb3cc3eedb78f1f26197c/README.md",
+  "card_sha256": "8e4e960401dba331582a1533f9263ef29115f61f371dcd1b82a99d3905882604",
+  "label_source_urls": [
+    "https://epd.expasy.org/epd/",
+    "https://epd.expasy.org/ftp/epdnew/H_sapiens/006/Hs_EPDnew_006_hg38.bed",
+    "https://epd.expasy.org/ftp/epdnew/H_sapiens/006/db/promoter_motifs.txt](https://epd.expasy.org/ftp/epdnew/H_sapiens/006/db/promoter_motifs.txt",
+    "https://www.gencodegenes.org/human/release_44.html"
+  ],
+  "splice_annotation_release": 44,
+  "promoter_source_release": "006",
+  "command": "read the pinned official dataset API and README; extract source URLs and release IDs"
+}

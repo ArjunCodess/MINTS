@@ -1,0 +1,94 @@
+{
+  "command": "compare ordered test activation caches by names, sequences, labels, layers and residual_mean",
+  "records": [
+    {
+      "task": "promoter_tata",
+      "identity": {
+        "names": true,
+        "sequences": true,
+        "labels": true,
+        "layers": true
+      },
+      "shape": [
+        212,
+        3,
+        768
+      ],
+      "maximum_absolute_feature_difference": 0.0,
+      "mean_absolute_feature_difference": 0.0,
+      "old_sha256": "13a757fb1701314abac6111786cdc28245d8a5556455809a51ddecc88bc195e6",
+      "new_sha256": "13a757fb1701314abac6111786cdc28245d8a5556455809a51ddecc88bc195e6",
+      "training_cache_sha256": {
+        "old": "8bff54bf6e77f4424ca7d94ace4282ab8845f5501538549c01e4dc4b923aa410",
+        "new": "8bff54bf6e77f4424ca7d94ace4282ab8845f5501538549c01e4dc4b923aa410"
+      }
+    },
+    {
+      "task": "promoter_no_tata",
+      "identity": {
+        "names": true,
+        "sequences": true,
+        "labels": true,
+        "layers": true
+      },
+      "shape": [
+        1372,
+        3,
+        768
+      ],
+      "maximum_absolute_feature_difference": 0.0,
+      "mean_absolute_feature_difference": 0.0,
+      "old_sha256": "0fb62ec8a1d48a76e370c99b9b73e2a8c46a934904a1e67930a5becaca00f190",
+      "new_sha256": "0fb62ec8a1d48a76e370c99b9b73e2a8c46a934904a1e67930a5becaca00f190",
+      "training_cache_sha256": {
+        "old": "92549188e01b19f8f97ada111918bd4ce37f36a3f645e9c56cb5905d3bd139c9",
+        "new": "92549188e01b19f8f97ada111918bd4ce37f36a3f645e9c56cb5905d3bd139c9"
+      }
+    },
+    {
+      "task": "splice_sites_donors",
+      "identity": {
+        "names": true,
+        "sequences": true,
+        "labels": true,
+        "layers": true
+      },
+      "shape": [
+        3000,
+        3,
+        768
+      ],
+      "maximum_absolute_feature_difference": 0.0,
+      "mean_absolute_feature_difference": 0.0,
+      "old_sha256": "19996000a5f8845786d62f1a70764dd0f0bdbe5946ea2c4f412650783a9e9f8a",
+      "new_sha256": "19996000a5f8845786d62f1a70764dd0f0bdbe5946ea2c4f412650783a9e9f8a",
+      "training_cache_sha256": {
+        "old": "7ddd36dc15bfe265101d88190a753f753d0ab46d631c2ad531a4504728bf9462",
+        "new": "7ddd36dc15bfe265101d88190a753f753d0ab46d631c2ad531a4504728bf9462"
+      }
+    },
+    {
+      "task": "splice_sites_acceptors",
+      "identity": {
+        "names": true,
+        "sequences": true,
+        "labels": true,
+        "layers": true
+      },
+      "shape": [
+        3000,
+        3,
+        768
+      ],
+      "maximum_absolute_feature_difference": 0.0,
+      "mean_absolute_feature_difference": 0.0,
+      "old_sha256": "5eafa7927fbbc06a96a4b58101d3f94e234a1da7738600df358842a804285502",
+      "new_sha256": "5eafa7927fbbc06a96a4b58101d3f94e234a1da7738600df358842a804285502",
+      "training_cache_sha256": {
+        "old": "eb6940782d3ffe6a6be144f1629cdecd204c82533025b8c3dc02fee001d549c7",
+        "new": "eb6940782d3ffe6a6be144f1629cdecd204c82533025b8c3dc02fee001d549c7"
+      }
+    }
+  ],
+  "interpretation": "feature agreement concerns these examples and does not recover an unpinned historical checkpoint"
+}

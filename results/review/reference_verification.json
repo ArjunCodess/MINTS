@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-10-04",
+  "references": [
+    {
+      "key": "elhage2021framework",
+      "url": "https://transformer-circuits.pub/2021/framework/index.html",
+      "status": 200,
+      "title": "A Mathematical Framework for Transformer Circuits",
+      "sha256": "5b072df765d9dc659068841083d1b1e6012f04ad37f9ea62c11908b30eb61350",
+      "verification": "official publisher page title"
+    },
+    {
+      "key": "heimersheim2024patching",
+      "url": "https://arxiv.org/abs/2404.15255",
+      "doi": "10.48550/arXiv.2404.15255",
+      "title": "How to use and interpret activation patching",
+      "authors": [
+        "Stefan Heimersheim",
+        "Neel Nanda"
+      ],
+      "verification": "official arXiv page and DOI; browser check"
+    },
+    {
+      "key": "zhou2024dnabert2",
+      "url": "https://arxiv.org/abs/2306.15006",
+      "doi": "10.48550/arXiv.2306.15006",
+      "title": "DNABERT-2: Efficient Foundation Model and Benchmark For Multi-Species Genome",
+      "version": "v2, 2024-03-18",
+      "verification": "official arXiv page and DOI; browser check"
+    }
+  ],
+  "note": "publisher page content retained only as a hash, not copied article text",
+  "bibliography_sha256": "a9604c0a244dc2bee1904a63b3d6cbfc1a21a555967712b21bc4b76f8e38c068"
+}

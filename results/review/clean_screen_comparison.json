@@ -1,0 +1,29 @@
+{
+  "command": "merge old/fresh head tables by layer/head and compare Pearson r and enrichment ratio",
+  "records": [
+    {
+      "metric": "pearson_r",
+      "meaning": "Pearson r",
+      "old_source": "results\\qk_alignment\\ctcf_qk_alignment.csv",
+      "new_source": "G:\\mints-repro-20261004\\run\\results\\qk_alignment\\ctcf_qk_alignment.csv",
+      "old_sha256": "ca64d6ef36b5d9fb1448a0edefba057b8a3efb603ab8fed2ab0146f8eb0e43c0",
+      "new_sha256": "7c81da5f372030be981ff154f1269391f819ec782185b9cb94a705e065a06e8f",
+      "maximum_absolute_difference": 1.1288361197181462e-08,
+      "old_maximum": 0.300385294523397,
+      "new_maximum": 0.3003852946938276
+    },
+    {
+      "metric": "rho",
+      "meaning": "attention enrichment ratio",
+      "old_source": "results\\enrichment\\ctcf_qk_alignment_matched_attention_enrichment.csv",
+      "new_source": "G:\\mints-repro-20261004\\run\\results\\enrichment\\ctcf_qk_alignment_matched_attention_enrichment.csv",
+      "old_sha256": "14a709449e7d79ef274ef6f6478b952e887df91876d6a2536522b9480785ab2a",
+      "new_sha256": "d429d7a36790b97adc3494ead668f76a644a859893ce944c3fbf191ed960568b",
+      "maximum_absolute_difference": 5.07019559670141e-09,
+      "old_maximum": 1.3130489892426245,
+      "new_maximum": 1.3130489899898634
+    }
+  ],
+  "fresh_joint_screen_heads": 0,
+  "scope": "historical weight-only assay remains descriptive; this is numerical reproduction, not native causal evidence"
+}
