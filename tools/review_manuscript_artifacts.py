@@ -92,6 +92,10 @@ tables={"PerformanceTable":tex_table(metrics,dict(gc="GC",kmer="$3$--$6$-mer",pr
 names={"sequences":"CTCFSequences","unique_motif_support_tokens":"UniqueSupport","motif_hit_token_occurrences":"HitOccurrences",
        "finite_token_rows":"FiniteTokens","token_rows":"TokenRows","motif_absent_sequences":"AbsentSequences"}
 macros=["\\newcommand{\\"+macro+"}{"+f"{counts[key]:,}"+"}" for key,macro in names.items()]
+for task,macro in {"promoter_tata":"CaliperTATACount", "promoter_no_tata":"CaliperOtherCount",
+                   "splice_sites_donors":"CaliperDonorCount", "splice_sites_acceptors":"CaliperAcceptorCount"}.items():
+    retained=metrics[(metrics.task==task)&(metrics.method=="caliper_gc_probe")].iloc[0]
+    macros.append("\\newcommand{\\"+macro+"}{"+f"{int(retained.test_examples):,}"+"}")
 historical_pairs=audit["patching"]["promoter_tata"]
 for macro,value in {"HistoricalTATAPairs":historical_pairs["pairs"],
                     "HistoricalTATATrain":historical_pairs["split_membership"]["train"],

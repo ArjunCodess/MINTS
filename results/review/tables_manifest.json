@@ -36,7 +36,7 @@
   },
   "paper_results": {
     "path": "paper/results.tex",
-    "sha256": "3cc5a973baf8a8c898b154756d2874eff22daa99f18fa3973e725d6a908cc2ef",
+    "sha256": "44d826f54378e918b51672ead5941bc8bbe86959dbdabfee64425c969b92fadf",
     "command": "python tools/review_manuscript_artifacts.py"
   },
   "paper_sources": {
