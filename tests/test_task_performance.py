@@ -102,6 +102,7 @@ def test_evaluate_task_performance_context_writes_table(tmp_path) -> None:
 
     assert "promoter_tata" in table_text
     assert "kmer_tfidf_3_6_auroc" in table_text
-    assert "dnabert_sequence_head_auroc" in table_text
+    assert "frozen_dnabert_l11_readout_auroc" in table_text
+    assert "dnabert_sequence_head_auroc" not in table_text
     assert "frozen_dnabert_l11_sequence_head" in table_text
     assert "downstream_task_performance.csv" in manifest_text

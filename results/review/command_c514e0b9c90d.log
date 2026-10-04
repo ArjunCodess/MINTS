@@ -1,0 +1,96 @@
+{
+  "attempts": [
+    {
+      "command": [
+        "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE",
+        "-norc",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-synctex=1",
+        "-outdir=C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build",
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex"
+      ],
+      "compiler": "texlive",
+      "exitCode": 12,
+      "log": "box\\etoolbox.sty)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/kvoptions\\kvoptions.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/generic/ltxcmds\\ltxcmds.sty)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/kvsetkeys\\kvsetkeys.sty)\n))) (C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/base\\fontenc.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/psnfss\\t1ptm.fd))\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsmath\\amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsmath\\amstext.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsmath\\amsgen.sty))\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsmath\\amsbsy.sty)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsmath\\amsopn.sty))\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsfonts\\amssymb.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsfonts\\amsfonts.sty))\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/booktabs\\booktabs.sty)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/graphics\\graphicx.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/graphics\\graphics.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/graphics\\trig.sty)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/graphics-cfg\\graphics.cf\ng)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/graphics-def\\pdftex.def)\n))\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/microtype\\microtype.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/microtype\\microtype-pdft\nex.def)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/microtype\\microtype.cfg)\n) (C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/url\\url.sty)\n(../results/review/numbers.tex)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/l3backend\\l3backend-pdft\nex.def) (C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.aux)\n*geometry* driver: auto-detecting\n*geometry* detected driver: pdftex\n*geometry* verbose mode - [ preamble ] result:\n* driver: pdftex\n* paper: letterpaper\n* layout: <same size as paper>\n* layoutoffset:(h,v)=(0.0pt,0.0pt)\n* modes: \n* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)\n* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)\n* \\paperwidth=614.295pt\n* \\paperheight=794.96999pt\n* \\textwidth=430.00462pt\n* \\textheight=556.47656pt\n* \\oddsidemargin=19.8752pt\n* \\evensidemargin=19.8752pt\n* \\topmargin=-13.87262pt\n* \\headheight=12.0pt\n* \\headsep=25.0pt\n* \\topskip=10.0pt\n* \\footskip=30.0pt\n* \\marginparwidth=65.0pt\n* \\marginparsep=11.0pt\n* \\columnsep=10.0pt\n* \\skip\\footins=9.0pt plus 4.0pt minus 2.0pt\n* \\hoffset=0.0pt\n* \\voffset=0.0pt\n* \\mag=1000\n* \\@twocolumnfalse\n* \\@twosidefalse\n* \\@mparswitchfalse\n* \\@reversemarginfalse\n* (1in=72.27pt=25.4mm, 1cm=28.453pt)\n\n*geometry* verbose mode - [ newgeometry ] result:\n* driver: pdftex\n* paper: letterpaper\n* layout: <same size as paper>\n* layoutoffset:(h,v)=(0.0pt,0.0pt)\n* modes: \n* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)\n* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)\n* \\paperwidth=614.295pt\n* \\paperheight=794.96999pt\n* \\textwidth=397.48499pt\n* \\textheight=650.43pt\n* \\oddsidemargin=36.13501pt\n* \\evensidemargin=36.13501pt\n* \\topmargin=-37.0pt\n* \\headheight=12.0pt\n* \\headsep=25.0pt\n* \\topskip=10.0pt\n* \\footskip=30.0pt\n* \\marginparwidth=65.0pt\n* \\marginparsep=11.0pt\n* \\columnsep=10.0pt\n* \\skip\\footins=9.0pt plus 4.0pt minus 2.0pt\n* \\hoffset=0.0pt\n* \\voffset=0.0pt\n* \\mag=1000\n* \\@twocolumnfalse\n* \\@twosidefalse\n* \\@mparswitchfalse\n* \\@reversemarginfalse\n* (1in=72.27pt=25.4mm, 1cm=28.453pt)\n\n\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/context/base/mkii\\supp-pdf.mki\ni\n[Loading MPS to PDF converter (version 2006.09.02).]\n)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/epstopdf-pkg\\epstopdf-ba\nse.sty\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/00miktex\\epstopdf-sys.cf\ng)) (C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/microtype\\mt-ptm.cfg\n) (C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/microtype\\mt-cmr.cfg)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsfonts\\umsa.fd)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/microtype\\mt-msa.cfg)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/amsfonts\\umsb.fd)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/microtype\\mt-msb.cfg)\n(C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\tex/latex/psnfss\\t1phv.fd)\n\nPackage natbib Warning: Citation `elhage2021framework' on page 1 undefined on i\nnput line 19.\n\n\nPackage natbib Warning: Citation `heimersheim2024patching' on page 1 undefined \non input line 19.\n\n\nPackage natbib Warning: Citation `zhou2024dnabert2' on page 1 undefined on inpu\nt line 19.\n\n[1{C:/Users/USER/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/USE\nR/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]\n\nLaTeX Warning: Reference `tab:criteria' on page 2 undefined on input line 27.\n\n[2]\n\nLaTeX Warning: Reference `tab:dataset' on page 3 undefined on input line 70.\n\n(../results/review/dataset_table.tex)\nOverfull \\hbox (44.01176pt too wide) in paragraph at lines 70--77\n\\T1/ptm/m/n/10 (-20) We use lo-cally saved par-ti-tions of \\T1/cmtt/m/n/10 Inst\naDeepAI/nucleotide_transformer_downstream_tasks_revised\\T1/ptm/m/n/10 (-20) ,\n[3]\n\nLaTeX Warning: Reference `tab:task-performance' on page 4 undefined on input li\nne 84.\n\n(../results/review/table3.tex)\n\nLaTeX Warning: Reference `tab:probe-controls' on page 4 undefined on input line\n 93.\n\n(../results/review/table4.tex)\n\nLaTeX Warning: Reference `tab:sweep' on page 4 undefined on input line 104.\n\n(../results/review/threshold_table.tex)\n\nLaTeX Warning: Reference `tab:patching' on page 4 undefined on input line 113.\n\n\nLaTeX Warning: Reference `fig:pairs' on page 4 undefined on input line 113.\n\n\n! LaTeX Error: File `../results/review/patching_table.tex' not found.\n\nType X to quit or <RETURN> to proceed,\nor enter new name. (Default extension: tex)\n\nEnter file name: \n! Emergency stop.\n<read *> \n         \nl.118 \\input{../results/review/patching_table}\n                                              ^^M\n!  ==> Fatal error occurred, no output PDF file produced!\nTranscript written on C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.\nlog.\nLatexmk: Getting log file 'review-build/main.log'\nLatexmk: Examining 'review-build/main.fls'\nLatexmk: Examining 'review-build/main.log'\nLatexmk: Missing input file '../results/review/patching_table.tex' message in .log file:\n  ! LaTeX Error: File `../results/review/patching_table.tex' not found.\nLatexmk: Using bibtex to make bibliography file(s).\nLatexmk: Summary of warnings from last run of *latex:\n  Latex failed to resolve 7 reference(s)\n  Latex failed to resolve 3 citation(s)\nLatexmk: ====Undefined refs and citations with line #s in .tex file:\n  Citation `elhage2021framework' on page 1 undefined on input line 19\n  Citation `heimersheim2024patching' on page 1 undefined on input line 19\n  Citation `zhou2024dnabert2' on page 1 undefined on input line 19\n  Reference `tab:criteria' on page 2 undefined on input line 27\n  Reference `tab:dataset' on page 3 undefined on input line 70\n  Reference `tab:task-performance' on page 4 undefined on input line 84\n  Reference `tab:probe-controls' on page 4 undefined on input line 93\n And 3 more --- see log file 'review-build/main.log'\nLatexmk: Errors, so I did not complete making targets\nCollected error summary (may duplicate other messages):\n  pdflatex: Command for 'pdflatex' gave return code 1\n      Refer to 'review-build/main.log' and/or above output for details\n\nLatexmk: Sometimes, the -f option can be used to get latexmk\n  to try to force complete processing.\n  But normally, you will need to correct the file(s) that caused the\n  error, and then rerun latexmk.\n  In some cases, it is best to clean out generated files before rerunning\n  latexmk after you've corrected the files.\nReverting Windows console CPs to (in,out) = (437,65001)\n",
+      "pdfExists": false,
+      "pdfPath": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.pdf"
+    },
+    {
+      "compiler": "tectonic",
+      "reason": "TeX Live is available, so auto mode prefers TeX Live.",
+      "skipped": true
+    }
+  ],
+  "command": null,
+  "compiler": null,
+  "exitCode": 1,
+  "log": "",
+  "pdfExists": false,
+  "pdfPath": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.pdf",
+  "rootFile": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex",
+  "tectonic": {
+    "checked": [
+      {
+        "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.928.2636.0_x64__2p2nqsd0c76g0\\app\\resources\\tectonic\\tectonic.exe",
+        "source": "app"
+      }
+    ],
+    "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.928.2636.0_x64__2p2nqsd0c76g0\\app\\resources\\tectonic\\tectonic.exe",
+    "reason": "Tectonic executable is available.",
+    "source": "app",
+    "status": "available",
+    "version": "[WinError 5] Access is denied"
+  },
+  "tectonicSuitability": {
+    "reasons": [
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex: bibliography tooling"
+    ],
+    "scannedFiles": [
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\threshold_table.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\table4.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\table3.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\dataset_table.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\numbers.tex"
+    ],
+    "suitable": false
+  },
+  "texliveDetection": {
+    "activeBinDir": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64",
+    "commands": {
+      "biber": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\biber.EXE",
+        "version": "present"
+      },
+      "kpsewhich": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\kpsewhich.EXE",
+        "version": "MiKTeX 25.12"
+      },
+      "latexmk": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE",
+        "version": "perl: warning: Setting locale failed."
+      },
+      "lualatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\lualatex.EXE",
+        "version": "This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12)"
+      },
+      "pdflatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.EXE",
+        "version": "MiKTeX-pdfTeX 4.23 (MiKTeX 25.12)"
+      },
+      "xelatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\xelatex.EXE",
+        "version": "MiKTeX-XeTeX 4.16 (MiKTeX 25.12)"
+      }
+    },
+    "knownTexBinDirs": [],
+    "missingRecommended": [],
+    "missingRequired": [],
+    "reason": "Required TeX tools are available.",
+    "searchPath": "C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Users\\USER\\.codex\\tmp\\arg0\\codex-arg0HciMwB;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\libheif\\libheif\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\jxrlib\\jxrlib\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\override;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Python314\\Scripts;C:\\Python314;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Windows\\System32\\OpenSSH;C:\\Program Files\\nodejs;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Strawberry\\c\\bin;C:\\Strawberry\\perl\\site\\bin;C:\\Strawberry\\perl\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\dotnet;C:\\Program Files\\GitHub CLI;C:\\Program Files\\Go\\bin;D:\\cargo\\bin;C:\\Users\\USER\\.cargo\\bin;C:\\Users\\USER\\.local\\bin;C:\\Users\\USER\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\USER\\AppData\\Roaming\\npm;C:\\Program Files\\Git;C:\\Users\\USER\\AppData\\Local\\Programs\\Antigravity\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64;C:\\Users\\USER\\AppData\\Local\\Programs\\Ollama;C:\\Users\\USER\\AppData\\Local\\cursor-agent;C:\\Users\\USER\\go\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\fallback;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd;C:\\Users\\USER\\AppData\\Local\\OpenAI\\Codex\\bin\\56d1c54034a4a372;C:\\Users\\USER\\AppData\\Local\\OpenAI\\Codex\\bin\\c6fe824d725f02d7",
+    "status": "existing-usable",
+    "texmfroot": null
+  }
+}

@@ -1,0 +1,110 @@
+% Generated from saved results by tools/review_manuscript_artifacts.py.
+\newcommand{\CTCFSequences}{51,249}
+\newcommand{\UniqueSupport}{256,918}
+\newcommand{\HitOccurrences}{281,915}
+\newcommand{\FiniteTokens}{1,843,874}
+\newcommand{\TokenRows}{1,946,372}
+\newcommand{\AbsentSequences}{5,344}
+\newcommand{\CaliperTATACount}{82}
+\newcommand{\CaliperOtherCount}{456}
+\newcommand{\CaliperDonorCount}{2,256}
+\newcommand{\CaliperAcceptorCount}{2,352}
+\newcommand{\HistoricalTATAPairs}{327}
+\newcommand{\HistoricalTATATrain}{317}
+\newcommand{\HistoricalTATATest}{10}
+\newcommand{\BestQK}{0.3004}
+\newcommand{\BestEnrichment}{1.3130}
+\newcommand{\HeldoutTATAPairs}{10}
+\newcommand{\NativePairs}{5,220}
+\newcommand{\NativePositiveHeads}{58}
+\newcommand{\NativeBestLayer}{6}
+\newcommand{\NativeBestHead}{3}
+\newcommand{\NativeBestContrast}{0.1471}
+\newcommand{\NativeBestLow}{0.1317}
+\newcommand{\NativeBestHigh}{0.1628}
+\newcommand{\NativeBestHolm}{0.0144}
+\newcommand{\SequenceQKPairs}{5,220}
+\newcommand{\SequenceQKUndefined}{0}
+\newcommand{\SequenceQKHighHeads}{0}
+\newcommand{\SequenceQKBestLayer}{9}
+\newcommand{\SequenceQKBestHead}{9}
+\newcommand{\SequenceQKBestMean}{0.2595}
+\newcommand{\SequenceQKBestLow}{0.2537}
+\newcommand{\SequenceQKBestHigh}{0.2654}
+
+\newcommand{\PerformanceTable}{%
+\begin{tabular}{lrrr}
+\toprule
+Task & GC & $3$--$6$-mer & Frozen readout \\
+\midrule
+TATA promoter & 0.8955 [0.8496, 0.9337] & 0.9297 [0.8947, 0.9598] & 0.9136 [0.8748, 0.9476] \\
+Other promoter & 0.9088 [0.8937, 0.9236] & 0.9406 [0.9292, 0.9517] & 0.9383 [0.9253, 0.9499] \\
+Splice donor & 0.6560 [0.6375, 0.6750] & 0.8185 [0.8046, 0.8320] & 0.8954 [0.8838, 0.9059] \\
+Splice acceptor & 0.6361 [0.6156, 0.6547] & 0.7956 [0.7792, 0.8113] & 0.8847 [0.8724, 0.8959] \\
+\bottomrule
+\end{tabular}
+}
+
+\newcommand{\ControlTable}{%
+\begin{tabular}{lrrr}
+\toprule
+Task & Full & Historical matching & GC caliper \\
+\midrule
+TATA promoter & 0.9136 [0.8748, 0.9476] & 0.9136 [0.8738, 0.9477] & 0.7787 [0.6663, 0.8681] \\
+Other promoter & 0.9383 [0.9253, 0.9499] & 0.9383 [0.9253, 0.9495] & 0.7254 [0.6796, 0.7710] \\
+Splice donor & 0.8954 [0.8838, 0.9059] & 0.8943 [0.8826, 0.9054] & 0.8600 [0.8448, 0.8751] \\
+Splice acceptor & 0.8847 [0.8724, 0.8959] & 0.8838 [0.8718, 0.8960] & 0.8607 [0.8457, 0.8750] \\
+\bottomrule
+\end{tabular}
+}
+
+\newcommand{\DatasetTable}{%
+\begin{tabular}{lrrrr}
+\toprule
+Task & Train positive & Train negative & Test positive & Test negative \\
+\midrule
+TATA promoter & 2,531 & 2,531 & 106 & 106 \\
+Other promoter & 14,980 & 15,020 & 686 & 686 \\
+Splice donor & 15,084 & 14,916 & 1,480 & 1,520 \\
+Splice acceptor & 15,031 & 14,969 & 1,475 & 1,525 \\
+\bottomrule
+\end{tabular}
+}
+
+\newcommand{\ThresholdTable}{%
+\begin{tabular}{lrrrr}
+\toprule
+QK $r$ cutoff & Ratio $1.1$ & Ratio $1.25$ & Ratio $1.5$ & Ratio $2.0$ \\
+\midrule
+0.1 & 2 & 1 & 0 & 0 \\
+0.2 & 0 & 0 & 0 & 0 \\
+0.3 & 0 & 0 & 0 & 0 \\
+0.4 & 0 & 0 & 0 & 0 \\
+0.5 & 0 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+}
+
+\newcommand{\PatchingTable}{%
+\begin{tabular}{lrrrr}
+\toprule
+Layer/head & Mean PM & Median PM & Mean 95\% CI & Pairs \\
+\midrule
+2/7 & 0.3611 & 0.0306 & [-0.0265, 1.0250] & 10 \\
+11/4 & 0.3118 & 0.0344 & [-0.1208, 0.9656] & 10 \\
+3/10 & 0.2984 & 0.0385 & [0.0177, 0.6639] & 10 \\
+\bottomrule
+\end{tabular}
+}
+
+\newcommand{\SequenceQKTable}{%
+\begin{tabular}{lrrr}
+\toprule
+Layer/head & Mean present $r$ [95\% CI] & Present--absent [95\% CI] & Holm $p$ \\
+\midrule
+9/9 & 0.2595 [0.2537, 0.2654] & -0.0539 [-0.0630, -0.0454] & 0.0144 \\
+10/9 & 0.2085 [0.2026, 0.2143] & -0.0558 [-0.0632, -0.0476] & 0.0144 \\
+7/2 & 0.2015 [0.1951, 0.2078] & 0.0103 [0.0018, 0.0183] & 0.7130 \\
+\bottomrule
+\end{tabular}
+}

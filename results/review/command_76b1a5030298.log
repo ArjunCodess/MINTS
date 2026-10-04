@@ -1,0 +1,25 @@
+{
+  "submission_text_files": [
+    "paper\\main.tex",
+    "paper\\references.bib",
+    "results\\review\\dataset_table.tex",
+    "results\\review\\numbers.tex",
+    "results\\review\\patching_table.tex",
+    "results\\review\\table3.tex",
+    "results\\review\\table4.tex",
+    "results\\review\\threshold_table.tex"
+  ],
+  "findings": {},
+  "scope": "rendered manuscript sources and inserts; internal review documents and historical results are not submission material",
+  "hash_sources": {
+    "paper\\main.tex": "291c2908031951eb02ff6cc5fe9c04f2e54d32f37779263357d4ff1861725f76",
+    "paper\\references.bib": "a9604c0a244dc2bee1904a63b3d6cbfc1a21a555967712b21bc4b76f8e38c068",
+    "results\\review\\dataset_table.tex": "07dd42496fd95b55ca6ce7db626482e09bef6446d487a76a592b1970a2315ba2",
+    "results\\review\\numbers.tex": "e61b33776f9eacee5d4dca5a776488cd45ee217fc7d54852c56a8b197c39cbfa",
+    "results\\review\\patching_table.tex": "f5758b8faaa939343fe454d9e7d0cdda484e891aea5f569e20b1fe4b809e3183",
+    "results\\review\\table3.tex": "327397251d1bf1764d60f3fef7ce966790d735310a33f8b28ae182db30452378",
+    "results\\review\\table4.tex": "52dbde81e6cbf8d8b1eb942f49f7831d2c6f3003840d3d906b62d2249cec8b87",
+    "results\\review\\threshold_table.tex": "8140e688985ce2df66eb0e025a5a64d5248570c10a0efac30d803d97bfd5b424"
+  },
+  "pdf_sha256": "d95f4e5fb45aed8932e7dbb3ba17b5f9eedab830038237628b109a29fe2bcb0f"
+}

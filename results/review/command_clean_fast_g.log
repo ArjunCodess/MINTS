@@ -1,0 +1,3 @@
+[MINTS 01:42:38] Creating required data/results directories
+[MINTS 01:42:39] Starting step: strict_mechanistic_proofs
+[MINTS 01:42:39] Loading model for strict mechanistic proofs: zhihan1996/DNABERT-2-117M

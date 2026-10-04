@@ -778,7 +778,7 @@ def _select_patching_pairs_for_task(
     task = canonicalize_task_name(task, config.data)
     dataset = load_from_disk(str(config.paths.hf_downstream_dir / task))
     records: list[MutationRecord] = []
-    for split_name in ("test", "train"):
+    for split_name in ("test",):
         if split_name not in dataset:
             continue
         for row_idx, row in enumerate(dataset[split_name]):
@@ -790,7 +790,7 @@ def _select_patching_pairs_for_task(
                 record = generate_counterfactual_sequence(
                     sequence=str(row["sequence"]),
                     task=task,
-                    sequence_id=str(row.get("name", f"{split_name}_{row_idx}")),
+                    sequence_id=f"{split_name}:{row_idx}:" + str(row.get("name", "")),
                     allow_center_fallback=False,
                     config=config,
                 )
@@ -834,12 +834,17 @@ def run_batch_dnabert_activation_patching(
     layers = layer_indices or tuple(range(len(encoder_layer_list)))
     n_heads = int(encoder_layer_list[layers[0]].attention.self.num_attention_heads)
     per_pair_restoration = np.full((len(records), len(layers), n_heads), np.nan, dtype=np.float64)
+    per_pair_patched_scores = np.full_like(per_pair_restoration, np.nan)
     denominator_failures = 0
     sparse_position_counts: list[int] = []
+    clean_scores = np.full(len(records), np.nan)
+    corrupted_scores = np.full(len(records), np.nan)
 
     for pair_idx, record in enumerate(records):
         clean_score = _score_sequence_with_probe(bundle, record.clean_sequence, scorer, config)
         corrupted_score = _score_sequence_with_probe(bundle, record.corrupted_sequence, scorer, config)
+        clean_scores[pair_idx] = clean_score
+        corrupted_scores[pair_idx] = corrupted_score
         if abs(clean_score - corrupted_score) <= 1e-8:
             denominator_failures += 1
         clean_cache = _cache_clean_attention_self_outputs(bundle, record.clean_sequence, layers)
@@ -883,18 +888,28 @@ def run_batch_dnabert_activation_patching(
                     corrupted_score,
                     patched_score,
                 )
+                per_pair_patched_scores[pair_idx, layer_offset, head_idx] = patched_score
         if pair_idx == 0 or pair_idx + 1 == len(records) or (pair_idx + 1) % 25 == 0:
             progress(f"{task}: batch patching processed {pair_idx + 1}/{len(records)} pairs")
 
     restoration = np.nanmean(per_pair_restoration, axis=0)
     stem = output_stem or f"{task}_batch_dnabert_activation_patching"
     outputs = save_restoration_matrix(restoration, stem, config=config)
+    pair_effect_path = config.paths.patching_dir / f"{stem}_pair_effects.npz"
+    np.savez_compressed(pair_effect_path, restoration=per_pair_restoration,
+                        patched_scores=per_pair_patched_scores,
+                        clean_scores=clean_scores, corrupted_scores=corrupted_scores,
+                        denominator=clean_scores-corrupted_scores,
+                        sequence_ids=np.asarray([r.sequence_id for r in records]), layers=np.asarray(layers))
     write_json(
         outputs["manifest"],
         {
             "created_at": utc_now_iso(),
             "task": task,
             "target": "linear_probe_decision_function",
+            "partition": "test_only",
+            "pair_effects_path": str(pair_effect_path),
+            "interpretation": "effects on trained probe; not pretrained native behavior; PM>1 may be off-manifold",
             "pair_table": str(pair_path),
             "pairs": len(records),
             "denominator_failures": int(denominator_failures),
@@ -919,6 +934,49 @@ def run_batch_dnabert_activation_patching(
     rows["task"] = task
     rows["pairs"] = len(records)
     rows["denominator_failures"] = int(denominator_failures)
+    from .inference import bootstrap_mean_interval
+    medians, low, high = [], [], []
+    for row in rows.itertuples():
+        values = per_pair_restoration[:, layers.index(int(row.layer)), int(row.head)]
+        medians.append(float(np.nanmedian(values)))
+        interval = bootstrap_mean_interval(values, seed=config.data.seed)
+        low.append(interval[0])
+        high.append(interval[1])
+    rows["median_restoration"] = medians
+    rows["mean_ci_low"] = low
+    rows["mean_ci_high"] = high
     rows.to_csv(outputs["table"], index=False)
     outputs["pairs"] = pair_path
+    outputs["sequence_summary"] = summarize_sequence_patching(
+        outputs["table"],pair_effect_path,pair_path,seed=config.data.seed)
     return outputs
+
+
+def summarize_sequence_patching(table_path, effects_path, pairs_path, seed=1729):
+    """Derive cluster intervals from saved effects without rerunning the model."""
+    from .inference import bootstrap_sequence_cluster_interval
+    from .utils import sha256_file
+    table_path,effects_path,pairs_path=map(Path,[table_path,effects_path,pairs_path])
+    pairs=pd.read_csv(pairs_path,sep="\t")
+    with np.load(effects_path) as saved:
+        if not np.array_equal(pairs.sequence_id.astype(str).to_numpy(),saved["sequence_ids"]):
+            raise ValueError("Patching pair IDs do not align with saved effects")
+        effects=saved["restoration"]
+        layers=list(saved["layers"])
+    rows=pd.read_csv(table_path)
+    intervals=[bootstrap_sequence_cluster_interval(effects[:,layers.index(int(row.layer)),int(row.head)],
+                pairs.clean_sequence.to_numpy(),seed=seed) for row in rows.itertuples()]
+    rows["mean_ci_low"]=[ci[0] for ci in intervals]
+    rows["mean_ci_high"]=[ci[1] for ci in intervals]
+    rows["sequence_units"]=pairs.clean_sequence.nunique()
+    output=table_path.with_name(table_path.stem+"_sequence_cluster_summary.csv")
+    rows.to_csv(output,index=False)
+    duplicate_groups=[group.sequence_id.tolist() for _,group in pairs.groupby("clean_sequence",sort=False) if len(group)>1]
+    write_json(output.with_suffix(".json"),dict(
+        seed=seed,bootstrap_samples=1000,confidence_level=.95,pairs=len(pairs),sequence_units=int(pairs.clean_sequence.nunique()),
+        bootstrap_unit="exact clean-sequence cluster; all locus pairs retain observed multiplicity",
+        point_estimand="mean pair PM over genomic loci; median also remains pair-weighted",
+        repeated_input_groups=duplicate_groups,claim_boundary="exploratory trained-probe effects; selected-head intervals are marginal",
+        inputs={str(path):sha256_file(path) for path in [table_path,effects_path,pairs_path]},
+        output_sha256=sha256_file(output)))
+    return output

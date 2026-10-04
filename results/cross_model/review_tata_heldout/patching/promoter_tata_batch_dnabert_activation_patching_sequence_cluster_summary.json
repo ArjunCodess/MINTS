@@ -1,0 +1,17 @@
+{
+  "bootstrap_samples": 1000,
+  "bootstrap_unit": "exact clean-sequence cluster; all locus pairs retain observed multiplicity",
+  "claim_boundary": "exploratory trained-probe effects; selected-head intervals are marginal",
+  "confidence_level": 0.95,
+  "inputs": {
+    "G:\\mints-repro-20261004\\run\\results\\counterfactuals\\promoter_tata_batch_activation_patching_pairs.tsv": "f15d57570ad8bc410716e50fd4b782fba104bf8020f09fa1dd4f7d65be46379c",
+    "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching.csv": "dc3d6e81f6f9f8db438649f335e4defe2b3a289504c2d6a76792c21cff13421e",
+    "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching_pair_effects.npz": "c3e3fd399085ee3a0f3b4dbc88256c039a6f8b1e25483e3d660cef73aead77d5"
+  },
+  "output_sha256": "77767d52f196ab849ec2c3d7ccda17449e8ddcfe70ce382174218dee90842c77",
+  "pairs": 10,
+  "point_estimand": "mean pair PM over genomic loci; median also remains pair-weighted",
+  "repeated_input_groups": [],
+  "seed": 1729,
+  "sequence_units": 10
+}

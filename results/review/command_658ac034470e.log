@@ -1,0 +1,6 @@
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'paper/main.tex', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/data_ingestion.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/mechanistic_proofs.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qk_alignment.py', LF will be replaced by CRLF the next time Git touches it

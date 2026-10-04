@@ -1,0 +1,28 @@
+[MINTS 01:53:59] Creating required data/results directories
+[MINTS 01:53:59] Starting step: strict_mechanistic_proofs
+[MINTS 01:53:59] Loading model for strict mechanistic proofs: zhihan1996/DNABERT-2-117M
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 5775.93it/s]
+[transformers] BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+pooler.dense.weight                        | MISSING    | 
+pooler.dense.bias                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[MINTS 02:00:00] Model ready on cuda using huggingface_forward_hooks
+[MINTS 02:00:00] Running CTCF motif scoring, QK alignment, and matched attention enrichment
+[MINTS 02:00:08] Using low-rank W_Q/W_K factors for strict QK proof scoring
+[MINTS 02:00:08] Scoring CTCF motif support for up to all sequences

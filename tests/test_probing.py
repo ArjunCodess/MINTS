@@ -133,4 +133,4 @@ def test_run_probe_controls_writes_control_table(tmp_path) -> None:
     assert "position_only" in table_text
     assert "residual_probe_gc_matched_test" in table_text
     assert table_text.count("random_label_residual_probe") == 2
-    assert "Kiho Park" in manifest_text
+    assert "suggested_by" not in manifest_text

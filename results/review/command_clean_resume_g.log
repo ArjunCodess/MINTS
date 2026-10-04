@@ -1,0 +1,245 @@
+[MINTS 01:05:47] Creating required data/results directories
+[MINTS 01:05:47] Starting step: circuit_extraction_and_residual_probing
+[MINTS 01:05:47] Loading model: zhihan1996/DNABERT-2-117M
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 20753.31it/s]
+[transformers] BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+pooler.dense.weight                        | MISSING    | 
+pooler.dense.bias                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[MINTS 01:06:14] Model ready on cuda using huggingface_forward_hooks
+[MINTS 01:06:14] Caching residual activations for probe tasks
+[MINTS 01:06:14] Starting residual-cache exports for task: promoter_tata
+[MINTS 01:06:14] Loading cached dataset split: promoter_tata/train
+[MINTS 01:06:14] Caching residuals for promoter_tata/train: 5062 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:06:21] promoter_tata/train: cached 8/5062 examples
+[MINTS 01:06:23] promoter_tata/train: cached 504/5062 examples
+[MINTS 01:06:25] promoter_tata/train: cached 1008/5062 examples
+[MINTS 01:06:27] promoter_tata/train: cached 1512/5062 examples
+[MINTS 01:06:29] promoter_tata/train: cached 2016/5062 examples
+[MINTS 01:06:31] promoter_tata/train: cached 2520/5062 examples
+[MINTS 01:06:33] promoter_tata/train: cached 3024/5062 examples
+[MINTS 01:06:35] promoter_tata/train: cached 3528/5062 examples
+[MINTS 01:06:37] promoter_tata/train: cached 4032/5062 examples
+[MINTS 01:06:39] promoter_tata/train: cached 4536/5062 examples
+[MINTS 01:06:41] promoter_tata/train: cached 5040/5062 examples
+[MINTS 01:06:41] promoter_tata/train: cached 5062/5062 examples
+[MINTS 01:06:41] Writing residual cache: G:\mints-repro-20261004\run\results\activations\promoter_tata_train_residual_mean.npz
+[MINTS 01:06:44] Finished residual cache for promoter_tata/train: shape=[5062, 3, 768]
+[MINTS 01:06:44] Loading cached dataset split: promoter_tata/test
+[MINTS 01:06:44] Caching residuals for promoter_tata/test: 212 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:06:44] promoter_tata/test: cached 8/212 examples
+[MINTS 01:06:44] promoter_tata/test: cached 16/212 examples
+[MINTS 01:06:44] promoter_tata/test: cached 32/212 examples
+[MINTS 01:06:44] promoter_tata/test: cached 48/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 64/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 80/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 96/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 112/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 128/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 144/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 160/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 176/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 192/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 208/212 examples
+[MINTS 01:06:45] promoter_tata/test: cached 212/212 examples
+[MINTS 01:06:45] Writing residual cache: G:\mints-repro-20261004\run\results\activations\promoter_tata_test_residual_mean.npz
+[MINTS 01:06:45] Finished residual cache for promoter_tata/test: shape=[212, 3, 768]
+[MINTS 01:06:45] Finished residual-cache exports for task: promoter_tata
+[MINTS 01:06:45] Starting residual-cache exports for task: promoter_no_tata
+[MINTS 01:06:45] Loading cached dataset split: promoter_no_tata/train
+[MINTS 01:06:47] Caching residuals for promoter_no_tata/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:06:47] promoter_no_tata/train: cached 8/30000 examples
+[MINTS 01:07:00] promoter_no_tata/train: cached 3000/30000 examples
+[MINTS 01:07:14] promoter_no_tata/train: cached 6000/30000 examples
+[MINTS 01:07:27] promoter_no_tata/train: cached 9000/30000 examples
+[MINTS 01:07:40] promoter_no_tata/train: cached 12000/30000 examples
+[MINTS 01:07:52] promoter_no_tata/train: cached 15000/30000 examples
+[MINTS 01:08:04] promoter_no_tata/train: cached 18000/30000 examples
+[MINTS 01:08:18] promoter_no_tata/train: cached 21000/30000 examples
+[MINTS 01:08:30] promoter_no_tata/train: cached 24000/30000 examples
+[MINTS 01:08:42] promoter_no_tata/train: cached 27000/30000 examples
+[MINTS 01:08:56] promoter_no_tata/train: cached 30000/30000 examples
+[MINTS 01:08:56] Writing residual cache: G:\mints-repro-20261004\run\results\activations\promoter_no_tata_train_residual_mean.npz
+[MINTS 01:09:09] Finished residual cache for promoter_no_tata/train: shape=[30000, 3, 768]
+[MINTS 01:09:09] Loading cached dataset split: promoter_no_tata/test
+[MINTS 01:09:09] Caching residuals for promoter_no_tata/test: 1372 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:09:09] promoter_no_tata/test: cached 8/1372 examples
+[MINTS 01:09:10] promoter_no_tata/test: cached 136/1372 examples
+[MINTS 01:09:10] promoter_no_tata/test: cached 272/1372 examples
+[MINTS 01:09:11] promoter_no_tata/test: cached 408/1372 examples
+[MINTS 01:09:12] promoter_no_tata/test: cached 544/1372 examples
+[MINTS 01:09:12] promoter_no_tata/test: cached 680/1372 examples
+[MINTS 01:09:13] promoter_no_tata/test: cached 816/1372 examples
+[MINTS 01:09:14] promoter_no_tata/test: cached 952/1372 examples
+[MINTS 01:09:14] promoter_no_tata/test: cached 1088/1372 examples
+[MINTS 01:09:15] promoter_no_tata/test: cached 1224/1372 examples
+[MINTS 01:09:16] promoter_no_tata/test: cached 1360/1372 examples
+[MINTS 01:09:16] promoter_no_tata/test: cached 1372/1372 examples
+[MINTS 01:09:16] Writing residual cache: G:\mints-repro-20261004\run\results\activations\promoter_no_tata_test_residual_mean.npz
+[MINTS 01:09:16] Finished residual cache for promoter_no_tata/test: shape=[1372, 3, 768]
+[MINTS 01:09:16] Finished residual-cache exports for task: promoter_no_tata
+[MINTS 01:09:16] Starting residual-cache exports for task: splice_sites_donors
+[MINTS 01:09:16] Loading cached dataset split: splice_sites_donors/train
+[MINTS 01:09:18] Caching residuals for splice_sites_donors/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:09:18] splice_sites_donors/train: cached 8/30000 examples
+[MINTS 01:09:43] splice_sites_donors/train: cached 3000/30000 examples
+[MINTS 01:10:07] splice_sites_donors/train: cached 6000/30000 examples
+[MINTS 01:10:34] splice_sites_donors/train: cached 9000/30000 examples
+[MINTS 01:11:02] splice_sites_donors/train: cached 12000/30000 examples
+[MINTS 01:11:21] splice_sites_donors/train: cached 15000/30000 examples
+[MINTS 01:11:41] splice_sites_donors/train: cached 18000/30000 examples
+[MINTS 01:12:00] splice_sites_donors/train: cached 21000/30000 examples
+[MINTS 01:12:18] splice_sites_donors/train: cached 24000/30000 examples
+[MINTS 01:12:37] splice_sites_donors/train: cached 27000/30000 examples
+[MINTS 01:12:55] splice_sites_donors/train: cached 30000/30000 examples
+[MINTS 01:12:56] Writing residual cache: G:\mints-repro-20261004\run\results\activations\splice_sites_donors_train_residual_mean.npz
+[MINTS 01:13:09] Finished residual cache for splice_sites_donors/train: shape=[30000, 3, 768]
+[MINTS 01:13:09] Loading cached dataset split: splice_sites_donors/test
+[MINTS 01:13:09] Caching residuals for splice_sites_donors/test: 3000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:13:10] splice_sites_donors/test: cached 8/3000 examples
+[MINTS 01:13:11] splice_sites_donors/test: cached 296/3000 examples
+[MINTS 01:13:13] splice_sites_donors/test: cached 592/3000 examples
+[MINTS 01:13:15] splice_sites_donors/test: cached 888/3000 examples
+[MINTS 01:13:16] splice_sites_donors/test: cached 1184/3000 examples
+[MINTS 01:13:18] splice_sites_donors/test: cached 1480/3000 examples
+[MINTS 01:13:20] splice_sites_donors/test: cached 1776/3000 examples
+[MINTS 01:13:22] splice_sites_donors/test: cached 2072/3000 examples
+[MINTS 01:13:24] splice_sites_donors/test: cached 2368/3000 examples
+[MINTS 01:13:25] splice_sites_donors/test: cached 2664/3000 examples
+[MINTS 01:13:27] splice_sites_donors/test: cached 2960/3000 examples
+[MINTS 01:13:27] splice_sites_donors/test: cached 3000/3000 examples
+[MINTS 01:13:27] Writing residual cache: G:\mints-repro-20261004\run\results\activations\splice_sites_donors_test_residual_mean.npz
+[MINTS 01:13:29] Finished residual cache for splice_sites_donors/test: shape=[3000, 3, 768]
+[MINTS 01:13:29] Finished residual-cache exports for task: splice_sites_donors
+[MINTS 01:13:29] Starting residual-cache exports for task: splice_sites_acceptors
+[MINTS 01:13:29] Loading cached dataset split: splice_sites_acceptors/train
+[MINTS 01:13:29] Caching residuals for splice_sites_acceptors/train: 30000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:13:29] splice_sites_acceptors/train: cached 8/30000 examples
+[MINTS 01:13:47] splice_sites_acceptors/train: cached 3000/30000 examples
+[MINTS 01:14:06] splice_sites_acceptors/train: cached 6000/30000 examples
+[MINTS 01:14:26] splice_sites_acceptors/train: cached 9000/30000 examples
+[MINTS 01:14:45] splice_sites_acceptors/train: cached 12000/30000 examples
+[MINTS 01:15:03] splice_sites_acceptors/train: cached 15000/30000 examples
+[MINTS 01:15:21] splice_sites_acceptors/train: cached 18000/30000 examples
+[MINTS 01:15:40] splice_sites_acceptors/train: cached 21000/30000 examples
+[MINTS 01:15:58] splice_sites_acceptors/train: cached 24000/30000 examples
+[MINTS 01:16:17] splice_sites_acceptors/train: cached 27000/30000 examples
+[MINTS 01:16:37] splice_sites_acceptors/train: cached 30000/30000 examples
+[MINTS 01:16:37] Writing residual cache: G:\mints-repro-20261004\run\results\activations\splice_sites_acceptors_train_residual_mean.npz
+[MINTS 01:16:51] Finished residual cache for splice_sites_acceptors/train: shape=[30000, 3, 768]
+[MINTS 01:16:51] Loading cached dataset split: splice_sites_acceptors/test
+[MINTS 01:16:51] Caching residuals for splice_sites_acceptors/test: 3000 examples, layers=[0, 5, 11], batch_size=8
+[MINTS 01:16:51] splice_sites_acceptors/test: cached 8/3000 examples
+[MINTS 01:16:53] splice_sites_acceptors/test: cached 296/3000 examples
+[MINTS 01:16:55] splice_sites_acceptors/test: cached 592/3000 examples
+[MINTS 01:16:57] splice_sites_acceptors/test: cached 888/3000 examples
+[MINTS 01:16:58] splice_sites_acceptors/test: cached 1184/3000 examples
+[MINTS 01:17:00] splice_sites_acceptors/test: cached 1480/3000 examples
+[MINTS 01:17:02] splice_sites_acceptors/test: cached 1776/3000 examples
+[MINTS 01:17:04] splice_sites_acceptors/test: cached 2072/3000 examples
+[MINTS 01:17:05] splice_sites_acceptors/test: cached 2368/3000 examples
+[MINTS 01:17:07] splice_sites_acceptors/test: cached 2664/3000 examples
+[MINTS 01:17:09] splice_sites_acceptors/test: cached 2960/3000 examples
+[MINTS 01:17:09] splice_sites_acceptors/test: cached 3000/3000 examples
+[MINTS 01:17:09] Writing residual cache: G:\mints-repro-20261004\run\results\activations\splice_sites_acceptors_test_residual_mean.npz
+[MINTS 01:17:10] Finished residual cache for splice_sites_acceptors/test: shape=[3000, 3, 768]
+[MINTS 01:17:10] Finished residual-cache exports for task: splice_sites_acceptors
+[MINTS 01:17:10] Extracting QK/OV circuit matrices
+[MINTS 01:17:10] Extracting QK/OV matrices for layer 0
+[MINTS 01:17:11] Extracting QK/OV matrices for layer 1
+[MINTS 01:17:11] Extracting QK/OV matrices for layer 2
+[MINTS 01:17:11] Extracting QK/OV matrices for layer 3
+[MINTS 01:17:11] Extracting QK/OV matrices for layer 4
+[MINTS 01:17:12] Extracting QK/OV matrices for layer 5
+[MINTS 01:17:12] Extracting QK/OV matrices for layer 6
+[MINTS 01:17:12] Extracting QK/OV matrices for layer 7
+[MINTS 01:17:12] Extracting QK/OV matrices for layer 8
+[MINTS 01:17:13] Extracting QK/OV matrices for layer 9
+[MINTS 01:17:13] Extracting QK/OV matrices for layer 10
+[MINTS 01:17:13] Extracting QK/OV matrices for layer 11
+[MINTS 01:17:14] Writing QK/OV matrix archive: G:\mints-repro-20261004\run\results\circuits\qk_ov_matrices.npz
+[MINTS 01:17:44] Finished QK/OV export: layers=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], heads=12, d_model=768, d_head=64
+[MINTS 01:17:44] Training linear probes from cached residuals
+[MINTS 01:17:44] Loading residual caches for probe: task=promoter_tata, layer=11
+[MINTS 01:17:45] Training probe for promoter_tata: train=5062, test=212, train_pos_rate=0.500, test_pos_rate=0.500
+[MINTS 01:17:48] Probe complete for promoter_tata: AUROC=0.9133, AUPRC=0.9238, accuracy=0.8349
+[MINTS 01:17:48] Loading residual caches for probe: task=promoter_no_tata, layer=11
+[MINTS 01:17:53] Training probe for promoter_no_tata: train=30000, test=1372, train_pos_rate=0.499, test_pos_rate=0.500
+[MINTS 01:17:58] Probe complete for promoter_no_tata: AUROC=0.9384, AUPRC=0.9475, accuracy=0.8557
+[MINTS 01:17:58] Loading residual caches for probe: task=splice_sites_donors, layer=11
+[MINTS 01:18:04] Training probe for splice_sites_donors: train=30000, test=3000, train_pos_rate=0.503, test_pos_rate=0.493
+[MINTS 01:18:10] Probe complete for splice_sites_donors: AUROC=0.8955, AUPRC=0.9049, accuracy=0.8237
+[MINTS 01:18:10] Loading residual caches for probe: task=splice_sites_acceptors, layer=11
+[MINTS 01:18:16] Training probe for splice_sites_acceptors: train=30000, test=3000, train_pos_rate=0.501, test_pos_rate=0.492
+[MINTS 01:18:22] Probe complete for splice_sites_acceptors: AUROC=0.8848, AUPRC=0.8954, accuracy=0.8083
+[MINTS 01:18:22] Writing probe metrics table: G:\mints-repro-20261004\run\results\tables\linear_probe_metrics.csv
+[MINTS 01:18:22] Analyzing OV readout alignment for the promoter-TATA restoring head
+[MINTS 01:18:22] Analyzing OV readout alignment for promoter_tata: layer=2, head=7
+[MINTS 01:18:36] Finished TATA OV readout analysis: top_output_abs_cos=0.1260, probe_self_gain=-0.0326
+[MINTS 01:18:36] Completed step: circuit_extraction_and_residual_probing in 768.736s
+[MINTS 01:18:36] Starting step: downstream_task_performance
+[MINTS 01:18:36] Evaluating downstream task baselines: promoter_tata
+[MINTS 01:18:39] Evaluating downstream task baselines: promoter_no_tata
+[MINTS 01:19:05] Evaluating downstream task baselines: splice_sites_donors
+[MINTS 01:19:48] Evaluating downstream task baselines: splice_sites_acceptors
+[MINTS 01:20:49] Completed step: downstream_task_performance in 133.542s
+[MINTS 01:20:49] Starting step: probe_controls
+[MINTS 01:20:50] Running probe controls for promoter_tata: layer=11
+[MINTS 01:20:54] Running probe controls for promoter_no_tata: layer=11
+[MINTS 01:21:12] Running probe controls for splice_sites_donors: layer=11
+[MINTS 01:21:36] Running probe controls for splice_sites_acceptors: layer=11
+[MINTS 01:21:58] Writing probe-control metrics table: G:\mints-repro-20261004\run\results\tables\linear_probe_controls.csv
+[MINTS 01:21:58] Completed step: probe_controls in 68.738s
+[MINTS 01:21:58] Starting step: strict_mechanistic_proofs
+[MINTS 01:21:58] Loading model for strict mechanistic proofs: zhihan1996/DNABERT-2-117M
+[transformers] BertForMaskedLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From \U0001f449v4.50\U0001f448 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 20157.80it/s]
+[transformers] BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+pooler.dense.weight                        | MISSING    | 
+pooler.dense.bias                          | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[MINTS 01:22:00] Model ready on cuda using huggingface_forward_hooks
+[MINTS 01:22:00] Running CTCF motif scoring, QK alignment, and matched attention enrichment
+[MINTS 01:22:02] Using low-rank W_Q/W_K factors for strict QK proof scoring
+[MINTS 01:22:02] Scoring CTCF motif support for up to all sequences
+[MINTS 01:22:02] Downloading JASPAR CTCF matrix MA0139.1 from https://jaspar2024.elixir.no/api/v1/matrix/MA0139.1.jaspar
+[MINTS 01:23:43] Wrote token motif scores: G:\mints-repro-20261004\run\results\enrichment\ctcf_qk_alignment_token_motif_scores.csv
+[MINTS 01:23:43] Processed strict QK proof inputs for 1/51249 CTCF sequences
+[MINTS 01:28:17] Processed strict QK proof inputs for 1000/51249 CTCF sequences
+[MINTS 01:32:12] Processed strict QK proof inputs for 2000/51249 CTCF sequences
+[MINTS 01:36:16] Processed strict QK proof inputs for 3000/51249 CTCF sequences
+[MINTS 01:40:23] Processed strict QK proof inputs for 4000/51249 CTCF sequences

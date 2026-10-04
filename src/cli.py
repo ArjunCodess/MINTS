@@ -19,10 +19,6 @@ FROM_STEP_ALIASES = {
     "strict_proofs": "strict_mechanistic_proofs",
     "batch_patching": "systematic_causal_intervention",
     "systematic_patching": "systematic_causal_intervention",
-    "feature_search": "distributed_feature_search",
-    "distributed_features": "distributed_feature_search",
-    "cross_model": "cross_model_tokenization_comparison",
-    "tokenization_comparison": "cross_model_tokenization_comparison",
 }
 
 
@@ -87,33 +83,6 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
-        "--max-feature-search-sequences",
-        type=int,
-        default=None,
-        metavar="N",
-        help=(
-            "Limit CTCF sequences used for residual/MLP sparse feature search. "
-            "Omit this flag, or pass 0, to scan all prepared CTCF sequences."
-        ),
-    )
-    parser.add_argument(
-        "--sae-epochs",
-        type=int,
-        default=10,
-        metavar="N",
-        help="Sparse autoencoder training epochs for distributed feature search. Defaults to 10.",
-    )
-    parser.add_argument(
-        "--max-cross-model-qk-alignment-sequences",
-        type=int,
-        default=None,
-        metavar="N",
-        help=(
-            "Limit CTCF sequences used for the cross-model QK/attention-enrichment comparison. "
-            "Omit this flag to scan all prepared CTCF sequences for both models."
-        ),
-    )
-    parser.add_argument(
         "--probe-bootstrap-samples",
         type=int,
         default=1000,
@@ -154,7 +123,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--only-threshold-sensitivity",
         action="store_true",
         help=(
-            "Run only threshold sensitivity and null-calibration summaries from existing result tables."
+            "Run only descriptive threshold sensitivity from existing result tables."
         ),
     )
     parser.add_argument(
@@ -169,10 +138,6 @@ def build_parser() -> argparse.ArgumentParser:
             "strict_proofs",
             "batch_patching",
             "systematic_patching",
-            "feature_search",
-            "distributed_features",
-            "cross_model",
-            "tokenization_comparison",
         ),
         default="all",
         help=(
@@ -197,12 +162,6 @@ def run(argv: list[str] | None = None) -> int:
         parser.error("--max-qk-alignment-sequences must be a positive integer.")
     if args.max_patching_pairs is not None and args.max_patching_pairs <= 0:
         parser.error("--max-patching-pairs must be a positive integer.")
-    if args.max_feature_search_sequences is not None and args.max_feature_search_sequences < 0:
-        parser.error("--max-feature-search-sequences must be zero or a positive integer.")
-    if args.sae_epochs is not None and args.sae_epochs <= 0:
-        parser.error("--sae-epochs must be a positive integer.")
-    if args.max_cross_model_qk_alignment_sequences is not None and args.max_cross_model_qk_alignment_sequences <= 0:
-        parser.error("--max-cross-model-qk-alignment-sequences must be a positive integer.")
     if args.probe_bootstrap_samples is not None and args.probe_bootstrap_samples < 0:
         parser.error("--probe-bootstrap-samples must be zero or a positive integer.")
     if args.probe_ci_level is not None and not 0.0 < args.probe_ci_level < 1.0:
@@ -212,9 +171,6 @@ def run(argv: list[str] | None = None) -> int:
 
     config = PipelineConfig()
     from_step = FROM_STEP_ALIASES.get(args.from_step, args.from_step)
-    max_feature_search_sequences = (
-        None if args.max_feature_search_sequences == 0 else args.max_feature_search_sequences
-    )
     config = replace(
         config,
         model=replace(config.model, device=args.device),
@@ -224,9 +180,6 @@ def run(argv: list[str] | None = None) -> int:
             max_probe_test=args.max_probe_test,
             max_qk_alignment_sequences=args.max_qk_alignment_sequences,
             max_patching_pairs=args.max_patching_pairs,
-            max_feature_search_sequences=max_feature_search_sequences,
-            sae_epochs=args.sae_epochs,
-            max_cross_model_qk_alignment_sequences=args.max_cross_model_qk_alignment_sequences,
             probe_bootstrap_samples=args.probe_bootstrap_samples,
             probe_ci_level=args.probe_ci_level,
             probe_control_random_label_runs=args.probe_control_random_label_runs,

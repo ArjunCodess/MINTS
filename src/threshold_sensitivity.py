@@ -158,10 +158,6 @@ def _joint_ctcf_rows(qk: pd.DataFrame, enrichment: pd.DataFrame, seed: int) -> l
             rho_mask = np.isfinite(rho_values) & (rho_values >= rho_threshold)
             observed = int(np.sum(qk_mask & rho_mask))
             null_counts = []
-            for _ in range(1000):
-                permuted = rng.permutation(rho_mask)
-                null_counts.append(int(np.sum(qk_mask & permuted)))
-            null_array = np.asarray(null_counts, dtype=np.float64)
             rows.append(
                 {
                     "analysis": "joint_ctcf_sensitivity",
@@ -175,9 +171,9 @@ def _joint_ctcf_rows(qk: pd.DataFrame, enrichment: pd.DataFrame, seed: int) -> l
                     "enrichment_pass_count": int(np.sum(rho_mask)),
                     "patching_pass_count": np.nan,
                     "joint_pass_count": observed,
-                    "null_type": "permuted_head_alignment",
-                    "null_mean": float(np.mean(null_array)),
-                    "null_p95": float(np.percentile(null_array, 95)),
+                    "null_type": "none_descriptive_sweep",
+                    "null_mean": np.nan,
+                    "null_p95": np.nan,
                     "best_layer": np.nan,
                     "best_head": np.nan,
                     "best_value": np.nan,
@@ -369,18 +365,9 @@ def _write_figure(table: pd.DataFrame, figure_path: Path) -> None:
         & (table["rho_threshold"] == 1.1)
     ].sort_values("r_threshold")
     axes[1, 1].plot(joint["r_threshold"], joint["joint_pass_count"], marker="o", color="#8f4f6f")
-    axes[1, 1].fill_between(
-        joint["r_threshold"].astype(float),
-        0,
-        joint["null_p95"].astype(float),
-        color="#8f4f6f",
-        alpha=0.18,
-        label="permuted-head p95",
-    )
     axes[1, 1].set_title("Joint CTCF count at rho >= 1.1")
     axes[1, 1].set_xlabel("minimum Pearson r")
     axes[1, 1].set_ylabel("joint passing heads")
-    axes[1, 1].legend(frameon=False, fontsize=8)
 
     for ax in axes.flat:
         ax.grid(True, color="#dddddd", linewidth=0.6, alpha=0.8)
@@ -401,8 +388,6 @@ def run_threshold_sensitivity(config: PipelineConfig = DEFAULT_CONFIG) -> Sensit
     rows.extend(_enrichment_rows(enrichment))
     rows.extend(_patching_rows(config))
     rows.extend(_joint_ctcf_rows(qk, enrichment, seed=config.data.seed))
-    rows.extend(_motif_score_null_rows(config, seed=config.data.seed))
-    rows.extend(_unavailable_null_rows())
 
     table = pd.DataFrame(rows)
     table_path = config.paths.tables_dir / "threshold_sensitivity.csv"
@@ -417,12 +402,7 @@ def run_threshold_sensitivity(config: PipelineConfig = DEFAULT_CONFIG) -> Sensit
         "qk_r_thresholds": list(QK_R_THRESHOLDS),
         "rho_thresholds": list(RHO_THRESHOLDS),
         "pm_thresholds": list(PM_THRESHOLDS),
-        "null_calibration": {
-            "matched_background": "observed enrichment table uses deterministic position-matched backgrounds",
-            "permuted_head_alignment": "1,000 permutations of enrichment-pass labels against QK-pass labels",
-            "shuffled_motif_scores": "1,000 permutations of token motif scores against observed support-token labels",
-            "gc_matched_background": "nearest-GC non-support token motif-score calibration",
-        },
+        "inference_boundary": "Descriptive threshold counts only; token-shuffle and permuted-head nulls withdrawn. Use sequence_genomic_controls for sequence-pair inference.",
     }
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     return SensitivityOutputs(table=table_path, figure=figure_path, manifest=manifest_path)

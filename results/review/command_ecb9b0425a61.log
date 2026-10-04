@@ -1,0 +1,21 @@
+ M .gitignore
+ M README.md
+ D paper/checklist.tex
+ M paper/main.pdf
+ M paper/main.tex
+ M paper/references.bib
+ M src/data_ingestion.py
+ M src/mechanistic_proofs.py
+ M src/patching.py
+ M src/probing.py
+ M src/qk_alignment.py
+ M src/task_performance.py
+ M tests/test_task_performance.py
+?? LICENSE
+?? docs/
+?? results/cross_model/review_tata_heldout/
+?? results/review/
+?? src/inference.py
+?? src/integrity.py
+?? tests/test_review_integrity.py
+?? tools/

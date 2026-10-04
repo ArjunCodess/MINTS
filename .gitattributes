@@ -1,0 +1,6 @@
+# Preserve generated evidence bytes so recorded SHA-256 hashes survive checkout.
+results/review/** -text whitespace=cr-at-eol
+results/cross_model/review_tata_heldout/** -text whitespace=cr-at-eol
+# Captured process output is retained verbatim, including terminal whitespace.
+results/review/command_*.log -whitespace
+paper/results.tex text eol=lf

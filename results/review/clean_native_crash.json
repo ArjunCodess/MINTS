@@ -1,0 +1,11 @@
+{
+  "status": "native crash",
+  "module": "python314.dll",
+  "time": "2026-10-04T10:48:57.538808+05:30",
+  "offset": "0x000000000000c222",
+  "event_id": 1000,
+  "diagnosis": "crash occurred at the scheduled 120-second traceback dump; timer removed for retry; causation not proven",
+  "log": "command_clean_cuda.log",
+  "exception_code": "0xc0000005",
+  "trace": "G:\\mints-repro-20261004\\run\\trace_strict_mechanistic_proofs_1791091017010111000.log"
+}

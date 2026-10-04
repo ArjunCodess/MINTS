@@ -1,0 +1,10 @@
+{
+  "einsum": {
+    "seconds_per_layer": 0.0027854530001059172,
+    "max_attention_difference": 3.3523718836470096e-06
+  },
+  "matmul": {
+    "seconds_per_layer": 0.0011668450001161546,
+    "max_attention_difference": 3.3523718836470096e-06
+  }
+}

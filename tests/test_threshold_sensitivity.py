@@ -74,7 +74,7 @@ def test_run_threshold_sensitivity_writes_table_and_figure(tmp_path) -> None:
     assert outputs.figure.exists()
     assert outputs.manifest.exists()
     assert "joint_ctcf_sensitivity" in set(table["analysis"])
-    assert "shuffled_motif_scores" in set(table["null_type"].dropna())
-    assert "gc_matched_background" in set(table["null_type"].dropna())
+    assert "shuffled_motif_scores" not in set(table["null_type"].dropna())
+    assert "permuted_head_alignment" not in set(table["null_type"].dropna())
     qk_row = table[(table["metric"] == "qk_pearson_r") & (table["r_threshold"] == 0.5)].iloc[0]
     assert int(qk_row["observed_pass_count"]) == 1

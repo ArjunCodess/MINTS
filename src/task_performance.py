@@ -28,9 +28,6 @@ class TaskPerformanceResult:
     kmer_tfidf_3_6_auroc: float
     kmer_tfidf_3_6_auprc: float
     kmer_tfidf_3_6_accuracy: float
-    dnabert_sequence_head_auroc: float
-    dnabert_sequence_head_auprc: float
-    dnabert_sequence_head_accuracy: float
     frozen_dnabert_l11_readout_auroc: float
     frozen_dnabert_l11_readout_auprc: float
     frozen_dnabert_l11_readout_accuracy: float
@@ -161,7 +158,6 @@ def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -
     from datasets import load_from_disk
 
     config.ensure_paths()
-    readout_metrics = _load_probe_readout_metrics(config)
     rows: list[TaskPerformanceResult] = []
 
     for task_name in config.data.task_names:
@@ -177,7 +173,6 @@ def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -
         gc = _fit_gc_baseline(train_sequences, y_train, test_sequences, y_test, seed=config.data.seed)
         kmer = _fit_kmer_baseline(train_sequences, y_train, test_sequences, y_test, seed=config.data.seed)
         sequence_head, sequence_head_status = _fit_cached_dnabert_sequence_head(task, config)
-        readout = readout_metrics.get(task, {})
         rows.append(
             TaskPerformanceResult(
                 task=task,
@@ -189,17 +184,13 @@ def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -
                 kmer_tfidf_3_6_auroc=kmer["auroc"],
                 kmer_tfidf_3_6_auprc=kmer["auprc"],
                 kmer_tfidf_3_6_accuracy=kmer["accuracy"],
-                dnabert_sequence_head_auroc=sequence_head["auroc"],
-                dnabert_sequence_head_auprc=sequence_head["auprc"],
-                dnabert_sequence_head_accuracy=sequence_head["accuracy"],
-                frozen_dnabert_l11_readout_auroc=float(readout.get("auroc", np.nan)),
-                frozen_dnabert_l11_readout_auprc=float(readout.get("auprc", np.nan)),
-                frozen_dnabert_l11_readout_accuracy=float(readout.get("accuracy", np.nan)),
+                frozen_dnabert_l11_readout_auroc=sequence_head["auroc"],
+                frozen_dnabert_l11_readout_auprc=sequence_head["auprc"],
+                frozen_dnabert_l11_readout_accuracy=sequence_head["accuracy"],
                 sequence_classifier_status=sequence_head_status,
                 notes=(
-                    "GC and k-mer are raw-sequence baselines; DNABERT sequence-head metrics train "
-                    "a frozen-encoder classifier head from cached layer-11 sequence embeddings; "
-                    "frozen readout metrics are retained as residual decodability context."
+                    "GC and k-mer are raw-sequence baselines; the frozen DNABERT residual readout "
+                    "is the classifier formerly duplicated as Seq-head and Readout."
                 ),
             )
         )
@@ -213,13 +204,9 @@ def evaluate_task_performance_context(config: PipelineConfig = DEFAULT_CONFIG) -
         "baselines": {
             "gc_only": "logistic regression over GC fraction, GC skew, and sequence length",
             "kmer_tfidf_3_6": "TF-IDF character 3-6-mer logistic regression with max_features=50000",
-            "dnabert_sequence_head": (
-                "balanced logistic sequence-classification head trained on cached frozen DNABERT-2 "
-                "layer-11 sequence embeddings"
-            ),
             "frozen_dnabert_l11_readout": (
-                "existing layer-11 residual readout from linear_probe_metrics.csv; "
-                "reported separately from task baselines"
+                "balanced standardized logistic classifier over frozen mean-pooled layer-11 embeddings; "
+                "Seq-head and Readout were the same classifier and are now collapsed"
             ),
         },
         "sequence_classifier_status": sorted({row.sequence_classifier_status for row in rows}),

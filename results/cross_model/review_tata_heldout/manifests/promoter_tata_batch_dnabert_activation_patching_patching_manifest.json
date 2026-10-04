@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-10-04T05:36:00+00:00",
+  "denominator_failures": 0,
+  "figure_path": "G:\\mints-repro-20261004\\run\\results\\figures\\promoter_tata_batch_dnabert_activation_patching_heatmap.png",
+  "interpretation": "effects on trained probe; not pretrained native behavior; PM>1 may be off-manifold",
+  "layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "n_heads": 12,
+  "nan_count": 0,
+  "pair_effects_path": "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching_pair_effects.npz",
+  "pair_table": "G:\\mints-repro-20261004\\run\\results\\counterfactuals\\promoter_tata_batch_activation_patching_pairs.tsv",
+  "pairs": 10,
+  "partition": "test_only",
+  "shape": [
+    12,
+    12
+  ],
+  "sparse_mask_algorithm": "stream_hierarchical_block_refinement",
+  "sparse_position_count_max": 13,
+  "sparse_position_count_mean": 10.9,
+  "sparse_position_count_min": 10,
+  "sparse_positions": true,
+  "table_path": "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching.csv",
+  "target": "linear_probe_decision_function",
+  "task": "promoter_tata"
+}

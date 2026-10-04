@@ -1,0 +1,34 @@
+{
+  "status": "interrupted_for_vectorization",
+  "created_at": "2026-10-03T20:11:14+00:00",
+  "completed_steps": [
+    {
+      "name": "circuit_extraction_and_residual_probing",
+      "seconds": 768.736,
+      "status": "completed",
+      "evidence": "command_clean_resume_g.log"
+    },
+    {
+      "name": "downstream_task_performance",
+      "seconds": 133.542,
+      "status": "completed",
+      "evidence": "command_clean_resume_g.log"
+    },
+    {
+      "name": "probe_controls",
+      "seconds": 68.738,
+      "status": "completed",
+      "evidence": "command_clean_resume_g.log"
+    }
+  ],
+  "last_ctcf_progress": [
+    "4000",
+    "51249"
+  ],
+  "command_log_sha256": "2eaf7ce3c0b0e02ad274d36a99285ac1d49ccfc6d7f19024e6c1840d5e035a00",
+  "reason": "unvectorized CPU projections; full sequence count retained in restart",
+  "stopped_process_ids": [
+    43516,
+    25280
+  ]
+}

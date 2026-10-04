@@ -105,7 +105,7 @@ def _resolve_device(device: str) -> str:
     return "cuda" if torch.cuda.is_available() else "cpu"
 
 
-def _patch_dnabert_alibi_builder(model_name: str, hf_config: Any) -> None:
+def _patch_dnabert_alibi_builder(model_name: str, hf_config: Any, revision: str | None = None) -> None:
     """Patch DNABERT-2 ALiBi construction for Transformers meta-device loading.
 
     Recent Transformers versions may instantiate remote-code models under a
@@ -125,7 +125,7 @@ def _patch_dnabert_alibi_builder(model_name: str, hf_config: Any) -> None:
     except ImportError:
         return
 
-    model_class = get_class_from_dynamic_module(class_ref, model_name)
+    model_class = get_class_from_dynamic_module(class_ref, model_name, revision=revision)
     module = __import__(model_class.__module__, fromlist=["BertEncoder"])
     encoder_class = getattr(module, "BertEncoder", None)
     if encoder_class is None or getattr(encoder_class, "_mints_alibi_patch", False):
@@ -142,7 +142,7 @@ def _patch_dnabert_alibi_builder(model_name: str, hf_config: Any) -> None:
     encoder_class._mints_alibi_patch = True
 
 
-def _disable_dnabert_triton_attention(model_name: str, hf_config: Any) -> None:
+def _disable_dnabert_triton_attention(model_name: str, hf_config: Any, revision: str | None = None) -> None:
     """Force DNABERT-2 to use its PyTorch attention fallback.
 
     DNABERT-2 ships a Triton FlashAttention implementation whose `tl.dot`
@@ -161,7 +161,7 @@ def _disable_dnabert_triton_attention(model_name: str, hf_config: Any) -> None:
     except ImportError:
         return
 
-    model_class = get_class_from_dynamic_module(class_ref, model_name)
+    model_class = get_class_from_dynamic_module(class_ref, model_name, revision=revision)
     module = __import__(model_class.__module__, fromlist=["flash_attn_qkvpacked_func"])
     if hasattr(module, "flash_attn_qkvpacked_func"):
         module.flash_attn_qkvpacked_func = None
@@ -204,7 +204,7 @@ def _patch_transformers_pruning_helper() -> None:
     pytorch_utils.find_pruneable_heads_and_indices = find_pruneable_heads_and_indices
 
 
-def _patch_remote_masked_lm_class(model_name: str, hf_config: Any) -> None:
+def _patch_remote_masked_lm_class(model_name: str, hf_config: Any, revision: str | None = None) -> None:
     """Patch old remote model classes for current Transformers loaders."""
 
     auto_map = getattr(hf_config, "auto_map", None) or {}
@@ -215,7 +215,7 @@ def _patch_remote_masked_lm_class(model_name: str, hf_config: Any) -> None:
         from transformers.dynamic_module_utils import get_class_from_dynamic_module
     except ImportError:
         return
-    model_class = get_class_from_dynamic_module(class_ref, model_name)
+    model_class = get_class_from_dynamic_module(class_ref, model_name, revision=revision)
     if not hasattr(model_class, "all_tied_weights_keys"):
         model_class.all_tied_weights_keys = {}
 
@@ -273,11 +273,11 @@ def load_hf_components(config: ModelConfig = DEFAULT_CONFIG.model) -> tuple[Any,
     if not hasattr(hf_config, "eos_token_id") and tokenizer.sep_token_id is not None:
         hf_config.eos_token_id = tokenizer.sep_token_id
 
-    _patch_dnabert_alibi_builder(config.model_name, hf_config)
-    _disable_dnabert_triton_attention(config.model_name, hf_config)
+    _patch_dnabert_alibi_builder(config.model_name, hf_config, config.revision)
+    _disable_dnabert_triton_attention(config.model_name, hf_config, config.revision)
     _patch_esm_config_defaults(hf_config)
     _patch_transformers_pruning_helper()
-    _patch_remote_masked_lm_class(config.model_name, hf_config)
+    _patch_remote_masked_lm_class(config.model_name, hf_config, config.revision)
     prefers_masked_lm = bool((getattr(hf_config, "auto_map", None) or {}).get("AutoModelForMaskedLM"))
     loaders = (AutoModelForMaskedLM, AutoModel) if prefers_masked_lm else (AutoModel, AutoModelForMaskedLM)
     errors: list[str] = []
@@ -429,8 +429,7 @@ def _select_hooked_encoder_class() -> Any:
         from transformer_lens import HookedEncoder
     except ImportError as exc:
         raise ImportError(
-            "TransformerLens is not installed. Install `transformer-lens` from "
-            "requirements.txt before running model wrapping."
+            "The installed TransformerLens package does not provide HookedEncoder."
         ) from exc
     return HookedEncoder
 
@@ -455,16 +454,10 @@ def _call_from_pretrained(hooked_encoder_cls: Any, kwargs: dict[str, Any]) -> An
 
 
 def load_hooked_encoder(config: ModelConfig = DEFAULT_CONFIG.model) -> LoadedModelBundle:
-    """Load DNABERT-2 and wrap it with TransformerLens `HookedEncoder`.
-
-    If the installed TransformerLens version cannot consume DNABERT-2's custom
-    Hugging Face code, this function raises a clear compatibility error rather
-    than returning a partially instrumented model.
-    """
+    """Load the encoder, using native forward hooks when Lens is unavailable."""
 
     set_reproducibility_seed(DEFAULT_CONFIG.data.seed)
     tokenizer, hf_model, device = load_hf_components(config)
-    hooked_encoder_cls = _select_hooked_encoder_class()
     kwargs = {
         "model_name": config.model_name,
         "hf_model": hf_model,
@@ -474,6 +467,7 @@ def load_hooked_encoder(config: ModelConfig = DEFAULT_CONFIG.model) -> LoadedMod
         "revision": config.revision,
     }
     try:
+        hooked_encoder_cls = _select_hooked_encoder_class()
         hooked_model = _call_from_pretrained(hooked_encoder_cls, kwargs)
     except Exception as exc:
         adapter = HuggingFaceHookAdapter(hf_model)

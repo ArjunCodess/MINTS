@@ -1,0 +1,11 @@
+[MINTS 10:46:58] Creating required data/results directories
+[MINTS 10:46:58] Starting step: strict_mechanistic_proofs
+[MINTS 10:46:58] Loading model for strict mechanistic proofs: zhihan1996/DNABERT-2-117M
+[MINTS 10:47:02] Model ready on cuda using huggingface_forward_hooks
+[MINTS 10:47:02] Running CTCF motif scoring, QK alignment, and matched attention enrichment
+[MINTS 10:47:04] Using low-rank W_Q/W_K factors for strict QK proof scoring
+[MINTS 10:47:04] Batching historical factor QK across layers on CUDA
+[MINTS 10:47:04] Scoring CTCF motif support for up to all sequences
+[MINTS 10:48:16] Wrote token motif scores: G:\mints-repro-20261004\run\results\enrichment\ctcf_qk_alignment_token_motif_scores.csv
+[MINTS 10:48:16] Processed strict QK proof inputs for 1/51249 CTCF sequences
+[MINTS 10:48:37] Processed strict QK proof inputs for 1000/51249 CTCF sequences

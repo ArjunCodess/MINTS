@@ -1,0 +1,72 @@
+{
+  "dataset_revision": "851f9946252e90c665cdb3cc3eedb78f1f26197c",
+  "model_revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "partitions": {
+    "promoter_tata": {
+      "train": {
+        "stored_rows": 5062,
+        "fresh_rows": 5062,
+        "stored_sha256": "eac9465f1232e3a5d39d1a5ad3159d3c5fcb6bf3890eda7a624f6acf2e5ccd9b",
+        "fresh_sha256": "eac9465f1232e3a5d39d1a5ad3159d3c5fcb6bf3890eda7a624f6acf2e5ccd9b",
+        "identical": true
+      },
+      "test": {
+        "stored_rows": 212,
+        "fresh_rows": 212,
+        "stored_sha256": "e88e4f4484d27c2b00291db3d1db79c9fbe1cb350064886ab5535df6d3638bdc",
+        "fresh_sha256": "e88e4f4484d27c2b00291db3d1db79c9fbe1cb350064886ab5535df6d3638bdc",
+        "identical": true
+      }
+    },
+    "promoter_no_tata": {
+      "train": {
+        "stored_rows": 30000,
+        "fresh_rows": 30000,
+        "stored_sha256": "b0d47cce7e7fce27aafafd6bf665db5f0891723e45dde57b1f0ff240b0dc87d0",
+        "fresh_sha256": "b0d47cce7e7fce27aafafd6bf665db5f0891723e45dde57b1f0ff240b0dc87d0",
+        "identical": true
+      },
+      "test": {
+        "stored_rows": 1372,
+        "fresh_rows": 1372,
+        "stored_sha256": "6e0f59ad532a41e90d4c8e7f80fda2ffdbf7f7453649dd034cab8313bba40309",
+        "fresh_sha256": "6e0f59ad532a41e90d4c8e7f80fda2ffdbf7f7453649dd034cab8313bba40309",
+        "identical": true
+      }
+    },
+    "splice_sites_donors": {
+      "train": {
+        "stored_rows": 30000,
+        "fresh_rows": 30000,
+        "stored_sha256": "846b7107bd47d627ae49b53f7fce213e1c3361a7f78b4be181af737e750baa21",
+        "fresh_sha256": "846b7107bd47d627ae49b53f7fce213e1c3361a7f78b4be181af737e750baa21",
+        "identical": true
+      },
+      "test": {
+        "stored_rows": 3000,
+        "fresh_rows": 3000,
+        "stored_sha256": "671f71d7b386ce4abb733799a6f6fe773b03edac4f5ae88dc2de2b946bfe4e29",
+        "fresh_sha256": "671f71d7b386ce4abb733799a6f6fe773b03edac4f5ae88dc2de2b946bfe4e29",
+        "identical": true
+      }
+    },
+    "splice_sites_acceptors": {
+      "train": {
+        "stored_rows": 30000,
+        "fresh_rows": 30000,
+        "stored_sha256": "14ddac6c7944159eea72af0f413aad55ce049d1381c1b3be134cb28a564b196b",
+        "fresh_sha256": "14ddac6c7944159eea72af0f413aad55ce049d1381c1b3be134cb28a564b196b",
+        "identical": true
+      },
+      "test": {
+        "stored_rows": 3000,
+        "fresh_rows": 3000,
+        "stored_sha256": "7f215c6e9ff9dbd9a8f78469418892dd907acb720443cffd7655e64e924724d4",
+        "fresh_sha256": "7f215c6e9ff9dbd9a8f78469418892dd907acb720443cffd7655e64e924724d4",
+        "identical": true
+      }
+    }
+  },
+  "fresh_data_root": "G:/mints-repro-20261004/run/data/hf_downstream",
+  "all_identical": true
+}

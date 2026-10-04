@@ -1,0 +1,101 @@
+{
+  "attempts": [
+    {
+      "command": [
+        "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE",
+        "-norc",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-synctex=1",
+        "-outdir=C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build",
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex"
+      ],
+      "compiler": "texlive",
+      "exitCode": 0,
+      "log": "perl: warning: Setting locale failed.\nperl: warning: Please check that your locale settings:\n\tLC_ALL = \"C.UTF-8\",\n\tLC_CTYPE = \"C.UTF-8\",\n\tLC_NUMERIC = (unset),\n\tLC_COLLATE = (unset),\n\tLC_TIME = (unset),\n\tLC_MONETARY = (unset),\n\tLANG = \"C.UTF-8\"\n    are supported and installed on your system.\nperl: warning: Falling back to the system default locale (\"English_India.1252\").\nInitial Win CP for (console input, console output, system): (CP437, CP65001, CP1252)\nI changed them all to CP1252\nRc files read:\n  NONE\nLatexmk: This is Latexmk, John Collins, 15 June 2025. Version 4.87.\nLatexmk: Nothing to do for 'C:/Users/USER/Desktop/code/MINTS/paper/main.tex'.\nLatexmk: All targets (review-build/main.pdf) are up-to-date\n\nReverting Windows console CPs to (in,out) = (437,65001)\n",
+      "pdfExists": true,
+      "pdfPath": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.pdf"
+    }
+  ],
+  "command": [
+    "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE",
+    "-norc",
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-synctex=1",
+    "-outdir=C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build",
+    "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex"
+  ],
+  "compiler": "texlive",
+  "exitCode": 0,
+  "log": "perl: warning: Setting locale failed.\nperl: warning: Please check that your locale settings:\n\tLC_ALL = \"C.UTF-8\",\n\tLC_CTYPE = \"C.UTF-8\",\n\tLC_NUMERIC = (unset),\n\tLC_COLLATE = (unset),\n\tLC_TIME = (unset),\n\tLC_MONETARY = (unset),\n\tLANG = \"C.UTF-8\"\n    are supported and installed on your system.\nperl: warning: Falling back to the system default locale (\"English_India.1252\").\nInitial Win CP for (console input, console output, system): (CP437, CP65001, CP1252)\nI changed them all to CP1252\nRc files read:\n  NONE\nLatexmk: This is Latexmk, John Collins, 15 June 2025. Version 4.87.\nLatexmk: Nothing to do for 'C:/Users/USER/Desktop/code/MINTS/paper/main.tex'.\nLatexmk: All targets (review-build/main.pdf) are up-to-date\n\nReverting Windows console CPs to (in,out) = (437,65001)\n",
+  "pdfExists": true,
+  "pdfPath": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.pdf",
+  "rootFile": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex",
+  "tectonic": {
+    "checked": [
+      {
+        "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.3930.0_x64__2p2nqsd0c76g0\\app\\resources\\tectonic\\tectonic.exe",
+        "source": "app"
+      }
+    ],
+    "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.3930.0_x64__2p2nqsd0c76g0\\app\\resources\\tectonic\\tectonic.exe",
+    "reason": "Tectonic executable is available.",
+    "source": "app",
+    "status": "available",
+    "version": "[WinError 5] Access is denied"
+  },
+  "tectonicSuitability": {
+    "reasons": [
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex: bibliography tooling"
+    ],
+    "scannedFiles": [
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\patching_table.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\threshold_table.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\table4.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\table3.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\dataset_table.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\numbers.tex"
+    ],
+    "suitable": false
+  },
+  "texliveDetection": {
+    "activeBinDir": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64",
+    "commands": {
+      "biber": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\biber.EXE",
+        "version": "present"
+      },
+      "kpsewhich": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\kpsewhich.EXE",
+        "version": "MiKTeX 25.12"
+      },
+      "latexmk": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE",
+        "version": "perl: warning: Setting locale failed."
+      },
+      "lualatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\lualatex.EXE",
+        "version": "This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12)"
+      },
+      "pdflatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.EXE",
+        "version": "MiKTeX-pdfTeX 4.23 (MiKTeX 25.12)"
+      },
+      "xelatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\xelatex.EXE",
+        "version": "MiKTeX-XeTeX 4.16 (MiKTeX 25.12)"
+      }
+    },
+    "knownTexBinDirs": [],
+    "missingRecommended": [],
+    "missingRequired": [],
+    "reason": "Required TeX tools are available.",
+    "searchPath": "C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Users\\USER\\.codex\\tmp\\arg0\\codex-arg0mZYFI1;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\libheif\\libheif\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\jxrlib\\jxrlib\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\override;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Python314\\Scripts;C:\\Python314;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Windows\\System32\\OpenSSH;C:\\Program Files\\nodejs;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Strawberry\\c\\bin;C:\\Strawberry\\perl\\site\\bin;C:\\Strawberry\\perl\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\dotnet;C:\\Program Files\\GitHub CLI;C:\\Program Files\\Go\\bin;D:\\cargo\\bin;C:\\Users\\USER\\.cargo\\bin;C:\\Users\\USER\\.local\\bin;C:\\Users\\USER\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\USER\\AppData\\Roaming\\npm;C:\\Program Files\\Git;C:\\Users\\USER\\AppData\\Local\\Programs\\Antigravity\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64;C:\\Users\\USER\\AppData\\Local\\Programs\\Ollama;C:\\Users\\USER\\AppData\\Local\\cursor-agent;C:\\Users\\USER\\go\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\fallback;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd;C:\\Users\\USER\\AppData\\Local\\OpenAI\\Codex\\bin\\f1e5e36960c35938;C:\\Users\\USER\\AppData\\Local\\OpenAI\\Codex\\bin\\8aaf1547b825b104",
+    "status": "existing-usable",
+    "texmfroot": null
+  }
+}

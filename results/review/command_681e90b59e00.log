@@ -1,0 +1,93 @@
+{
+  "attempts": [
+    {
+      "command": [
+        "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE",
+        "-norc",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-synctex=1",
+        "-outdir=C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build",
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex"
+      ],
+      "compiler": "texlive",
+      "exitCode": 3221226505,
+      "log": "14 [0x0000a264] INFO latexmk null - this process (48524) started by python in directory C:\\Users\\USER\\Desktop\\code\\MINTS\\paper with command line: C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE -norc -pdf -interaction=nonstopmode -halt-on-error -synctex=1 -outdir=C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex\n\n14 [0x0000a264] INFO latexmk null - running on Windows 10.0.19045\n\n\nIt seems that this is a fresh TeX installation.\nPlease finish the setup before proceeding.\nFor more information, visit:\nhttps://miktex.org/howto/install-miktex-win\n",
+      "pdfExists": false,
+      "pdfPath": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.pdf"
+    },
+    {
+      "compiler": "tectonic",
+      "reason": "TeX Live is available, so auto mode prefers TeX Live.",
+      "skipped": true
+    }
+  ],
+  "command": null,
+  "compiler": null,
+  "exitCode": 1,
+  "log": "",
+  "pdfExists": false,
+  "pdfPath": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\review-build\\main.pdf",
+  "rootFile": "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex",
+  "tectonic": {
+    "checked": [
+      {
+        "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.928.2636.0_x64__2p2nqsd0c76g0\\app\\resources\\tectonic\\tectonic.exe",
+        "source": "app"
+      }
+    ],
+    "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.928.2636.0_x64__2p2nqsd0c76g0\\app\\resources\\tectonic\\tectonic.exe",
+    "reason": "Tectonic executable is available.",
+    "source": "app",
+    "status": "available",
+    "version": "[WinError 5] Access is denied"
+  },
+  "tectonicSuitability": {
+    "reasons": [
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex: bibliography tooling"
+    ],
+    "scannedFiles": [
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\paper\\main.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\table4.tex",
+      "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\table3.tex"
+    ],
+    "suitable": false
+  },
+  "texliveDetection": {
+    "activeBinDir": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64",
+    "commands": {
+      "biber": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\biber.EXE",
+        "version": "present"
+      },
+      "kpsewhich": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\kpsewhich.EXE",
+        "version": "14 [0x0000aca4] INFO kpsewhich null - this process (27332) started by python in directory C:\\Users\\USER\\Desktop\\code\\MINTS with command line: C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\kpsewhich.EXE --version"
+      },
+      "latexmk": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE",
+        "version": "16 [0x00003318] INFO latexmk null - this process (46144) started by python in directory C:\\Users\\USER\\Desktop\\code\\MINTS with command line: C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\latexmk.EXE -norc -v"
+      },
+      "lualatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\lualatex.EXE",
+        "version": "15 [0x0000bf80] INFO lualatex null - this process (30664) started by python in directory C:\\Users\\USER\\Desktop\\code\\MINTS with command line: C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\lualatex.EXE --version"
+      },
+      "pdflatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.EXE",
+        "version": "15 [0x0000778c] INFO pdflatex null - this process (44700) started by python in directory C:\\Users\\USER\\Desktop\\code\\MINTS with command line: C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.EXE --version"
+      },
+      "xelatex": {
+        "path": "C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\xelatex.EXE",
+        "version": "14 [0x0000a85c] INFO xelatex null - this process (18556) started by python in directory C:\\Users\\USER\\Desktop\\code\\MINTS with command line: C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\xelatex.EXE --version"
+      }
+    },
+    "knownTexBinDirs": [],
+    "missingRecommended": [],
+    "missingRequired": [],
+    "reason": "Required TeX tools are available.",
+    "searchPath": "C:\\Users\\USER\\.codex\\tmp\\arg0\\codex-arg0HciMwB;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\libheif\\libheif\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\jxrlib\\jxrlib\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\override;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Python314\\Scripts;C:\\Python314;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Windows\\System32\\OpenSSH;C:\\Program Files\\nodejs;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Strawberry\\c\\bin;C:\\Strawberry\\perl\\site\\bin;C:\\Strawberry\\perl\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\dotnet;C:\\Program Files\\GitHub CLI;C:\\Program Files\\Go\\bin;D:\\cargo\\bin;C:\\Users\\USER\\.cargo\\bin;C:\\Users\\USER\\.local\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Users\\USER\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\USER\\AppData\\Roaming\\npm;C:\\Program Files\\Git;C:\\Users\\USER\\AppData\\Local\\Programs\\Antigravity\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin;C:\\Users\\USER\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64;C:\\Users\\USER\\AppData\\Local\\Programs\\Ollama;C:\\Users\\USER\\AppData\\Local\\cursor-agent;C:\\Users\\USER\\go\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\fallback;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin;C:\\Users\\USER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd;C:\\Users\\USER\\AppData\\Local\\OpenAI\\Codex\\bin\\56d1c54034a4a372;C:\\Users\\USER\\AppData\\Local\\OpenAI\\Codex\\bin\\c6fe824d725f02d7",
+    "status": "existing-usable",
+    "texmfroot": null
+  }
+}

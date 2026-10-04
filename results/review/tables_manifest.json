@@ -1,0 +1,79 @@
+{
+  "command": [
+    "G:\\mints-repro-20261004\\venv\\Scripts\\python.exe",
+    "tools/review_full_pipeline.py",
+    "--run-directory",
+    "G:/mints-repro-20261004/run",
+    "--from-step",
+    "strict_mechanistic_proofs"
+  ],
+  "entrypoint": "tools.review_tables.main(config)",
+  "seed": 1729,
+  "bootstrap_samples": 1000,
+  "bootstrap_unit": "test sequence; fixed trained model",
+  "confidence_level": 0.95,
+  "seconds": 228.1235197999922,
+  "caliper_status": "0.02 chosen heuristically during October review, not preregistered",
+  "inputs": {
+    "G:\\mints-repro-20261004\\run\\results\\activations\\promoter_tata_train_residual_mean.npz": "8bff54bf6e77f4424ca7d94ace4282ab8845f5501538549c01e4dc4b923aa410",
+    "G:\\mints-repro-20261004\\run\\results\\activations\\promoter_tata_test_residual_mean.npz": "13a757fb1701314abac6111786cdc28245d8a5556455809a51ddecc88bc195e6",
+    "G:\\mints-repro-20261004\\run\\results\\activations\\promoter_no_tata_train_residual_mean.npz": "92549188e01b19f8f97ada111918bd4ce37f36a3f645e9c56cb5905d3bd139c9",
+    "G:\\mints-repro-20261004\\run\\results\\activations\\promoter_no_tata_test_residual_mean.npz": "0fb62ec8a1d48a76e370c99b9b73e2a8c46a934904a1e67930a5becaca00f190",
+    "G:\\mints-repro-20261004\\run\\results\\activations\\splice_sites_donors_train_residual_mean.npz": "7ddd36dc15bfe265101d88190a753f753d0ab46d631c2ad531a4504728bf9462",
+    "G:\\mints-repro-20261004\\run\\results\\activations\\splice_sites_donors_test_residual_mean.npz": "19996000a5f8845786d62f1a70764dd0f0bdbe5946ea2c4f412650783a9e9f8a",
+    "G:\\mints-repro-20261004\\run\\results\\activations\\splice_sites_acceptors_train_residual_mean.npz": "eb6940782d3ffe6a6be144f1629cdecd204c82533025b8c3dc02fee001d549c7",
+    "G:\\mints-repro-20261004\\run\\results\\activations\\splice_sites_acceptors_test_residual_mean.npz": "5eafa7927fbbc06a96a4b58101d3f94e234a1da7738600df358842a804285502"
+  },
+  "artifacts": {
+    "classification_metrics.csv": "0dce0095adaa55381b23265c6e4d10e1599425903c2ab059182972a895106c5b",
+    "ctcf_genomic_control_pairs.csv": "f67aff6c44c27993987e4bfd949abf8cd8d0b440d2fab9e7fbee77af239d2512",
+    "ctcf_native_control_inference.csv": "9e9ad0eb1ae4e5f4cb5270efb4d217dc4917bde9b8924a99ad1f05015bbb156a",
+    "ctcf_sequence_qk_inference.csv": "1fe402ca60fe8ccc7042c4c11de512a78242b7c97706fb7d6b7db5a88697d01b",
+    "promoter_no_tata_predictions.csv": "2df3714b02bc2d28ee56d03a3b1f7b396b640328d93f250d2f586d7f724f8994",
+    "promoter_tata_predictions.csv": "6072ca5cafa6a551f8268be3aeeb18c04822f0360674317128c915b60581f8ba",
+    "splice_sites_acceptors_predictions.csv": "23f5f9b6dde01d07dff8dc443c30010337ff273d1e6f42ac405b4cbbff48139f",
+    "splice_sites_donors_predictions.csv": "e6f1fd15c688858a6148cb0291b90a8b1289c923b6dafe99090e11ef48dcb399"
+  },
+  "paper_results": {
+    "path": "paper/results.tex",
+    "sha256": "44d826f54378e918b51672ead5941bc8bbe86959dbdabfee64425c969b92fadf",
+    "command": "python tools/review_manuscript_artifacts.py"
+  },
+  "paper_sources": {
+    "results/review/correctness_audit.json": "7a54b97d24b4c5d6d17c8e9e0c77ed5865f5c090c2e39b6e43139f9be6f736cd",
+    "results/review/classification_metrics.csv": "0dce0095adaa55381b23265c6e4d10e1599425903c2ab059182972a895106c5b",
+    "results/qk_alignment/ctcf_qk_alignment.csv": "ca64d6ef36b5d9fb1448a0edefba057b8a3efb603ab8fed2ab0146f8eb0e43c0",
+    "results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv": "14a709449e7d79ef274ef6f6478b952e887df91876d6a2536522b9480785ab2a",
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching.csv": "77767d52f196ab849ec2c3d7ccda17449e8ddcfe70ce382174218dee90842c77",
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_pair_effects.npz": "c3e3fd399085ee3a0f3b4dbc88256c039a6f8b1e25483e3d660cef73aead77d5",
+    "results/review/ctcf_native_control_inference.csv": "9e9ad0eb1ae4e5f4cb5270efb4d217dc4917bde9b8924a99ad1f05015bbb156a",
+    "results/review/ctcf_native_controls_manifest.json": "ac4d0c18a62a3f079da4e720ebf114c8cfad8c6bf36681e4aa72defe5d0fcb28",
+    "results/review/ctcf_sequence_qk_inference.csv": "1fe402ca60fe8ccc7042c4c11de512a78242b7c97706fb7d6b7db5a88697d01b",
+    "results/review/pinned_dataset_comparison.json": "39c361bd1f2a54c8c96cc28739d8eceeffc4dbe2d6312cdcc98708ce9fcc04b6",
+    "results/review/upstream_dataset_snapshot.json": "05602747905eb4136c89f204733a2759a35fbcff537442925131e03b8ccc7803",
+    "results/review/reference_verification.json": "738ffefc0255e71724108d859662303673ec4bfea5a8e5814bef1b86d17ddfa6",
+    "paper/references.bib": "a9604c0a244dc2bee1904a63b3d6cbfc1a21a555967712b21bc4b76f8e38c068",
+    "results/review/clean_result_import.json": "fae39e411b9872869a03b109e2625a9ed58c2e22bdaa68466e61260d0b34ef6e",
+    "results/review/clean_reproduction.json": "73602808fcf739e32acf1407370ab0beecdffa394217e1946bd93ffe37c82eaf",
+    "results/review/clean_input_comparison.json": "028c62bbec9dac90a98b9265e25831a72ef036d2a12da964d227797369f0c214",
+    "results/review/clean_feature_comparison.json": "d61a38a9a4b07e0e89aaff153bc5c9ecaf0a6f2fd3b673d653c0f5fcc8eb689b",
+    "results/review/clean_screen_comparison.json": "b9d25eb590999c62beab7021ca4245055cce0bd35034bd79afcfdd43f31c643d",
+    "results/review/donor_sequence_cluster_summary.json": "31bc6443f9d314f0406c98265da66c5168d2c287f668f3faabcef58f71905c2c",
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json": "a6e371afa6b4141041701a291cf436362553e4a0ba22db7a1e2d4844a8f93562"
+  },
+  "figures": {
+    "results/review/ctcf_native_controls.png": {
+      "sha256": "a49b7692f97ae6a38edeb4c1e4cb9ed034abac8bd4a2a126ff915ee9076560a0",
+      "sources": [
+        "results/review/ctcf_native_control_inference.csv"
+      ]
+    },
+    "results/review/heldout_patching.png": {
+      "sha256": "93b52796bb31bf05668da60c0eabc04bc01f02466f40313efbe5737944df203c",
+      "sources": [
+        "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_pair_effects.npz",
+        "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching.csv"
+      ]
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "command": [
+    "G:\\mints-repro-20261004\\venv\\Scripts\\python.exe",
+    "tools/review_manuscript_artifacts.py",
+    "--input-run-directory",
+    "G:/mints-repro-20261004/run"
+  ],
+  "input_run": "G:\\mints-repro-20261004\\run",
+  "completed_required_steps": [
+    "sequence_classifier_intervals",
+    "sequence_genomic_controls",
+    "systematic_causal_intervention"
+  ],
+  "files": {
+    "results/review/classification_metrics.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\classification_metrics.csv",
+      "sha256": "0dce0095adaa55381b23265c6e4d10e1599425903c2ab059182972a895106c5b"
+    },
+    "results/review/gc_matching_diagnostics.json": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\gc_matching_diagnostics.json",
+      "sha256": "017388500a0aa0947ea569187d1831c32eee98758cfae5e5c52fab518aad5f86"
+    },
+    "results/review/tables_manifest.json": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\tables_manifest.json",
+      "sha256": "562017eb7cefff63e229df48e3b859fb3b6507a302f379c27ad32be27a82d61c"
+    },
+    "results/review/ctcf_genomic_control_pairs.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\ctcf_genomic_control_pairs.csv",
+      "sha256": "f67aff6c44c27993987e4bfd949abf8cd8d0b440d2fab9e7fbee77af239d2512"
+    },
+    "results/review/ctcf_native_control_scores.npz": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\ctcf_native_control_scores.npz",
+      "sha256": "2b2f762bd6cf2559526a5dbccf94160eff823ed5254d1b13c6517aa2fcdd6a34"
+    },
+    "results/review/ctcf_native_control_inference.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\ctcf_native_control_inference.csv",
+      "sha256": "9e9ad0eb1ae4e5f4cb5270efb4d217dc4917bde9b8924a99ad1f05015bbb156a"
+    },
+    "results/review/ctcf_sequence_qk_inference.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\ctcf_sequence_qk_inference.csv",
+      "sha256": "1fe402ca60fe8ccc7042c4c11de512a78242b7c97706fb7d6b7db5a88697d01b"
+    },
+    "results/review/ctcf_native_controls_manifest.json": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\ctcf_native_controls_manifest.json",
+      "sha256": "ac4d0c18a62a3f079da4e720ebf114c8cfad8c6bf36681e4aa72defe5d0fcb28"
+    },
+    "results/review/promoter_tata_predictions.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\promoter_tata_predictions.csv",
+      "sha256": "6072ca5cafa6a551f8268be3aeeb18c04822f0360674317128c915b60581f8ba"
+    },
+    "results/review/promoter_no_tata_predictions.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\promoter_no_tata_predictions.csv",
+      "sha256": "2df3714b02bc2d28ee56d03a3b1f7b396b640328d93f250d2f586d7f724f8994"
+    },
+    "results/review/splice_sites_donors_predictions.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\splice_sites_donors_predictions.csv",
+      "sha256": "e6f1fd15c688858a6148cb0291b90a8b1289c923b6dafe99090e11ef48dcb399"
+    },
+    "results/review/splice_sites_acceptors_predictions.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\review\\splice_sites_acceptors_predictions.csv",
+      "sha256": "23f5f9b6dde01d07dff8dc443c30010337ff273d1e6f42ac405b4cbbff48139f"
+    },
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_pair_effects.npz": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching_pair_effects.npz",
+      "sha256": "c3e3fd399085ee3a0f3b4dbc88256c039a6f8b1e25483e3d660cef73aead77d5"
+    },
+    "results/cross_model/review_tata_heldout/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\figures\\promoter_tata_batch_dnabert_activation_patching_heatmap.png",
+      "sha256": "400b020f850a6310f930be08c193f9a01326b72940a83aa5d5ae6b02de2f7649"
+    },
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching.csv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.csv",
+      "sha256": "77767d52f196ab849ec2c3d7ccda17449e8ddcfe70ce382174218dee90842c77"
+    },
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json",
+      "sha256": "a6e371afa6b4141041701a291cf436362553e4a0ba22db7a1e2d4844a8f93562"
+    },
+    "results/cross_model/review_tata_heldout/counterfactuals/promoter_tata_batch_activation_patching_pairs.tsv": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\counterfactuals\\promoter_tata_batch_activation_patching_pairs.tsv",
+      "sha256": "f15d57570ad8bc410716e50fd4b782fba104bf8020f09fa1dd4f7d65be46379c"
+    },
+    "results/cross_model/review_tata_heldout/manifests/promoter_tata_batch_dnabert_activation_patching_patching_manifest.json": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\manifests\\promoter_tata_batch_dnabert_activation_patching_patching_manifest.json",
+      "sha256": "cbef1b89292ffe972084a69ec00120a0d83e981b64a493f7c2f8dc6a8369413a"
+    },
+    "results/cross_model/review_tata_heldout/manifests/promoter_tata_batch_activation_patching_pairs_counterfactuals_manifest.json": {
+      "source": "G:\\mints-repro-20261004\\run\\results\\manifests\\promoter_tata_batch_activation_patching_pairs_counterfactuals_manifest.json",
+      "sha256": "5bfdbfc31e78baf9a7c2c3cad451193eddcaee0b4b42ccccb1e0665db6afd308"
+    }
+  },
+  "scope": "fresh classifier, held-out TATA patching and native controls; historical screen tables remain historical"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "interrupted_for_verified_cuda_batching",
+  "reason": "full CPU factor scan measured about 100 seconds per 1000 sequences; CUDA batching tested against separate calculations",
+  "last_progress": "see command_clean_background.log",
+  "evidence": [
+    "command_gpu_equivalence_tests.log",
+    "gpu_qk_profile.json"
+  ],
+  "log_sha256": "cead33b6f0b11852272d2e17806c1943b33846014ce369e0c21f9809fe2b93a6",
+  "stopped_process_ids": [
+    35060,
+    43676
+  ]
+}

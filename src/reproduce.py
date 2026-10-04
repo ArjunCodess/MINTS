@@ -35,8 +35,8 @@ PIPELINE_STEPS: tuple[str, ...] = (
     "strict_mechanistic_proofs",
     "systematic_causal_intervention",
     "threshold_sensitivity",
-    "distributed_feature_search",
-    "cross_model_tokenization_comparison",
+    "sequence_genomic_controls",
+    "sequence_classifier_intervals",
 )
 
 
@@ -304,6 +304,8 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
     """Keep pipeline_run.json readable while preserving useful run evidence."""
 
     details = step.details
+    if step.status == "failed":
+        return {"name":step.name,"status":step.status,"seconds":step.seconds,"details":details}
     if step.name == "write_config":
         compact_details = {"path": _relative_to_project(details["path"], config)}
     elif step.name == "ingest_hf_downstream":
@@ -362,7 +364,6 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
     elif step.name == "probe_controls":
         compact_details = {
             "control_table": _relative_to_project(details["control_table"], config),
-            "suggested_by": "Kiho Park",
             "reason": (
                 "Probe scores establish linear decodability; controls test whether "
                 "simple correlated signals or distribution shifts explain the result."
@@ -458,6 +459,18 @@ def _compact_step(step: StepRecord, config: PipelineConfig) -> dict[str, Any]:
     }
 
 
+def _run_sequence_genomic_controls(config: PipelineConfig) -> dict[str, Any]:
+    from tools.review_ctcf_controls import main
+    main(config)
+    return {"manifest":str(config.paths.results_dir/"review/ctcf_native_controls_manifest.json")}
+
+
+def _run_sequence_classifier_intervals(config: PipelineConfig) -> dict[str, Any]:
+    from tools.review_tables import main
+    main(config)
+    return {"manifest":str(config.paths.results_dir/"review/tables_manifest.json")}
+
+
 def _write_run_manifest(
     path: Path,
     config: PipelineConfig,
@@ -484,6 +497,7 @@ def _write_run_manifest(
         "data": {
             "hf_dataset": config.data.hf_dataset_name,
             "hf_dataset_config": config.data.hf_dataset_config,
+            "hf_dataset_revision": config.data.hf_dataset_revision,
             "tasks": list(config.data.task_names),
             "encode_url_file": _relative_to_project(config.paths.encode_url_file, config),
             "grch38_fasta_url": config.data.grch38_fasta_url,
@@ -506,6 +520,10 @@ def _write_run_manifest(
             "sae_l1_coefficient": config.data.sae_l1_coefficient,
         },
         "steps": [_compact_step(step, config) for step in steps],
+        "excluded_legacy_analyses": {
+            "cross_model_tokenization_comparison": "Withdrawn: checkpoint, token alignment and native attention not validated",
+            "distributed_feature_search": "Historical auxiliary analysis; excluded from revised paper and reproduction scope",
+        },
     }
     if error is not None:
         payload["error"] = error
@@ -583,12 +601,23 @@ def run_pipeline(
             "strict_mechanistic_proofs": lambda: _run_strict_proof_exports(config),
             "systematic_causal_intervention": lambda: _run_systematic_causal_interventions(config),
             "threshold_sensitivity": lambda: _run_threshold_sensitivity_exports(config),
-            "distributed_feature_search": lambda: _run_distributed_feature_search(config),
-            "cross_model_tokenization_comparison": lambda: _run_cross_model_tokenization_comparison(config),
+            "sequence_genomic_controls": lambda: _run_sequence_genomic_controls(config),
+            "sequence_classifier_intervals": lambda: _run_sequence_classifier_intervals(config),
         }
         start_index = PIPELINE_STEPS.index(from_step)
         for step_name in PIPELINE_STEPS[start_index:]:
-            steps.append(_run_step(step_name, step_functions[step_name]))
+            started = time.perf_counter()
+            try:
+                steps.append(_run_step(step_name, step_functions[step_name]))
+                _write_run_manifest(
+                    run_manifest_path.with_name(run_manifest_path.stem+"_progress.json"),
+                    config=config,status="running",overwrite=overwrite,
+                    from_step=from_step,steps=steps,
+                )
+            except Exception as exc:
+                steps.append(StepRecord(step_name,"failed",round(time.perf_counter()-started,3),
+                                        {"error":f"{type(exc).__name__}: {exc}"}))
+                raise
     except Exception as exc:
         progress(f"Writing failed run manifest to {run_manifest_path}")
         _write_run_manifest(

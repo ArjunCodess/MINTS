@@ -1,0 +1,4 @@
+  File "C:\Users\USER\Desktop\code\MINTS\tools\review_manuscript_artifacts.py", line 16
+    macros=[r"\newcommand{\"+macro+"}{"+f"{counts[key]:,}"+"}" for key,macro in names.items()]
+                                    ^
+SyntaxError: closing parenthesis '}' does not match opening parenthesis '['

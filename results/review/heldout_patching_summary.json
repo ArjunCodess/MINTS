@@ -1,0 +1,38 @@
+{
+  "pairs": 10,
+  "best_layer": 2,
+  "best_head": 7,
+  "best_mean": 0.3610606790623344,
+  "median": 0.0305564240160703,
+  "mean_ci": [
+    -0.0264943761380609,
+    1.0249569141540236
+  ],
+  "denominator_quantiles": [
+    -1.903436541557312,
+    -1.3035390377044678,
+    -0.44095873832702637,
+    0.40068572387099266,
+    2.606927812099457
+  ],
+  "negative_denominators": 7,
+  "positive_denominators": 3,
+  "denominators_near_zero": 0,
+  "pm_greater_than_one": 34,
+  "min_absolute_denominator": 0.11360765993595123,
+  "selection_warning": "largest observed mean selected over 144 heads; intervals are marginal and do not certify selected-head significance",
+  "overshoots_with_positive_denominator": 8,
+  "overshoots_with_negative_denominator": 26,
+  "overshoot_investigation": "No denominator is within 1e-8 of zero; sign-changing reference differences and heterogeneous absolute effects make mean PM unstable. Off-manifold geometry was not measured, so overshoot is not evidence of motif-specific causality.",
+  "selected_head_absolute_effect_quantiles": [
+    -0.3698427826166153,
+    0.0022395849227905273,
+    0.07824444770812988,
+    0.17078065872192383,
+    0.2137765884399414
+  ],
+  "selected_head_absolute_effect_mean_ci": [
+    -0.06775452226400375,
+    0.13158626675605775
+  ]
+}
