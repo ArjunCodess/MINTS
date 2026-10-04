@@ -947,4 +947,36 @@ def run_batch_dnabert_activation_patching(
     rows["mean_ci_high"] = high
     rows.to_csv(outputs["table"], index=False)
     outputs["pairs"] = pair_path
+    outputs["sequence_summary"] = summarize_sequence_patching(
+        outputs["table"],pair_effect_path,pair_path,seed=config.data.seed)
     return outputs
+
+
+def summarize_sequence_patching(table_path, effects_path, pairs_path, seed=1729):
+    """Derive cluster intervals from saved effects without rerunning the model."""
+    from .inference import bootstrap_sequence_cluster_interval
+    from .utils import sha256_file
+    table_path,effects_path,pairs_path=map(Path,[table_path,effects_path,pairs_path])
+    pairs=pd.read_csv(pairs_path,sep="\t")
+    with np.load(effects_path) as saved:
+        if not np.array_equal(pairs.sequence_id.astype(str).to_numpy(),saved["sequence_ids"]):
+            raise ValueError("Patching pair IDs do not align with saved effects")
+        effects=saved["restoration"]
+        layers=list(saved["layers"])
+    rows=pd.read_csv(table_path)
+    intervals=[bootstrap_sequence_cluster_interval(effects[:,layers.index(int(row.layer)),int(row.head)],
+                pairs.clean_sequence.to_numpy(),seed=seed) for row in rows.itertuples()]
+    rows["mean_ci_low"]=[ci[0] for ci in intervals]
+    rows["mean_ci_high"]=[ci[1] for ci in intervals]
+    rows["sequence_units"]=pairs.clean_sequence.nunique()
+    output=table_path.with_name(table_path.stem+"_sequence_cluster_summary.csv")
+    rows.to_csv(output,index=False)
+    duplicate_groups=[group.sequence_id.tolist() for _,group in pairs.groupby("clean_sequence",sort=False) if len(group)>1]
+    write_json(output.with_suffix(".json"),dict(
+        seed=seed,bootstrap_samples=1000,confidence_level=.95,pairs=len(pairs),sequence_units=int(pairs.clean_sequence.nunique()),
+        bootstrap_unit="exact clean-sequence cluster; all locus pairs retain observed multiplicity",
+        point_estimand="mean pair PM over genomic loci; median also remains pair-weighted",
+        repeated_input_groups=duplicate_groups,claim_boundary="exploratory trained-probe effects; selected-head intervals are marginal",
+        inputs={str(path):sha256_file(path) for path in [table_path,effects_path,pairs_path]},
+        output_sha256=sha256_file(output)))
+    return output

@@ -36,3 +36,27 @@ def validate_metric(name, values):
         raise ValueError(f"Unknown metric: {name}")
     if not valid.all():
         raise ValueError(f"Out-of-range {name}")
+
+
+def bootstrap_sequence_cluster_interval(values, sequences, seed=1729, repetitions=1000):
+    """Resample exact-input clusters, retaining the observed locus weights."""
+    values=np.asarray(values,dtype=float)
+    sequences=np.asarray(sequences,dtype=str)
+    if values.shape!=sequences.shape:
+        raise ValueError("Effects and sequence identities must align")
+    valid=np.isfinite(values)
+    values,sequences=values[valid],sequences[valid]
+    groups={}
+    codes=np.asarray([groups.setdefault(sequence,len(groups)) for sequence in sequences])
+    if len(groups)<2:
+        return [float("nan"),float("nan")]
+    if len(groups)==len(values):
+        return bootstrap_mean_interval(values,seed,repetitions)
+    sums=np.bincount(codes,weights=values)
+    counts=np.bincount(codes)
+    rng=np.random.default_rng(seed)
+    means=[]
+    for _ in range(repetitions):
+        draw=rng.integers(len(groups),size=len(groups))
+        means.append(sums[draw].sum()/counts[draw].sum())
+    return np.quantile(means,[.025,.975]).tolist()
