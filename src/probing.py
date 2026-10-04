@@ -696,14 +696,6 @@ def run_probe_controls(config: PipelineConfig = DEFAULT_CONFIG) -> Path:
             "layer": int(config.data.probe_layer),
             "tasks": list(config.data.task_names),
             "random_label_runs": int(config.data.probe_control_random_label_runs),
-            "suggested_by": {
-                "name": "Kiho Park",
-                "url": "https://kihopark.github.io/",
-                "feedback": (
-                    "Clarify that linear probes establish decodability, not causality, "
-                    "and add controls for correlated distributional signals."
-                ),
-            },
             "controls": [
                 "gc_content_only",
                 "position_only",

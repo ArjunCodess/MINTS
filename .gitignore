@@ -234,6 +234,7 @@ results/**/*.tmp
 .venv-review/
 results/review/test-tmp-*/
 results/review/full_run/
+results/review/full_run_retry/
 paper/review-build/
 results/review/pip-cache/
 results/review/page-*.png

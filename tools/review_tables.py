@@ -32,17 +32,23 @@ def tex_table(rows, metrics):
     return "\n".join(lines + [r"\bottomrule", r"\end{tabular}"]) + "\n"
 
 
-def main():
+def main(config=DEFAULT_CONFIG):
     started = time.perf_counter()
-    OUT.mkdir(parents=True, exist_ok=True)
+    out=config.paths.results_dir/"review"
+    out.mkdir(parents=True, exist_ok=True)
     rows, matching = [], []
-    for task in DEFAULT_CONFIG.data.task_names:
+    inputs={}
+    for task in config.data.task_names:
         print(task, flush=True)
-        with np.load(ROOT / f"results/activations/{task}_train_residual_mean.npz", allow_pickle=True) as p:
+        train_path=config.paths.activations_dir/f"{task}_train_residual_mean.npz"
+        test_path=config.paths.activations_dir/f"{task}_test_residual_mean.npz"
+        for path in [train_path,test_path]:
+            inputs[str(path)]=hashlib.sha256(path.read_bytes()).hexdigest()
+        with np.load(train_path, allow_pickle=True) as p:
             train_sequences = p["sequences"].astype(str)
             y_train = p["labels"].astype(int)
             x_train = p["residual_mean"][:, list(p["layers"]).index(11)].copy()
-        with np.load(ROOT / f"results/activations/{task}_test_residual_mean.npz", allow_pickle=True) as p:
+        with np.load(test_path, allow_pickle=True) as p:
             sequences = p["sequences"].astype(str)
             y = p["labels"].astype(int)
             x_test = p["residual_mean"][:, list(p["layers"]).index(11)].copy()
@@ -68,7 +74,7 @@ def main():
         pred = pd.DataFrame(dict(name=names, label=y, gc_probability=gc_prob, kmer_probability=kmer_prob,
                                  probe_probability=probe_prob, gc_caliper_selected=np.isin(np.arange(len(y)), matched),
                                  historical_gc_selected=np.isin(np.arange(len(y)), historical)))
-        pred.to_csv(OUT / f"{task}_predictions.csv", index=False)
+        pred.to_csv(out / f"{task}_predictions.csv", index=False)
         for method, prob, indices in [("gc",gc_prob,np.arange(len(y))), ("kmer",kmer_prob,np.arange(len(y))),
                                       ("probe",probe_prob,np.arange(len(y))), ("historical_gc_probe",probe_prob,historical),
                                       ("caliper_gc_probe",probe_prob,matched), ("caliper_gc_baseline",gc_prob,matched)]:
@@ -82,13 +88,14 @@ def main():
                 row[f"{key}_ci_low"], row[f"{key}_ci_high"] = low, high
             rows.append(row)
     table = pd.DataFrame(rows)
-    table.to_csv(OUT / "classification_metrics.csv", index=False)
-    (OUT / "gc_matching_diagnostics.json").write_text(json.dumps(matching, indent=2),encoding="utf-8")
-    manifest = dict(command=".venv/Scripts/python.exe tools/review_tables.py", seed=1729, bootstrap_samples=1000,
+    table.to_csv(out / "classification_metrics.csv", index=False)
+    (out / "gc_matching_diagnostics.json").write_text(json.dumps(matching, indent=2),encoding="utf-8")
+    manifest = dict(command=[sys.executable,*sys.argv], entrypoint="tools.review_tables.main(config)",
+                    seed=1729, bootstrap_samples=1000,
                     bootstrap_unit="test sequence; fixed trained model", confidence_level=0.95, seconds=time.perf_counter()-started,
                     caliper_status="0.02 chosen heuristically during October review, not preregistered",
-                    artifacts={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in OUT.glob("*.csv")})
-    (OUT / "tables_manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
+                    inputs=inputs,artifacts={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob("*.csv")})
+    (out / "tables_manifest.json").write_text(json.dumps(manifest,indent=2),encoding="utf-8")
 
 
 if __name__ == "__main__":
