@@ -1,0 +1,6 @@
+{
+  "reason": "process no longer running; no exit status or final run manifest was available after conversation continuation",
+  "status": "interrupted",
+  "log": "results/review/command_clean_fast2_g.log",
+  "last_log_write": "2026-10-04T02:00:08.6142126+05:30"
+}

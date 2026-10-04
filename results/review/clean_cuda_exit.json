@@ -1,0 +1,6 @@
+{
+  "finished_at": "2026-10-04T10:49:13.9649863+05:30",
+  "process_id": 16304,
+  "command": "G:/mints-repro-20261004/venv/Scripts/python.exe tools/review_full_pipeline.py --run-directory G:/mints-repro-20261004/run --from-step strict_mechanistic_proofs",
+  "exit_status": null
+}
