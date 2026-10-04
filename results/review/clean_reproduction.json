@@ -1,0 +1,450 @@
+{
+  "status": "completed after recorded repairs and resumptions",
+  "exit_status": 0,
+  "all_required_steps": [
+    "write_config",
+    "ingest_hf_downstream",
+    "download_encode_ctcf",
+    "download_grch38",
+    "prepare_ctcf_sequences",
+    "circuit_extraction_and_residual_probing",
+    "downstream_task_performance",
+    "probe_controls",
+    "strict_mechanistic_proofs",
+    "systematic_causal_intervention",
+    "threshold_sensitivity",
+    "sequence_genomic_controls",
+    "sequence_classifier_intervals"
+  ],
+  "completed_steps": [
+    {
+      "details": {
+        "path": "G:\\mints-repro-20261004\\run\\results\\manifests\\pipeline_config.json"
+      },
+      "name": "write_config",
+      "seconds": 0.001,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "dataset": "InstaDeepAI/nucleotide_transformer_downstream_tasks_revised",
+        "output_dir": "G:\\mints-repro-20261004\\run\\data\\hf_downstream",
+        "tasks": {
+          "promoter_no_tata": {
+            "test": 1372,
+            "train": 30000
+          },
+          "promoter_tata": {
+            "test": 212,
+            "train": 5062
+          },
+          "splice_sites_acceptors": {
+            "test": 3000,
+            "train": 30000
+          },
+          "splice_sites_donors": {
+            "test": 3000,
+            "train": 30000
+          }
+        }
+      },
+      "name": "ingest_hf_downstream",
+      "seconds": 72.599,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "artifacts": [
+          {
+            "filename": "ENCFF827JRI.bed.gz",
+            "path": "G:\\mints-repro-20261004\\run\\data\\encode\\ctcf_gm12878\\ENCFF827JRI.bed.gz",
+            "status": "downloaded"
+          }
+        ],
+        "output_dir": "G:\\mints-repro-20261004\\run\\data\\encode\\ctcf_gm12878"
+      },
+      "name": "download_encode_ctcf",
+      "seconds": 4.482,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "path": "G:\\mints-repro-20261004\\run\\data\\genomes\\hg38.fa"
+      },
+      "name": "download_grch38",
+      "seconds": 235.137,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "path": "G:\\mints-repro-20261004\\run\\data\\ctcf\\ctcf_gm12878_sequences.tsv"
+      },
+      "name": "prepare_ctcf_sequences",
+      "seconds": 16.092,
+      "status": "completed"
+    },
+    {
+      "name": "circuit_extraction_and_residual_probing",
+      "seconds": 768.736,
+      "status": "completed",
+      "evidence": "command_clean_resume_g.log"
+    },
+    {
+      "name": "downstream_task_performance",
+      "seconds": 133.542,
+      "status": "completed",
+      "evidence": "command_clean_resume_g.log"
+    },
+    {
+      "name": "probe_controls",
+      "seconds": 68.738,
+      "status": "completed",
+      "evidence": "command_clean_resume_g.log"
+    },
+    {
+      "details": {
+        "circuit_refresh": null,
+        "model": {
+          "device": "cuda",
+          "instrumentation_backend": "huggingface_forward_hooks",
+          "manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\model_hooked_encoder_manifest.json",
+          "name": "zhihan1996/DNABERT-2-117M"
+        },
+        "strict_proofs": {
+          "activation_patching": {
+            "figure": "G:\\mints-repro-20261004\\run\\results\\figures\\promoter_tata_dnabert_activation_patching_heatmap.png",
+            "manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\promoter_tata_dnabert_activation_patching_patching_manifest.json",
+            "table": "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_dnabert_activation_patching.csv"
+          },
+          "patching_pair": "G:\\mints-repro-20261004\\run\\results\\counterfactuals\\promoter_tata_activation_patching_pair.tsv",
+          "patching_pair_summary": {
+            "clean_subsequence": "TATAAA",
+            "corrupted_subsequence": "GCGCGC",
+            "end": 26,
+            "motif_name": "TATA-like",
+            "sequence_id": "chr20:257674-257974|1",
+            "start": 20,
+            "task": "promoter_tata"
+          },
+          "qk_alignment": {
+            "enrichment_figure": "G:\\mints-repro-20261004\\run\\results\\figures\\ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png",
+            "enrichment_manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\qk_enrich_manifest.json",
+            "enrichment_table": "G:\\mints-repro-20261004\\run\\results\\enrichment\\ctcf_qk_alignment_matched_attention_enrichment.csv",
+            "figure": "G:\\mints-repro-20261004\\run\\results\\figures\\ctcf_qk_alignment_pearson_heatmap.png",
+            "manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\ctcf_qk_alignment_qk_alignment_manifest.json",
+            "motif_scores": "G:\\mints-repro-20261004\\run\\results\\enrichment\\ctcf_qk_alignment_token_motif_scores.csv",
+            "table": "G:\\mints-repro-20261004\\run\\results\\qk_alignment\\ctcf_qk_alignment.csv"
+          },
+          "summary": {
+            "activation_patching": {
+              "finite_scores": 144,
+              "max_restoration": 0.5968530579251206,
+              "mean_restoration": 0.00451410767530711,
+              "top_heads": [
+                {
+                  "head": 8,
+                  "layer": 7,
+                  "restoration": 0.5968530579251206
+                },
+                {
+                  "head": 0,
+                  "layer": 11,
+                  "restoration": 0.3303508201791136
+                },
+                {
+                  "head": 7,
+                  "layer": 1,
+                  "restoration": 0.2235426248950738
+                },
+                {
+                  "head": 2,
+                  "layer": 10,
+                  "restoration": 0.2136529655857266
+                },
+                {
+                  "head": 1,
+                  "layer": 5,
+                  "restoration": 0.2126810972229729
+                },
+                {
+                  "head": 4,
+                  "layer": 4,
+                  "restoration": 0.1748651593709422
+                },
+                {
+                  "head": 0,
+                  "layer": 1,
+                  "restoration": 0.1559383392800095
+                },
+                {
+                  "head": 6,
+                  "layer": 3,
+                  "restoration": 0.1317691417452909
+                },
+                {
+                  "head": 2,
+                  "layer": 7,
+                  "restoration": 0.127928764892342
+                },
+                {
+                  "head": 11,
+                  "layer": 11,
+                  "restoration": 0.1187647188611792
+                }
+              ]
+            },
+            "attention_enrichment_candidate_count": 0,
+            "attention_enrichment_candidates": [],
+            "qk_alignment_candidate_count": 0,
+            "qk_alignment_candidates": []
+          }
+        }
+      },
+      "name": "strict_mechanistic_proofs",
+      "seconds": 833.763,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "model": {
+          "device": "cuda",
+          "instrumentation_backend": "huggingface_forward_hooks",
+          "manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\model_hooked_encoder_manifest.json",
+          "name": "zhihan1996/DNABERT-2-117M"
+        },
+        "tasks": {
+          "promoter_tata": {
+            "figure": "G:\\mints-repro-20261004\\run\\results\\figures\\promoter_tata_batch_dnabert_activation_patching_heatmap.png",
+            "manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\promoter_tata_batch_dnabert_activation_patching_patching_manifest.json",
+            "pairs": "G:\\mints-repro-20261004\\run\\results\\counterfactuals\\promoter_tata_batch_activation_patching_pairs.tsv",
+            "summary": {
+              "denominator_failures": 0,
+              "finite_scores": 144,
+              "max_restoration": 0.3610606790623344,
+              "mean_restoration": -0.02499894473607724,
+              "pairs": 10,
+              "top_heads": [
+                {
+                  "head": 7,
+                  "layer": 2,
+                  "restoration": 0.3610606790623344
+                },
+                {
+                  "head": 4,
+                  "layer": 11,
+                  "restoration": 0.311827523593172
+                },
+                {
+                  "head": 10,
+                  "layer": 3,
+                  "restoration": 0.2984324319578578
+                },
+                {
+                  "head": 8,
+                  "layer": 3,
+                  "restoration": 0.2952843902596095
+                },
+                {
+                  "head": 11,
+                  "layer": 11,
+                  "restoration": 0.217378800271945
+                },
+                {
+                  "head": 1,
+                  "layer": 0,
+                  "restoration": 0.2009228167740676
+                },
+                {
+                  "head": 0,
+                  "layer": 6,
+                  "restoration": 0.1901722238016025
+                },
+                {
+                  "head": 9,
+                  "layer": 2,
+                  "restoration": 0.1887231777645825
+                },
+                {
+                  "head": 8,
+                  "layer": 2,
+                  "restoration": 0.1850114574700866
+                },
+                {
+                  "head": 2,
+                  "layer": 2,
+                  "restoration": 0.1836068650089828
+                }
+              ]
+            },
+            "table": "G:\\mints-repro-20261004\\run\\results\\patching\\promoter_tata_batch_dnabert_activation_patching.csv"
+          },
+          "splice_sites_donors": {
+            "figure": "G:\\mints-repro-20261004\\run\\results\\figures\\splice_sites_donors_batch_dnabert_activation_patching_heatmap.png",
+            "manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\splice_sites_donors_batch_dnabert_activation_patching_patching_manifest.json",
+            "pairs": "G:\\mints-repro-20261004\\run\\results\\counterfactuals\\splice_sites_donors_batch_activation_patching_pairs.tsv",
+            "summary": {
+              "denominator_failures": 0,
+              "finite_scores": 144,
+              "max_restoration": 2.602172291078206,
+              "mean_restoration": -0.004287621699106243,
+              "pairs": 1182,
+              "top_heads": [
+                {
+                  "head": 8,
+                  "layer": 1,
+                  "restoration": 2.602172291078206
+                },
+                {
+                  "head": 8,
+                  "layer": 9,
+                  "restoration": 2.0847963341686566
+                },
+                {
+                  "head": 1,
+                  "layer": 11,
+                  "restoration": 1.1959501593840605
+                },
+                {
+                  "head": 7,
+                  "layer": 10,
+                  "restoration": 0.7559504224650773
+                },
+                {
+                  "head": 4,
+                  "layer": 4,
+                  "restoration": 0.7551000555557172
+                },
+                {
+                  "head": 0,
+                  "layer": 11,
+                  "restoration": 0.697790297217802
+                },
+                {
+                  "head": 5,
+                  "layer": 10,
+                  "restoration": 0.5814327781249502
+                },
+                {
+                  "head": 10,
+                  "layer": 10,
+                  "restoration": 0.5803632224252966
+                },
+                {
+                  "head": 4,
+                  "layer": 11,
+                  "restoration": 0.5760136882572499
+                },
+                {
+                  "head": 2,
+                  "layer": 9,
+                  "restoration": 0.5048757141411275
+                }
+              ]
+            },
+            "table": "G:\\mints-repro-20261004\\run\\results\\patching\\splice_sites_donors_batch_dnabert_activation_patching.csv"
+          }
+        }
+      },
+      "name": "systematic_causal_intervention",
+      "seconds": 2308.734,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "figure": "G:\\mints-repro-20261004\\run\\results\\figures\\threshold_sensitivity.png",
+        "manifest": "G:\\mints-repro-20261004\\run\\results\\manifests\\threshold_sensitivity_manifest.json",
+        "table": "G:\\mints-repro-20261004\\run\\results\\tables\\threshold_sensitivity.csv"
+      },
+      "name": "threshold_sensitivity",
+      "seconds": 0.436,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "manifest": "G:\\mints-repro-20261004\\run\\results\\review\\ctcf_native_controls_manifest.json"
+      },
+      "name": "sequence_genomic_controls",
+      "seconds": 308.695,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "manifest": "G:\\mints-repro-20261004\\run\\results\\review\\tables_manifest.json"
+      },
+      "name": "sequence_classifier_intervals",
+      "seconds": 228.532,
+      "status": "completed"
+    }
+  ],
+  "scientific_run_directory": "G:\\mints-repro-20261004\\run",
+  "seed": 1729,
+  "model_revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "dataset_revision": "851f9946252e90c665cdb3cc3eedb78f1f26197c",
+  "source_changes_after_start": {
+    "src/inference.py": {
+      "start": "fb2035eadffe555c2892ea115a60a9664338cabc09d613813c4f715e39001b00",
+      "finish": "4cfe1942765ab7ac8c6eacb0e7a0f7608aef9a28b26ea2e9920e6e086fe2e655"
+    },
+    "src/patching.py": {
+      "start": "4820b49f75e27e333b7448e4590b73bbc0fd86827c063b5ace900fb4f59fa4cf",
+      "finish": "90be7d9effd6b585601a6f8531dfb767dec7c4ff605cb550346abea3ef9f4287"
+    },
+    "src/probing.py": {
+      "start": "9dedbdfee433437d5bf216384e5a3faa30f747d0c550605c15af8b0a45481c67",
+      "finish": "2729af96e7de3e903cdccecc7475c5dcc391581a8abd98a6c2ab9100c94fa3f3"
+    },
+    "tools/review_ctcf_controls.py": {
+      "start": "d4faddc074c5c23a66f5ffb34584343afc29d91e766476765d4e0002d9b979b7",
+      "finish": "172b40248e1e42dbbe55b828fa7083fae35d4c1450dd9886fbc4b3ea118ee306"
+    },
+    "tools/review_manuscript_artifacts.py": {
+      "start": "4f13d39f31d640b008f08c2982591807bde6f0fd56728a1e23ca4120f8ae1d89",
+      "finish": "181dd6be01d3996f48fda0214c938c7976f8d76baecfbb216f7bd8d482a05876"
+    },
+    "tools/review_patching.py": {
+      "start": "eeacbd0a2e8d3461d439998e002d769b5dcb81729a57fa4a654cda34d6697a49",
+      "finish": "0a184163b1d0f1bd9240656937a69a64286e57de5439d41803737fd4dbc946f8"
+    },
+    "tools/review_tables.py": {
+      "start": "88b5594442f15dd19629a9e36982339cd26dad37e4b63b09ad237b02f88ee2b5",
+      "finish": "fd675e61239227600ba933152a017d82272d0c92b3be0688cbda0d02f93c9446"
+    }
+  },
+  "source_change_scope": "sequence-cluster postprocessing and manuscript export guards, motif-score ID assertion, reviewer-attribution cleanup and command metadata; saved model outputs unchanged",
+  "donor_resampling": {
+    "genomic_pairs": 1182,
+    "sequence_units": 1181,
+    "repeated_input_groups": [
+      [
+        "test:985:chr21:7442882-7443482|1",
+        "test:2977:chr21:7061104-7061704|1"
+      ]
+    ],
+    "summary": "donor_sequence_cluster_summary.csv"
+  },
+  "known_failures": [
+    "initial disk exhaustion",
+    "missing HookedEncoder in TransformerLens 4",
+    "native Python crash at diagnostic timer",
+    "temporary-directory permission errors",
+    "two regression expectations corrected",
+    "two import preflight filename errors corrected"
+  ],
+  "interruptions": [
+    "CPU factor calculation replaced by numerically tested acceleration",
+    "slow-loading attempt preserved",
+    "missing process exit preserved"
+  ],
+  "evidence": {
+    "results/review/clean_initial_failure.json": "49750920e30021adb610181ac151fe93cb4054482c51046fa34e8085648e11e2",
+    "results/review/clean_completed_manifest.json": "4ef8c3a739ec4df15d42d11b52bce6a90c95019f27de946d272766f1576da1e5",
+    "results/review/clean_run_artifact_hashes.json": "519d5368de0366899f456e412adae189f6eecf354dd271fb3fe50d064507a156"
+  },
+  "limitations": [
+    "native CTCF causal target not validated",
+    "NT comparison withdrawn",
+    "independent upstream label reconstruction incomplete",
+    "historical checkpoint provenance not recovered",
+    "command ledger covers substantive validation and instrumented runs, not every exploratory read"
+  ]
+}

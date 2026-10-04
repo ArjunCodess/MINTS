@@ -1,0 +1,141 @@
+{
+  "analysis": {
+    "activation_layers": [
+      0,
+      5,
+      11
+    ],
+    "circuit_layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "max_cross_model_qk_alignment_sequences": null,
+    "max_feature_search_sequences": null,
+    "max_patching_pairs": null,
+    "max_probe_test": null,
+    "max_probe_train": null,
+    "max_qk_alignment_sequences": null,
+    "probe_bootstrap_samples": 1000,
+    "probe_ci_level": 0.95,
+    "probe_control_random_label_runs": 8,
+    "probe_layer": 11,
+    "sae_dictionary_size": 512,
+    "sae_epochs": 10,
+    "sae_l1_coefficient": 0.001
+  },
+  "created_at": "2026-10-03T19:34:08+00:00",
+  "data": {
+    "encode_url_file": "data\\ENCODE4_v1.5.1_GRCh38.txt",
+    "grch38_fasta_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz",
+    "hf_dataset": "InstaDeepAI/nucleotide_transformer_downstream_tasks_revised",
+    "hf_dataset_config": "default",
+    "hf_dataset_revision": "851f9946252e90c665cdb3cc3eedb78f1f26197c",
+    "tasks": [
+      "promoter_tata",
+      "promoter_no_tata",
+      "splice_sites_donors",
+      "splice_sites_acceptors"
+    ]
+  },
+  "error": "ImportError: TransformerLens is not installed. Install `transformer-lens` from requirements.txt before running model wrapping.",
+  "excluded_legacy_analyses": {
+    "cross_model_tokenization_comparison": "Withdrawn: checkpoint, token alignment and native attention not validated",
+    "distributed_feature_search": "Historical auxiliary analysis; excluded from revised paper and reproduction scope"
+  },
+  "from_step": "write_config",
+  "model": {
+    "device": "auto",
+    "name": "zhihan1996/DNABERT-2-117M",
+    "revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+    "trust_remote_code": true
+  },
+  "overwrite": false,
+  "project": "MINTS",
+  "status": "failed",
+  "steps": [
+    {
+      "details": {
+        "path": "G:\\mints-repro-20261004\\run\\results\\manifests\\pipeline_config.json"
+      },
+      "name": "write_config",
+      "seconds": 0.001,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "dataset": "InstaDeepAI/nucleotide_transformer_downstream_tasks_revised",
+        "output_dir": "G:\\mints-repro-20261004\\run\\data\\hf_downstream",
+        "tasks": {
+          "promoter_no_tata": {
+            "test": 1372,
+            "train": 30000
+          },
+          "promoter_tata": {
+            "test": 212,
+            "train": 5062
+          },
+          "splice_sites_acceptors": {
+            "test": 3000,
+            "train": 30000
+          },
+          "splice_sites_donors": {
+            "test": 3000,
+            "train": 30000
+          }
+        }
+      },
+      "name": "ingest_hf_downstream",
+      "seconds": 72.599,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "artifacts": [
+          {
+            "filename": "ENCFF827JRI.bed.gz",
+            "path": "G:\\mints-repro-20261004\\run\\data\\encode\\ctcf_gm12878\\ENCFF827JRI.bed.gz",
+            "status": "downloaded"
+          }
+        ],
+        "output_dir": "G:\\mints-repro-20261004\\run\\data\\encode\\ctcf_gm12878"
+      },
+      "name": "download_encode_ctcf",
+      "seconds": 4.482,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "path": "G:\\mints-repro-20261004\\run\\data\\genomes\\hg38.fa"
+      },
+      "name": "download_grch38",
+      "seconds": 235.137,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "path": "G:\\mints-repro-20261004\\run\\data\\ctcf\\ctcf_gm12878_sequences.tsv"
+      },
+      "name": "prepare_ctcf_sequences",
+      "seconds": 16.092,
+      "status": "completed"
+    },
+    {
+      "details": {
+        "error": "ImportError: TransformerLens is not installed. Install `transformer-lens` from requirements.txt before running model wrapping."
+      },
+      "name": "circuit_extraction_and_residual_probing",
+      "seconds": 5.291,
+      "status": "failed"
+    }
+  ]
+}
