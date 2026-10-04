@@ -63,8 +63,11 @@ def assert_disjoint_splits(splits):
         raise ValueError("Cross-partition sequence/RC duplication or overlapping genomic windows detected")
     if report["missing_coordinates"] or report["shared_chromosomes"]:
         raise ValueError("Chromosome-disjoint partitioning cannot be certified")
-    if near_duplicate_pairs(splits):
+    near_duplicates=near_duplicate_pairs(splits)
+    if near_duplicates:
         raise ValueError("Cross-partition near-duplicate sequences detected (<=2 substitutions, either orientation)")
+    report["near_duplicates"]=near_duplicates
+    report["near_duplicate_status"]="exhaustive <=2 substitutions for equal-length sequences, either orientation; indels/shifted alignment not screened"
     return report
 
 

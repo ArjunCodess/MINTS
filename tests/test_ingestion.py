@@ -1,4 +1,5 @@
 from pathlib import Path
+from src.config import DataConfig
 
 import pytest
 
@@ -8,7 +9,14 @@ from src.data_ingestion import (
     filter_encode_artifact_urls,
     is_encode_artifact_url,
     read_encode_urls,
+    partition_digest,
 )
+
+
+def test_cached_partition_identity_includes_labels_and_tokenization():
+    original=dict(sequence="ACGT",label=1,name="chr1:0-4",input_ids=[1,2],attention_mask=[1,1])
+    assert partition_digest([original])!=partition_digest([{**original,"label":0}])
+    assert partition_digest([original])!=partition_digest([{**original,"input_ids":[1,3]}])
 
 
 def test_task_aliases_are_canonicalized() -> None:
@@ -33,10 +41,12 @@ def test_encode_url_filter_keeps_only_requested_artifacts() -> None:
         "https://www.encodeproject.org/files/ENCFF000ABC/@@download/ENCFF000ABC.txt",
     ]
 
-    filtered = filter_encode_artifact_urls(urls)
+    assert filter_encode_artifact_urls(urls)==[urls[2]]
+    requested=DataConfig(encode_allowed_suffixes=(".bigWig", ".bed.gz", ".bigBed"))
+    filtered = filter_encode_artifact_urls(urls,requested)
 
     assert len(filtered) == 3
-    assert all(is_encode_artifact_url(url) for url in filtered)
+    assert all(is_encode_artifact_url(url,requested) for url in filtered)
     assert encode_output_filename(filtered[0]) == "ENCFF680XUD.bigWig"
 
 

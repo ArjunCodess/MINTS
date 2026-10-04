@@ -69,7 +69,7 @@ class ModelConfig:
     model_name: str = "zhihan1996/DNABERT-2-117M"
     trust_remote_code: bool = True
     device: str = "auto"
-    revision: str | None = None
+    revision: str | None = "7bce263b15377fc15361f52cfab88f8b586abda0"
 
 
 @dataclass(frozen=True)
@@ -78,6 +78,7 @@ class DataConfig:
 
     hf_dataset_name: str = "InstaDeepAI/nucleotide_transformer_downstream_tasks_revised"
     hf_dataset_config: str = "default"
+    hf_dataset_revision: str | None = "851f9946252e90c665cdb3cc3eedb78f1f26197c"
     task_names: tuple[str, ...] = (
         "promoter_tata",
         "promoter_no_tata",
@@ -90,7 +91,7 @@ class DataConfig:
             "splice_sites_acceptor": "splice_sites_acceptors",
         }
     )
-    encode_allowed_suffixes: tuple[str, ...] = (".bigWig", ".bed.gz", ".bigBed")
+    encode_allowed_suffixes: tuple[str, ...] = (".bed.gz",)
     grch38_fasta_url: str = "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz"
     seed: int = 1729
     token_max_length: int | None = None

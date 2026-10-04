@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import re
+import hashlib
+import json
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -72,10 +74,10 @@ def encode_output_filename(url: str) -> str:
     return filename
 
 
-def filter_encode_artifact_urls(urls: Iterable[str]) -> list[str]:
+def filter_encode_artifact_urls(urls: Iterable[str], data_config: DataConfig = DEFAULT_CONFIG.data) -> list[str]:
     """Filter URL lines to the direct artifact downloads used by the pipeline."""
 
-    return [url for url in urls if is_encode_artifact_url(url)]
+    return [url for url in urls if is_encode_artifact_url(url, data_config)]
 
 
 def download_file(url: str, output_path: Path, overwrite: bool = False) -> DownloadRecord:
@@ -126,7 +128,7 @@ def download_encode_artifacts(
 
     config.ensure_paths()
     all_urls = read_encode_urls(config.paths.encode_url_file)
-    artifact_urls = filter_encode_artifact_urls(all_urls)
+    artifact_urls = filter_encode_artifact_urls(all_urls, config.data)
     records: list[DownloadRecord] = []
 
     for url in artifact_urls:
@@ -163,7 +165,8 @@ def load_hf_downstream_dataset(config: PipelineConfig = DEFAULT_CONFIG):
 
     from datasets import load_dataset
 
-    return load_dataset(config.data.hf_dataset_name, config.data.hf_dataset_config)
+    return load_dataset(config.data.hf_dataset_name, config.data.hf_dataset_config,
+                        revision=config.data.hf_dataset_revision)
 
 
 def _tokenize_dataset(dataset, tokenizer, max_length: int | None):
@@ -194,6 +197,15 @@ def _load_existing_dataset_dict(output_dir: Path):
     return existing
 
 
+def partition_digest(rows):
+    """Ordered digest includes labels, coordinates, sequence and tokenization."""
+    digest=hashlib.sha256()
+    for row in rows:
+        record={key:row[key] for key in ("sequence","label","name","input_ids","attention_mask") if key in row}
+        digest.update((json.dumps(record,sort_keys=True,separators=(",",":"))+"\n").encode())
+    return digest.hexdigest()
+
+
 def ingest_hf_downstream_tasks(
     config: PipelineConfig = DEFAULT_CONFIG,
     task_names: Iterable[str] | None = None,
@@ -215,6 +227,7 @@ def ingest_hf_downstream_tasks(
     )
     dataset_dict = load_hf_downstream_dataset(config)
     summary: dict[str, dict[str, int]] = {}
+    partition_hashes={}
 
     for task in canonical_tasks:
         progress(f"Preparing HF downstream task: {task}")
@@ -234,12 +247,16 @@ def ingest_hf_downstream_tasks(
             raise ValueError(f"No rows found for task '{task}' in {config.data.hf_dataset_name}.")
 
         tokenized = _tokenize_dataset(task_dataset, tokenizer, config.data.token_max_length)
+        partition_hashes[task]={split:partition_digest(rows) for split,rows in tokenized.items()}
         output_dir = config.paths.hf_downstream_dir / task
         if output_dir.exists() and overwrite:
             shutil.rmtree(output_dir)
         if output_dir.exists() and not overwrite:
             existing = _load_existing_dataset_dict(output_dir)
             if existing is not None:
+                cached={split:partition_digest(rows) for split,rows in existing.items()}
+                if cached!=partition_hashes[task]:
+                    raise ValueError(f"Cached {task} differs from pinned dataset/tokenizer; use an isolated run directory")
                 assert_disjoint_splits({split: list(ds) for split, ds in existing.items()})
                 summary[task] = {split: len(ds) for split, ds in existing.items()}
                 progress(f"Reusing cached tokenized dataset for {task}: {summary[task]}")
@@ -258,7 +275,10 @@ def ingest_hf_downstream_tasks(
             "created_at": utc_now_iso(),
             "dataset": config.data.hf_dataset_name,
             "dataset_config": config.data.hf_dataset_config,
+            "dataset_revision": config.data.hf_dataset_revision,
             "model_tokenizer": config.model.model_name,
+            "model_revision": config.model.revision,
+            "partition_sha256": partition_hashes,
             "tasks": summary,
             "limit_per_split": limit_per_split,
         },
