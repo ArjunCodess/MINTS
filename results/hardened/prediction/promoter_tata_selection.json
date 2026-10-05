@@ -1,0 +1,139 @@
+{
+  "classifier_selection": {
+    "baseline_plus_residual": {
+      "c": 0.01,
+      "classifier_sha256": "94b43a155686451efa04dc73fc07efe327b38ed9dbb24fa4e0d0ac1a97c05ce7",
+      "validation_scores": [
+        {
+          "c": 0.01,
+          "validation_auroc": 0.9204576659038901
+        },
+        {
+          "c": 0.1,
+          "validation_auroc": 0.9036613272311212
+        },
+        {
+          "c": 1.0,
+          "validation_auroc": 0.8934553775743707
+        }
+      ]
+    },
+    "gc": {
+      "c": 1.0,
+      "classifier_sha256": "dfdfdea7a2dcfee70cd6282721230b690f0a5f8538cc8d2ada2edab6d0eca441",
+      "validation_scores": [
+        {
+          "c": 0.01,
+          "validation_auroc": 0.8487643020594965
+        },
+        {
+          "c": 0.1,
+          "validation_auroc": 0.8490389016018307
+        },
+        {
+          "c": 1.0,
+          "validation_auroc": 0.8491304347826086
+        }
+      ]
+    },
+    "kmer": {
+      "c": 1.0,
+      "validation_scores": [
+        {
+          "c": 0.01,
+          "validation_auroc": 0.8678718535469108
+        },
+        {
+          "c": 0.1,
+          "validation_auroc": 0.8884210526315789
+        },
+        {
+          "c": 1.0,
+          "validation_auroc": 0.9160183066361557
+        }
+      ]
+    },
+    "motif_position_composition": {
+      "c": 0.1,
+      "classifier_sha256": "2b369e4424daa978e31b8df1f4f4de7916b24deb346fa601f99188bbb8b1e741",
+      "validation_scores": [
+        {
+          "c": 0.01,
+          "validation_auroc": 0.8951945080091532
+        },
+        {
+          "c": 0.1,
+          "validation_auroc": 0.8981693363844394
+        },
+        {
+          "c": 1.0,
+          "validation_auroc": 0.8975286041189932
+        }
+      ]
+    },
+    "residual": {
+      "c": 0.01,
+      "classifier_sha256": "6f0d8d93ed3da88ecdd015ac316ec2ab512f69939adb1d0dcc8ff7938f42493f",
+      "validation_scores": [
+        {
+          "c": 0.01,
+          "validation_auroc": 0.9083295194508009
+        },
+        {
+          "c": 0.1,
+          "validation_auroc": 0.8884210526315789
+        },
+        {
+          "c": 1.0,
+          "validation_auroc": 0.8807322654462242
+        }
+      ]
+    }
+  },
+  "independent_test_auroc": 0.9337842648629405,
+  "inference_scope": "fixed classifiers; sequence and 1Mb genomic-block bootstrap; no checkpoint variability",
+  "membership_sha256": [
+    "8dd9975490b49adced692a8bb63209ced051906f5f4aea33d04a6c49ec5a4a4f",
+    "2159c0c6af572e3669b113f66437ef3f7f0d8063fd1a9558f472baa1f47637a2",
+    "82e53f34a94a9a96f58923f57b2b8523864d9e29d62e908a2a02d66d6c1a5ef5"
+  ],
+  "partitions": [
+    [
+      "chr1",
+      "chr10",
+      "chr11",
+      "chr12",
+      "chr13",
+      "chr14",
+      "chr15",
+      "chr16",
+      "chr17",
+      "chr2",
+      "chr3",
+      "chr4",
+      "chr5",
+      "chr6",
+      "chr7",
+      "chr8",
+      "chr9",
+      "chrX",
+      "chrY"
+    ],
+    [
+      "chr18",
+      "chr19"
+    ],
+    [
+      "chr20",
+      "chr21"
+    ]
+  ],
+  "seed": 1729,
+  "selection_partition": "validation only; chromosome 18/19",
+  "target": "trained frozen residual readout decision function; not pretrained biological output",
+  "task": "promoter_tata",
+  "test_examples": 212,
+  "train_examples": 4757,
+  "validation_auroc": 0.9083295194508009,
+  "validation_examples": 305
+}

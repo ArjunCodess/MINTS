@@ -1,0 +1,11 @@
+{
+  "fingerprint": "7c8a89f982111ad8964da0d7fbd216f1450d4d5cb94ed941aec0afa75b52aeaf",
+  "historical_checkpoint_identity": "not inferred from artifact hashes",
+  "inputs": {
+    "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\activations\\splice_sites_donors_test_residual_mean.npz": "19996000a5f8845786d62f1a70764dd0f0bdbe5946ea2c4f412650783a9e9f8a",
+    "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\activations\\splice_sites_donors_train_residual_mean.npz": "7ddd36dc15bfe265101d88190a753f753d0ab46d631c2ad531a4504728bf9462",
+    "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\clean_feature_comparison.json": "d61a38a9a4b07e0e89aaff153bc5c9ecaf0a6f2fd3b673d653c0f5fcc8eb689b",
+    "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\review\\clean_reproduction.json": "73602808fcf739e32acf1407370ab0beecdffa394217e1946bd93ffe37c82eaf"
+  },
+  "justification": "Historical frozen caches are reused as measured inputs. Prior pinned clean reproduction matched their bytes; historical checkpoint identity is not independently inferred."
+}

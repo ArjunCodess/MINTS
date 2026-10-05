@@ -1,0 +1,7 @@
+task,first,second,resampling_unit,difference,ci_low,ci_high,valid_draws,clusters,estimand
+splice_sites_acceptors,residual,kmer,sequence,0.09050914142817446,0.07527083895057204,0.1042691586572558,1000,3000,paired held-out AUROC difference conditional on fixed classifiers
+splice_sites_acceptors,residual,kmer,genomic_block,0.09050914142817446,0.073771445708636,0.10774156833306572,1000,107,paired held-out AUROC difference conditional on fixed classifiers
+splice_sites_acceptors,baseline_plus_residual,motif_position_composition,sequence,0.23596599055293144,0.21562566513432935,0.256787832056236,1000,3000,paired held-out AUROC difference conditional on fixed classifiers
+splice_sites_acceptors,baseline_plus_residual,motif_position_composition,genomic_block,0.23596599055293144,0.20243928851620377,0.26700545189303115,1000,107,paired held-out AUROC difference conditional on fixed classifiers
+splice_sites_acceptors,residual,gc,sequence,0.2506276187829952,0.23075180639926512,0.2727749289006752,1000,3000,paired held-out AUROC difference conditional on fixed classifiers
+splice_sites_acceptors,residual,gc,genomic_block,0.2506276187829952,0.21608069223188248,0.2859952788603831,1000,107,paired held-out AUROC difference conditional on fixed classifiers
