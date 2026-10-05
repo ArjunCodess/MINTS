@@ -1,0 +1,17 @@
+{
+  "binding_ci_high": null,
+  "binding_ci_low": null,
+  "binding_rho": null,
+  "ci_high": null,
+  "ci_low": null,
+  "clusters": 0,
+  "confirmation_status": "not run; independent biological QC, membership and power required",
+  "controls_passed": false,
+  "engineered_control_passed": true,
+  "mean": null,
+  "retained": 0,
+  "retention": 0.0,
+  "scanned": 16,
+  "selected_head": null,
+  "singleton_heterozygous_loci": 11
+}

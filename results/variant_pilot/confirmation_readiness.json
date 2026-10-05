@@ -1,0 +1,16 @@
+{
+  "missing": [
+    "pilot_passed",
+    "head_frozen",
+    "endpoint_frozen",
+    "controls_frozen",
+    "membership_frozen",
+    "freshness_verified",
+    "genomic_separation_verified",
+    "donor_dependence_addressed",
+    "biological_qc_verified",
+    "power_passed",
+    "protocol_hash_verified"
+  ],
+  "ready": false
+}

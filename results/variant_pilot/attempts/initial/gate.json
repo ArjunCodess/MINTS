@@ -1,0 +1,14 @@
+{
+  "confirmation": "not authorized by feasibility alone",
+  "reasons": [
+    "implementation controls failed",
+    "insufficient sequence-only retention",
+    "insufficient genomic clusters",
+    "mean fails frozen sensitivity threshold",
+    "ci_low fails frozen sensitivity threshold",
+    "binding_rho fails frozen sensitivity threshold",
+    "binding_ci_low fails frozen sensitivity threshold"
+  ],
+  "selected_head": null,
+  "status": "stop"
+}
