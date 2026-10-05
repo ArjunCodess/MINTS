@@ -5,12 +5,12 @@
   "branch": "natural-variant-pilot",
   "tests": {
     "tests_cuda.log": {
-      "passed": 121,
-      "sha256": "174efe04010c956f945b0329a97bb2ee967e0d7f9f4d3578093faca47c706ef4"
+      "passed": 160,
+      "sha256": "11fdb538cac9845d44d66df111c7b27016a9425ed2cc42b663265ba415ae3333"
     },
     "tests_cpu.log": {
-      "passed": 121,
-      "sha256": "b89ffd724a20f682bd1e7408682f33dda87cbe635c3f2099473c9d088d1749f1"
+      "passed": 160,
+      "sha256": "ecbe1959ac695003be6294676b6da3851a184b217378c2154c8db462a77d2b70"
     }
   },
   "preflight": "passed; pinned tokenizer cached; scientific input files present",
@@ -42,13 +42,39 @@
     "head_selection": "not run",
     "confirmation": "not run"
   },
-  "scientific_execution_sha256": "c0ab621fac0eee74a527eb1587f97812b57b3df68f5b86807ce88d595b95253d",
-  "report_manifest_sha256": "78679aeb06677f64db03b08666ad251b3c7f87fbc1e92c66b3f01c29534de2ca",
+  "scientific_execution_sha256": "3827a5f4d45f408d7bddd70915cbcbb548b5eef2824a859832052257d6603959",
+  "report_manifest_sha256": "e6632d99df9527e23a2e45c664f6755f5d807b301872212ff7e515c212ddfdab",
   "remaining_requirements": [
     "phase and replicate biological QC",
     "mapping-bias and dosage verification",
     "feasible aligned substitution controls",
     "fresh donor/source-separated membership",
     "discovery intervention variance and justified confirmation power"
-  ]
+  ],
+  "hardening": {
+    "offline_audit": "passed",
+    "semantic_and_byte_verification": true,
+    "tampering_regressions": true,
+    "atomic_protocol_claim": true,
+    "historical_attempts_preserved": 3,
+    "candidate_positions_checked": 512,
+    "first_rejections": {
+      "trinucleotide": 500,
+      "token_width": 5,
+      "motif": 3,
+      "geometry": 3,
+      "GC": 1
+    },
+    "equal_token_counts_with_boundary_mismatch": 6,
+    "frozen_rules_and_membership_unchanged": true,
+    "targeted_final_tests": 51,
+    "clean_checkout": {
+      "tests_passed": 152,
+      "artifact_tests_deselected": 8,
+      "offline_audit": "passed",
+      "local_windows_longpaths_enabled": true,
+      "log_sha256": "de93759721a59fea7b2bfab6bf2539bd4320c2748297434363ab30eb4694b198"
+    },
+    "no_new_model_outcomes_or_confirmation": true
+  }
 }
