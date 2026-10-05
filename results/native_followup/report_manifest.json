@@ -1,0 +1,12 @@
+{
+  "allele_manifest_sha256": "12176f615854e33011ae5e8748223cfb2a2f087f97f36b641c331c3e12305468",
+  "execution_sha256": "d3870139fa63544fa97803f9ef911143404d8db7bb183896972758c0849555ea",
+  "generator_sha256": "0cc7a08b46b17bd3b6104366627f2dc96b30a2c97a9e11771a1e5b84f5beff0e",
+  "outputs": {
+    "eligibility_balance.csv": "b31bb5eba5e8e2743b4f82ddfe0120eaef9e56367876eb0d09269351fcc03ca6",
+    "eligibility_metrics.csv": "83f01a90cf4e689eb46d904e8415abd4a69a057564cb2a09f06cdb34de037f02",
+    "pilot_diagnostics.png": "5cb760fb668fa73b23dde4de8abf745ec4344403c3d8fcb1b81fe688c7681ebc",
+    "recovery_calibration.png": "b1951f47d5c24d87d79aa97805bc1604da533cb2bfea1a39631287071d92ebd5"
+  },
+  "paper_tex_sha256": "5b28acf47fffc74c33d7ca56557b506808bd19f58e43adc32f2ee69a3e471c6d"
+}

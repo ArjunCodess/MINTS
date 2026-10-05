@@ -1,0 +1,39 @@
+{
+  "artifacts": {
+    "allele_manifest.json": "12176f615854e33011ae5e8748223cfb2a2f087f97f36b641c331c3e12305468",
+    "checkpoint.json": "3047842e555b19eae90db9071d637006ff262b3b0c664721a11d17a9baabc67a",
+    "ctcf_allele_effects.csv": "c9520470a796595eb636faaa6ac5aae048518a77263515ec7c930fb5600fa5cc",
+    "engineered_control.json": "0bd6ddf3512d87d3ff7db7939f8d782dd0a2d98cf21294ca65fd06da0d431cb0",
+    "geometry.csv": "c000d00f35ef6ddf8a4888f4b504c6c0b6a077dba67cb19b2de6e0f30bf634b2",
+    "intervention_controls.csv": "f82572fd0fbda1dae32b32ea6db5165a1544ce61b4542f5bfeb526223e55d61c",
+    "pilot_eligibility.csv": "fefb51809f50c731084e046e48dbf257e40a6aa0eba8e9f88d68b9b87ce9aa56",
+    "pilot_influence.csv": "09054d90afa46dbe2922c09391de0492b8cab0f37a60a1664758a4cdfb981b62",
+    "protocol.json": "6a349cef004a9a24cb431190cdce741c6c60c1c0b10b85c30bb3c9dde2772a12",
+    "recovery_membership.json": "37a0ebced2c568933f294dbd330f9e47bd75a58ac8b42afe4a8dff4d7e840902",
+    "recovery_scores.csv": "5dc1719bff4719608a250b3bab7128b2834775b3942818004f1bee3f55f66ad6",
+    "recovery_strata.csv": "49fb411ff130f3964434a3a5951172022e7080719a141afdc1d13a899914bea1",
+    "summary.json": "2dacdc77d858bd05fb0dfb803ab9bbe546243c056ade1ee81bebcb2dc938d9f0"
+  },
+  "command": [
+    "tools/run_native_followup.py",
+    "--device",
+    "cuda"
+  ],
+  "elapsed_seconds": 5.345985174179077,
+  "protocol_sha256": "6a349cef004a9a24cb431190cdce741c6c60c1c0b10b85c30bb3c9dde2772a12",
+  "source_changed_during_run": false,
+  "source_sha256": {
+    "src/assay_alignment.py": "cc193663f2f40a37173c113ced0f4d5e56c4d26f5c55c933df2edfffe89cce5e",
+    "src/assay_stats.py": "fafa7b4e78fdabf1fd26b46fe2152089468146467bd5f1a0177fd3b9240f2979",
+    "src/config.py": "59515a9a8be06fe617b065a449788861196894d7fb2a4474009185167a6d2afb",
+    "src/controlled_edits.py": "a3d91083a3e7e5a664a61de2ab4924a1f473771d6d6d2741ae7cdc39741a6282",
+    "src/modeling.py": "06300e1c149f45765a21707bf43d9f4e77f500dde0a410fe1d7a43beb228db91",
+    "src/motif_scoring.py": "e6f265a22d434d59448220c47d9593ce714b673b8376ba191ec18bc0697e905c",
+    "src/native_endpoint.py": "3bbae34a71f4731a249f809363f3ff178c961e7d42db0e0a252ea68171b32255",
+    "src/native_followup.py": "4fe9a51b851dd009044c92b0f8bdc868ad7c966a5e6fa5d00ce245caa2769fb9",
+    "src/utils.py": "e8fb7f1f68a61697644d7c3c8fffd1b71fa5cfbfd301f1441f15cc612b484e9e",
+    "tools/run_native_followup.py": "2281c8b4e23cfdda3bf3ed4a71d9859658f3afdfb0e40058ae33653b665ae288"
+  },
+  "started_utc": "2026-10-05T14:15:00.068702+00:00",
+  "status": "completed"
+}
