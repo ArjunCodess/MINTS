@@ -1,0 +1,50 @@
+{
+  "analysis_status": "discovery only; not preregistered confirmation",
+  "bootstrap_samples": 2000,
+  "claim_boundary": "native sequence prediction, not CTCF binding causality",
+  "cluster_block_bp": 1000000,
+  "confirmation_rule": "no reuse of inspected chromosomes 20/21 or pilot sequences",
+  "controls": [
+    "transition/width/token-budget matched non-motif edit",
+    "identity scores",
+    "whole-context rescue sensitivity before head-specific null interpretation"
+  ],
+  "discovery_chromosomes": [
+    "chr18",
+    "chr19"
+  ],
+  "edit_candidates": 128,
+  "eligibility": "canonical DNA, matched transitions/composition, exact offsets, unchanged visible flank",
+  "endpoint": "unchanged masked flank token log probability",
+  "head_selection": "largest mean motif-minus-sham rescue; ties by layer then head",
+  "input_sha256": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459",
+  "max_flank_bp": 30,
+  "min_clusters": 8,
+  "min_effect_nats": 0.05,
+  "model_name": "zhihan1996/DNABERT-2-117M",
+  "model_revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "motif": "JASPAR MA0139.1",
+  "motif_threshold_fraction": 0.8,
+  "one_edit_per_sequence": true,
+  "permutations": 9999,
+  "previously_inspected_chromosomes": [
+    "chr20",
+    "chr21"
+  ],
+  "primary_intervention": "clean to motif-edited head context at masked query",
+  "scan_cap": 256,
+  "seed": 1729,
+  "sequence_cap": 12,
+  "source_sha256": {
+    "src/assay_alignment.py": "cc193663f2f40a37173c113ced0f4d5e56c4d26f5c55c933df2edfffe89cce5e",
+    "src/assay_stats.py": "fafa7b4e78fdabf1fd26b46fe2152089468146467bd5f1a0177fd3b9240f2979",
+    "src/config.py": "59515a9a8be06fe617b065a449788861196894d7fb2a4474009185167a6d2afb",
+    "src/controlled_edits.py": "a3d91083a3e7e5a664a61de2ab4924a1f473771d6d6d2741ae7cdc39741a6282",
+    "src/modeling.py": "06300e1c149f45765a21707bf43d9f4e77f500dde0a410fe1d7a43beb228db91",
+    "src/motif_scoring.py": "e6f265a22d434d59448220c47d9593ce714b673b8376ba191ec18bc0697e905c",
+    "src/native_endpoint.py": "3bbae34a71f4731a249f809363f3ff178c961e7d42db0e0a252ea68171b32255",
+    "src/utils.py": "e8fb7f1f68a61697644d7c3c8fffd1b71fa5cfbfd301f1441f15cc612b484e9e",
+    "tools/run_native_endpoint.py": "08b6f22e39c3479f7d3b8f7ab6c2bd4e00789d6251b1878e1142a8d795148bd8"
+  },
+  "target_rule": "nearest downstream whole token, gap 1..30 bp, then upstream"
+}

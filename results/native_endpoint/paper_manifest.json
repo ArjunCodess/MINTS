@@ -1,0 +1,7 @@
+{
+  "claim": "failed discovery feasibility gate; no native head or binding inference",
+  "execution_sha256": "8ed5e002df8853d32e9dd316aa15bd309da5525cc511a11ac2653f82a696ef72",
+  "generator_sha256": "4c3bb53c5281f995a9f07e5dcd48487f90bb62b518b053c6a572535c9d77686e",
+  "summary_sha256": "f9f4ddfcb11a2afb68e521b169c830fc5a69886de9c9f0fdbae52d3947497da0",
+  "tex_sha256": "5c09c7d953b14bc043d3ea4cd733f7bd116924c7613658040a008ef34b7b69ca"
+}

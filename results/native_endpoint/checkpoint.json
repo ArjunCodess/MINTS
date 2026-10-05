@@ -1,0 +1,21 @@
+{
+  "device": "cuda",
+  "fitted_readout": false,
+  "loading_info": {
+    "error_msgs": [],
+    "mismatched_keys": [],
+    "missing_keys": [],
+    "unexpected_keys": []
+  },
+  "model_name": "zhihan1996/DNABERT-2-117M",
+  "prediction_head_parameters": [
+    "cls.predictions.transform.dense.weight",
+    "cls.predictions.transform.dense.bias",
+    "cls.predictions.transform.LayerNorm.weight",
+    "cls.predictions.transform.LayerNorm.bias",
+    "cls.predictions.decoder.weight",
+    "cls.predictions.decoder.bias"
+  ],
+  "resolved_revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "revision": "7bce263b15377fc15361f52cfab88f8b586abda0"
+}

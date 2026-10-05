@@ -1,0 +1,18 @@
+{
+  "ci_high": 0.08692974597215648,
+  "ci_low": -0.25132797197862106,
+  "cluster_standard_deviation": 0.3128413475703733,
+  "confirmation_status": "not run; fresh uninspected cohort required",
+  "endpoint": "unchanged masked flank token log probability",
+  "genomic_clusters": 11,
+  "interpretation": "discovery feasibility only; no native mechanism or binding claim",
+  "mean": -0.05680769681930542,
+  "next_action": "stop this endpoint; any revised endpoint is a new exploratory study",
+  "p": 0.6218,
+  "reasons": [
+    "motif effect does not exceed matched sham with specified sensitivity"
+  ],
+  "retained_sequences": 12,
+  "selected_head": null,
+  "status": "stop"
+}
