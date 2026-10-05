@@ -4,6 +4,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import json
 import argparse
+import os
 from collections import Counter
 from src.variant_audit import audit_study
 
@@ -14,30 +15,48 @@ from src.utils import sha256_file,write_json
 ROOT=Path(__file__).resolve().parents[1]
 
 
+def validate_report_target(root,study,pilot,report):
+    """Keep presentation output away from frozen and scientific evidence."""
+    root,study,pilot,report=(Path(p).resolve() for p in (root,study,pilot,report))
+    if any(not path.is_relative_to(root) for path in (study,pilot,report)):
+        raise ValueError("Study, pilot and report outputs must stay within the repository")
+    if report.suffix.lower()!=".md" or any(report.is_relative_to(p) for p in (study,pilot)):
+        raise ValueError("Report must be a Markdown document outside study and pilot evidence")
+    if report.exists() and not report.is_file():
+        raise ValueError("Report output must be a file")
+    baseline=json.loads((study/"baseline_manifest.json").read_text(encoding="utf-8-sig"))
+    if report.relative_to(root) in {Path(name) for name in baseline["files"]} or report==root/"docs/MINTS_v2_protocol.md":
+        raise ValueError("Report cannot overwrite a frozen baseline or protocol document")
+
+
+def powershell_path(path):
+    return "'"+Path(path).relative_to(ROOT).as_posix().replace("'","''")+"'"
+
+
 def build(study=ROOT/"results/variant_study",pilot=ROOT/"results/variant_pilot",report=ROOT/"docs/MINTS_v2_feasibility.md"):
     study,pilot,report=Path(study).resolve(),Path(pilot).resolve(),Path(report).resolve()
     if any(not path.is_relative_to(ROOT) for path in (study,pilot,report)):
         raise ValueError("Study, pilot and report outputs must stay within the repository")
     audit=audit_study(ROOT,study,pilot,check_report=False)
+    validate_report_target(ROOT,study,pilot,report)
     summary=json.loads((pilot/"summary.json").read_text())
     gate=json.loads((pilot/"gate.json").read_text())
+    if summary["retained"]!=0 or gate["status"]!="stop":
+        raise ValueError("This report describes a stopped empty pilot; a nonempty study needs its own report")
     eligibility=pd.read_csv(pilot/"eligibility.csv")
     inventory=pd.read_csv(study/"dataset_inventory.csv")
     counts=eligibility.groupby("reason").size().sort_index()
-    counts.rename("rows").to_csv(study/"exclusion_counts.csv")
-    if summary["retained"]!=0 or gate["status"]!="stop":
-        raise ValueError("This report describes a stopped empty pilot; a nonempty study needs its own report")
     traces=json.loads((pilot/"eligibility_diagnostics.json").read_text())
     rejection_counts=Counter()
     for trace in traces:rejection_counts.update(trace["candidate_rejections"])
     candidates=sum(t["candidate_positions_checked"] for t in traces)
+    def link(name):
+        return Path(os.path.relpath(ROOT/"docs"/name,report.parent)).as_posix()
     rejection_table=pd.DataFrame([dict(first_rejection=k,candidates=v) for k,v in sorted(rejection_counts.items())])
-    rejection_table.to_csv(study/"sham_constraint_counts.csv",index=False)
     boundaries=[dict(source_row=t["source_row"],reference_tokens=t["reference_token_count"],
         alternate_tokens=t["alternate_token_count"],first_boundary_difference=t["first_boundary_difference"],
         reference_variant_tokens=json.dumps(t["reference_variant_tokens"]),
         alternate_variant_tokens=json.dumps(t["alternate_variant_tokens"])) for t in traces if "first_boundary_difference" in t]
-    pd.DataFrame(boundaries).to_csv(study/"token_boundary_diagnostics.csv",index=False)
     equal_counts=sum(r["reference_tokens"]==r["alternate_tokens"] for r in boundaries)
     constraint_lines="\n".join(f"| {r.first_rejection} | {r.candidates} |" for r in rejection_table.itertuples())
     reason_lines="\n".join(f"| {reason} | {n} |" for reason,n in counts.items())
@@ -96,15 +115,16 @@ from freshness claims.
 
 ## Reproduction and next boundary
 
-Use fresh output directories for every scientific attempt:
+This report was built from saved evidence with:
 
 ```powershell
-python tools/prepare_variant_study.py --output results/variant_study_new
-python tools/run_variant_pilot.py --output results/variant_pilot_new --device cuda
-python tools/build_variant_artifacts.py
+python tools/build_variant_artifacts.py --study {powershell_path(study)} --pilot {powershell_path(pilot)} --report {powershell_path(report)}
+python tools/audit_variant_study.py --study {powershell_path(study)} --pilot {powershell_path(pilot)}
 ```
 
-The report builder verifies the saved default study, scientific receipts,
+Use fresh output directories for every scientific attempt, following the
+[reproduction instructions]({link('variant_verification.md')}#fresh-output-reproduction).
+The report builder verifies the supplied study, scientific receipts,
 historical attempt, metadata hashes and frozen Git baseline. The initial attempt
 is retained with source snapshots; its reporting label was corrected to
 distinguish unrun controls from failed controls without changing eligibility.
@@ -112,10 +132,13 @@ distinguish unrun controls from failed controls without changing eligibility.
 Continuing requires a new exploratory protocol for nucleotide correspondence
 and control feasibility, or a larger cohort supporting the frozen rules.
 Any revision must be saved before model scoring and must not reinterpret this
-empty retained population as a positive result. The [protocol](MINTS_v2_protocol.md)
-and [data inventory](variant_data_feasibility.md) describe the required evidence.
+empty retained population as a positive result. The [protocol]({link('MINTS_v2_protocol.md')})
+and [data inventory]({link('variant_data_feasibility.md')}) describe the required evidence.
 """
     report.parent.mkdir(parents=True,exist_ok=True)
+    counts.rename("rows").to_csv(study/"exclusion_counts.csv",lineterminator="\n")
+    rejection_table.to_csv(study/"sham_constraint_counts.csv",index=False,lineterminator="\n")
+    pd.DataFrame(boundaries).to_csv(study/"token_boundary_diagnostics.csv",index=False,lineterminator="\n")
     report.write_bytes(text.encode())
     outputs={report.relative_to(ROOT).as_posix():sha256_file(report)}
     for name in ("exclusion_counts.csv","sham_constraint_counts.csv","token_boundary_diagnostics.csv"):
