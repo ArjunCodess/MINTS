@@ -1,8 +1,13 @@
 {
   "clean_checkout": {
-    "reason": "local Git transfer failed on damaged objects with about 22 MB free; recursive temporary-directory cleanup blocked by automatic approval review",
-    "stale_checkout_test_log_excluded": true,
-    "status": "not completed"
+    "artifact_tests_deselected": 8,
+    "cached_scientific_inputs_absent": true,
+    "implementation_commit": "6708369",
+    "offline_audits": "both passed",
+    "report_rebuild_byte_identical": true,
+    "status": "completed",
+    "test_log_sha256": "cbbf030fcf899e0c70278b485079c64f3a928256df01059195fd1bdcd5861853",
+    "tests_passed": 177
   },
   "compileall": "both environments passed",
   "dependencies": "both environments passed pip check",
@@ -21,6 +26,11 @@
   },
   "implementation_commit": "02025f7",
   "offline_audits": "original study and downloaded cohort passed",
+  "previous_clean_checkout_attempt": {
+    "reason": "local Git transfer failed on damaged objects with about 22 MB free; recursive temporary-directory cleanup blocked by automatic approval review",
+    "stale_checkout_test_log_excluded": true,
+    "status": "not completed"
+  },
   "reference_verified": 4096,
   "report_build": "passed",
   "report_manifest_sha256": "a4363b3e6603e01bcffa0533e1844f7dce309a37f7667c95fbee92c363dea7e4",
@@ -29,7 +39,12 @@
   "screened": 4096,
   "sequence_controls": 0,
   "source_records": 512556,
-  "status": "completed with clean-checkout limitation",
+  "status": "completed",
+  "temporary_cleanup": {
+    "free_bytes_after_validation": 86884352,
+    "reason": "automatic approval review blocked recursive deletion despite explicit user authorization",
+    "status": "not performed"
+  },
   "tests": {
     "tests_cpu.log": {
       "passed": 185,
