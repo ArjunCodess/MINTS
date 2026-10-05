@@ -1,0 +1,12 @@
+........................................................................ [ 66%]
+.....................................                                    [100%]
+============================== warnings summary ===============================
+tests/test_hardened_assay.py::test_manuscript_build_rejects_changed_execution_input
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+tests/test_hardened_assay.py::test_manuscript_build_rejects_changed_execution_input
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+109 passed, 2 warnings in 11.82s
+<sys>:0: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
