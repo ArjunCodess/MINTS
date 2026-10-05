@@ -66,9 +66,20 @@
         "Ke Li"
       ],
       "verification": "Official arXiv page; title, authors, year and DOI checked with web tool"
+    },
+    {
+      "key": "ali2026causal",
+      "url": "https://arxiv.org/abs/2607.19618v1",
+      "doi": "10.48550/arXiv.2607.19618",
+      "title": "Causal dictionary learning reveals and validates transcription-factor binding features in genomic language models",
+      "authors": [
+        "Sarwan Ali"
+      ],
+      "version": "v1, 2026-07-21",
+      "verification": "Official arXiv abstract and HTML inspected with web tool on 2026-10-05; sections 3.3 and 4 compared with fixed-token pilot"
     }
   ],
   "note": "publisher page content retained only as a hash, not copied article text",
-  "bibliography_sha256": "88296911a1ef2e5d0160ed1f90617b0a72ef54615fdb73f3bfca8ef6a7a19074",
+  "bibliography_sha256": "4314fd3c7c30effc92e8f302ce8e1bc8e4e50db939c70368e5699f34aa8b7006",
   "previous_checked_at": "2026-10-04"
 }

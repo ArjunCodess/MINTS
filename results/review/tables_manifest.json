@@ -51,8 +51,8 @@
     "results/review/ctcf_sequence_qk_inference.csv": "1fe402ca60fe8ccc7042c4c11de512a78242b7c97706fb7d6b7db5a88697d01b",
     "results/review/pinned_dataset_comparison.json": "39c361bd1f2a54c8c96cc28739d8eceeffc4dbe2d6312cdcc98708ce9fcc04b6",
     "results/review/upstream_dataset_snapshot.json": "05602747905eb4136c89f204733a2759a35fbcff537442925131e03b8ccc7803",
-    "results/review/reference_verification.json": "592a7891b78b656fd5757d9fec7359aaffeb9325c1ca21da782ee23b59bc8acb",
-    "paper/references.bib": "88296911a1ef2e5d0160ed1f90617b0a72ef54615fdb73f3bfca8ef6a7a19074",
+    "results/review/reference_verification.json": "34c5f6fb01aed7ba7ef2818bf277327095656f105aa982f21e3056f651f297c4",
+    "paper/references.bib": "4314fd3c7c30effc92e8f302ce8e1bc8e4e50db939c70368e5699f34aa8b7006",
     "results/review/clean_result_import.json": "fae39e411b9872869a03b109e2625a9ed58c2e22bdaa68466e61260d0b34ef6e",
     "results/review/clean_reproduction.json": "73602808fcf739e32acf1407370ab0beecdffa394217e1946bd93ffe37c82eaf",
     "results/review/clean_input_comparison.json": "028c62bbec9dac90a98b9265e25831a72ef036d2a12da964d227797369f0c214",
@@ -62,7 +62,7 @@
     "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json": "a6e371afa6b4141041701a291cf436362553e4a0ba22db7a1e2d4844a8f93562",
     "paper/hardened_results.tex": "8ea04c65df309ac700601b8f8b309119e09d22254226f44d50f949e590a06b04",
     "results/hardened/paper_manifest.json": "1dc34e3d59adf7203cd033c8460b1614c4075fafc06393b5754fb59fb9ed659b",
-    "paper/main.tex": "247d86783ec09d4502482b975666b40b9f5da4801e16456d96a745949135d175"
+    "paper/main.tex": "34ee3a1274dc0b3d91fa36cee0b6a8d393b55a55b106dabc262d7dc41c5b6d87"
   },
   "figures": {
     "results/review/ctcf_native_controls.png": {

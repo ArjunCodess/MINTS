@@ -6,6 +6,19 @@ MINTS is a reproducible mechanistic-interpretability pipeline for genomic transf
 
 MINTS asks a narrow question: what evidence is required before calling a genomic-transformer attention head a biological motif detector? The pipeline separates label decodability, motif-local association, and intervention effects on a specified output. These measurements support different claims, and the current results do not establish a native CTCF causal mechanism.
 
+## Native masked-flank feasibility pilot
+
+The paper is now titled **MINTS: Auditing Evidence for Motif Detection in Genomic Transformer Attention Heads**. Its main findings are the gap between decodability, attention association and causal use, broken historical patch alignment, unstable restoration ratios and a negative fitted CTCF incremental comparison. The latter does not prove absence of additional information, and individual-head screen failures leave distributed mechanisms unresolved.
+
+A separate discovery-only pilot loads the pinned pretrained MLM head with no missing prediction weights and measures recovery of one unchanged masked flank token across composition-preserving CTCF edits and matched shams. Exact token spans and target IDs must agree, and the motif difference must remain visible after masking. No trained probe or prior trained-readout head is reused.
+
+    python tools/run_native_endpoint.py --device cuda --output results/native_endpoint_new
+    python tools/build_native_artifacts.py
+
+The runner requires the pinned local model/tokenizer cache and prepared CTCF sequences, writes its full protocol before scoring, and refuses nonempty output directories. The artifact builder verifies the saved default `results/native_endpoint` run; a new exploratory run does not silently replace the manuscript evidence. The saved pilot retains 12 discovery sequences in 11 genomic clusters. Its motif-minus-sham loss is -0.0568 nats, with a 95% cluster interval of [-0.2513, 0.0869], so it stops before head selection or confirmation. This is an inconclusive feasibility result, not a precise mechanistic null.
+
+The [literature and biological-source review](docs/native_endpoint_review.md) records overlap with the July 2026 dictionary-ablation preprint, requirements for a future frozen confirmation, and GSE81945's hg19/allele-data compatibility limits. The already inspected chromosomes 20/21 cannot provide fresh confirmation for this extension. Any revised endpoint starts a new exploratory study.
+
 The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [`paper/main.tex`](paper/main.tex).
 
 ## Hardened mechanistic assays
