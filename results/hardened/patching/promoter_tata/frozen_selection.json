@@ -1,0 +1,26 @@
+{
+  "calibration_scope": "synthetic fixture thresholds are not transferred to native biological claims",
+  "criterion": "maximum discovery mean motif-minus-transition-matched-sham absolute score effect",
+  "discovery_membership": [
+    "chr18:32189989-32190289|1",
+    "chr18:55588604-55588904|1",
+    "chr18:59318638-59318938|1",
+    "chr18:63702910-63703210|1",
+    "chr19:1269282-1269582|1",
+    "chr19:1356271-1356571|1",
+    "chr19:35448207-35448507|1",
+    "chr19:46148189-46148489|1",
+    "chr19:48270031-48270331|1",
+    "chr19:7049256-7049556|1",
+    "chr19:8321450-8321750|1",
+    "chr19:8364106-8364406|1"
+  ],
+  "head": 8,
+  "layer": 0,
+  "motif": "TATA",
+  "primary_direction": "denoise",
+  "primary_endpoint": "motif_minus_sham_absolute_decision_score_change",
+  "primary_scheme": "edit",
+  "scorer_sha256": "6f0d8d93ed3da88ecdd015ac316ec2ab512f69939adb1d0dcc8ff7938f42493f",
+  "selection_scope": "discovery chromosomes only; independent confirmation"
+}

@@ -1,0 +1,28 @@
+{
+  "aggregation": "average candidate edits within sequence, then genomic-block inference",
+  "bootstrap_samples": 1000,
+  "claim_boundary": "effects on a trained frozen readout; no native pretrained biological mechanism established",
+  "confirmation_edits": 25,
+  "confirmation_sequences": 16,
+  "directions": [
+    "denoise",
+    "reverse"
+  ],
+  "discovery_sequences": 12,
+  "frozen_selection_sha256": "358615ac93f5cbe282232f62cdf2e960ea480511c67e4d3e156bf878b52d6b2b",
+  "motif": "TATA",
+  "permutations": 9999,
+  "primary_endpoint": "motif_minus_sham_absolute_decision_score_change",
+  "resampling_assumptions": "exchangeability for conditional observational genomic blocks; no biological randomization",
+  "schemes": [
+    "edit",
+    "all",
+    "all_with_special",
+    "flank",
+    "random",
+    "sparse"
+  ],
+  "scorer_sha256": "6f0d8d93ed3da88ecdd015ac316ec2ab512f69939adb1d0dcc8ff7938f42493f",
+  "seed": 1729,
+  "status": "completed"
+}
