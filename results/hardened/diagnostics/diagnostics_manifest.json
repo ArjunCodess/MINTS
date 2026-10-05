@@ -1,0 +1,17 @@
+{
+  "bootstrap_samples": 1000,
+  "inference": "fixed classifiers; paired sequence and 1Mb genomic-block intervals",
+  "inputs": {
+    "results\\cross_model\\review_tata_heldout\\counterfactuals\\promoter_tata_batch_activation_patching_pairs.tsv": "f15d57570ad8bc410716e50fd4b782fba104bf8020f09fa1dd4f7d65be46379c",
+    "results\\cross_model\\review_tata_heldout\\patching\\promoter_tata_batch_dnabert_activation_patching_pair_effects.npz": "c3e3fd399085ee3a0f3b4dbc88256c039a6f8b1e25483e3d660cef73aead77d5",
+    "results\\review\\promoter_no_tata_predictions.csv": "2df3714b02bc2d28ee56d03a3b1f7b396b640328d93f250d2f586d7f724f8994",
+    "results\\review\\promoter_tata_predictions.csv": "6072ca5cafa6a551f8268be3aeeb18c04822f0360674317128c915b60581f8ba",
+    "results\\review\\splice_sites_acceptors_predictions.csv": "23f5f9b6dde01d07dff8dc443c30010337ff273d1e6f42ac405b4cbbff48139f",
+    "results\\review\\splice_sites_donors_predictions.csv": "e6f1fd15c688858a6148cb0291b90a8b1289c923b6dafe99090e11ef48dcb399"
+  },
+  "interpretation": "historical patching is retained for audit only; new controlled, aligned studies are separate",
+  "negative_denominators": 7,
+  "pairs": 10,
+  "pairs_with_misaligned_patch_positions": 6,
+  "seed": 1729
+}
