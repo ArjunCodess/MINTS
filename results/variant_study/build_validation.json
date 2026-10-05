@@ -1,0 +1,54 @@
+{
+  "status": "completed",
+  "checked_at": "2026-10-05",
+  "base_commit": "fb93ca3e33dd7ebee8424b8ec55c84ac0fdbc625",
+  "branch": "natural-variant-pilot",
+  "tests": {
+    "tests_cuda.log": {
+      "passed": 121,
+      "sha256": "174efe04010c956f945b0329a97bb2ee967e0d7f9f4d3578093faca47c706ef4"
+    },
+    "tests_cpu.log": {
+      "passed": 121,
+      "sha256": "b89ffd724a20f682bd1e7408682f33dda87cbe635c3f2099473c9d088d1749f1"
+    }
+  },
+  "preflight": "passed; pinned tokenizer cached; scientific input files present",
+  "dependencies": "both environments: no broken requirements",
+  "compileall": "src and tools passed",
+  "artifact_builds": [
+    "tools/build_hardened_artifacts.py",
+    "tools/build_native_artifacts.py",
+    "tools/build_native_followup.py",
+    "tools/build_variant_artifacts.py"
+  ],
+  "manuscript": {
+    "compiler": "MiKTeX via bundled latex helper",
+    "exit_code": 0,
+    "pages": 15,
+    "text_matches_frozen_baseline": true,
+    "tracked_pdf_sha256": "feeecf04682f51c24eb8827b5fc77d8b58d626fec255cd0b77e96f3bf9a9cc40",
+    "rebuilt_pdf_sha256": "b10487f811d5d07785adbc492e7fe5ec8c79c6affcca6950f0fe114ee5927068",
+    "unresolved_citations": false,
+    "overfull_boxes": false,
+    "scope": "baseline document rebuilt; original PDF bytes preserved; PDF figure metadata-only changes restored"
+  },
+  "pilot": {
+    "scanned": 16,
+    "singleton_heterozygous_loci": 11,
+    "retained": 0,
+    "decision": "stop",
+    "native_scoring": "not run",
+    "head_selection": "not run",
+    "confirmation": "not run"
+  },
+  "scientific_execution_sha256": "c0ab621fac0eee74a527eb1587f97812b57b3df68f5b86807ce88d595b95253d",
+  "report_manifest_sha256": "78679aeb06677f64db03b08666ad251b3c7f87fbc1e92c66b3f01c29534de2ca",
+  "remaining_requirements": [
+    "phase and replicate biological QC",
+    "mapping-bias and dosage verification",
+    "feasible aligned substitution controls",
+    "fresh donor/source-separated membership",
+    "discovery intervention variance and justified confirmation power"
+  ]
+}
