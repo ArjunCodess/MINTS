@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-05",
+  "literature": {
+    "url": "https://arxiv.org/html/2607.19618v1",
+    "version": "v1",
+    "verification": "arXiv abstract and HTML inspected with web tool",
+    "scope": "protocol comparison; independent reproduction not attempted"
+  },
+  "biological_source": {
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE81nnn/GSE81945/soft/GSE81945_family.soft.gz",
+    "compressed_sha256": "c425fe5f300c699d27a52133fbd6e958bda475ad63010a4a42165e7e3684d4ac",
+    "metadata": [
+      "!Series_title = Functional mutations form at CTCF-cohesin binding sites in melanoma due to uneven nucleotide excision repair across the motif",
+      "!Series_sample_id = GSM2178295",
+      "!Series_sample_id = GSM2178296",
+      "!Series_sample_id = GSM2178297",
+      "!Sample_title = CTCF_1_ChIP_COLO829",
+      "!Sample_geo_accession = GSM2178295",
+      "!Sample_data_processing = Genome_build: hg19",
+      "!Sample_data_processing = Supplementary_files_format_and_content: Bed files contain coordinates for CTCF peak calls",
+      "!Sample_supplementary_file_1 = ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM2178nnn/GSM2178295/suppl/GSM2178295_CTCF_1_ChIP_COLO829_peaks.bed.gz",
+      "!Sample_title = CTCF_2_ChIP_COLO829",
+      "!Sample_geo_accession = GSM2178296",
+      "!Sample_data_processing = Genome_build: hg19",
+      "!Sample_data_processing = Supplementary_files_format_and_content: Bed files contain coordinates for CTCF peak calls",
+      "!Sample_supplementary_file_1 = ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM2178nnn/GSM2178296/suppl/GSM2178296_CTCF_2_ChIP_COLO829_peaks.bed.gz",
+      "!Sample_title = IgG_ChIP_COLO829",
+      "!Sample_geo_accession = GSM2178297",
+      "!Sample_data_processing = Genome_build: hg19",
+      "!Sample_data_processing = Supplementary_files_format_and_content: Bed files contain coordinates for CTCF peak calls",
+      "!Sample_supplementary_file_1 = NONE"
+    ],
+    "usable_variant_count": null,
+    "status": "candidate only; peak metadata does not establish variant sample size"
+  }
+}
