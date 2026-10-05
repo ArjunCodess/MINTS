@@ -142,6 +142,7 @@ def save_restoration_matrix(
     restoration: np.ndarray,
     output_stem: str,
     config: PipelineConfig = DEFAULT_CONFIG,
+    layer_indices: tuple[int, ...] | None = None,
 ) -> dict[str, Path]:
     """Save restoration values as CSV plus a heatmap image."""
 
@@ -152,6 +153,9 @@ def save_restoration_matrix(
     matrix = np.asarray(restoration, dtype=np.float64)
     if matrix.ndim != 2:
         raise ValueError("Restoration matrix must be rank 2 with shape [layer, head].")
+    layer_ids = tuple(range(matrix.shape[0])) if layer_indices is None else tuple(layer_indices)
+    if len(layer_ids) != matrix.shape[0] or len(set(layer_ids)) != len(layer_ids):
+        raise ValueError("Actual layer IDs must be unique and align with matrix rows")
 
     table_path = config.paths.patching_dir / f"{output_stem}.csv"
     figure_path = config.paths.figures_dir / f"{output_stem}_heatmap.png"
@@ -160,7 +164,7 @@ def save_restoration_matrix(
 
     table = pd.DataFrame(
         [
-            {"layer": layer_idx, "head": head_idx, "restoration": float(matrix[layer_idx, head_idx])}
+            {"layer": layer_ids[layer_idx], "head": head_idx, "restoration": float(matrix[layer_idx, head_idx])}
             for layer_idx in range(matrix.shape[0])
             for head_idx in range(matrix.shape[1])
         ]
@@ -171,6 +175,7 @@ def save_restoration_matrix(
     height = max(4.0, matrix.shape[0] * 0.45)
     fig, ax = plt.subplots(figsize=(width, height))
     sns.heatmap(matrix, ax=ax, cmap="vlag", center=0.0, cbar_kws={"label": "restoration"})
+    ax.set_yticklabels(layer_ids)
     ax.set_xlabel("head")
     ax.set_ylabel("layer")
     ax.set_title("Activation patching restoration")
@@ -186,6 +191,7 @@ def save_restoration_matrix(
             "table_path": str(table_path),
             "figure_path": str(figure_path),
             "shape": list(matrix.shape),
+            "layers": list(layer_ids),
             "nan_count": int(np.isnan(matrix).sum()),
         },
     )
@@ -724,6 +730,8 @@ def run_custom_dnabert_activation_patching(
             "Clean and corrupted sequences must tokenize to the same shape for head-output patching; "
             f"got {tuple(clean_encoded['input_ids'].shape)} and {tuple(corrupted_encoded['input_ids'].shape)}."
         )
+    from .assay_alignment import validate_patch_alignment
+    validate_patch_alignment(bundle.tokenizer, clean_sequence, corrupted_sequence)
 
     clean_score = _score_sequence_with_probe(bundle, clean_sequence, scorer, config)
     corrupted_score = _score_sequence_with_probe(bundle, corrupted_sequence, scorer, config)
@@ -744,7 +752,7 @@ def run_custom_dnabert_activation_patching(
             restoration[layer_offset, head_idx] = restoration_metric(clean_score, corrupted_score, patched_score)
         progress(f"Custom patching complete for layer {layer_idx}")
 
-    outputs = save_restoration_matrix(restoration, output_stem, config=config)
+    outputs = save_restoration_matrix(restoration, output_stem, config=config, layer_indices=layers)
     manifest_path = outputs["manifest"]
     write_json(
         manifest_path,
@@ -799,6 +807,11 @@ def _select_patching_pairs_for_task(
             clean = _encode_single(bundle.tokenizer, record.clean_sequence, bundle.device)
             corrupted = _encode_single(bundle.tokenizer, record.corrupted_sequence, bundle.device)
             if clean["input_ids"].shape == corrupted["input_ids"].shape:
+                from .assay_alignment import validate_patch_alignment
+                try:
+                    validate_patch_alignment(bundle.tokenizer, record.clean_sequence, record.corrupted_sequence)
+                except ValueError:
+                    continue
                 records.append(record)
     return records
 
@@ -861,8 +874,8 @@ def run_batch_dnabert_activation_patching(
                     record.end,
                     bundle.tokenizer,
                 )
-            except Exception:
-                motif_span = None
+            except (ValueError, NotImplementedError) as exc:
+                raise ValueError(f"Exact intervention alignment failed for {record.sequence_id}") from exc
             positions = stream_sparse_patch_positions(
                 sequence_length=token_count,
                 motif_token_span=motif_span,
@@ -894,7 +907,7 @@ def run_batch_dnabert_activation_patching(
 
     restoration = np.nanmean(per_pair_restoration, axis=0)
     stem = output_stem or f"{task}_batch_dnabert_activation_patching"
-    outputs = save_restoration_matrix(restoration, stem, config=config)
+    outputs = save_restoration_matrix(restoration, stem, config=config, layer_indices=layers)
     pair_effect_path = config.paths.patching_dir / f"{stem}_pair_effects.npz"
     np.savez_compressed(pair_effect_path, restoration=per_pair_restoration,
                         patched_scores=per_pair_patched_scores,
@@ -945,6 +958,14 @@ def run_batch_dnabert_activation_patching(
     rows["median_restoration"] = medians
     rows["mean_ci_low"] = low
     rows["mean_ci_high"] = high
+    from .assay_stats import absolute_patching_summary
+    absolute = absolute_patching_summary(clean_scores, corrupted_scores, per_pair_patched_scores,
+                                        [r.clean_sequence for r in records], seed=config.data.seed)
+    for column, key in [("absolute_effect", "mean"), ("absolute_median", "median"),
+                        ("absolute_ci_low", "ci_low"), ("absolute_ci_high", "ci_high"),
+                        ("absolute_loo_low", "loo_low"), ("absolute_loo_high", "loo_high")]:
+        rows[column] = absolute[key]
+    rows["primary_endpoint"] = "patched_minus_corrupted_probe_decision"
     rows.to_csv(outputs["table"], index=False)
     outputs["pairs"] = pair_path
     outputs["sequence_summary"] = summarize_sequence_patching(
