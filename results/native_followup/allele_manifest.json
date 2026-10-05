@@ -1,0 +1,40 @@
+{
+  "adjacent_multi_variant_loci": 2,
+  "coordinates": "source positions treated as 1-based and checked against UCSC hg19; windows 0-based half-open",
+  "count_normalization": "MT_ChIP * WT_WGS / MT_WGS divided by adjusted_MT_ChIP + WT_ChIP",
+  "genome_build": "hg19",
+  "heterozygous_loci": 13,
+  "heterozygous_variants": 15,
+  "interval": "half-count corrected log odds ratio +/- 1.96*sqrt(sum reciprocal counts); descriptive pooled reads",
+  "limitations": [
+    "replicates pooled in publication; replicate-specific variation unavailable",
+    "nearby variants may be one haplotype; phase unresolved",
+    "homozygous locus excluded from normalized allele inference",
+    "small selected cohort; no broad biological confirmation or native model claim",
+    "no substitution-matched control population yet; no hg38 liftover claimed",
+    "uncertainty excludes mapping bias, cell-line context and WGS/ChIP replicate variation"
+  ],
+  "parser_sha256": "53631c34bb46d1a060372efd9669c74226fb8d23c4fe861f7999b61a28ac6a42",
+  "raw_source_license": "publisher supplemental material; third-party terms, not MINTS MIT license",
+  "reference_verified": 16,
+  "runner_sha256": "f55ebede4a9dfd5eb65243f32ee28986f513aa392ebec5d5c9ac5d6e635be1b9",
+  "source_table": "Table S3 in mmc1.pdf",
+  "source_table_correction": "main text references Table S2; supplementary Table S2 is RAD21 accessions",
+  "sources": [
+    {
+      "path": "results/native_followup/sources/mmc1.pdf",
+      "sha256": "7dd30e798e65f170c5721a3145de661ec61a982d6b370cd6777a8843d06b5a70",
+      "url": "https://ars.els-cdn.com/content/image/1-s2.0-S221112471631628X-mmc1.pdf"
+    },
+    {
+      "path": "results/native_followup/sources/mmc2.xlsx",
+      "sha256": "e591fa07442922e8f14f3eb92141694d2d1d0a227e1c16620ef822c16550cb99",
+      "url": "https://ars.els-cdn.com/content/image/1-s2.0-S221112471631628X-mmc2.xlsx"
+    }
+  ],
+  "status": "prepared exploratory biological benchmark",
+  "strict_core_loci": 11,
+  "strict_core_variants": 13,
+  "table_sha256": "c9520470a796595eb636faaa6ac5aae048518a77263515ec7c930fb5600fa5cc",
+  "variants": 16
+}

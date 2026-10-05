@@ -1,0 +1,308 @@
+Cell Reports, Volume 17
+
+
+
+Supplemental Information
+
+
+
+Functional Mutations Form at CTCF-Cohesin
+Binding Sites in Melanoma Due to Uneven
+Nucleotide Excision Repair across the Motif
+Rebecca C. Poulos, Julie A.I. Thoms, Yi Fang Guan, Ashwin Unnikrishnan, John E.
+Pimanda, and Jason W.H. Wong
+Supplemental Data Items
+
+
+Figure S1:   CTCF motif, control motif and simulated mutations in skin cancers.
+
+Figure S2:   CTCF ChIP-seq and DNA-affinity experiments in COLO829.
+
+Figure S3:   Investigating enrichment for cancer-association in CTCF motif mutations in melanoma.
+
+
+Table S1:    CTCF and control motifs used in analyses.
+
+Table S2:    Accession numbers and cell-type information for RAD21 ChIP-seq datasets.
+
+Table S3:    COLO829 mutations in CTCF motifs identified from CTCF ChIP-seq in COLO829 cells.
+Figure S1: CTCF motif, control motif and simulated mutations in skin cancers. Related to Figure 1.
+Mutation density per sample for the region ± 1 kb of the CTCF motif centre in (a) skin squamous cell carcinoma
+(SCC; n=8), (b) skin basal cell carcinoma (BCC; n=3) and (c) nucleotide excision repair (NER)-deficient XPC-/-
+SCCs (n=5). Mutation density per sample in (d) SCC and (e) BCC at the CTCF and control motifs, along with
+mutations simulated at CTCF motifs using the combined trinucleotide signature of SCC or BCC, respectively.
+(f) Mutation density per sample in melanoma and XPC-/- SCC at control motifs. In the motif, ‘N’ denotes any
+nucleotide. (g) Number of reads from CTCF NHEK ChIP-seq across the strict 13 bp CTCF and control motifs
+(n=5,470), showing mean and standard deviation. Significance is by unpaired t-test, where **** P < 0.0001.
+Mutation density per sample for the region ± 1 kb of the control motif centre in (h) melanoma, (i) SCC and (j)
+BCC.
+Figure S2: CTCF ChIP-seq and DNA-affinity experiments in COLO829. Related to Figure 3.
+(a) Number of peaks identified in CTCF ChIP-seq replicates in COLO829. (b) Distance of the CTCF motif from
+the peak centre in COLO829 CTCF ChIP-seq data. (c) Distribution of CTCF mutations per Mb of CTCF peaks
+from COLO829 CTCF ChIP-seq in COLO829 and The Cancer Genome Atlas (TCGA) melanoma samples. (d)
+A portion of the Sanger sequencing traces from plasmids containing the cloned CTCF regions used to produce
+wild-type and mutant DNA baits, along with the reverse complement of the CTCF motif from the JASPAR
+database (Mathelier et al., 2015). (e) Western blot using anti-CTCF primary antibody (top) and silver stain
+loading control (bottom) from DNA affinity experiments. Blots show protein input (left lane), protein elute from
+wild-type DNA bait (middle lane) and protein elute from mutant DNA bait (right lane). Position of the CTCF
+protein band and protein molecular weight markers are indicated.
+Figure S3: Investigating enrichment for cancer-association in CTCF motif mutations in melanoma.
+Related to Figure 4.
+(a) Normalised gene expression (RNA-seq data) for melanoma samples, shown for all cancer-associated genes
+within loops with an anchor motif mutated in at least one melanoma sample. Adjusted P-values are given after
+multiple testing correction using the Bonferroni correction method. Error bars show mean and standard
+deviation, with individual data points indicating values for each sample. Histogram showing bootstrapping
+results (n=1,000 iterations) of the proportion of (b) cancer-associated genes (data in bins of 5% intervals) and
+(c) non-cancer-associated genes (data in bins of 1.25% intervals) with significantly different gene expression
+between wild-type and mutant samples for all unique anchor-gene-loop groupings when anchor motif mutations
+were randomly assigned. The actual proportion of significant anchor-gene-loop groupings in The Cancer
+Genome Atlas (TCGA) melanomas is indicated. (d) Distance between the transcription start site of a given gene
+and an anchor motif, for all genes within 100 kb of an anchor motif mutated in melanoma, separated into all
+cancer-associated and non-cancer-associated genes. (e) Variant allele frequency (VAF) of all melanoma
+mutations within CTCF motifs in anchor regions, non-anchor regions and of BRAF V600E mutations, with only
+significant associations shown. Box-plots show median, quartiles, maximum and minimum. Significances are by
+unpaired t-test, or unpaired one-sample t-test where appropriate in (a). **** P < 0.0001, *** P < 0.001, ** P <
+0.01 and n.s. denotes not significant.
+Table S1: CTCF and control motifs used in analyses. Related to Figure 1.
+
+See Excel file.
+
+
+
+Table S2: Accession numbers and cell-type information for RAD21 ChIP-seq datasets. Related to Figure 2.
+
+ ENCODE accession          Cell           Tissue                    Karyotype    Mean peak size (bp)
+ ENCFF001VFE               GM12878        blood                     normal       440
+ ENCFF001VRC               SK-N-SH        brain                     cancer       1,045
+ ENCFF001VDS               A549           epithelium                cancer       311
+ ENCFF001VHB               H1-hESC        embryonic stem cell       normal       355
+ ENCFF001VLU               IMR-90         lung                      normal       485
+ ENCFF001VJD               HeLa-S3        cervix                    cancer       403
+ ENCFF001VOM               K562           blood                     cancer       366
+ ENCFF001VKW               HepG2          liver                     cancer       326
+Table S3: COLO829 mutations in CTCF motifs identified from CTCF ChIP-seq in COLO829 cells. Related to Figure 3.
+
+                                   Position in    Position in 19       WGS      ChIP-seq     normVAF for
+   Position (hg19)    Mutation     strict 13 bp   bp consensus         reads     reads      mutant allele in      Zygosity
+                                      motif           motif        WT     MT    WT    MT    CTCF ChIP-seq
+
+ chr20:49,435,093       G>A             -               2          17      11   53    46         57%           heterozygous
+ chr2:43,158,779        C>T             1               4          14      5    29     3         22%           heterozygous
+ chr3:196,336,325       C>A             2               5          8       15   138    2          1%           heterozygous
+ chr3:50,587,723        G>T             4               7          8       10   135   61         27%           heterozygous
+ chr8:43,265,125        G>A             4               7          17      16   18     0          0%           heterozygous
+ chr3:50,587,722        G>A             5               8          8       10   131   61         27%           heterozygous
+ chr2:233,304,367       C>T            10              13          8       5    190    8          6%           heterozygous
+ chr3:54,408,675        C>A            10              13          33      16   36     0          0%           heterozygous
+ chr7:150,685,763       C>T            10              13          13      7    149   37         32%           heterozygous
+ chr8:122,261,217       G>A            10              13          8       10   143   13          7%           heterozygous
+ chr17:10,231,077       G>A            10              13          11      25   60    80         37%           heterozygous
+ chr17:19,350,559       C>T            10              13          13      20   53     2          2%           heterozygous
+ chr17:19,350,558       C>T            11              14          15      20   53     2          3%           heterozygous
+ chr17:48,758,841       C>T            11              14          24      6    91     2          8%           heterozygous
+ chr19:43,389,232       G>A             -              18          10      23   53    128        51%           heterozygous
+chr5:23,303,782        G>A             -               19             0     13  0     14         100%          homozygous
+WGS = whole-genome sequencing; ChIP-seq = chromatin immunoprecipitation sequencing;
+WT = wild-type; MT = mutant; normVAF = normalised variant allele frequency.
+Supplemental Experimental Procedures
+ChIP experiments in COLO829
+
+ChIP-seq experiments were performed as previously described (Wilson et al., 2010). In brief, early passage cells
+were cross-linked in 1% formaldehyde and nuclei extracted and lysed. Chromatin was sonicated for 6 hours in a
+Diagenode (Wallonia, Belgium) Pico Bioruptor (30 seconds on/ 30 seconds off) and divided across two samples,
+incubated with polyclonal rabbit anti-CTCF antibody (Millipore 07-729) and rabbit immunoglobulin G (IgG;
+Sigma I5006) respectively. Immunoprecipitated DNA was purified and used for library construction, followed
+by sequencing using the Illumina HiSeq 2000 platform (BGI, Hong Kong). Two independent ChIP experiments
+using COLO829 cells grown to different passages and harvested independently were performed and sequenced
+separately. Replicate 1 was performed using ~20 million cells for each condition (CTCF and IgG) and replicate
+2 was performed using ~40 million cells for each condition.
+
+DNA-affinity experiments in COLO829
+
+For DNA-affinity experiments, genomic DNA was isolated from COLO829 as previously described (Poulos et
+al., 2015) and a region (chr17:48,758,701-48,758,900) isolated for DNA baits using the following primers –
+forward: CTCCTTCACCGTTGTCTC; and reverse: CTGGAATGGAAGATGTGATG. The PCR product,
+representing both wild-type and mutant alleles, was cloned into the pGEM®-T Easy Vector System per
+manufacturer’s instructions (Promega Corporation, WI, USA). Wild-type and mutant plasmid clones were
+selected and purified (Figure S2d). To produce wild-type and mutant DNA baits, the region was PCR amplified
+from wild-type and mutant plasmids respectively, using a 5’ biotinylated forward primer so that each DNA bait
+had a biotin tag. PCR reactions were pooled to produce a sufficient quantity of DNA baits. The integrity of the
+PCR product was confirmed by Sanger sequencing.
+
+1.5 µg of dsDNA baits were loaded with 300 µg of Streptavidin dynabeads (M-280; Thermo Fisher Scientific,
+NSW, Australia) and kept at room temperature for 3 hours. After incubation with a blocking buffer, DNA-
+conjugated beads were incubated with pre-cleared COLO829 cell lysate which had been extracted using the NE-
+PER™ Nuclear and Cytoplasmic Extraction Reagents per kit instructions (Thermo Fisher Scientific, NSW,
+Australia). Each 300 µg of DNA-conjugated bead condition was incubated with 0.2 mg of pre-cleared nuclear
+protein extract from COLO829, in the presence of 10 µM zinc from zinc acetate, overnight at 4 oC. The bound
+proteins were boiled off the beads in 4x NuPAGE LD buffer (NP0007; Life Technologies, VIC, Australia)
+supplemented with 200 mM DTT at 95oC for 10 minutes. Equal volumes of elute from each DNA bait, and an
+aliquot of the protein input were loaded in separate lanes and separated on a 4-12% Bis-Tris gel (Life
+Technologies, VIC, Australia), and then transferred onto a nitrocellulose membrane. Western blotting was
+performed using 5% skim milk as a blocking reagent, polyclonal rabbit anti-CTCF antibody (Millipore 07-729)
+as the primary antibody and polyclonal goat anti-rabbit IgG (Dako P0448) as the secondary antibody. A silver
+stain was performed on the gel following transfer to the nitrocellulose membrane to serve as a loading control
+(Figure S2e). The silver stain was performed using reagents from Pierce Silver Stain for Mass Spectrometry per
+kit instructions (Thermo Fisher Scientific, NSW, Australia).
+
+Variant allele frequency and copy number variation analysis
+
+Variant allele frequencies (VAFs) in the melanoma samples were calculated by determining base calls at
+specific sites using SAMtools (Li et al., 2009) mpileup on the BAM files obtained from CGHub (Wilks et al.,
+2014). Reads were disregarded if they recorded a base call which was neither the wild-type nor mutant
+nucleotide (per the mutation calls made by Strelka (Saunders et al., 2012)). The VAF was calculated as the
+proportion of mutant base calls, over the total number of mutant and wild-type base calls, from all reads
+covering a given nucleotide.
+
+Copy number segment information data for melanoma sample TCGA-D9-A148 was obtained from the Genomic
+Data Commons (GDC).
+
+ChIP-sequencing data analysis
+
+The NHEK CTCF ChIP-seq peaks used for analyses in this study were those from the processed ‘narrow peak’
+BED files obtained directly from ENCODE. Peaks from the two replicates were merged to provide a complete
+list. To ensure that all regions used were of the same size, for all regions greater than 150 bp after merging, the
+centre 150 bp was used. To determine the CTCF read count from ChIP-seq across a given region, the
+corresponding BAM files were used. BEDtools (Quinlan and Hall, 2010) was used to convert the BAM to BED
+files and extend reads downstream to 150 bp. The two replicates were then combined for further analysis.
+
+COLO829 ChIP-seq data were obtained in fastq format and aligned using Burrows-Wheeler Aligner (BWA) (Li
+and Durbin, 2009). The resultant SAM file was converted to BAM format and sorted using SAMtools (Li et al.,
+2009). Peaks were called using the Homer Suite (Heinz et al., 2010) with ‘factor’ as the style option and IgG as
+the background control. Only CTCF peaks present across replicate experiments were used for analysis. To
+ensure standard peak sizes (332 bp by default), where peaks overlapped, peaks from the first replicate
+experiment were kept.
+
+To calculate the normalised variant allele frequency (normVAF) of each COLO829 mutation from ChIP-seq
+data, the reads from both ChIP-seq replicate experiments were combined. Base calls at specific sites were
+determined using SAMtools (Li et al., 2009) mpileup on sorted BAM files of either COLO829 CTCF ChIP-seq
+or whole-genome sequencing (WGS) data. Reads were disregarded if they recorded a base call which was
+neither the wild-type nor mutant nucleotide, using base calls as previously recorded (Craig et al., 2016).
+Normalisation for copy number variation and mapability was performed by using COLO829 WGS read
+coverage to calculate the normVAF, making use of the following formula:
+
+                                                          WildtypeWGS
+                                                 (Mutant ChIP ×       )
+                                                           Mutant WGS
+                          normVAF =
+                                                   WildtypeWGS
+                                    (Mutant ChIP ×             ) + WildtypeChIP
+                                                   Mutant WGS
+
+Repair dataset processing
+
+Genome-wide nucleotide excision repair (NER) sequencing (excision repair sequencing; XR-seq) cyclobutane
+pyrimidine dimer (CPD) repair data from UV light-irradiated normal human skin fibroblast (NHF) cells (Hu et
+al., 2015) were obtained in Sequence Read Archive (SRA) format (GEO: GSM1659156). As previously
+described (Hu et al., 2015), the raw reads were trimmed using Trimmomatic (Bolger et al., 2014) and aligned
+using Bowtie (Langmead et al., 2009). De-duplicated aligned reads for the two replicate experiments were
+merged for analysis, and reads were discarded if less than 20 bp in length. Time-course CPD and (6-
+4)pyrimidine-pyrimidone photoproduct ((6-4)PP) data XR-seq data for NHF cells for all time points (Adar et al.,
+2016) were obtained in SRA format (GEO: GSE76391). Reads were processed as described above, but with
+reads discarded only if they were greater than 36 bp in length. This is because reads greater than this length are
+unlikely to be nucleotide excision fragments which are generally 22-30 nucleotides in length (Hu et al., 2015).
+
+CTCF motif identification
+
+The strict 13 bp CTCF motifs (n=5,470; Table S1a) were confined to only those motifs which adhered to the
+following sequence CCA(C|G)(C|T)AG(A|G)(G|T)GGC(A|G) which overlapped with any of the 150 bp merged
+list of peaks from the replicate CTCF ChIP-seq datasets from NHEK cells. We defined the control motif as
+consisting of any region overlapping a CTCF NHEK ChIP-seq peak with the same six bases at the 3’ end of the
+motif as those in the strict 13 bp CTCF motif, but with any combination of bases at the 5’ end of the motif, as
+follows: NNNNNNNN(A|G)(G|T)GGC(A|G), where N represents any nucleotide. Control motifs were excluded
+if the six bases at the 3’ end of the motif overlapped with any full motifs identified previously, with a final count
+of n=80,551 control motifs identified. A subset of n=5,470 control motifs (Table S1b) were randomly selected
+from the full list such that they were matched for replication timing with the strict CTCF motif (that is,
+corresponding motifs had replication timing within ± 1 of each corresponding strict CTCF motif).
+
+To identify mutations in CTCF motifs in COLO829, motifs were identified within CTCF peaks from COLO829
+CTCF ChIP-seq (only peaks common between replicate experiments were used, as described above). CTCF
+motifs were identified using the consensus CTCF motif from the JASPAR database (Mathelier et al., 2015),
+using FIMO (Grant et al., 2011) with default settings.
+
+For the analyses of NHEK CTCF motifs, motifs were identified within CTCF peaks from NHEK CTCF ChIP-
+seq (the merged list of 150 bp peaks was used for this analysis, as described above). NHEK CTCF motifs
+(n=56,009) were identified using the consensus CTCF motif from the JASPAR database (Mathelier et al., 2015),
+using FIMO (Grant et al., 2011) with default settings.
+        We identified CTCF motifs with RAD21 (NHEK CTCF motifs which overlapped RAD21 peaks in all
+         eight cell-types; n=12,126) and CTCF motifs without RAD21 (NHEK CTCF motifs which did not
+         overlap RAD21 peaks in any cell-type; n=6,330). These were used for the mutation profiles at Figure
+         2a and the correlations at Figure 2b.
+        Using the list of NHEK CTCF motifs with RAD21 (see above), we defined a subset of motifs from
+         each group (n=1,099) which had matched CTCF read coverage (that is, corresponding motifs had
+         NHEK CTCF read coverage within ± 5 reads). These motifs were used for the repair profile at Figure
+         2c.
+        For the repair profile (Figure 2d) and correlations (Figure 2e), we selected from the list of NHEK
+         CTCF motifs with RAD21, the motifs in the top (Q4) and bottom (Q1) quartiles of CTCF read
+         coverage (n=3,031).
+TAD anchor motifs were identified from previously published data (Rao et al., 2014) using results from Hi-C
+experiments in NHEK cells. For VAF calculations of mutations in anchor and non-anchor regions (Figure S3e),
+published anchor motif annotations (Rao et al., 2014) were used in addition to strict 13 bp CTCF motifs. For
+mutations in the strict 13 bp motif, motifs were separated into all those that fell into anchor regions (n=1,587;
+motifs within TAD anchors from NHEK cells (Rao et al., 2014)), and those that fell into non-anchor regions
+(n=3,883; all remaining motifs).
+
+Data binning in Figure 2
+
+Binned data is shown in Figure 2b and Figure 2e. In Figure 2b, for motifs with RAD21 binding, data was
+binned by CTCF reads across the motif, incrementally increasing by 25, with all motifs with ≥ 600 CTCF reads
+allocated to the final bin. For motifs without RAD21 binding, data was binned by CTCF reads across the motif,
+incrementally increasing by 10, with all motifs with ≥ 90 CTCF reads allocated to the final bin. In Figure 2e,
+data was allocated to seven equally-sized bins, with bins ranging from replication timing of 10 to 80 (Q1 ChIP-
+seq) and replication timing of 15 to 85 (Q4 ChIP-seq). Within bins, CTCF reads (Figure 2b) or replication
+timing (Figure 2e) were averaged to provide the y-axis value, and mutations were averaged and normalised to
+mutations per Mb per sample to provide the x-axis value.
+
+Mutation simulation
+
+Calculation of the expected distribution of mutations across CTCF binding sites utilised mutations randomly
+shuffled across the genome using “shuffle” from BEDtools (Quinlan and Hall, 2010), across 1,000 iterations.
+
+Simulated mutations within the CTCF motifs were calculated by adopting trinucleotide mutation signatures as
+described (Alexandrov et al., 2013). Trinucleotide mutation signatures for each cancer type were determined by
+combining all mutations within a cancer type, and counting the number of each of the possible 96 trinucleotides.
+Mutations were then randomly allocated across the genome to locations with the corresponding trinucleotide,
+according to the number of each trinucleotide mutated within each cancer type. The mutation density was then
+calculated at each base of the CTCF motif using these randomly allocated mutations. This process was repeated
+for a total of 1,000 iterations, and the average mutation density at each base within the CTCF motif was
+calculated.
+
+Bootstrapping analysis
+
+Bootstrapping for percentage of cancer-associated genes (Figure 4a) was performed by selecting all TAD
+anchor motif mutations from melanoma samples (using TAD anchor motifs described above) and then randomly
+shuffling these mutations across all anchor motifs. All genes with a TSS within a gene loop with a mutated
+anchor motif were then identified, and the proportion of these that were cancer-associated was calculated. This
+process was repeated through 1,000 iterations to obtain robust confidence intervals around the mean proportion
+of cancer-associated genes from random iterations.
+
+Bootstrapping for percentage of cancer-associated (Figure S3b) and non-cancer associated (Figure S3c) genes
+within unique anchor-gene-loop groupings was performed as follows. All TAD anchor motif mutations in
+melanoma samples were identified, as described above. These mutations were then randomly shuffled across all
+anchor motifs, and all genes with TSSs within loops with mutated anchor motifs were identified. All unique
+anchor-gene-loop groupings were identified, and expression differences from melanoma RNA-sequencing data
+were calculated as described above, using wild-type and mutant melanoma sample designations from the
+randomly shuffled mutations. Gene expression differences were identified either by unpaired t-test or unpaired
+one-sample t-test, whichever was appropriate. Multiple testing correction was then performed using the
+Bonferroni correction method on all P-values obtained, and the proportion of significantly differentially-
+expressed genes within each iteration after multiple testing correction was determined, using a threshold of P <
+0.05 to determine significance. A distribution of results was calculated by repeating this process through 1,000
+iterations.
+Supplemental References
+Only additional references not cited in the main manuscript are listed here.
+
+Bolger, A.M., Lohse, M., and Usadel, B. (2014). Trimmomatic: a flexible trimmer for Illumina sequence data.
+Bioinformatics 30, 2114-2120.
+
+Grant, C.E., Bailey, T.L., and Noble, W.S. (2011). FIMO: scanning for occurrences of a given motif.
+Bioinformatics 27, 1017-1018.
+
+Langmead, B., Trapnell, C., Pop, M., and Salzberg, S.L. (2009). Ultrafast and memory-efficient alignment of
+short DNA sequences to the human genome. Genome Biol 10, R25.
+
+Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., Marth, G., Abecasis, G., and Durbin, R.
+(2009). The Sequence Alignment/Map format and SAMtools. Bioinformatics 25, 2078-2079.
+
+Quinlan, A.R., and Hall, I.M. (2010). BEDTools: a flexible suite of utilities for comparing genomic features.
+Bioinformatics 26, 841-842.
+

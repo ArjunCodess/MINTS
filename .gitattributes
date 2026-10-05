@@ -8,6 +8,7 @@ paper/results.tex text eol=lf
 # Hardened evidence and scientific source hashes must survive checkout.
 results/hardened/** -text whitespace=cr-at-eol
 results/native_endpoint/** -text whitespace=cr-at-eol
+results/native_followup/** -text whitespace=cr-at-eol
 results/hardened/command_*.log -whitespace
 src/*.py text eol=lf
 tools/*.py text eol=lf
