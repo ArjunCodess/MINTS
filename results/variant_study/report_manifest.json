@@ -1,0 +1,11 @@
+{
+  "baseline_manifest_sha256": "067a370f9e25ad10231fba62b0c80f56e9bfb6de007cfa19d26ccd485c3612af",
+  "generator_sha256": "3a9faedcd5ae87dda8bf8c804c06f2a226c431c0134250a0d331d49b0f7cdbef",
+  "outputs": {
+    "docs/MINTS_v2_feasibility.md": "286f417c43dfa01b3305fa71588b2487b031e9f5517a72f5aa1559c1f4cac323",
+    "results/variant_study/exclusion_counts.csv": "2df0ef52ab0fe8ba8f37c4c312f37feefb297aaf658a7ff0cc824cbaa6cda61e"
+  },
+  "protocol_document_sha256": "d0ff437a3c4bba1dde40b8b05986df72ff217fa83746ac6a45ed3a4647c0fafe",
+  "scientific_execution_sha256": "c0ab621fac0eee74a527eb1587f97812b57b3df68f5b86807ce88d595b95253d",
+  "source_retrieval_sha256": "916a3946ce833df97103bb5525ee564509922a9fe61447b3ea3f1aff38f89ee1"
+}

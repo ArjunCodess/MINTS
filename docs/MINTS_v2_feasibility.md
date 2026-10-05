@@ -1,0 +1,59 @@
+# MINTS v2 feasibility result
+
+The frozen natural-variant protocol retained 0 matched cases
+from 11 singleton heterozygous loci. Its
+decision is **stop**. Native distribution scoring, real-case rescue
+controls and head selection were not run because no matched case survived.
+This measures control eligibility, not model sensitivity or biological absence.
+
+## Population accounting
+
+All 16 published rows were audited before model inference.
+
+| Exclusion | Rows |
+| --- | ---: |
+| adjacent variants with unresolved phase | 4 |
+| no sequence-only substitution/geometry matched sham | 4 |
+| reference/alternate BPE boundaries differ | 7 |
+| unidentifiable allele contrast | 1 |
+
+The seven boundary mismatches concern complete reference/alternate BPE offsets.
+The four remaining singleton loci had no control meeting the frozen substitution,
+context, geometry and motif-preservation rules. Neither matching tolerance nor
+query policy was relaxed after this result. The engineered hook fixture passed,
+but it does not demonstrate sensitivity of DNABERT-2 on natural variants.
+
+## Biological and confirmation limits
+
+ADASTRA's metadata reports 80,735 CTCF candidate records. Its release is
+accessible, but eligible independent donors/loci, source overlap and intervention
+power remain unverified. Aggregate source counts do not authorize confirmation.
+GSE81945 supplies pooled reads; phase, mapping-bias, dosage and replicate checks
+remain missing. No native model prediction of binding direction is claimed.
+
+There is no selected head or discovery intervention variance, so a powered
+confirmation size cannot be estimated from this run. `power.json` labels its
+normal-approximation scenarios illustrative. `confirmation_readiness.json`
+keeps confirmation disabled; the old audit's inspected cohorts are excluded
+from freshness claims.
+
+## Reproduction and next boundary
+
+Use fresh output directories for every scientific attempt:
+
+```powershell
+python tools/prepare_variant_study.py --output results/variant_study_new
+python tools/run_variant_pilot.py --output results/variant_pilot_new --device cuda
+python tools/build_variant_artifacts.py
+```
+
+The report builder verifies the saved default study, scientific receipts,
+historical attempt, metadata hashes and frozen Git baseline. The initial attempt
+is retained with source snapshots; its reporting label was corrected to
+distinguish unrun controls from failed controls without changing eligibility.
+
+Continuing requires a new exploratory protocol for nucleotide correspondence
+and control feasibility, or a larger cohort supporting the frozen rules.
+Any revision must be saved before model scoring and must not reinterpret this
+empty retained population as a positive result. The [protocol](MINTS_v2_protocol.md)
+and [data inventory](variant_data_feasibility.md) describe the required evidence.
