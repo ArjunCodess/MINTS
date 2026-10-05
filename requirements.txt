@@ -1,19 +1,18 @@
-torch
-transformers
-datasets
-transformer-lens
-scikit-learn
-pandas
-numpy
-scipy
-matplotlib
-seaborn
-tqdm
-requests
-biopython
-pyfaidx
-pytest
-accelerate
-einops
-triton; platform_system != "Windows"
-triton-windows; platform_system == "Windows"
+# Versions exercised in the hardened assay environment (Python 3.14).
+torch==2.11.0
+transformers==5.5.3
+datasets==4.8.4
+scikit-learn==1.8.0
+pandas==3.0.2
+numpy==2.4.4
+scipy==1.17.1
+matplotlib==3.10.8
+seaborn==0.13.2
+tqdm==4.67.3
+requests==2.33.1
+biopython==1.87
+pyfaidx==0.9.0.4
+pytest==9.0.3
+accelerate==1.13.0
+einops==0.8.2
+threadpoolctl==3.6.0

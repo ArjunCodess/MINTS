@@ -1,0 +1,4 @@
+# Native HF instrumentation uses the validated PyTorch attention fallback.
+--extra-index-url https://download.pytorch.org/whl/cu126
+-r requirements.txt
+torch==2.11.0+cu126
