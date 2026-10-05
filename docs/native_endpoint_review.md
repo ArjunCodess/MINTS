@@ -96,7 +96,7 @@ allele-specific reduction of CTCF binding at mutant motifs in melanoma. The
 lists GSM2178295 and GSM2178296 as CTCF ChIP replicates in COLO829 and GSM2178297
 as IgG. Alignments use hg19; the processed replicate files contain peak calls.
 The checked metadata does not supply a paired variant/binding-effect table, so
-the usable allele-specific sample size remains unverified. Peak count is not
+that metadata alone cannot establish allele sample size. The subsequent [follow-up](native_followup.md) recovered the measured counts from publisher Table S3: 15 heterozygous variants across 13 hg19 loci, with all source reference alleles verified. Peak count is not
 variant sample size, and hg19 coordinates cannot be read directly as hg38.
 
 A biological extension needs reference/alternate alleles, genome-build-verified

@@ -266,3 +266,7 @@ Large datasets, weights, activation caches, QK/OV archives, and token-score dump
 - [`paper/`](paper): manuscript, generated numerical input, references, and compiled PDF.
 
 Original MINTS code is [MIT licensed](LICENSE). Third-party datasets, models, and venue style files retain their own terms.
+
+## Native endpoint follow-up
+
+The [follow-up diagnostics](docs/native_followup.md) record geometry feasibility, independent masked-token recovery, native intervention controls, eligibility and cluster influence, and the recovered measured allele table. Hash-verified evidence lives in `results/native_followup/`. Tight within-sequence geometry matching is structurally infeasible for the original 19-base edits; the failed sensitivity gate remains in force.

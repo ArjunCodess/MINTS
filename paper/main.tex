@@ -165,11 +165,22 @@ The earlier \HistoricalTATAPairs{} TATA pairs contain \HistoricalTATATrain{} tra
 \input{hardened_results}
 \input{cohort_balance}
 \input{native_endpoint}
+\input{native_followup}
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{../results/native_followup/pilot_diagnostics.png}
+\caption{Discovery-pilot geometry, eligibility and cluster influence. Leave-cluster-out estimates remove every sequence in the omitted genomic cluster; changing signs indicate sensitivity to membership.}
+\label{fig:pilot-diagnostics}
+\end{figure}
+\begin{figure}[t]
+\centering\includegraphics[width=.9\linewidth]{../results/native_followup/recovery_calibration.png}
+\caption{Independent masked-token recovery on 128 fixed chromosome 16/17 windows. Vocabulary rank and log probability depend on token width; comparison uses a smoothed token-frequency baseline from chromosomes 14/15. This calibrates recovery competence without testing motif-specific sensitivity.}
+\label{fig:recovery-calibration}
+\end{figure}
 \paragraph{Donor control feasibility.}
 For a two-base GT-to-TG edit, a non-motif sham with the same width and transition multiset must change TG to GT, which creates a prohibited new hit. The resulting donor exclusion concerns the feasibility of this strict control design, rather than absence of a donor mechanism. A wider-context donor control is outside these intervention results.
 \FloatBarrier
 \section{Interpretation and limitations}
-The native extension is gated on endpoint feasibility. Its current masked-flank pilot fails that gate, and its interval is too wide for a precise null. Any revised endpoint is exploratory. A subsequent confirmation would require a fully frozen endpoint, selection and intervention rule, matched controls, eligibility, genomic clustering and a cluster-based power justification on genuinely uninspected inputs. The inspected chromosomes 20/21 cannot provide that confirmation. GSE81945 is a candidate independent allele-specific binding source, but its listed processed peaks use hg19 and do not provide a ready paired variant-effect table; usable allele sample size and genome-build compatibility remain unverified. Natural substitutions require substitution-matched controls, rather than composition-preserving shuffle controls.
+The native extension is gated on endpoint feasibility. Its current masked-flank pilot fails that gate, and its interval is too wide for a precise null. Any revised endpoint is exploratory. A subsequent confirmation would require a fully frozen endpoint, selection and intervention rule, matched controls, eligibility, genomic clustering and a cluster-based power justification on genuinely uninspected inputs. The inspected chromosomes 20/21 cannot provide that confirmation. The recovered GSE81945 study supplement provides 15 heterozygous variants across 13 hg19 loci, with reference alleles verified against hg19. Pooled counts and two adjacent-variant groups limit independent allele inference; no hg38 transfer or biological confirmation is claimed. Natural substitutions require substitution-matched controls, rather than composition-preserving shuffle controls.
 Evidence supports frozen decodability, failure of historical CTCF screens, and sequence-level QK and native-attention measurements under matched genomic controls, without identifying native CTCF causality. A validated native pretrained causal target remains unresolved; the added CTCF target is an independently evaluated trained readout. The corrected analyses use different aggregation and a different control population from the historical screens; the assays are not interchangeable. Small selected patching populations and composition-changing corruptions prevent broad causal conclusions. The controlled assays above establish nucleotide correspondence and matched shams for their retained populations, with explicit eligibility exclusions.
 
 The affine QK observation is conditional: if logits for a fixed query equal $a+\gamma s_j$ with $\gamma>0$, softmax preserves score ordering within that sequence. This assumption is not shown empirically. Within-sequence ranking does not imply a cross-sequence motif-present/absent threshold or causal use; we make no stronger layer-1 theorem claim.

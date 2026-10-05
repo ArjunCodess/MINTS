@@ -77,9 +77,17 @@
       ],
       "version": "v1, 2026-07-21",
       "verification": "Official arXiv abstract and HTML inspected with web tool on 2026-10-05; sections 3.3 and 4 compared with fixed-token pilot"
+    },
+    {
+      "key": "poulos2016ctcf",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27974201/",
+      "doi": "10.1016/j.celrep.2016.11.055",
+      "title": "Functional Mutations Form at CTCF-Cohesin Binding Sites in Melanoma Due to Uneven Nucleotide Excision Repair across the Motif",
+      "verification": "PubMed and author-hosted article inspected; official publisher supplementary Table S3 downloaded and visually checked on 2026-10-05",
+      "supplement_url": "https://ars.els-cdn.com/content/image/1-s2.0-S221112471631628X-mmc1.pdf"
     }
   ],
   "note": "publisher page content retained only as a hash, not copied article text",
-  "bibliography_sha256": "4314fd3c7c30effc92e8f302ce8e1bc8e4e50db939c70368e5699f34aa8b7006",
+  "bibliography_sha256": "35e41d2d6ef4171057d26962bbcdbaf604b767e03397f4a6d861fb51a2657cce",
   "previous_checked_at": "2026-10-04"
 }
