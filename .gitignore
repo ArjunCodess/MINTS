@@ -212,6 +212,7 @@ __marimo__/
 data/ctcf/
 data/encode/
 data/genomes/
+data/adastra/
 data/hf_downstream/
 
 # MINTS run-local results
