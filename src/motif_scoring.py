@@ -145,6 +145,8 @@ def scan_sequence_with_pssm(sequence: str, pssm: Any, include_reverse_complement
 def default_support_threshold(pssm: Any, fraction_of_max: float = 0.80) -> float:
     """Set a deterministic motif-support threshold from the PSSM score range."""
 
+    if not 0 < fraction_of_max < 1:
+        raise ValueError("Motif support fraction must be in (0, 1)")
     min_score = float(pssm.min)
     max_score = float(pssm.max)
     return min_score + fraction_of_max * (max_score - min_score)
@@ -200,9 +202,12 @@ def aggregate_start_scores_to_tokens(
     start_scores: np.ndarray,
     motif_length: int,
     token_offsets: list[tuple[int, int]],
+    aggregation: str = "max",
 ) -> np.ndarray:
     """Map motif-start scores to token positions by overlap with motif windows."""
 
+    if aggregation not in {"max", "mean", "overlap_weighted"}:
+        raise ValueError(f"Unknown motif aggregation: {aggregation}")
     token_scores = np.full(len(token_offsets), np.nan, dtype=np.float64)
     finite_starts = np.flatnonzero(np.isfinite(start_scores))
     for token_idx, (token_start, token_end) in enumerate(token_offsets):
@@ -213,7 +218,15 @@ def aggregate_start_scores_to_tokens(
             for start in finite_starts
             if start < token_end and (start + motif_length) > token_start
         ]
-        token_scores[token_idx] = float(np.max(overlapping_scores)) if overlapping_scores else np.nan
+        if overlapping_scores:
+            if aggregation == "max":
+                token_scores[token_idx] = float(np.max(overlapping_scores))
+            elif aggregation == "mean":
+                token_scores[token_idx] = float(np.mean(overlapping_scores))
+            else:
+                weights = [min(token_end, start + motif_length) - max(token_start, start)
+                           for start in finite_starts if start < token_end and start + motif_length > token_start]
+                token_scores[token_idx] = float(np.average(overlapping_scores, weights=weights))
     return token_scores
 
 
@@ -277,6 +290,7 @@ def score_sequence_tokens(
     sequence_index: int = 0,
     sequence_id: str = "sequence",
     threshold: float | None = None,
+    aggregation: str = "max",
 ) -> TokenMotifScores:
     """Score every model token position for CTCF motif support."""
 
@@ -284,7 +298,7 @@ def score_sequence_tokens(
     support_threshold = default_support_threshold(pssm) if threshold is None else threshold
     start_scores = scan_sequence_with_pssm(sequence, pssm)
     offsets = token_offsets_for_sequence(tokenizer, sequence)
-    token_scores = aggregate_start_scores_to_tokens(start_scores, int(pssm.length), offsets)
+    token_scores = aggregate_start_scores_to_tokens(start_scores, int(pssm.length), offsets, aggregation)
     support_spans = motif_support_spans_from_start_scores(start_scores, int(pssm.length), offsets, support_threshold)
     support_tokens = sorted(
         {
