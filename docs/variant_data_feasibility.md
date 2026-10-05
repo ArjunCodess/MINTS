@@ -40,3 +40,27 @@ missing item instead of treating the absence of metadata as a passing result.
 The current decision is to build and evaluate bounded feasibility only. A
 larger resource is accessible, but the study must stop before confirmation
 until eligible membership and intervention-based power are established.
+
+## Downloaded cohort follow-up
+
+The metadata-only inventory above records the earlier study. The pinned release
+has now been downloaded and checksum-verified, and its complete CTCF table has
+512,556 coverage-eligible records. That archive denominator differs from the
+80,735 records reported by the live API; the two counts should not be substituted
+for each other. The import preserves nonsignificant source records and selects
+no cases by published effect, significance or motif-concordance labels.
+
+The separate [ADASTRA engineering screen](adastra_feasibility.md) selected 4,096
+variants by a frozen coordinate-and-allele hash. All reference alleles matched
+hg38, but none had an aligned substitution-matched sequence control. This sample
+does not establish full-cohort retention, biological sensitivity or confirmation
+eligibility. No native inference or head search was run.
+
+The archive is cached locally under ignored `data/adastra/`; the full coordinate
+denominator and selected membership accompany the new receipts. The first import
+stopped on the publisher's `#chr` header. Its failed execution, download receipt,
+protocol and complete source snapshots remain in `results/adastra_import_attempt/`.
+The corrected import ran under a fresh frozen protocol and output directory.
+The deposited dataset is CC BY 4.0; attribution and the pinned source DOI are
+retained in the new report. The old metadata-only ledger remains historical,
+while the new ledger marks this source exploratory and disables fresh confirmation.
