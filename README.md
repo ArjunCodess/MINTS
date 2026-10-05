@@ -8,11 +8,44 @@ MINTS asks a narrow question: what evidence is required before calling a genomic
 
 The research paper lives in [`paper/main.pdf`](paper/main.pdf), with source in [`paper/main.tex`](paper/main.tex).
 
+## Hardened mechanistic assays
+
+The current assay workflow is separate from the archived results below. It validates nucleotide correspondence before patching, preserves composition, contrasts motif edits with matched shams, selects heads on discovery chromosomes, and confirms them on independent chromosomes. Historical TATA PM rankings are diagnostic artifacts: six of ten archived pairs have incompatible nucleotide boundaries at patched positions.
+
+Use Python 3.14. The Windows CUDA and fresh Windows CPU environments are locally verified. Linux installation configurations and CPU CI are provided; Linux execution has not been verified locally. TransformerLens and Triton are optional: scientific interventions use native HF hooks and the validated PyTorch attention fallback.
+
+    python -m pip install -r requirements-cuda-windows.txt
+    python -m pip check
+    python tools/preflight.py --scientific
+    python main.py hardened --device cuda
+    python tools/build_hardened_artifacts.py
+    python results/hardened/cohort_diagnostics/build_balance.py
+    python tools/review_manuscript_artifacts.py
+
+For CPU checks, install requirements-cpu.txt and run:
+
+    python -m pytest -q -m "not artifact" --basetemp .test-tmp
+    python -m pytest -q -m artifact --basetemp .test-tmp
+
+The artifact suite validates saved scientific outputs; passing synthetic tests alone does not certify biological results. Fresh scientific execution needs the pinned tokenizer/model cache, prepared hg38/CTCF inputs, and downstream residual caches from the ingestion pipeline. Historical cache reuse records byte hashes and its provenance limits, rather than assigning checkpoint identity from hashes. The runner retrieves and MD5-verifies the small independent ENCODE DNase input ENCFF598KWZ.
+
+Results go to [results/hardened](results/hardened), with stage commands, runtime versions, source hashes, exclusions and raw effects. Six stages cover diagnostics, known-mechanism calibration, incremental prediction, controlled patching, native genomic sensitivity, and accessible CTCF peak-overlap prediction/intervention. Use the stage option to run one stage. Completed stages refuse replacement unless the explicit replace-stage option is supplied; previous execution receipts are archived. Use a fresh output directory when changing the scientific protocol.
+
+Default caps are 12 discovery sequences, 64 confirmation sequences with up to three eligible edits each, and 256 randomly selected pairs per genomic configuration. Motif scoring scans all 51,249 peaks. The independent CTCF cohort caps each class at 512 training, 128 validation and 128 test examples. These caps, candidate searches, seeds and eligibility exclusions are recorded in the protocol and manifests. The TATA study retained 16 confirmation sequences, and donor matched-edit eligibility was insufficient. For a two-base GT-to-TG swap, a width- and transition-matched non-motif sham necessarily creates a new GT hit, so this exclusion reflects control feasibility. Increasing caps cannot resolve that constraint; donor intervention requires a wider-context control design. Increase the explicit CLI caps for larger studies without silently pooling discovery and confirmation.
+
+Prediction compares motif/position/composition baselines with baseline-plus-residual models on identical populations, tuning regularization on chromosomes 18/19 and evaluating on 20/21. Paired AUROC intervals use sequence and transitive genomic-block sampling. Patching reports absolute motif-minus-sham score effects, individual scores, leave-one-out estimates, six position schemes and reverse interventions. Native CTCF comparisons recompute PWM thresholds, token matching and alternate aggregation, with content-only and position-only controls and simultaneous inference over heads.
+
+The added CTCF output is a trained frozen readout of peak overlap within independently measured accessible windows. It does not certify native pretrained binding causality, and non-overlap is not verified absence of binding. Oracle detector calibration measures power in engineered attention computations. Normalized CTCF BED-score balance and sequence-complexity diagnostics are reported in the descriptive cohort audit. Repeat annotations, quantitative CTCF occupancy, distant homology and cross-cell biological replication remain unavailable or outside the implemented inference scope.
+
+Legacy pipeline resume now requires immutable upstream receipts with compatible model/tokenizer revision, settings, pooling, source and artifact hashes. Older outputs without these receipts cannot be resumed as verified new executions. The historical manuscript inserts remain in paper/results.tex; the new source-backed inserts are generated in paper/hardened_results.tex, with paper_manifest.json verifying their evidence.
+
+## Historical workflow and results
+
 ## Key Achievements
 
 - **One-command reproducibility:** `python main.py` runs the configured data, model, circuit, probe, control, motif-scoring, patching, and uncertainty analyses. Package versions, seeds, runtimes, failures, and artifact hashes make individual runs traceable.
 - **Leakage checks:** Pinned dataset and model revisions, exact partition membership, chromosome and window checks, reverse-complement checks, and equal-length near-duplicate detection protect held-out evaluation.
-- **Performance context before mechanism:** Frozen DNABERT-2 readouts are compared with composition and 3–6-mer classifiers, with sequence-bootstrap intervals. The k-mer classifier has higher point AUROC on both promoter tasks.
+- **Performance context before mechanism:** Frozen DNABERT-2 readouts are compared with composition and 3ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ6-mer classifiers, with sequence-bootstrap intervals. The k-mer classifier has higher point AUROC on both promoter tasks.
 - **Sequence-level genomic controls:** Motif-present and motif-absent CTCF peaks are matched on chromosome, GC fraction, and length. Native attention and content-QK contrasts use matched-pair inference and separate Holm corrections across heads.
 - **Held-out probe patching:** Test-only clean/corrupted pairs retain scalar scores, denominators, pair-level effects, medians, and intervals. Repeated clean sequences form one bootstrap cluster; probe restoration is not presented as native biological behavior.
 - **Artifact-backed manuscript:** One generated [`paper/results.tex`](paper/results.tex) supplies numerical variables and table bodies, with source hashes linking displayed results to saved machine-readable artifacts.
@@ -71,7 +104,7 @@ Token support is interval-based. A motif hit spans a half-open nucleotide interv
 
 The frozen readout is a standardized, balanced logistic classifier over mean-pooled layer-11 representations. It is reported once; it is not encoder fine-tuning. GC and k-mer classifiers use sequence-derived features alone.
 
-| Task | GC AUROC [95% CI] | 3–6-mer AUROC [95% CI] | Frozen readout AUROC [95% CI] |
+| Task | GC AUROC [95% CI] | 3ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ6-mer AUROC [95% CI] | Frozen readout AUROC [95% CI] |
 |---|---:|---:|---:|
 | TATA promoter | 0.8955 [0.8496, 0.9337] | 0.9297 [0.8947, 0.9598] | 0.9136 [0.8748, 0.9476] |
 | Other promoter | 0.9088 [0.8937, 0.9236] | 0.9406 [0.9292, 0.9517] | 0.9383 [0.9253, 0.9499] |
@@ -107,7 +140,7 @@ Sources: [`ctcf_native_control_inference.csv`](results/review/ctcf_native_contro
 
 ### Activation Patching
 
-The held-out TATA experiment retains 10 eligible test pairs. The head with the largest observed mean PM is layer 2, head 7: mean 0.3611, median 0.0306, and marginal mean interval [-0.0265, 1.0250]. Head selection is exploratory, and this interval includes zero.
+The archived held-out TATA experiment retains 10 shape-compatible test pairs, six with incompatible nucleotide boundaries at patched positions; its PM ranking is withdrawn as aligned intervention evidence. The head with the largest observed mean PM is layer 2, head 7: mean 0.3611, median 0.0306, and marginal mean interval [-0.0265, 1.0250]. Head selection is exploratory, and this interval includes zero.
 
 The scalar target is a trained probe's decision function. Sign-changing clean-corrupted differences and PM overshoot limit interpretation of mean restoration; interventions also change composition and can combine off-manifold activations. These effects do not establish native motif detection.
 
