@@ -7,12 +7,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,booktabs,graphicx,microtype,url,placeins}
 \input{results}
-\title{MINTS: What Evidence Supports a Genomic Attention Head as a Motif Detector?}
+\title{MINTS: Auditing Evidence for Motif Detection in Genomic Transformer Attention Heads}
 \author{Anonymous Author}
 \begin{document}
 \maketitle
 \begin{abstract}
-MINTS tests what evidence supports calling a genomic-transformer attention head a motif detector. Historical attention screens and probe restoration are retained as audited observations; six of ten historical TATA patching pairs fail nucleotide correspondence. New assays enforce identical nucleotide boundaries, composition-preserving motif edits and matched shams, discovery-selected heads, and independent chromosome-held-out confirmation. Engineered attention fixtures calibrate sensitivity against known single-head, query-specific and distributed mechanisms, with composition and randomized controls. An independently collected DNase assay defines an accessibility-conditioned CTCF readout, connecting localization and intervention for the same motif and trained output. Predictive comparisons estimate paired incremental information beyond motif, position and composition features, while native-attention sensitivity varies motif thresholds and tokenizer geometry with genomic-block inference. These experiments distinguish synthetic calibration, conditional genomic association and trained-readout effects, without establishing native pretrained binding causality.
+MINTS audits the gap between label decodability, attention association and causal use in DNABERT-2. Six of ten historical TATA patching pairs fail nucleotide correspondence, and unstable restoration ratios weaken their interpretation. In an accessibility-conditioned CTCF comparison, the fitted baseline-plus-residual classifier performs worse than the motif, position and composition baseline; this does not show that residual representations contain no additional information. Repaired assays enforce nucleotide correspondence, composition-preserving motif edits and matched shams, with discovery-selected heads and chromosome-held-out confirmation. The CTCF trained-readout intervention covers 64 sequences but only 45 genomic clusters, and does not establish native pretrained binding causality. A separate fixed-endpoint native masked-flank pilot retains 12 discovery sequences in 11 clusters but fails its motif-minus-sham sensitivity gate, so head search and fresh confirmation stop. Engineered attention fixtures calibrate specific single-head and distributed mechanisms; individual-head screen failures do not exclude distributed genomic mechanisms. The audit supports bounded computational claims and leaves biological binding causality unresolved.
 \end{abstract}
 
 \section{Introduction}
@@ -26,6 +26,8 @@ The evidence standard is a reporting discipline, not an exhaustive definition of
 
 \paragraph{Relation to prior work.}
 DNABERT already uses attention to identify conserved sequence motifs \citep{ji2021dnabert}. We do not claim to introduce attention-based motif discovery. Zhang and Nanda show that corruption and metric choices can change activation-patching conclusions \citep{zhang2024metrics}; our composition-preserving edits, matched shams and absolute endpoints test those concerns under variable-width DNA tokenization. OmniGenBench addresses reproducible genomic model evaluation and interoperability \citep{yang2025omnigenbench}. MINTS adds a narrower empirical assay audit, known-mechanism computational calibration, and frozen-head confirmation for specified trained outputs. The synthetic fixtures do not prove assay sensitivity to every learned genomic mechanism.
+
+Ali's recent sparse-dictionary study compares native prediction-distribution shifts after feature ablation in binding-associated populations \citep{ali2026causal}. Our unchanged masked-token endpoint separates a specified sequence-prediction effect from biological binding causality; allele-specific binding measurements remain an independent requirement.
 
 \section{Methods}
 \paragraph{Evidence and output targets.}
@@ -97,6 +99,8 @@ Checks find no shared chromosomes, overlapping windows, identical sequences, or 
 CTCF sequences come from ENCODE experiment ENCSR000DKV, peak file ENCFF827JRI, and the UCSC hg38 reference. BED intervals are extracted without flanks; the prepared file contains \CTCFSequences{} intervals. Peaks are assay observations rather than proof of a particular motif or a model's binding prediction. Local source hashes are audited. New inference pins the model revision stated above; the historical unpinned checkpoint cannot be reconstructed from these hashes alone.
 
 \section{Results}
+\paragraph{The audit separates evidence that supports different claims.}
+Decodable labels and conditional attention associations do not establish causal motif use. Historical patching has broken nucleotide alignment and unstable restoration ratios. The fitted CTCF baseline-plus-residual classifier has a negative incremental comparison on the analyzed population; it does not prove absence of additional representational information. The repaired trained-readout intervention uses 64 sequences in 45 genomic clusters. Its target remains a fitted readout, so these measurements cannot establish a native biological binding mechanism. Individual-head screen failures also leave distributed mechanisms unresolved.
 \paragraph{Prediction is context, not a mechanism.}
 Table~\ref{tab:task-performance} shows higher point AUROC for the k-mer classifier than the DNABERT-2 readout on both promoter tasks; this is not a claim of statistically established superiority. The readout has higher point AUROC on splice tasks. Strong promoter composition baselines make a motif-specific explanation especially uncertain.
 \begin{table}[t]
@@ -160,10 +164,23 @@ The earlier \HistoricalTATAPairs{} TATA pairs contain \HistoricalTATATrain{} tra
 \FloatBarrier
 \input{hardened_results}
 \input{cohort_balance}
+\input{native_endpoint}
+\input{native_followup}
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{../results/native_followup/pilot_diagnostics.png}
+\caption{Discovery-pilot geometry, eligibility and cluster influence. Leave-cluster-out estimates remove every sequence in the omitted genomic cluster; changing signs indicate sensitivity to membership.}
+\label{fig:pilot-diagnostics}
+\end{figure}
+\begin{figure}[t]
+\centering\includegraphics[width=.9\linewidth]{../results/native_followup/recovery_calibration.png}
+\caption{Independent masked-token recovery on 128 fixed chromosome 16/17 windows. Vocabulary rank and log probability depend on token width; comparison uses a smoothed token-frequency baseline from chromosomes 14/15. This calibrates recovery competence without testing motif-specific sensitivity.}
+\label{fig:recovery-calibration}
+\end{figure}
 \paragraph{Donor control feasibility.}
 For a two-base GT-to-TG edit, a non-motif sham with the same width and transition multiset must change TG to GT, which creates a prohibited new hit. The resulting donor exclusion concerns the feasibility of this strict control design, rather than absence of a donor mechanism. A wider-context donor control is outside these intervention results.
 \FloatBarrier
 \section{Interpretation and limitations}
+The native extension is gated on endpoint feasibility. Its current masked-flank pilot fails that gate, and its interval is too wide for a precise null. Any revised endpoint is exploratory. A subsequent confirmation would require a fully frozen endpoint, selection and intervention rule, matched controls, eligibility, genomic clustering and a cluster-based power justification on genuinely uninspected inputs. The inspected chromosomes 20/21 cannot provide that confirmation. The recovered GSE81945 study supplement provides 15 heterozygous variants across 13 hg19 loci, with reference alleles verified against hg19. Pooled counts and two adjacent-variant groups limit independent allele inference; no hg38 transfer or biological confirmation is claimed. Natural substitutions require substitution-matched controls, rather than composition-preserving shuffle controls.
 Evidence supports frozen decodability, failure of historical CTCF screens, and sequence-level QK and native-attention measurements under matched genomic controls, without identifying native CTCF causality. A validated native pretrained causal target remains unresolved; the added CTCF target is an independently evaluated trained readout. The corrected analyses use different aggregation and a different control population from the historical screens; the assays are not interchangeable. Small selected patching populations and composition-changing corruptions prevent broad causal conclusions. The controlled assays above establish nucleotide correspondence and matched shams for their retained populations, with explicit eligibility exclusions.
 
 The affine QK observation is conditional: if logits for a fixed query equal $a+\gamma s_j$ with $\gamma>0$, softmax preserves score ordering within that sequence. This assumption is not shown empirically. Within-sequence ranking does not imply a cross-sequence motif-present/absent threshold or causal use; we make no stronger layer-1 theorem claim.

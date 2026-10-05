@@ -1,0 +1,13 @@
+sequence_id,motif_side,motif_gap_bp,sham_side,sham_gap_bp,status,width_bp,minimum_same_side_gap_difference_bp,tolerance_bp
+chr18:76633605-76633809,upstream,3,upstream,35,structurally_infeasible,19,19,2
+chr19:38686528-38686732,upstream,3,upstream,30,structurally_infeasible,19,19,2
+chr18:76475575-76475779,upstream,8,downstream,50,structurally_infeasible,19,19,2
+chr19:11293854-11294009,upstream,28,upstream,5,structurally_infeasible,19,19,2
+chr18:32674577-32674781,upstream,6,downstream,17,structurally_infeasible,19,19,2
+chr19:37210635-37210839,upstream,5,upstream,45,structurally_infeasible,19,19,2
+chr18:48778760-48778964,upstream,7,upstream,30,structurally_infeasible,19,19,2
+chr19:40602226-40602337,upstream,3,downstream,9,structurally_infeasible,19,19,2
+chr19:49937750-49937915,upstream,3,downstream,30,structurally_infeasible,19,19,2
+chr19:29815414-29815618,upstream,4,upstream,59,structurally_infeasible,19,19,2
+chr19:15112569-15112773,upstream,26,upstream,2,structurally_infeasible,19,19,2
+chr19:39110479-39110642,upstream,4,downstream,0,structurally_infeasible,19,19,2

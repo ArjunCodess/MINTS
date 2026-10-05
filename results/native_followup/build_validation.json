@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "checked_at": "2026-10-05",
+  "tests": {
+    "cuda": {
+      "passed": 109,
+      "log": "tests_cuda.log",
+      "sha256": "2cf33bb01795f2f2e0fba7337526c739d8094d6f7f999e46b5f9e602af2aa7c2"
+    },
+    "cpu": {
+      "passed": 109,
+      "log": "tests_cpu.log",
+      "sha256": "73fe160d67e8bc0336907b2aa07066faaa688e7920d1a2881a9dcaebbcc39769"
+    }
+  },
+  "dependency_checks": "both environments: no broken requirements",
+  "manuscript": {
+    "path": "paper/main.pdf",
+    "pages": 15,
+    "sha256": "feeecf04682f51c24eb8827b5fc77d8b58d626fec255cd0b77e96f3bf9a9cc40",
+    "compiler": "MiKTeX via bundled latex compile helper",
+    "unresolved_citations": false,
+    "overfull_boxes": false,
+    "visual_check": "new diagnostic figure pages 10-12 and publisher allele table inspected"
+  },
+  "report_manifest_sha256": "74e04a169a13ad81b74b675a316c34bc63d7cb09e816b4d78688f6b413ed4180",
+  "scientific_execution_sha256": "d3870139fa63544fa97803f9ef911143404d8db7bb183896972758c0849555ea",
+  "claim_boundary": "diagnostics and exploratory measured-allele preparation; original endpoint remains stopped; no head search or biological confirmation"
+}

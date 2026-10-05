@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-10-05",
+  "base_commit": "123886f7bbbf545ca6d6f1ec6f1ac2a133cd4e40",
+  "latest_merged_pr": 3,
+  "branch": "codex/native-endpoint-pilot",
+  "checks": {
+    "cuda_environment_tests": {
+      "passed": 101,
+      "log": "command_cuda_tests.log"
+    },
+    "cpu_environment_tests": {
+      "passed": 101,
+      "log": "command_cpu_tests.log"
+    },
+    "artifact_tests": {
+      "passed": 6
+    },
+    "pip_check_cuda": "passed",
+    "pip_check_cpu": "passed",
+    "compileall": "passed",
+    "scientific_preflight": "passed",
+    "hardened_artifact_verification": "passed",
+    "native_artifact_verification": "passed",
+    "legacy_manuscript_generator": "passed",
+    "latex": {
+      "compiler": "texlive",
+      "exit_code": 0,
+      "pdf_sha256": "e6ece279a3f49b86b6a3a998eac3d8df57052c33f8d1c44f846a06d8dd669fcc",
+      "layout": "first page visually inspected; no warnings or overfull boxes in final log"
+    },
+    "git_diff_check": "passed",
+    "final_native_tests": {
+      "passed": 8,
+      "scope": "after LF manuscript output repair; CUDA and CPU environments"
+    }
+  },
+  "scientific_outcome": "native feasibility gate failed; no head search or fresh confirmation",
+  "limits": [
+    "12 discovery sequences, 11 genomic clusters",
+    "not a precise null",
+    "allele-specific usable sample size unverified",
+    "no biological binding causal claim"
+  ],
+  "scope": "existing audit executions verified; new native pilot executed on CUDA; no redundant rerun of historical scientific stages"
+}

@@ -1,0 +1,20 @@
+{
+  "attention_only_rescue_median_error": 0.0,
+  "calibration_sequences": 128,
+  "claim_boundary": "no head search; no fresh confirmation; descriptive/exploratory calibration",
+  "engineered_control_passed": true,
+  "frequency_baseline_log_probability": -6.876895454015299,
+  "geometry_evaluated": 12,
+  "geometry_retained": 0,
+  "geometry_status": "infeasible",
+  "leave_cluster_out_max": 0.01628054272044788,
+  "leave_cluster_out_min": -0.09221823215484619,
+  "mean_log_probability": -6.063235385343432,
+  "mean_reciprocal_rank": 0.11759005975353959,
+  "median_rank": 57.5,
+  "native_control_rows": 24,
+  "native_controls_passed": true,
+  "pilot_retained": 12,
+  "pilot_scanned": 21,
+  "top1_rate": 0.0625
+}
