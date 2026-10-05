@@ -1,0 +1,11 @@
+{
+  "accession": "ENCFF598KWZ",
+  "assay": "DNase-seq",
+  "assembly": "GRCh38",
+  "biosample": "GM12878",
+  "experiment": "ENCSR000EMT",
+  "label_boundary": "absence of overlap with this CTCF peak file is not verified absence of binding",
+  "md5": "02802ecaf3d6a6d7891f2816bdd42421",
+  "sha256": "ec566bd39017453d2d29e09e747da33925626672991c6c877eaabeb72f0bff7a",
+  "url": "https://www.encodeproject.org/files/ENCFF598KWZ/@@download/ENCFF598KWZ.bed.gz"
+}

@@ -1,0 +1,6 @@
+{
+  "output": "trained frozen CTCF peak-overlap readout; does not represent pretrained binding output",
+  "status": "predictive_readout_validated",
+  "validation_auroc": 0.68585205078125,
+  "validation_gate": 0.6
+}

@@ -1,0 +1,28 @@
+{
+  "aggregation": "average candidate edits within sequence, then genomic-block inference",
+  "bootstrap_samples": 1000,
+  "claim_boundary": "effects on a trained frozen readout; no native pretrained biological mechanism established",
+  "confirmation_edits": 135,
+  "confirmation_sequences": 64,
+  "directions": [
+    "denoise",
+    "reverse"
+  ],
+  "discovery_sequences": 12,
+  "frozen_selection_sha256": "398a192af0616a79967b0c4c03407e329f023fb82018cb204f94a7bbb847b07c",
+  "motif": "CTCF",
+  "permutations": 9999,
+  "primary_endpoint": "motif_minus_sham_absolute_decision_score_change",
+  "resampling_assumptions": "exchangeability for conditional observational genomic blocks; no biological randomization",
+  "schemes": [
+    "edit",
+    "all",
+    "all_with_special",
+    "flank",
+    "random",
+    "sparse"
+  ],
+  "scorer_sha256": "65ee2282f8de69b19dc56b75dacf6c2d94465f3eaaba3a131e9e4d229c939098",
+  "seed": 1729,
+  "status": "completed"
+}

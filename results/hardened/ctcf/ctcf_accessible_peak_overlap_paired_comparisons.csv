@@ -1,0 +1,7 @@
+task,first,second,resampling_unit,difference,ci_low,ci_high,valid_draws,clusters,estimand
+ctcf_accessible_peak_overlap,residual,kmer,sequence,-0.04034423828125,-0.10439713064713071,0.024329672961138544,1000,256,paired held-out AUROC difference conditional on fixed classifiers
+ctcf_accessible_peak_overlap,residual,kmer,genomic_block,-0.04034423828125,-0.11629146659367988,0.030125948984273874,1000,81,paired held-out AUROC difference conditional on fixed classifiers
+ctcf_accessible_peak_overlap,baseline_plus_residual,motif_position_composition,sequence,-0.04541015625,-0.0731703274258422,-0.017320520388702253,1000,256,paired held-out AUROC difference conditional on fixed classifiers
+ctcf_accessible_peak_overlap,baseline_plus_residual,motif_position_composition,genomic_block,-0.04541015625,-0.07558875882361352,-0.016638310530643352,1000,81,paired held-out AUROC difference conditional on fixed classifiers
+ctcf_accessible_peak_overlap,residual,gc,sequence,0.18841552734375,0.0986380580671912,0.27352694227923613,1000,256,paired held-out AUROC difference conditional on fixed classifiers
+ctcf_accessible_peak_overlap,residual,gc,genomic_block,0.18841552734375,0.10017846883910772,0.28305549572716515,1000,81,paired held-out AUROC difference conditional on fixed classifiers
