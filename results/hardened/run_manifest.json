@@ -1,0 +1,56 @@
+{
+  "protocol_sha256": "8a01489cddf8e71645120d3e17ea965b724d446b9181c189f67b7432be8899d9",
+  "requested_stages": [
+    "diagnostics",
+    "calibration",
+    "prediction",
+    "patching",
+    "genomic",
+    "ctcf"
+  ],
+  "stages": [
+    {
+      "execution_sha256": "d131090ee0acedfd553da94e87bf09b21e470b0ad5ad720634b8389941b6b31e",
+      "protocol_sha256": "8a01489cddf8e71645120d3e17ea965b724d446b9181c189f67b7432be8899d9",
+      "seconds": 13.294784599999957,
+      "stage": "diagnostics",
+      "status": "completed"
+    },
+    {
+      "execution_sha256": "4fb4acc7b5917f1abfdad5997c4783a5822893e9dbb757512bf4e688ce7690da",
+      "protocol_sha256": "8a01489cddf8e71645120d3e17ea965b724d446b9181c189f67b7432be8899d9",
+      "seconds": 4.325452499999983,
+      "stage": "calibration",
+      "status": "completed"
+    },
+    {
+      "execution_sha256": "306f20eb27c31d4554e4ea4cad03f3a34a9c27e8446f40c90772831f7271f701",
+      "protocol_sha256": "8a01489cddf8e71645120d3e17ea965b724d446b9181c189f67b7432be8899d9",
+      "seconds": 292.2075176999999,
+      "stage": "prediction",
+      "status": "completed"
+    },
+    {
+      "execution_sha256": "7fbb5df6211d0e18a146c61b8f268c34157b38667a7b80e8fa58ca6bccd99e4b",
+      "protocol_sha256": "8a01489cddf8e71645120d3e17ea965b724d446b9181c189f67b7432be8899d9",
+      "seconds": 51.970727500000066,
+      "stage": "patching",
+      "status": "completed"
+    },
+    {
+      "execution_sha256": "5884bf969093bec6d5a03b94b2da59c48b02a7c2edc3ceb2d7db28879cf4d047",
+      "protocol_sha256": "8a01489cddf8e71645120d3e17ea965b724d446b9181c189f67b7432be8899d9",
+      "seconds": 530.7487988,
+      "stage": "genomic",
+      "status": "completed"
+    },
+    {
+      "execution_sha256": "5cbba04a459937e2fdd35cb57cd1ba3a8c9107fe96e2e5fd8d3a8db3144f220f",
+      "protocol_sha256": "8a01489cddf8e71645120d3e17ea965b724d446b9181c189f67b7432be8899d9",
+      "seconds": 140.7865119999999,
+      "stage": "ctcf",
+      "status": "completed"
+    }
+  ],
+  "status": "completed"
+}

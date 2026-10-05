@@ -1,0 +1,95 @@
+[MINTS 14:17:01] hardened stage: diagnostics
+[MINTS 14:17:15] hardened stage: calibration
+[MINTS 14:17:19] hardened stage: prediction
+[MINTS 14:17:19] validation-selected prediction: promoter_tata
+[MINTS 14:17:38] validation-selected prediction: promoter_no_tata
+[MINTS 14:18:41] validation-selected prediction: splice_sites_donors
+[MINTS 14:20:25] validation-selected prediction: splice_sites_acceptors
+[MINTS 14:22:11] hardened stage: patching
+C:\Users\USER\.cache\huggingface\modules\transformers_modules\zhihan1996\DNABERT_hyphen_2_hyphen_117M\7bce263b15377fc15361f52cfab88f8b586abda0\bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+
+Loading weights:   0%|          | 0/136 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 136/136 [00:00<00:00, 72851.26it/s]
+BertModel LOAD REPORT from: zhihan1996/DNABERT-2-117M
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+pooler.dense.bias                          | MISSING    | 
+pooler.dense.weight                        | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+WARNING:root:Support for BERT in TransformerLens is currently experimental, until such a time when it has feature parity with HookedTransformer and has been tested on real research tasks. Until then, backward compatibility is not guaranteed. Please see the docs for information on the limitations of the current implementation.
+If using BERT for interpretability research, keep in mind that BERT has some significant architectural differences to GPT. For example, LayerNorms are applied *after* the attention and MLP components, meaning that the last LayerNorm in a block cannot be folded.
+[MINTS 14:22:13] hardened assays: model loaded on cuda
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[MINTS 14:22:19] TATA: discovery 1/12
+[MINTS 14:22:22] TATA: discovery 2/12
+[MINTS 14:22:25] TATA: discovery 3/12
+[MINTS 14:22:28] TATA: discovery 4/12
+[MINTS 14:22:31] TATA: discovery 5/12
+[MINTS 14:22:34] TATA: discovery 6/12
+[MINTS 14:22:37] TATA: discovery 7/12
+[MINTS 14:22:39] TATA: discovery 8/12
+[MINTS 14:22:42] TATA: discovery 9/12
+[MINTS 14:22:45] TATA: discovery 10/12
+[MINTS 14:22:48] TATA: discovery 11/12
+[MINTS 14:22:51] TATA: discovery 12/12
+[MINTS 14:22:52] TATA: confirmation 1/25
+[MINTS 14:22:55] TATA: confirmation 11/25
+[MINTS 14:22:59] TATA: confirmation 21/25
+[MINTS 14:23:01] TATA: confirmation 25/25
+[MINTS 14:23:03] hardened stage: genomic
+[MINTS 14:23:59] native sensitivity f0.70_nucleotide_matched: 1/82 pairs
+[MINTS 14:24:19] native sensitivity f0.70_token_balanced: 1/15 pairs
+[MINTS 14:25:26] native sensitivity f0.80_nucleotide_matched: 1/256 pairs
+[MINTS 14:25:45] native sensitivity f0.80_nucleotide_matched: 101/256 pairs
+[MINTS 14:26:05] native sensitivity f0.80_nucleotide_matched: 201/256 pairs
+[MINTS 14:26:54] native sensitivity f0.80_token_balanced: 1/256 pairs
+[MINTS 14:27:14] native sensitivity f0.80_token_balanced: 101/256 pairs
+[MINTS 14:27:35] native sensitivity f0.80_token_balanced: 201/256 pairs
+[MINTS 14:28:54] native sensitivity f0.90_nucleotide_matched: 1/256 pairs
+[MINTS 14:29:13] native sensitivity f0.90_nucleotide_matched: 101/256 pairs
+[MINTS 14:29:33] native sensitivity f0.90_nucleotide_matched: 201/256 pairs
+[MINTS 14:31:00] native sensitivity f0.90_token_balanced: 1/256 pairs
+[MINTS 14:31:19] native sensitivity f0.90_token_balanced: 101/256 pairs
+[MINTS 14:31:41] native sensitivity f0.90_token_balanced: 201/256 pairs
+[MINTS 14:31:55] hardened stage: ctcf
+[MINTS 14:32:47] CTCF: discovery 1/12
+[MINTS 14:32:50] CTCF: discovery 2/12
+[MINTS 14:32:53] CTCF: discovery 3/12
+[MINTS 14:32:56] CTCF: discovery 4/12
+[MINTS 14:32:59] CTCF: discovery 5/12
+[MINTS 14:33:02] CTCF: discovery 6/12
+[MINTS 14:33:05] CTCF: discovery 7/12
+[MINTS 14:33:08] CTCF: discovery 8/12
+[MINTS 14:33:12] CTCF: discovery 9/12
+[MINTS 14:33:15] CTCF: discovery 10/12
+[MINTS 14:33:18] CTCF: discovery 11/12
+[MINTS 14:33:21] CTCF: discovery 12/12
+[MINTS 14:33:21] CTCF: confirmation 1/135
+[MINTS 14:33:25] CTCF: confirmation 11/135
+[MINTS 14:33:29] CTCF: confirmation 21/135
+[MINTS 14:33:33] CTCF: confirmation 31/135
+[MINTS 14:33:37] CTCF: confirmation 41/135
+[MINTS 14:33:41] CTCF: confirmation 51/135
+[MINTS 14:33:45] CTCF: confirmation 61/135
+[MINTS 14:33:49] CTCF: confirmation 71/135
+[MINTS 14:33:53] CTCF: confirmation 81/135
+[MINTS 14:33:57] CTCF: confirmation 91/135
+[MINTS 14:34:01] CTCF: confirmation 101/135
+[MINTS 14:34:05] CTCF: confirmation 111/135
+[MINTS 14:34:09] CTCF: confirmation 121/135
+[MINTS 14:34:13] CTCF: confirmation 131/135
+[MINTS 14:34:15] CTCF: confirmation 135/135
+{
+  "output": "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\hardened"
+}

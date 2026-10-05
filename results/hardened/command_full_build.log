@@ -1,0 +1,6 @@
+[MINTS 14:08:46] hardened stage: diagnostics
+[MINTS 14:09:00] hardened stage: calibration
+[MINTS 14:09:04] hardened stage: prediction
+[MINTS 14:09:04] validation-selected prediction: promoter_tata
+[MINTS 14:09:23] validation-selected prediction: promoter_no_tata
+[MINTS 14:10:26] validation-selected prediction: splice_sites_donors
