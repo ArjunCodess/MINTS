@@ -1,0 +1,10 @@
+{
+  "dataset": "ADASTRA CTCF Mabel v6.1",
+  "fresh_confirmation_membership": null,
+  "outcomes_used": false,
+  "prior_study": "results/variant_study/inspection_ledger.json records the earlier metadata-only inspection",
+  "role": "exploratory only",
+  "selected_membership_sha256": "b15e4896e42950a2b282bdc3b4d6ee89756e6a4ee2442ca49a5b2af4515889ac",
+  "source_records": 512556,
+  "source_table_opened": true
+}

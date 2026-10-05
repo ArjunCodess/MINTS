@@ -1,0 +1,23 @@
+{
+  "artifacts": {
+    "protocol.json": "e5662a170568851aeb7cd9c80faae6a4ff4e8e74f0d5828b05cf9b6c582d7233"
+  },
+  "elapsed_seconds": 3.4624242782592773,
+  "error": "ValueError: Missing ADASTRA genomic columns",
+  "protocol_sha256": "e5662a170568851aeb7cd9c80faae6a4ff4e8e74f0d5828b05cf9b6c582d7233",
+  "source_changed_during_run": false,
+  "source_sha256": {
+    "src/adastra_candidates.py": "98b7a5c6f2f88d1ed66e7e65d00300276c080895f2da4b3cd3a898996385b415",
+    "src/assay_alignment.py": "cc193663f2f40a37173c113ced0f4d5e56c4d26f5c55c933df2edfffe89cce5e",
+    "src/config.py": "59515a9a8be06fe617b065a449788861196894d7fb2a4474009185167a6d2afb",
+    "src/controlled_edits.py": "a3d91083a3e7e5a664a61de2ab4924a1f473771d6d6d2741ae7cdc39741a6282",
+    "src/motif_scoring.py": "e6f265a22d434d59448220c47d9593ce714b673b8376ba191ec18bc0697e905c",
+    "src/native_followup.py": "4fe9a51b851dd009044c92b0f8bdc868ad7c966a5e6fa5d00ce245caa2769fb9",
+    "src/utils.py": "e8fb7f1f68a61697644d7c3c8fffd1b71fa5cfbfd301f1441f15cc612b484e9e",
+    "src/variant_protocol.py": "47075fc31aa6e78341bc052092f666bcbe239742015cc7b798844e4f5f14158c",
+    "tools/audit_adastra_feasibility.py": "72a4e65304442050ad27e1ace50414948fdd2871529b1a80d7520d42c1e1bb9a",
+    "tools/download_adastra.py": "0614c5822b9fd89538b97f64f95399491e336e3d34718e89a14460d2c52c6443",
+    "tools/run_adastra_feasibility.py": "76a5f3a14ea9eddd213bb07852032eeac4752bec3aab11538d7856b573a4b557"
+  },
+  "status": "failed"
+}
