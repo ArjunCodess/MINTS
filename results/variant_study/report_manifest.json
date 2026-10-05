@@ -2,12 +2,12 @@
   "audit_cli_sha256": "5fed9df5887e32941caf3c6f3d2701eb75f592f0a9c3fe0c382b8f82c9561ccf",
   "auditor_sha256": "742e6b778f18023c7cee0fc66d927fa8be9751482a76f50eb83cab944a6150e3",
   "baseline_manifest_sha256": "067a370f9e25ad10231fba62b0c80f56e9bfb6de007cfa19d26ccd485c3612af",
-  "generator_sha256": "5fa8b43031e15ed2a95fb517002ac094e122edfad6011940b98ab1174395476b",
+  "generator_sha256": "302104ab66dc138c73e00a7c91daa5214281a6e1269efe3aa8b92ea55ea8cbf2",
   "outputs": {
-    "docs/MINTS_v2_feasibility.md": "f57ba8a65411c4491d1fdd16d267d6feb7cb96a921c0ce98f81c3dd5f955bb12",
-    "results/variant_study/exclusion_counts.csv": "2df0ef52ab0fe8ba8f37c4c312f37feefb297aaf658a7ff0cc824cbaa6cda61e",
-    "results/variant_study/sham_constraint_counts.csv": "66aa03f4151d83c6f9997e7504a46252afa58e3d6098a26bbf1019779752d35b",
-    "results/variant_study/token_boundary_diagnostics.csv": "71fe2f95785e06a204a81a18c1a7e0ef524f839f236314281b6a4184e0d07adb"
+    "docs/MINTS_v2_feasibility.md": "39b8b49777fbbc85dd6e85740052e5bcf7cd3d6b716c3047fbc5e532d3594454",
+    "results/variant_study/exclusion_counts.csv": "8e1ec696c8e7920b1843639ae0e9dcf2822c96b3e1fd71a87527fd9b64c88154",
+    "results/variant_study/sham_constraint_counts.csv": "c2311d9b6e6efa7ff83de8838fc053c35d7a74e9dcf6d42aa82fda8fad761c90",
+    "results/variant_study/token_boundary_diagnostics.csv": "cd87186c6baccdb123251a8b079b9002e4cb1570f9918e4ae081998302f0337b"
   },
   "protocol_document_sha256": "d0ff437a3c4bba1dde40b8b05986df72ff217fa83746ac6a45ed3a4647c0fafe",
   "scientific_execution_sha256": "3827a5f4d45f408d7bddd70915cbcbb548b5eef2824a859832052257d6603959",

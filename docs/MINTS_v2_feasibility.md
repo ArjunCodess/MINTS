@@ -58,15 +58,16 @@ from freshness claims.
 
 ## Reproduction and next boundary
 
-Use fresh output directories for every scientific attempt:
+This report was built from saved evidence with:
 
 ```powershell
-python tools/prepare_variant_study.py --output results/variant_study_new
-python tools/run_variant_pilot.py --output results/variant_pilot_new --device cuda
-python tools/build_variant_artifacts.py
+python tools/build_variant_artifacts.py --study 'results/variant_study' --pilot 'results/variant_pilot' --report 'docs/MINTS_v2_feasibility.md'
+python tools/audit_variant_study.py --study 'results/variant_study' --pilot 'results/variant_pilot'
 ```
 
-The report builder verifies the saved default study, scientific receipts,
+Use fresh output directories for every scientific attempt, following the
+[reproduction instructions](variant_verification.md#fresh-output-reproduction).
+The report builder verifies the supplied study, scientific receipts,
 historical attempt, metadata hashes and frozen Git baseline. The initial attempt
 is retained with source snapshots; its reporting label was corrected to
 distinguish unrun controls from failed controls without changing eligibility.

@@ -52,6 +52,12 @@ scientific dependencies. The pilot retains its fixed published input. It does
 not import another cohort or enable confirmation through command-line flags.
 The report builder supports the stopped empty population recorded by this
 protocol and rejects a nonempty result rather than generating misleading text.
+Report outputs must be Markdown files outside both evidence directories and
+cannot overwrite the frozen protocol or baseline files. Rejected targets and
+unsupported nonempty results leave existing output bytes unchanged. Generated
+commands use the supplied paths, quote PowerShell arguments, and link back to
+the documentation from the report's location. Diagnostic CSVs use LF line
+endings so rebuilding on Windows and Linux produces the same table bytes.
 
 The remaining work requires a new scientific design or additional biological
 evidence. This PR does not relax controls, score alternative endpoints, select
