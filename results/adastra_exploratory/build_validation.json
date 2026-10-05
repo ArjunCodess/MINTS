@@ -1,0 +1,43 @@
+{
+  "clean_checkout": {
+    "reason": "local Git transfer failed on damaged objects with about 22 MB free; recursive temporary-directory cleanup blocked by automatic approval review",
+    "stale_checkout_test_log_excluded": true,
+    "status": "not completed"
+  },
+  "compileall": "both environments passed",
+  "dependencies": "both environments passed pip check",
+  "download": {
+    "bytes": 942669336,
+    "http_status": 200,
+    "original_receipt": "results/adastra_import_attempt/download.json",
+    "publisher_md5": "4a3672e8261c49c37d8d2297393b0069",
+    "sha256": "172c9e9d922abd22bd6c3fe53c64fc4f9d1d7243f3d7daca45ce2099fd99dbf2"
+  },
+  "git_recovery": {
+    "damaged_objects_preserved": "paper/review-build/object-recovery",
+    "fsck": "passed",
+    "reachable_blob": "reconstructed from matching working-tree eligibility.csv; expected Git object id verified",
+    "second_object": "unreachable from all refs and reflogs; quarantined"
+  },
+  "implementation_commit": "02025f7",
+  "offline_audits": "original study and downloaded cohort passed",
+  "reference_verified": 4096,
+  "report_build": "passed",
+  "report_manifest_sha256": "a4363b3e6603e01bcffa0533e1844f7dce309a37f7667c95fbee92c363dea7e4",
+  "scientific_execution_sha256": "2a6a9ff668c7d14c6af11955b8edf48848a178588393157f3631cea166fcb05d",
+  "scientific_scope": "sequence-only engineering; no native inference, head search or confirmation",
+  "screened": 4096,
+  "sequence_controls": 0,
+  "source_records": 512556,
+  "status": "completed with clean-checkout limitation",
+  "tests": {
+    "tests_cpu.log": {
+      "passed": 185,
+      "sha256": "3334ca60696826f1f7c5363a97739de16e7d1ab144fe7fa1828f6fd8b62b895f"
+    },
+    "tests_cuda.log": {
+      "passed": 185,
+      "sha256": "696600e56cae91dc21b46f170f930cc0c8fdaff54d1fc261d5641d415ded5a1a"
+    }
+  }
+}
