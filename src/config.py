@@ -68,6 +68,7 @@ class ModelConfig:
 
     model_name: str = "zhihan1996/DNABERT-2-117M"
     trust_remote_code: bool = True
+    local_files_only: bool = False
     device: str = "auto"
     revision: str | None = "7bce263b15377fc15361f52cfab88f8b586abda0"
 
