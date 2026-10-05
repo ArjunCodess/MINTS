@@ -43,7 +43,7 @@ def build(output=ROOT / "results/native_endpoint"):
         "confirmation for any subsequent extension.\n"
     )
     target = ROOT / "paper/native_endpoint.tex"
-    target.write_text(text, encoding="utf-8")
+    target.write_text(text, encoding="utf-8", newline="\n")
     write_json(output / "paper_manifest.json", dict(
         generator_sha256=sha256_file(Path(__file__)),
         execution_sha256=sha256_file(output / "execution.json"),
