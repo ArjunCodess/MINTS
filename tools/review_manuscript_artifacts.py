@@ -234,6 +234,8 @@ for name in ("clean_reproduction.json", "clean_input_comparison.json", "clean_fe
         sources.append(out/name)
 if (patchroot/"promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json").exists():
     sources.append(patchroot/"promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json")
+if (root/"paper/hardened_results.tex").exists():
+    sources.extend([root/"paper/hardened_results.tex",root/"results/hardened/paper_manifest.json",root/"paper/main.tex"])
 manifest["paper_sources"]={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
 manifest["figures"]={
     "results/review/ctcf_native_controls.png":{
@@ -259,8 +261,8 @@ claim_audit={
         dict(claim="Native attention and sequence-QK conditional associations",status="sequence-pair inference completed",
              evidence=["ctcf_native_control_inference.csv","ctcf_sequence_qk_inference.csv","ctcf_native_control_scores.npz","ctcf_native_controls_manifest.json"],
              boundary="separate Holm families; observational exchangeability; marginal displayed-head intervals"),
-        dict(claim="Held-out TATA probe restoration",status="exploratory",
-             evidence=["heldout_patching_summary.json","heldout_pair_plot_data.csv"],boundary="ten selected test pairs; trained probe; composition edits and uncertain nucleotide alignment"),
+        dict(claim="Held-out TATA probe restoration",status="historical diagnostic; withdrawn as aligned intervention evidence",
+             evidence=["heldout_patching_summary.json","heldout_pair_plot_data.csv"],boundary="ten selected test pairs; trained probe; composition edits; six of ten pairs have verified offset mismatch"),
         dict(claim="No biological motif detector exists",status="removed",evidence=[],boundary="screen failure cannot establish absence"),
         dict(claim="Native CTCF causal effect",status="not claimed",evidence=[],boundary="no validated native CTCF output"),
         dict(claim="Cross-model ranking or Spearman rho above one",status="removed",evidence=["correctness_audit.json"],boundary="stored rho is an enrichment ratio; NT comparison not validated"),
