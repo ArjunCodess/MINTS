@@ -1,0 +1,12 @@
+\paragraph{Additional descriptive balance audit.}
+Normalized BED scores are available in the prepared CTCF peaks, although quantitative occupancy and repeat annotations are not. Table~\ref{tab:bed-balance} reports their means in evaluated native-control pairs. Matching does not constrain this score, so differences remain possible confounders. Most peaks reach the score ceiling of 1000. Saved diagnostics also report base entropy, longest mononucleotide runs, and DNase balance by motif presence and partition; these sequence-complexity measures do not identify repeat annotations. This post-hoc audit does not select heads or modify inference.
+\begin{table}[t]\centering\small\caption{Normalized CTCF BED-score balance in evaluated pairs.}\label{tab:bed-balance}
+\begin{tabular}{lrr}\toprule Configuration & Present mean & Absent mean \\\midrule
+f0.70\_nucleotide\_matched\_pairs & 1000.0 & 941.6 \\
+f0.70\_token\_balanced\_pairs & 954.2 & 796.5 \\
+f0.80\_nucleotide\_matched\_pairs & 994.9 & 894.8 \\
+f0.80\_token\_balanced\_pairs & 940.9 & 909.9 \\
+f0.90\_nucleotide\_matched\_pairs & 981.9 & 964.9 \\
+f0.90\_token\_balanced\_pairs & 982.8 & 947.8 \\
+\bottomrule\end{tabular}
+\end{table}
