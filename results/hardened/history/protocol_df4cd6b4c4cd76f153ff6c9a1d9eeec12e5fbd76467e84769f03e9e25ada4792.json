@@ -1,0 +1,32 @@
+{
+  "biological_claim": "trained readout effects; not native pretrained binding causality",
+  "bootstrap_samples": 1000,
+  "calibration_repetitions": 24,
+  "confirmation_pairs": 64,
+  "ctcf_test_per_class": 128,
+  "ctcf_train_per_class": 512,
+  "ctcf_validation_gate": "validation AUROC >= .6; tested before interventions",
+  "ctcf_validation_per_class": 128,
+  "dataset_revision": "851f9946252e90c665cdb3cc3eedb78f1f26197c",
+  "discovery_pairs": 12,
+  "edit_candidates": 128,
+  "genomic_pairs": 256,
+  "genomic_sequences": null,
+  "model_revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "output": "results\\hardened",
+  "permutations": 9999,
+  "primary_direction": "denoise",
+  "primary_endpoint": "motif-minus-transition-matched-sham absolute probe decision-score change",
+  "primary_scheme": "edit-only nucleotide positions",
+  "prospective_status": "protocol recorded before this execution; not an external preregistration",
+  "seed": 1729,
+  "test_chromosomes": [
+    "chr20",
+    "chr21"
+  ],
+  "train_cap": null,
+  "validation_chromosomes": [
+    "chr18",
+    "chr19"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "calibration_scope": "synthetic fixture thresholds are not transferred to native biological claims",
+  "criterion": "maximum discovery mean motif-minus-transition-matched-sham absolute score effect",
+  "discovery_membership": [
+    "chr18:11733036-11733240",
+    "chr18:23703162-23703366",
+    "chr18:36809648-36809852",
+    "chr18:45880028-45880232",
+    "chr18:49021928-49022132",
+    "chr19:14572008-14572212",
+    "chr19:32224685-32224889",
+    "chr19:41439888-41440092",
+    "chr19:4831708-4831912",
+    "chr19:49301348-49301552",
+    "chr19:6738548-6738752",
+    "chr19:770308-770512"
+  ],
+  "head": 8,
+  "layer": 5,
+  "motif": "CTCF",
+  "primary_direction": "denoise",
+  "primary_endpoint": "motif_minus_sham_absolute_decision_score_change",
+  "primary_scheme": "edit",
+  "scorer_sha256": "65ee2282f8de69b19dc56b75dacf6c2d94465f3eaaba3a131e9e4d229c939098",
+  "selection_scope": "discovery chromosomes only; independent confirmation"
+}

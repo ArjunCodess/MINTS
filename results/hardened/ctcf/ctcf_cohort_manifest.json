@@ -1,0 +1,87 @@
+{
+  "annotations_not_available": [
+    "repeat annotation",
+    "quantitative CTCF occupancy",
+    "cell-type replication"
+  ],
+  "caps": {
+    "test": 128,
+    "train": 512,
+    "validation": 128
+  },
+  "claim_boundary": "accessibility-conditioned observed peak overlap, not experimentally verified binding absence",
+  "counts": [
+    {
+      "count": 128,
+      "label": 0,
+      "partition": "test"
+    },
+    {
+      "count": 128,
+      "label": 1,
+      "partition": "test"
+    },
+    {
+      "count": 512,
+      "label": 0,
+      "partition": "train"
+    },
+    {
+      "count": 512,
+      "label": 1,
+      "partition": "train"
+    },
+    {
+      "count": 128,
+      "label": 0,
+      "partition": "validation"
+    },
+    {
+      "count": 128,
+      "label": 1,
+      "partition": "validation"
+    }
+  ],
+  "eligible_counts": [
+    {
+      "count": 1495,
+      "label": 0,
+      "partition": "test"
+    },
+    {
+      "count": 625,
+      "label": 1,
+      "partition": "test"
+    },
+    {
+      "count": 35792,
+      "label": 0,
+      "partition": "train"
+    },
+    {
+      "count": 14792,
+      "label": 1,
+      "partition": "train"
+    },
+    {
+      "count": 2778,
+      "label": 0,
+      "partition": "validation"
+    },
+    {
+      "count": 965,
+      "label": 1,
+      "partition": "validation"
+    }
+  ],
+  "fasta_sha256": "5be01555d98347fdb3714dc84c6f77c9d8bc774adcf32c6f7a8fa06f5baf5e51",
+  "label": "overlap with saved GM12878 CTCF peaks within independent DNase accessible windows",
+  "matching": "same chromosome; width 204bp; GC caliper .02; log1p DNase signal caliper .5; without replacement",
+  "partition": "train excludes 18/19/20/21; validation 18/19; test 20/21",
+  "seed": 1729,
+  "sources": {
+    "C:\\Users\\USER\\Desktop\\code\\MINTS\\data\\ctcf\\ctcf_gm12878_sequences.tsv": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459",
+    "C:\\Users\\USER\\Desktop\\code\\MINTS\\results\\hardened\\sources\\ENCFF598KWZ.bed.gz": "ec566bd39017453d2d29e09e747da33925626672991c6c877eaabeb72f0bff7a"
+  },
+  "width": 204
+}

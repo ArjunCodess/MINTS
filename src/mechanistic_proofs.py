@@ -71,7 +71,14 @@ def _token_shapes_match(bundle: Any, clean_sequence: str, corrupted_sequence: st
 
     clean = bundle.tokenizer(clean_sequence, return_tensors="pt", padding=True, truncation=True)
     corrupted = bundle.tokenizer(corrupted_sequence, return_tensors="pt", padding=True, truncation=True)
-    return clean["input_ids"].shape == corrupted["input_ids"].shape
+    if clean["input_ids"].shape != corrupted["input_ids"].shape:
+        return False
+    from .assay_alignment import validate_patch_alignment
+    try:
+        validate_patch_alignment(bundle.tokenizer, clean_sequence, corrupted_sequence)
+    except ValueError:
+        return False
+    return True
 
 
 def _select_patching_pair(

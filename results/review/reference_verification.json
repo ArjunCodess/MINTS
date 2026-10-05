@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-04",
+  "checked_at": "2026-10-05",
   "references": [
     {
       "key": "elhage2021framework",
@@ -27,8 +27,48 @@
       "title": "DNABERT-2: Efficient Foundation Model and Benchmark For Multi-Species Genome",
       "version": "v2, 2024-03-18",
       "verification": "official arXiv page and DOI; browser check"
+    },
+    {
+      "key": "ji2021dnabert",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11025658/",
+      "doi": "10.1093/bioinformatics/btab083",
+      "title": "DNABERT: pre-trained Bidirectional Encoder Representations from Transformers model for DNA-language in genome",
+      "authors": [
+        "Yanrong Ji",
+        "Zhihan Zhou",
+        "Han Liu",
+        "Ramana V. Davuluri"
+      ],
+      "verification": "Primary publisher article in PMC; title, authors, journal, year and DOI checked with web tool"
+    },
+    {
+      "key": "zhang2024metrics",
+      "url": "https://arxiv.org/abs/2309.16042",
+      "doi": "10.48550/arXiv.2309.16042",
+      "title": "Towards Best Practices of Activation Patching in Language Models: Metrics and Methods",
+      "authors": [
+        "Fred Zhang",
+        "Neel Nanda"
+      ],
+      "verification": "Official arXiv page; title, authors, version date and DOI checked with web tool"
+    },
+    {
+      "key": "yang2025omnigenbench",
+      "url": "https://arxiv.org/abs/2505.14402",
+      "doi": "10.48550/arXiv.2505.14402",
+      "title": "OmniGenBench: A Modular Platform for Reproducible Genomic Foundation Models Benchmarking",
+      "authors": [
+        "Heng Yang",
+        "Jack Cole",
+        "Yuan Li",
+        "Renzhi Chen",
+        "Geyong Min",
+        "Ke Li"
+      ],
+      "verification": "Official arXiv page; title, authors, year and DOI checked with web tool"
     }
   ],
   "note": "publisher page content retained only as a hash, not copied article text",
-  "bibliography_sha256": "a9604c0a244dc2bee1904a63b3d6cbfc1a21a555967712b21bc4b76f8e38c068"
+  "bibliography_sha256": "88296911a1ef2e5d0160ed1f90617b0a72ef54615fdb73f3bfca8ef6a7a19074",
+  "previous_checked_at": "2026-10-04"
 }

@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "implementation": "exact nucleotide alignment",
+      "item": 1
+    },
+    {
+      "implementation": "composition-preserving and transition-matched edits",
+      "item": 2
+    },
+    {
+      "implementation": "same-motif validated CTCF trained readout",
+      "item": 3
+    },
+    {
+      "implementation": "absolute effects and leave-one-out estimates",
+      "item": 4
+    },
+    {
+      "implementation": "known-mechanism synthetic calibration",
+      "item": 5
+    },
+    {
+      "implementation": "token geometry controls",
+      "item": 6
+    },
+    {
+      "implementation": "independent accessible non-peak controls",
+      "item": 7
+    },
+    {
+      "implementation": "discovery and independent confirmation",
+      "item": 8
+    },
+    {
+      "implementation": "genomic-block and identity clustering",
+      "item": 9
+    },
+    {
+      "implementation": "baseline-plus-residual comparison",
+      "item": 10
+    },
+    {
+      "implementation": "paired classifier differences",
+      "item": 11
+    },
+    {
+      "implementation": "PWM and aggregation sensitivity",
+      "item": 12
+    },
+    {
+      "implementation": "six patch schemes and reverse effects",
+      "item": 13
+    },
+    {
+      "implementation": "related work and second motif/assay",
+      "item": 14
+    },
+    {
+      "implementation": "immutable resume receipts",
+      "item": 15
+    },
+    {
+      "implementation": "actual layer IDs",
+      "item": 16
+    },
+    {
+      "implementation": "pinned runtime, preflight and CPU CI",
+      "item": 17
+    }
+  ],
+  "limitations": [
+    "oracle fixtures do not validate learned mechanisms",
+    "donor matched eligibility insufficient",
+    "repeat and occupancy annotations unavailable",
+    "no new label reconstruction or cell-type replication"
+  ]
+}

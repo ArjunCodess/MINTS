@@ -1,0 +1,25 @@
+{
+  "scope": "post-hoc descriptive balance, no biological inference or selection",
+  "command": "python results/hardened/cohort_diagnostics/build_balance.py",
+  "script_sha256": "b1843575d0388e7c595947e8797db142f18db6cece6b019614005b42c98acdda",
+  "inputs": {
+    "data/ctcf/ctcf_gm12878_sequences.tsv": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459",
+    "results/hardened/genomic/f0.70_nucleotide_matched_pairs.csv": "baa9180613d85f0db8413768bcea7ae372c3377fbe9c4bf362167ae8866b533b",
+    "results/hardened/genomic/f0.70_token_balanced_pairs.csv": "cb7e5a7ae5b7a32b1e0aafd9d909d89801aad147d3e3746ffa2c1cd558e3ce53",
+    "results/hardened/genomic/f0.80_nucleotide_matched_pairs.csv": "b489bfa43634130ac432e8da01de413a7e8f3b7c3fcd3ba132c9200dcc39f3e9",
+    "results/hardened/genomic/f0.80_token_balanced_pairs.csv": "2e46c583cc8aa461de0c2716afa823ce87caeae809149e344602b73d183d9f45",
+    "results/hardened/genomic/f0.90_nucleotide_matched_pairs.csv": "8cc32108b3c5182c242d0d4ced6e24c2b2a11cf71928c2e0caa7147553329b75",
+    "results/hardened/genomic/f0.90_token_balanced_pairs.csv": "e381916123df52dec24966fd17078cf55b3305b1b857090a13158deecc2c5ca4",
+    "results/hardened/ctcf/ctcf_case_control.tsv": "71bb735617fad16b574b485b41077773c7be7de81af6ab277af0259d3b0e0178"
+  },
+  "outputs": {
+    "results/hardened/cohort_diagnostics/accessible_cohort_balance.csv": "49b8877da9fce202b595577ca4cbfb07690929fea394fdf5302392149b654f02",
+    "results/hardened/cohort_diagnostics/native_peak_balance.csv": "a70c49f4442d64c1ec267bdd22a2bea71775ea2535981d533604a32983398f5d",
+    "results/hardened/cohort_diagnostics/native_peak_balance_members.csv": "f3b597b96cee240535992f5fe8d8c99dcb1f4a554f850a3ace5a76ce8cd0df7b",
+    "paper/cohort_balance.tex": "ffe3b214b7eb1a861a720cf9d2d725acb2908a86c7684d1cb032d0a416af5be7"
+  },
+  "limitations": [
+    "BED rank/normalized score is not calibrated occupancy",
+    "base entropy and run length are not repeat annotation"
+  ]
+}

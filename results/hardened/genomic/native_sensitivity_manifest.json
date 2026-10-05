@@ -1,0 +1,87 @@
+{
+  "aggregations": [
+    "max",
+    "mean",
+    "overlap_weighted"
+  ],
+  "attention_assays": [
+    "native ALiBi-inclusive",
+    "content-only softmax",
+    "position-only softmax"
+  ],
+  "claim_boundary": "conditional association within CTCF peaks; no binding absence or causal native output",
+  "evaluated_sequences": 51249,
+  "fractions": [
+    0.7,
+    0.8,
+    0.9
+  ],
+  "inference": "sequence-pair and transitive 1Mb genomic-block bootstrap and sign flips; Holm and simultaneous max statistics",
+  "model_revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "multiplicity": "144-head family within each assay; additional Holm over all reported sensitivity rows",
+  "pair_cap": 256,
+  "query_assays": [
+    "all nucleotide queries, width weighted",
+    "queries within 30bp of target span"
+  ],
+  "runs": [
+    {
+      "eligible_pairs": 82,
+      "evaluated_pairs": 82,
+      "fraction": 0.7,
+      "geometry": "nucleotide_matched",
+      "max_native_context_error": 0.0,
+      "status": "completed",
+      "threshold": -5.705004614891905
+    },
+    {
+      "eligible_pairs": 15,
+      "evaluated_pairs": 15,
+      "fraction": 0.7,
+      "geometry": "token_balanced",
+      "max_native_context_error": 0.0,
+      "status": "completed",
+      "threshold": -5.705004614891905
+    },
+    {
+      "eligible_pairs": 5220,
+      "evaluated_pairs": 256,
+      "fraction": 0.8,
+      "geometry": "nucleotide_matched",
+      "max_native_context_error": 0.0,
+      "status": "completed",
+      "threshold": 4.891474929279198
+    },
+    {
+      "eligible_pairs": 3510,
+      "evaluated_pairs": 256,
+      "fraction": 0.8,
+      "geometry": "token_balanced",
+      "max_native_context_error": 0.0,
+      "status": "completed",
+      "threshold": 4.891474929279198
+    },
+    {
+      "eligible_pairs": 13090,
+      "evaluated_pairs": 256,
+      "fraction": 0.9,
+      "geometry": "nucleotide_matched",
+      "max_native_context_error": 0.0,
+      "status": "completed",
+      "threshold": 15.487954473450273
+    },
+    {
+      "eligible_pairs": 5088,
+      "evaluated_pairs": 256,
+      "fraction": 0.9,
+      "geometry": "token_balanced",
+      "max_native_context_error": 0.0,
+      "status": "completed",
+      "threshold": 15.487954473450273
+    }
+  ],
+  "seed": 1729,
+  "sequence_cap": null,
+  "source_sequences": 51249,
+  "source_sha256": "63575ae1a843c7a97063523e22a42a1244c605a910829a9c1bc08b59debe7459"
+}

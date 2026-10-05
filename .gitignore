@@ -239,3 +239,11 @@ paper/review-build/
 results/review/pip-cache/
 results/review/page-*.png
 !results/review/command_*.log
+
+# Local validation and manuscript build intermediates
+.test-tmp/
+results/hardened/test-tmp-*/
+paper/hardened-build/
+
+.venv-cpu-check/
+!results/hardened/command_*.log

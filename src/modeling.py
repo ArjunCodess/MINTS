@@ -260,11 +260,13 @@ def load_hf_components(config: ModelConfig = DEFAULT_CONFIG.model) -> tuple[Any,
         config.model_name,
         trust_remote_code=config.trust_remote_code,
         revision=config.revision,
+        local_files_only=config.local_files_only,
     )
     hf_config = AutoConfig.from_pretrained(
         config.model_name,
         trust_remote_code=config.trust_remote_code,
         revision=config.revision,
+        local_files_only=config.local_files_only,
     )
     if not hasattr(hf_config, "pad_token_id") or hf_config.pad_token_id is None:
         hf_config.pad_token_id = tokenizer.pad_token_id
@@ -289,6 +291,7 @@ def load_hf_components(config: ModelConfig = DEFAULT_CONFIG.model) -> tuple[Any,
                 config=hf_config,
                 trust_remote_code=config.trust_remote_code,
                 revision=config.revision,
+                local_files_only=config.local_files_only,
             )
             break
         except Exception as exc:

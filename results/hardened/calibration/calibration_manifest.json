@@ -1,0 +1,19 @@
+{
+  "confirmation_false_positive_rate": 0.0,
+  "confirmation_sensitivity": 1.0,
+  "detector_feature": "oracle motif feature explicitly implanted in QK and V; native fixture output is known",
+  "limitations": [
+    "finite fixtures, strengths, and background distributions",
+    "no learned detector calibration",
+    "no biological validation"
+  ],
+  "repetitions": 24,
+  "scope": "synthetic attention computations with base tokens; does not establish sensitivity in pretrained DNABERT",
+  "seed": 1729,
+  "selection": "thresholds selected on discovery fixture seeds with false-positive rate <= .05",
+  "thresholds": {
+    "absolute_effect": 0.001,
+    "density": 1.0,
+    "qk_r": 0.5
+  }
+}

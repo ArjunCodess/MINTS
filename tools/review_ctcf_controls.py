@@ -25,7 +25,7 @@ OUT=ROOT/"results/review"
 REVISION="7bce263b15377fc15361f52cfab88f8b586abda0"
 
 
-def match_controls(sequences, tokens):
+def match_controls(sequences, tokens, strict_geometry=False, seed=1729):
     support=tokens.groupby("sequence_index")["is_support"].any()
     if not np.array_equal(support.index.to_numpy(),np.arange(len(sequences))):
         raise ValueError("Motif scores must cover exactly the sequence table in row-index order")
@@ -40,20 +40,60 @@ def match_controls(sequences, tokens):
     gc=np.asarray([_sequence_gc_fraction(s) for s in sequences.sequence])
     lengths=sequences.sequence.str.len().to_numpy()
     chromosomes=np.asarray([str(c) for c in sequences.chrom])
-    rng=np.random.default_rng(1729)
+    geometry = None
+    grouped = None
+    if strict_geometry:
+        required = {"char_start", "char_end", "token"}
+        if not required.issubset(tokens.columns):
+            raise ValueError("Strict geometry matching requires nucleotide offsets and token IDs")
+        real = tokens[tokens.char_end > tokens.char_start]
+        geometry = real.groupby("sequence_index").size().reindex(range(len(sequences))).to_numpy()
+        if not np.isfinite(geometry).all():
+            raise ValueError("Every sequence needs real nucleotide-spanning tokens")
+        grouped = {i: group.sort_values("token") for i, group in tokens.groupby("sequence_index")}
+    rng=np.random.default_rng(seed)
     rng.shuffle(absent)
     available=set(present.tolist())
     pairs=[]
     for control in absent:
         candidates=np.asarray(sorted(available),dtype=int)
         eligible=(chromosomes[candidates]==chromosomes[control]) & (np.abs(gc[candidates]-gc[control])<=.02) & (np.abs(lengths[candidates]-lengths[control])<=.05*lengths[control])
+        if strict_geometry:
+            eligible &= geometry[candidates] == geometry[control]
         candidates=candidates[eligible]
         if not len(candidates):
             continue
-        best=int(candidates[np.argmin(np.abs(gc[candidates]-gc[control]) + np.abs(lengths[candidates]-lengths[control])/lengths[control])])
+        costs=np.abs(gc[candidates]-gc[control]) + np.abs(lengths[candidates]-lengths[control])/lengths[control]
+        best = None
+        diagnostics = {}
+        for candidate in candidates[np.argsort(costs, kind="stable")]:
+            if strict_geometry:
+                supported = grouped[int(candidate)].loc[lambda g:g.is_support]
+                run = supported.token.to_numpy()
+                if np.any(np.diff(run)>1):
+                    run=run[:np.flatnonzero(np.diff(run)>1)[0]+1]
+                selected=supported[supported.token.isin(run)]
+                a,b=int(selected.char_start.min()),int(selected.char_end.max())
+                ca=round(a*lengths[control]/lengths[candidate])
+                cb=min(int(lengths[control]),ca+b-a)
+                record=grouped[control]
+                covered=record[(record.char_end>record.char_start)&(record.char_start<cb)&(record.char_end>ca)]
+                if len(covered)!=len(selected):
+                    continue
+                # Bound support enlargement caused by partially overlapping BPE tokens.
+                control_width=int(covered.char_end.max()-covered.char_start.min())
+                if abs(control_width-(b-a))>2:
+                    continue
+                diagnostics=dict(real_tokens=int(geometry[candidate]),target_tokens=len(selected),
+                                 present_target_width=b-a,absent_target_width=control_width)
+            best=int(candidate)
+            break
+        if best is None:
+            continue
         available.remove(best)
         pairs.append(dict(present_index=best,absent_index=int(control),present_gc=float(gc[best]),absent_gc=float(gc[control]),
-                          present_length=int(lengths[best]),absent_length=int(lengths[control]),chromosome=chromosomes[control]))
+                          present_length=int(lengths[best]),absent_length=int(lengths[control]),chromosome=chromosomes[control],
+                          **diagnostics))
     return pairs
 
 

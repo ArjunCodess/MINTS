@@ -79,7 +79,7 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="N",
         help=(
             "Limit systematic denoising activation-patching pairs per configured task. "
-            "Omit this flag to use all token-shape-preserving pairs."
+            "Omit this flag to use all nucleotide-boundary-compatible pairs."
         ),
     )
     parser.add_argument(
@@ -152,8 +152,14 @@ def build_parser() -> argparse.ArgumentParser:
 def run(argv: list[str] | None = None) -> int:
     """Run the complete pipeline."""
 
+    import sys
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if arguments and arguments[0] == "hardened":
+        from tools.run_hardened_assay import parser as assay_parser, run as run_assay
+        print(json.dumps({"output": str(run_assay(assay_parser().parse_args(arguments[1:])))}, indent=2))
+        return 0
     parser = build_parser()
-    args = parser.parse_args(argv)
+    args = parser.parse_args(arguments)
     if args.max_probe_train is not None and args.max_probe_train <= 0:
         parser.error("--max-probe-train must be a positive integer.")
     if args.max_probe_test is not None and args.max_probe_test <= 0:

@@ -103,6 +103,7 @@ def test_manuscript_sources_have_no_stale_submission_material():
     assert "suggested_by" not in active_code
 
 
+@pytest.mark.artifact
 def test_paper_numbers_and_inputs_match_the_saved_artifact_manifest():
     from pathlib import Path
     import hashlib
@@ -128,6 +129,7 @@ def test_manuscript_import_rejects_an_unfinished_run(tmp_path):
     assert "Cannot import incomplete scientific run" in result.stderr
 
 
+@pytest.mark.artifact
 def test_reported_classifier_metrics_recompute_from_saved_predictions():
     from pathlib import Path
     from sklearn.metrics import roc_auc_score, average_precision_score, accuracy_score
@@ -150,6 +152,7 @@ def test_reported_classifier_metrics_recompute_from_saved_predictions():
             assert np.isclose(accuracy_score(y,score>=.5),row.accuracy,atol=1e-12,rtol=0)
 
 
+@pytest.mark.artifact
 def test_native_and_qk_summaries_match_raw_sequence_pairs():
     from pathlib import Path
     out=Path(__file__).resolve().parents[1]/"results/review"
@@ -174,6 +177,7 @@ def test_native_and_qk_summaries_match_raw_sequence_pairs():
             assert np.allclose(table.holm_p.to_numpy()[order],expected,atol=1e-12,rtol=0)
 
 
+@pytest.mark.artifact
 def test_heldout_patching_interpretation_matches_raw_scores():
     from pathlib import Path
     import json

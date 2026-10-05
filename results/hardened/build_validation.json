@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "scientific_stages": 6,
+  "full_tests": 93,
+  "scientific_artifact_tests": 5,
+  "fresh_cpu_fast_tests": 88,
+  "cuda_environment_pip_check": "passed",
+  "fresh_cpu_environment_pip_check": "passed",
+  "python_compileall": "passed",
+  "manuscript": {
+    "path": "paper/main.pdf",
+    "pages": 12,
+    "sha256": "f06a3da298845c7a19fdd6a3b18a6b041ef008c64a1975647fb9e4714c8546b5",
+    "compiler": "MiKTeX latexmk via latex-compile skill",
+    "unresolved_references": 0,
+    "overfull_boxes": 0,
+    "visually_inspected_pages": [
+      8,
+      9,
+      10
+    ]
+  },
+  "renderer_source_validation": "Scientific computation sources and artifacts match frozen receipts. The presentation renderer was repaired after execution and its current hash is recorded separately in paper_manifest.json.",
+  "development_interruptions": [
+    "Build attempts were stopped only to add verified cache identity and portable/frozen source metadata; prior receipts and command logs are preserved."
+  ],
+  "scientific_limits": [
+    "Engineered oracle calibration does not validate every learned mechanism",
+    "CTCF effects concern a trained readout, not native pretrained binding biology",
+    "Two-base donor sham constraints are structurally infeasible",
+    "Repeat annotations, calibrated occupancy and cross-cell replication unavailable"
+  ],
+  "review_document_excluded": "results/review/phd_review_20261005.md"
+}
