@@ -25,6 +25,12 @@ from src.variant_quality import biological_qc
 ROOT=Path(__file__).resolve().parents[1]
 
 
+def freeze_protocol(path,record):
+    """Exclusive creation prevents two runners claiming the same output folder."""
+    with Path(path).open("x",encoding="utf-8",newline="") as stream:
+        json.dump(record,stream,indent=2,sort_keys=True)
+
+
 def run(output, input_path, device="auto"):
     output,input_path=Path(output).resolve(),Path(input_path).resolve()
     if (output/"protocol.json").exists():
@@ -46,7 +52,7 @@ def run(output, input_path, device="auto"):
         pilot_population="all 16 published rows; homozygous and unresolved adjacent variants excluded before model scoring",
         min_queries=1,coverage_scope="published pooled counts; phase, replicate and mapping-bias uncertainty unresolved",
         biological_power="not supplied by this small published benchmark")
-    write_json(output/"protocol.json",frozen)
+    freeze_protocol(output/"protocol.json",frozen)
     started=time.time()
     receipt=dict(status="running",source_sha256=sources,protocol_sha256=sha256_file(output/"protocol.json"),command=sys.argv)
     write_json(output/"execution.json",receipt)
@@ -58,14 +64,17 @@ def run(output, input_path, device="auto"):
         tokenizer=AutoTokenizer.from_pretrained(DEFAULT_CONFIG.model.model_name,
             revision=DEFAULT_CONFIG.model.revision,trust_remote_code=True,local_files_only=DEFAULT_CONFIG.model.local_files_only)
         motif=MotifDefinition("CTCF",pssm=motif_pssm(load_jaspar_ctcf_motif()),fraction=.8)
-        eligibility=[];cases=[];observed={}
+        eligibility=[];cases=[];observed={};eligibility_diagnostics=[]
         for row in table.to_dict("records"):
-            case,reason=prepare_variant(tokenizer,row,motif,protocol,group_sizes)
+            trace={}
+            case,reason=prepare_variant(tokenizer,row,motif,protocol,group_sizes,diagnostics=trace)
+            eligibility_diagnostics.append(dict(source_row=row["source_row"],reason=reason,**trace))
             eligibility.append(dict(source_row=row["source_row"],locus_group=row["locus_group"],reason=reason,retained=case is not None))
             if case is not None:
                 cases.append(case)
                 observed[case["variant_id"]]=float(row["log_odds_ratio"])
         pd.DataFrame(eligibility).to_csv(output/"eligibility.csv",index=False)
+        write_json(output/"eligibility_diagnostics.json",eligibility_diagnostics)
         # Membership and controls are saved before any model inference.
         write_json(output/"membership.json",dict(cases=cases,inspection_role="exploratory published benchmark",
             biological_effects_used_for_selection=False))

@@ -21,15 +21,23 @@ class VariantProtocol:
     meaningful_rescue_nats: float = .001
 
     def __post_init__(self):
+        for name in ("seed", "query_radius_bp", "sham_radius_bp", "distance_tolerance_bp", "min_clusters", "bootstrap_samples"):
+            if type(getattr(self,name)) is not int:
+                raise ValueError(f"{name} must be an integer")
+        if self.seed < 0 or self.bootstrap_samples < 100:
+            raise ValueError("Nonnegative seed and at least 100 bootstrap draws required")
         if min(self.query_radius_bp, self.sham_radius_bp, self.bootstrap_samples) < 1:
             raise ValueError("Radii and resampling counts must be positive")
         if self.min_clusters < 3 or self.distance_tolerance_bp < 0:
             raise ValueError("Invalid independence or geometry rule")
         for name in ("gc_tolerance", "sham_pwm_tolerance_bits", "min_effect_nats",
-                     "numerical_tolerance", "meaningful_rescue_nats"):
-            if not math.isfinite(getattr(self, name)) or getattr(self, name) <= 0:
+                     "numerical_tolerance", "meaningful_rescue_nats", "min_retention", "min_binding_rho"):
+            value=getattr(self,name)
+            if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value):
                 raise ValueError(f"Invalid {name}")
-        if not 0 < self.min_retention <= 1 or not -1 <= self.min_binding_rho <= 1:
+            if name!="min_binding_rho" and value<=0:
+                raise ValueError(f"Invalid {name}")
+        if not 0 < self.min_retention <= 1 or not 0 <= self.min_binding_rho <= 1:
             raise ValueError("Invalid retention or correlation threshold")
 
     def record(self):
@@ -53,18 +61,29 @@ def feasibility_gate(summary, protocol):
                 "binding_rho", "binding_ci_low"]
     if any(k not in summary for k in required):
         return dict(status="stop", reasons=["incomplete feasibility evidence"], selected_head=None)
-    if not summary["controls_passed"]:
+    def number(value):
+        return isinstance(value,(int,float)) and not isinstance(value,bool) and math.isfinite(value)
+    if summary["controls_passed"] is not True:
         reasons.append("implementation controls not demonstrated" if summary["controls_passed"] is None else "implementation controls failed")
-    if summary["retention"] < protocol.min_retention:
+    if not number(summary["retention"]) or not protocol.min_retention <= summary["retention"] <= 1:
         reasons.append("insufficient sequence-only retention")
-    if summary["clusters"] < protocol.min_clusters:
+    if type(summary["clusters"]) is not int or summary["clusters"] < protocol.min_clusters:
         reasons.append("insufficient genomic clusters")
     checks = [("mean", protocol.min_effect_nats), ("ci_low", 0),
               ("binding_rho", protocol.min_binding_rho), ("binding_ci_low", 0)]
     for key, threshold in checks:
         value = summary[key]
-        if value is None or not math.isfinite(value) or value <= threshold:
+        if not number(value) or value <= threshold:
             reasons.append(f"{key} fails frozen sensitivity threshold")
+    if number(summary["binding_rho"]) and not -1 <= summary["binding_rho"] <= 1:
+        reasons.append("binding correlation outside valid range")
+    if number(summary["binding_ci_low"]) and (not -1 <= summary["binding_ci_low"] <= 1
+            or (number(summary["binding_rho"]) and summary["binding_ci_low"]>summary["binding_rho"])):
+        reasons.append("binding interval inconsistent with correlation")
+    if number(summary["mean"]) and abs(summary["mean"])>math.log(2):
+        reasons.append("divergence contrast outside Jensen-Shannon bounds")
+    if number(summary["ci_low"]) and number(summary["mean"]) and summary["ci_low"]>summary["mean"]:
+        reasons.append("effect interval inconsistent with estimate")
     return dict(status="eligible_for_discovery" if not reasons else "stop", reasons=reasons,
                 selected_head=None, confirmation="not authorized by feasibility alone")
 

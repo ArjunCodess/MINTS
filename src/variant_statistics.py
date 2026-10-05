@@ -1,13 +1,22 @@
 """Equal-cluster feasibility summaries and intervention-based power planning."""
 import math
 import numpy as np
-from scipy.stats import spearmanr, norm, t
+from scipy.stats import spearmanr, t
+
+
+def _vectors(values, clusters, repetitions, seed):
+    values,clusters=np.asarray(values,dtype=float),np.asarray(clusters)
+    if values.ndim!=1 or clusters.ndim!=1 or len(values)!=len(clusters) or not np.isfinite(values).all():
+        raise ValueError("Finite aligned one-dimensional effects and cluster labels required")
+    if any(c is None or (isinstance(c,(float,np.floating)) and not np.isfinite(c)) for c in clusters):
+        raise ValueError("Missing cluster labels are not independent observations")
+    if type(repetitions) is not int or repetitions<2 or type(seed) is not int or seed<0:
+        raise ValueError("Integer resampling count and nonnegative seed required")
+    return values,clusters
 
 
 def cluster_summary(values, clusters, repetitions=2000, seed=1731):
-    values, clusters=np.asarray(values,dtype=float),np.asarray(clusters)
-    if len(values) != len(clusters) or not np.isfinite(values).all():
-        raise ValueError("Finite aligned effects required")
+    values,clusters=_vectors(values,clusters,repetitions,seed)
     means=np.array([values[clusters==c].mean() for c in np.unique(clusters)])
     if len(means)<2:
         return dict(mean=None,ci_low=None,ci_high=None,clusters=len(means))
@@ -18,8 +27,9 @@ def cluster_summary(values, clusters, repetitions=2000, seed=1731):
 
 
 def binding_agreement(scores, effects, clusters, repetitions=2000, seed=1731):
-    scores,effects,clusters=np.asarray(scores,dtype=float),np.asarray(effects,dtype=float),np.asarray(clusters)
-    if not len(scores)==len(effects)==len(clusters) or not np.isfinite(scores).all() or not np.isfinite(effects).all():
+    scores,clusters=_vectors(scores,clusters,repetitions,seed)
+    effects=np.asarray(effects,dtype=float)
+    if effects.ndim!=1 or len(scores)!=len(effects) or not np.isfinite(effects).all():
         raise ValueError("Finite aligned model and biological effects required")
     groups=np.unique(clusters)
     x=np.array([scores[clusters==c].mean() for c in groups])
@@ -43,12 +53,16 @@ def simulate_cluster_power(intervention_cluster_means, minimum_effect, retention
                            candidates=(16,32,64,128,256,512), repetitions=3000, seed=1731):
     """Resample discovery intervention noise, never unpatched pilot variance."""
     values=np.asarray(intervention_cluster_means,dtype=float)
-    if len(values)<8 or not np.isfinite(values).all() or np.std(values,ddof=1)<=0:
+    if values.ndim!=1 or len(values)<8 or not np.isfinite(values).all() or np.std(values,ddof=1)<=0:
         raise ValueError("At least eight variable discovery intervention clusters required")
-    if minimum_effect<=0 or not 0<retention<=1 or repetitions<100:
+    if not math.isfinite(minimum_effect) or minimum_effect<=0 or not math.isfinite(retention) or not 0<retention<=1 or type(repetitions) is not int or repetitions<100:
         raise ValueError("Invalid effect, retention or simulation count")
+    if type(seed) is not int or seed<0 or not candidates:
+        raise ValueError("Nonnegative seed and nonempty candidate sizes required")
+    if any(type(n) is not int or n<3 for n in candidates) or len(set(candidates))!=len(candidates):
+        raise ValueError("Candidate cluster counts must be distinct integers of at least three")
     noise=values-values.mean();rng=np.random.default_rng(seed);rows=[]
-    for n in candidates:
+    for n in sorted(candidates):
         if n<3:
             raise ValueError("Power candidates must contain at least three clusters")
         draws=noise[rng.integers(0,len(noise),(repetitions,n))]+minimum_effect
@@ -65,6 +79,10 @@ def simulate_cluster_power(intervention_cluster_means, minimum_effect, retention
 def select_head(discovery_rows):
     if not discovery_rows:
         raise ValueError("No discovery intervention results")
-    if any(not math.isfinite(r["mean"]) for r in discovery_rows):
+    if any(r.get("mean") is None or not math.isfinite(r["mean"]) for r in discovery_rows):
         raise ValueError("Head selection requires finite effects")
+    if any(type(r.get(k)) is not int or r[k]<0 for r in discovery_rows for k in ("layer","head")):
+        raise ValueError("Nonnegative integer layer/head indices required")
+    if len({(r["layer"],r["head"]) for r in discovery_rows})!=len(discovery_rows):
+        raise ValueError("Duplicate head candidates")
     return min(discovery_rows,key=lambda r:(-r["mean"],r["layer"],r["head"]))

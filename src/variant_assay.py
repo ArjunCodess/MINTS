@@ -15,6 +15,12 @@ def validate_variant(row):
         raise ValueError("Explicit supported genome build required")
     if not clean or len(clean) != len(alt) or set(clean + alt) - set("ACGT"):
         raise ValueError("Canonical equal-length allele windows required")
+    for key in ("position_1based","window_start_0based","window_end_0based"):
+        number=float(row[key])
+        if isinstance(row[key],bool) or not math.isfinite(number) or not number.is_integer() or number<0:
+            raise ValueError("Genomic coordinates must be finite nonnegative integers")
+    if int(row["position_1based"])<1:
+        raise ValueError("Source position must be one-based")
     index = int(row["position_1based"]) - 1 - int(row["window_start_0based"])
     if not 0 <= index < len(clean) or int(row["window_end_0based"]) - int(row["window_start_0based"]) != len(clean):
         raise ValueError("Coordinate/window mismatch")
@@ -30,9 +36,13 @@ def validate_variant(row):
     return index
 
 
-def prepare_variant(tokenizer, row, motif, protocol, group_sizes):
+def prepare_variant(tokenizer, row, motif, protocol, group_sizes, diagnostics=None):
     """Choose controls and queries before inspecting any native model output."""
     index = validate_variant(row)
+    trace=diagnostics if diagnostics is not None else {}
+    trace.update(variant_index=index,candidate_rejections={},candidate_positions_checked=0)
+    def reject(reason):
+        trace["candidate_rejections"][reason]=trace["candidate_rejections"].get(reason,0)+1
     if row["zygosity"] != "heterozygous" or min(row["wgs_wt"], row["wgs_mt"] ) <= 0:
         return None, "unidentifiable allele contrast"
     if group_sizes[row["locus_group"]] > 1:
@@ -41,6 +51,12 @@ def prepare_variant(tokenizer, row, motif, protocol, group_sizes):
     try:
         alignment = validate_patch_alignment(tokenizer, clean, alt)
     except ValueError:
+        a,b=exact_offsets(tokenizer,clean),exact_offsets(tokenizer,alt)
+        trace["reference_token_count"]=len(a)
+        trace["alternate_token_count"]=len(b)
+        trace["reference_variant_tokens"]=[list(span) for span in a if span[0]<=index<span[1]]
+        trace["alternate_variant_tokens"]=[list(span) for span in b if span[0]<=index<span[1]]
+        trace["first_boundary_difference"]=next((i for i,(x,y) in enumerate(zip(a,b)) if x!=y),min(len(a),len(b)))
         return None, "reference/alternate BPE boundaries differ"
     offsets = alignment["clean_offsets"]
     encoded = [list(tokenizer(s, add_special_tokens=True, truncation=False)["input_ids"]) for s in (clean, alt)]
@@ -65,42 +81,55 @@ def prepare_variant(tokenizer, row, motif, protocol, group_sizes):
         if masked[0] == masked[1]:
             return None, "masking erases allele distinction"
     context = clean[max(0, index-1):index+2]
+    trace.update(initial_query_count=len(queries),trinucleotide=context,motif_span=list(span[:2]))
     edit_tokens = [b-a for a, b in offsets if a <= index < b]
     candidates = sorted(range(1, len(clean)-1), key=lambda j: (abs(j-index), j))
     for sham_index in candidates:
         if sham_index == index or abs(sham_index-index) > protocol.sham_radius_bp:
             continue
+        trace["candidate_positions_checked"]+=1
         if clean[sham_index-1:sham_index+2] != context:
+            reject("trinucleotide mismatch")
             continue
         if any(a <= sham_index < b for a, b, _ in hits):
+            reject("inside reference motif")
             continue
         if [b-a for a, b in offsets if a <= sham_index < b] != edit_tokens:
+            reject("edit-token width mismatch")
             continue
         selected_queries=[q for q in queries if q["span"][1] <= min(index,sham_index)
                           or q["span"][0] > max(index,sham_index)]
         if not selected_queries:
+            reject("no query outside both edits")
             continue
         if any(target_geometry((index,index+1), q["span"])[0] != target_geometry((sham_index,sham_index+1), q["span"])[0]
                or abs(target_geometry((index,index+1),q["span"])[1] - target_geometry((sham_index,sham_index+1),q["span"])[1]) > protocol.distance_tolerance_bp
                for q in selected_queries):
+            reject("query distance or side mismatch")
             continue
         def gc(j):
             window=clean[max(0,j-16):j+17]
             return (window.count("G")+window.count("C"))/len(window)
         if abs(gc(index)-gc(sham_index)) > protocol.gc_tolerance:
+            reject("local GC mismatch")
             continue
         sham = clean[:sham_index] + row["alternate"] + clean[sham_index+1:]
         if {(a,b) for a,b,_ in motif.hits(sham)} != {(a,b) for a,b,_ in hits}:
+            reject("motif-hit locations changed")
             continue
         if abs(motif.span_score(sham,span[0],span[1])-span[2]) > protocol.sham_pwm_tolerance_bits:
+            reject("motif score changed")
             continue
         try:
             validate_patch_alignment(tokenizer, clean, sham)
         except ValueError:
+            reject("sham BPE boundaries differ")
             continue
         sham_ids=list(tokenizer(sham,add_special_tokens=True,truncation=False)["input_ids"])
         if any(sham_ids[q["index"]] != q["token_id"] for q in selected_queries):
+            reject("query token identity changed")
             continue
+        trace.update(selected_sham=sham_index,selected_query_count=len(selected_queries))
         return dict(variant_id=f"{row['chrom']}:{row['position_1based']}:{row['reference']}>{row['alternate']}",
             locus_group=row["locus_group"],sequence_id=f"{row['chrom']}:{row['window_start_0based']}-{row['window_end_0based']}",
             genome_build=row["genome_build"],reference_sequence=clean,alternate_sequence=alt,sham_sequence=sham,
@@ -112,7 +141,8 @@ def prepare_variant(tokenizer, row, motif, protocol, group_sizes):
 
 def js_divergence(first, second):
     """Stable symmetric Jensen-Shannon divergence of native vocabulary logits."""
-    if first.shape != second.shape or not torch.isfinite(first).all() or not torch.isfinite(second).all():
+    if (first.ndim != 1 or first.numel() < 2 or first.shape != second.shape
+            or not torch.isfinite(first).all() or not torch.isfinite(second).all()):
         raise ValueError("Finite same-vocabulary logits required")
     a, b = torch.log_softmax(first.double(), -1), torch.log_softmax(second.double(), -1)
     mean = torch.logaddexp(a, b) - math.log(2)
@@ -121,6 +151,25 @@ def js_divergence(first, second):
 
 def score_variant(bundle, case, protocol, head=None):
     """Fixed queries, identity/full-residual controls, optional one-head rescue."""
+    if len(case.get("ids",[]))!=3 or not case.get("queries"):
+        raise ValueError("One aligned reference/alternate/sham triplet and nonempty queries required")
+    lengths={len(ids) for ids in case["ids"]}
+    if len(lengths)!=1:
+        raise ValueError("Intervention inputs must have equal token lengths")
+    for q in case["queries"]:
+        if type(q["index"]) is not int or not 0 <= q["index"] < len(case["ids"][0]) or type(q["width"]) is not int or q["width"]<=0:
+            raise ValueError("Invalid query index or nucleotide weight")
+        if any(ids[q["index"]]!=q["token_id"] for ids in case["ids"]):
+            raise ValueError("Query token identity differs across intervention inputs")
+        masked=[ids[:q["index"]]+[bundle.tokenizer.mask_token_id]+ids[q["index"]+1:] for ids in case["ids"]]
+        if masked[0]==masked[1] or masked[0]==masked[2]:
+            raise ValueError("Masking erases variant or sham distinction")
+    if head is not None:
+        if len(head)!=2 or any(type(index) is not int for index in head):
+            raise ValueError("Layer/head selection must contain two integers")
+        layer,h=head;layers=bundle.hf_model.bert.encoder.layer
+        if not 0 <= layer < len(layers) or not 0 <= h < layers[layer].attention.self.num_attention_heads:
+            raise ValueError("Selected head is outside the model")
     rows=[]
     for query in case["queries"]:
         ids=[x.copy() for x in case["ids"]]
