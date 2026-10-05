@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-05T15:45:50.366378+00:00",
+  "code_sha256": "52309fbb5c54d80436ba84f56ce1f375ce11398b852030502c96f8c6ef5b62f5",
+  "conclusion": "larger candidate resource accessible; adequately powered independent CTCF confirmation not yet established",
+  "outcome_inspection": "aggregate metadata only; no ADASTRA variant outcomes or sequences retrieved",
+  "sources": [
+    {
+      "name": "adastra_tf_metadata",
+      "path": "adastra_tf_metadata.json",
+      "requested_parameters": {
+        "size": 1200
+      },
+      "resolved_url": "https://adastra.autosome.org/api/v6/browse/tf?size=1200",
+      "sha256": "d19491e962ff3926747e950bf38dec83e13bddfd10db0d960cde04814231c850",
+      "status": 200,
+      "url": "https://adastra.autosome.org/api/v6/browse/tf"
+    },
+    {
+      "name": "adastra_readme",
+      "path": "adastra_readme.txt",
+      "requested_parameters": null,
+      "resolved_url": "https://adastra.autosome.org/assets/readme/readme.mabel.txt",
+      "sha256": "8859e2e3dc4230d469da4ec769e890ae232d5c005812653c87d85283cbdfa397",
+      "status": 200,
+      "url": "https://adastra.autosome.org/assets/readme/readme.mabel.txt"
+    },
+    {
+      "name": "zenodo_release",
+      "path": "zenodo_release.json",
+      "requested_parameters": null,
+      "resolved_url": "https://zenodo.org/api/records/14174114",
+      "sha256": "895d24d6fe6d5010ceeb92d3bca5f675b65b23cf2d4af692619adb5c57b777d2",
+      "status": 200,
+      "url": "https://zenodo.org/api/records/14174114"
+    },
+    {
+      "error": "HTTPSConnectionPool(host='alleledb.gersteinlab.org', port=443): Max retries exceeded with url: /download/ (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "name": "alleleDB_access",
+      "requested_parameters": null,
+      "url": "https://alleledb.gersteinlab.org/download/"
+    }
+  ]
+}

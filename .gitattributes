@@ -9,6 +9,9 @@ paper/results.tex text eol=lf
 results/hardened/** -text whitespace=cr-at-eol
 results/native_endpoint/** -text whitespace=cr-at-eol
 results/native_followup/** -text whitespace=cr-at-eol
+results/variant_study/** -text whitespace=cr-at-eol
+results/variant_pilot/** -text whitespace=cr-at-eol
+results/variant_study/tests_*.log -whitespace
 results/hardened/command_*.log -whitespace
 src/*.py text eol=lf
 tools/*.py text eol=lf
