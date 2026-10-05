@@ -1,0 +1,10 @@
+{
+  "illustrative_sd_to_clusters": {
+    "0.002": 32,
+    "0.005": 196,
+    "0.01": 784
+  },
+  "reason": "pilot failed before head selection; discovery intervention variance unavailable",
+  "scenarios": "normal approximation only; no sample-size authorization",
+  "status": "not estimable"
+}

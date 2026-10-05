@@ -1,0 +1,6 @@
+{
+  "clean_minus_edited_log_probability": 0.6749972105026245,
+  "passed": true,
+  "rescue_max_logit_error": 0.0,
+  "scope": "engineered computational sensitivity; not biological native-model sensitivity"
+}
