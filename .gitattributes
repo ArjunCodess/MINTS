@@ -4,3 +4,12 @@ results/cross_model/review_tata_heldout/** -text whitespace=cr-at-eol
 # Captured process output is retained verbatim, including terminal whitespace.
 results/review/command_*.log -whitespace
 paper/results.tex text eol=lf
+
+# Hardened evidence and scientific source hashes must survive checkout.
+results/hardened/** -text whitespace=cr-at-eol
+results/hardened/command_*.log -whitespace
+src/*.py text eol=lf
+tools/*.py text eol=lf
+tests/*.py text eol=lf
+paper/*.tex text eol=lf
+paper/*.bib text eol=lf
