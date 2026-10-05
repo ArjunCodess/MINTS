@@ -8,6 +8,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.14'
@@ -16,4 +18,5 @@ jobs:
       - run: python -m pip check
       - run: python tools/preflight.py
       - run: python -m compileall -q src tools
+      - run: python tools/audit_variant_study.py
       - run: python -m pytest -q -m "not artifact" --basetemp .test-tmp
