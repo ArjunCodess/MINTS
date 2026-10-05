@@ -21,6 +21,7 @@ from .probing import run_all_probes, run_probe_controls
 from .task_performance import evaluate_task_performance_context
 from .threshold_sensitivity import run_threshold_sensitivity
 from .utils import progress, utc_now_iso, write_json
+from .provenance import validate_resume, write_stage_receipt
 
 
 PIPELINE_STEPS: tuple[str, ...] = (
@@ -547,6 +548,10 @@ def run_pipeline(
         else config.paths.results_dir / f"pipeline_run_{from_step}.json"
     )
     steps: list[StepRecord] = []
+    start_index = PIPELINE_STEPS.index(from_step)
+    lineage = validate_resume(config, PIPELINE_STEPS[:start_index]) if start_index else []
+    if not start_index and (config.paths.manifests_dir / "lineage" / "write_config.json").exists():
+        raise ValueError("This run already has immutable stage receipts; choose a fresh result directory")
 
     def record_config() -> dict[str, Any]:
         config_path = config.paths.manifests_dir / "pipeline_config.json"
@@ -604,11 +609,14 @@ def run_pipeline(
             "sequence_genomic_controls": lambda: _run_sequence_genomic_controls(config),
             "sequence_classifier_intervals": lambda: _run_sequence_classifier_intervals(config),
         }
-        start_index = PIPELINE_STEPS.index(from_step)
         for step_name in PIPELINE_STEPS[start_index:]:
             started = time.perf_counter()
             try:
-                steps.append(_run_step(step_name, step_functions[step_name]))
+                completed_step = _run_step(step_name, step_functions[step_name])
+                receipt = write_stage_receipt(step_name, config, completed_step.details)
+                steps.append(completed_step)
+                lineage.append({"stage": step_name, "receipt": str(receipt)})
+                write_json(config.paths.manifests_dir / "run_lineage.json", {"from_step": from_step, "stages": lineage})
                 _write_run_manifest(
                     run_manifest_path.with_name(run_manifest_path.stem+"_progress.json"),
                     config=config,status="running",overwrite=overwrite,
