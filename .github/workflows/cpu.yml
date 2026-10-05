@@ -19,4 +19,5 @@ jobs:
       - run: python tools/preflight.py
       - run: python -m compileall -q src tools
       - run: python tools/audit_variant_study.py
+      - run: python tools/audit_adastra_feasibility.py
       - run: python -m pytest -q -m "not artifact" --basetemp .test-tmp
