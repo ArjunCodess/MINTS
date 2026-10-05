@@ -13,7 +13,7 @@ results/variant_study/** -text whitespace=cr-at-eol
 results/variant_pilot/** -text whitespace=cr-at-eol
 results/variant_study/tests_*.log -whitespace
 docs/MINTS_v2*.md text eol=lf
-docs/variant_data_feasibility.md text eol=lf
+docs/variant_*.md text eol=lf
 results/hardened/command_*.log -whitespace
 src/*.py text eol=lf
 tools/*.py text eol=lf

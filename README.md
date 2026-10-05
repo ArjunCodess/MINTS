@@ -274,3 +274,5 @@ The [follow-up diagnostics](docs/native_followup.md) record geometry feasibility
 ## Natural-variant feasibility
 
 The [v2 protocol](docs/MINTS_v2_protocol.md), [data inventory](docs/variant_data_feasibility.md), and [feasibility result](docs/MINTS_v2_feasibility.md) describe a separate, frozen exploratory study. The published benchmark retained no cases under the strict BPE and substitution-control rules, so native scoring, head selection and confirmation stopped before execution. `python tools/build_variant_artifacts.py` verifies the saved study and regenerates its report. New scientific attempts require fresh output directories. The baseline manifest preserves the exact merged audit commit and Git tree.
+
+`python tools/audit_variant_study.py` performs the [offline evidence audit](docs/variant_verification.md) used by CI, including population and gate consistency checks. Candidate-level diagnostics explain the matching failures without changing the frozen rules.

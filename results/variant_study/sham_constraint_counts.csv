@@ -1,0 +1,6 @@
+first_rejection,candidates
+edit-token width mismatch,5
+inside reference motif,3
+local GC mismatch,1
+query distance or side mismatch,3
+trinucleotide mismatch,500

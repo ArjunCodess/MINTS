@@ -17,11 +17,30 @@ All 16 published rows were audited before model inference.
 | reference/alternate BPE boundaries differ | 7 |
 | unidentifiable allele contrast | 1 |
 
-The seven boundary mismatches concern complete reference/alternate BPE offsets.
-The four remaining singleton loci had no control meeting the frozen substitution,
+The 7 boundary mismatches concern complete reference/alternate BPE offsets.
+In 6 of these cases, token counts agree even though nucleotide boundaries
+move, so matching tensor shape alone would not establish intervention alignment.
+The 4 remaining singleton loci had no control meeting the frozen substitution,
 context, geometry and motif-preservation rules. Neither matching tolerance nor
 query policy was relaxed after this result. The engineered hook fixture passed,
 but it does not demonstrate sensitivity of DNABERT-2 on natural variants.
+
+## Why substitution matching failed
+
+The deterministic search checked 512 candidate positions. Each row below
+counts the first violated constraint in the frozen check order, not independent
+failure rates or evidence that relaxing one rule would retain a valid control.
+
+| First candidate rejection | Positions |
+| --- | ---: |
+| edit-token width mismatch | 5 |
+| inside reference motif | 3 |
+| local GC mismatch | 1 |
+| query distance or side mismatch | 3 |
+| trinucleotide mismatch | 500 |
+
+These diagnostics use sequences and tokenizer offsets only. They add no model
+outcomes, alternative endpoint, relaxed tolerance or confirmation cohort.
 
 ## Biological and confirmation limits
 
