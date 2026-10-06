@@ -1,0 +1,17 @@
+source_row,reference_verified,singleton_heterozygous,full_allele_offsets,reference_motif,query_correspondence,reference_tokens,alternate_tokens,candidate_positions,substitution_candidates,trinucleotide_candidates,original,local_only,local_no_width,local_geometry32,local_geometry64
+1,True,True,False,True,True,44,44,128,40,4,False,False,True,True,True
+2,True,True,True,True,True,46,46,128,26,3,False,False,False,True,True
+3,True,True,False,True,True,42,41,128,40,4,False,True,True,True,True
+4,True,False,False,True,True,46,45,128,23,1,False,False,False,True,True
+5,True,True,False,True,True,41,41,128,28,1,False,False,False,False,False
+6,True,False,True,True,True,44,44,128,23,2,False,False,False,True,True
+7,True,True,True,True,True,43,43,128,36,4,False,False,False,False,False
+8,True,True,False,True,True,47,47,128,31,3,False,False,False,False,False
+9,True,True,False,True,True,48,48,128,42,5,False,False,False,False,True
+10,True,True,True,True,True,44,44,128,41,2,False,False,False,False,False
+11,True,True,True,True,True,45,45,128,28,3,False,False,False,False,False
+12,True,False,False,True,True,43,43,128,35,1,False,False,False,False,False
+13,True,False,False,True,True,42,42,128,34,3,False,False,False,False,True
+14,True,True,False,True,True,44,44,128,48,9,False,False,False,True,True
+15,True,True,False,True,True,46,46,128,31,1,False,False,False,False,True
+16,True,False,True,True,True,42,42,128,29,0,False,False,False,False,False

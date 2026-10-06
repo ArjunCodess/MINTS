@@ -1,0 +1,24 @@
+{
+  "added": [
+    {
+      "doi": "10.1038/s41467-021-23007-0",
+      "key": "abramov2021adastra",
+      "response_sha256": "e8110bc9e57228208e30fb651290b6a190a16741e933b04b5da66099c93d1ed8",
+      "status": 200,
+      "title": "Landscape of allele-specific transcription factor binding in the human genome",
+      "url": "https://www.nature.com/articles/s41467-021-23007-0",
+      "verification": "official publisher/deposit page title, DOI and source metadata; browser and HTTP checks"
+    },
+    {
+      "doi": "10.5281/zenodo.14174114",
+      "key": "adastra2024release",
+      "response_sha256": "ae872a1b23beab2fd5f49633967d62dbe41a157644eb9acfbff74dc886dd5d97",
+      "status": 200,
+      "title": "ADASTRA release Mabel v.6.1 Nov 2024",
+      "url": "https://zenodo.org/records/14174114",
+      "verification": "official publisher/deposit page title, DOI and source metadata; browser and HTTP checks"
+    }
+  ],
+  "bibliography_sha256": "b3e0de6bd5f16e17235add6b26eaced976fc4aa6a0fa7a5fb99305078d71b678",
+  "previous_sha256": "74ad2850842af72a3036295617dcf3117bc0faa61d62382543437fcbeda465a3"
+}

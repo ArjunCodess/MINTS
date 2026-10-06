@@ -1,0 +1,80 @@
+{
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "elapsed_seconds": 0.9324421882629395,
+      "exit_code": 0,
+      "log_sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+      "name": "dependencies"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv\\Scripts\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tools",
+        "tests"
+      ],
+      "elapsed_seconds": 0.23450922966003418,
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "compileall"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv\\Scripts\\python.exe",
+        "tools/audit_variant_study.py"
+      ],
+      "elapsed_seconds": 0.6463179588317871,
+      "exit_code": 0,
+      "log_sha256": "4d3aeeddbd99e2944bfe202b9dfe9b10be9b9c16274886cfd7fd8758ad0e6c51",
+      "name": "variant_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv\\Scripts\\python.exe",
+        "tools/audit_adastra_feasibility.py"
+      ],
+      "elapsed_seconds": 4.71626877784729,
+      "exit_code": 0,
+      "log_sha256": "8c7f1c42dfb71d8624722551959b1ddb0f53bb34b8438fda0632aa6ac3faa0d4",
+      "name": "adastra_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv\\Scripts\\python.exe",
+        "tools/audit_mapped_variant.py"
+      ],
+      "elapsed_seconds": 5.044961214065552,
+      "exit_code": 0,
+      "log_sha256": "6aca09e00b036ca47546ec8ebb45bda98910790f9f68964fe96c571fba688e78",
+      "name": "mapped_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/mapped-cuda"
+      ],
+      "elapsed_seconds": 10.904422044754028,
+      "exit_code": 1,
+      "log_sha256": "e66fefcb15a0238ec9a5cfdd1680107c0646526aaa757c2117ee472e1f5e2b72",
+      "name": "tests"
+    }
+  ],
+  "disk_free_bytes": 6524653568,
+  "executable": "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv\\Scripts\\python.exe",
+  "python": "3.14.0",
+  "started_utc": "2026-10-06T05:16:33Z",
+  "status": "failed"
+}

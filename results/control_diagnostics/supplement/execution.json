@@ -1,0 +1,10 @@
+{
+  "artifacts": {
+    "gse_candidates.csv": "12673c64f52ddd558e177e5f1c69fecd6f2a3daa8dafee4a7784a9c01d2ce1cb",
+    "gse_cases.csv": "223a4bea2b76ec3b66b2890e715acda0b9d06a60e86c37fe0b3928ddedf808d2",
+    "protocol.json": "5c3ac073a540b452d1974b3e78d6ffd65a619b538a015738928e5696f2f79959",
+    "summary.json": "cc8e63537435527d1b6281a789f84e37a484be29b98ff3edeea306b093170623"
+  },
+  "source_code_sha256": "579351102dc07686fcbe4d8266ad4ab06dbb04aa9ce4098ce785e67913238469",
+  "status": "completed"
+}

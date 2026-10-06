@@ -1,0 +1,37 @@
+cohort,risk_set,predicate,passing,denominator
+expansion,all exact-trinucleotide candidates,outside_motif,20636,21477
+expansion,all exact-trinucleotide candidates,edit_width,5338,21477
+expansion,all exact-trinucleotide candidates,query_side,21451,21477
+expansion,all exact-trinucleotide candidates,geometry16,5881,21477
+expansion,all exact-trinucleotide candidates,gc,9015,21477
+expansion,all exact-trinucleotide candidates,motif_locations,20929,21477
+expansion,all exact-trinucleotide candidates,motif_score,21383,21477
+expansion,all exact-trinucleotide candidates,full_sham_offsets,8264,21477
+expansion,all exact-trinucleotide candidates,query_identity,21449,21477
+expansion,motif-overlapping variants,outside_motif,554,674
+expansion,motif-overlapping variants,edit_width,173,674
+expansion,motif-overlapping variants,query_side,670,674
+expansion,motif-overlapping variants,geometry16,176,674
+expansion,motif-overlapping variants,gc,274,674
+expansion,motif-overlapping variants,motif_locations,616,674
+expansion,motif-overlapping variants,motif_score,580,674
+expansion,motif-overlapping variants,full_sham_offsets,262,674
+expansion,motif-overlapping variants,query_identity,670,674
+original4096,all exact-trinucleotide candidates,outside_motif,9987,10431
+original4096,all exact-trinucleotide candidates,edit_width,2617,10431
+original4096,all exact-trinucleotide candidates,query_side,10409,10431
+original4096,all exact-trinucleotide candidates,geometry16,2849,10431
+original4096,all exact-trinucleotide candidates,gc,4331,10431
+original4096,all exact-trinucleotide candidates,motif_locations,10174,10431
+original4096,all exact-trinucleotide candidates,motif_score,10366,10431
+original4096,all exact-trinucleotide candidates,full_sham_offsets,4056,10431
+original4096,all exact-trinucleotide candidates,query_identity,10407,10431
+original4096,motif-overlapping variants,outside_motif,313,402
+original4096,motif-overlapping variants,edit_width,102,402
+original4096,motif-overlapping variants,query_side,401,402
+original4096,motif-overlapping variants,geometry16,110,402
+original4096,motif-overlapping variants,gc,150,402
+original4096,motif-overlapping variants,motif_locations,350,402
+original4096,motif-overlapping variants,motif_score,337,402
+original4096,motif-overlapping variants,full_sham_offsets,160,402
+original4096,motif-overlapping variants,query_identity,401,402

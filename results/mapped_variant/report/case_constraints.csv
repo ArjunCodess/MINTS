@@ -1,0 +1,17 @@
+cohort,constraint,passing,denominator
+expansion,full_allele_offsets,3223,8192
+expansion,reference_motif,273,8192
+expansion,query_correspondence,8192,8192
+expansion,original,1,8192
+expansion,local_only,9,8192
+expansion,local_no_width,40,8192
+expansion,local_geometry32,73,8192
+expansion,local_geometry64,115,8192
+original4096,full_allele_offsets,1627,4096
+original4096,reference_motif,160,4096
+original4096,query_correspondence,4096,4096
+original4096,original,0,4096
+original4096,local_only,2,4096
+original4096,local_no_width,21,4096
+original4096,local_geometry32,35,4096
+original4096,local_geometry64,61,4096

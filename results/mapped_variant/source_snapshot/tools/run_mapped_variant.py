@@ -34,7 +34,7 @@ from src.variant_statistics import cluster_summary
 ROOT=Path(__file__).resolve().parents[1]
 
 
-def run(output,device,raw_directory=None):
+def run(output,device):
     if output.exists():raise FileExistsError("Use a fresh study directory")
     if shutil.disk_usage(ROOT).free<2*1024**3:raise OSError("Need 2 GiB spare disk")
     output.mkdir(parents=True)
@@ -123,7 +123,7 @@ def run(output,device,raw_directory=None):
             tokenizer_sha256=sha256_file(cache/"tokenizer.json"),precision=str(next(bundle.hf_model.parameters()).dtype),
             device_name=torch.cuda.get_device_name(0) if device.startswith("cuda") else platform.processor(),
             genome_sha256=sha256_file(ROOT/"data/genomes/hg38.fa"),motif_sha256=sha256_file(find_jaspar_matrix_path())))
-        raw_dir=Path(raw_directory).resolve() if raw_directory else ROOT/"data/adastra"/(output.name+"_native")
+        raw_dir=ROOT/"data/adastra/mapped_native_v1"
         raw_dir.mkdir(parents=True,exist_ok=False)
         scores=[]
         for number,case in enumerate(cases,1):
@@ -186,5 +186,4 @@ if __name__=="__main__":
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output",type=Path,default=ROOT/"results/mapped_variant")
     p.add_argument("--device",default="cuda")
-    p.add_argument("--raw-directory",type=Path)
-    a=p.parse_args();run(a.output,a.device,a.raw_directory)
+    a=p.parse_args();run(a.output,a.device)

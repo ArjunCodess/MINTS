@@ -1,0 +1,26 @@
+{
+  "gse_singleton_predicate_counts": {
+    "full_allele_offsets": 4,
+    "local_no_width": 2,
+    "local_only": 1,
+    "original": 0,
+    "query_correspondence": 11,
+    "reference_motif": 11
+  },
+  "gse_source_rows": 16,
+  "singleton_heterozygous": 11,
+  "strict_expansion_verification": [
+    {
+      "reason": "sequence control feasible",
+      "sham_index": 113,
+      "trace": {
+        "candidate_positions_checked": 22,
+        "candidate_rejections": {
+          "edit-token width mismatch": 1,
+          "trinucleotide mismatch": 20
+        }
+      },
+      "variant_id": "chr15:78926431:C>T"
+    }
+  ]
+}

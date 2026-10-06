@@ -1,0 +1,28 @@
+{
+  "comparisons": [
+    {
+      "cohort": "expansion",
+      "total_variation": 0.016484823159871802,
+      "variable": "chrom"
+    },
+    {
+      "cohort": "expansion",
+      "total_variation": 0.016859520212791378,
+      "variable": "substitution"
+    },
+    {
+      "cohort": "original4096",
+      "total_variation": 0.023961009870141024,
+      "variable": "chrom"
+    },
+    {
+      "cohort": "original4096",
+      "total_variation": 0.013692242439118839,
+      "variable": "substitution"
+    }
+  ],
+  "expansion_denominator": 8192,
+  "expansion_strict_retained": 1,
+  "limitation": "descriptive coordinate/allele distributions; does not certify motif/sequence or biological representativeness",
+  "original_zero_upper_approximation": 0.000732421875
+}
