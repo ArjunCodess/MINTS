@@ -1,0 +1,85 @@
+{
+  "conservative_working_space_bytes": 32212254720,
+  "control": "ENCSR000DKW",
+  "disk_free_bytes": 8094978048,
+  "encode_experiment": "ENCSR000DKV",
+  "missing": [
+    "membership-specific experiment links",
+    "verified individual genotype and phase",
+    "replicate ChIP/input allele counts",
+    "mapping-bias-corrected alignments",
+    "per-case dosage and uncertainty",
+    "independent source separation"
+  ],
+  "raw_fastq_bytes": 2339858626,
+  "raw_files": [
+    {
+      "accession": "ENCFF000ROU",
+      "biological_replicates": [
+        1
+      ],
+      "bytes": 358306226,
+      "href": "/files/ENCFF000ROU/@@download/ENCFF000ROU.fastq.gz",
+      "md5": "49d078a7cc72e52fdca9c9806c9d375f"
+    },
+    {
+      "accession": "ENCFF000ROX",
+      "biological_replicates": [
+        3
+      ],
+      "bytes": 513185151,
+      "href": "/files/ENCFF000ROX/@@download/ENCFF000ROX.fastq.gz",
+      "md5": "60159eff02f764d871ed8c38882debb7"
+    },
+    {
+      "accession": "ENCFF000ROZ",
+      "biological_replicates": [
+        2
+      ],
+      "bytes": 904880702,
+      "href": "/files/ENCFF000ROZ/@@download/ENCFF000ROZ.fastq.gz",
+      "md5": "8857dc283de4486075d9220966431943"
+    },
+    {
+      "accession": "ENCFF000RPB",
+      "biological_replicates": [
+        1
+      ],
+      "bytes": 563486547,
+      "href": "/files/ENCFF000RPB/@@download/ENCFF000RPB.fastq.gz",
+      "md5": "b7b552c10494212ce4f100d1b4bf75d5"
+    }
+  ],
+  "raw_processing": "not started; insufficient spare disk for reference alignment and WASP remapping working set",
+  "replicates": [
+    {
+      "biological_replicate": 3,
+      "biosample": "ENCBS337LQM",
+      "donor": "ENCDO000AAK",
+      "technical_replicate": 1
+    },
+    {
+      "biological_replicate": 1,
+      "biosample": "ENCBS337LQM",
+      "donor": "ENCDO000AAK",
+      "technical_replicate": 1
+    },
+    {
+      "biological_replicate": 2,
+      "biosample": "ENCBS337LQM",
+      "donor": "ENCDO000AAK",
+      "technical_replicate": 1
+    }
+  ],
+  "role": "previously inspected GM12878 assay; not fresh confirmation",
+  "statuses": {
+    "archive": "downloaded, MD5/SHA256 verified; imported coordinates and reference windows verified",
+    "biological_qc_cases": null,
+    "confirmation_eligible": false,
+    "discovery_eligible": "sequence method development only",
+    "independent_donors": null,
+    "sequence_population": "exploratory only; QC eligibility unknown"
+  },
+  "workflow": "WASP allele-swap/remap, discard reads with changed mapping; requires verified donor variants, replicate count extraction and explicit CNV/coverage filters",
+  "working_space_basis": "3.2 GB genome plus aligner index, compressed reads, remapped reads and multiple BAM/sort stages; 30 GiB is a planning floor, not measured allocation"
+}

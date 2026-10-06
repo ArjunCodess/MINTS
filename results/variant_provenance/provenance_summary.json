@@ -1,0 +1,15 @@
+{
+  "cases_with_available_ctcf_counts": 26,
+  "ctcf_experiments": 174,
+  "ctcf_observations": 238,
+  "downloaded": 35,
+  "failed": 26,
+  "interpretation": "live API exposes some ChIP allele counts and experiment/BAD links; coverage and significance filtering means absent observations are unknown, not zero",
+  "live_version": "v6.1.1; post-score exploratory provenance; no outcome correlation or frozen archive replacement",
+  "metadata_ctcf_experiments": 685,
+  "metadata_linked_observations": 238,
+  "observed_shared_experiment_components": 5,
+  "qc": "individual genotype/phase, donor identities, matched per-replicate input counts and mapping correction remain unverified",
+  "queried_cases": 61,
+  "source_publications_or_series": 36
+}

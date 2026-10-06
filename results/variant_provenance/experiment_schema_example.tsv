@@ -1,0 +1,6 @@
+EXP	ALIGN	TF_UNIPROT_AC	TF_UNIPROT_ID	GTRD_CELL_TYPE_ID	GTRD_CELL_TYPE_NAME	BAD_GROUP_ID	BAD_GROUP_NAME	ENCODE	GEO_GSE	IS_CONTROL
+EEXP000004	EALIGNS000070	P03372	ESR1_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	4098	MCF7__Invasive_ductal_breast_carcinoma_@GSE110502	None	GSE110502	False
+EEXP000005	EALIGNS000071	P03372	ESR1_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	4098	MCF7__Invasive_ductal_breast_carcinoma_@GSE110502	None	GSE110502	False
+EEXP000006	EALIGNS000072	P55317	FOXA1_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	4098	MCF7__Invasive_ductal_breast_carcinoma_@GSE110502	None	GSE110502	False
+EEXP000007	EALIGNS000073	P55317	FOXA1_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	4098	MCF7__Invasive_ductal_breast_carcinoma_@GSE110502	None	GSE110502	False
+EEXP000008	EALIGNS000074	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	4098	MCF7__Invasive_ductal_breast_carcinoma_@GSE110502	None	GSE110502	False

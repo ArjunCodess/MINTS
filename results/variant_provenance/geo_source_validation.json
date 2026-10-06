@@ -1,0 +1,19 @@
+{
+  "correction": "geo_relations.json used broad regex that included a truncated GSM fragment; only exact SAMPLE lines identify samples",
+  "excluded_candidate": "PRJNA324773 initial query was not linked by this GEO deposit; preserved but not used",
+  "fastq_bytes": 5207709075,
+  "project": "PRJNA323481",
+  "runs": [
+    "SRR3590789",
+    "SRR3590790",
+    "SRR3590791"
+  ],
+  "samples": [
+    "GSM2178295",
+    "GSM2178296",
+    "GSM2178297"
+  ],
+  "series": "GSE81945",
+  "source_sha256": "c425fe5f300c699d27a52133fbd6e958bda475ad63010a4a42165e7e3684d4ac",
+  "study": "SRP075768"
+}

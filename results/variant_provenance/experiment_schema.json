@@ -1,0 +1,18 @@
+{
+  "columns": [
+    "EXP",
+    "ALIGN",
+    "TF_UNIPROT_AC",
+    "TF_UNIPROT_ID",
+    "GTRD_CELL_TYPE_ID",
+    "GTRD_CELL_TYPE_NAME",
+    "BAD_GROUP_ID",
+    "BAD_GROUP_NAME",
+    "ENCODE",
+    "GEO_GSE",
+    "IS_CONTROL"
+  ],
+  "rows": 11870,
+  "source_sha256": "9c04bcd007e77f53880ac4a3418937a77e74c42e6074add8c5539d8eb6369fae",
+  "version_warning": "live v6.1.1 page labels Mabel but links a bill_cipher filename; overlap/version requires per-variant resolution"
+}

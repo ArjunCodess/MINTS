@@ -1,0 +1,71 @@
+{
+  "attempts": [
+    {
+      "access_utc": "2026-10-06T05:01:10Z",
+      "bytes": 8265,
+      "elapsed_seconds": 0.8486723899841309,
+      "final_url": "https://zenodo.org/records/14174114/files/readme.ADASTRA.Mabel.v6.1.txt?download=1",
+      "http_status": 200,
+      "name": "readme.txt",
+      "sha256": "e4b4709fa882e34537fb9469077f4defc21db04b16c6a0b1c0a5af12e5ab9b33",
+      "status": "downloaded",
+      "url": "https://zenodo.org/records/14174114/files/readme.ADASTRA.Mabel.v6.1.txt?download=1"
+    },
+    {
+      "access_utc": "2026-10-06T05:01:11Z",
+      "bytes": 45527,
+      "elapsed_seconds": 1.209343671798706,
+      "final_url": "https://adastra.autosome.org/mabel/downloads",
+      "http_status": 200,
+      "name": "downloads.html",
+      "sha256": "01001d503f9c99a8eb4043fbc347ef939d2af3a4e3fc9989e2fb9230d40201f6",
+      "status": "downloaded",
+      "url": "https://adastra.autosome.org/mabel/downloads"
+    },
+    {
+      "access_utc": "2026-10-06T05:01:12Z",
+      "bytes": 37302,
+      "elapsed_seconds": 1.080066442489624,
+      "final_url": "https://adastra.autosome.org/api/v6/swagger.json",
+      "http_status": 200,
+      "name": "swagger.json",
+      "sha256": "53d835a58d3ec59c88dc1d87be0aa6709271b73888306dd9f043a9afce4861c5",
+      "status": "downloaded",
+      "url": "https://adastra.autosome.org/api/v6/swagger.json"
+    },
+    {
+      "access_utc": "2026-10-06T05:01:13Z",
+      "bytes": 4583,
+      "elapsed_seconds": 0.5709805488586426,
+      "final_url": "https://raw.githubusercontent.com/autosome-ru/ADASTRA-pipeline/master/README.md",
+      "http_status": 200,
+      "name": "pipeline_readme.md",
+      "sha256": "ed9d07c59c4081fd0ccc0d51f788606f5519e12f75afd8796a4262b72123cee8",
+      "status": "downloaded",
+      "url": "https://raw.githubusercontent.com/autosome-ru/ADASTRA-pipeline/master/README.md"
+    },
+    {
+      "access_utc": "2026-10-06T05:01:14Z",
+      "bytes": 483519,
+      "elapsed_seconds": 1.7754521369934082,
+      "final_url": "https://www.encodeproject.org/experiments/ENCSR000DKV/?format=json",
+      "http_status": 200,
+      "name": "ENCSR000DKV.json",
+      "sha256": "bde65e38950d9ea87a123885285e61349e651b962947d61aaa3a754445c840ae",
+      "status": "downloaded",
+      "url": "https://www.encodeproject.org/experiments/ENCSR000DKV/?format=json"
+    },
+    {
+      "access_utc": "2026-10-06T05:01:15Z",
+      "bytes": 2022,
+      "elapsed_seconds": 0.8559844493865967,
+      "final_url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA324773&result=read_run&fields=run_accession,experiment_accession,sample_accession,fastq_bytes,fastq_md5,fastq_ftp&format=tsv",
+      "http_status": 200,
+      "name": "GSE81945_runs_candidate.tsv",
+      "sha256": "09494ae67e904d19fb0b44c994f059ae40ca837b84d2058833a7cf2130040b70",
+      "status": "downloaded",
+      "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA324773&result=read_run&fields=run_accession,experiment_accession,sample_accession,fastq_bytes,fastq_md5,fastq_ftp&format=tsv"
+    }
+  ],
+  "disk_free_bytes": 9062166528
+}
