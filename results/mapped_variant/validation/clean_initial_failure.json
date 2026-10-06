@@ -1,0 +1,8 @@
+{
+  "action": "git clone into nested test directory",
+  "exit_code": 1,
+  "preserved_path": "C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-clean-checkout",
+  "reason": "Filename too long during checkout of historical cross-model files",
+  "recovery": "fresh short checkout with Git core.longpaths enabled",
+  "scientific_caches_copied": false
+}

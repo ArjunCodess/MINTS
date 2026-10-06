@@ -1,0 +1,26 @@
+........................................................................ [ 37%]
+.....................................................F.................. [ 75%]
+................................................                         [100%]
+================================== FAILURES ===================================
+_______ test_paper_numbers_and_inputs_match_the_saved_artifact_manifest _______
+
+    @pytest.mark.artifact
+    def test_paper_numbers_and_inputs_match_the_saved_artifact_manifest():
+        from pathlib import Path
+        import hashlib
+        import json
+        root=Path(__file__).resolve().parents[1]
+        manifest=json.loads((root/"results/review/tables_manifest.json").read_text())
+        sources={**manifest["paper_sources"],manifest["paper_results"]["path"]:manifest["paper_results"]["sha256"]}
+        for path,expected in sources.items():
+>           assert hashlib.sha256((root/path).read_bytes()).hexdigest()==expected, f"Stale manuscript source: {path}"
+E           AssertionError: Stale manuscript source: paper/references.bib
+E           assert 'b3e0de6bd5f1...305078d71b678' == '35e41d2d6ef4...1fb51a2657cce'
+E             
+E             - 35e41d2d6ef4171057d26962bbcdbaf604b767e03397f4a6d861fb51a2657cce
+E             + b3e0de6bd5f16e17235add6b26eaced976fc4aa6a0fa7a5fb99305078d71b678
+
+tests\test_review_integrity.py:115: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_review_integrity.py::test_paper_numbers_and_inputs_match_the_saved_artifact_manifest
+1 failed, 191 passed in 28.61s

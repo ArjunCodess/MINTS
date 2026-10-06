@@ -1,0 +1,5 @@
+dataset,genome_build,candidate_variants,significant_005,experiments,eligible_loci,usable_donors,confirmation_status,source
+ADASTRA Mabel v6.1,hg38,80735.0,29519.0,685.0,,,"unresolved: no per-locus QC, independent donor design or power verified",https://adastra.autosome.org/api/v6/browse/tf
+GSE81945 Table S3,hg19,16.0,,2.0,11.0,1.0,exploratory only; 11 singleton heterozygous loci before token/control exclusions,https://ars.els-cdn.com/content/image/1-s2.0-S221112471631628X-mmc1.pdf
+AlleleDB,hg19,,,,,,access failed; do not equate published all-TF totals with CTCF eligibility,https://www.nature.com/articles/ncomms11101
+BaalChIP ENCODE panel,unverified for proposed import,,,,,,potential source; 548 all-TF samples/14 cell lines are not independent CTCF variant counts,https://doi.org/10.1186/s13059-017-1165-7

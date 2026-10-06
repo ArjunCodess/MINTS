@@ -1,0 +1,686 @@
+EXP	ALIGN	TF_UNIPROT_AC	TF_UNIPROT_ID	GTRD_CELL_TYPE_ID	GTRD_CELL_TYPE_NAME	BAD_GROUP_ID	BAD_GROUP_NAME	ENCODE	GEO_GSE	IS_CONTROL
+EEXP000008	EALIGNS000074	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	4098	MCF7__Invasive_ductal_breast_carcinoma_@GSE110502	None	GSE110502	False
+EEXP000019	EALIGNS000017	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3704	K562__myelogenous_leukemia_@GSE110681	None	GSE110681	False
+EEXP000020	EALIGNS000018	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3704	K562__myelogenous_leukemia_@GSE110681	None	GSE110681	False
+EEXP000021	EALIGNS000019	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3704	K562__myelogenous_leukemia_@GSE110681	None	GSE110681	False
+EEXP000022	EALIGNS000020	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3704	K562__myelogenous_leukemia_@GSE110681	None	GSE110681	False
+EEXP000023	EALIGNS000021	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3704	K562__myelogenous_leukemia_@GSE110681	None	GSE110681	False
+EEXP000202	EALIGNS000107	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	4099	HEK293T__embryonic_kidney_@GSE103651	None	GSE103651	False
+EEXP000203	EALIGNS000108	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	4099	HEK293T__embryonic_kidney_@GSE103651	None	GSE103651	False
+EEXP000215	EALIGNS000015	P49711	CTCF_HUMAN	3115	HCC1806(Squamous cell breast carcinoma, acantholytic variant)	4102	HCC1806_Squamous_cell_breast_carcinoma__acantholytic_variant_@GSE118033	None	GSE118033	False
+EEXP000216	EALIGNS000016	P49711	CTCF_HUMAN	3115	HCC1806(Squamous cell breast carcinoma, acantholytic variant)	4102	HCC1806_Squamous_cell_breast_carcinoma__acantholytic_variant_@GSE118033	None	GSE118033	False
+EEXP000238	EALIGNS000388	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	3705	HeLa_S3__cervical_adenocarcinoma_@GSE79563	None	GSE79563	False
+EEXP000239	EALIGNS000389	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	3705	HeLa_S3__cervical_adenocarcinoma_@GSE79563	None	GSE79563	False
+EXP000192	ALIGNS033261	P49711	CTCF_HUMAN	376	WA01 (H1, human embryonic stem cells)	18	WA01__H1__human_embryonic_stem_cells_@GSE20650	None	GSE20650	False
+EXP000451	ALIGNS034377	P49711	CTCF_HUMAN	92	BJAB (Burkitt lymphoma)	64	BJAB__Burkitt_lymphoma_@GSE31485	None	GSE31485	False
+EXP000453	ALIGNS034374	P49711	CTCF_HUMAN	94	BL41(Burkitt lymphoma)	65	BL41_Burkitt_lymphoma_@GSE31485	None	GSE31485	False
+EXP000551	ALIGNS034323	P49711	CTCF_HUMAN	402	pancreatic islets	79	pancreatic_islets@GSE23784	None	GSE23784	False
+EXP000552	ALIGNS033156	P49711	CTCF_HUMAN	402	pancreatic islets	79	pancreatic_islets@GSE23784	None	GSE23784	False
+EXP000596	ALIGNS033171	P49711	CTCF_HUMAN	376	WA01 (H1, human embryonic stem cells)	94	WA01__H1__human_embryonic_stem_cells_@GSE25416	None	GSE25416	False
+EXP000597	ALIGNS033172	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	95	HeLa_S3__cervical_adenocarcinoma_@GSE25416	None	GSE25416	False
+EXP000598	ALIGNS033193	P49711	CTCF_HUMAN	472	HUVEC-C (HUVEC, umbilical vein endothelial cells)	96	HUVEC-C__HUVEC__umbilical_vein_endothelial_cells_@GSE25416	None	GSE25416	False
+EXP000599	ALIGNS033200	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	97	K562__myelogenous_leukemia_@GSE25416	None	GSE25416	False
+EXP000600	ALIGNS033078	P49711	CTCF_HUMAN	673	normal epidermal keratinocytes	98	normal_epidermal_keratinocytes@GSE25416	None	GSE25416	False
+EXP000776	ALIGNS033125	P49711	CTCF_HUMAN	566	lymphoblastoid cells	130	lymphoblastoid_cells@GSE19622	None	GSE19622	False
+EXP000777	ALIGNS033126	P49711	CTCF_HUMAN	566	lymphoblastoid cells	130	lymphoblastoid_cells@GSE19622	None	GSE19622	False
+EXP000778	ALIGNS033122	P49711	CTCF_HUMAN	566	lymphoblastoid cells	130	lymphoblastoid_cells@GSE19622	None	GSE19622	False
+EXP000779	ALIGNS033165	P49711	CTCF_HUMAN	566	lymphoblastoid cells	130	lymphoblastoid_cells@GSE19622	None	GSE19622	False
+EXP000780	ALIGNS033207	P49711	CTCF_HUMAN	566	lymphoblastoid cells	130	lymphoblastoid_cells@GSE19622	None	GSE19622	False
+EXP000781	ALIGNS033206	P49711	CTCF_HUMAN	566	lymphoblastoid cells	130	lymphoblastoid_cells@GSE19622	None	GSE19622	False
+EXP000808	ALIGNS034472	P49711	CTCF_HUMAN	404	hASC (preadipocytes)	131	hASC__preadipocytes_@GSE21366	None	GSE21366	False
+EXP000809	ALIGNS034473	P49711	CTCF_HUMAN	404	hASC (preadipocytes)	131	hASC__preadipocytes_@GSE21366	None	GSE21366	False
+EXP000810	ALIGNS034392	P49711	CTCF_HUMAN	404	hASC (preadipocytes)	131	hASC__preadipocytes_@GSE21366	None	GSE21366	False
+EXP000811	ALIGNS033224	P49711	CTCF_HUMAN	404	hASC (preadipocytes)	131	hASC__preadipocytes_@GSE21366	None	GSE21366	False
+EXP000908	ALIGNS034376	P49711	CTCF_HUMAN	166	CD34+ hematopoietic stem cells	141	CD34+_hematopoietic_stem_cells@GSE26501	None	GSE26501	False
+EXP000909	ALIGNS034373	P49711	CTCF_HUMAN	168	CD36+ erythroid cells	142	CD36+_erythroid_cells@GSE26501	None	GSE26501	False
+EXP000910	ALIGNS034334	P49711	CTCF_HUMAN	168	CD36+ erythroid cells	142	CD36+_erythroid_cells@GSE26501	None	GSE26501	False
+EXP000992	ALIGNS033244	P49711	CTCF_HUMAN	430	HepG2 (hepatoblastoma)	152	HepG2__hepatoblastoma_@GSE30226	None	GSE30226	False
+EXP001021	ALIGNS033140	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	162	MCF7__Invasive_ductal_breast_carcinoma_@GSE32692	None	GSE32692	False
+EXP001023	ALIGNS033141	P49711	CTCF_HUMAN	297	FB8470 (fibroblasts)	163	FB8470__fibroblasts_@GSE32692	None	GSE32692	False
+EXP001025	ALIGNS033136	P49711	CTCF_HUMAN	296	FB0167P (progeria fibroblasts)	164	FB0167P__progeria_fibroblasts_@GSE32692	None	GSE32692	False
+EXP001027	ALIGNS033138	P49711	CTCF_HUMAN	391	D54 (H54, Human glioblastoma)	165	D54__H54__Human_glioblastoma_@GSE32692	None	GSE32692	False
+EXP010000	ALIGNS033270	P49711	CTCF_HUMAN	430	HepG2 (hepatoblastoma)	166	HepG2__hepatoblastoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS680YLF_	ENCSR000DUG	None	False
+EXP010004	ALIGNS033300	P49711	CTCF_HUMAN	353	GM12873 (female B-cells)	169	GM12873__female_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS800BFZ_	ENCSR000DRP	None	False
+EXP010026	ALIGNS033310	P49711	CTCF_HUMAN	408	HBMEC (human brain microvascular endothelial cells)	178	HBMEC__human_brain_microvascular_endothelial_cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS729HUF_	ENCSR000DTA	None	False
+EXP010043	ALIGNS033319	P49711	CTCF_HUMAN	665	SK-N-SH (neuroblastoma)	189	SK-N-SH__neuroblastoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS172JMM_	ENCSR000DXQ	None	False
+EXP010046	ALIGNS033320	P49711	CTCF_HUMAN	354	GM12874 (male B-cells)	190	GM12874__male_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS218AAA_	ENCSR000DRR	None	False
+EXP010084	ALIGNS033338	P49711	CTCF_HUMAN	1146	epithelial cell of proximal tubule	203	epithelial_cell_of_proximal_tubule@_labs_john-stamatoyannopoulos___biosamples_ENCBS402ENC_	ENCSR000DXD	None	False
+EXP010089	ALIGNS033340	P49711	CTCF_HUMAN	504	Ishikawa (endometrial adenocarcinoma)	205	Ishikawa__endometrial_adenocarcinoma_@_labs_richard-myers___biosamples_ENCBS312UTV_	ENCSR000BQE	None	False
+EXP010108	ALIGNS033349	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	211	A549__lung_carcinoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS858LUL_	ENCSR000DPF	None	False
+EXP010114	ALIGNS033352	P49711	CTCF_HUMAN	430	HepG2 (hepatoblastoma)	173	HepG2__hepatoblastoma_@_labs_richard-myers___biosamples_ENCBS114ENC_	ENCSR000BIE	None	False
+EXP010116	ALIGNS033354	P49711	CTCF_HUMAN	863	WERI-Rb-1 (retinoblastoma)	213	WERI-Rb-1__retinoblastoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS283KOW_	ENCSR000DXW	None	False
+EXP010144	ALIGNS033362	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	219	MCF7__Invasive_ductal_breast_carcinoma_@_labs_vishwanath-iyer___biosamples_ENCBS096ENC_	ENCSR000DMS	None	False
+EXP010154	ALIGNS034516	P49711	CTCF_HUMAN	648	NB4 (acute promyelocytic leukemia )	222	NB4__acute_promyelocytic_leukemia__@_labs_john-stamatoyannopoulos___biosamples_ENCBS390ENC_	ENCSR000DWN	None	False
+EXP010174	ALIGNS033371	P49711	CTCF_HUMAN	420	esophageal epithelial cells	225	esophageal_epithelial_cells@_labs_john-stamatoyannopoulos___biosamples_ENCBS191CHS_	ENCSR000DTR	None	False
+EXP010193	ALIGNS037973	P49711	CTCF_HUMAN	489	IMR90 (lung fibroblasts)	199	IMR90__lung_fibroblasts_@_labs_michael-snyder___biosamples_ENCBS379ENC_	ENCSR000EFI	None	False
+EXP010195	ALIGNS033383	P49711	CTCF_HUMAN	114	bronchial epithelial cells	229	bronchial_epithelial_cells@_labs_john-stamatoyannopoulos___biosamples_ENCBS768ZLU_	ENCSR000DXI	None	False
+EXP010197	ALIGNS033385	P49711	CTCF_HUMAN	441	HMF (human mammary fibroblasts)	230	HMF__human_mammary_fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS399FWJ_	ENCSR000DUU	None	False
+EXP010203	ALIGNS034534	P49711	CTCF_HUMAN	414	HCFaa (cardiac fibroblasts - adult atrial)	231	HCFaa__cardiac_fibroblasts_-_adult_atrial_@_labs_john-stamatoyannopoulos___biosamples_ENCBS501ROB_	ENCSR000DTF	None	False
+EXP010206	ALIGNS033387	P49711	CTCF_HUMAN	1141	BE2C	232	BE2C@_labs_john-stamatoyannopoulos___biosamples_ENCBS271SFD_	ENCSR000DQD	None	False
+EXP010214	ALIGNS033390	P49711	CTCF_HUMAN	55	AG04450 (fibroblasts)	233	AG04450__fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS554API_	ENCSR000DPM	None	False
+EXP010223	ALIGNS033394	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	236	HeLa_S3__cervical_adenocarcinoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS254ZSR_	ENCSR000DUB	None	False
+EXP010246	ALIGNS033401	P49711	CTCF_HUMAN	344	GM12864 (male B-cells)	242	GM12864__male_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS315VRM_	ENCSR000DRB	None	False
+EXP010250	ALIGNS033403	P49711	CTCF_HUMAN	356	GM12878 (female B-cells lymphoblastoid cell line)	244	GM12878__female_B-cells_lymphoblastoid_cell_line_@_labs_john-stamatoyannopoulos___biosamples_ENCBS506MRD_	ENCSR000DRZ	None	False
+EXP010252	ALIGNS033405	P49711	CTCF_HUMAN	391	D54 (H54, Human glioblastoma)	198	D54__H54__Human_glioblastoma_@_labs_vishwanath-iyer___biosamples_ENCBS173AAA_	ENCSR000DKN	None	False
+EXP010269	ALIGNS033410	P49711	CTCF_HUMAN	434	HFF-Myc (fetal fibroblasts)	247	HFF-Myc__fetal_fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS411AMC_	ENCSR000DUM	None	False
+EXP010272	ALIGNS033412	P49711	CTCF_HUMAN	56	AG09309 (fibroblasts)	248	AG09309__fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS394ULN_	ENCSR000DPP	None	False
+EXP010276	ALIGNS037987	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	185	K562__myelogenous_leukemia_@_labs_michael-snyder___biosamples_ENCBS039ENC_	ENCSR000EGM	None	False
+EXP010295	ALIGNS033419	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	253	MCF7__Invasive_ductal_breast_carcinoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS748WRO_	ENCSR000DWH	None	False
+EXP010297	ALIGNS033420	P49711	CTCF_HUMAN	356	GM12878 (female B-cells lymphoblastoid cell line)	214	GM12878__female_B-cells_lymphoblastoid_cell_line_@_labs_michael-snyder___biosamples_ENCBS630AAA_	ENCSR000DZN	None	False
+EXP010302	ALIGNS034555	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	192	K562__myelogenous_leukemia_@_labs_richard-myers___biosamples_ENCBS109ENC_	ENCSR000BPJ	None	False
+EXP010304	ALIGNS034556	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	192	K562__myelogenous_leukemia_@_labs_richard-myers___biosamples_ENCBS109ENC_	ENCSR000BPJ	None	False
+EXP010305	ALIGNS033424	P49711	CTCF_HUMAN	54	AG04449 (fibroblasts)	254	AG04449__fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS338DRP_	ENCSR000DPG	None	False
+EXP010322	ALIGNS033433	P49711	CTCF_HUMAN	93	BJ (fibroblasts)	256	BJ__fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS693PNC_	ENCSR000DQI	None	False
+EXP010324	ALIGNS033435	P49711	CTCF_HUMAN	57	AG09319 (fibroblasts)	257	AG09319__fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS992UXD_	ENCSR000DPS	None	False
+EXP010345	ALIGNS033443	P49711	CTCF_HUMAN	345	GM12865 (female B-cells)	260	GM12865__female_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS159QLB_	ENCSR000DRE	None	False
+EXP010352	ALIGNS033447	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	262	HCT-116__colon_carcinoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS257IHV_	ENCSR000DTO	None	False
+EXP010383	ALIGNS033458	P49711	CTCF_HUMAN	58	AG10803 (fibroblasts)	266	AG10803__fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS793PDT_	ENCSR000DPV	None	False
+EXP010395	ALIGNS033462	P49711	CTCF_HUMAN	352	GM12872 (male B-cells)	270	GM12872__male_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS883JTO_	ENCSR000DRN	None	False
+EXP010410	ALIGNS033469	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	174	T47D__invasive_ductal_carcinoma_@_labs_richard-myers___biosamples_ENCBS597ENC_	ENCSR000BNO	None	False
+EXP010411	ALIGNS033470	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	251	MCF7__Invasive_ductal_breast_carcinoma_@_labs_vishwanath-iyer___biosamples_ENCBS252AAA_	ENCSR000DMV	None	False
+EXP010423	ALIGNS033473	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	274	A549__lung_carcinoma_@_labs_richard-myers___biosamples_ENCBS165AAA_	ENCSR000BHV	None	False
+EXP010429	ALIGNS033475	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	268	HeLa_S3__cervical_adenocarcinoma_@_labs_vishwanath-iyer___biosamples_ENCBS646PGB_	ENCSR000DLO	None	False
+EXP010433	ALIGNS033477	P49711	CTCF_HUMAN	955	primary foreskin fibroblasts	275	primary_foreskin_fibroblasts@_labs_john-stamatoyannopoulos___biosamples_ENCBS748WVA_	ENCSR000DWQ	None	False
+EXP010438	ALIGNS033480	P49711	CTCF_HUMAN	215	keratinocytes	277	keratinocytes@_labs_john-stamatoyannopoulos___biosamples_ENCBS672NFZ_	ENCSR000DWX	None	False
+EXP010457	ALIGNS033492	P49711	CTCF_HUMAN	1160	HRE (Human Renal Epithelial cells)	280	HRE__Human_Renal_Epithelial_cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS050EYT_	ENCSR000DVH	None	False
+EXP010464	ALIGNS033493	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	282	K562__myelogenous_leukemia_@_labs_john-stamatoyannopoulos___biosamples_ENCBS922RYG_	ENCSR000DWE	None	False
+EXP010467	ALIGNS033495	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	175	A549__lung_carcinoma_@_labs_richard-myers___biosamples_ENCBS423ENC_	ENCSR000BHW	None	False
+EXP010472	ALIGNS033498	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	283	HEK293__embryonic_kidney_@_labs_john-stamatoyannopoulos___biosamples_ENCBS209KHO_	ENCSR000DTW	None	False
+EXP010478	ALIGNS033500	P49711	CTCF_HUMAN	473	human villous mesenchymal fibroblast cells	284	human_villous_mesenchymal_fibroblast_cells@_labs_john-stamatoyannopoulos___biosamples_ENCBS677ASF_	ENCSR000DVQ	None	False
+EXP010490	ALIGNS033505	P49711	CTCF_HUMAN	1152	fibroblast of pulmonary artery	285	fibroblast_of_pulmonary_artery@_labs_john-stamatoyannopoulos___biosamples_ENCBS321AAA_	ENCSR000DUX	None	False
+EXP010500	ALIGNS033511	P49711	CTCF_HUMAN	67	aortic adventitial fibroblasts	287	aortic_adventitial_fibroblasts@_labs_john-stamatoyannopoulos___biosamples_ENCBS098SOQ_	ENCSR000DPY	None	False
+EXP010502	ALIGNS033512	P49711	CTCF_HUMAN	416	HCPEpiC (choroid plexus epithelial cells)	288	HCPEpiC__choroid_plexus_epithelial_cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS395ENC_	ENCSR000DTL	None	False
+EXP010514	ALIGNS033516	P49711	CTCF_HUMAN	665	SK-N-SH (neuroblastoma)	176	SK-N-SH__neuroblastoma_@_labs_richard-myers___biosamples_ENCBS404ENC_	ENCSR000BLX	None	False
+EXP010590	ALIGNS033545	P49711	CTCF_HUMAN	399	astrocytes of cerebellum	298	astrocytes_of_cerebellum@_labs_john-stamatoyannopoulos___biosamples_ENCBS303AAA_	ENCSR000DSZ	None	False
+EXP010591	ALIGNS033546	P49711	CTCF_HUMAN	376	WA01 (H1, human embryonic stem cells)	167	WA01__H1__human_embryonic_stem_cells_@_labs_richard-myers___biosamples_ENCBS111ENC_	ENCSR000BNH	None	False
+EXP010609	ALIGNS033554	P49711	CTCF_HUMAN	355	GM12875 (female B-cells)	300	GM12875__female_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS364XYO_	ENCSR000DRU	None	False
+EXP010622	ALIGNS033559	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	258	K562__myelogenous_leukemia_@_labs_vishwanath-iyer___biosamples_ENCBS775AAA_	ENCSR000DMA	None	False
+EXP010623	ALIGNS033560	P49711	CTCF_HUMAN	446	HPF (pulmonary fibroblasts isolated from lung tissue)	301	HPF__pulmonary_fibroblasts_isolated_from_lung_tissue_@_labs_john-stamatoyannopoulos___biosamples_ENCBS024DYT_	ENCSR000DVA	None	False
+EXP010624	ALIGNS033561	P49711	CTCF_HUMAN	440	HMEC (human mammary epithelial cells)	302	HMEC__human_mammary_epithelial_cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS721SRV_	ENCSR000DUS	None	False
+EXP010661	ALIGNS033577	P49711	CTCF_HUMAN	415	HCM (cardiac myocytes)	307	HCM__cardiac_myocytes_@_labs_john-stamatoyannopoulos___biosamples_ENCBS887NMD_	ENCSR000DTI	None	False
+EXP010663	ALIGNS033578	P49711	CTCF_HUMAN	448	retinal pigment epithelial cells	308	retinal_pigment_epithelial_cells@_labs_john-stamatoyannopoulos___biosamples_ENCBS925NLT_	ENCSR000DVI	None	False
+EXP010664	ALIGNS034642	P49711	CTCF_HUMAN	343	GM12801 (male B-cells)	299	GM12801__male_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS187AAA_	ENCSR000DQY	None	False
+EXP010679	ALIGNS034649	P49711	CTCF_HUMAN	438	HL-60 (acute myeloid leukemia)	310	HL-60__acute_myeloid_leukemia_@_labs_john-stamatoyannopoulos___biosamples_ENCBS373UEY_	ENCSR000DUP	None	False
+EXP010692	ALIGNS033586	P49711	CTCF_HUMAN	472	HUVEC-C (HUVEC, umbilical vein endothelial cells)	241	HUVEC-C__HUVEC__umbilical_vein_endothelial_cells_@_labs_vishwanath-iyer___biosamples_ENCBS669AAA_	ENCSR000DLW	None	False
+EXP010696	ALIGNS033588	P49711	CTCF_HUMAN	405	human astrocytes from spinal cord	312	human_astrocytes_from_spinal_cord@_labs_john-stamatoyannopoulos___biosamples_ENCBS302AAA_	ENCSR000DSU	None	False
+EXP010708	ALIGNS033592	P49711	CTCF_HUMAN	145	Caco-2 (colon adenocarcinoma)	315	Caco-2__colon_adenocarcinoma_@_labs_john-stamatoyannopoulos___biosamples_ENCBS530YXL_	ENCSR000DQN	None	False
+EXP010734	ALIGNS033605	P49711	CTCF_HUMAN	472	HUVEC-C (HUVEC, umbilical vein endothelial cells)	320	HUVEC-C__HUVEC__umbilical_vein_endothelial_cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS834QWR_	ENCSR000DVP	None	False
+EXP010759	ALIGNS033620	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	276	MCF7__Invasive_ductal_breast_carcinoma_@_labs_vishwanath-iyer___biosamples_ENCBS017ENC_	ENCSR000DMR	None	False
+EXP010766	ALIGNS033623	P49711	CTCF_HUMAN	335	GM06990 (female B-cells)	323	GM06990__female_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS185XLT_	ENCSR000DQW	None	False
+EXP010768	ALIGNS033624	P49711	CTCF_HUMAN	867	WI-38 (lung fibroblasts)	324	WI-38__lung_fibroblasts_@_labs_john-stamatoyannopoulos___biosamples_ENCBS157XHV_	ENCSR000DYB	None	False
+EXP010933	ALIGNS033651	P49711	CTCF_HUMAN	346	GM12866 (male B-cells)	393	GM12866__male_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS210AAA_	ENCSR000DRF	None	False
+EXP010946	ALIGNS033653	P49711	CTCF_HUMAN	348	GM12868 (female B-cells)	395	GM12868__female_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS480ERX_	ENCSR000DRI	None	False
+EXP010948	ALIGNS033654	P49711	CTCF_HUMAN	910	lung	396	lung@_labs_vishwanath-iyer___biosamples_ENCBS351AAA_	ENCSR000DMH	None	False
+EXP010963	ALIGNS033660	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	397	MCF7__Invasive_ductal_breast_carcinoma_@_labs_vishwanath-iyer___biosamples_ENCBS251AAA_	ENCSR000DML	None	False
+EXP010965	ALIGNS033661	P49711	CTCF_HUMAN	909	kidney	383	kidney@_labs_vishwanath-iyer___biosamples_ENCBS349AAA_	ENCSR000DMC	None	False
+EXP010971	ALIGNS033662	P49711	CTCF_HUMAN	360	GM13977 (female B-cells)	341	GM13977__female_B-cells_@_labs_vishwanath-iyer___biosamples_ENCBS221AAA_	ENCSR000DLB	None	False
+EXP010987	ALIGNS033666	P49711	CTCF_HUMAN	350	GM12870 (male B-cells)	398	GM12870__male_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS214AAA_	ENCSR000DRK	None	False
+EXP010996	ALIGNS033668	P49711	CTCF_HUMAN	337	GM10248 (male B-cells)	368	GM10248__male_B-cells_@_labs_vishwanath-iyer___biosamples_ENCBS183AAA_	ENCSR000DKP	None	False
+EXP011006	ALIGNS034808	P49711	CTCF_HUMAN	955	primary foreskin fibroblasts	399	primary_foreskin_fibroblasts@_labs_john-stamatoyannopoulos___biosamples_ENCBS148GEQ_	ENCSR000DUH	None	False
+EXP011010	ALIGNS033671	P49711	CTCF_HUMAN	430	HepG2 (hepatoblastoma)	360	HepG2__hepatoblastoma_@_labs_vishwanath-iyer___biosamples_ENCBS773AAA_	ENCSR000DLS	None	False
+EXP011022	ALIGNS033673	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	357	A549__lung_carcinoma_@_labs_vishwanath-iyer___biosamples_ENCBS162AAA_	ENCSR000DNA	None	False
+EXP011024	ALIGNS033674	P49711	CTCF_HUMAN	1177	LNCaP clone FGC	384	LNCaP_clone_FGC@_labs_vishwanath-iyer___biosamples_ENCBS386ENC_	ENCSR000DMF	None	False
+EXP011037	ALIGNS034823	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	240	HCT-116__colon_carcinoma_@_labs_richard-myers___biosamples_ENCBS389ENC_	ENCSR000BSE	None	False
+EXP011038	ALIGNS034824	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	240	HCT-116__colon_carcinoma_@_labs_richard-myers___biosamples_ENCBS389ENC_	ENCSR000BSE	None	False
+EXP011045	ALIGNS033678	P49711	CTCF_HUMAN	370	GM20000 (B-cells)	369	GM20000__B-cells_@_labs_vishwanath-iyer___biosamples_ENCBS223AAA_	ENCSR000DLG	None	False
+EXP011051	ALIGNS033681	P49711	CTCF_HUMAN	368	GM19239 (male B-cells lymphoblastoid cell line)	400	GM19239__male_B-cells_lymphoblastoid_cell_line_@_labs_vishwanath-iyer___biosamples_ENCBS385ENC_	ENCSR000DLE	None	False
+EXP011072	ALIGNS038079	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	237	A549__lung_carcinoma_@_labs_michael-snyder___biosamples_ENCBS159AAA_	ENCSR000DYD	None	False
+EXP011095	ALIGNS033692	P49711	CTCF_HUMAN	215	keratinocytes	402	keratinocytes@_labs_vishwanath-iyer___biosamples_ENCBS611ENC_	ENCSR000DNC	None	False
+EXP011096	ALIGNS034853	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	403	MCF7__Invasive_ductal_breast_carcinoma_@_labs_richard-myers___biosamples_ENCBS000AAA_	ENCSR000AHD	None	False
+EXP011113	ALIGNS038085	P49711	CTCF_HUMAN	665	SK-N-SH (neuroblastoma)	380	SK-N-SH__neuroblastoma_@_labs_michael-snyder___biosamples_ENCBS376ENC_	ENCSR000EIC	None	False
+EXP011116	ALIGNS033696	P49711	CTCF_HUMAN	358	GM12892 (female B-cells lymphoblastoid cell line)	404	GM12892__female_B-cells_lymphoblastoid_cell_line_@_labs_vishwanath-iyer___biosamples_ENCBS633AAA_	ENCSR000DKY	None	False
+EXP011125	ALIGNS033698	P49711	CTCF_HUMAN	338	GM10266 (male B-cells)	372	GM10266__male_B-cells_@_labs_vishwanath-iyer___biosamples_ENCBS184AAA_	ENCSR000DKR	None	False
+EXP011127	ALIGNS033699	P49711	CTCF_HUMAN	633	spleen	405	spleen@_labs_vishwanath-iyer___biosamples_ENCBS149AAA_	ENCSR000DNI	None	False
+EXP011141	ALIGNS033705	P49711	CTCF_HUMAN	1177	LNCaP clone FGC	406	LNCaP_clone_FGC@_labs_vishwanath-iyer___biosamples_ENCBS387ENC_	ENCSR000DME	None	False
+EXP011163	ALIGNS033712	P49711	CTCF_HUMAN	347	GM12867 (female B-cells)	407	GM12867__female_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS211AAA_	ENCSR000DRH	None	False
+EXP011169	ALIGNS033714	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	251	MCF7__Invasive_ductal_breast_carcinoma_@_labs_vishwanath-iyer___biosamples_ENCBS252AAA_	ENCSR000DMO	None	False
+EXP011173	ALIGNS033715	P49711	CTCF_HUMAN	356	GM12878 (female B-cells lymphoblastoid cell line)	365	GM12878__female_B-cells_lymphoblastoid_cell_line_@_labs_vishwanath-iyer___biosamples_ENCBS337LQM_	ENCSR000DKV	None	False
+EXP011174	ALIGNS033716	P49711	CTCF_HUMAN	349	GM12869 (female B-cells)	408	GM12869__female_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS213AAA_	ENCSR000DRJ	None	False
+EXP011186	ALIGNS033721	P49711	CTCF_HUMAN	367	GM19238 (female B-cells lymphoblastoid cell lines)	409	GM19238__female_B-cells_lymphoblastoid_cell_lines_@_labs_vishwanath-iyer___biosamples_ENCBS509ENC_	ENCSR000DLD	None	False
+EXP011188	ALIGNS034899	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	403	MCF7__Invasive_ductal_breast_carcinoma_@_labs_richard-myers___biosamples_ENCBS000AAA_	ENCSR000AHD	None	False
+EXP011189	ALIGNS033723	P49711	CTCF_HUMAN	351	GM12871 (male B-cells)	410	GM12871__male_B-cells_@_labs_john-stamatoyannopoulos___biosamples_ENCBS723JLA_	ENCSR000DRL	None	False
+EXP011193	ALIGNS033724	P49711	CTCF_HUMAN	369	GM19240 (B cells Lymphoblastoid Cell Lines)	411	GM19240__B_cells_Lymphoblastoid_Cell_Lines_@_labs_vishwanath-iyer___biosamples_ENCBS510ENC_	ENCSR000DLF	None	False
+EXP011198	ALIGNS033728	P49711	CTCF_HUMAN	920	pancreas	392	pancreas@_labs_vishwanath-iyer___biosamples_ENCBS355AAA_	ENCSR000DND	None	False
+EXP011199	ALIGNS033729	P49711	CTCF_HUMAN	1159	medulloblastoma	373	medulloblastoma@_labs_vishwanath-iyer___biosamples_ENCBS253AAA_	ENCSR000DMY	None	False
+EXP011201	ALIGNS034902	P49711	CTCF_HUMAN	376	WA01 (H1, human embryonic stem cells)	401	WA01__H1__human_embryonic_stem_cells_@_labs_vishwanath-iyer___biosamples_ENCBS670AAA_	ENCSR000DLK	None	False
+EXP011214	ALIGNS033732	P49711	CTCF_HUMAN	359	GM13976 (female B-cells)	371	GM13976__female_B-cells_@_labs_vishwanath-iyer___biosamples_ENCBS220AAA_	ENCSR000DKZ	None	False
+EXP011231	ALIGNS033736	P49711	CTCF_HUMAN	357	GM12891 (male B- cells lymphoblastoid cell line)	412	GM12891__male_B-_cells_lymphoblastoid_cell_line_@_labs_vishwanath-iyer___biosamples_ENCBS384ENC_	ENCSR000DKX	None	False
+EXP030138	ALIGNS033818	P49711	CTCF_HUMAN	553	LoVo (colorectal adenocarcinoma)	413	LoVo__colorectal_adenocarcinoma_@GSE49402	None	GSE49402	False
+EXP030398	ALIGNS033981	P49711	CTCF_HUMAN	356	GM12878 (female B-cells lymphoblastoid cell line)	414	GM12878__female_B-cells_lymphoblastoid_cell_line_@GSE26320	None	GSE26320	False
+EXP030399	ALIGNS033982	P49711	CTCF_HUMAN	376	WA01 (H1, human embryonic stem cells)	415	WA01__H1__human_embryonic_stem_cells_@GSE26320	None	GSE26320	False
+EXP030400	ALIGNS033983	P49711	CTCF_HUMAN	430	HepG2 (hepatoblastoma)	416	HepG2__hepatoblastoma_@GSE26320	None	GSE26320	False
+EXP030401	ALIGNS033984	P49711	CTCF_HUMAN	440	HMEC (human mammary epithelial cells)	417	HMEC__human_mammary_epithelial_cells_@GSE26320	None	GSE26320	False
+EXP030402	ALIGNS033985	P49711	CTCF_HUMAN	450	skeletal muscles and myoblasts	418	skeletal_muscles_and_myoblasts@GSE26320	None	GSE26320	False
+EXP030403	ALIGNS033986	P49711	CTCF_HUMAN	472	HUVEC-C (HUVEC, umbilical vein endothelial cells)	419	HUVEC-C__HUVEC__umbilical_vein_endothelial_cells_@GSE26320	None	GSE26320	False
+EXP030404	ALIGNS033987	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	420	K562__myelogenous_leukemia_@GSE26320	None	GSE26320	False
+EXP030405	ALIGNS033988	P49711	CTCF_HUMAN	673	normal epidermal keratinocytes	421	normal_epidermal_keratinocytes@GSE26320	None	GSE26320	False
+EXP030406	ALIGNS033989	P49711	CTCF_HUMAN	446	HPF (pulmonary fibroblasts isolated from lung tissue)	422	HPF__pulmonary_fibroblasts_isolated_from_lung_tissue_@GSE26320	None	GSE26320	False
+EXP030555	ALIGNS035143	P49711	CTCF_HUMAN	618	MM1.S (plasma cell myeloma)	448	MM1_S__plasma_cell_myeloma_@GSE43743	None	GSE43743	False
+EXP030654	ALIGNS035171	P49711	CTCF_HUMAN	371	GP5d (colon adenocarcinoma)	465	GP5d__colon_adenocarcinoma_@GSE51234	None	GSE51234	False
+EXP030661	ALIGNS035178	P49711	CTCF_HUMAN	371	GP5d (colon adenocarcinoma)	465	GP5d__colon_adenocarcinoma_@GSE51234	None	GSE51234	False
+EXP030880	ALIGNS035263	P49711	CTCF_HUMAN	881	CD4+ T-cells	498	CD4+_T-cells@GSE12889	None	GSE12889	False
+EXP030881	ALIGNS035264	P49711	CTCF_HUMAN	78	HeLa (cervical adenocarcinoma)	499	HeLa__cervical_adenocarcinoma_@GSE12889	None	GSE12889	False
+EXP030882	ALIGNS035265	P49711	CTCF_HUMAN	509	Jurkat (T-cells)	500	Jurkat__T-cells_@GSE12889	None	GSE12889	False
+EXP030931	ALIGNS035289	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	510	MCF7__Invasive_ductal_breast_carcinoma_@GSE25021	None	GSE25021	False
+EXP030932	ALIGNS035290	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	510	MCF7__Invasive_ductal_breast_carcinoma_@GSE25021	None	GSE25021	False
+EXP030933	ALIGNS034053	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	510	MCF7__Invasive_ductal_breast_carcinoma_@GSE25021	None	GSE25021	False
+EXP030934	ALIGNS034054	P49711	CTCF_HUMAN	430	HepG2 (hepatoblastoma)	511	HepG2__hepatoblastoma_@GSE25021	None	GSE25021	False
+EXP031445	ALIGNS035401	P49711	CTCF_HUMAN	167	CD34+ hematopoietic stem cells-derived proerythroblasts	553	CD34+_hematopoietic_stem_cells-derived_proerythroblasts@GSE36985	None	GSE36985	False
+EXP031446	ALIGNS035402	P49711	CTCF_HUMAN	167	CD34+ hematopoietic stem cells-derived proerythroblasts	553	CD34+_hematopoietic_stem_cells-derived_proerythroblasts@GSE36985	None	GSE36985	False
+EXP031540	ALIGNS035423	P49711	CTCF_HUMAN	79	BCBL-1 (B-cell lymphoma)	562	BCBL-1__B-cell_lymphoma_@GSE38411	None	GSE38411	False
+EXP031555	ALIGNS035436	P49711	CTCF_HUMAN	738	PrEC (prostate cells)	564	PrEC__prostate_cells_@GSE38684	None	GSE38684	False
+EXP031556	ALIGNS035437	P49711	CTCF_HUMAN	70	LNCaP (prostate carcinoma)	565	LNCaP__prostate_carcinoma_@GSE38684	None	GSE38684	False
+EXP031734	ALIGNS035485	P49711	CTCF_HUMAN	867	WI-38 (lung fibroblasts)	592	WI-38__lung_fibroblasts_@GSE41048	None	GSE41048	False
+EXP031735	ALIGNS035486	P49711	CTCF_HUMAN	867	WI-38 (lung fibroblasts)	592	WI-38__lung_fibroblasts_@GSE41048	None	GSE41048	False
+EXP031863	ALIGNS034126	P49711	CTCF_HUMAN	302	fetal lung fibroblasts	604	fetal_lung_fibroblasts@GSE43070	None	GSE43070	False
+EXP031865	ALIGNS035527	P49711	CTCF_HUMAN	98	blood monocytes	606	blood_monocytes@GSE43098	None	GSE43098	False
+EXP031866	ALIGNS035528	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	607	MDM_monocyte_derived_macrophages_@GSE43098	None	GSE43098	False
+EXP032107	ALIGNS035592	P49711	CTCF_HUMAN	97	blood lymphocytes	633	blood_lymphocytes@GSE46832	None	GSE46832	False
+EXP032633	ALIGNS035748	P49711	CTCF_HUMAN	817	SUM159PT (Triple negative breast cancer)	688	SUM159PT__Triple_negative_breast_cancer_@GSE46055	None	GSE46055	False
+EXP032759	ALIGNS035799	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	704	HCT-116__colon_carcinoma_@GSE50610	None	GSE50610	False
+EXP032760	ALIGNS035800	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	704	HCT-116__colon_carcinoma_@GSE50610	None	GSE50610	False
+EXP032761	ALIGNS034189	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	704	HCT-116__colon_carcinoma_@GSE50610	None	GSE50610	False
+EXP032762	ALIGNS034190	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	704	HCT-116__colon_carcinoma_@GSE50610	None	GSE50610	False
+EXP032763	ALIGNS034191	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	705	K562__myelogenous_leukemia_@GSE50610	None	GSE50610	False
+EXP032764	ALIGNS034192	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	705	K562__myelogenous_leukemia_@GSE50610	None	GSE50610	False
+EXP032934	ALIGNS035835	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	720	THP-1__acute_monocytic_leukemia_@GSE55407	None	GSE55407	False
+EXP033039	ALIGNS035866	P49711	CTCF_HUMAN	725	PC3(bone mets prostate adenocarcinoma)	728	PC3_bone_mets_prostate_adenocarcinoma_@GSE57498	None	GSE57498	False
+EXP033055	ALIGNS041689	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	730	K562__myelogenous_leukemia_@GSE50611	None	GSE50611	False
+EXP033112	ALIGNS041720	P49711	CTCF_HUMAN	376	WA01 (H1, human embryonic stem cells)	738	WA01__H1__human_embryonic_stem_cells_@GSE52457	None	GSE52457	False
+EXP033113	ALIGNS041721	P49711	CTCF_HUMAN	379	H1-derived mesendodermal cells	739	H1-derived_mesendodermal_cells@GSE52457	None	GSE52457	False
+EXP033114	ALIGNS041722	P49711	CTCF_HUMAN	378	H1-derived mesenchymal stem cells	740	H1-derived_mesenchymal_stem_cells@GSE52457	None	GSE52457	False
+EXP033115	ALIGNS041723	P49711	CTCF_HUMAN	380	H1-derived neuronal progenitors	741	H1-derived_neuronal_progenitors@GSE52457	None	GSE52457	False
+EXP033116	ALIGNS041724	P49711	CTCF_HUMAN	382	H1-derived trophectodermal cells	742	H1-derived_trophectodermal_cells@GSE52457	None	GSE52457	False
+EXP033119	ALIGNS041727	P49711	CTCF_HUMAN	895	erythroid progenitors	743	erythroid_progenitors@GSE52637	None	GSE52637	False
+EXP033165	ALIGNS041736	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	747	T47D__invasive_ductal_carcinoma_@GSE53463	None	GSE53463	False
+EXP033166	ALIGNS041737	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	747	T47D__invasive_ductal_carcinoma_@GSE53463	None	GSE53463	False
+EXP033453	ALIGNS038329	P49711	CTCF_HUMAN	87	BEAS-2B (bronchial epithelium)	785	BEAS-2B__bronchial_epithelium_@GSE56051	None	GSE56051	False
+EXP033454	ALIGNS038330	P49711	CTCF_HUMAN	87	BEAS-2B (bronchial epithelium)	785	BEAS-2B__bronchial_epithelium_@GSE56051	None	GSE56051	False
+EXP034794	ALIGNS039670	P49711	CTCF_HUMAN	471	stem and progenitor cells	950	stem_and_progenitor_cells@GSE67783	None	GSE67783	False
+EXP034795	ALIGNS039671	P49711	CTCF_HUMAN	894	erythroid cells	951	erythroid_cells@GSE67783	None	GSE67783	False
+EXP034954	ALIGNS039830	P49711	CTCF_HUMAN	509	Jurkat (T-cells)	967	Jurkat__T-cells_@GSE68976	None	GSE68976	False
+EXP034957	ALIGNS039833	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	968	HEK293T__embryonic_kidney_@GSE68976	None	GSE68976	False
+EXP034958	ALIGNS039834	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	968	HEK293T__embryonic_kidney_@GSE68976	None	GSE68976	False
+EXP035101	ALIGNS039977	P49711	CTCF_HUMAN	878	embryonic stem cells	995	embryonic_stem_cells@GSE69646	None	GSE69646	False
+EXP035103	ALIGNS039979	P49711	CTCF_HUMAN	878	embryonic stem cells	995	embryonic_stem_cells@GSE69646	None	GSE69646	False
+EXP035175	ALIGNS040051	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	998	K562__myelogenous_leukemia_@GSE70482	None	GSE70482	False
+EXP035251	ALIGNS040127	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	1007	K562__myelogenous_leukemia_@GSE70764	None	GSE70764	False
+EXP035253	ALIGNS040129	P49711	CTCF_HUMAN	211	Delta47 (plasma cell myeloma)	1008	Delta47__plasma_cell_myeloma_@GSE70764	None	GSE70764	False
+EXP035255	ALIGNS040131	P49711	CTCF_HUMAN	701	OVCAR8 (high grade ovarian serous adenocarcinoma)	1009	OVCAR8__high_grade_ovarian_serous_adenocarcinoma_@GSE70764	None	GSE70764	False
+EXP035257	ALIGNS040133	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1010	MCF7__Invasive_ductal_breast_carcinoma_@GSE70764	None	GSE70764	False
+EXP035258	ALIGNS040134	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1010	MCF7__Invasive_ductal_breast_carcinoma_@GSE70764	None	GSE70764	False
+EXP035259	ALIGNS040135	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1010	MCF7__Invasive_ductal_breast_carcinoma_@GSE70764	None	GSE70764	False
+EXP035691	ALIGNS040567	P49711	CTCF_HUMAN	882	T-cells	1057	T-cells@GSE74850	None	GSE74850	False
+EXP035692	ALIGNS040568	P49711	CTCF_HUMAN	882	T-cells	1057	T-cells@GSE74850	None	GSE74850	False
+EXP035701	ALIGNS040577	P49711	CTCF_HUMAN	878	embryonic stem cells	1059	embryonic_stem_cells@GSE74967	None	GSE74967	False
+EXP035951	ALIGNS040827	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	1077	HEK293__embryonic_kidney_@GSE76494	None	GSE76494	False
+EXP035982	ALIGNS040858	P49711	CTCF_HUMAN	665	SK-N-SH (neuroblastoma)	1080	SK-N-SH__neuroblastoma_@GSE76815	None	GSE76815	False
+EXP036160	ALIGNS041036	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1090	MCF7__Invasive_ductal_breast_carcinoma_@GSE78113	None	GSE78113	False
+EXP036161	ALIGNS041037	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1090	MCF7__Invasive_ductal_breast_carcinoma_@GSE78113	None	GSE78113	False
+EXP036162	ALIGNS041038	P49711	CTCF_HUMAN	30	RCC 7860 (Renal cell carcinoma)	1091	RCC_7860__Renal_cell_carcinoma_@GSE78113	None	GSE78113	False
+EXP036544	ALIGNS041420	P49711	CTCF_HUMAN	71	VCaP (prostate carcinoma)	1133	VCaP__prostate_carcinoma_@GSE84432	None	GSE84432	False
+EXP036545	ALIGNS041421	P49711	CTCF_HUMAN	71	VCaP (prostate carcinoma)	1133	VCaP__prostate_carcinoma_@GSE84432	None	GSE84432	False
+EXP036562	ALIGNS041438	P49711	CTCF_HUMAN	798	SK-OV-3 (ovarian serous cystadenocarcinoma)	1137	SK-OV-3__ovarian_serous_cystadenocarcinoma_@GSE85453	None	GSE85453	False
+EXP036643	ALIGNS041519	P49711	CTCF_HUMAN	448	retinal pigment epithelial cells	1141	retinal_pigment_epithelial_cells@GSE60024	None	GSE60024	False
+EXP036698	ALIGNS041574	P49711	CTCF_HUMAN	455	HUES64 (embryonic stem cells)	1144	HUES64__embryonic_stem_cells_@GSE61475	None	GSE61475	False
+EXP036699	ALIGNS041575	P49711	CTCF_HUMAN	455	HUES64 (embryonic stem cells)	1144	HUES64__embryonic_stem_cells_@GSE61475	None	GSE61475	False
+EXP036700	ALIGNS041576	P49711	CTCF_HUMAN	455	HUES64 (embryonic stem cells)	1144	HUES64__embryonic_stem_cells_@GSE61475	None	GSE61475	False
+EXP036701	ALIGNS041577	P49711	CTCF_HUMAN	455	HUES64 (embryonic stem cells)	1144	HUES64__embryonic_stem_cells_@GSE61475	None	GSE61475	False
+EXP036784	ALIGNS041660	P49711	CTCF_HUMAN	455	HUES64 (embryonic stem cells)	1144	HUES64__embryonic_stem_cells_@GSE61475	None	GSE61475	False
+EXP036841	ALIGNS041919	P49711	CTCF_HUMAN	687	OCI-LY7 (diffuse large B-cell lymphoma)	1148	OCI-LY7__diffuse_large_B-cell_lymphoma_@GSE100977	None	GSE100977	False
+EXP036842	ALIGNS041920	P49711	CTCF_HUMAN	687	OCI-LY7 (diffuse large B-cell lymphoma)	1148	OCI-LY7__diffuse_large_B-cell_lymphoma_@GSE100977	None	GSE100977	False
+EXP036843	ALIGNS041921	P49711	CTCF_HUMAN	926	IPSC-derived bipolar neuron	1149	IPSC-derived_bipolar_neuron@GSE100991	None	GSE100991	False
+EXP036844	ALIGNS041922	P49711	CTCF_HUMAN	926	IPSC-derived bipolar neuron	1149	IPSC-derived_bipolar_neuron@GSE100991	None	GSE100991	False
+EXP036845	ALIGNS041923	P49711	CTCF_HUMAN	221	DOHH2 (diffuse large B-cell lymphoma)	1150	DOHH2__diffuse_large_B-cell_lymphoma_@GSE101017	None	GSE101017	False
+EXP036846	ALIGNS041924	P49711	CTCF_HUMAN	221	DOHH2 (diffuse large B-cell lymphoma)	1150	DOHH2__diffuse_large_B-cell_lymphoma_@GSE101017	None	GSE101017	False
+EXP036849	ALIGNS041927	P49711	CTCF_HUMAN	927	PC9 (lung adenocarcinoma)	1153	PC9__lung_adenocarcinoma_@GSE101051	None	GSE101051	False
+EXP036850	ALIGNS041928	P49711	CTCF_HUMAN	927	PC9 (lung adenocarcinoma)	1153	PC9__lung_adenocarcinoma_@GSE101051	None	GSE101051	False
+EXP036853	ALIGNS041931	P49711	CTCF_HUMAN	618	MM1.S (plasma cell myeloma)	1155	MM1_S__plasma_cell_myeloma_@GSE101095	None	GSE101095	False
+EXP036854	ALIGNS041932	P49711	CTCF_HUMAN	618	MM1.S (plasma cell myeloma)	1155	MM1_S__plasma_cell_myeloma_@GSE101095	None	GSE101095	False
+EXP036855	ALIGNS041933	P49711	CTCF_HUMAN	900	hepatocytes	1156	hepatocytes@GSE101103	None	GSE101103	False
+EXP036856	ALIGNS041934	P49711	CTCF_HUMAN	900	hepatocytes	1156	hepatocytes@GSE101103	None	GSE101103	False
+EXP036857	ALIGNS041935	P49711	CTCF_HUMAN	900	hepatocytes	1156	hepatocytes@GSE101103	None	GSE101103	False
+EXP036862	ALIGNS041940	P49711	CTCF_HUMAN	929	neutrophils	1159	neutrophils@GSE101279	None	GSE101279	False
+EXP036863	ALIGNS041941	P49711	CTCF_HUMAN	929	neutrophils	1159	neutrophils@GSE101279	None	GSE101279	False
+EXP036890	ALIGNS041968	P49711	CTCF_HUMAN	930	226LDM (normal breast luminal cells)	1166	226LDM__normal_breast_luminal_cells_@GSE102237	None	GSE102237	False
+EXP036891	ALIGNS041969	P49711	CTCF_HUMAN	930	226LDM (normal breast luminal cells)	1166	226LDM__normal_breast_luminal_cells_@GSE102237	None	GSE102237	False
+EXP037459	ALIGNS042537	P49711	CTCF_HUMAN	1549	COLO-829 (melanoma)	1212	COLO-829__melanoma_@GSE81945	None	GSE81945	False
+EXP037532	ALIGNS042610	P49711	CTCF_HUMAN	980	RH4 (alveolar rhabdomyosarcoma)	1223	RH4__alveolar_rhabdomyosarcoma_@GSE83726	None	GSE83726	False
+EXP037596	ALIGNS042674	P49711	CTCF_HUMAN	463	epidermal keratinocytes	1230	epidermal_keratinocytes@GSE84657	None	GSE84657	False
+EXP037597	ALIGNS042675	P49711	CTCF_HUMAN	463	epidermal keratinocytes	1230	epidermal_keratinocytes@GSE84657	None	GSE84657	False
+EXP037598	ALIGNS042676	P49711	CTCF_HUMAN	463	epidermal keratinocytes	1230	epidermal_keratinocytes@GSE84657	None	GSE84657	False
+EXP037646	ALIGNS042724	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1235	MCF7__Invasive_ductal_breast_carcinoma_@GSE85106	None	GSE85106	False
+EXP037647	ALIGNS042725	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1235	MCF7__Invasive_ductal_breast_carcinoma_@GSE85106	None	GSE85106	False
+EXP037648	ALIGNS042726	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1235	MCF7__Invasive_ductal_breast_carcinoma_@GSE85106	None	GSE85106	False
+EXP037799	ALIGNS042877	P49711	CTCF_HUMAN	1017	E14 retina	1264	E14_retina@GSE86981	None	GSE86981	False
+EXP037800	ALIGNS042878	P49711	CTCF_HUMAN	1018	E16 retina	1265	E16_retina@GSE86981	None	GSE86981	False
+EXP037801	ALIGNS042879	P49711	CTCF_HUMAN	1019	E18 retina	1266	E18_retina@GSE86981	None	GSE86981	False
+EXP037802	ALIGNS042880	P49711	CTCF_HUMAN	1020	E23 retina	1267	E23_retina@GSE86981	None	GSE86981	False
+EXP037803	ALIGNS042881	P49711	CTCF_HUMAN	1016	retinoblastoma xenograft	1268	retinoblastoma_xenograft@GSE86981	None	GSE86981	False
+EXP037952	ALIGNS043030	P49711	CTCF_HUMAN	848	U2OS (osteosarcoma)	1273	U2OS__osteosarcoma_@GSE87831	None	GSE87831	False
+EXP038267	ALIGNS043345	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	1294	K562__myelogenous_leukemia_@GSE92879	None	GSE92879	False
+EXP038268	ALIGNS043346	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	1294	K562__myelogenous_leukemia_@GSE92879	None	GSE92879	False
+EXP038269	ALIGNS043347	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	1295	HCT-116__colon_carcinoma_@GSE92879	None	GSE92879	False
+EXP038623	ALIGNS043701	P49711	CTCF_HUMAN	583	MCF10A (breast epithelial cells)	1335	MCF10A__breast_epithelial_cells_@GSE98551	None	GSE98551	False
+EXP038624	ALIGNS043702	P49711	CTCF_HUMAN	1113	MCF10AT1 (breast premetastatic epithelial cells)	1336	MCF10AT1__breast_premetastatic_epithelial_cells_@GSE98551	None	GSE98551	False
+EXP038625	ALIGNS043703	P49711	CTCF_HUMAN	1114	MCF10CA1a (breast metastatic epithelial cells)	1337	MCF10CA1a__breast_metastatic_epithelial_cells_@GSE98551	None	GSE98551	False
+EXP038767	ALIGNS043845	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1344	MCF7__Invasive_ductal_breast_carcinoma_@GSE25710	None	GSE25710	False
+EXP038773	ALIGNS043851	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1344	MCF7__Invasive_ductal_breast_carcinoma_@GSE25710	None	GSE25710	False
+EXP038774	ALIGNS043852	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	1344	MCF7__Invasive_ductal_breast_carcinoma_@GSE25710	None	GSE25710	False
+EXP039310	ALIGNS044388	P49711	CTCF_HUMAN	1169	sigmoid colon	1609	sigmoid_colon@_labs_michael-snyder___biosamples_ENCBS919RQL_	ENCSR721AHD	None	False
+EXP039321	ALIGNS044399	P49711	CTCF_HUMAN	633	spleen	1427	spleen@_labs_michael-snyder___biosamples_ENCBS440AZZ_	ENCSR692ILH	None	False
+EXP039328	ALIGNS044406	P49711	CTCF_HUMAN	1170	lower leg skin	1519	lower_leg_skin@_labs_michael-snyder___biosamples_ENCBS443VUU_	ENCSR252XWG	None	False
+EXP039334	ALIGNS044412	P49711	CTCF_HUMAN	1167	esophagus muscularis mucosa	1532	esophagus_muscularis_mucosa@_labs_michael-snyder___biosamples_ENCBS025PFE_	ENCSR559KAB	None	False
+EXP039370	ALIGNS044448	P49711	CTCF_HUMAN	1132	heart left ventricle	1564	heart_left_ventricle@_labs_michael-snyder___biosamples_ENCBS106FXL_	ENCSR544APK	None	False
+EXP039379	ALIGNS044457	P49711	CTCF_HUMAN	1167	esophagus muscularis mucosa	1613	esophagus_muscularis_mucosa@_labs_michael-snyder___biosamples_ENCBS917HYJ_	ENCSR353DFU	None	False
+EXP039386	ALIGNS044464	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1677	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS153NPL_	ENCSR851SOK	GSE92830	False
+EXP039388	ALIGNS044466	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1678	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS613WNR_	ENCSR287UXS	GSE92797	False
+EXP039398	ALIGNS044476	P49711	CTCF_HUMAN	1172	adrenal gland	1606	adrenal_gland@_labs_michael-snyder___biosamples_ENCBS926VJZ_	ENCSR770IWO	None	False
+EXP039402	ALIGNS044480	P49711	CTCF_HUMAN	1172	adrenal gland	1547	adrenal_gland@_labs_michael-snyder___biosamples_ENCBS693ETI_	ENCSR899JSO	None	False
+EXP039406	ALIGNS044484	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1690	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS136ZVQ_	ENCSR130TQM	GSE92786	False
+EXP039407	ALIGNS044485	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1691	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS924DBS_	ENCSR249JOH	GSE92794	False
+EXP039413	ALIGNS044491	P49711	CTCF_HUMAN	1095	Loucy (adult T acute lymphoblastic leukemia)	1387	Loucy__adult_T_acute_lymphoblastic_leukemia_@_labs_bradley-bernstein___biosamples_ENCBS170DPY_	ENCSR464DKE	None	False
+EXP039434	ALIGNS044512	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1714	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS714GDR_	ENCSR035OXA	GSE92782	False
+EXP039438	ALIGNS044516	P49711	CTCF_HUMAN	1148	esophagus squamous epithelium	1598	esophagus_squamous_epithelium@_labs_michael-snyder___biosamples_ENCBS927UKP_	ENCSR773JBP	None	False
+EXP039453	ALIGNS044531	P49711	CTCF_HUMAN	1148	esophagus squamous epithelium	1373	esophagus_squamous_epithelium@_labs_michael-snyder___biosamples_ENCBS969YPI_	ENCSR003SZZ	None	False
+EXP039454	ALIGNS044532	P49711	CTCF_HUMAN	1148	esophagus squamous epithelium	1592	esophagus_squamous_epithelium@_labs_michael-snyder___biosamples_ENCBS278PSF_	ENCSR450FRI	None	False
+EXP039456	ALIGNS044534	P49711	CTCF_HUMAN	1140	subcutaneous adipose tissue	1482	subcutaneous_adipose_tissue@_labs_michael-snyder___biosamples_ENCBS644JJL_	ENCSR790VEV	None	False
+EXP039457	ALIGNS044535	P49711	CTCF_HUMAN	440	HMEC (human mammary epithelial cells)	1599	HMEC__human_mammary_epithelial_cells_@_labs_michael-snyder___biosamples_ENCBS236MDX_	ENCSR697YIN	None	False
+EXP039463	ALIGNS044541	P49711	CTCF_HUMAN	1179	tibial nerve	1490	tibial_nerve@_labs_michael-snyder___biosamples_ENCBS689AWK_	ENCSR822PJT	None	False
+EXP039468	ALIGNS044546	P49711	CTCF_HUMAN	70	LNCaP (prostate carcinoma)	1733	LNCaP__prostate_carcinoma_@_labs_michael-snyder___biosamples_ENCBS260TRO_	ENCSR673WZL	None	False
+EXP039469	ALIGNS044547	P49711	CTCF_HUMAN	633	spleen	1399	spleen@_labs_michael-snyder___biosamples_ENCBS780KFJ_	ENCSR234HEM	None	False
+EXP039472	ALIGNS044550	P49711	CTCF_HUMAN	1163	transverse colon	1513	transverse_colon@_labs_bradley-bernstein___biosamples_ENCBS990XOM_	ENCSR608WPS	None	False
+EXP039474	ALIGNS044552	P49711	CTCF_HUMAN	1156	gastroesophageal sphincter	1432	gastroesophageal_sphincter@_labs_michael-snyder___biosamples_ENCBS543LVV_	ENCSR186NVR	None	False
+EXP039475	ALIGNS044553	P49711	CTCF_HUMAN	1142	Peyer's patch	1522	Peyer_s_patch@_labs_michael-snyder___biosamples_ENCBS944UJX_	ENCSR375VXU	None	False
+EXP039487	ALIGNS044565	P49711	CTCF_HUMAN	1166	epithelial cell of prostate	1744	epithelial_cell_of_prostate@_labs_michael-snyder___biosamples_ENCBS706NVS_	ENCSR196HOM	None	False
+EXP039498	ALIGNS044576	P49711	CTCF_HUMAN	1182	RWPE2	1754	RWPE2@_labs_michael-snyder___biosamples_ENCBS796LYI_	ENCSR856JJB	None	False
+EXP039523	ALIGNS044601	P49711	CTCF_HUMAN	71	VCaP (prostate carcinoma)	1467	VCaP__prostate_carcinoma_@_labs_michael-snyder___biosamples_ENCBS316RCQ_	ENCSR265ARE	None	False
+EXP039525	ALIGNS044603	P49711	CTCF_HUMAN	1156	gastroesophageal sphincter	1538	gastroesophageal_sphincter@_labs_michael-snyder___biosamples_ENCBS802IML_	ENCSR661XNQ	None	False
+EXP039534	ALIGNS044612	P49711	CTCF_HUMAN	1157	stomach	1544	stomach@_labs_michael-snyder___biosamples_ENCBS962HLD_	ENCSR618QYE	None	False
+EXP039536	ALIGNS044614	P49711	CTCF_HUMAN	1149	testis	1456	testis@_labs_michael-snyder___biosamples_ENCBS746YNW_	ENCSR981CID	None	False
+EXP039537	ALIGNS044615	P49711	CTCF_HUMAN	1170	lower leg skin	1516	lower_leg_skin@_labs_michael-snyder___biosamples_ENCBS204MYN_	ENCSR582MTM	None	False
+EXP039544	ALIGNS044622	P49711	CTCF_HUMAN	929	neutrophils	1783	neutrophils@_labs_bradley-bernstein___biosamples_ENCBS462VZJ_	ENCSR785YRL	None	False
+EXP039547	ALIGNS044625	P49711	CTCF_HUMAN	1142	Peyer's patch	1510	Peyer_s_patch@_labs_michael-snyder___biosamples_ENCBS404OGY_	ENCSR799WDT	None	False
+EXP039548	ALIGNS044626	P49711	CTCF_HUMAN	1163	transverse colon	1611	transverse_colon@_labs_michael-snyder___biosamples_ENCBS360EPF_	ENCSR558HTE	None	False
+EXP039550	ALIGNS044628	P49711	CTCF_HUMAN	1181	upper lobe of left lung	1458	upper_lobe_of_left_lung@_labs_michael-snyder___biosamples_ENCBS011GFV_	ENCSR972LYL	None	False
+EXP039569	ALIGNS044647	P49711	CTCF_HUMAN	1149	testis	1431	testis@_labs_michael-snyder___biosamples_ENCBS133MOQ_	ENCSR494TNM	None	False
+EXP039572	ALIGNS044650	P49711	CTCF_HUMAN	1157	stomach	1469	stomach@_labs_michael-snyder___biosamples_ENCBS296KUN_	ENCSR776AEL	None	False
+EXP039574	ALIGNS044652	P49711	CTCF_HUMAN	1170	lower leg skin	1610	lower_leg_skin@_labs_michael-snyder___biosamples_ENCBS439RNG_	ENCSR430TEE	None	False
+EXP039576	ALIGNS044654	P49711	CTCF_HUMAN	1176	ascending aorta	1439	ascending_aorta@_labs_michael-snyder___biosamples_ENCBS232BOV_	ENCSR960MDF	None	False
+EXP039579	ALIGNS044657	P49711	CTCF_HUMAN	1175	prostate gland	1614	prostate_gland@_labs_michael-snyder___biosamples_ENCBS631JUH_	ENCSR720USO	None	False
+EXP039581	ALIGNS044659	P49711	CTCF_HUMAN	633	spleen	1459	spleen@_labs_michael-snyder___biosamples_ENCBS009ALA_	ENCSR028YEV	None	False
+EXP039586	ALIGNS044664	P49711	CTCF_HUMAN	920	pancreas	1529	pancreas@_labs_michael-snyder___biosamples_ENCBS799DMW_	ENCSR307PFP	None	False
+EXP039609	ALIGNS044687	P49711	CTCF_HUMAN	221	DOHH2 (diffuse large B-cell lymphoma)	1437	DOHH2__diffuse_large_B-cell_lymphoma_@_labs_bradley-bernstein___biosamples_ENCBS662OGM_	ENCSR084RDK	None	False
+EXP039610	ALIGNS044688	P49711	CTCF_HUMAN	1145	bipolar neuron	1575	bipolar_neuron@_labs_bradley-bernstein___biosamples_ENCBS374AAA_	ENCSR066BZZ	None	False
+EXP039612	ALIGNS044690	P49711	CTCF_HUMAN	1142	Peyer's patch	1383	Peyer_s_patch@_labs_michael-snyder___biosamples_ENCBS666LQH_	ENCSR391ZKN	None	False
+EXP039618	ALIGNS044696	P49711	CTCF_HUMAN	1169	sigmoid colon	1512	sigmoid_colon@_labs_michael-snyder___biosamples_ENCBS345HRP_	ENCSR222SQE	None	False
+EXP039620	ALIGNS044698	P49711	CTCF_HUMAN	1148	esophagus squamous epithelium	1470	esophagus_squamous_epithelium@_labs_bradley-bernstein___biosamples_ENCBS054JUC_	ENCSR756URL	None	False
+EXP039638	ALIGNS044716	P49711	CTCF_HUMAN	900	hepatocytes	1840	hepatocytes@_labs_bradley-bernstein___biosamples_ENCBS520VFV_	ENCSR252QYR	None	False
+EXP039639	ALIGNS044717	P49711	CTCF_HUMAN	440	HMEC (human mammary epithelial cells)	1454	HMEC__human_mammary_epithelial_cells_@_labs_michael-snyder___biosamples_ENCBS824TRN_	ENCSR661NXJ	None	False
+EXP039645	ALIGNS044723	P49711	CTCF_HUMAN	1168	thyroid gland	1422	thyroid_gland@_labs_michael-snyder___biosamples_ENCBS413MJK_	ENCSR955BIB	None	False
+EXP039663	ALIGNS044741	P49711	CTCF_HUMAN	1129	suprapubic skin	1455	suprapubic_skin@_labs_michael-snyder___biosamples_ENCBS119VMU_	ENCSR515LRI	None	False
+EXP039667	ALIGNS044745	P49711	CTCF_HUMAN	1162	thoracic aorta	1450	thoracic_aorta@_labs_michael-snyder___biosamples_ENCBS978YKP_	ENCSR668BTN	None	False
+EXP039677	ALIGNS044755	P49711	CTCF_HUMAN	1163	transverse colon	1379	transverse_colon@_labs_michael-snyder___biosamples_ENCBS866IBT_	ENCSR833FWC	None	False
+EXP039678	ALIGNS044756	P49711	CTCF_HUMAN	1157	stomach	1551	stomach@_labs_michael-snyder___biosamples_ENCBS424ANS_	ENCSR549WAU	None	False
+EXP039683	ALIGNS044761	P49711	CTCF_HUMAN	927	PC9 (lung adenocarcinoma)	1864	PC9__lung_adenocarcinoma_@_labs_bradley-bernstein___biosamples_ENCBS177ANS_	ENCSR243INX	None	False
+EXP039689	ALIGNS044767	P49711	CTCF_HUMAN	1145	bipolar neuron	1534	bipolar_neuron@_labs_richard-myers___biosamples_ENCBS369AAA_	ENCSR619IUE	GSE96269	False
+EXP039695	ALIGNS044773	P49711	CTCF_HUMAN	1154	omental fat pad	1535	omental_fat_pad@_labs_michael-snyder___biosamples_ENCBS996THA_	ENCSR005LPI	None	False
+EXP039696	ALIGNS044774	P49711	CTCF_HUMAN	1163	transverse colon	1501	transverse_colon@_labs_michael-snyder___biosamples_ENCBS659AMF_	ENCSR769WKR	None	False
+EXP039699	ALIGNS044777	P49711	CTCF_HUMAN	1163	transverse colon	1415	transverse_colon@_labs_michael-snyder___biosamples_ENCBS572ESP_	ENCSR102CSD	None	False
+EXP039700	ALIGNS044778	P49711	CTCF_HUMAN	1181	upper lobe of left lung	1386	upper_lobe_of_left_lung@_labs_michael-snyder___biosamples_ENCBS423TVO_	ENCSR964BKO	None	False
+EXP039704	ALIGNS044782	P49711	CTCF_HUMAN	1136	gastrocnemius medialis	1420	gastrocnemius_medialis@_labs_michael-snyder___biosamples_ENCBS668EWD_	ENCSR071XWO	None	False
+EXP039705	ALIGNS044783	P49711	CTCF_HUMAN	712	PANC1 (pancreatic ductal adenocarcinoma)	1475	PANC1__pancreatic_ductal_adenocarcinoma_@_labs_michael-snyder___biosamples_ENCBS314FVF_	ENCSR203QEB	None	False
+EXP039707	ALIGNS044785	P49711	CTCF_HUMAN	1170	lower leg skin	1543	lower_leg_skin@_labs_michael-snyder___biosamples_ENCBS207AJN_	ENCSR727HME	None	False
+EXP039723	ALIGNS044801	P49711	CTCF_HUMAN	1131	tibial artery	1573	tibial_artery@_labs_michael-snyder___biosamples_ENCBS825KJI_	ENCSR699BEK	None	False
+EXP039740	ALIGNS044818	P49711	CTCF_HUMAN	618	MM1.S (plasma cell myeloma)	1498	MM1_S__plasma_cell_myeloma_@_labs_bradley-bernstein___biosamples_ENCBS981ZAE_	ENCSR402IDP	None	False
+EXP039745	ALIGNS044823	P49711	CTCF_HUMAN	1150	ovary	1425	ovary@_labs_michael-snyder___biosamples_ENCBS600YTL_	ENCSR548DDS	None	False
+EXP039759	ALIGNS044837	P49711	CTCF_HUMAN	1129	suprapubic skin	1404	suprapubic_skin@_labs_michael-snyder___biosamples_ENCBS351RRY_	ENCSR756KRS	None	False
+EXP039762	ALIGNS044840	P49711	CTCF_HUMAN	7	22RV1 (prostate carcinoma)	1906	22RV1__prostate_carcinoma_@_labs_michael-snyder___biosamples_ENCBS822DIG_	ENCSR857PBV	None	False
+EXP039767	ALIGNS044845	P49711	CTCF_HUMAN	1138	KARPAS-422 (diffuse large B-cell lymphoma)	1910	KARPAS-422__diffuse_large_B-cell_lymphoma_@_labs_bradley-bernstein___biosamples_ENCBS850UIV_	ENCSR113REG	None	False
+EXP039772	ALIGNS044850	P49711	CTCF_HUMAN	1163	transverse colon	1914	transverse_colon@_labs_bradley-bernstein___biosamples_ENCBS280DYM_	ENCSR236YGF	None	False
+EXP039781	ALIGNS044859	P49711	CTCF_HUMAN	1164	uterus	1421	uterus@_labs_michael-snyder___biosamples_ENCBS201ZAR_	ENCSR392SFJ	None	False
+EXP039782	ALIGNS044860	P49711	CTCF_HUMAN	1151	right lobe of liver	1566	right_lobe_of_liver@_labs_michael-snyder___biosamples_ENCBS904HZU_	ENCSR911GFJ	None	False
+EXP039802	ALIGNS044880	P49711	CTCF_HUMAN	1178	coronary artery	1405	coronary_artery@_labs_michael-snyder___biosamples_ENCBS906UGR_	ENCSR175FLL	None	False
+EXP039805	ALIGNS044883	P49711	CTCF_HUMAN	920	pancreas	1550	pancreas@_labs_michael-snyder___biosamples_ENCBS372UUZ_	ENCSR484DDO	None	False
+EXP039806	ALIGNS044884	P49711	CTCF_HUMAN	1158	vagina	1389	vagina@_labs_michael-snyder___biosamples_ENCBS688NIO_	ENCSR655ECZ	None	False
+EXP039808	ALIGNS044886	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1937	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS922MBD_	ENCSR336VBV	GSE92800	False
+EXP039832	ALIGNS044910	P49711	CTCF_HUMAN	1181	upper lobe of left lung	1375	upper_lobe_of_left_lung@_labs_michael-snyder___biosamples_ENCBS089HGD_	ENCSR027FSZ	None	False
+EXP039840	ALIGNS044918	P49711	CTCF_HUMAN	70	LNCaP (prostate carcinoma)	1567	LNCaP__prostate_carcinoma_@_labs_michael-snyder___biosamples_ENCBS535BWO_	ENCSR315NAC	None	False
+EXP039845	ALIGNS044923	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1962	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS094BQG_	ENCSR553UWG	GSE92814	False
+EXP039854	ALIGNS044932	P49711	CTCF_HUMAN	1180	neural cell	1965	neural_cell@_labs_michael-snyder___biosamples_ENCBS163EMU_	ENCSR822CEA	None	False
+EXP039861	ALIGNS044939	P49711	CTCF_HUMAN	1168	thyroid gland	1577	thyroid_gland@_labs_michael-snyder___biosamples_ENCBS995JJM_	ENCSR492ZIW	None	False
+EXP039864	ALIGNS044942	P49711	CTCF_HUMAN	920	pancreas	1591	pancreas@_labs_michael-snyder___biosamples_ENCBS425WFZ_	ENCSR408XTO	None	False
+EXP039866	ALIGNS044944	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	1970	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS802OFY_	ENCSR173IEA	GSE92789	False
+EXP039880	ALIGNS044958	P49711	CTCF_HUMAN	1172	adrenal gland	1600	adrenal_gland@_labs_michael-snyder___biosamples_ENCBS063ABX_	ENCSR450BLH	None	False
+EXP039898	ALIGNS044976	P49711	CTCF_HUMAN	879	liver	1537	liver@_labs_michael-snyder___biosamples_ENCBS045RNA_	ENCSR254YRM	None	False
+EXP039923	ALIGNS045001	P49711	CTCF_HUMAN	687	OCI-LY7 (diffuse large B-cell lymphoma)	2007	OCI-LY7__diffuse_large_B-cell_lymphoma_@_labs_bradley-bernstein___biosamples_ENCBS699NWP_	ENCSR027HML	None	False
+EXP039929	ALIGNS045007	P49711	CTCF_HUMAN	1175	prostate gland	1433	prostate_gland@_labs_michael-snyder___biosamples_ENCBS282GPE_	ENCSR829HTO	None	False
+EXP039943	ALIGNS045021	P49711	CTCF_HUMAN	7	22RV1 (prostate carcinoma)	2019	22RV1__prostate_carcinoma_@_labs_michael-snyder___biosamples_ENCBS626QQL_	ENCSR847XGE	None	False
+EXP039949	ALIGNS045027	P49711	CTCF_HUMAN	686	OCI-LY3 (diffuse large B-cell lymphoma)	2022	OCI-LY3__diffuse_large_B-cell_lymphoma_@_labs_bradley-bernstein___biosamples_ENCBS018GXW_	ENCSR756ZKG	None	False
+EXP039952	ALIGNS045030	P49711	CTCF_HUMAN	440	HMEC (human mammary epithelial cells)	1429	HMEC__human_mammary_epithelial_cells_@_labs_michael-snyder___biosamples_ENCBS114DQJ_	ENCSR304XUZ	None	False
+EXP039954	ALIGNS045032	P49711	CTCF_HUMAN	1136	gastrocnemius medialis	1581	gastrocnemius_medialis@_labs_michael-snyder___biosamples_ENCBS291EBC_	ENCSR998NQG	None	False
+EXP039968	ALIGNS045046	P49711	CTCF_HUMAN	1140	subcutaneous adipose tissue	1499	subcutaneous_adipose_tissue@_labs_michael-snyder___biosamples_ENCBS108OCK_	ENCSR762PCG	None	False
+EXP039971	ALIGNS045049	P49711	CTCF_HUMAN	1169	sigmoid colon	1445	sigmoid_colon@_labs_michael-snyder___biosamples_ENCBS835BNK_	ENCSR925GDS	None	False
+EXP039980	ALIGNS045058	P49711	CTCF_HUMAN	633	spleen	1407	spleen@_labs_michael-snyder___biosamples_ENCBS214FBD_	ENCSR482PMN	None	False
+EXP039983	ALIGNS045061	P49711	CTCF_HUMAN	1156	gastroesophageal sphincter	1446	gastroesophageal_sphincter@_labs_michael-snyder___biosamples_ENCBS728DKU_	ENCSR146BGM	None	False
+EXP039994	ALIGNS045072	P49711	CTCF_HUMAN	1179	tibial nerve	1361	tibial_nerve@_labs_michael-snyder___biosamples_ENCBS004OVW_	ENCSR469POZ	None	False
+EXP040000	ALIGNS045078	P49711	CTCF_HUMAN	1158	vagina	1587	vagina@_labs_michael-snyder___biosamples_ENCBS762FDB_	ENCSR606TNN	None	False
+EXP040012	ALIGNS045090	P49711	CTCF_HUMAN	920	pancreas	1517	pancreas@_labs_bradley-bernstein___biosamples_ENCBS869MHP_	ENCSR572DUJ	None	False
+EXP040026	ALIGNS045104	P49711	CTCF_HUMAN	1129	suprapubic skin	1462	suprapubic_skin@_labs_michael-snyder___biosamples_ENCBS134OKV_	ENCSR038FOS	None	False
+EXP040027	ALIGNS045105	P49711	CTCF_HUMAN	1179	tibial nerve	1365	tibial_nerve@_labs_michael-snyder___biosamples_ENCBS168BMV_	ENCSR434XLP	None	False
+EXP040028	ALIGNS045106	P49711	CTCF_HUMAN	1135	right atrium auricular region	1494	right_atrium_auricular_region@_labs_michael-snyder___biosamples_ENCBS822YKL_	ENCSR066GBX	None	False
+EXP040031	ALIGNS045109	P49711	CTCF_HUMAN	1142	Peyer's patch	1612	Peyer_s_patch@_labs_michael-snyder___biosamples_ENCBS467IBM_	ENCSR419ANE	None	False
+EXP040050	ALIGNS045128	P49711	CTCF_HUMAN	1168	thyroid gland	1528	thyroid_gland@_labs_michael-snyder___biosamples_ENCBS131UEI_	ENCSR744YJR	None	False
+EXP040054	ALIGNS045132	P49711	CTCF_HUMAN	1167	esophagus muscularis mucosa	1594	esophagus_muscularis_mucosa@_labs_michael-snyder___biosamples_ENCBS643MHO_	ENCSR074SFL	None	False
+EXP040058	ALIGNS045136	P49711	CTCF_HUMAN	1164	uterus	1603	uterus@_labs_michael-snyder___biosamples_ENCBS867AWW_	ENCSR798NVH	None	False
+EXP040061	ALIGNS045139	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	2084	HEK293__embryonic_kidney_@_labs_michael-snyder___biosamples_ENCBS268XWC_	ENCSR617IFZ	GSE91917	False
+EXP040063	ALIGNS045141	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	2085	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS024QOG_	ENCSR432AXE	GSE92808	False
+EXP040068	ALIGNS045146	P49711	CTCF_HUMAN	1150	ovary	1504	ovary@_labs_michael-snyder___biosamples_ENCBS165BJP_	ENCSR493APD	None	False
+EXP040071	ALIGNS045149	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	2090	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS114PSH_	ENCSR384KPP	GSE92803	False
+EXP040072	ALIGNS045150	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	2091	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS321WEQ_	ENCSR414CQB	GSE92805	False
+EXP040077	ALIGNS045155	P49711	CTCF_HUMAN	1132	heart left ventricle	1385	heart_left_ventricle@_labs_michael-snyder___biosamples_ENCBS410KPZ_	ENCSR791AYW	None	False
+EXP040082	ALIGNS045160	P49711	CTCF_HUMAN	1184	GM23338	1460	GM23338@_labs_richard-myers___biosamples_ENCBS368AAA_	ENCSR932ZMX	GSE96477	False
+EXP040087	ALIGNS045165	P49711	CTCF_HUMAN	1181	upper lobe of left lung	1583	upper_lobe_of_left_lung@_labs_michael-snyder___biosamples_ENCBS218BVZ_	ENCSR970UZD	None	False
+EXP040089	ALIGNS045167	P49711	CTCF_HUMAN	1154	omental fat pad	1568	omental_fat_pad@_labs_michael-snyder___biosamples_ENCBS666LUO_	ENCSR089DTY	None	False
+EXP040090	ALIGNS045168	P49711	CTCF_HUMAN	1154	omental fat pad	1363	omental_fat_pad@_labs_michael-snyder___biosamples_ENCBS971HUW_	ENCSR225OKX	None	False
+EXP040101	ALIGNS045179	P49711	CTCF_HUMAN	781	RWPE1 (prostate epithelial cells)	2105	RWPE1__prostate_epithelial_cells_@_labs_michael-snyder___biosamples_ENCBS875FPF_	ENCSR303GFI	None	False
+EXP040107	ALIGNS045185	P49711	CTCF_HUMAN	920	pancreas	1500	pancreas@_labs_michael-snyder___biosamples_ENCBS867VCV_	ENCSR265PFQ	None	False
+EXP040118	ALIGNS045196	P49711	CTCF_HUMAN	1157	stomach	1576	stomach@_labs_michael-snyder___biosamples_ENCBS314VNR_	ENCSR173AIR	None	False
+EXP040128	ALIGNS045206	P49711	CTCF_HUMAN	1172	adrenal gland	1380	adrenal_gland@_labs_michael-snyder___biosamples_ENCBS055JKA_	ENCSR014GSQ	None	False
+EXP040134	ALIGNS045212	P49711	CTCF_HUMAN	1136	gastrocnemius medialis	1506	gastrocnemius_medialis@_labs_michael-snyder___biosamples_ENCBS429IGV_	ENCSR428BKN	None	False
+EXP040145	ALIGNS045223	P49711	CTCF_HUMAN	129	LNCaP C4-2B (prostate carcinoma)	2132	LNCaP_C4-2B__prostate_carcinoma_@_labs_michael-snyder___biosamples_ENCBS109FVF_	ENCSR460LGH	None	False
+EXP040157	ALIGNS045235	P49711	CTCF_HUMAN	1148	esophagus squamous epithelium	1536	esophagus_squamous_epithelium@_labs_michael-snyder___biosamples_ENCBS312CXQ_	ENCSR838RUX	None	False
+EXP040169	ALIGNS045247	P49711	CTCF_HUMAN	1156	gastroesophageal sphincter	1527	gastroesophageal_sphincter@_labs_michael-snyder___biosamples_ENCBS185KVE_	ENCSR206ETG	None	False
+EXP040192	ALIGNS045270	P49711	CTCF_HUMAN	1163	transverse colon	2162	transverse_colon@_labs_bradley-bernstein___biosamples_ENCBS989UNA_	ENCSR907BES	None	False
+EXP040193	ALIGNS045271	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	2163	A549__lung_carcinoma_@_labs_tim-reddy___biosamples_ENCBS472FTV_	ENCSR876UZD	GSE92832	False
+EXP040228	ALIGNS045306	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	2167	HCT-116__colon_carcinoma_@_labs_bradley-bernstein___biosamples_ENCBS494OPB_	ENCSR240PRQ	None	False
+EXP040234	ALIGNS045312	P49711	CTCF_HUMAN	1187	Parathyroid adenoma	2170	Parathyroid_adenoma@_labs_bradley-bernstein___biosamples_ENCBS842IQY_	ENCSR336PTS	None	False
+EXP040241	ALIGNS045319	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	2175	MCF7__Invasive_ductal_breast_carcinoma_@_labs_bradley-bernstein___biosamples_ENCBS789UPK_	ENCSR560BUE	None	False
+EXP040244	ALIGNS045322	P49711	CTCF_HUMAN	1185	foreskin keratinocyte	2176	foreskin_keratinocyte@_labs_michael-snyder___biosamples_ENCBS389AUD_	ENCSR812FNU	None	False
+EXP040246	ALIGNS045324	P49711	CTCF_HUMAN	665	SK-N-SH (neuroblastoma)	2202	SK-N-SH__neuroblastoma_@_labs_bradley-bernstein___biosamples_ENCBS324TZB_	ENCSR541AMF	None	False
+EXP040253	ALIGNS045331	P49711	CTCF_HUMAN	415	HCM (cardiac myocytes)	2205	HCM__cardiac_myocytes_@_labs_bradley-bernstein___biosamples_ENCBS343AKO_	ENCSR713SXF	None	False
+EXP040254	ALIGNS045332	P49711	CTCF_HUMAN	1183	KMS-11 (Plasma cell myeloma)	2190	KMS-11__Plasma_cell_myeloma_@_labs_bradley-bernstein___biosamples_ENCBS987CHP_	ENCSR430YRJ	None	False
+EXP040256	ALIGNS045334	P49711	CTCF_HUMAN	1185	foreskin keratinocyte	2206	foreskin_keratinocyte@_labs_michael-snyder___biosamples_ENCBS079LRU_	ENCSR036EGV	None	False
+EXP040257	ALIGNS045335	P49711	CTCF_HUMAN	288	A673 (Ewing sarcoma)	2174	A673__Ewing_sarcoma_@_labs_bradley-bernstein___biosamples_ENCBS385OLC_	ENCSR611JJS	None	False
+EXP040259	ALIGNS045337	P49711	CTCF_HUMAN	1184	GM23338	2166	GM23338@_labs_bradley-bernstein___biosamples_ENCBS368AAA_	ENCSR987GXT	None	False
+EXP040275	ALIGNS045353	P49711	CTCF_HUMAN	394	H929 (plasma cell myeloma)	2165	H929__plasma_cell_myeloma_@_labs_bradley-bernstein___biosamples_ENCBS571AQH_	ENCSR634OAQ	None	False
+EXP040278	ALIGNS045356	P49711	CTCF_HUMAN	1187	Parathyroid adenoma	2185	Parathyroid_adenoma@_labs_bradley-bernstein___biosamples_ENCBS785UMH_	ENCSR780OZE	None	False
+EXP040279	ALIGNS045357	P49711	CTCF_HUMAN	816	SU-DHL-6 (diffuse large B-cell lymphoma)	2217	SU-DHL-6__diffuse_large_B-cell_lymphoma_@_labs_bradley-bernstein___biosamples_ENCBS107PVI_	ENCSR125DKL	None	False
+EXP040282	ALIGNS045360	P49711	CTCF_HUMAN	1185	foreskin keratinocyte	2218	foreskin_keratinocyte@_labs_michael-snyder___biosamples_ENCBS666IIR_	ENCSR817HTJ	None	False
+EXP040290	ALIGNS045368	P49711	CTCF_HUMAN	887	neural progenitors	2184	neural_progenitors@_labs_bradley-bernstein___biosamples_ENCBS044KWE_	ENCSR125NBL	None	False
+EXP040291	ALIGNS045369	P49711	CTCF_HUMAN	725	PC3(bone mets prostate adenocarcinoma)	2187	PC3_bone_mets_prostate_adenocarcinoma_@_labs_bradley-bernstein___biosamples_ENCBS451OVM_	ENCSR359LOD	None	False
+EXP040298	ALIGNS045376	P49711	CTCF_HUMAN	1186	smooth muscle cell	2227	smooth_muscle_cell@_labs_bradley-bernstein___biosamples_ENCBS780PCJ_	ENCSR261VAS	None	False
+EXP040321	ALIGNS045399	P49711	CTCF_HUMAN	685	OCI-LY1 (diffuse large B-cell lymphoma)	2234	OCI-LY1__diffuse_large_B-cell_lymphoma_@_labs_bradley-bernstein___biosamples_ENCBS397COL_	ENCSR072EUE	None	False
+EXP040383	ALIGNS045461	P49711	CTCF_HUMAN	664	SH-SY5Y (neuroblastoma)	2241	SH-SY5Y__neuroblastoma_@GSE101295	None	GSE101295	False
+EXP040384	ALIGNS045462	P49711	CTCF_HUMAN	1194	SK-N-AS (neuroblastoma)	2242	SK-N-AS__neuroblastoma_@GSE101295	None	GSE101295	False
+EXP040385	ALIGNS045463	P49711	CTCF_HUMAN	1195	NB69 (neuroblastoma)	2243	NB69__neuroblastoma_@GSE101295	None	GSE101295	False
+EXP040425	ALIGNS045503	P49711	CTCF_HUMAN	326	CD34+ stem cells-derived erythroblasts	2245	CD34+_stem_cells-derived_erythroblasts@GSE102184	None	GSE102184	False
+EXP040426	ALIGNS045504	P49711	CTCF_HUMAN	326	CD34+ stem cells-derived erythroblasts	2245	CD34+_stem_cells-derived_erythroblasts@GSE102184	None	GSE102184	False
+EXP040503	ALIGNS045581	P49711	CTCF_HUMAN	422	HeLa Kyoto (cervical adenocarcinoma)	2257	HeLa_Kyoto__cervical_adenocarcinoma_@GSE102884	None	GSE102884	False
+EXP040504	ALIGNS045582	P49711	CTCF_HUMAN	422	HeLa Kyoto (cervical adenocarcinoma)	2257	HeLa_Kyoto__cervical_adenocarcinoma_@GSE102884	None	GSE102884	False
+EXP040505	ALIGNS045583	P49711	CTCF_HUMAN	422	HeLa Kyoto (cervical adenocarcinoma)	2257	HeLa_Kyoto__cervical_adenocarcinoma_@GSE102884	None	GSE102884	False
+EXP040506	ALIGNS045584	P49711	CTCF_HUMAN	422	HeLa Kyoto (cervical adenocarcinoma)	2257	HeLa_Kyoto__cervical_adenocarcinoma_@GSE102884	None	GSE102884	False
+EXP040679	ALIGNS045757	P49711	CTCF_HUMAN	1228	HCT-116-RAD21-mAC	2274	HCT-116-RAD21-mAC@GSE104888	None	GSE104888	False
+EXP040680	ALIGNS045758	P49711	CTCF_HUMAN	1228	HCT-116-RAD21-mAC	2274	HCT-116-RAD21-mAC@GSE104888	None	GSE104888	False
+EXP040768	ALIGNS045846	P49711	CTCF_HUMAN	166	CD34+ hematopoietic stem cells	2281	CD34+_hematopoietic_stem_cells@GSE107147	None	GSE107147	False
+EXP047761	ALIGNS052843	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047762	ALIGNS052844	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047774	ALIGNS052856	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047775	ALIGNS052857	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047776	ALIGNS052858	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047777	ALIGNS052859	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047778	ALIGNS052860	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047779	ALIGNS052861	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047780	ALIGNS052862	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047781	ALIGNS052863	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047782	ALIGNS052864	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047783	ALIGNS052865	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047784	ALIGNS052866	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047796	ALIGNS052878	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047797	ALIGNS052879	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047798	ALIGNS052880	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047799	ALIGNS052881	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047800	ALIGNS052882	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047801	ALIGNS052883	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047802	ALIGNS052884	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047803	ALIGNS052885	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047804	ALIGNS052886	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047805	ALIGNS052887	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047806	ALIGNS052888	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047811	ALIGNS052893	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047812	ALIGNS052894	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2644	THP-1__acute_monocytic_leukemia_@GSE103477	None	GSE103477	False
+EXP047825	ALIGNS052907	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	2643	MDM_monocyte_derived_macrophages_@GSE103477	None	GSE103477	False
+EXP047826	ALIGNS052908	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	2643	MDM_monocyte_derived_macrophages_@GSE103477	None	GSE103477	False
+EXP047827	ALIGNS052909	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	2643	MDM_monocyte_derived_macrophages_@GSE103477	None	GSE103477	False
+EXP047828	ALIGNS052910	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	2643	MDM_monocyte_derived_macrophages_@GSE103477	None	GSE103477	False
+EXP047906	ALIGNS052988	P49711	CTCF_HUMAN	396	WA09 (embryonic stem cells)	2650	WA09__embryonic_stem_cells_@GSE105028	None	GSE105028	False
+EXP047907	ALIGNS052989	P49711	CTCF_HUMAN	396	WA09 (embryonic stem cells)	2650	WA09__embryonic_stem_cells_@GSE105028	None	GSE105028	False
+EXP047929	ALIGNS053011	P49711	CTCF_HUMAN	396	WA09 (embryonic stem cells)	2650	WA09__embryonic_stem_cells_@GSE105028	None	GSE105028	False
+EXP047930	ALIGNS053012	P49711	CTCF_HUMAN	396	WA09 (embryonic stem cells)	2650	WA09__embryonic_stem_cells_@GSE105028	None	GSE105028	False
+EXP048002	ALIGNS053084	P49711	CTCF_HUMAN	78	HeLa (cervical adenocarcinoma)	2669	HeLa__cervical_adenocarcinoma_@GSE107607	None	GSE107607	False
+EXP048003	ALIGNS053085	P49711	CTCF_HUMAN	78	HeLa (cervical adenocarcinoma)	2669	HeLa__cervical_adenocarcinoma_@GSE107607	None	GSE107607	False
+EXP048004	ALIGNS053086	P49711	CTCF_HUMAN	78	HeLa (cervical adenocarcinoma)	2669	HeLa__cervical_adenocarcinoma_@GSE107607	None	GSE107607	False
+EXP048005	ALIGNS053087	P49711	CTCF_HUMAN	78	HeLa (cervical adenocarcinoma)	2669	HeLa__cervical_adenocarcinoma_@GSE107607	None	GSE107607	False
+EXP048089	ALIGNS053171	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	2686	HeLa_S3__cervical_adenocarcinoma_@GSE108173	None	GSE108173	False
+EXP048090	ALIGNS053172	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	2686	HeLa_S3__cervical_adenocarcinoma_@GSE108173	None	GSE108173	False
+EXP048091	ALIGNS053173	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	2686	HeLa_S3__cervical_adenocarcinoma_@GSE108173	None	GSE108173	False
+EXP048092	ALIGNS053174	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	2686	HeLa_S3__cervical_adenocarcinoma_@GSE108173	None	GSE108173	False
+EXP048229	ALIGNS053311	P49711	CTCF_HUMAN	2260	LUHMES (lund human mesencephalic cells)	2702	LUHMES__lund_human_mesencephalic_cells_@GSE109706	None	GSE109706	False
+EXP048230	ALIGNS053312	P49711	CTCF_HUMAN	2260	LUHMES (lund human mesencephalic cells)	2702	LUHMES__lund_human_mesencephalic_cells_@GSE109706	None	GSE109706	False
+EXP048607	ALIGNS053689	P49711	CTCF_HUMAN	417	HCT-116 (colon carcinoma)	2757	HCT-116__colon_carcinoma_@GSE115822	None	GSE115822	False
+EXP048655	ALIGNS053737	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	2765	MDM_monocyte_derived_macrophages_@GSE118305	None	GSE118305	False
+EXP048656	ALIGNS053738	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	2765	MDM_monocyte_derived_macrophages_@GSE118305	None	GSE118305	False
+EXP048657	ALIGNS053739	P49711	CTCF_HUMAN	466	MDM(monocyte derived macrophages)	2765	MDM_monocyte_derived_macrophages_@GSE118305	None	GSE118305	False
+EXP048791	ALIGNS053873	P49711	CTCF_HUMAN	712	PANC1 (pancreatic ductal adenocarcinoma)	2783	PANC1__pancreatic_ductal_adenocarcinoma_@GSE68858	None	GSE68858	False
+EXP048817	ALIGNS053899	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2792	THP-1__acute_monocytic_leukemia_@GSE69962	None	GSE69962	False
+EXP048818	ALIGNS053900	P49711	CTCF_HUMAN	2334	THP-1 (acute monocytic leukemia)	2792	THP-1__acute_monocytic_leukemia_@GSE69962	None	GSE69962	False
+EXP048875	ALIGNS053957	P49711	CTCF_HUMAN	2306	ID00014 (lymphoblastoid cell, DiGeorge syndrome)	2806	ID00014__lymphoblastoid_cell__DiGeorge_syndrome_@GSE76922	None	GSE76922	False
+EXP048876	ALIGNS053958	P49711	CTCF_HUMAN	2305	ID00015 (lymphoblastoid cell)	2807	ID00015__lymphoblastoid_cell_@GSE76922	None	GSE76922	False
+EXP048877	ALIGNS053959	P49711	CTCF_HUMAN	2306	ID00014 (lymphoblastoid cell, DiGeorge syndrome)	2806	ID00014__lymphoblastoid_cell__DiGeorge_syndrome_@GSE76922	None	GSE76922	False
+EXP048888	ALIGNS053970	P49711	CTCF_HUMAN	2307	IMR-5 (Neuroblastoma)	2809	IMR-5__Neuroblastoma_@GSE78957	None	GSE78957	False
+EXP049078	ALIGNS054160	P49711	CTCF_HUMAN	2327	MIA PaCa-2 (pancreatic ductal adenocarcinoma)	2845	MIA_PaCa-2__pancreatic_ductal_adenocarcinoma_@GSE88734	None	GSE88734	False
+EXP049756	ALIGNS054838	P49711	CTCF_HUMAN	455	HUES64 (embryonic stem cells)	2930	HUES64__embryonic_stem_cells_@GSE97394	None	GSE97394	False
+EXP049757	ALIGNS054839	P49711	CTCF_HUMAN	455	HUES64 (embryonic stem cells)	2930	HUES64__embryonic_stem_cells_@GSE97394	None	GSE97394	False
+EXP051006	ALIGNS034892	P49711	CTCF_HUMAN	446	HPF (pulmonary fibroblasts isolated from lung tissue)	2960	HPF__pulmonary_fibroblasts_isolated_from_lung_tissue_@_labs_john-stamatoyannopoulos___biosamples_ENCBS936GPP_	ENCSR000DWY	None	False
+EXP051028	ALIGNS053960	P49711	CTCF_HUMAN	2303	GM17942 (lymphoblastoid cell)	2804	GM17942__lymphoblastoid_cell_@GSE76922	None	GSE76922	False
+EXP051029	ALIGNS053963	P49711	CTCF_HUMAN	356	GM12878 (female B-cells lymphoblastoid cell line)	2803	GM12878__female_B-cells_lymphoblastoid_cell_line_@GSE76922	None	GSE76922	False
+EXP052988	ALIGNS065620	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	2984	HeLa_S3__cervical_adenocarcinoma_@GSE108869	None	GSE108869	False
+EXP052989	ALIGNS065622	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	2984	HeLa_S3__cervical_adenocarcinoma_@GSE108869	None	GSE108869	False
+EXP053041	ALIGNS057617	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053042	ALIGNS057618	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053043	ALIGNS057619	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053044	ALIGNS057620	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053045	ALIGNS057621	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053046	ALIGNS057622	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053047	ALIGNS057623	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053048	ALIGNS057624	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053049	ALIGNS057625	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053050	ALIGNS057626	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053051	ALIGNS057627	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053052	ALIGNS057628	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053053	ALIGNS057629	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	2992	T47D__invasive_ductal_carcinoma_@GSE111923	None	GSE111923	False
+EXP053093	ALIGNS057669	P49711	CTCF_HUMAN	2529	EOL-1 (Acute myeloid leukemia)	2994	EOL-1__Acute_myeloid_leukemia_@GSE113040	None	GSE113040	False
+EXP053099	ALIGNS057675	P49711	CTCF_HUMAN	2219	MOLM-13(acute monocytic leukemia(AML), Homo sapiens)	2995	MOLM-13_acute_monocytic_leukemia_AML___Homo_sapiens_@GSE113040	None	GSE113040	False
+EXP053102	ALIGNS057678	P49711	CTCF_HUMAN	2530	SYO-1(Biphasic synovial sarcoma)	2996	SYO-1_Biphasic_synovial_sarcoma_@GSE113040	None	GSE113040	False
+EXP053106	ALIGNS057682	P49711	CTCF_HUMAN	509	Jurkat (T-cells)	2997	Jurkat__T-cells_@GSE113040	None	GSE113040	False
+EXP053111	ALIGNS057687	P49711	CTCF_HUMAN	2345	TTC-1240 (Rhabdoid tumor of the kidney)	2998	TTC-1240__Rhabdoid_tumor_of_the_kidney_@GSE113040	None	GSE113040	False
+EXP053289	ALIGNS065485	P49711	CTCF_HUMAN	2550	angelman Syndrome iPSC	3028	angelman_Syndrome_iPSC@GSE117283	None	GSE117283	False
+EXP053290	ALIGNS065487	P49711	CTCF_HUMAN	2550	angelman Syndrome iPSC	3028	angelman_Syndrome_iPSC@GSE117283	None	GSE117283	False
+EXP053291	ALIGNS065489	P49711	CTCF_HUMAN	2551	Prader-Willi Syndrome iPSC	3029	Prader-Willi_Syndrome_iPSC@GSE117283	None	GSE117283	False
+EXP053292	ALIGNS065491	P49711	CTCF_HUMAN	2551	Prader-Willi Syndrome iPSC	3029	Prader-Willi_Syndrome_iPSC@GSE117283	None	GSE117283	False
+EXP053296	ALIGNS057872	P49711	CTCF_HUMAN	2552	EndoC-BH1 (human pancreatic beta cell line)	3031	EndoC-BH1__human_pancreatic_beta_cell_line_@GSE118588	None	GSE118588	False
+EXP054030	ALIGNS058606	P49711	CTCF_HUMAN	2605	HNEK (epidermal keratinocytes)	3108	HNEK__epidermal_keratinocytes_@GSE29611	None	GSE29611	False
+EXP054031	ALIGNS058607	P49711	CTCF_HUMAN	430	HepG2 (hepatoblastoma)	3107	HepG2__hepatoblastoma_@GSE29611	None	GSE29611	False
+EXP054032	ALIGNS058608	P49711	CTCF_HUMAN	376	WA01 (H1, human embryonic stem cells)	3111	WA01__H1__human_embryonic_stem_cells_@GSE29611	None	GSE29611	False
+EXP054033	ALIGNS058609	P49711	CTCF_HUMAN	2606	NHLF (lung fibroblasts)	3106	NHLF__lung_fibroblasts_@GSE29611	None	GSE29611	False
+EXP054034	ALIGNS058610	P49711	CTCF_HUMAN	472	HUVEC-C (HUVEC, umbilical vein endothelial cells)	3105	HUVEC-C__HUVEC__umbilical_vein_endothelial_cells_@GSE29611	None	GSE29611	False
+EXP054035	ALIGNS058611	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3112	K562__myelogenous_leukemia_@GSE29611	None	GSE29611	False
+EXP054036	ALIGNS058612	P49711	CTCF_HUMAN	440	HMEC (human mammary epithelial cells)	3113	HMEC__human_mammary_epithelial_cells_@GSE29611	None	GSE29611	False
+EXP054037	ALIGNS058613	P49711	CTCF_HUMAN	2607	NHDF-Ad (adult dermal fibroblasts)	3109	NHDF-Ad__adult_dermal_fibroblasts_@GSE29611	None	GSE29611	False
+EXP054038	ALIGNS058614	P49711	CTCF_HUMAN	356	GM12878 (female B-cells lymphoblastoid cell line)	3114	GM12878__female_B-cells_lymphoblastoid_cell_line_@GSE29611	None	GSE29611	False
+EXP054039	ALIGNS058615	P49711	CTCF_HUMAN	2608	HSMM (skeletal muscle myoblasts)	3115	HSMM__skeletal_muscle_myoblasts_@GSE29611	None	GSE29611	False
+EXP054040	ALIGNS058616	P49711	CTCF_HUMAN	2609	NA-A (astrocytes)	3116	NA-A__astrocytes_@GSE29611	None	GSE29611	False
+EXP054041	ALIGNS058617	P49711	CTCF_HUMAN	2610	HSMM dirived skeletal muscle myotubes	3117	HSMM_dirived_skeletal_muscle_myotubes@GSE29611	None	GSE29611	False
+EXP054042	ALIGNS058618	P49711	CTCF_HUMAN	149	osteoblasts	3118	osteoblasts@GSE29611	None	GSE29611	False
+EXP054043	ALIGNS058619	P49711	CTCF_HUMAN	423	HeLa S3 (cervical adenocarcinoma)	3119	HeLa_S3__cervical_adenocarcinoma_@GSE29611	None	GSE29611	False
+EXP054054	ALIGNS058630	P49711	CTCF_HUMAN	220	DND41 (acute lymphoblastic leukemia)	3120	DND41__acute_lymphoblastic_leukemia_@GSE29611	None	GSE29611	False
+EXP054057	ALIGNS058633	P49711	CTCF_HUMAN	2611	CD20+	3121	CD20+@GSE29611	None	GSE29611	False
+EXP054064	ALIGNS058640	P49711	CTCF_HUMAN	2612	RO01746 (CD14+ monocytes)	3123	RO01746__CD14+_monocytes_@GSE29611	None	GSE29611	False
+EXP054083	ALIGNS058659	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	3126	A549__lung_carcinoma_@GSE29611	None	GSE29611	False
+EXP054084	ALIGNS058660	P49711	CTCF_HUMAN	38	A549 (lung carcinoma)	3126	A549__lung_carcinoma_@GSE29611	None	GSE29611	False
+EXP054511	ALIGNS059087	P49711	CTCF_HUMAN	339	GM10847 (female B-cells Lymphoblastoid Cell Lines)	3225	GM10847__female_B-cells_Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054513	ALIGNS059089	P49711	CTCF_HUMAN	356	GM12878 (female B-cells lymphoblastoid cell line)	3226	GM12878__female_B-cells_lymphoblastoid_cell_line_@GSE50893	None	GSE50893	False
+EXP054515	ALIGNS059091	P49711	CTCF_HUMAN	2640	GM12890 (Lymphoblastoid Cell Lines)	3227	GM12890__Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054517	ALIGNS059093	P49711	CTCF_HUMAN	357	GM12891 (male B- cells lymphoblastoid cell line)	3228	GM12891__male_B-_cells_lymphoblastoid_cell_line_@GSE50893	None	GSE50893	False
+EXP054519	ALIGNS059095	P49711	CTCF_HUMAN	358	GM12892 (female B-cells lymphoblastoid cell line)	3229	GM12892__female_B-cells_lymphoblastoid_cell_line_@GSE50893	None	GSE50893	False
+EXP054521	ALIGNS059097	P49711	CTCF_HUMAN	2643	GM18486 (Lymphoblastoid Cell Lines)	3230	GM18486__Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054523	ALIGNS059099	P49711	CTCF_HUMAN	362	GM18505 (female B-cells Lymphoblastoid Cell Lines)	3231	GM18505__female_B-cells_Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054525	ALIGNS059101	P49711	CTCF_HUMAN	363	GM18526 (B – cells Lymphoblastoid Cell Lines)	3232	GM18526__B_–_cells_Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054527	ALIGNS059103	P49711	CTCF_HUMAN	364	GM18951 (B-cells Lymphoblastoid Cell Lines)	3233	GM18951__B-cells_Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054529	ALIGNS059105	P49711	CTCF_HUMAN	365	GM19099 (female B-cells Lymphoblastoid Cell Lines)	3234	GM19099__female_B-cells_Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054531	ALIGNS059107	P49711	CTCF_HUMAN	366	GM19193 (female B-cells Lymphoblastoid Cell Lines)	3235	GM19193__female_B-cells_Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054533	ALIGNS059109	P49711	CTCF_HUMAN	367	GM19238 (female B-cells lymphoblastoid cell lines)	3236	GM19238__female_B-cells_lymphoblastoid_cell_lines_@GSE50893	None	GSE50893	False
+EXP054535	ALIGNS059111	P49711	CTCF_HUMAN	368	GM19239 (male B-cells lymphoblastoid cell line)	3237	GM19239__male_B-cells_lymphoblastoid_cell_line_@GSE50893	None	GSE50893	False
+EXP054537	ALIGNS059113	P49711	CTCF_HUMAN	369	GM19240 (B cells Lymphoblastoid Cell Lines)	3238	GM19240__B_cells_Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054539	ALIGNS059115	P49711	CTCF_HUMAN	2652	GM02255 (Lymphoblastoid Cell Lines)	3239	GM02255__Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054541	ALIGNS059117	P49711	CTCF_HUMAN	2653	2588 (Lymphoblastoid Cell Lines)	3240	2588__Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054543	ALIGNS059119	P49711	CTCF_HUMAN	2654	GM02610 (Lymphoblastoid Cell Lines)	3241	GM02610__Lymphoblastoid_Cell_Lines_@GSE50893	None	GSE50893	False
+EXP054545	ALIGNS059121	P49711	CTCF_HUMAN	2655	GM02630 (Fanconi anemi)	3242	GM02630__Fanconi_anemi_@GSE50893	None	GSE50893	False
+EXP054547	ALIGNS059123	P49711	CTCF_HUMAN	2656	MS-1 (Small cell lung carcinoma)	3243	MS-1__Small_cell_lung_carcinoma_@GSE50893	None	GSE50893	False
+EXP055795	ALIGNS060371	P49711	CTCF_HUMAN	1507	HAP1 (chronic myelogenous leukemia)	3529	HAP1__chronic_myelogenous_leukemia_@GSE94992	None	GSE94992	False
+EXP055796	ALIGNS060372	P49711	CTCF_HUMAN	1507	HAP1 (chronic myelogenous leukemia)	3529	HAP1__chronic_myelogenous_leukemia_@GSE94992	None	GSE94992	False
+EXP055797	ALIGNS060373	P49711	CTCF_HUMAN	1507	HAP1 (chronic myelogenous leukemia)	3529	HAP1__chronic_myelogenous_leukemia_@GSE94992	None	GSE94992	False
+EXP055798	ALIGNS060374	P49711	CTCF_HUMAN	1507	HAP1 (chronic myelogenous leukemia)	3529	HAP1__chronic_myelogenous_leukemia_@GSE94992	None	GSE94992	False
+EXP057858	ALIGNS063433	P49711	CTCF_HUMAN	2991	MCF7L-P(immortalized breast epithelial cell line)	3556	MCF7L-P_immortalized_breast_epithelial_cell_line_@GSE108787	None	GSE108787	False
+EXP057860	ALIGNS063435	P49711	CTCF_HUMAN	2991	MCF7L-P(immortalized breast epithelial cell line)	3556	MCF7L-P_immortalized_breast_epithelial_cell_line_@GSE108787	None	GSE108787	False
+EXP057862	ALIGNS063437	P49711	CTCF_HUMAN	2991	MCF7L-P(immortalized breast epithelial cell line)	3556	MCF7L-P_immortalized_breast_epithelial_cell_line_@GSE108787	None	GSE108787	False
+EXP057864	ALIGNS063439	P49711	CTCF_HUMAN	2991	MCF7L-P(immortalized breast epithelial cell line)	3556	MCF7L-P_immortalized_breast_epithelial_cell_line_@GSE108787	None	GSE108787	False
+EXP057866	ALIGNS063441	P49711	CTCF_HUMAN	2991	MCF7L-P(immortalized breast epithelial cell line)	3556	MCF7L-P_immortalized_breast_epithelial_cell_line_@GSE108787	None	GSE108787	False
+EXP057868	ALIGNS063443	P49711	CTCF_HUMAN	2992	MCF7L-TamR(immortalized breast epithelial, tamoxifen resistant cell line)	3557	MCF7L-TamR_immortalized_breast_epithelial__tamoxifen_resistant_cell_line_@GSE108787	None	GSE108787	False
+EXP058186	ALIGNS063761	P49711	CTCF_HUMAN	665	SK-N-SH (neuroblastoma)	3608	SK-N-SH__neuroblastoma_@GSE115862	None	GSE115862	False
+EXP058188	ALIGNS063763	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	3609	HEK293T__embryonic_kidney_@GSE115862	None	GSE115862	False
+EXP058203	ALIGNS063778	P49711	CTCF_HUMAN	1001	MDA-MB-157 (triple negative breast carcinoma)	3611	MDA-MB-157__triple_negative_breast_carcinoma_@GSE116868	None	GSE116868	False
+EXP058381	ALIGNS063956	P49711	CTCF_HUMAN	1008	HT1080 (fibrosarcoma)	3634	HT1080__fibrosarcoma_@GSE122462	None	GSE122462	False
+EXP058382	ALIGNS063957	P49711	CTCF_HUMAN	1008	HT1080 (fibrosarcoma)	3634	HT1080__fibrosarcoma_@GSE122462	None	GSE122462	False
+EXP058383	ALIGNS063958	P49711	CTCF_HUMAN	1008	HT1080 (fibrosarcoma)	3634	HT1080__fibrosarcoma_@GSE122462	None	GSE122462	False
+EXP058384	ALIGNS063959	P49711	CTCF_HUMAN	1008	HT1080 (fibrosarcoma)	3634	HT1080__fibrosarcoma_@GSE122462	None	GSE122462	False
+EXP058485	ALIGNS064060	P49711	CTCF_HUMAN	3035	697 (B acute lymphoblastic leukemia with t(1;19)(q23;p13.3) E2A-PBX1 (TCF3-PBX1))	3651	697__B_acute_lymphoblastic_leukemia_with_t_1_19__q23_p13_3__E2A-PBX1__TCF3-PBX1__@GSE126083	None	GSE126083	False
+EXP058486	ALIGNS064061	P49711	CTCF_HUMAN	3035	697 (B acute lymphoblastic leukemia with t(1;19)(q23;p13.3) E2A-PBX1 (TCF3-PBX1))	3651	697__B_acute_lymphoblastic_leukemia_with_t_1_19__q23_p13_3__E2A-PBX1__TCF3-PBX1__@GSE126083	None	GSE126083	False
+EXP058487	ALIGNS064062	P49711	CTCF_HUMAN	3035	697 (B acute lymphoblastic leukemia with t(1;19)(q23;p13.3) E2A-PBX1 (TCF3-PBX1))	3651	697__B_acute_lymphoblastic_leukemia_with_t_1_19__q23_p13_3__E2A-PBX1__TCF3-PBX1__@GSE126083	None	GSE126083	False
+EXP058488	ALIGNS064063	P49711	CTCF_HUMAN	3035	697 (B acute lymphoblastic leukemia with t(1;19)(q23;p13.3) E2A-PBX1 (TCF3-PBX1))	3651	697__B_acute_lymphoblastic_leukemia_with_t_1_19__q23_p13_3__E2A-PBX1__TCF3-PBX1__@GSE126083	None	GSE126083	False
+EXP058516	ALIGNS064091	P49711	CTCF_HUMAN	3036	neutrophils from periferal blood	3653	neutrophils_from_periferal_blood@GSE126755	None	GSE126755	False
+EXP058517	ALIGNS064092	P49711	CTCF_HUMAN	3036	neutrophils from periferal blood	3653	neutrophils_from_periferal_blood@GSE126755	None	GSE126755	False
+EXP058575	ALIGNS064150	P49711	CTCF_HUMAN	36	A375 (malignant melanoma)	3663	A375__malignant_melanoma_@GSE128346	None	GSE128346	False
+EXP059685	ALIGNS065260	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3701	MCF7__Invasive_ductal_breast_carcinoma_@GSE130852	None	GSE130852	False
+EXP059885	ALIGNS065497	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3704	K562__myelogenous_leukemia_@GSE110681	None	GSE110681	False
+EXP059965	ALIGNS065953	P49711	CTCF_HUMAN	794	SK-MEL-147 (melanoma)	2897	SK-MEL-147__melanoma_@GSE94488	None	GSE94488	False
+EXP060168	ALIGNS066156	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3711	Kelly__neuroblastoma_@GSE103030	None	GSE103030	False
+EXP060169	ALIGNS066157	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3711	Kelly__neuroblastoma_@GSE103030	None	GSE103030	False
+EXP060174	ALIGNS066162	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3711	Kelly__neuroblastoma_@GSE103030	None	GSE103030	False
+EXP060175	ALIGNS066163	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3711	Kelly__neuroblastoma_@GSE103030	None	GSE103030	False
+EXP060180	ALIGNS066168	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3711	Kelly__neuroblastoma_@GSE103030	None	GSE103030	False
+EXP060181	ALIGNS066169	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3711	Kelly__neuroblastoma_@GSE103030	None	GSE103030	False
+EXP060296	ALIGNS066284	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3727	Kelly__neuroblastoma_@GSE115248	None	GSE115248	False
+EXP060297	ALIGNS066285	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3727	Kelly__neuroblastoma_@GSE115248	None	GSE115248	False
+EXP060302	ALIGNS066290	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3727	Kelly__neuroblastoma_@GSE115248	None	GSE115248	False
+EXP060303	ALIGNS066291	P49711	CTCF_HUMAN	520	Kelly (neuroblastoma)	3727	Kelly__neuroblastoma_@GSE115248	None	GSE115248	False
+EXP060344	ALIGNS066332	P49711	CTCF_HUMAN	4235	T cells from peripheral blood	3732	T_cells_from_peripheral_blood@GSE115893	None	GSE115893	False
+EXP060345	ALIGNS066333	P49711	CTCF_HUMAN	4236	T-ALL cells from peripheral blood	3733	T-ALL_cells_from_peripheral_blood@GSE115893	None	GSE115893	False
+EXP060346	ALIGNS066334	P49711	CTCF_HUMAN	4236	T-ALL cells from peripheral blood	3733	T-ALL_cells_from_peripheral_blood@GSE115893	None	GSE115893	False
+EXP060347	ALIGNS066335	P49711	CTCF_HUMAN	509	Jurkat (T-cells)	3734	Jurkat__T-cells_@GSE115893	None	GSE115893	False
+EXP060348	ALIGNS066336	P49711	CTCF_HUMAN	199	CUTLL1 (T-cell lymphoblastic lymphoma 1)	3735	CUTLL1__T-cell_lymphoblastic_lymphoma_1_@GSE115893	None	GSE115893	False
+EXP060349	ALIGNS066337	P49711	CTCF_HUMAN	199	CUTLL1 (T-cell lymphoblastic lymphoma 1)	3735	CUTLL1__T-cell_lymphoblastic_lymphoma_1_@GSE115893	None	GSE115893	False
+EXP060380	ALIGNS066368	P49711	CTCF_HUMAN	396	WA09 (embryonic stem cells)	3738	WA09__embryonic_stem_cells_@GSE116862	None	GSE116862	False
+EXP060381	ALIGNS066369	P49711	CTCF_HUMAN	396	WA09 (embryonic stem cells)	3738	WA09__embryonic_stem_cells_@GSE116862	None	GSE116862	False
+EXP060382	ALIGNS066370	P49711	CTCF_HUMAN	4238	WA09 derived cardiac mesoderm	3740	WA09_derived_cardiac_mesoderm@GSE116862	None	GSE116862	False
+EXP060383	ALIGNS066371	P49711	CTCF_HUMAN	4238	WA09 derived cardiac mesoderm	3740	WA09_derived_cardiac_mesoderm@GSE116862	None	GSE116862	False
+EXP060384	ALIGNS066372	P49711	CTCF_HUMAN	4239	WA09 derived cardiac progenitor cells	3741	WA09_derived_cardiac_progenitor_cells@GSE116862	None	GSE116862	False
+EXP060385	ALIGNS066373	P49711	CTCF_HUMAN	4239	WA09 derived cardiac progenitor cells	3741	WA09_derived_cardiac_progenitor_cells@GSE116862	None	GSE116862	False
+EXP060386	ALIGNS066374	P49711	CTCF_HUMAN	4240	WA09 derived primitive cardiomyocite	3742	WA09_derived_primitive_cardiomyocite@GSE116862	None	GSE116862	False
+EXP060387	ALIGNS066375	P49711	CTCF_HUMAN	4240	WA09 derived primitive cardiomyocite	3742	WA09_derived_primitive_cardiomyocite@GSE116862	None	GSE116862	False
+EXP060388	ALIGNS066376	P49711	CTCF_HUMAN	4241	WA09 derived ventricular cardiomyocyte	3743	WA09_derived_ventricular_cardiomyocyte@GSE116862	None	GSE116862	False
+EXP060390	ALIGNS066378	P49711	CTCF_HUMAN	4237	WA09 derived mesoderm	3739	WA09_derived_mesoderm@GSE116862	None	GSE116862	False
+EXP060497	ALIGNS066485	P49711	CTCF_HUMAN	541	SEM (childhood B acute lymphoblastic leukemia)	3755	SEM__childhood_B_acute_lymphoblastic_leukemia_@GSE117864	None	GSE117864	False
+EXP060728	ALIGNS066716	P49711	CTCF_HUMAN	332	glioblastoma cells	3772	glioblastoma_cells@GSE121601	None	GSE121601	False
+EXP060729	ALIGNS066717	P49711	CTCF_HUMAN	332	glioblastoma cells	3772	glioblastoma_cells@GSE121601	None	GSE121601	False
+EXP060730	ALIGNS066718	P49711	CTCF_HUMAN	332	glioblastoma cells	3772	glioblastoma_cells@GSE121601	None	GSE121601	False
+EXP060739	ALIGNS066727	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	3775	HEK293__embryonic_kidney_@GSE121998	None	GSE121998	False
+EXP060740	ALIGNS066728	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	3775	HEK293__embryonic_kidney_@GSE121998	None	GSE121998	False
+EXP060741	ALIGNS066729	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	3775	HEK293__embryonic_kidney_@GSE121998	None	GSE121998	False
+EXP060742	ALIGNS066730	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	3775	HEK293__embryonic_kidney_@GSE121998	None	GSE121998	False
+EXP060743	ALIGNS066731	P49711	CTCF_HUMAN	421	HEK293 (embryonic kidney)	3775	HEK293__embryonic_kidney_@GSE121998	None	GSE121998	False
+EXP060827	ALIGNS066815	P49711	CTCF_HUMAN	2562	Dombi23 (primary keratinocytes)	3783	Dombi23__primary_keratinocytes_@GSE123711	None	GSE123711	False
+EXP060828	ALIGNS066816	P49711	CTCF_HUMAN	4268	R204W (keratinocytes)	3784	R204W__keratinocytes_@GSE123711	None	GSE123711	False
+EXP060829	ALIGNS066817	P49711	CTCF_HUMAN	4269	R304W (keratinocytes)	3785	R304W__keratinocytes_@GSE123711	None	GSE123711	False
+EXP061079	ALIGNS067067	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3822	K562__myelogenous_leukemia_@GSE131349	None	GSE131349	False
+EXP061080	ALIGNS067068	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3822	K562__myelogenous_leukemia_@GSE131349	None	GSE131349	False
+EXP061081	ALIGNS067069	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3822	K562__myelogenous_leukemia_@GSE131349	None	GSE131349	False
+EXP061082	ALIGNS067070	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3822	K562__myelogenous_leukemia_@GSE131349	None	GSE131349	False
+EXP061083	ALIGNS067071	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3822	K562__myelogenous_leukemia_@GSE131349	None	GSE131349	False
+EXP061084	ALIGNS067072	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	3822	K562__myelogenous_leukemia_@GSE131349	None	GSE131349	False
+EXP061119	ALIGNS067107	P49711	CTCF_HUMAN	1183	KMS-11 (Plasma cell myeloma)	3825	KMS-11__Plasma_cell_myeloma_@GSE131651	None	GSE131651	False
+EXP061120	ALIGNS067108	P49711	CTCF_HUMAN	1183	KMS-11 (Plasma cell myeloma)	3825	KMS-11__Plasma_cell_myeloma_@GSE131651	None	GSE131651	False
+EXP061129	ALIGNS067117	P49711	CTCF_HUMAN	4295	FT282 (normal human fallopian tube tissue)	3828	FT282__normal_human_fallopian_tube_tissue_@GSE131931	None	GSE131931	False
+EXP061130	ALIGNS067118	P49711	CTCF_HUMAN	4295	FT282 (normal human fallopian tube tissue)	3828	FT282__normal_human_fallopian_tube_tissue_@GSE131931	None	GSE131931	False
+EXP061301	ALIGNS067289	P49711	CTCF_HUMAN	4306	ocular melanoma cells	3861	ocular_melanoma_cells@GSE136336	None	GSE136336	False
+EXP061316	ALIGNS067304	P49711	CTCF_HUMAN	4307	body of pancreas	3876	body_of_pancreas@GSE136502	None	GSE136502	False
+EXP061320	ALIGNS067308	P49711	CTCF_HUMAN	1181	upper lobe of left lung	3880	upper_lobe_of_left_lung@GSE136519	None	GSE136519	False
+EXP061356	ALIGNS067344	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3886	MCF7__Invasive_ductal_breast_carcinoma_@GSE83579	None	GSE83579	False
+EXP061357	ALIGNS067345	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3886	MCF7__Invasive_ductal_breast_carcinoma_@GSE83579	None	GSE83579	False
+EXP062626	ALIGNS068614	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	3908	HEK293T__embryonic_kidney_@GSE129548	None	GSE129548	False
+EXP062627	ALIGNS068615	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	3908	HEK293T__embryonic_kidney_@GSE129548	None	GSE129548	False
+EXP062628	ALIGNS068616	P49711	CTCF_HUMAN	10	HEK293T (embryonic kidney)	3908	HEK293T__embryonic_kidney_@GSE129548	None	GSE129548	False
+EXP062666	ALIGNS068656	P49711	CTCF_HUMAN	519	KB (cervical adenocarcinoma)	3913	KB__cervical_adenocarcinoma_@GSE134435	None	GSE134435	False
+EXP062667	ALIGNS068657	P49711	CTCF_HUMAN	519	KB (cervical adenocarcinoma)	3913	KB__cervical_adenocarcinoma_@GSE134435	None	GSE134435	False
+EXP062668	ALIGNS068658	P49711	CTCF_HUMAN	519	KB (cervical adenocarcinoma)	3913	KB__cervical_adenocarcinoma_@GSE134435	None	GSE134435	False
+EXP062669	ALIGNS068659	P49711	CTCF_HUMAN	519	KB (cervical adenocarcinoma)	3913	KB__cervical_adenocarcinoma_@GSE134435	None	GSE134435	False
+EXP063239	ALIGNS069229	P49711	CTCF_HUMAN	4645	MDA-MB-435 (amelanotic melanoma)	3932	MDA-MB-435__amelanotic_melanoma_@GSE102019	None	GSE102019	False
+EXP063240	ALIGNS069230	P49711	CTCF_HUMAN	4645	MDA-MB-435 (amelanotic melanoma)	3932	MDA-MB-435__amelanotic_melanoma_@GSE102019	None	GSE102019	False
+EXP063324	ALIGNS069314	P49711	CTCF_HUMAN	489	IMR90 (lung fibroblasts)	3952	IMR90__lung_fibroblasts_@GSE118494	None	GSE118494	False
+EXP063325	ALIGNS069315	P49711	CTCF_HUMAN	4670	IMR90 derived OIS (Oncogene-Induced Senescence) cells	3953	IMR90_derived_OIS__Oncogene-Induced_Senescence__cells@GSE118494	None	GSE118494	False
+EXP063338	ALIGNS069328	P49711	CTCF_HUMAN	949	MCF7 TamR (invasive ductal breast carcinoma Tamoxifen resistant)	3954	MCF7_TamR__invasive_ductal_breast_carcinoma_Tamoxifen_resistant_@GSE118711	None	GSE118711	False
+EXP063339	ALIGNS069329	P49711	CTCF_HUMAN	4671	MCF7-FasR (fulvestrant-resistant Invasive ductal carcinoma)	3955	MCF7-FasR__fulvestrant-resistant_Invasive_ductal_carcinoma_@GSE118711	None	GSE118711	False
+EXP063366	ALIGNS069356	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	3958	T47D__invasive_ductal_carcinoma_@GSE120162	None	GSE120162	False
+EXP063368	ALIGNS069358	P49711	CTCF_HUMAN	111	T47D (invasive ductal carcinoma)	3958	T47D__invasive_ductal_carcinoma_@GSE120162	None	GSE120162	False
+EXP063376	ALIGNS069366	P49711	CTCF_HUMAN	516	Kasumi-1 (acute myeloblastic leukemia)	3963	Kasumi-1__acute_myeloblastic_leukemia_@GSE121280	None	GSE121280	False
+EXP063377	ALIGNS069367	P49711	CTCF_HUMAN	516	Kasumi-1 (acute myeloblastic leukemia)	3963	Kasumi-1__acute_myeloblastic_leukemia_@GSE121280	None	GSE121280	False
+EXP063542	ALIGNS069532	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3977	MCF7__Invasive_ductal_breast_carcinoma_@GSE124667	None	GSE124667	False
+EXP063545	ALIGNS069535	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3977	MCF7__Invasive_ductal_breast_carcinoma_@GSE124667	None	GSE124667	False
+EXP063548	ALIGNS069538	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3977	MCF7__Invasive_ductal_breast_carcinoma_@GSE124667	None	GSE124667	False
+EXP063549	ALIGNS069539	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3977	MCF7__Invasive_ductal_breast_carcinoma_@GSE124667	None	GSE124667	False
+EXP063552	ALIGNS069542	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3977	MCF7__Invasive_ductal_breast_carcinoma_@GSE124667	None	GSE124667	False
+EXP063555	ALIGNS069545	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3977	MCF7__Invasive_ductal_breast_carcinoma_@GSE124667	None	GSE124667	False
+EXP063560	ALIGNS069550	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	3977	MCF7__Invasive_ductal_breast_carcinoma_@GSE124667	None	GSE124667	False
+EXP063621	ALIGNS069611	P49711	CTCF_HUMAN	70	LNCaP (prostate carcinoma)	3982	LNCaP__prostate_carcinoma_@GSE125639	None	GSE125639	False
+EXP063622	ALIGNS069612	P49711	CTCF_HUMAN	70	LNCaP (prostate carcinoma)	3982	LNCaP__prostate_carcinoma_@GSE125639	None	GSE125639	False
+EXP063623	ALIGNS069613	P49711	CTCF_HUMAN	489	IMR90 (lung fibroblasts)	3983	IMR90__lung_fibroblasts_@GSE125639	None	GSE125639	False
+EXP063624	ALIGNS069614	P49711	CTCF_HUMAN	489	IMR90 (lung fibroblasts)	3983	IMR90__lung_fibroblasts_@GSE125639	None	GSE125639	False
+EXP063625	ALIGNS069615	P49711	CTCF_HUMAN	489	IMR90 (lung fibroblasts)	3983	IMR90__lung_fibroblasts_@GSE125639	None	GSE125639	False
+EXP063626	ALIGNS069616	P49711	CTCF_HUMAN	489	IMR90 (lung fibroblasts)	3983	IMR90__lung_fibroblasts_@GSE125639	None	GSE125639	False
+EXP063639	ALIGNS069629	P49711	CTCF_HUMAN	1507	HAP1 (chronic myelogenous leukemia)	3987	HAP1__chronic_myelogenous_leukemia_@GSE126634	None	GSE126634	False
+EXP063640	ALIGNS069630	P49711	CTCF_HUMAN	1507	HAP1 (chronic myelogenous leukemia)	3987	HAP1__chronic_myelogenous_leukemia_@GSE126634	None	GSE126634	False
+EXP063652	ALIGNS069642	P49711	CTCF_HUMAN	422	HeLa Kyoto (cervical adenocarcinoma)	3990	HeLa_Kyoto__cervical_adenocarcinoma_@GSE126990	None	GSE126990	False
+EXP063884	ALIGNS069874	P49711	CTCF_HUMAN	4718	MutuI-LCL (lymphoblastoid cells)	4016	MutuI-LCL__lymphoblastoid_cells_@GSE129703	None	GSE129703	False
+EXP063885	ALIGNS069875	P49711	CTCF_HUMAN	640	Mutu-1 (Epstein-Barr virus-related Burkitt lymphoma)	4017	Mutu-1__Epstein-Barr_virus-related_Burkitt_lymphoma_@GSE129703	None	GSE129703	False
+EXP063902	ALIGNS069892	P49711	CTCF_HUMAN	4727	GBM39 (Human brain tumor)	4025	GBM39__Human_brain_tumor_@GSE131956	None	GSE131956	False
+EXP063903	ALIGNS069893	P49711	CTCF_HUMAN	4727	GBM39 (Human brain tumor)	4025	GBM39__Human_brain_tumor_@GSE131956	None	GSE131956	False
+EXP063964	ALIGNS069954	P49711	CTCF_HUMAN	1008	HT1080 (fibrosarcoma)	4038	HT1080__fibrosarcoma_@GSE135580	None	GSE135580	False
+EXP063966	ALIGNS069956	P49711	CTCF_HUMAN	1008	HT1080 (fibrosarcoma)	4038	HT1080__fibrosarcoma_@GSE135580	None	GSE135580	False
+EXP064047	ALIGNS070037	P49711	CTCF_HUMAN	4755	SLK (Clear cell renal cell carcinoma. Derived from metastatic site: Skin.Clear cell renal cell carcinoma (NCIt: C4033) Derived from metastatic site: Skin)	4052	SLK__Clear_cell_renal_cell_carcinoma__Derived_from_metastatic_site__Skin_Clear_cell_renal_cell_carcinoma__NCIt__C4033__Derived_from_metastatic_site__Skin_@GSE138105	None	GSE138105	False
+EXP064049	ALIGNS070039	P49711	CTCF_HUMAN	4755	SLK (Clear cell renal cell carcinoma. Derived from metastatic site: Skin.Clear cell renal cell carcinoma (NCIt: C4033) Derived from metastatic site: Skin)	4052	SLK__Clear_cell_renal_cell_carcinoma__Derived_from_metastatic_site__Skin_Clear_cell_renal_cell_carcinoma__NCIt__C4033__Derived_from_metastatic_site__Skin_@GSE138105	None	GSE138105	False
+EXP064051	ALIGNS070041	P49711	CTCF_HUMAN	4755	SLK (Clear cell renal cell carcinoma. Derived from metastatic site: Skin.Clear cell renal cell carcinoma (NCIt: C4033) Derived from metastatic site: Skin)	4052	SLK__Clear_cell_renal_cell_carcinoma__Derived_from_metastatic_site__Skin_Clear_cell_renal_cell_carcinoma__NCIt__C4033__Derived_from_metastatic_site__Skin_@GSE138105	None	GSE138105	False
+EXP064083	ALIGNS070073	P49711	CTCF_HUMAN	4769	glioblastoma patient-derived cell model	4066	glioblastoma_patient-derived_cell_model@GSE139416	None	GSE139416	False
+EXP064084	ALIGNS070074	P49711	CTCF_HUMAN	4707	GSC23 (Glioblastoma)	4067	GSC23__Glioblastoma_@GSE139416	None	GSE139416	False
+EXP064201	ALIGNS070191	P49711	CTCF_HUMAN	4789	alveolar type 2 cells (AT2 cells)	4089	alveolar_type_2_cells__AT2_cells_@GSE93852	None	GSE93852	False
+EXP064202	ALIGNS070192	P49711	CTCF_HUMAN	4791	in vitro differentiated AT1-like cells	4090	in_vitro_differentiated_AT1-like_cells@GSE93852	None	GSE93852	False
+EXP064203	ALIGNS070193	P49711	CTCF_HUMAN	4791	in vitro differentiated AT1-like cells	4090	in_vitro_differentiated_AT1-like_cells@GSE93852	None	GSE93852	False
+EXP064204	ALIGNS070194	P49711	CTCF_HUMAN	4789	alveolar type 2 cells (AT2 cells)	4089	alveolar_type_2_cells__AT2_cells_@GSE93852	None	GSE93852	False
+EXP064205	ALIGNS070195	P49711	CTCF_HUMAN	4791	in vitro differentiated AT1-like cells	4090	in_vitro_differentiated_AT1-like_cells@GSE93852	None	GSE93852	False
+EXP064206	ALIGNS070196	P49711	CTCF_HUMAN	4791	in vitro differentiated AT1-like cells	4090	in_vitro_differentiated_AT1-like_cells@GSE93852	None	GSE93852	False
+EXP064207	ALIGNS070197	P49711	CTCF_HUMAN	4789	alveolar type 2 cells (AT2 cells)	4089	alveolar_type_2_cells__AT2_cells_@GSE93852	None	GSE93852	False
+EXP064208	ALIGNS070198	P49711	CTCF_HUMAN	4791	in vitro differentiated AT1-like cells	4090	in_vitro_differentiated_AT1-like_cells@GSE93852	None	GSE93852	False
+EXP064731	ALIGNS070721	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	4095	K562__myelogenous_leukemia_@GSE137216	None	GSE137216	False
+EXP064732	ALIGNS070722	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	4095	K562__myelogenous_leukemia_@GSE137216	None	GSE137216	False
+EXP064733	ALIGNS070723	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	4095	K562__myelogenous_leukemia_@GSE137216	None	GSE137216	False
+EXP064768	ALIGNS070758	P49711	CTCF_HUMAN	514	K562 (myelogenous leukemia)	4095	K562__myelogenous_leukemia_@GSE137216	None	GSE137216	False
+EXP064769	ALIGNS070759	P49711	CTCF_HUMAN	113	MCF7 (Invasive ductal breast carcinoma)	4096	MCF7__Invasive_ductal_breast_carcinoma_@GSE137216	None	GSE137216	False

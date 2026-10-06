@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\mints-mapped-clean-20261006\tools\audit_mapped_variant.py", line 134, in <module>
+    print(json.dumps(audit(a.root,a.raw),indent=2))
+                     ~~~~~^^^^^^^^^^^^^^
+  File "C:\mints-mapped-clean-20261006\tools\audit_mapped_variant.py", line 24, in audit
+    assert sha256_file(directory/name)==digest,(directory,name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (WindowsPath('C:/mints-mapped-clean-20261006/results/control_diagnostics'), 'inspection_ledger.json')

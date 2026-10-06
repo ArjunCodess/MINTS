@@ -1,0 +1,55 @@
+{
+  "baseline_commit": "fb93ca3e33dd7ebee8424b8ec55c84ac0fdbc625",
+  "confirmation_membership": null,
+  "entries": [
+    {
+      "dataset": "existing hg38 CTCF audit",
+      "membership": "all existing genomic assay manifests",
+      "role": "previously inspected; never fresh by default"
+    },
+    {
+      "chromosomes": [
+        "chr18",
+        "chr19"
+      ],
+      "dataset": "native pilot",
+      "role": "inspected discovery"
+    },
+    {
+      "chromosomes": [
+        "chr14",
+        "chr15",
+        "chr16",
+        "chr17"
+      ],
+      "dataset": "native calibration",
+      "role": "inspected frequency/recovery"
+    },
+    {
+      "chromosomes": [
+        "chr20",
+        "chr21"
+      ],
+      "dataset": "prior audit confirmation candidates",
+      "role": "already inspected"
+    },
+    {
+      "dataset": "GSE81945",
+      "membership_sha256": "c9520470a796595eb636faaa6ac5aae048518a77263515ec7c930fb5600fa5cc",
+      "role": "published effects inspected; feasibility only"
+    },
+    {
+      "dataset": "ADASTRA",
+      "role": "metadata inspected only; confirmation membership unassigned; source overlap unverified"
+    }
+  ],
+  "freshness_verified": false,
+  "pretraining_overlap": "not excluded; fresh experimental outcomes do not imply unseen reference sequence",
+  "separation_requirements": [
+    "coordinate overlap within same genome build",
+    "exact/reverse-complement sequence identity",
+    "homology review",
+    "shared donor/biosample and source experiments",
+    "publication/source overlap"
+  ]
+}

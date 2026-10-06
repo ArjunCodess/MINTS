@@ -1,0 +1,17 @@
+source_row,locus_group,reason,retained
+1,chr20:49435093,reference/alternate BPE boundaries differ,False
+2,chr2:43158779,no sequence-only substitution/geometry matched sham,False
+3,chr3:196336325,reference/alternate BPE boundaries differ,False
+4,chr3:50587722,adjacent variants with unresolved phase,False
+5,chr8:43265125,reference/alternate BPE boundaries differ,False
+6,chr3:50587722,adjacent variants with unresolved phase,False
+7,chr2:233304367,no sequence-only substitution/geometry matched sham,False
+8,chr3:54408675,reference/alternate BPE boundaries differ,False
+9,chr7:150685763,reference/alternate BPE boundaries differ,False
+10,chr8:122261217,no sequence-only substitution/geometry matched sham,False
+11,chr17:10231077,no sequence-only substitution/geometry matched sham,False
+12,chr17:19350558,adjacent variants with unresolved phase,False
+13,chr17:19350558,adjacent variants with unresolved phase,False
+14,chr17:48758841,reference/alternate BPE boundaries differ,False
+15,chr19:43389232,reference/alternate BPE boundaries differ,False
+16,chr5:23303782,unidentifiable allele contrast,False

@@ -1,0 +1,44 @@
+{
+  "artifact_generators": "all four passed",
+  "baseline_artifacts": "restored committed figure and manifest bytes after rebuilding; initial suite detected changed artifact hashes; rerun passed",
+  "clean_checkout": {
+    "artifact_tests_deselected": 8,
+    "local_windows_longpaths_enabled": true,
+    "offline_audit": "passed",
+    "report_rebuild_byte_identical": true,
+    "test_log_sha256": "48d4298659caa9c2aafa33dc7f931ebc88b995c56a3a2b2eb0232eb7a2a57ef8",
+    "tests_passed": 160
+  },
+  "compileall": "both environments passed",
+  "dependencies": "both environments passed pip check",
+  "implementation_commit": "86b856a",
+  "manuscript": {
+    "compile_exit_code": 0,
+    "overfull_boxes": false,
+    "pages": 15,
+    "rebuilt_pdf_sha256": "77427e0e695b87abebd235c30461c8bb3af9517ac86be2b4c918fcb174d629f4",
+    "text_matches_frozen_pdf": true,
+    "unresolved_citations": false
+  },
+  "new_regressions": 8,
+  "offline_audit": "passed",
+  "preflight": "passed",
+  "report_manifest_sha256": "9b75c3984abc9f5b789cc38230489355d42ce2211f2df6b80ea098b0f86cc827",
+  "scientific_result": {
+    "decision": "stop",
+    "frozen_rules_unchanged": true,
+    "retained": 0,
+    "scanned": 16
+  },
+  "status": "completed",
+  "tests": {
+    "tests_report_cpu.log": {
+      "passed": 168,
+      "sha256": "17389bf6a379f25bd38e8ae240f74d57bc20fc838cdfe1ec8c15bba2c24e502e"
+    },
+    "tests_report_cuda.log": {
+      "passed": 168,
+      "sha256": "d30424753aa909398417164494bfbe2cc357c6b1db9b0860e221ef8e93ece8e9"
+    }
+  }
+}

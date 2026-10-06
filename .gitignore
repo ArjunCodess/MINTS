@@ -212,6 +212,7 @@ __marimo__/
 data/ctcf/
 data/encode/
 data/genomes/
+data/adastra/
 data/hf_downstream/
 
 # MINTS run-local results
@@ -244,6 +245,8 @@ results/review/page-*.png
 .test-tmp/
 results/hardened/test-tmp-*/
 paper/hardened-build/
+paper/mapped-build/
 
 .venv-cpu-check/
 !results/hardened/command_*.log
+!results/mapped_variant/validation/*.log

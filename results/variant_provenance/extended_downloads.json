@@ -1,0 +1,56 @@
+[
+  {
+    "access_utc": "2026-10-06T05:07:12.835296+00:00",
+    "bytes": 1783835,
+    "http_status": 200,
+    "name": "GTRD_experiments.tsv",
+    "sha256": "9c04bcd007e77f53880ac4a3418937a77e74c42e6074add8c5539d8eb6369fae",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/assets/exps/ADASTRA_GTRD_exps.bill_cipher.tsv"
+  },
+  {
+    "access_utc": "2026-10-06T05:07:14.846082+00:00",
+    "bytes": 2660,
+    "http_status": 200,
+    "name": "GSE81945.soft.gz",
+    "sha256": "c425fe5f300c699d27a52133fbd6e958bda475ad63010a4a42165e7e3684d4ac",
+    "status": "downloaded",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE81nnn/GSE81945/soft/GSE81945_family.soft.gz"
+  },
+  {
+    "access_utc": "2026-10-06T05:07:16.343092+00:00",
+    "bytes": 81706,
+    "http_status": 200,
+    "name": "ENCSR000DKW.json",
+    "sha256": "1a60f6db54e8629e7048a553732855785947877b572969ebed112d9d723b86b0",
+    "status": "downloaded",
+    "url": "https://www.encodeproject.org/experiments/ENCSR000DKW/?format=json"
+  },
+  {
+    "access_utc": "2026-10-06T05:07:17.735387+00:00",
+    "bytes": 3902,
+    "http_status": 200,
+    "name": "WASP_readme.md",
+    "sha256": "9c5f4c90ab22aca939f85dd318b827d21e006818f2945cbdddc8fc9c1b22d816",
+    "status": "downloaded",
+    "url": "https://raw.githubusercontent.com/bmvdgeijn/WASP/master/README.md"
+  },
+  {
+    "access_utc": "2026-10-06T05:07:18.293475+00:00",
+    "bytes": 533,
+    "http_status": 200,
+    "name": "PRJNA323481_runs.tsv",
+    "sha256": "9f17e0e2f89f68ea72b520479b8cdde6857ec1c770ac76dbf3784645f88d6b3d",
+    "status": "downloaded",
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA323481&result=read_run&fields=run_accession,experiment_accession,sample_accession,fastq_bytes,fastq_md5,fastq_ftp&format=tsv"
+  },
+  {
+    "access_utc": "2026-10-06T05:07:19.367801+00:00",
+    "bytes": 533,
+    "http_status": 200,
+    "name": "SRP075768_runs.tsv",
+    "sha256": "e0ee1adb3065732e199c56f9ff218e394ca399e79bfa37872592a7f98bb3ad12",
+    "status": "downloaded",
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRP075768&result=read_run&fields=run_accession,experiment_accession,sample_accession,fastq_bytes,fastq_md5,fastq_ftp&format=tsv"
+  }
+]

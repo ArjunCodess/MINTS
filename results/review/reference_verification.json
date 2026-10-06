@@ -1,62 +1,61 @@
 {
-  "checked_at": "2026-10-05",
+  "bibliography_sha256": "b3e0de6bd5f16e17235add6b26eaced976fc4aa6a0fa7a5fb99305078d71b678",
+  "checked_at": "2026-10-06T05:19:11.897217+00:00",
+  "note": "publisher page content retained only as a hash, not copied article text",
+  "previous_checked_at": "2026-10-05",
   "references": [
     {
       "key": "elhage2021framework",
-      "url": "https://transformer-circuits.pub/2021/framework/index.html",
+      "sha256": "5b072df765d9dc659068841083d1b1e6012f04ad37f9ea62c11908b30eb61350",
       "status": 200,
       "title": "A Mathematical Framework for Transformer Circuits",
-      "sha256": "5b072df765d9dc659068841083d1b1e6012f04ad37f9ea62c11908b30eb61350",
+      "url": "https://transformer-circuits.pub/2021/framework/index.html",
       "verification": "official publisher page title"
     },
     {
-      "key": "heimersheim2024patching",
-      "url": "https://arxiv.org/abs/2404.15255",
-      "doi": "10.48550/arXiv.2404.15255",
-      "title": "How to use and interpret activation patching",
       "authors": [
         "Stefan Heimersheim",
         "Neel Nanda"
       ],
+      "doi": "10.48550/arXiv.2404.15255",
+      "key": "heimersheim2024patching",
+      "title": "How to use and interpret activation patching",
+      "url": "https://arxiv.org/abs/2404.15255",
       "verification": "official arXiv page and DOI; browser check"
     },
     {
-      "key": "zhou2024dnabert2",
-      "url": "https://arxiv.org/abs/2306.15006",
       "doi": "10.48550/arXiv.2306.15006",
+      "key": "zhou2024dnabert2",
       "title": "DNABERT-2: Efficient Foundation Model and Benchmark For Multi-Species Genome",
-      "version": "v2, 2024-03-18",
-      "verification": "official arXiv page and DOI; browser check"
+      "url": "https://arxiv.org/abs/2306.15006",
+      "verification": "official arXiv page and DOI; browser check",
+      "version": "v2, 2024-03-18"
     },
     {
-      "key": "ji2021dnabert",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11025658/",
-      "doi": "10.1093/bioinformatics/btab083",
-      "title": "DNABERT: pre-trained Bidirectional Encoder Representations from Transformers model for DNA-language in genome",
       "authors": [
         "Yanrong Ji",
         "Zhihan Zhou",
         "Han Liu",
         "Ramana V. Davuluri"
       ],
+      "doi": "10.1093/bioinformatics/btab083",
+      "key": "ji2021dnabert",
+      "title": "DNABERT: pre-trained Bidirectional Encoder Representations from Transformers model for DNA-language in genome",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11025658/",
       "verification": "Primary publisher article in PMC; title, authors, journal, year and DOI checked with web tool"
     },
     {
-      "key": "zhang2024metrics",
-      "url": "https://arxiv.org/abs/2309.16042",
-      "doi": "10.48550/arXiv.2309.16042",
-      "title": "Towards Best Practices of Activation Patching in Language Models: Metrics and Methods",
       "authors": [
         "Fred Zhang",
         "Neel Nanda"
       ],
+      "doi": "10.48550/arXiv.2309.16042",
+      "key": "zhang2024metrics",
+      "title": "Towards Best Practices of Activation Patching in Language Models: Metrics and Methods",
+      "url": "https://arxiv.org/abs/2309.16042",
       "verification": "Official arXiv page; title, authors, version date and DOI checked with web tool"
     },
     {
-      "key": "yang2025omnigenbench",
-      "url": "https://arxiv.org/abs/2505.14402",
-      "doi": "10.48550/arXiv.2505.14402",
-      "title": "OmniGenBench: A Modular Platform for Reproducible Genomic Foundation Models Benchmarking",
       "authors": [
         "Heng Yang",
         "Jack Cole",
@@ -65,29 +64,48 @@
         "Geyong Min",
         "Ke Li"
       ],
+      "doi": "10.48550/arXiv.2505.14402",
+      "key": "yang2025omnigenbench",
+      "title": "OmniGenBench: A Modular Platform for Reproducible Genomic Foundation Models Benchmarking",
+      "url": "https://arxiv.org/abs/2505.14402",
       "verification": "Official arXiv page; title, authors, year and DOI checked with web tool"
     },
     {
-      "key": "ali2026causal",
-      "url": "https://arxiv.org/abs/2607.19618v1",
-      "doi": "10.48550/arXiv.2607.19618",
-      "title": "Causal dictionary learning reveals and validates transcription-factor binding features in genomic language models",
       "authors": [
         "Sarwan Ali"
       ],
-      "version": "v1, 2026-07-21",
-      "verification": "Official arXiv abstract and HTML inspected with web tool on 2026-10-05; sections 3.3 and 4 compared with fixed-token pilot"
+      "doi": "10.48550/arXiv.2607.19618",
+      "key": "ali2026causal",
+      "title": "Causal dictionary learning reveals and validates transcription-factor binding features in genomic language models",
+      "url": "https://arxiv.org/abs/2607.19618v1",
+      "verification": "Official arXiv abstract and HTML inspected with web tool on 2026-10-05; sections 3.3 and 4 compared with fixed-token pilot",
+      "version": "v1, 2026-07-21"
     },
     {
-      "key": "poulos2016ctcf",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/27974201/",
       "doi": "10.1016/j.celrep.2016.11.055",
+      "key": "poulos2016ctcf",
+      "supplement_url": "https://ars.els-cdn.com/content/image/1-s2.0-S221112471631628X-mmc1.pdf",
       "title": "Functional Mutations Form at CTCF-Cohesin Binding Sites in Melanoma Due to Uneven Nucleotide Excision Repair across the Motif",
-      "verification": "PubMed and author-hosted article inspected; official publisher supplementary Table S3 downloaded and visually checked on 2026-10-05",
-      "supplement_url": "https://ars.els-cdn.com/content/image/1-s2.0-S221112471631628X-mmc1.pdf"
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27974201/",
+      "verification": "PubMed and author-hosted article inspected; official publisher supplementary Table S3 downloaded and visually checked on 2026-10-05"
+    },
+    {
+      "doi": "10.1038/s41467-021-23007-0",
+      "key": "abramov2021adastra",
+      "response_sha256": "e8110bc9e57228208e30fb651290b6a190a16741e933b04b5da66099c93d1ed8",
+      "status": 200,
+      "title": "Landscape of allele-specific transcription factor binding in the human genome",
+      "url": "https://www.nature.com/articles/s41467-021-23007-0",
+      "verification": "official publisher/deposit page title, DOI and source metadata; browser and HTTP checks"
+    },
+    {
+      "doi": "10.5281/zenodo.14174114",
+      "key": "adastra2024release",
+      "response_sha256": "ae872a1b23beab2fd5f49633967d62dbe41a157644eb9acfbff74dc886dd5d97",
+      "status": 200,
+      "title": "ADASTRA release Mabel v.6.1 Nov 2024",
+      "url": "https://zenodo.org/records/14174114",
+      "verification": "official publisher/deposit page title, DOI and source metadata; browser and HTTP checks"
     }
-  ],
-  "note": "publisher page content retained only as a hash, not copied article text",
-  "bibliography_sha256": "35e41d2d6ef4171057d26962bbcdbaf604b767e03397f4a6d861fb51a2657cce",
-  "previous_checked_at": "2026-10-04"
+  ]
 }

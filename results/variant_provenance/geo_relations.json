@@ -1,0 +1,14 @@
+{
+  "accessions": [
+    "PRJNA323481",
+    "SRP075768"
+  ],
+  "samples": [
+    "GSM2178",
+    "GSM2178295",
+    "GSM2178296",
+    "GSM2178297"
+  ],
+  "series": "GSE81945",
+  "soft_sha256": "c425fe5f300c699d27a52133fbd6e958bda475ad63010a4a42165e7e3684d4ac"
+}

@@ -1,0 +1,560 @@
+[
+  {
+    "access_utc": "2026-10-06T05:09:06.154755+00:00",
+    "available_ctcf_observations": 9,
+    "bytes": 9325,
+    "http_status": 200,
+    "sha256": "89b5066c28e5c6b41048b91ed64caa4d8358b3b28aeffa825c93338efb026ad8",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/2648820/G",
+    "variant_id": "chr4:132227817:C>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:06.155175+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/9662499/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/9662499/A",
+    "variant_id": "chr1:24642639:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:06.155419+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/2858339/C",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/2858339/C",
+    "variant_id": "chr22:32549820:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:07.206490+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/116388336/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/116388336/A",
+    "variant_id": "chr19:8609566:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:07.242214+00:00",
+    "available_ctcf_observations": 2,
+    "bytes": 2056,
+    "http_status": 200,
+    "sha256": "e928d22a0c6ced5d9ba72d9d06da42e4170b51f36dbeb7da26978bab83837af1",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/60683863/C",
+    "variant_id": "chr1:111746819:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:07.275757+00:00",
+    "available_ctcf_observations": 7,
+    "bytes": 7577,
+    "http_status": 200,
+    "sha256": "861423e2168fb30a50a440110e115fe982480b672049ccb39abdd12a711f71cb",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/1012411/G",
+    "variant_id": "chr6:30364778:T>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:08.188633+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/12702150/T",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/12702150/T",
+    "variant_id": "chr7:45591303:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:08.256419+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/12376164/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/12376164/A",
+    "variant_id": "chr9:124123372:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:08.357578+00:00",
+    "available_ctcf_observations": 22,
+    "bytes": 10688,
+    "http_status": 200,
+    "sha256": "b2ada8a2f464ed8964dbc7af0ca4979ac8ecba74ff96d1003293f2d34499d7ed",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/74371743/T",
+    "variant_id": "chr18:61322498:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:09.181335+00:00",
+    "available_ctcf_observations": 1,
+    "bytes": 1723,
+    "http_status": 200,
+    "sha256": "ed31c966245adee563878d023b9d65239c5576260394af8315e6452edda17162",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/62207517/G",
+    "variant_id": "chr20:23799681:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:09.277493+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 3423,
+    "http_status": 200,
+    "sha256": "31401bfde94947bea1dbe6c8d936436fc9d6460f09d82848dc2b0bf9de477a70",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/115775444/T",
+    "variant_id": "chr3:196609495:G>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:09.394735+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 5026,
+    "http_status": 200,
+    "sha256": "0cbf88060ad7f10ee4055d564f9142f37270f7811c4044fbb4fa07e42b12573d",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/1560194/T",
+    "variant_id": "chr5:78548207:G>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:10.180591+00:00",
+    "available_ctcf_observations": 3,
+    "bytes": 2307,
+    "http_status": 200,
+    "sha256": "5d6dc7f946bdbd756af81c7eaf42dd49ef0d97188e17acc24bde5f1bbc4d28d4",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/78216089/T",
+    "variant_id": "chr6:42085077:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:10.316916+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 1666,
+    "http_status": 200,
+    "sha256": "5fa58e5bbd74069a0dce404bf816164ec380f8ccea4e5d6edc63d4f80d8201cf",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/544822406/A",
+    "variant_id": "chr10:15168172:C>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:10.399365+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/75746195/G",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/75746195/G",
+    "variant_id": "chr16:88698340:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:11.134431+00:00",
+    "available_ctcf_observations": 2,
+    "bytes": 24374,
+    "http_status": 200,
+    "sha256": "4e639d786d5de848b35b20c5e5e1d287e79aa6308bc101db9985b434ce253b94",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/3129697/G",
+    "variant_id": "chr6:30259648:C>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:11.326889+00:00",
+    "available_ctcf_observations": 2,
+    "bytes": 1170,
+    "http_status": 200,
+    "sha256": "28d4d5a84cae3f59f4b17080416ad50f2e15e4138dce9f99dfc6c24c3cb3b01e",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/55935798/T",
+    "variant_id": "chr2:128234139:A>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:11.362095+00:00",
+    "available_ctcf_observations": 2,
+    "bytes": 3750,
+    "http_status": 200,
+    "sha256": "21066d54321e39c2bae5563fa0128f7edb5765cbdf230532979c16fc0664f558",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/76272141/C",
+    "variant_id": "chr3:118595486:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:12.295819+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/7807025/C",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/7807025/C",
+    "variant_id": "chr7:137333130:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:12.317214+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/6105091/C",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/6105091/C",
+    "variant_id": "chr20:13423741:A>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:12.343507+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/792987/G",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/792987/G",
+    "variant_id": "chr5:172856422:T>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:13.326370+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/2277507/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/2277507/A",
+    "variant_id": "chr14:91310090:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:13.368653+00:00",
+    "available_ctcf_observations": 9,
+    "bytes": 16385,
+    "http_status": 200,
+    "sha256": "ef812f83d501fd901081ed79e98f8bbdc9f1486ae5b45c5d0e25fe51bf7d4494",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/5769126/C",
+    "variant_id": "chr22:46739308:A>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:13.381009+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 50886,
+    "http_status": 200,
+    "sha256": "bc305c477d24f6701b0561969866dbfb943a5f51c69a038c9a2d76b6c341c4b3",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/469108/A",
+    "variant_id": "chr21:42010445:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:14.354467+00:00",
+    "available_ctcf_observations": 1,
+    "bytes": 3412,
+    "http_status": 200,
+    "sha256": "9e4337430caa47d25f44eba1e4917ca3bcd33e500f894abef6e74d9cbe650c87",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/141515363/G",
+    "variant_id": "chr3:165206902:T>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:14.588801+00:00",
+    "available_ctcf_observations": 1,
+    "bytes": 1092,
+    "http_status": 200,
+    "sha256": "7736b1da62559c23bfc9d73142595cad114cd986fc1363f561f11fd09ce432c5",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/7846052/A",
+    "variant_id": "chr8:107281981:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:14.885665+00:00",
+    "available_ctcf_observations": 4,
+    "bytes": 6049,
+    "http_status": 200,
+    "sha256": "d57b493d1c915be4ec3a12ab50a9f167d1154e6e669c6de5dda06759bced831e",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/4278903/G",
+    "variant_id": "chr2:170462117:C>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:15.324246+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/12138325/T",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/12138325/T",
+    "variant_id": "chr1:242753210:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:15.550694+00:00",
+    "available_ctcf_observations": 2,
+    "bytes": 1948,
+    "http_status": 200,
+    "sha256": "6db4332ff27a37fd8662f69c38ef26b825b67c33e3046e8f82f6fb16a536cedb",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/531266/C",
+    "variant_id": "chr13:30133766:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:15.882409+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/621102/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/621102/A",
+    "variant_id": "chr1:116587673:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:16.264139+00:00",
+    "available_ctcf_observations": 12,
+    "bytes": 6426,
+    "http_status": 200,
+    "sha256": "e8821022376461af34b7ccce670dbac83308952d09020b702fd6c29259fb73ae",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/267548/T",
+    "variant_id": "chr3:37536185:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:16.488806+00:00",
+    "available_ctcf_observations": 77,
+    "bytes": 56396,
+    "http_status": 200,
+    "sha256": "9f78c0c5efe7219cb4529e392faa62fc660ebcfeaf10fabfc34a1e22e6df6a62",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/7245892/C",
+    "variant_id": "chr19:13879957:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:16.811073+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/56247409/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/56247409/A",
+    "variant_id": "chr17:67348333:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:17.223582+00:00",
+    "available_ctcf_observations": 4,
+    "bytes": 1849,
+    "http_status": 200,
+    "sha256": "b24e0b9bdc995dc88be774db67bec78c5ba67ae5906b49f6c6a76d5c4bfe126d",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/79401348/A",
+    "variant_id": "chr6:108250653:C>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:17.791525+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/141787153/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/141787153/A",
+    "variant_id": "chr19:48194236:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:17.964610+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/1642545/T",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/1642545/T",
+    "variant_id": "chr3:172700719:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:18.158491+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 876,
+    "http_status": 200,
+    "sha256": "916cb18e21253fae0fe632d5dd4ebc5330da93c62083335e2e7aeca2d98aecbb",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/238187/C",
+    "variant_id": "chr20:49273805:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:18.726112+00:00",
+    "available_ctcf_observations": 2,
+    "bytes": 2197,
+    "http_status": 200,
+    "sha256": "f34556033d4021d7cc48067e5d3bfeb28b34874378cd314bffc07daf48cfa53b",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/144912072/A",
+    "variant_id": "chr9:137117112:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:18.916034+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/9411215/G",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/9411215/G",
+    "variant_id": "chr9:136674614:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:19.102676+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 2007,
+    "http_status": 200,
+    "sha256": "1bd886081b0f4d039b7a699d74782282ac106ce3299a6e8c27ba3ceab130bc28",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/7104619/A",
+    "variant_id": "chr11:70077349:C>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:19.670738+00:00",
+    "available_ctcf_observations": 1,
+    "bytes": 2906,
+    "http_status": 200,
+    "sha256": "5e5416a96277ebe7a4f2e3375b7504716915d77a29d1cc61b72e676002af511c",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/550892164/T",
+    "variant_id": "chr1:203273254:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:19.870233+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/114178790/T",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/114178790/T",
+    "variant_id": "chr17:82370769:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:20.060317+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/112645424/G",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/112645424/G",
+    "variant_id": "chr8:46029656:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:20.622150+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/12578973/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/12578973/A",
+    "variant_id": "chr12:131096866:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:20.798800+00:00",
+    "available_ctcf_observations": 4,
+    "bytes": 14602,
+    "http_status": 200,
+    "sha256": "af2b8650d7033151191cf4364e79826746b8a4b69ab3b84f19798e672f05ea7f",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/59438000/C",
+    "variant_id": "chr17:39637302:G>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:20.989569+00:00",
+    "available_ctcf_observations": 7,
+    "bytes": 8669,
+    "http_status": 200,
+    "sha256": "da9757e4e6e80356e6933330519ad657e2b9d5a39f09b4ca769a31119f1b1d68",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/16968298/C",
+    "variant_id": "chr16:17027657:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:21.548204+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/62023830/T",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/62023830/T",
+    "variant_id": "chr16:11423963:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:21.955956+00:00",
+    "available_ctcf_observations": 1,
+    "bytes": 5528,
+    "http_status": 200,
+    "sha256": "7a682edfbec66b4b7b990618d1c9b4b1027a8d64c45b066caaf359e9d3d41a83",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/12441725/T",
+    "variant_id": "chr15:78926431:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:21.959239+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 11144,
+    "http_status": 200,
+    "sha256": "794220697da1e148fea115a5044d0c3397bf5ab79f4256d2a5e9a1226c7a1458",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/1209852/G",
+    "variant_id": "chr8:144878886:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:22.502510+00:00",
+    "available_ctcf_observations": 1,
+    "bytes": 1648,
+    "http_status": 200,
+    "sha256": "1a7bb7e7ea8c987619f4c4d8fcbb9c72aa0072a408e4598e9ce780eb4d7768d0",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/75480791/C",
+    "variant_id": "chr7:158663518:A>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:23.018581+00:00",
+    "available_ctcf_observations": 59,
+    "bytes": 31908,
+    "http_status": 200,
+    "sha256": "93fb785687a50f5016662348d04fc255e779a93bc2aa5cc8fccba886a78d28c8",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/6790405/T",
+    "variant_id": "chr3:185070673:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:23.023244+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/73316017/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/73316017/A",
+    "variant_id": "chr20:63238639:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:23.465919+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 1378,
+    "http_status": 200,
+    "sha256": "a16aae2b4df667a387f92b1bcfd520fc2cd8f9372fe4974c195a963dc749f26b",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/192190883/T",
+    "variant_id": "chr13:48976554:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:24.029893+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/4980040/T",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/4980040/T",
+    "variant_id": "chr10:79163200:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:24.249427+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/16975093/A",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/16975093/A",
+    "variant_id": "chr16:84986455:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:24.417301+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/3760378/G",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/3760378/G",
+    "variant_id": "chr17:44916813:C>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:25.000959+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/565571289/C",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/565571289/C",
+    "variant_id": "chr1:156151770:A>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:25.165260+00:00",
+    "available_ctcf_observations": 2,
+    "bytes": 4126,
+    "http_status": 200,
+    "sha256": "713e533bed87b13e366ebcd8499f9621df6e1616898e3606d84a35429c1aa913",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/10058821/G",
+    "variant_id": "chr5:150846823:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:25.360607+00:00",
+    "available_ctcf_observations": 0,
+    "bytes": 1906,
+    "http_status": 200,
+    "sha256": "b88ba2f576942c69b7096a9d13f441ad02592ace352aabbc3789fbae3578faa6",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/6672768/C",
+    "variant_id": "chr1:210293039:A>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:25.937443+00:00",
+    "http_status": 404,
+    "reason": "HTTPError: 404 Client Error: NOT FOUND for url: https://adastra.autosome.org/api/v6/snps/62162802/T",
+    "status": "failed",
+    "url": "https://adastra.autosome.org/api/v6/snps/62162802/T",
+    "variant_id": "chr2:85063817:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:09:26.144528+00:00",
+    "available_ctcf_observations": 1,
+    "bytes": 2281,
+    "http_status": 200,
+    "sha256": "d1872e3384d0aa7e1c7670fe75e0a6367bb3ceefeac165b7bd85c1b8cd4f2542",
+    "status": "verified coordinates",
+    "url": "https://adastra.autosome.org/api/v6/snps/77352868/A",
+    "variant_id": "chr10:92331577:G>A"
+  }
+]

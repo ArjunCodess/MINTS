@@ -1,0 +1,10 @@
+{
+  "status": "verified",
+  "scanned": 16,
+  "retained": 0,
+  "decision": "stop",
+  "historical_attempts": 3,
+  "baseline_commit": "fb93ca3e33dd7ebee8424b8ec55c84ac0fdbc625",
+  "confirmation_ready": false,
+  "scope": "offline byte and semantic audit; no model loading, network, new cohort or relaxed controls"
+}

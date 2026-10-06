@@ -1,0 +1,23 @@
+{
+  "equal_cluster_sham_js": 0.029018313879236098,
+  "equal_cluster_variant_js": 0.013052569731615745,
+  "full_boundary_stable_summary": {
+    "ci_high": -0.006247083699224969,
+    "ci_low": -0.021899579234235952,
+    "clusters": 15,
+    "mean": -0.012716344924263026
+  },
+  "leave_cluster_out_max": -0.013038619422356481,
+  "leave_cluster_out_min": -0.016587125728370265,
+  "max_implementation_logit_error": 0.0,
+  "max_normalization_error": 6.661338147750939e-16,
+  "negative_case_contrasts": 50,
+  "pwm_interval_status": "post-score uncertainty calculation for the frozen secondary endpoint; primary gate unchanged",
+  "pwm_rho_defined_draws": 10000,
+  "pwm_rho_interval": [
+    -0.10918017995751775,
+    0.3916463403538647
+  ],
+  "query_measurements": 438,
+  "status": "post-inspection descriptive summary of a prespecified tokenization stratum; no additional significance test"
+}

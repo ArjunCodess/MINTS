@@ -1,0 +1,305 @@
+{
+  "biological_qc_cases": null,
+  "chromosome_sensitivity": {
+    "ci_high": -0.008024596435666036,
+    "ci_low": -0.026126967815668388,
+    "clusters": 22,
+    "mean": -0.01627128047007362
+  },
+  "confirmation": "not run; no selected head or independent frozen cohort",
+  "correspondence_eligible": 433,
+  "full_boundary_stable_cases": 15,
+  "full_boundary_stable_clusters": 15,
+  "gates": {
+    "biological_qc": false,
+    "confirmation": false,
+    "head_search": false,
+    "implementation_valid": true,
+    "native_sensitivity": false,
+    "sequence_feasibility": true,
+    "tokenization_isolation": true
+  },
+  "genomic_proxy_clusters": 60,
+  "head_search": "not run; causal gates failed",
+  "implementation_valid": 61,
+  "independent_donors": null,
+  "leave_cluster_out": [
+    {
+      "mean": -0.015104499106993791,
+      "omitted_cluster": 0
+    },
+    {
+      "mean": -0.015820077866065825,
+      "omitted_cluster": 1
+    },
+    {
+      "mean": -0.01622271010626236,
+      "omitted_cluster": 2
+    },
+    {
+      "mean": -0.01603931693217777,
+      "omitted_cluster": 3
+    },
+    {
+      "mean": -0.016043997962879326,
+      "omitted_cluster": 4
+    },
+    {
+      "mean": -0.016014174459366915,
+      "omitted_cluster": 5
+    },
+    {
+      "mean": -0.016137655528383796,
+      "omitted_cluster": 6
+    },
+    {
+      "mean": -0.01466837087466036,
+      "omitted_cluster": 7
+    },
+    {
+      "mean": -0.015980681201650103,
+      "omitted_cluster": 8
+    },
+    {
+      "mean": -0.015627848056380365,
+      "omitted_cluster": 9
+    },
+    {
+      "mean": -0.016135271849845756,
+      "omitted_cluster": 10
+    },
+    {
+      "mean": -0.015895655825741827,
+      "omitted_cluster": 11
+    },
+    {
+      "mean": -0.015943148034223493,
+      "omitted_cluster": 12
+    },
+    {
+      "mean": -0.015981477098710777,
+      "omitted_cluster": 13
+    },
+    {
+      "mean": -0.016248052413988266,
+      "omitted_cluster": 14
+    },
+    {
+      "mean": -0.015964834698181718,
+      "omitted_cluster": 15
+    },
+    {
+      "mean": -0.016587125728370265,
+      "omitted_cluster": 16
+    },
+    {
+      "mean": -0.015233420282932692,
+      "omitted_cluster": 17
+    },
+    {
+      "mean": -0.015968336468062134,
+      "omitted_cluster": 18
+    },
+    {
+      "mean": -0.01584781656670068,
+      "omitted_cluster": 19
+    },
+    {
+      "mean": -0.016346565472286006,
+      "omitted_cluster": 20
+    },
+    {
+      "mean": -0.015748544874393117,
+      "omitted_cluster": 21
+    },
+    {
+      "mean": -0.0161684436615372,
+      "omitted_cluster": 22
+    },
+    {
+      "mean": -0.016096683328232785,
+      "omitted_cluster": 23
+    },
+    {
+      "mean": -0.01504228163060614,
+      "omitted_cluster": 24
+    },
+    {
+      "mean": -0.016148063520968026,
+      "omitted_cluster": 25
+    },
+    {
+      "mean": -0.016062862917668855,
+      "omitted_cluster": 26
+    },
+    {
+      "mean": -0.016110242849669543,
+      "omitted_cluster": 27
+    },
+    {
+      "mean": -0.016119396272432633,
+      "omitted_cluster": 28
+    },
+    {
+      "mean": -0.015905113520997115,
+      "omitted_cluster": 29
+    },
+    {
+      "mean": -0.016214995248352695,
+      "omitted_cluster": 30
+    },
+    {
+      "mean": -0.016341258649313812,
+      "omitted_cluster": 31
+    },
+    {
+      "mean": -0.016085529205640516,
+      "omitted_cluster": 32
+    },
+    {
+      "mean": -0.01623304231575988,
+      "omitted_cluster": 33
+    },
+    {
+      "mean": -0.01611038403094837,
+      "omitted_cluster": 34
+    },
+    {
+      "mean": -0.016236543525709232,
+      "omitted_cluster": 35
+    },
+    {
+      "mean": -0.016258571455822372,
+      "omitted_cluster": 36
+    },
+    {
+      "mean": -0.015691604493482936,
+      "omitted_cluster": 37
+    },
+    {
+      "mean": -0.015975510316479282,
+      "omitted_cluster": 38
+    },
+    {
+      "mean": -0.01657095026046376,
+      "omitted_cluster": 39
+    },
+    {
+      "mean": -0.016070367902659272,
+      "omitted_cluster": 40
+    },
+    {
+      "mean": -0.015821773914830542,
+      "omitted_cluster": 41
+    },
+    {
+      "mean": -0.01653639576164539,
+      "omitted_cluster": 42
+    },
+    {
+      "mean": -0.01624928867812348,
+      "omitted_cluster": 43
+    },
+    {
+      "mean": -0.015983332967154342,
+      "omitted_cluster": 44
+    },
+    {
+      "mean": -0.015361052335914128,
+      "omitted_cluster": 45
+    },
+    {
+      "mean": -0.016196511517856747,
+      "omitted_cluster": 46
+    },
+    {
+      "mean": -0.015898233676965023,
+      "omitted_cluster": 47
+    },
+    {
+      "mean": -0.016299054907754722,
+      "omitted_cluster": 48
+    },
+    {
+      "mean": -0.01616274274043674,
+      "omitted_cluster": 49
+    },
+    {
+      "mean": -0.016129930060815832,
+      "omitted_cluster": 50
+    },
+    {
+      "mean": -0.01608394003483347,
+      "omitted_cluster": 51
+    },
+    {
+      "mean": -0.016502280989969545,
+      "omitted_cluster": 52
+    },
+    {
+      "mean": -0.016102107722866296,
+      "omitted_cluster": 53
+    },
+    {
+      "mean": -0.01622598462247835,
+      "omitted_cluster": 54
+    },
+    {
+      "mean": -0.01622338318193879,
+      "omitted_cluster": 55
+    },
+    {
+      "mean": -0.013038619422356481,
+      "omitted_cluster": 56
+    },
+    {
+      "mean": -0.01623118201719817,
+      "omitted_cluster": 57
+    },
+    {
+      "mean": -0.016231184276137418,
+      "omitted_cluster": 58
+    },
+    {
+      "mean": -0.015666223512943795,
+      "omitted_cluster": 59
+    }
+  ],
+  "matched_controls": 61,
+  "motif_eligible": 433,
+  "primary": {
+    "ci_high": -0.00914593525477031,
+    "ci_low": -0.02445395218106008,
+    "clusters": 60,
+    "mean": -0.01596574414762035
+  },
+  "query_index_shift_cases": 29,
+  "reference_verified": 12288,
+  "secondary_tests": [
+    {
+      "effect": 0.1428333249528452,
+      "p_holm": 0.2762853074380541,
+      "p_raw": 0.2762853074380541,
+      "test": "absolute PWM magnitude vs variant JS"
+    },
+    {
+      "effect": -0.006757874371235354,
+      "p_holm": 0.24427188370566952,
+      "p_raw": 0.12213594185283476,
+      "test": "width-matched contrast"
+    }
+  ],
+  "selected": 12288,
+  "source_records": 512556,
+  "stop_reasons": [
+    "native_sensitivity",
+    "biological_qc"
+  ],
+  "width_matched": {
+    "ci_high": 0.0006229864467612638,
+    "ci_low": -0.014121368656089284,
+    "clusters": 11,
+    "mean": -0.006757874371235354
+  },
+  "width_matched_cases": 11
+}

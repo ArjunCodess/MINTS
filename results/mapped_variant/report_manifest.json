@@ -1,0 +1,20 @@
+{
+  "builder_sha256": "a1b779a6e746221a7539e0b089ca51c85bb1b0f3ece98f71fd34af284536d6f6",
+  "inputs": {
+    "results/control_diagnostics/summary.json": "b9dcccefe45fe033053098e0a63473f946642f72791e76e2f878d0e58230de1e",
+    "results/mapped_variant/case_scores.csv": "56313e68490c7ef9b5f13b3d52bb7a25c76b1ef74c9a5c123f78803406676f90",
+    "results/mapped_variant/scores.json": "9973ab9a5f6e8181696cc41525453e5aceb0325d09ed8227ffe2367354758854",
+    "results/mapped_variant/summary.json": "049854922237560db61546826c9612f4e5cfac4e880a8623d3e85654a3da2801",
+    "results/variant_provenance/provenance_summary.json": "64c9612cef9eec40f683653a88cd67e8e33d6c18edd8c410a404158040a7ba5b"
+  },
+  "outputs": {
+    "docs/mapped_variant_results.md": "b8d25c3abd83e3de3dcb0b2fedcc53412f699c917027b4de23d34fce9481c524",
+    "paper/mapped_variant.tex": "f831ecc94f26aa492e938da5bfbaee31a4ed512d3669e9bcadb1a29c4a7a12cd",
+    "results/mapped_variant/report/candidate_constraints.csv": "988b4bec3ae1907aad24f232ce0ab0811a8ac1f378f743cb82defe3e0ad383a1",
+    "results/mapped_variant/report/case_constraints.csv": "f7075e073a94f73c7b4d0ebbbabb50386afe90bfc32b2a8b5fe8b42a16938f25",
+    "results/mapped_variant/report/constraint_intersections.csv": "d888efa2b30c2bdad10a835725944de0e81a4d5d6a3286069972013e066d8f26",
+    "results/mapped_variant/report/diagnostics.json": "b56858bd75263cb78c2bb65e54a4b0076d2190decb06500263ac0dfdf69b64b1",
+    "results/mapped_variant/report/representativity.json": "c6ce3abfd091ad243c48918716f172de66ccf380561daba1c73c490959183bc5",
+    "results/mapped_variant/report/study.png": "9b9916a9aa337469e9eecac6894991c5bd3b0fa949d5e6a909a498a72b2771d1"
+  }
+}

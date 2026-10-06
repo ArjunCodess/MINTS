@@ -1,0 +1,7 @@
+{
+  "analysis": "same independent predicates as v1 diagnostic; no native protocol or membership changes",
+  "extra": "verify predicted strict original-rule retention in expanded ADASTRA against original sequence_control implementation",
+  "population": "all 16 inspected hg19 published rows; label singleton heterozygous subset",
+  "role": "post-native exploratory sequence-only supplement; no model scores",
+  "source_sha256": "c9520470a796595eb636faaa6ac5aae048518a77263515ec7c930fb5600fa5cc"
+}

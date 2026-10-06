@@ -1,0 +1,40 @@
+{
+  "checkout": "C:\\mints-mapped-clean-20261006",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "tools/audit_variant_study.py"
+      ],
+      "elapsed_seconds": 0.806342363357544,
+      "exit_code": 0,
+      "log_sha256": "4d3aeeddbd99e2944bfe202b9dfe9b10be9b9c16274886cfd7fd8758ad0e6c51",
+      "name": "clean_variant_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "tools/audit_adastra_feasibility.py"
+      ],
+      "elapsed_seconds": 4.587885141372681,
+      "exit_code": 0,
+      "log_sha256": "8c7f1c42dfb71d8624722551959b1ddb0f53bb34b8438fda0632aa6ac3faa0d4",
+      "name": "clean_adastra_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "tools/audit_mapped_variant.py"
+      ],
+      "elapsed_seconds": 1.1801609992980957,
+      "exit_code": 1,
+      "log_sha256": "98dedadb2e69495ea6af21832c4258bdda9e7e517e02d645d411b137868c0be3",
+      "name": "clean_mapped_audit"
+    }
+  ],
+  "commit": "02f3d7523b51540bd179784683cd44d44451744f",
+  "disk_free_bytes": 4442251264,
+  "empty_offline_hf_cache": "C:\\mints-mapped-clean-20261006\\.empty-hf-cache",
+  "scientific_caches_absent": true,
+  "status": "failed"
+}

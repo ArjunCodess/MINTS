@@ -1,0 +1,366 @@
+[
+  {
+    "access_utc": "2026-10-06T05:16:24.252202+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/9662499",
+    "variant_id": "chr1:24642639:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:24.252490+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/2858339",
+    "variant_id": "chr22:32549820:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:24.252631+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/116388336",
+    "variant_id": "chr19:8609566:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:25.295470+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/12702150",
+    "variant_id": "chr7:45591303:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:25.331171+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/12376164",
+    "variant_id": "chr9:124123372:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:25.345071+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/75746195",
+    "variant_id": "chr16:88698340:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:26.315123+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/7807025",
+    "variant_id": "chr7:137333130:T>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:26.502056+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/6105091",
+    "variant_id": "chr20:13423741:A>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:26.505614+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/792987",
+    "variant_id": "chr5:172856422:T>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:27.269626+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/2277507",
+    "variant_id": "chr14:91310090:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:27.482141+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/12138325",
+    "variant_id": "chr1:242753210:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:27.567684+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/621102",
+    "variant_id": "chr1:116587673:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:28.226986+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/56247409",
+    "variant_id": "chr17:67348333:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:28.451406+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/141787153",
+    "variant_id": "chr19:48194236:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:28.524956+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/1642545",
+    "variant_id": "chr3:172700719:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:29.165763+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/9411215",
+    "variant_id": "chr9:136674614:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:29.415609+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/114178790",
+    "variant_id": "chr17:82370769:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:29.508121+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/112645424",
+    "variant_id": "chr8:46029656:A>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:30.108016+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/12578973",
+    "variant_id": "chr12:131096866:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:30.422786+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/62023830",
+    "variant_id": "chr16:11423963:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:30.479793+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/73316017",
+    "variant_id": "chr20:63238639:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:31.047166+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/4980040",
+    "variant_id": "chr10:79163200:C>T"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:31.400597+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/16975093",
+    "variant_id": "chr16:84986455:G>A"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:31.476372+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/3760378",
+    "variant_id": "chr17:44916813:C>G"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:31.976292+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/565571289",
+    "variant_id": "chr1:156151770:A>C"
+  },
+  {
+    "access_utc": "2026-10-06T05:16:32.381823+00:00",
+    "bytes": 28,
+    "http_status": 200,
+    "interpretation": "search availability only; no read counts inferred",
+    "response": {
+      "results": [],
+      "total": 0
+    },
+    "sha256": "37cadd52a4e8a9fddde8c70b530be00e5abbb1295400b9cc478b44c76c49330c",
+    "status": "downloaded",
+    "url": "https://adastra.autosome.org/api/v6/search/snps/rs/62162802",
+    "variant_id": "chr2:85063817:C>T"
+  }
+]

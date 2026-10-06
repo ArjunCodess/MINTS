@@ -1,0 +1,1680 @@
+{
+  "commit": "fb93ca3e33dd7ebee8424b8ec55c84ac0fdbc625",
+  "files": {
+    ".gitattributes": {
+      "git_blob": "7c75d2cb6a04890975495671b90bcd47b2765ae3"
+    },
+    ".github/workflows/cpu.yml": {
+      "git_blob": "6c577bddc44082ccf840f80867f0aa87b538aa94"
+    },
+    ".gitignore": {
+      "git_blob": "590fe1f9a7cde438963481408dbb8f675085bf13"
+    },
+    "LICENSE": {
+      "git_blob": "97f9306561c104cf727f7a1ec5764dcfa142c901"
+    },
+    "README.md": {
+      "git_blob": "bf8f73b24aa685292d220f6466a4e95f4d1c54d4"
+    },
+    "data/20260412145746_JASPAR2026_individual_matrices_2313119_jaspar/MA0139.1.jaspar": {
+      "git_blob": "520d0e2c50a4e4a392bbb263852d9d5bbe03b20a"
+    },
+    "data/ENCODE4_v1.5.1_GRCh38.txt": {
+      "git_blob": "531ff843dd24a4c734b411cf1e223d829705d353"
+    },
+    "docs/native_endpoint_review.md": {
+      "git_blob": "81bd454c7339d0b9e5ea2edf7dbf7d158849fffa"
+    },
+    "docs/native_followup.md": {
+      "git_blob": "3cbbd0084995ff48e40555b9a6a52a556dd16cbf"
+    },
+    "docs/native_sources.json": {
+      "git_blob": "ca1d55b5ec766f306fe2ffd69051fc7d1d69c1e2"
+    },
+    "main.py": {
+      "git_blob": "2c62ace2ca0aaa686d4d00614bc44f34012762e0"
+    },
+    "paper/cohort_balance.tex": {
+      "git_blob": "640972016a71a42970148bce50b5656b7fd23155"
+    },
+    "paper/hardened_results.tex": {
+      "git_blob": "b4ba6a6ca2129b3cc8ade126c4da52a7f1e1a694"
+    },
+    "paper/main.pdf": {
+      "git_blob": "2142554a711aacba20aaee1c7621edc17c19f6da",
+      "sha256": "feeecf04682f51c24eb8827b5fc77d8b58d626fec255cd0b77e96f3bf9a9cc40"
+    },
+    "paper/main.tex": {
+      "git_blob": "b5709b54c553471741d69ca7b9137a75ce372621",
+      "sha256": "e15d16b62336f481c219d0801d653881cc6c087c4ba19a0f8913e911ddc2119a"
+    },
+    "paper/native_endpoint.tex": {
+      "git_blob": "faf5476e2a1bab562219bca608bc147649b7c084"
+    },
+    "paper/native_followup.tex": {
+      "git_blob": "8d893c714075e440896243f5f4a490a993d2a01c"
+    },
+    "paper/neurips_2026.sty": {
+      "git_blob": "ba57755282dcb4ed8febc86c24f4e581810bf374"
+    },
+    "paper/references.bib": {
+      "git_blob": "a02c7642013637c81dca6a0d2d058906b4ac09e5"
+    },
+    "paper/results.tex": {
+      "git_blob": "232016b6b43353c1c9f338ad89b616832b7eb224"
+    },
+    "pytest.ini": {
+      "git_blob": "7f6582adc851c7279f3ea2ea3d0cf87577efbb4a"
+    },
+    "requirements-cpu.txt": {
+      "git_blob": "620b553e3261689a77381123bc86194ff8f1aa7d"
+    },
+    "requirements-cuda-linux.txt": {
+      "git_blob": "abf4ec176ea36764bd258e08b5a310b0c01ca761"
+    },
+    "requirements-cuda-windows.txt": {
+      "git_blob": "e1fea5e771a0349700ae3a14ffe6ff855fff21bb"
+    },
+    "requirements.txt": {
+      "git_blob": "e3ffcb5959949ee80b162a0ff1d60a719b08e8c6"
+    },
+    "results/counterfactuals/promoter_tata_activation_patching_pair.tsv": {
+      "git_blob": "527bf361b8610ce776bc80fb55bd8fe11460a43b"
+    },
+    "results/counterfactuals/promoter_tata_batch_activation_patching_pairs.tsv": {
+      "git_blob": "b8f2871630f59fa9ab567f2f2d70fe482a27c0be"
+    },
+    "results/counterfactuals/splice_sites_donors_batch_activation_patching_pairs.tsv": {
+      "git_blob": "ec3d8c29600f53a4cd9a5c84c7843208097fedf3"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/enrichment/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_matched_attention_enrichment.csv": {
+      "git_blob": "24966ea3d5ae2fe312020c4087a64d3afed7e221"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/figures/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png": {
+      "git_blob": "fbeb48d819d4eae64a4535bcc60e298aa2ca3f16"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/figures/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_pearson_heatmap.png": {
+      "git_blob": "a93a02e386e3d86a08f76682692a3a5e353f989c"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/circuits_manifest.json": {
+      "git_blob": "4185298b210fe1a405d26f0e03f1608d50916685"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_qk_alignment_manifest.json": {
+      "git_blob": "45b017f18c830700d98a740c72c367e5679471b8"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment_token_motif_scores_motif_scores_manifest.json": {
+      "git_blob": "f7c403b65c3991fd5fb61ef33a5e0d17ee451b2e"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/linear_probe_manifest.json": {
+      "git_blob": "6a11aaa457701d9130264edb0df9eaee5093bf62"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_no_tata_test_activations_manifest.json": {
+      "git_blob": "31e3288e8435b8df1948db421b58e35fbbaff9ed"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_no_tata_train_activations_manifest.json": {
+      "git_blob": "05984198fb5be80aba03464cd47e787e9e41068d"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_tata_test_activations_manifest.json": {
+      "git_blob": "0b214c6a6801917cc5a22ddc2aea1e48e6d47458"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/promoter_tata_train_activations_manifest.json": {
+      "git_blob": "1f62bde7c555be841e992180f1afc607a3764130"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/qk_enrich_manifest.json": {
+      "git_blob": "f395a5f075a4f62bd6cc2bfed1871c21eefa3310"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_acceptors_test_activations_manifest.json": {
+      "git_blob": "45e81b571a3d4df9a4c1ca3588fcadeaa78c6286"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_acceptors_train_activations_manifest.json": {
+      "git_blob": "553e09d02fba6d47e94e0e4f577a0ade37493e2a"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_donors_test_activations_manifest.json": {
+      "git_blob": "e0a91b1784b76cd533add8443aa59e1dae88310b"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/manifests/splice_sites_donors_train_activations_manifest.json": {
+      "git_blob": "c7ca44151df5c0f5a4be3c5c33af1e9b1da74cd5"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/qk_alignment/instadeepai__nucleotide_transformer_v2_100m_multi_species_ctcf_qk_alignment.csv": {
+      "git_blob": "8eb77f1c66dc42d413976ce6bb6be84eb16f0388"
+    },
+    "results/cross_model/instadeepai__nucleotide_transformer_v2_100m_multi_species/tables/linear_probe_metrics.csv": {
+      "git_blob": "3bb014828c32f61cdb090dada029607e4522b44e"
+    },
+    "results/cross_model/review_tata_heldout/counterfactuals/promoter_tata_batch_activation_patching_pairs.tsv": {
+      "git_blob": "04f50f4a8f1f1296e4f5e60a75542d213f9d150e"
+    },
+    "results/cross_model/review_tata_heldout/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png": {
+      "git_blob": "853eca6f7df1a50f800caadfef1e65f386098487"
+    },
+    "results/cross_model/review_tata_heldout/manifests/promoter_tata_batch_activation_patching_pairs_counterfactuals_manifest.json": {
+      "git_blob": "0e254d86481100f1080399f943887f076307e1f5"
+    },
+    "results/cross_model/review_tata_heldout/manifests/promoter_tata_batch_dnabert_activation_patching_patching_manifest.json": {
+      "git_blob": "dbaa4ed200f73ed92a5dca4d8f9b2a0738b2d112"
+    },
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching.csv": {
+      "git_blob": "239067b8b63108369a917f50d840ebc04fcda280"
+    },
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_pair_effects.npz": {
+      "git_blob": "20a7a132f428eec6e9aadb64dfa631958bc4c53d"
+    },
+    "results/cross_model/review_tata_heldout/patching/promoter_tata_batch_dnabert_activation_patching_sequence_cluster_summary.json": {
+      "git_blob": "0f4025572d59044551b3f60d38fe6b5ffe059f39"
+    },
+    "results/cross_model/review_tata_heldout/review_model_manifest.json": {
+      "git_blob": "d298d8d201df22a31994c00b7dadf5bb9ba51079"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/enrichment/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_matched_attention_enrichment.csv": {
+      "git_blob": "906d1cd1827d30ccffd9cbb79dc66acfb6fa7915"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/figures/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png": {
+      "git_blob": "bd3cf9736ccb157c410b3491f435b98b18d7953c"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/figures/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_pearson_heatmap.png": {
+      "git_blob": "fb43175fae0cb9ce79424dfccd9f48386929bfe9"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/circuits_manifest.json": {
+      "git_blob": "504abe8677175709bc329a4a27c961180aac2bd5"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/linear_probe_manifest.json": {
+      "git_blob": "d01c0a68c89b0de36b09c844b1ba8392f11e140e"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_no_tata_test_activations_manifest.json": {
+      "git_blob": "ea48e6efe5caabb2a8d23f98e92e428cca5afe12"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_no_tata_train_activations_manifest.json": {
+      "git_blob": "5ced261abd89d2260f0f5090d9f25361dde7d0d3"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_tata_test_activations_manifest.json": {
+      "git_blob": "2e0f4ce8f5345e39931d05e6139060b3c0cebe90"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/promoter_tata_train_activations_manifest.json": {
+      "git_blob": "9dcd65e43cd8b1deb543c92bff4c1ec8da892d05"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/qk_enrich_manifest.json": {
+      "git_blob": "5ca927bcd0812fb659ee2bc38f43bb7f63e534c2"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_acceptors_test_activations_manifest.json": {
+      "git_blob": "bb537ad7bb56465d526721081f121209ba093ebf"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_acceptors_train_activations_manifest.json": {
+      "git_blob": "910a7e6e89e04344db8ba7c00f2c6acadc0a5d20"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_donors_test_activations_manifest.json": {
+      "git_blob": "5bc49ef9403330796bfac523fd3de17097d02579"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/splice_sites_donors_train_activations_manifest.json": {
+      "git_blob": "3b092739cb71be4e05c15425d34334b6559bbe5d"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_qk_alignment_manifest.json": {
+      "git_blob": "42b8424584a44b0beef0249d400beaf35c51fbc7"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/manifests/zhihan1996__dnabert_2_117m_ctcf_qk_alignment_token_motif_scores_motif_scores_manifest.json": {
+      "git_blob": "642449a29cb94267d259c3f1b23e4f870047208c"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/qk_alignment/zhihan1996__dnabert_2_117m_ctcf_qk_alignment.csv": {
+      "git_blob": "ec057b637b1fb87a25becb5254ca372da05a7801"
+    },
+    "results/cross_model/zhihan1996__dnabert_2_117m/tables/linear_probe_metrics.csv": {
+      "git_blob": "8e641adf01b1046648d2187d0a34909b0ebe63e3"
+    },
+    "results/distributed_features/ctcf_distributed_feature_search_summary.json": {
+      "git_blob": "d1adfbe98d26ee465e64de6a96a864ffe91d8097"
+    },
+    "results/distributed_features/ctcf_mlp_sae_feature_alignment.csv": {
+      "git_blob": "0909f9b52cca1010ab4f93598787a60fdf3b2301"
+    },
+    "results/distributed_features/ctcf_mlp_sae_training_history.csv": {
+      "git_blob": "90ad5c30050fb172b5defff45b9ea17f6bfd3d27"
+    },
+    "results/distributed_features/ctcf_residual_sae_feature_alignment.csv": {
+      "git_blob": "cce7c6fe60e4e615ced96714ee9d775376635141"
+    },
+    "results/distributed_features/ctcf_residual_sae_training_history.csv": {
+      "git_blob": "0c1d75a9ca5fc37d662bbcd012072bc7267399e9"
+    },
+    "results/distributed_features/ctcf_sae_feature_alignment_top10.csv": {
+      "git_blob": "dab1411cc7b665db4662f3c17c2a4fa2ccd32a81"
+    },
+    "results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv": {
+      "git_blob": "906d1cd1827d30ccffd9cbb79dc66acfb6fa7915"
+    },
+    "results/figures/ctcf_mlp_sae_top10_alignment.png": {
+      "git_blob": "efb5b9fc186fad8fba1a18cd513e4364b328756f"
+    },
+    "results/figures/ctcf_qk_alignment_matched_attention_enrichment_rho_heatmap.png": {
+      "git_blob": "bd3cf9736ccb157c410b3491f435b98b18d7953c"
+    },
+    "results/figures/ctcf_qk_alignment_pearson_heatmap.png": {
+      "git_blob": "fb43175fae0cb9ce79424dfccd9f48386929bfe9"
+    },
+    "results/figures/ctcf_residual_sae_top10_alignment.png": {
+      "git_blob": "632ac85cf91d4d54d5599fd69f876bb1d51189bb"
+    },
+    "results/figures/promoter_tata_batch_dnabert_activation_patching_heatmap.png": {
+      "git_blob": "40971f3f24d1f99a14c0612928822a152f87e168"
+    },
+    "results/figures/promoter_tata_dnabert_activation_patching_heatmap.png": {
+      "git_blob": "3ad62c8f04b1b7538bdd5a4a9592c2d4fc0af5d8"
+    },
+    "results/figures/splice_sites_donors_batch_dnabert_activation_patching_heatmap.png": {
+      "git_blob": "2235365fcb24770ff1780aa307e8b99d63ec04b0"
+    },
+    "results/figures/tata_l2h7_ov_probe_alignment.png": {
+      "git_blob": "8d16a26d3714916aa7cd5495ec5696acbd8ffe95"
+    },
+    "results/figures/threshold_sensitivity.png": {
+      "git_blob": "5f94b4e1a7bc8327c5f083df9171c39c0f1f4950"
+    },
+    "results/hardened/build_validation.json": {
+      "git_blob": "69fcb552bb72e2f0644e33f7dd1f6bd12a691973"
+    },
+    "results/hardened/calibration/calibration_manifest.json": {
+      "git_blob": "abd3d5eb1a945b86139511a660bcfe80d6f2e1a1"
+    },
+    "results/hardened/calibration/calibration_observations.csv": {
+      "git_blob": "a267afe69fe4d4cbe18153916dede49cd659910a"
+    },
+    "results/hardened/calibration/calibration_summary.csv": {
+      "git_blob": "335760424ae0dc9288214b5d598be2aaa21e9d3a"
+    },
+    "results/hardened/calibration/execution.json": {
+      "git_blob": "42546631962737c71d6dc8a87ee27bb66692db7d"
+    },
+    "results/hardened/cohort_diagnostics/accessible_cohort_balance.csv": {
+      "git_blob": "0503291c9a9c21f09556608dcd6e1763f4eae66b"
+    },
+    "results/hardened/cohort_diagnostics/build_balance.py": {
+      "git_blob": "22cc6cbcc1ddb1ea674421711b81ec0874874f3f"
+    },
+    "results/hardened/cohort_diagnostics/native_peak_balance.csv": {
+      "git_blob": "2211dc1a4cb5737d896a595715e1e16786246a62"
+    },
+    "results/hardened/cohort_diagnostics/native_peak_balance_members.csv": {
+      "git_blob": "d7f7edc8f93d7c68319e53b87f4677cbcff73657"
+    },
+    "results/hardened/cohort_diagnostics/report_manifest.json": {
+      "git_blob": "6acb4d006bae315ce60f0bbbdd6c76dd1aefb66a"
+    },
+    "results/hardened/command_cpu_checks.log": {
+      "git_blob": "449da9ad95305583b5cbe3c24e926e7d820ecdc6"
+    },
+    "results/hardened/command_cpu_install.log": {
+      "git_blob": "871e19c5f3826ddda18467aff08c19ad0372b8e0"
+    },
+    "results/hardened/command_final_build.log": {
+      "git_blob": "77fba4215307acfe39673294c0dc855de22dffd9"
+    },
+    "results/hardened/command_full_build.log": {
+      "git_blob": "5f912d2da27249cf5323c5f856e86cb6de754f25"
+    },
+    "results/hardened/command_full_tests.log": {
+      "git_blob": "d8c8fadc5bec67a50f79f8fbbdf3707db2506d37"
+    },
+    "results/hardened/command_paper_build.log": {
+      "git_blob": "caf7df8a9e3b28f8b1b550bd8744cda2f3ef087d"
+    },
+    "results/hardened/command_verified_build.log": {
+      "git_blob": "6cee763b0eb51b35b1ece8d9c9e5d899f018e0e1"
+    },
+    "results/hardened/cpu_environment.txt": {
+      "git_blob": "f40aa5346d5fd1ca04dd7c153e11eed326f6b756"
+    },
+    "results/hardened/ctcf/ctcf_accessible_peak_overlap_metrics.csv": {
+      "git_blob": "41fa40754eff4771226922eb34cc7c9ee7d2eda6"
+    },
+    "results/hardened/ctcf/ctcf_accessible_peak_overlap_paired_comparisons.csv": {
+      "git_blob": "d1025c12c013e57cef75db5dc2f6fc535375b48a"
+    },
+    "results/hardened/ctcf/ctcf_accessible_peak_overlap_predictions.csv": {
+      "git_blob": "b60f74b0099b066088d9927314cae717fcc69cf2"
+    },
+    "results/hardened/ctcf/ctcf_accessible_peak_overlap_selection.json": {
+      "git_blob": "04a34dfb2a36aa2dfc0e7503db1a148a4b75e1f0"
+    },
+    "results/hardened/ctcf/ctcf_case_control.tsv": {
+      "git_blob": "0700c3c861797c24dd455ede6633721d7aa93497"
+    },
+    "results/hardened/ctcf/ctcf_cohort_balance.csv": {
+      "git_blob": "53dbf7027ef116439d4917a0fb3b43dec3c28ed6"
+    },
+    "results/hardened/ctcf/ctcf_cohort_manifest.json": {
+      "git_blob": "99e824eb741f7f1a2add7c4a9a02ab2b3fb0505e"
+    },
+    "results/hardened/ctcf/ctcf_fresh_residuals.npz": {
+      "git_blob": "ce1defee8ccc792c8ae91a5426c473ec41a95947"
+    },
+    "results/hardened/ctcf/execution.json": {
+      "git_blob": "7bddff5117d0f2d5977a6a6f830ecdba81fcd7b9"
+    },
+    "results/hardened/ctcf/interventions/confirmation_pair_effects.csv": {
+      "git_blob": "4250141e77c3c184c00d66064dc59896cf6e7a24"
+    },
+    "results/hardened/ctcf/interventions/confirmation_summary.csv": {
+      "git_blob": "174f1cc65a2bc210532c2406c1524975120d51ec"
+    },
+    "results/hardened/ctcf/interventions/controlled_pairs.jsonl": {
+      "git_blob": "79c48569aeaf4be0186fc74fc45371ba02b38a3f"
+    },
+    "results/hardened/ctcf/interventions/discovery_inference.csv": {
+      "git_blob": "b2af8f35dffdd7b2499869cbec09c2bd01dac1fc"
+    },
+    "results/hardened/ctcf/interventions/discovery_pair_effects.csv": {
+      "git_blob": "55cc517f7fcb8d35e69ce2710ed187ac21b19927"
+    },
+    "results/hardened/ctcf/interventions/eligibility.json": {
+      "git_blob": "c5fd218428267088e2d62cd0891a2bb059930473"
+    },
+    "results/hardened/ctcf/interventions/frozen_selection.json": {
+      "git_blob": "29a008592cb723dda9912de4a7e3671296ff0ead"
+    },
+    "results/hardened/ctcf/interventions/same_motif_localization.csv": {
+      "git_blob": "0cc8570e03e1d62410d7a30696a358fe8fa3e798"
+    },
+    "results/hardened/ctcf/interventions/study_manifest.json": {
+      "git_blob": "1bd4273681df5383d1d363cd58d5fef8f56fb4de"
+    },
+    "results/hardened/ctcf/target_validation.json": {
+      "git_blob": "c456b47e5d980b51570e06ed01676a27b424dda7"
+    },
+    "results/hardened/diagnostics/diagnostics_manifest.json": {
+      "git_blob": "e1d353167aa85c88148d22496cbcfe35ce29997d"
+    },
+    "results/hardened/diagnostics/execution.json": {
+      "git_blob": "5f8a00216c961ecee0c2f0e8f3e0419b68609c05"
+    },
+    "results/hardened/diagnostics/historical_absolute_effects.csv": {
+      "git_blob": "21165f19505242766a828cd5bd694e8206394f82"
+    },
+    "results/hardened/diagnostics/historical_alignment.csv": {
+      "git_blob": "0d6319a22af4b61e4b9f178e86dacc66c6bcc63c"
+    },
+    "results/hardened/diagnostics/historical_paired_comparisons.csv": {
+      "git_blob": "cbc4f4664115c7392711094c5a3c2ba91a569d1f"
+    },
+    "results/hardened/figures/calibration.pdf": {
+      "git_blob": "fa48b8084684b339b3e0066373481be5b7759fe2"
+    },
+    "results/hardened/figures/calibration.png": {
+      "git_blob": "eb3a7b2733a741462270ac398e8bafff2f583802"
+    },
+    "results/hardened/figures/controlled_interventions.pdf": {
+      "git_blob": "5735735fff2a0c6dca39f4bdb3a5cc9aa7cb3657"
+    },
+    "results/hardened/figures/controlled_interventions.png": {
+      "git_blob": "75d8fff946e9c2d615fceb0b277aa27ab2dfdbf8"
+    },
+    "results/hardened/genomic/execution.json": {
+      "git_blob": "f4765da00d20f753bdd714ea52d3136757fc06a5"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_balance.csv": {
+      "git_blob": "fc9fba8b44cc780a850ad763c6b490a05b014a28"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_base_density_chromosomes.csv": {
+      "git_blob": "f80b24d3a7d528b16f13c109596eb115c77fa9ac"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_content_density_chromosomes.csv": {
+      "git_blob": "998286e9b96e5c531e725f355239d0aba1549692"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_local_query_density_chromosomes.csv": {
+      "git_blob": "afd6f9db95b18ea44589921f7aa21791638025d4"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_pairs.csv": {
+      "git_blob": "b92a0123fa1473d35314bdb968ee0881d4391f2d"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_position_only_density_chromosomes.csv": {
+      "git_blob": "11a85274bc7339e2e281965ba031aedc2fe417df"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_qk_max_chromosomes.csv": {
+      "git_blob": "cb408c7d6b56de4f9f3aee4dd878a8716672f110"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_qk_mean_chromosomes.csv": {
+      "git_blob": "a377f80054faa73b3a76f099e8a86e2a82b3c05e"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_qk_overlap_weighted_chromosomes.csv": {
+      "git_blob": "ab388c4b5208422a41f4a4410073e8ea7efe253f"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_scores.npz": {
+      "git_blob": "415714675b2847c3131ce24ed165fb8d31ca25be"
+    },
+    "results/hardened/genomic/f0.70_nucleotide_matched_token_density_chromosomes.csv": {
+      "git_blob": "a549c95e99cdcdc3fc93a55fb1499467907dba11"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_balance.csv": {
+      "git_blob": "b4e27178afa2c4c09f74aee90b41239200f66150"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_base_density_chromosomes.csv": {
+      "git_blob": "446df517f85d0bc3a9fc6e39579c39d4137b2c26"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_content_density_chromosomes.csv": {
+      "git_blob": "675591f7b66412842ac766a318dc27aeb63a91b0"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_local_query_density_chromosomes.csv": {
+      "git_blob": "10802e71bad829e9fd88f2f5bf8115a71bad1c65"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_pairs.csv": {
+      "git_blob": "360067f48d3cf415ff3785d1eefacbe9cef1304b"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_position_only_density_chromosomes.csv": {
+      "git_blob": "93b824c7c26f44223f9608c012d4d2dafb5be7b0"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_qk_max_chromosomes.csv": {
+      "git_blob": "77cb73171d2545c3d6c7b09a749bd8036a2c40a7"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_qk_mean_chromosomes.csv": {
+      "git_blob": "ef7a9a4ee0409ca9f5b3242f9e21836b2fd631dd"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_qk_overlap_weighted_chromosomes.csv": {
+      "git_blob": "680ca319c79618b5f7cc691bcafdb617c58d18e9"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_scores.npz": {
+      "git_blob": "e445c33522cf14329f2bd0fe021a50db37d77e44"
+    },
+    "results/hardened/genomic/f0.70_token_balanced_token_density_chromosomes.csv": {
+      "git_blob": "92b7fd03ee283d9d49f04d2eaf229079a88aae46"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_balance.csv": {
+      "git_blob": "6bcab60df79c41de1cb0bd6604f3d27b7e5e058d"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_base_density_chromosomes.csv": {
+      "git_blob": "fc55f8276c697720ed5d260854e49583e286ab73"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_content_density_chromosomes.csv": {
+      "git_blob": "c2f6936820773a2995c515914304b1bad30eb74e"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_local_query_density_chromosomes.csv": {
+      "git_blob": "f92602bf8edd7186c7fbc0ed1440e7f397f8d4ab"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_pairs.csv": {
+      "git_blob": "e752fc4cacf40de61e00c4e8b932de1058853d01"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_position_only_density_chromosomes.csv": {
+      "git_blob": "c4a9a5654885e5b451490c686f3b90f1435600a8"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_qk_max_chromosomes.csv": {
+      "git_blob": "357e02353cf0c97610c13e0eccf38c1c146d8ec7"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_qk_mean_chromosomes.csv": {
+      "git_blob": "67383159315f45628dc4c87ab36c5c1be77f2b26"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_qk_overlap_weighted_chromosomes.csv": {
+      "git_blob": "4613b53c53173912d72e4f642cd874102696beaa"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_scores.npz": {
+      "git_blob": "bd4013f9f917a0af0f7a8ef54349a9f9642d3236"
+    },
+    "results/hardened/genomic/f0.80_nucleotide_matched_token_density_chromosomes.csv": {
+      "git_blob": "e8a674f324950f9aca5e48fef56eccd3de920642"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_balance.csv": {
+      "git_blob": "8c7204003539187e1cd603590b51bdefc9cbf9cf"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_base_density_chromosomes.csv": {
+      "git_blob": "bb641d1aa1e710adb7054c7bc8a422efd98b72e1"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_content_density_chromosomes.csv": {
+      "git_blob": "3eb87c36b1088452082992d9f0d194dac87ef278"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_local_query_density_chromosomes.csv": {
+      "git_blob": "00b2ef9b39b82a183fda58cd1f85e93c09f2c707"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_pairs.csv": {
+      "git_blob": "e32108b132797a54a8df27ee43bd446562e544d4"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_position_only_density_chromosomes.csv": {
+      "git_blob": "243565b6351c66daa8a40242ee8ee88a2e07d463"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_qk_max_chromosomes.csv": {
+      "git_blob": "539a228565d370f92f0f252e03b50ccfb9e70034"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_qk_mean_chromosomes.csv": {
+      "git_blob": "8da1c3be5841fe3a56b0fabcce1910d1c261f34f"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_qk_overlap_weighted_chromosomes.csv": {
+      "git_blob": "c3556727aed621450032954ca854c30fc8899cfb"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_scores.npz": {
+      "git_blob": "f3e7044895818abfcebdc855ee787fd558e97b14"
+    },
+    "results/hardened/genomic/f0.80_token_balanced_token_density_chromosomes.csv": {
+      "git_blob": "dc505b0fb1d8c75cdc0220d886cf6e9f6441033e"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_balance.csv": {
+      "git_blob": "e81e767b9e84841a2dcaf5addeff60c2852ab686"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_base_density_chromosomes.csv": {
+      "git_blob": "5d83b833ec8912cae4dfe91ac31223d40c4ce6e8"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_content_density_chromosomes.csv": {
+      "git_blob": "a992c52840f4618d1766c03633b75cd9608bee46"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_local_query_density_chromosomes.csv": {
+      "git_blob": "f2437c378e3f9d2fb7be2bdcf7083c11831a42de"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_pairs.csv": {
+      "git_blob": "7b75eb05cf4bb4c42cbc24f5b237a303bac4e591"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_position_only_density_chromosomes.csv": {
+      "git_blob": "4fcf1ff629aa19e591388362ca5077802cd2bcbe"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_qk_max_chromosomes.csv": {
+      "git_blob": "22e5b78115d42c4595c3f13a491a4d4132d98550"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_qk_mean_chromosomes.csv": {
+      "git_blob": "b3db87bf03ea0561c4212ab77ff3a51a9be7e1a8"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_qk_overlap_weighted_chromosomes.csv": {
+      "git_blob": "bbfa9193d009c6560395b7e94c185892c79c0172"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_scores.npz": {
+      "git_blob": "f9c93c76f76e5aa8f177e0ee032846ef120974c7"
+    },
+    "results/hardened/genomic/f0.90_nucleotide_matched_token_density_chromosomes.csv": {
+      "git_blob": "c63863e32b799aa02e32d8daa8100c2924be48e6"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_balance.csv": {
+      "git_blob": "b143aa7cec7949e9391ce9d3af80799cb66a4399"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_base_density_chromosomes.csv": {
+      "git_blob": "bc963c2840f522a68195953852ad781cb4b7930c"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_content_density_chromosomes.csv": {
+      "git_blob": "4aabd7eef5ce09b8dc8cd6df1e8762ae04559173"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_local_query_density_chromosomes.csv": {
+      "git_blob": "1b14b97712decd7ee33c81a0ca848ca6a11afafc"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_pairs.csv": {
+      "git_blob": "ec0d2f9b3d88cb5ccdcc44e392ecf18fcb89e40e"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_position_only_density_chromosomes.csv": {
+      "git_blob": "fe7b9359918756efa7cba703c993239bb8c1e15f"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_qk_max_chromosomes.csv": {
+      "git_blob": "859306efcf9c9f503dd1117151d70eb335b53523"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_qk_mean_chromosomes.csv": {
+      "git_blob": "85b7de7aeb8bebad8625f074a6033778a12d4808"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_qk_overlap_weighted_chromosomes.csv": {
+      "git_blob": "5c99ac1790aba2f3195b45575904a40894c92512"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_scores.npz": {
+      "git_blob": "decfcc1942421ce87da24395d0e59f380f0bd79f"
+    },
+    "results/hardened/genomic/f0.90_token_balanced_token_density_chromosomes.csv": {
+      "git_blob": "48a56b39984500a753043f9ab130f82f7ad1e84a"
+    },
+    "results/hardened/genomic/native_sensitivity_inference.csv": {
+      "git_blob": "1adcb5afc109ed28e6cc4e18ae468d29efb64b0f"
+    },
+    "results/hardened/genomic/native_sensitivity_manifest.json": {
+      "git_blob": "58b1558703f97ca9619a7faa18b5a4c15463daae"
+    },
+    "results/hardened/history/calibration/3cdd2faa0b0595125ffcb2e280b1d49a6fcf2b284a3137b0f8a330d60aa07ed5.json": {
+      "git_blob": "8db76112df9812f38fa19b114364d963c4d21ec0"
+    },
+    "results/hardened/history/calibration/51ee5ccb21845e170adf35fb0c4b5c7aa7e5885a6c3cb27426ca71b87102f20e.json": {
+      "git_blob": "b2d40c38546db8344fb447190920f296973104e3"
+    },
+    "results/hardened/history/calibration/54caa50e607fab44becc89c0276a4289fd3077df1ad57985273b79c230b01add.json": {
+      "git_blob": "cb19a841a68fc674685ce7b914fc87c4ff72b8d7"
+    },
+    "results/hardened/history/ctcf/2d8e98532142f68e6a08d993b8489dba16d6afa0a66ef54218f20396d4d368e0.json": {
+      "git_blob": "bf3c33bd3a72beb97d3f7c67ebea857370e03ed0"
+    },
+    "results/hardened/history/diagnostics/22010731bd2f36ff27709828c42048e52b596aecfce74e2d5754c3141bafed8b.json": {
+      "git_blob": "b4f9dd184831bf2ee2295bd66dc23e0ed6d0d7ae"
+    },
+    "results/hardened/history/diagnostics/620c4f1985d6bdb432fb0affe7dca67850f3a71229d89a8c8dae0052bffdf4c8.json": {
+      "git_blob": "80ac57229009e827ee116a6ed4b5e9b52c13acab"
+    },
+    "results/hardened/history/diagnostics/674ae9678d3d01c67d1be755820dadd4ea83350dd4f1c01e288dee91e9f05b5b.json": {
+      "git_blob": "ceb4ab01c941e10e05b0ab3d4a6ae901e2358ac2"
+    },
+    "results/hardened/history/genomic/9a72323d9d218d31df05d47961da8068d520016e6c87b4385761042280928fbb.json": {
+      "git_blob": "7e651296a639fa239c1f9436e12d2737047dfd4e"
+    },
+    "results/hardened/history/patching/6a3c9841a338930f81673a5c9df6a62958460b5c77b7e7c435bec5b00a2f853f.json": {
+      "git_blob": "1c73742aa7b609ed8782233b37b6cc05400a074e"
+    },
+    "results/hardened/history/prediction/58c6cef8f6df1d469dbc7e0adec7f964bb78acc7f0407371758e46c55bd5bb3d.json": {
+      "git_blob": "2e537eb816188e350da68e1912847be54c5dda92"
+    },
+    "results/hardened/history/prediction/b1f4b5d78ab9e71394e2ba87bbf982c83f673bf597ef1ae9c1cea888a398ebe8.json": {
+      "git_blob": "e969d2babd4f2aa4108a7d725d21f52e1731780d"
+    },
+    "results/hardened/history/prediction/ebd47ae58699a861ed1770df7c6584a092994bed83d4be1b0aed0a69031c1b1a.json": {
+      "git_blob": "c769ab488993470d4cc0ca01369f5388f97da206"
+    },
+    "results/hardened/history/protocol_df4cd6b4c4cd76f153ff6c9a1d9eeec12e5fbd76467e84769f03e9e25ada4792.json": {
+      "git_blob": "cf0f40eba383f14a2918ed65288443856439ec1f"
+    },
+    "results/hardened/implementation_coverage.json": {
+      "git_blob": "9cd037999dbe7a5033faa0192b7e6815cd0ac48c"
+    },
+    "results/hardened/implementation_coverage.md": {
+      "git_blob": "a0b95f0f2d7aab802a5edc60e71baef6c6db77b8"
+    },
+    "results/hardened/paper_manifest.json": {
+      "git_blob": "8371a755b250b6d01314b0cebb99e9fe23b1765f"
+    },
+    "results/hardened/patching/execution.json": {
+      "git_blob": "8b8559c52bc5b6ed79f6f2fc1164402d12d088ac"
+    },
+    "results/hardened/patching/promoter_tata/confirmation_pair_effects.csv": {
+      "git_blob": "4df101dde2c53c38e6ee31ffd5bef364565d3d8d"
+    },
+    "results/hardened/patching/promoter_tata/confirmation_summary.csv": {
+      "git_blob": "a92eee7dfb50e85b3200a1429b3eeaea04b397bf"
+    },
+    "results/hardened/patching/promoter_tata/controlled_pairs.jsonl": {
+      "git_blob": "1c7a2f37ead13889328fe0a6d46721e341f2572f"
+    },
+    "results/hardened/patching/promoter_tata/discovery_inference.csv": {
+      "git_blob": "b6ece23aec423a7e65f5138420b2ff5471be160f"
+    },
+    "results/hardened/patching/promoter_tata/discovery_pair_effects.csv": {
+      "git_blob": "42c57693759dcb6213be57684e158e6d5c4dac38"
+    },
+    "results/hardened/patching/promoter_tata/eligibility.json": {
+      "git_blob": "a9ca1eed3e9df4c41cbe61820ea05035b274c0d3"
+    },
+    "results/hardened/patching/promoter_tata/frozen_selection.json": {
+      "git_blob": "d264986f1ee9c16961f4d8a0444dd91a4a804bdf"
+    },
+    "results/hardened/patching/promoter_tata/same_motif_localization.csv": {
+      "git_blob": "a9e4e2e5f89681152ee951f2e08e5e325eb59ddb"
+    },
+    "results/hardened/patching/promoter_tata/study_manifest.json": {
+      "git_blob": "4d4103804cdd94a6d3b84dab4d69c22f6d05a5e2"
+    },
+    "results/hardened/patching/splice_sites_donors/controlled_pairs.jsonl": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/hardened/patching/splice_sites_donors/eligibility.json": {
+      "git_blob": "ee42e6efba1cc96fdbebf2c9b4af2f7944729eb5"
+    },
+    "results/hardened/patching/splice_sites_donors/study_manifest.json": {
+      "git_blob": "42c82f9bbeff2af7ec81931cc55c396df317441e"
+    },
+    "results/hardened/prediction/execution.json": {
+      "git_blob": "7d6a8a239a65774aac438fd71150e1bc28d1fa82"
+    },
+    "results/hardened/prediction/promoter_no_tata_cache_import.json": {
+      "git_blob": "9374f926fdcded014cf0a537621409d22f434cb4"
+    },
+    "results/hardened/prediction/promoter_no_tata_metrics.csv": {
+      "git_blob": "8cb2e77058dfbd77730715bfad7e03f62beb81ed"
+    },
+    "results/hardened/prediction/promoter_no_tata_paired_comparisons.csv": {
+      "git_blob": "8e33493f543805063a0bda0ba5f44d1cc70251de"
+    },
+    "results/hardened/prediction/promoter_no_tata_predictions.csv": {
+      "git_blob": "5097a0252b492ca7609d3be0b1eeebea9fab57f5"
+    },
+    "results/hardened/prediction/promoter_no_tata_selection.json": {
+      "git_blob": "a7660d14347db6420c7cd23adf2fbfac542db5ee"
+    },
+    "results/hardened/prediction/promoter_tata_cache_import.json": {
+      "git_blob": "82310dd90dba64a9ac06befb725dc5d1ebdbf6d9"
+    },
+    "results/hardened/prediction/promoter_tata_metrics.csv": {
+      "git_blob": "23c8e5c168e126f136b62615e26195c1064943e0"
+    },
+    "results/hardened/prediction/promoter_tata_paired_comparisons.csv": {
+      "git_blob": "322b5db19c7e54c035454e8bb0a5fafa8859d06a"
+    },
+    "results/hardened/prediction/promoter_tata_predictions.csv": {
+      "git_blob": "848ab03b30c5c01fc75c85f6715fadf2ace43d33"
+    },
+    "results/hardened/prediction/promoter_tata_selection.json": {
+      "git_blob": "30be695077e0e678e6929fb0eebb1ce2eb38fd77"
+    },
+    "results/hardened/prediction/splice_sites_acceptors_cache_import.json": {
+      "git_blob": "06e16ae5ff35bb71f62b2e783b02908a094193c3"
+    },
+    "results/hardened/prediction/splice_sites_acceptors_metrics.csv": {
+      "git_blob": "6d65a5ac389c07b208b9d9c62cee03b3f3d43c3a"
+    },
+    "results/hardened/prediction/splice_sites_acceptors_paired_comparisons.csv": {
+      "git_blob": "4b0357f0e2b062bd24527f57e3df9e7f6afacec9"
+    },
+    "results/hardened/prediction/splice_sites_acceptors_predictions.csv": {
+      "git_blob": "ac408e63c9b4b01c5febe916b0a71be849bc67dc"
+    },
+    "results/hardened/prediction/splice_sites_acceptors_selection.json": {
+      "git_blob": "9c571facacab643350503d4995d14349eee67958"
+    },
+    "results/hardened/prediction/splice_sites_donors_cache_import.json": {
+      "git_blob": "db01389fae165b0cdb811b1b0650ecda55a6082c"
+    },
+    "results/hardened/prediction/splice_sites_donors_metrics.csv": {
+      "git_blob": "832e591036875a05572537f7140e60bcde9f27d1"
+    },
+    "results/hardened/prediction/splice_sites_donors_paired_comparisons.csv": {
+      "git_blob": "96c7bf86eff62f621899b6fb9a7bb9ea0c8fe9eb"
+    },
+    "results/hardened/prediction/splice_sites_donors_predictions.csv": {
+      "git_blob": "46eb20a0e36a24e7bbf638b9a40c16322c997020"
+    },
+    "results/hardened/prediction/splice_sites_donors_selection.json": {
+      "git_blob": "c620f0f34574316b7a6e7d14f19bf211466704bb"
+    },
+    "results/hardened/protocol.json": {
+      "git_blob": "b781344ed5fccea2ea70c1a8d414c0fe5eb083eb"
+    },
+    "results/hardened/run_manifest.json": {
+      "git_blob": "24fd87e386d0876841d6dcdba1072966d7a941f2"
+    },
+    "results/hardened/sources/ENCFF598KWZ.bed.gz": {
+      "git_blob": "ffa92c5fb44da1047efb086ab382899dda6678cc"
+    },
+    "results/hardened/sources/accessibility_source.json": {
+      "git_blob": "0362c10868ebf9dafc793700492afb40d5a33f4f"
+    },
+    "results/native_endpoint/build_validation.json": {
+      "git_blob": "b135834b7e66fbe0472711407426fdc982bf8f6b"
+    },
+    "results/native_endpoint/checkpoint.json": {
+      "git_blob": "c0221e4e9197cf01d1e6e6ddd9721e42d1af9574"
+    },
+    "results/native_endpoint/command_cpu_tests.log": {
+      "git_blob": "3a7a5a5119c904446a075c89e7b0709bfa0c2767"
+    },
+    "results/native_endpoint/command_cuda_tests.log": {
+      "git_blob": "90f35bc7ee484be81259a12f9826fdfe1d043ff0"
+    },
+    "results/native_endpoint/eligibility.json": {
+      "git_blob": "c9de82f7767713af4cf0377ebdcc002215dfeec2"
+    },
+    "results/native_endpoint/execution.json": {
+      "git_blob": "d93f8c88546eb5f4822ef8eb3e21b2dd3c4ab48f"
+    },
+    "results/native_endpoint/pairs.jsonl": {
+      "git_blob": "7a1643585e5a12e14e876ef793f60298d7160a79"
+    },
+    "results/native_endpoint/paper_manifest.json": {
+      "git_blob": "4f4f435abfe90983a2ca017f0d6ab5343e4d1d11"
+    },
+    "results/native_endpoint/protocol.json": {
+      "git_blob": "5c7f07728a41e79ff2d44ce2e3511bb8a03aaf1a",
+      "sha256": "2e7d12898890c20a9c82dead49bbc60cc5c79b8e2c6804525266bc918c319aef"
+    },
+    "results/native_endpoint/scores.csv": {
+      "git_blob": "2811c4ca5dc9e42efad5396bae8b18966fbb9b3f"
+    },
+    "results/native_endpoint/summary.json": {
+      "git_blob": "97bb2a7d109832cf2c23616baf6aecc9591310c1"
+    },
+    "results/native_followup/allele_manifest.json": {
+      "git_blob": "af81ea9557f3775de63138e86479211054be3965"
+    },
+    "results/native_followup/build_validation.json": {
+      "git_blob": "68e0cdfe5b3fa29f98b4092d88d10598f75bc04a"
+    },
+    "results/native_followup/checkpoint.json": {
+      "git_blob": "c0221e4e9197cf01d1e6e6ddd9721e42d1af9574"
+    },
+    "results/native_followup/ctcf_allele_effects.csv": {
+      "git_blob": "45da5e5517056e2e245945cf1be111288997cb77"
+    },
+    "results/native_followup/eligibility_balance.csv": {
+      "git_blob": "56bac51ae6a44a0b51922e720bf048b419ad1d33"
+    },
+    "results/native_followup/eligibility_metrics.csv": {
+      "git_blob": "1260d1b6c50014fd4561be9694e22174a10f3262"
+    },
+    "results/native_followup/engineered_control.json": {
+      "git_blob": "d4d376b6762f78acc867d961c028f7e5b861d650"
+    },
+    "results/native_followup/execution.json": {
+      "git_blob": "7d5c95b4bbb4338c699ff6d55ed305a0f8148e77",
+      "sha256": "d3870139fa63544fa97803f9ef911143404d8db7bb183896972758c0849555ea"
+    },
+    "results/native_followup/geometry.csv": {
+      "git_blob": "dfd8e602254b46ead4d9385116403bdf40c52171"
+    },
+    "results/native_followup/intervention_controls.csv": {
+      "git_blob": "53ce9ed28a9ef4651788c42fb8ed9cded7ceb12e"
+    },
+    "results/native_followup/pilot_diagnostics.png": {
+      "git_blob": "f9122da4c216f29bf5f064c8041bc37cf6b199f4"
+    },
+    "results/native_followup/pilot_eligibility.csv": {
+      "git_blob": "603c8c483530d9ffb7944bb6342794a5df708849"
+    },
+    "results/native_followup/pilot_influence.csv": {
+      "git_blob": "3bda030e654991a810745eecd5ffd9eb72475a60"
+    },
+    "results/native_followup/protocol.json": {
+      "git_blob": "f375ce305f73f920af93d99175d2bcc4665a8f32",
+      "sha256": "6a349cef004a9a24cb431190cdce741c6c60c1c0b10b85c30bb3c9dde2772a12"
+    },
+    "results/native_followup/recovery_calibration.png": {
+      "git_blob": "db3c706877dad6586831815db516ed6acc482dd6"
+    },
+    "results/native_followup/recovery_membership.json": {
+      "git_blob": "79279800494ef11e7543879641981b2342769da4"
+    },
+    "results/native_followup/recovery_scores.csv": {
+      "git_blob": "b0ccdf318f16c4d9d6f0a6b91f6031115f79dbce"
+    },
+    "results/native_followup/recovery_strata.csv": {
+      "git_blob": "7374688bd8f123535957b4a322a42dd016dc8b17"
+    },
+    "results/native_followup/report_manifest.json": {
+      "git_blob": "e00b16415d98864f7ebb39eec3ffdb875cefd531"
+    },
+    "results/native_followup/sources/mmc1.pdf": {
+      "git_blob": "90f56c101fa885e3788c17ab2d08bf55e6ad0642"
+    },
+    "results/native_followup/sources/mmc2.xlsx": {
+      "git_blob": "37275dc537cead7f8e7c36b02252f6c23bd7bcf6"
+    },
+    "results/native_followup/sources/supplement.txt": {
+      "git_blob": "3e4fb9b3a3861857b4e05ea81dc6e21cf351c5b3"
+    },
+    "results/native_followup/sources/supplement_layout.txt": {
+      "git_blob": "1aacecf432a8d88645083d997928a74fc5475c5e"
+    },
+    "results/native_followup/summary.json": {
+      "git_blob": "f1e70ec23a6fbf12da5482a92d30a92af90494b3"
+    },
+    "results/native_followup/tests_cpu.log": {
+      "git_blob": "d57474da19a06865f08520712ad7ef1fb0f32c72"
+    },
+    "results/native_followup/tests_cuda.log": {
+      "git_blob": "e6604da171b8559c4d02f5cd4986447d304f205e"
+    },
+    "results/patching/promoter_tata_batch_dnabert_activation_patching.csv": {
+      "git_blob": "01252bd656e12bf294e7d01dde9ce3703cf8a6b0"
+    },
+    "results/patching/promoter_tata_dnabert_activation_patching.csv": {
+      "git_blob": "d0c468d6997bc4332fcb3074376aa5b2bde4f301"
+    },
+    "results/patching/splice_sites_donors_batch_dnabert_activation_patching.csv": {
+      "git_blob": "43b684b5755e7c7754cd2b7b54cd0d1c2c249142"
+    },
+    "results/pipeline_run.json": {
+      "git_blob": "71165158ee4b8cb64623e3f85ed9e222019dd129"
+    },
+    "results/pipeline_run_cross_model_tokenization_comparison.json": {
+      "git_blob": "62c361d7610e7f2f45ae40c83d6172c757392cdf"
+    },
+    "results/qk_alignment/ctcf_qk_alignment.csv": {
+      "git_blob": "ec057b637b1fb87a25becb5254ca372da05a7801"
+    },
+    "results/review/blas_profile.json": {
+      "git_blob": "4310fed6a9665cd4e864cd0ab52331282744e1df"
+    },
+    "results/review/claim_evidence_audit.json": {
+      "git_blob": "839c9ba07051bb25e1450fbbc3ce1d247ae6cb70"
+    },
+    "results/review/classification_metrics.csv": {
+      "git_blob": "8a96b686853fce84a69064a22258da8f7a6472aa"
+    },
+    "results/review/clean_background_exit.json": {
+      "git_blob": "23eb51919fe60d188efa03078e88977f16608fa5"
+    },
+    "results/review/clean_completed_manifest.json": {
+      "git_blob": "18f75e64b6290ebc2e3487137c3be0b879b2bac4"
+    },
+    "results/review/clean_cuda_environment.json": {
+      "git_blob": "acdad397d374103d7c0b43c61f20915e0668d47f"
+    },
+    "results/review/clean_cuda_exit.json": {
+      "git_blob": "f2f5bbdeb892e97e1bb9e3ee753ffcbc93e2df20"
+    },
+    "results/review/clean_cuda_retry_exit.json": {
+      "git_blob": "8620eaa118afbd4e60a987aa075abdec1564f53b"
+    },
+    "results/review/clean_environment_versions.json": {
+      "git_blob": "2528bffd79bced82206ca0ffb4a43e244e38fe9f"
+    },
+    "results/review/clean_feature_comparison.json": {
+      "git_blob": "43af0dbf85e48aeb028528269005489b22b39a78"
+    },
+    "results/review/clean_gpu_restart.json": {
+      "git_blob": "f47ddc84e57d54672579ee5acf2e473b30d3a285"
+    },
+    "results/review/clean_initial_failure.json": {
+      "git_blob": "b9ff7596d2cbe1f586c09184651ca6f22fb11c3b"
+    },
+    "results/review/clean_input_comparison.json": {
+      "git_blob": "622fecda2a8c820382aa9f49ae6797ff493af1e1"
+    },
+    "results/review/clean_loading_interruption.json": {
+      "git_blob": "e3f7a595504941ed89a55e194dba680bf2800ea8"
+    },
+    "results/review/clean_native_crash.json": {
+      "git_blob": "44e55fd1453f0caa22c8cd3aadbe1666fbb1d662"
+    },
+    "results/review/clean_process_disappearance.json": {
+      "git_blob": "950800aee6547b91d2701a380e21683699474618"
+    },
+    "results/review/clean_reproduction.json": {
+      "git_blob": "18041be0ad1b4ac1e43629a0996748583357765f"
+    },
+    "results/review/clean_requirements.txt": {
+      "git_blob": "7977758dcf9650090fe7813f1d6b4b56b3567cf4"
+    },
+    "results/review/clean_result_import.json": {
+      "git_blob": "53d16cbb01dfe7793122cecfcef10089a3249a10"
+    },
+    "results/review/clean_resume_interruption.json": {
+      "git_blob": "760108ec09511d699d49d80a403a12ebb848d7d5"
+    },
+    "results/review/clean_run_artifact_hashes.json": {
+      "git_blob": "ad6b8abeb824cf082309b6fc0e147081a6b86ba9"
+    },
+    "results/review/clean_screen_comparison.json": {
+      "git_blob": "c1424bdc729f7be899f64f47dd1879b5a6dfb0f6"
+    },
+    "results/review/clean_tata_comparison.json": {
+      "git_blob": "85486394619a0d374b036b06e2e5c68f00ce19f2"
+    },
+    "results/review/command_000.log": {
+      "git_blob": "9068d91b9c87fc31e2e80b139556fcf059282d49"
+    },
+    "results/review/command_0166723deea4.log": {
+      "git_blob": "8d4968df3669a01512ce648fe5e169857e19b331"
+    },
+    "results/review/command_059d18a0bebc.log": {
+      "git_blob": "c903f53e7500b150cc5346965348b2dd7a8aef66"
+    },
+    "results/review/command_080ed624cbf5.log": {
+      "git_blob": "29afa264bd8c6f4986c882bbd40a0dd0cd9cb94f"
+    },
+    "results/review/command_125aafafcce0.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_138e17d7263e.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_1a332c9e4305.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_1c059b4e3b63.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_1cb8ab04bbae.log": {
+      "git_blob": "1cc2d6da2ea2036c2760d11c13d02df72c01a634"
+    },
+    "results/review/command_281c1afb5b8f.log": {
+      "git_blob": "bc94b128540ae842912c2c52754a448ca3ba5184"
+    },
+    "results/review/command_28348ba85c77.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_379c19d2ff29.log": {
+      "git_blob": "5895a2367e6af1085f22555b810f2a3849c86399"
+    },
+    "results/review/command_3dd41c8e8533.log": {
+      "git_blob": "f711fbb58ce4adf5788bba86888b9cbe786d6735"
+    },
+    "results/review/command_3e10d26437f7.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_3fc4ca40e974.log": {
+      "git_blob": "36fe3f37a930b366fccd562b543cae312818790a"
+    },
+    "results/review/command_40b7fa39a48e.log": {
+      "git_blob": "790792b02433f88c64e9c3cf7b2e03fe78073238"
+    },
+    "results/review/command_4450eb4aeafc.log": {
+      "git_blob": "8d2adf0820e1aef0d9664089b7a8c3c73004e594"
+    },
+    "results/review/command_46a4b198077c.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_4959230f7c54.log": {
+      "git_blob": "2142c890b5079dd934438e5205b3438a52ecdb0d"
+    },
+    "results/review/command_4a788ec25bda.log": {
+      "git_blob": "a98565569bed7bde335bbfa4d422c1344b53fadd"
+    },
+    "results/review/command_4ffc4cae4867.log": {
+      "git_blob": "5e89b3176dca80fddfb77ee2221e75ab537536cf"
+    },
+    "results/review/command_567d4ff4d0ce.log": {
+      "git_blob": "330f4790ed14e6b4a0465952c3052c075b13d281"
+    },
+    "results/review/command_572e9b75c405.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_5b7f366d082b.log": {
+      "git_blob": "38ab552654b6ffb0c736ced3a950e587dabf8b49"
+    },
+    "results/review/command_5cd281e152bb.log": {
+      "git_blob": "4229d319dede2bdab5665ea72c04cfa457924e14"
+    },
+    "results/review/command_5d12b387c820.log": {
+      "git_blob": "7f779f7d9e15da1168435d27fb178c8317a936c8"
+    },
+    "results/review/command_5f4924f8478e.log": {
+      "git_blob": "2e7ccf4ca92e36973cdff4e5367d8fb538aa6f26"
+    },
+    "results/review/command_642a540a5527.log": {
+      "git_blob": "1a38b058b663b844e4240c6b5a413091ed04c71e"
+    },
+    "results/review/command_65530e9fb08c.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_658ac034470e.log": {
+      "git_blob": "06d934e934ccea25ccbd61a9d613c09e7298e941"
+    },
+    "results/review/command_66158afc6c38.log": {
+      "git_blob": "7fa5496613f4e829488f1a342b82080f95b61ab8"
+    },
+    "results/review/command_681e90b59e00.log": {
+      "git_blob": "0a6b2cb1ac0af87375191b53adeb430797d667b7"
+    },
+    "results/review/command_72d3acbe1b80.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_74b2bf4a4427.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_76b1a5030298.log": {
+      "git_blob": "5f33c33e5eecbc8a2d56ceb860fa669bb9c68a92"
+    },
+    "results/review/command_88c21580d03e.log": {
+      "git_blob": "f66454f2ca2a8da6ea0bb477e7d6813e61b72f29"
+    },
+    "results/review/command_8b04d3e235a9.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_a0d49c4d888c.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_a249a47cc9bf.log": {
+      "git_blob": "93d90775a0ee62b54ed6a3a477a487f7f36a680b"
+    },
+    "results/review/command_a8368e933a79.log": {
+      "git_blob": "4a4804c4602358a52f127224a54b1000b29a9741"
+    },
+    "results/review/command_a8ed0cb1d0f0.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_a91aede40b05.log": {
+      "git_blob": "5222076554d2ceb6dd94d8a1b65a8b12ceb53448"
+    },
+    "results/review/command_aea18b70f297.log": {
+      "git_blob": "49c26d1ae7f20f18caeb9928d4d622e6dd7411b0"
+    },
+    "results/review/command_af616f8c5a96.log": {
+      "git_blob": "4342a14aec7345ebb3d51c72b3efec3389f8db8d"
+    },
+    "results/review/command_author_verified_build.log": {
+      "git_blob": "9cbe19fa6b8cdce0a8f91c4a434703a3f85758d2"
+    },
+    "results/review/command_b38bc72dbb64.log": {
+      "git_blob": "7ebd6eb2fb15566af147f4b4b627940136066866"
+    },
+    "results/review/command_b4fd100e57a4.log": {
+      "git_blob": "06d934e934ccea25ccbd61a9d613c09e7298e941"
+    },
+    "results/review/command_b6c5816e3ce0.log": {
+      "git_blob": "9a70434b3a6c193756c79baca5226b8f705fe71b"
+    },
+    "results/review/command_c3ea45fb3626.log": {
+      "git_blob": "b54f6aa9ecc95f455ccfc82589148276f8ebbd7d"
+    },
+    "results/review/command_c514e0b9c90d.log": {
+      "git_blob": "f8f9a4659db27bddceaeedf2946b1b459889ff3f"
+    },
+    "results/review/command_c7b5c45153d5.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_c84d485b2f8f.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_ca56cf121aef.log": {
+      "git_blob": "2ae565e5a6028c9d632c3b857beb33ae25b0e1c4"
+    },
+    "results/review/command_cc1be1b7fbca.log": {
+      "git_blob": "e867814ce201bd169ca5e610b928bfcc61c01fad"
+    },
+    "results/review/command_clean_background.log": {
+      "git_blob": "206e269161d7ae6c3ec32c7f36aeb237e9511cc6"
+    },
+    "results/review/command_clean_background_stderr.log": {
+      "git_blob": "776d3e50ef3071fa267fa687fd3cfb8c4039b89c"
+    },
+    "results/review/command_clean_cuda.log": {
+      "git_blob": "de8f22b89763f9e3d442f8dbe52e6a5c5323ef10"
+    },
+    "results/review/command_clean_cuda_retry.log": {
+      "git_blob": "1172aad92503fdddbbf9e9e6b4bea59c2c21eedb"
+    },
+    "results/review/command_clean_cuda_stderr.log": {
+      "git_blob": "b1b869c0d757408e823c36b41da6530d4f4ba7d8"
+    },
+    "results/review/command_clean_fast2_g.log": {
+      "git_blob": "f5c3c6474ede132e51d206f816ab94906bba663a"
+    },
+    "results/review/command_clean_fast_g.log": {
+      "git_blob": "c8b83ff02ddcdbc15c0678b10f08a61457264304"
+    },
+    "results/review/command_clean_feature_comparison.log": {
+      "git_blob": "6eb3203f6aae7437e01fde2d1c343879751ff1a0"
+    },
+    "results/review/command_clean_full_g.log": {
+      "git_blob": "eea30135ada25e33786012d271feadab99e0418b"
+    },
+    "results/review/command_clean_input_comparison.log": {
+      "git_blob": "ce987a7c1d05761be41179cc4e63112dcab55cbb"
+    },
+    "results/review/command_clean_install_g.log": {
+      "git_blob": "3a0e4165b26a77ba70f1181bded4d9fe0564805c"
+    },
+    "results/review/command_clean_install_retry.log": {
+      "git_blob": "d1c23551e1f388169619d7367806e2eb82a53141"
+    },
+    "results/review/command_clean_qk_opt_tests.log": {
+      "git_blob": "8993dceb0fd071d2ef9db768df206b8a77115526"
+    },
+    "results/review/command_clean_result_import.log": {
+      "git_blob": "07a05155b39fe832996bd94aa96c6a0d5593dee4"
+    },
+    "results/review/command_clean_result_import2.log": {
+      "git_blob": "e5e255cd7b5e2c062689d5b947110612ae6d939a"
+    },
+    "results/review/command_clean_result_import3.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_clean_resume_g.log": {
+      "git_blob": "e83aea2cef1669f39b04f63b4dd0bc6363e3b93a"
+    },
+    "results/review/command_clean_screen_comparison.log": {
+      "git_blob": "ed9d5bcd8f725c865d22f3afdf6586ab996c2eb8"
+    },
+    "results/review/command_clean_tata_comparison.log": {
+      "git_blob": "1ad8b33e68863bb033aada3c1efa5886f813f4d7"
+    },
+    "results/review/command_clean_tests_g.log": {
+      "git_blob": "7dfbc410dd625b74a8b732db4a8651e40c680d85"
+    },
+    "results/review/command_clean_tests_g2.log": {
+      "git_blob": "025fcdf10b9a54f179e851bbdcd401e86b5522f5"
+    },
+    "results/review/command_clean_tests_g3.log": {
+      "git_blob": "e255b015bf3d534c24bc9cbe44faa8a66c34f8dc"
+    },
+    "results/review/command_clean_train_comparison.log": {
+      "git_blob": "47919e59bc1d447faeff388c0399b4e3023c2fda"
+    },
+    "results/review/command_completion_build.log": {
+      "git_blob": "72e55287ff98919307cd3ceb865eba625f2c7a96"
+    },
+    "results/review/command_completion_export.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_completion_generate.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_completion_generate2.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_completion_paper.log": {
+      "git_blob": "27b32b46a1e7b59413b8b080941e815ac3938aab"
+    },
+    "results/review/command_completion_suite.log": {
+      "git_blob": "f84a0d487a4ea46f2a35ac393fe56f1580b0ea94"
+    },
+    "results/review/command_completion_tests.log": {
+      "git_blob": "76d59cb83cb4723081e30f81cedf1afacf273531"
+    },
+    "results/review/command_completion_tests2.log": {
+      "git_blob": "7caca218bedba37132b074e1c6630bbd67d84bd9"
+    },
+    "results/review/command_completion_tests3.log": {
+      "git_blob": "9a95e39218726bc915374960b2d0a3e6e5b1ec0c"
+    },
+    "results/review/command_completion_tests4.log": {
+      "git_blob": "81f9e004e1f3567de51a51740e79c730378dbf94"
+    },
+    "results/review/command_confirmation_audit.log": {
+      "git_blob": "b2ced231e8856c3b07eb740619e34fb084e7f79b"
+    },
+    "results/review/command_confirmation_build.log": {
+      "git_blob": "55b94e7c9544a82d08c1640d846c571778694089"
+    },
+    "results/review/command_confirmation_build2.log": {
+      "git_blob": "9648a11fc0d6311f3dcddbf748a2dde49bebbf8d"
+    },
+    "results/review/command_confirmation_generate.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_confirmation_tests.log": {
+      "git_blob": "2b4a542287f3f8d10559e7e2126817f9c165b5ba"
+    },
+    "results/review/command_d5b6435d37b4.log": {
+      "git_blob": "84ed6c9d9c4a0e66ae1d7d7d325f8fdcd6bfff03"
+    },
+    "results/review/command_dc66c3513045.log": {
+      "git_blob": "b471d241e7187c61c2d3048ae181de3cee6c8ccd"
+    },
+    "results/review/command_e39e739c2b33.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_eab08e9cb58e.log": {
+      "git_blob": "61e99c753bbbfea314bc953628d4e67bfc6261a7"
+    },
+    "results/review/command_eb856c2570d1.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_ecb9b0425a61.log": {
+      "git_blob": "2969593123e5751e700b04645703ac1088cb4500"
+    },
+    "results/review/command_f2470a8e4d3f.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_f34674c2b68c.log": {
+      "git_blob": "8bb2713eb22cb363af69b289670947187743af10"
+    },
+    "results/review/command_f912aa46d3ee.log": {
+      "git_blob": "a3faf1775b133990f35f34320086050ec60c6841"
+    },
+    "results/review/command_fba4596174f4.log": {
+      "git_blob": "16138b515663df38ae8c847ccf4c896319500717"
+    },
+    "results/review/command_fd5cc1a11989.log": {
+      "git_blob": "ea0baf3943746cf444a1855800cdd09c0f305483"
+    },
+    "results/review/command_final63_tests.log": {
+      "git_blob": "a0e6d46f45b8fcca33b5958cfd3b21845d96940d"
+    },
+    "results/review/command_final_build.log": {
+      "git_blob": "0cfbf75255124e6828f09fad5249ab9cc9db89d2"
+    },
+    "results/review/command_final_clean_tests.log": {
+      "git_blob": "84d74cf3683fa55449b4a33e5b5cb9db9022c81a"
+    },
+    "results/review/command_final_generate.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_final_generate_figures.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_final_guarded_generate.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_final_provenance.log": {
+      "git_blob": "7f2831ab5a90819600a116f33db9518aa525532d"
+    },
+    "results/review/command_final_tests.log": {
+      "git_blob": "d4bf16c42441c2c03f0431f10ea7c689ed0dce62"
+    },
+    "results/review/command_final_verified_generate.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_gpu_equivalence_tests.log": {
+      "git_blob": "2eadedb975993e49a55f6eea37dd93bcfa52cf9c"
+    },
+    "results/review/command_gpu_profile.log": {
+      "git_blob": "903b10e85ad37973efceedc68c5d51df2022408d"
+    },
+    "results/review/command_import65_tests.log": {
+      "git_blob": "5d45406e9175847a1e80393bb170e7c422512315"
+    },
+    "results/review/command_manifest65_tests.log": {
+      "git_blob": "d2a16c7b7d3be9ab5334165b4704e28ec5d2ae29"
+    },
+    "results/review/command_manifest_paths_generate.log": {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    "results/review/command_reference_verification.log": {
+      "git_blob": "5d8ac61fa3bced9b4bfb77096628b53a2b43e04a"
+    },
+    "results/review/command_sequence_cluster_summary.log": {
+      "git_blob": "62195b8c5eb1839eed76dbdece07bf27a436a997"
+    },
+    "results/review/command_sequence_qk.log": {
+      "git_blob": "683624be24b9c9d208ce60cda410d7bcfa8b668c"
+    },
+    "results/review/commands.jsonl": {
+      "git_blob": "945f8e1911ff62501554c3b53035559b864bb100"
+    },
+    "results/review/completion_validation.json": {
+      "git_blob": "11d84c6f80ab5915d7dc2c74d077cd9a08e58902"
+    },
+    "results/review/correctness_audit.json": {
+      "git_blob": "5edd82bbfd7c803361c17bc650547420fffade13"
+    },
+    "results/review/ctcf_genomic_control_pairs.csv": {
+      "git_blob": "993398835fd9b66e82a1dd5026143f700582ce4d"
+    },
+    "results/review/ctcf_native_control_inference.csv": {
+      "git_blob": "352a016262cac875cc89b59658d6677aef3b2dc1"
+    },
+    "results/review/ctcf_native_control_scores.npz": {
+      "git_blob": "e5925050b8ff460147381602377190fab01b0e6a"
+    },
+    "results/review/ctcf_native_controls.png": {
+      "git_blob": "c4ec26fdbeece166a71acfdb8253af050d1df6e8"
+    },
+    "results/review/ctcf_native_controls_manifest.json": {
+      "git_blob": "1ec8ddcd925712008029d61d4cdc7a1ff27210b1"
+    },
+    "results/review/ctcf_sequence_qk_inference.csv": {
+      "git_blob": "64996b87fcedc08a93bafbbc91f96e324f30ec00"
+    },
+    "results/review/ctcf_threshold_sweep.csv": {
+      "git_blob": "ae1edacfe41c020885b144f5383ecfbb95161e79"
+    },
+    "results/review/donor_pair_effects.npz": {
+      "git_blob": "f75f18ef6cd6cd74a6b34bddc87163e92058e478"
+    },
+    "results/review/donor_patching_pairs.tsv": {
+      "git_blob": "63dcadeaad65027a9543d6e9411a67cd865f4b41"
+    },
+    "results/review/donor_sequence_cluster_summary.csv": {
+      "git_blob": "1139db7a99afaf00ba25683291b86cb7143ba686"
+    },
+    "results/review/donor_sequence_cluster_summary.json": {
+      "git_blob": "b145645b1b1fa849b74eb07a545fefb156ebf3f4"
+    },
+    "results/review/existing_environment_versions.json": {
+      "git_blob": "7bd49ab9407ed66f5ecba9a20e8b45b50c68601a"
+    },
+    "results/review/failed_clean_install_packages.json": {
+      "git_blob": "0d184917487a78ec2498d5a070a293ec5bb97f78"
+    },
+    "results/review/failed_full_pipeline_manifest.json": {
+      "git_blob": "f06a44a06ae06b66a30e7f7129d999759c3a183c"
+    },
+    "results/review/gc_matching_diagnostics.json": {
+      "git_blob": "47b7112446d52b501a1e187f90a19bc6a54b7e8d"
+    },
+    "results/review/gpu_qk_profile.json": {
+      "git_blob": "e783b1f75bb01203b07bd14f31f9252765c50ae5"
+    },
+    "results/review/heldout_pair_plot_data.csv": {
+      "git_blob": "2ca31ff674ce6dbef9618959c397407b0884a507"
+    },
+    "results/review/heldout_patching.png": {
+      "git_blob": "bf772c7f6a7ec9ac2e0f01f3ac412bf4d19a4786"
+    },
+    "results/review/heldout_patching_summary.json": {
+      "git_blob": "5288694c98402fcc394d7b2eaececc5a9c9bc5f5"
+    },
+    "results/review/model_snapshot_manifest.json": {
+      "git_blob": "573e41f49cbe12fe35d8a34abaa8c66d5653ccd9"
+    },
+    "results/review/phd_review_20261005.md": {
+      "git_blob": "2460335c27a5f16c7e45963875e8bf7c7c4ee9c2"
+    },
+    "results/review/pinned_dataset_comparison.json": {
+      "git_blob": "a2e5561a04a156da0c3dc6ce07069cfb2ed581aa"
+    },
+    "results/review/promoter_no_tata_membership.jsonl": {
+      "git_blob": "633958eb85531de964f5e26cafa99b13e62d0987"
+    },
+    "results/review/promoter_no_tata_predictions.csv": {
+      "git_blob": "e92c6a1ccdc2f58cecce7d2fc24a90685568c08a"
+    },
+    "results/review/promoter_tata_membership.jsonl": {
+      "git_blob": "1120f2425a0848c2ed0503cf2608a15bd638f4fa"
+    },
+    "results/review/promoter_tata_predictions.csv": {
+      "git_blob": "8b9ebe2f079ed016f9df3e716cf0ab5b966debbb"
+    },
+    "results/review/qk_optimization_profile.json": {
+      "git_blob": "ac68687469cc93d93a0941c6a36ba94a19598a47"
+    },
+    "results/review/reference_verification.json": {
+      "git_blob": "ff1c362938052cc869a20fe64d42728bda7b94ad"
+    },
+    "results/review/splice_sites_acceptors_membership.jsonl": {
+      "git_blob": "e072c87db81baf8f41f6e1e1438a895cf142849b"
+    },
+    "results/review/splice_sites_acceptors_predictions.csv": {
+      "git_blob": "129ee83d73dcd6aa3caeda66e71d05da93df58d5"
+    },
+    "results/review/splice_sites_donors_membership.jsonl": {
+      "git_blob": "c4f741f0ab4f2726a0a98da5228e323814c62765"
+    },
+    "results/review/splice_sites_donors_predictions.csv": {
+      "git_blob": "76a06d59afe945139f9270ed1a5ce9634eab4f31"
+    },
+    "results/review/tables_manifest.json": {
+      "git_blob": "96ee9e3d351e2755f315db28d64161cb429318a3"
+    },
+    "results/review/upstream_dataset_snapshot.json": {
+      "git_blob": "ed9270434335b77f2a27a2f3799d47a6671c4b28"
+    },
+    "results/tables/cross_model_tokenization_comparison.json": {
+      "git_blob": "5f875d673b753c45d9b5f3b6dea7093009601c99"
+    },
+    "results/tables/downstream_task_performance.csv": {
+      "git_blob": "c3fa8c6ab2cde5908249aabe65d445bef2c1f870"
+    },
+    "results/tables/evidence_ledger.csv": {
+      "git_blob": "69b162f903eaf221de2fb3ef9f3445e87ec8ea97"
+    },
+    "results/tables/linear_probe_controls.csv": {
+      "git_blob": "72233e1f2a9b55d09fa8612fe3f58a4c70bc4a3f"
+    },
+    "results/tables/linear_probe_metrics.csv": {
+      "git_blob": "8e641adf01b1046648d2187d0a34909b0ebe63e3"
+    },
+    "results/tables/review_issue_matrix.csv": {
+      "git_blob": "8695b7ddaaca99671808e52b7b35133f756352be"
+    },
+    "results/tables/target_alignment_table.csv": {
+      "git_blob": "ded05999b41dc55ca8d7f7323b4149abe1bf801b"
+    },
+    "results/tables/tata_l2h7_ov_probe_alignment.csv": {
+      "git_blob": "e20a4d40b6977afdb81fab99b8a76025e03b10c5"
+    },
+    "results/tables/threshold_sensitivity.csv": {
+      "git_blob": "6fb015884bfb2a182b7c85c474eae403c05e850f"
+    },
+    "src/__init__.py": {
+      "git_blob": "31b62e23e1c43b45776997ff454a12042a9dd961"
+    },
+    "src/activations.py": {
+      "git_blob": "c319384e8bd438aa82b3aa2da636a8615478e852"
+    },
+    "src/assay_alignment.py": {
+      "git_blob": "2d0241ac4016aac731760a83f0734aadf8eac738"
+    },
+    "src/assay_calibration.py": {
+      "git_blob": "3a7017cf8fed672a7dd52780f1ce15e7c714c297"
+    },
+    "src/assay_stats.py": {
+      "git_blob": "6b6a0be6675279de7e2021ba813b8eb4b149489f"
+    },
+    "src/circuits.py": {
+      "git_blob": "55885c0cbfe40827ea75ab5525f8e7ed4000b702"
+    },
+    "src/cli.py": {
+      "git_blob": "41e05d46e7e5408114cd44d76f13ed5aa5358871"
+    },
+    "src/config.py": {
+      "git_blob": "29d2380964d34eac91939431119d64186b4416fe",
+      "sha256": "59515a9a8be06fe617b065a449788861196894d7fb2a4474009185167a6d2afb"
+    },
+    "src/controlled_edits.py": {
+      "git_blob": "9a2c50ee4f95abae9c135e8a1291195510ff6ffe"
+    },
+    "src/counterfactuals.py": {
+      "git_blob": "36560da81d7c6feb1539757b2d8b4c4d39039eda"
+    },
+    "src/cross_model.py": {
+      "git_blob": "4eff9daff787af2564eb2b3c500a82bb1d7c9d9e"
+    },
+    "src/ctcf.py": {
+      "git_blob": "d5fba0a5bcfc76f74746522f433b0f2e736b0b87"
+    },
+    "src/ctcf_controls.py": {
+      "git_blob": "62faca99a9ec0cdb5ffc2126882a2b6ee16382f3"
+    },
+    "src/data_ingestion.py": {
+      "git_blob": "db54cf95e80fe1422a44341ddd6558c66266c346"
+    },
+    "src/distributed_features.py": {
+      "git_blob": "030a31b60f3f69db43408a5c934f819ddc8ecfa7"
+    },
+    "src/enrichment.py": {
+      "git_blob": "90aaf5275d2b785061fbcae52204ca3f86f7cf7a"
+    },
+    "src/hardened_diagnostics.py": {
+      "git_blob": "39b7491229e57cca992254431b57308b21996e2a"
+    },
+    "src/hardened_genomic.py": {
+      "git_blob": "47e82c711d14a6b60090c7d71a69753b665483e4"
+    },
+    "src/incremental_prediction.py": {
+      "git_blob": "07010fe62d497bada425715c3c38092532b198ba"
+    },
+    "src/inference.py": {
+      "git_blob": "67de46f1455a3ea8460c992bf653e24c575563f5"
+    },
+    "src/integrity.py": {
+      "git_blob": "c0636f966b063cd210d9a4657f667f37ef08807b"
+    },
+    "src/intervention_study.py": {
+      "git_blob": "e765658415aca23c0762d5e072eed46dca386fe1"
+    },
+    "src/mechanistic_proofs.py": {
+      "git_blob": "1dbaa5da016061e82ff4a65667da2472fa92ce2d"
+    },
+    "src/modeling.py": {
+      "git_blob": "2a28bd1105ff5fd9e1eb5ddc0acd06b7ab57b44f"
+    },
+    "src/motif_scoring.py": {
+      "git_blob": "f829b111d3a034139db884b62363c78b5a65c425"
+    },
+    "src/native_alleles.py": {
+      "git_blob": "54b4ae4e65f5cc9cbe1777e7e04b43602e5a65e7"
+    },
+    "src/native_assay.py": {
+      "git_blob": "5c0674c881255083c5ff0057c570846e54914b3f"
+    },
+    "src/native_endpoint.py": {
+      "git_blob": "8b39daf87ee163a566eced59b544e8df19f8eb6d"
+    },
+    "src/native_followup.py": {
+      "git_blob": "91aab9aa2e254a5f3c45ad3d2d7fea1681a2d0ac"
+    },
+    "src/patching.py": {
+      "git_blob": "0245e8b5016fc9a2f236d79409aea1fb9095ca80"
+    },
+    "src/probing.py": {
+      "git_blob": "97e621ae952b201bc726b01444bf85c3c840b615"
+    },
+    "src/provenance.py": {
+      "git_blob": "ca15d31e76db1c32407f19251f3c5f782037da45"
+    },
+    "src/qk_alignment.py": {
+      "git_blob": "d884e8b049f7abb8c6655ed8e73ebfd9357d56e9"
+    },
+    "src/reproduce.py": {
+      "git_blob": "e45220ed1d8ff57584417dd178ed0a6a4eb21cc5"
+    },
+    "src/task_performance.py": {
+      "git_blob": "6b362be11b170c503324029eb48615c2d0fdbabb"
+    },
+    "src/threshold_sensitivity.py": {
+      "git_blob": "157d8d8d91c1f3aac9d9772628a8e626044ab652"
+    },
+    "src/utils.py": {
+      "git_blob": "92ac388cdd9ff3fca4140549a6265d72247fd375"
+    },
+    "tests/test_circuits_and_enrichment.py": {
+      "git_blob": "3d535768a16f508760107c702bfdcdbeb68b6060"
+    },
+    "tests/test_counterfactuals_and_patching.py": {
+      "git_blob": "dc73f59b25e5f302e30f0bf0893c3be3b3aeeaab"
+    },
+    "tests/test_cross_model.py": {
+      "git_blob": "5955d976b7aa0f5f3d58254b9c8075c06506a7d2"
+    },
+    "tests/test_distributed_features.py": {
+      "git_blob": "8d4ba6eb327aec91b984b780523d125c0c4cbf74"
+    },
+    "tests/test_hardened_assay.py": {
+      "git_blob": "e786171ff87cf265ade2d8c57e930db2f781d50c"
+    },
+    "tests/test_ingestion.py": {
+      "git_blob": "fceb21f8e3af57f0249936c94c78fe29932fb03d"
+    },
+    "tests/test_motif_scoring_and_qk_alignment.py": {
+      "git_blob": "17bbe249a8c1fbc067b5d3c2b47a50c86abf4927"
+    },
+    "tests/test_native_endpoint.py": {
+      "git_blob": "08d77377a7c5fbfe8c76e01794bb1244624bb1ac"
+    },
+    "tests/test_native_followup.py": {
+      "git_blob": "1b2a8acb24b17f64fc81652f0caf8a3d6453e72e"
+    },
+    "tests/test_probing.py": {
+      "git_blob": "5e1109650a915cc1be0caa921d335d3c59ad647c"
+    },
+    "tests/test_reproduce_manifest.py": {
+      "git_blob": "ad988f4ccb002d3c57e9fcc460faebeae82a101d"
+    },
+    "tests/test_review_integrity.py": {
+      "git_blob": "9e497625bc7112a1238fb0077014d1e0f1ebef30"
+    },
+    "tests/test_smoke_runs.py": {
+      "git_blob": "24b416ea59b14628cea4ada3dcca16ed374827ed"
+    },
+    "tests/test_task_performance.py": {
+      "git_blob": "fa91ac314b4c9d64e60b02116aeb4dad2139698d"
+    },
+    "tests/test_threshold_sensitivity.py": {
+      "git_blob": "4c3fac1d7b163f1011014a52613459f29361dc98"
+    },
+    "tools/build_hardened_artifacts.py": {
+      "git_blob": "cb3881148457f576fdbd2b31bd37dc83d25d2a02"
+    },
+    "tools/build_native_artifacts.py": {
+      "git_blob": "54bc55f8c614fd9a516272c1c567fe29bf1170ee"
+    },
+    "tools/build_native_followup.py": {
+      "git_blob": "53232618e6ba9e623efff7e18a7ea7dc4f6adfd6"
+    },
+    "tools/extract_ctcf_alleles.py": {
+      "git_blob": "28788572c0a7e19cd1ca98a691171a9daae183ac"
+    },
+    "tools/preflight.py": {
+      "git_blob": "04cf827a036c430d5ac7b79627da919371a78e61"
+    },
+    "tools/review_audit.py": {
+      "git_blob": "bdfbafd663091145c48597c6bd5e4d65bb789c96"
+    },
+    "tools/review_ctcf_controls.py": {
+      "git_blob": "f354be14f14acfa97983621096a50be275298eef"
+    },
+    "tools/review_full_pipeline.py": {
+      "git_blob": "e6047acbc1f163b6fe0d9dbbd2bdd9d17490987b"
+    },
+    "tools/review_manuscript_artifacts.py": {
+      "git_blob": "faf6439d1a948e4194de3bf0854536551bdcf88c"
+    },
+    "tools/review_patching.py": {
+      "git_blob": "f9044d8665d9e82b0b3810af08a3bd85f2128e3a"
+    },
+    "tools/review_tables.py": {
+      "git_blob": "ea19216467a025a5094cf5bd372414ef5283cb1f"
+    },
+    "tools/run_hardened_assay.py": {
+      "git_blob": "d83d56e94904b4c1e971557a3e08c2cb0b39b13f"
+    },
+    "tools/run_native_endpoint.py": {
+      "git_blob": "03fd4855c651a2306c05d9a0a4dd9ecc02ab3742"
+    },
+    "tools/run_native_followup.py": {
+      "git_blob": "a43a33969e2b750a45ab36042896bbdfa2188f76"
+    }
+  },
+  "generator_sha256": "52309fbb5c54d80436ba84f56ce1f375ce11398b852030502c96f8c6ef5b62f5",
+  "scientific_stop": "original masked-flank sensitivity gate remains failed",
+  "scope": "exact Git tree retains manuscript, configs, protocols, results and execution receipts",
+  "tag": "mints-audit-v1-merged-2026-10-05"
+}

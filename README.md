@@ -270,3 +270,31 @@ Original MINTS code is [MIT licensed](LICENSE). Third-party datasets, models, an
 ## Native endpoint follow-up
 
 The [follow-up diagnostics](docs/native_followup.md) record geometry feasibility, independent masked-token recovery, native intervention controls, eligibility and cluster influence, and the recovered measured allele table. Hash-verified evidence lives in `results/native_followup/`. Tight within-sequence geometry matching is structurally infeasible for the original 19-base edits; the failed sensitivity gate remains in force.
+
+## Natural-variant feasibility
+
+The [v2 protocol](docs/MINTS_v2_protocol.md), [data inventory](docs/variant_data_feasibility.md), and [feasibility result](docs/MINTS_v2_feasibility.md) describe a separate, frozen exploratory study. The published benchmark retained no cases under the strict BPE and substitution-control rules, so native scoring, head selection and confirmation stopped before execution. `python tools/build_variant_artifacts.py` verifies the saved study and regenerates its report. New scientific attempts require fresh output directories. The baseline manifest preserves the exact merged audit commit and Git tree.
+
+`python tools/audit_variant_study.py` performs the [offline evidence audit](docs/variant_verification.md) used by CI, including population and gate consistency checks. Candidate-level diagnostics explain the matching failures without changing the frozen rules.
+
+The [downloaded ADASTRA cohort](docs/adastra_feasibility.md) adds a separate sequence-only screen of the complete public CTCF table. Its download, coordinate denominator, hash-selected membership and feasibility receipts are recorded under `results/adastra_exploratory/`; `python tools/audit_adastra_feasibility.py` verifies them offline. Missing biological QC keeps native inference and confirmation disabled.
+
+The [expanded diagnostic and mapped-query study](docs/mapped_variant_results.md)
+reaches a separately frozen negative exploratory endpoint. The 12,288-case
+diagnostic found one strict control in the added 8,192 cases. A minimal revision
+retained 61 paired reference-SNV/sham scenarios in 60 genomic proxy clusters,
+with exact query-span/ID mapping and verified native intervention wiring. Matched
+shams changed native predictions more than motif-overlapping variants: the
+cluster contrast is -0.015966 nats, with interval [-0.024454, -0.009146]. The
+positive sensitivity gate failed, so no head search or confirmation ran.
+Biological donor/phase/input/mapping QC remains a separate limit.
+
+The [new protocol](docs/mapped_variant_protocol.md), independent constraint
+intersections, case/query/cluster evidence, source snapshots, provenance gaps
+and execution receipts are preserved. Official metadata expose some real ChIP
+allele counts but do not establish independent donors or verified haplotypes.
+Run `python tools/audit_mapped_variant.py` without scientific caches, or add
+`--raw` to verify the preserved local native logits. Run
+`python tools/build_mapped_report.py` to regenerate tables, figures and the
+manuscript insert from audited evidence. This study does not reopen earlier
+stopped protocols or establish a causal CTCF circuit.

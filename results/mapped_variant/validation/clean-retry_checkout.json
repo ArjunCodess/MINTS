@@ -1,0 +1,69 @@
+{
+  "artifact_tests_deselected": 10,
+  "checkout": "C:\\mints-mapped-clean-20261006",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "tools/audit_variant_study.py"
+      ],
+      "elapsed_seconds": 0.6046967506408691,
+      "exit_code": 0,
+      "log_sha256": "4d3aeeddbd99e2944bfe202b9dfe9b10be9b9c16274886cfd7fd8758ad0e6c51",
+      "name": "clean-retry_variant_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "tools/audit_adastra_feasibility.py"
+      ],
+      "elapsed_seconds": 4.37296724319458,
+      "exit_code": 0,
+      "log_sha256": "8c7f1c42dfb71d8624722551959b1ddb0f53bb34b8438fda0632aa6ac3faa0d4",
+      "name": "clean-retry_adastra_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "tools/audit_mapped_variant.py"
+      ],
+      "elapsed_seconds": 4.377734184265137,
+      "exit_code": 0,
+      "log_sha256": "6aca09e00b036ca47546ec8ebb45bda98910790f9f68964fe96c571fba688e78",
+      "name": "clean-retry_mapped_audit"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-m",
+        "not artifact",
+        "--basetemp",
+        ".test-tmp"
+      ],
+      "elapsed_seconds": 25.778445720672607,
+      "exit_code": 0,
+      "log_sha256": "36483741827735734711fa3872e84be4eda7c0cde96f5f7dbc823b4603bfcc79",
+      "name": "clean-retry_tests"
+    },
+    {
+      "command": [
+        "C:\\Users\\USER\\Desktop\\code\\MINTS\\.venv-cpu-check\\Scripts\\python.exe",
+        "tools/build_mapped_report.py"
+      ],
+      "elapsed_seconds": 7.605678081512451,
+      "exit_code": 0,
+      "log_sha256": "b1c6003a2559c5accaf0fbd2112be9cc33b06cee945779d561dbff6a5355719f",
+      "name": "clean-retry_report"
+    }
+  ],
+  "commit": "930e93cd7984f0574066dceb3230bd4f96ff79b2",
+  "disk_free_bytes": 4432756736,
+  "empty_offline_hf_cache": "C:\\mints-mapped-clean-20261006\\.empty-hf-cache",
+  "report_outputs_byte_identical": true,
+  "scientific_caches_absent": true,
+  "status": "completed",
+  "tests_passed": 182
+}

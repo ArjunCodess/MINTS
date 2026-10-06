@@ -1,0 +1,80 @@
+{
+  "status": "completed",
+  "checked_at": "2026-10-05",
+  "base_commit": "fb93ca3e33dd7ebee8424b8ec55c84ac0fdbc625",
+  "branch": "natural-variant-pilot",
+  "tests": {
+    "tests_cuda.log": {
+      "passed": 160,
+      "sha256": "11fdb538cac9845d44d66df111c7b27016a9425ed2cc42b663265ba415ae3333"
+    },
+    "tests_cpu.log": {
+      "passed": 160,
+      "sha256": "ecbe1959ac695003be6294676b6da3851a184b217378c2154c8db462a77d2b70"
+    }
+  },
+  "preflight": "passed; pinned tokenizer cached; scientific input files present",
+  "dependencies": "both environments: no broken requirements",
+  "compileall": "src and tools passed",
+  "artifact_builds": [
+    "tools/build_hardened_artifacts.py",
+    "tools/build_native_artifacts.py",
+    "tools/build_native_followup.py",
+    "tools/build_variant_artifacts.py"
+  ],
+  "manuscript": {
+    "compiler": "MiKTeX via bundled latex helper",
+    "exit_code": 0,
+    "pages": 15,
+    "text_matches_frozen_baseline": true,
+    "tracked_pdf_sha256": "feeecf04682f51c24eb8827b5fc77d8b58d626fec255cd0b77e96f3bf9a9cc40",
+    "rebuilt_pdf_sha256": "b10487f811d5d07785adbc492e7fe5ec8c79c6affcca6950f0fe114ee5927068",
+    "unresolved_citations": false,
+    "overfull_boxes": false,
+    "scope": "baseline document rebuilt; original PDF bytes preserved; PDF figure metadata-only changes restored"
+  },
+  "pilot": {
+    "scanned": 16,
+    "singleton_heterozygous_loci": 11,
+    "retained": 0,
+    "decision": "stop",
+    "native_scoring": "not run",
+    "head_selection": "not run",
+    "confirmation": "not run"
+  },
+  "scientific_execution_sha256": "3827a5f4d45f408d7bddd70915cbcbb548b5eef2824a859832052257d6603959",
+  "report_manifest_sha256": "e6632d99df9527e23a2e45c664f6755f5d807b301872212ff7e515c212ddfdab",
+  "remaining_requirements": [
+    "phase and replicate biological QC",
+    "mapping-bias and dosage verification",
+    "feasible aligned substitution controls",
+    "fresh donor/source-separated membership",
+    "discovery intervention variance and justified confirmation power"
+  ],
+  "hardening": {
+    "offline_audit": "passed",
+    "semantic_and_byte_verification": true,
+    "tampering_regressions": true,
+    "atomic_protocol_claim": true,
+    "historical_attempts_preserved": 3,
+    "candidate_positions_checked": 512,
+    "first_rejections": {
+      "trinucleotide": 500,
+      "token_width": 5,
+      "motif": 3,
+      "geometry": 3,
+      "GC": 1
+    },
+    "equal_token_counts_with_boundary_mismatch": 6,
+    "frozen_rules_and_membership_unchanged": true,
+    "targeted_final_tests": 51,
+    "clean_checkout": {
+      "tests_passed": 152,
+      "artifact_tests_deselected": 8,
+      "offline_audit": "passed",
+      "local_windows_longpaths_enabled": true,
+      "log_sha256": "de93759721a59fea7b2bfab6bf2539bd4320c2748297434363ab30eb4694b198"
+    },
+    "no_new_model_outcomes_or_confirmation": true
+  }
+}

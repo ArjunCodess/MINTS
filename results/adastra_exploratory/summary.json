@@ -1,0 +1,25 @@
+{
+  "biological_eligible_loci": null,
+  "confirmation_ready": false,
+  "head_search": "not run",
+  "interpretation": "sequence-only feasibility of single-SNV reference scenarios; not binding agreement or independent biological replication",
+  "missing_qc": [
+    "donor and biosample identity",
+    "per-replicate counts",
+    "individual genotype and phase",
+    "mapping-bias provenance",
+    "source overlap and homology",
+    "intervention-based power"
+  ],
+  "native_inference": "not run by design",
+  "reasons": {
+    "no sequence-only substitution/geometry matched sham": 48,
+    "reference/alternate BPE boundaries differ": 2469,
+    "variant lacks reference CTCF motif": 1579
+  },
+  "reference_verified": 4096,
+  "screened": 4096,
+  "sequence_controls": 0,
+  "source_records": 512556,
+  "usable_donors": null
+}

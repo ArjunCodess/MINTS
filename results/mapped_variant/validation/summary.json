@@ -1,0 +1,51 @@
+{
+  "clean_checkout": {
+    "artifact_tests_deselected": 10,
+    "checked_commit": "930e93cd7984f0574066dceb3230bd4f96ff79b2",
+    "empty_offline_hf_cache": true,
+    "offline_audits": "all three passed",
+    "receipt_sha256": "1069a2b18563fce03f04d21c5b5c09f484398d784b2f38700941e2a0a04335ec",
+    "report_outputs_byte_identical": true,
+    "scientific_caches_absent": true,
+    "tests_passed": 182
+  },
+  "cleanup": {
+    "action": "recursive removal of two generated test directories",
+    "authorization": "user authorized; automatic policy rejection, not user refusal",
+    "returned_reason": "blocked by policy",
+    "status": "not performed"
+  },
+  "disk_free_bytes": 4987322368,
+  "downloaded_archive": {
+    "bytes": 942669336,
+    "checks": "MD5/size and SHA256 reverified during this task",
+    "md5": "4a3672e8261c49c37d8d2297393b0069",
+    "sha256": "172c9e9d922abd22bd6c3fe53c64fc4f9d1d7243f3d7daca45ce2099fd99dbf2"
+  },
+  "failures_preserved": [
+    "cuda.json",
+    "cpu.json",
+    "cuda-retry.json",
+    "cpu-retry.json"
+  ],
+  "manuscript": "compiled; primary citations verified; result text and figure visually inspected",
+  "manuscript_initial_failure": "Bibliography changed after reference verification; resolved by official citation verification and report rebuild",
+  "offline_audits": "variant, archived ADASTRA and mapped study passed in both environments",
+  "raw_logits_audit": {
+    "clusters": 60,
+    "confirmation": "not run",
+    "head_search": "not run",
+    "native_gate": "failed",
+    "raw_logits_checked": true,
+    "scored": 61,
+    "selected": 12288,
+    "status": "verified"
+  },
+  "recorded_utc": "2026-10-06T05:23:25Z",
+  "scientific_endpoint": "negative exploratory variant-minus-sham sequence sensitivity; head search and confirmation stopped",
+  "status": "completed",
+  "tests": {
+    "cpu": 192,
+    "cuda": 192
+  }
+}

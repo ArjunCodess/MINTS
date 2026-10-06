@@ -1,0 +1,27 @@
+{
+  "archive_path": "C:/Users/USER/Desktop/code/MINTS/data/adastra/ADASTRA.v.6.1.Mabel.zip",
+  "bytes": 942669336,
+  "ctcf_members": [
+    {
+      "bytes": 465535,
+      "compressed_bytes": 179333,
+      "name": "TF/CTCFL_HUMAN.tsv"
+    },
+    {
+      "bytes": 85666102,
+      "compressed_bytes": 32842978,
+      "name": "TF/CTCF_HUMAN.tsv"
+    }
+  ],
+  "elapsed_seconds": 604.5749502182007,
+  "expected_bytes": 942669336,
+  "http_status": 200,
+  "publisher_md5": "4a3672e8261c49c37d8d2297393b0069",
+  "record": "14174114",
+  "release": "Mabel v6.1",
+  "resolved_url": "https://zenodo.org/api/records/14174114/files/ADASTRA.v.6.1.Mabel.zip/content",
+  "role": "exploratory only; no confirmation freshness assigned",
+  "sha256": "172c9e9d922abd22bd6c3fe53c64fc4f9d1d7243f3d7daca45ce2099fd99dbf2",
+  "status": "completed",
+  "url": "https://zenodo.org/api/records/14174114/files/ADASTRA.v.6.1.Mabel.zip/content"
+}
