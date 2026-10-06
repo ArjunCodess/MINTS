@@ -1,0 +1,867 @@
+EEEEEE..........E........E........E.E....EE...........EEEEE...EE.EE.E... [ 37%]
+.E.E.E..E..........................E...EE............FE...EEEEEEEEEEEEEE [ 75%]
+EE............E...........E.EEEEEEEE............                         [100%]
+=================================== ERRORS ====================================
+___ ERROR at setup of test_complete_coordinate_denominator_verifies_offline ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_updated_hash_cannot_hide_inconsistent_claims[summary.json-<lambda>-population] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_updated_hash_cannot_hide_inconsistent_claims[summary.json-<lambda>-confirmation] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_updated_hash_cannot_hide_inconsistent_claims[diagnostics.json-<lambda>-accounting] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_updated_hash_cannot_hide_inconsistent_claims[source.json-<lambda>-inference] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_updated_hash_cannot_hide_inconsistent_claims[inspection_ledger.json-<lambda>-ledger] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+____ ERROR at setup of test_download_requires_publisher_size_and_checksum _____
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_ctcf_counterfactual_uses_jaspar_consensus_when_available _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+___ ERROR at setup of test_save_restoration_matrix_writes_table_and_heatmap ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+____ ERROR at setup of test_cross_model_config_uses_isolated_result_paths _____
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_____ ERROR at setup of test_train_sae_and_rank_features_writes_artifacts _____
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+___ ERROR at setup of test_combined_top_feature_table_returns_global_top_10 ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_resume_rejects_changed_scientific_settings[revision] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_resume_rejects_changed_scientific_settings[probe_layer] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_resume_rejects_changed_scientific_settings[activation_layers] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_resume_rejects_corrupted_artifact_and_missing_receipt _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+__ ERROR at setup of test_patching_writer_preserves_noncontiguous_layer_ids ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_______ ERROR at setup of test_resume_rejects_modified_pooling_receipt ________
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_incremental_models_share_population_and_freeze_validation_choices _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_calibration_exposes_query_specific_edit_only_blindness _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+___ ERROR at setup of test_manuscript_build_rejects_changed_execution_input ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_reused_cache_requires_verified_bytes_and_checkpoint __
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_____ ERROR at setup of test_read_encode_urls_strips_quotes_and_comments ______
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+___________ ERROR at setup of test_changed_mapped_gate_is_rejected ____________
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+___ ERROR at setup of test_case_scoring_checks_orientation_and_aggregation ____
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_______ ERROR at setup of test_jaspar_ctcf_scores_align_to_model_tokens _______
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_______ ERROR at setup of test_run_probe_controls_writes_control_table ________
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_failed_steps_are_recorded_with_their_actual_name_and_error _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_load_probe_metrics_treats_blank_confidence_intervals_as_none _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_____ ERROR at setup of test_manuscript_import_rejects_an_unfinished_run ______
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+____ ERROR at setup of test_smoke_artifacts_can_be_written_under_test_runs ____
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+____ ERROR at setup of test_evaluate_task_performance_context_writes_table ____
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+__ ERROR at setup of test_run_threshold_sensitivity_writes_table_and_figure ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_______ ERROR at setup of test_offline_audit_accepts_preserved_history ________
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>0] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>1] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>2] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>3] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[gate.json-<lambda>] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[membership.json-<lambda>] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[confirmation_readiness.json-<lambda>] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[eligibility_diagnostics.json-<lambda>] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_semantic_tampering_rejected_despite_updated_hash[biological_qc.json-<lambda>] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+______ ERROR at setup of test_stopped_pilot_cannot_acquire_head_results _______
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+___ ERROR at setup of test_required_evidence_cannot_be_removed_from_receipt ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_inventory_cannot_promote_aggregate_counts_to_eligible_loci _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+______ ERROR at setup of test_two_runners_cannot_claim_the_same_protocol ______
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_______ ERROR at setup of test_evidence_paths_cannot_escape_their_root ________
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_report_cannot_overwrite_evidence[results/custom pilot/protocol.json] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_report_cannot_overwrite_evidence[results/custom study/report.md] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_report_cannot_overwrite_evidence[docs/MINTS_v2_protocol.md] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_____ ERROR at setup of test_report_cannot_overwrite_evidence[README.md] ______
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_report_cannot_overwrite_evidence[src/variant_assay.py] _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+___ ERROR at setup of test_report_cannot_overwrite_evidence[../outside.md] ____
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+__ ERROR at setup of test_nonempty_result_is_rejected_without_output_writes ___
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+_ ERROR at setup of test_custom_report_records_quoted_paths_and_relative_links _
+
+self = WindowsPath('C:/Users/USER/Desktop/code/MINTS/.test-tmp/mapped-cpu')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\USER\\Desktop\\code\\MINTS\\.test-tmp\\mapped-cpu'
+
+C:\Python314\Lib\pathlib\__init__.py:1016: FileNotFoundError
+================================== FAILURES ===================================
+_______ test_paper_numbers_and_inputs_match_the_saved_artifact_manifest _______
+
+    @pytest.mark.artifact
+    def test_paper_numbers_and_inputs_match_the_saved_artifact_manifest():
+        from pathlib import Path
+        import hashlib
+        import json
+        root=Path(__file__).resolve().parents[1]
+        manifest=json.loads((root/"results/review/tables_manifest.json").read_text())
+        sources={**manifest["paper_sources"],manifest["paper_results"]["path"]:manifest["paper_results"]["sha256"]}
+        for path,expected in sources.items():
+>           assert hashlib.sha256((root/path).read_bytes()).hexdigest()==expected, f"Stale manuscript source: {path}"
+E           AssertionError: Stale manuscript source: paper/references.bib
+E           assert 'aa5e068715c0...36e253110895f' == '35e41d2d6ef4...1fb51a2657cce'
+E             
+E             - 35e41d2d6ef4171057d26962bbcdbaf604b767e03397f4a6d861fb51a2657cce
+E             + aa5e068715c0d1c2c5499f570488e48e06ad564d21abb355de336e253110895f
+
+tests\test_review_integrity.py:115: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_review_integrity.py::test_paper_numbers_and_inputs_match_the_saved_artifact_manifest
+ERROR tests/test_adastra_audit.py::test_complete_coordinate_denominator_verifies_offline
+ERROR tests/test_adastra_audit.py::test_updated_hash_cannot_hide_inconsistent_claims[summary.json-<lambda>-population]
+ERROR tests/test_adastra_audit.py::test_updated_hash_cannot_hide_inconsistent_claims[summary.json-<lambda>-confirmation]
+ERROR tests/test_adastra_audit.py::test_updated_hash_cannot_hide_inconsistent_claims[diagnostics.json-<lambda>-accounting]
+ERROR tests/test_adastra_audit.py::test_updated_hash_cannot_hide_inconsistent_claims[source.json-<lambda>-inference]
+ERROR tests/test_adastra_audit.py::test_updated_hash_cannot_hide_inconsistent_claims[inspection_ledger.json-<lambda>-ledger]
+ERROR tests/test_adastra_candidates.py::test_download_requires_publisher_size_and_checksum
+ERROR tests/test_counterfactuals_and_patching.py::test_ctcf_counterfactual_uses_jaspar_consensus_when_available
+ERROR tests/test_counterfactuals_and_patching.py::test_save_restoration_matrix_writes_table_and_heatmap
+ERROR tests/test_cross_model.py::test_cross_model_config_uses_isolated_result_paths
+ERROR tests/test_distributed_features.py::test_train_sae_and_rank_features_writes_artifacts
+ERROR tests/test_distributed_features.py::test_combined_top_feature_table_returns_global_top_10
+ERROR tests/test_hardened_assay.py::test_resume_rejects_changed_scientific_settings[revision]
+ERROR tests/test_hardened_assay.py::test_resume_rejects_changed_scientific_settings[probe_layer]
+ERROR tests/test_hardened_assay.py::test_resume_rejects_changed_scientific_settings[activation_layers]
+ERROR tests/test_hardened_assay.py::test_resume_rejects_corrupted_artifact_and_missing_receipt
+ERROR tests/test_hardened_assay.py::test_patching_writer_preserves_noncontiguous_layer_ids
+ERROR tests/test_hardened_assay.py::test_resume_rejects_modified_pooling_receipt
+ERROR tests/test_hardened_assay.py::test_incremental_models_share_population_and_freeze_validation_choices
+ERROR tests/test_hardened_assay.py::test_calibration_exposes_query_specific_edit_only_blindness
+ERROR tests/test_hardened_assay.py::test_manuscript_build_rejects_changed_execution_input
+ERROR tests/test_hardened_assay.py::test_reused_cache_requires_verified_bytes_and_checkpoint
+ERROR tests/test_ingestion.py::test_read_encode_urls_strips_quotes_and_comments
+ERROR tests/test_mapped_audit.py::test_changed_mapped_gate_is_rejected - File...
+ERROR tests/test_mapped_variant.py::test_case_scoring_checks_orientation_and_aggregation
+ERROR tests/test_motif_scoring_and_qk_alignment.py::test_jaspar_ctcf_scores_align_to_model_tokens
+ERROR tests/test_probing.py::test_run_probe_controls_writes_control_table - F...
+ERROR tests/test_reproduce_manifest.py::test_failed_steps_are_recorded_with_their_actual_name_and_error
+ERROR tests/test_reproduce_manifest.py::test_load_probe_metrics_treats_blank_confidence_intervals_as_none
+ERROR tests/test_review_integrity.py::test_manuscript_import_rejects_an_unfinished_run
+ERROR tests/test_smoke_runs.py::test_smoke_artifacts_can_be_written_under_test_runs
+ERROR tests/test_task_performance.py::test_evaluate_task_performance_context_writes_table
+ERROR tests/test_threshold_sensitivity.py::test_run_threshold_sensitivity_writes_table_and_figure
+ERROR tests/test_variant_audit.py::test_offline_audit_accepts_preserved_history
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>0]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>1]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>2]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[summary.json-<lambda>3]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[gate.json-<lambda>]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[membership.json-<lambda>]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[confirmation_readiness.json-<lambda>]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[eligibility_diagnostics.json-<lambda>]
+ERROR tests/test_variant_audit.py::test_semantic_tampering_rejected_despite_updated_hash[biological_qc.json-<lambda>]
+ERROR tests/test_variant_audit.py::test_stopped_pilot_cannot_acquire_head_results
+ERROR tests/test_variant_audit.py::test_required_evidence_cannot_be_removed_from_receipt
+ERROR tests/test_variant_audit.py::test_inventory_cannot_promote_aggregate_counts_to_eligible_loci
+ERROR tests/test_variant_audit.py::test_two_runners_cannot_claim_the_same_protocol
+ERROR tests/test_variant_audit.py::test_evidence_paths_cannot_escape_their_root
+ERROR tests/test_variant_report.py::test_report_cannot_overwrite_evidence[results/custom pilot/protocol.json]
+ERROR tests/test_variant_report.py::test_report_cannot_overwrite_evidence[results/custom study/report.md]
+ERROR tests/test_variant_report.py::test_report_cannot_overwrite_evidence[docs/MINTS_v2_protocol.md]
+ERROR tests/test_variant_report.py::test_report_cannot_overwrite_evidence[README.md]
+ERROR tests/test_variant_report.py::test_report_cannot_overwrite_evidence[src/variant_assay.py]
+ERROR tests/test_variant_report.py::test_report_cannot_overwrite_evidence[../outside.md]
+ERROR tests/test_variant_report.py::test_nonempty_result_is_rejected_without_output_writes
+ERROR tests/test_variant_report.py::test_custom_report_records_quoted_paths_and_relative_links
+1 failed, 135 passed, 56 errors in 14.06s

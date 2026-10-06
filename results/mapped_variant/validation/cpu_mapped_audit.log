@@ -1,0 +1,10 @@
+{
+  "status": "verified",
+  "selected": 12288,
+  "scored": 61,
+  "clusters": 60,
+  "raw_logits_checked": false,
+  "native_gate": "failed",
+  "head_search": "not run",
+  "confirmation": "not run"
+}

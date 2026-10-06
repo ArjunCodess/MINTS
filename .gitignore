@@ -249,3 +249,4 @@ paper/mapped-build/
 
 .venv-cpu-check/
 !results/hardened/command_*.log
+!results/mapped_variant/validation/*.log

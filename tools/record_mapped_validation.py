@@ -19,7 +19,8 @@ def main():
     assert cuda["status"]==cpu["status"]=="completed"
     for label in ("cuda-final","cpu-final"):
         assert "192 passed" in (validation/f"{label}_tests.log").read_text(encoding="utf-8",errors="replace")
-    build=json.loads((validation/"manuscript_compile.log").read_text(encoding="utf-8-sig"))
+    build_bytes=(validation/"manuscript_compile.log").read_bytes()
+    build=json.loads(build_bytes.decode("utf-16" if build_bytes.startswith(b"\xff\xfe") else "utf-8-sig"))
     # The compiler reports its own completed subprocess and output path.
     write_json(validation/"manuscript_build.json",dict(compiler_result=build,
         pdf_sha256=sha256_file(ROOT/"paper/main.pdf"),compile_log_sha256=sha256_file(validation/"manuscript_compile.log"),

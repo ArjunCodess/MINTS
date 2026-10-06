@@ -19,6 +19,7 @@ results/variant_provenance/** -text whitespace=cr-at-eol
 results/mapped_variant/validation/*.log -whitespace
 docs/control_diagnostics_protocol.md text eol=lf
 docs/mapped_variant_protocol.md text eol=lf
+docs/mapped_variant_results.md text eol=lf
 results/adastra_exploratory/tests_*.log -whitespace
 results/variant_study/tests_*.log -whitespace
 docs/MINTS_v2*.md text eol=lf
