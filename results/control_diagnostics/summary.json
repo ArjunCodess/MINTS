@@ -1,0 +1,30 @@
+{
+  "candidate_risk_set": "same substitution and exact trinucleotide, independent predicates; not sequential rejection counts",
+  "cohorts": {
+    "expansion": {
+      "full_allele_offsets": 3223,
+      "local_geometry32": 73,
+      "local_geometry64": 115,
+      "local_no_width": 40,
+      "local_only": 9,
+      "original": 1,
+      "query_correspondence": 8192,
+      "records": 8192,
+      "reference_motif": 273,
+      "reference_verified": 8192
+    },
+    "original4096": {
+      "full_allele_offsets": 1627,
+      "local_geometry32": 35,
+      "local_geometry64": 61,
+      "local_no_width": 21,
+      "local_only": 2,
+      "original": 0,
+      "query_correspondence": 4096,
+      "records": 4096,
+      "reference_motif": 160,
+      "reference_verified": 4096
+    }
+  },
+  "source_records": 512556
+}

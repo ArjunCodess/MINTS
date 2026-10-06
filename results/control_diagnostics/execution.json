@@ -1,0 +1,35 @@
+{
+  "artifacts": {
+    "candidate_predicates.csv.gz": "7df4d3c31bca3edd81d97fd81fbb7ff19959982600d3043f18b32403f78311a0",
+    "cases.csv": "4aba3761fa92a1c71900e89393b9799a0b3eb5b8fa26365070f6da37dc6a7dc1",
+    "inspection_ledger.json": "9fb3357798f8a7c7a29f079b92ded8da98943ebfdaeb79233609772d2b10a2be",
+    "membership.csv": "6bee4e540594ff050fcd503c0d9a63fae3955d217c7362a0685a109fb2fb61ba",
+    "protocol.json": "e1e30d5c72957e3150ae158c677ff2ae255d1054a83876d7651a7208471b0661",
+    "summary.json": "b9dcccefe45fe033053098e0a63473f946642f72791e76e2f878d0e58230de1e"
+  },
+  "elapsed_seconds": 27.58838987350464,
+  "packages": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "pyfaidx": "0.9.0.4",
+    "tokenizers": "0.22.2",
+    "transformers": "5.5.3"
+  },
+  "protocol_sha256": "e1e30d5c72957e3150ae158c677ff2ae255d1054a83876d7651a7208471b0661",
+  "python": "3.14.0",
+  "source_changed_during_run": false,
+  "source_sha256": {
+    "src/adastra_candidates.py": "4fd2b92d4938e6d74a4a032cda659ddcddd9312dfdaa07c88c000157a2f4144e",
+    "src/assay_alignment.py": "cc193663f2f40a37173c113ced0f4d5e56c4d26f5c55c933df2edfffe89cce5e",
+    "src/config.py": "59515a9a8be06fe617b065a449788861196894d7fb2a4474009185167a6d2afb",
+    "src/control_diagnostics.py": "5ffdbb4e6b0251f1b3d96c8f0002a753238515e423b44b2b83f2afcf1a8a612b",
+    "src/controlled_edits.py": "a3d91083a3e7e5a664a61de2ab4924a1f473771d6d6d2741ae7cdc39741a6282",
+    "src/motif_scoring.py": "e6f265a22d434d59448220c47d9593ce714b673b8376ba191ec18bc0697e905c",
+    "src/native_followup.py": "4fe9a51b851dd009044c92b0f8bdc868ad7c966a5e6fa5d00ce245caa2769fb9",
+    "src/utils.py": "e8fb7f1f68a61697644d7c3c8fffd1b71fa5cfbfd301f1441f15cc612b484e9e",
+    "src/variant_protocol.py": "47075fc31aa6e78341bc052092f666bcbe239742015cc7b798844e4f5f14158c",
+    "tools/run_control_diagnostics.py": "bb5cdfb4bf65401bac519150b1cb9d0cbafc041d00ebbb5751eeb40f30d5e3eb"
+  },
+  "started_utc": "2026-10-06T05:00:11.340900+00:00",
+  "status": "completed"
+}
