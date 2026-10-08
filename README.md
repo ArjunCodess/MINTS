@@ -2,7 +2,7 @@
 
 MINTS audits nucleotide correspondence and control feasibility in genomic transformer interventions. Equal tensor shapes can hide mismatched nucleotide positions. Explicit span and vocabulary correspondence permits comparison of a specified prediction task across changing BPE segmentation, while surrounding segmentation and context can still differ.
 
-The [main paper](paper/main.pdf) reports a repaired CTCF component effect on a fixed trained readout, inconclusive TATA results and failed native sensitivity gates. In the 61-case mapped-query study, sham prediction shifts exceed variant shifts. These results do not establish biological binding causality or general sensitivity to learned mechanisms.
+The [main paper](paper/main.pdf) and [supplement](paper/supplement.pdf) reports a repaired CTCF component effect on a fixed trained readout, inconclusive TATA results and failed native sensitivity gates. In the 61-case mapped-query study, sham prediction shifts exceed variant shifts. These results do not establish biological binding causality or general sensitivity to learned mechanisms.
 
 ## Reproduce the public evidence and paper
 
@@ -20,15 +20,17 @@ python -m pytest -q -m "not artifact" --basetemp .test-tmp
 python -m pytest -q -m artifact --basetemp .test-tmp/artifact
 ```
 
-Compile the main paper with an installed LaTeX environment from `paper`:
+Compile both papers with an installed LaTeX environment from `paper`:
 
 ```powershell
-latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=review-build main.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=review-build main.tex supplement.tex
 ```
 
 The [correspondence contract](docs/query_correspondence.md) explains its guarantees and limits. The dependency-light example uses hand-constructed maps; it is not model calibration. A separately versioned post-study certificate reproduces all 438 saved queries without changing scientific membership, predictions or gates. Retokenizing with `--saved-cases --output NEW_PATH.json` requires the pinned tokenizer and JASPAR cache, but no model weights.
 
-Original protocols, source receipts, timestamps and stopped studies remain intact under `results`. Historical manuscript hashes are checked against the original Git revision, not against the updated paper. `paper/figures/lineage.json` records input, generator and output hashes for the public presentation rebuild. The supplement, full reviewer archive and 61-file raw-logit package are prepared locally for a separate deposit; they are not distributed in this branch and no public deposit is claimed.
+Original protocols, source receipts, timestamps and stopped studies remain intact under `results`. Historical manuscript hashes are checked against the original Git revision, not against the updated paper. `paper/figures/lineage.json` records input, generator and output hashes for the public presentation rebuild. The supplement and its build inputs are public. The full reviewer archive and 61-file raw-logit package remain local pending a separate deposit and resource-permission checks; no public deposit is claimed.
+
+The [venue strategy](docs/venue_strategy.md) explains the journal route and its unresolved significance bar.
 
 ## Scientific execution
 
