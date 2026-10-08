@@ -35,6 +35,8 @@ def inspect_environment(require_scientific=False):
     }
     present = {name: path.exists() for name, path in inputs.items()}
     tokenizer_cached = False
+    native_head_verified = False
+    model_error = None
     try:
         from transformers import AutoTokenizer
         AutoTokenizer.from_pretrained(DEFAULT_CONFIG.model.model_name,
@@ -43,6 +45,15 @@ def inspect_environment(require_scientific=False):
     except (OSError, ValueError):
         pass
     if require_scientific:
+        try:
+            from dataclasses import replace
+            from src.native_endpoint import load_native_mlm
+            bundle, loading = load_native_mlm(replace(DEFAULT_CONFIG.model, device='cpu', local_files_only=True))
+            native_head_verified = True
+            del bundle
+        except Exception as exc:
+            model_error = str(exc)
+            errors.append(f'Pinned model/native prediction head unavailable: {exc}')
         errors.extend(f"Missing scientific input: {name}" for name, available in present.items() if not available)
         if not tokenizer_cached:
             errors.append("Pinned tokenizer is not cached; ingest the pinned checkpoint first")
@@ -53,6 +64,7 @@ def inspect_environment(require_scientific=False):
         cuda_device=torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
         disk_free_bytes=shutil.disk_usage(root).free, scientific_inputs=present,
         pinned_tokenizer_cached=tokenizer_cached, errors=errors,
+        native_head_verified=native_head_verified, model_error=model_error,
         scope="CPU tests use synthetic fixtures; scientific execution requires cached data/model and network for the pinned DNase file")
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
