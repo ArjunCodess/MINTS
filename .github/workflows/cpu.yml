@@ -22,3 +22,6 @@ jobs:
       - run: python tools/audit_adastra_feasibility.py
       - run: python tools/audit_mapped_variant.py
       - run: python -m pytest -q -m "not artifact" --basetemp .test-tmp
+      - run: python tools/check_query_correspondence.py
+      - run: python tools/build_paper_artifacts.py
+      - run: python -m pytest -q -m artifact --basetemp .test-tmp/artifact
