@@ -18,4 +18,4 @@ def test_changed_mapped_gate_is_rejected(tmp_path):
     path=tmp_path/"results/mapped_variant/summary.json"
     text=path.read_text().replace('"native_sensitivity": false','"native_sensitivity": true')
     path.write_text(text)
-    with pytest.raises(AssertionError):audit(tmp_path)
+    with pytest.raises(ValueError):audit(tmp_path)
