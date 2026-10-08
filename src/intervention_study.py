@@ -18,6 +18,47 @@ from .native_assay import capture_localization
 from .utils import write_json, sha256_file, progress
 
 
+def intervention_clusters(names, pairs):
+    """Join every candidate's clean/edit/sham identities, then collapse to sequences."""
+    names = list(map(str, names))
+    owners, loci, identities = [], [], []
+    for i, name in enumerate(names):
+        selected = [p for p in pairs if p['motif']['sequence_id'] == name]
+        if not selected:
+            raise ValueError(f'Missing controlled inputs for {name}')
+        for pair in selected:
+            owners.append(i)
+            loci.append([name] * 3)
+            identities.append([pair['motif']['clean_sequence'],
+                               pair['motif']['corrupted_sequence'],
+                               pair['sham']['corrupted_sequence']])
+    codes = genomic_clusters(loci, identities)
+    # All candidates for a sequence share its locus and therefore one code.
+    result = []
+    for i in range(len(names)):
+        unique = np.unique(codes[np.asarray(owners) == i])
+        if len(unique) != 1:
+            raise ValueError('Candidate edits split a sequence across clusters')
+        result.append(unique[0])
+    return np.asarray(result)
+
+
+def secondary_corrections(summary):
+    """Correct the same declared secondary family separately for each dependence unit."""
+    from .inference import holm_adjust
+    summary = summary.copy()
+    secondary = summary.analysis_scope == 'secondary exploratory'
+    for unit in ('sequence', 'block'):
+        name = f'secondary_{unit}_holm_p'
+        summary[name] = np.nan
+        values = summary.loc[secondary, f'{unit}_p'].to_numpy(dtype=float)
+        if not np.isfinite(values).all():
+            raise ValueError(f'Nonfinite {unit} secondary p-values')
+        summary.loc[secondary, name] = holm_adjust(values)
+    # Retire the ambiguous historical column in new reports.
+    return summary.drop(columns=['secondary_holm_p'], errors='ignore')
+
+
 def collect_controlled_pairs(table, motif, tokenizer, seed=1729, limit=32, edits_per_sequence=1, candidates=128):
     rows=table[table.label==1].copy()
     rows=rows.iloc[np.random.default_rng(seed).permutation(len(rows))]
@@ -106,7 +147,7 @@ def run_controlled_interventions(bundle, motif, scorer, discovery, confirmation,
     selection_hash=sha256_file(selection_path)
     # Discovery multiplicity remains explicit even though the confirmation head is frozen.
     names=indexed.index.get_level_values('sequence_id').to_numpy()
-    clusters=genomic_clusters(names)
+    clusters=intervention_clusters(names, discovery_pairs)
     if np.unique(clusters).size>=2:
         stats=paired_head_inference(effects,clusters,permutations,bootstrap_samples,seed)
         pd.DataFrame([dict(layer=l,head=h,**{k:float(v[j]) for k,v in stats.items() if isinstance(v,np.ndarray)})
@@ -133,7 +174,7 @@ def run_controlled_interventions(bundle, motif, scorer, discovery, confirmation,
         # Candidate edits are averaged within sequence before inference to avoid pseudo-replication.
         per_sequence=(pivot.motif-pivot.sham).groupby(level='sequence_id').mean()
         values=per_sequence.to_numpy()
-        codes=genomic_clusters(per_sequence.index.to_numpy())
+        codes=intervention_clusters(per_sequence.index.to_numpy(), confirmation_pairs)
         sequence_stats=paired_head_inference(values,None,permutations,bootstrap_samples,seed)
         stats=paired_head_inference(values,codes,permutations,bootstrap_samples,seed) if np.unique(codes).size>=2 else None
         loo=(values.sum()-values)/(len(values)-1)
@@ -146,10 +187,7 @@ def run_controlled_interventions(bundle, motif, scorer, discovery, confirmation,
             analysis_scope='primary' if scheme=='edit' and direction=='denoise' else 'secondary exploratory'))
     summary=pd.DataFrame(summaries)
     # Secondary choices form a family; the primary fixed-head test remains distinct.
-    from .inference import holm_adjust
-    secondary=summary.analysis_scope=='secondary exploratory'
-    summary['secondary_holm_p']=np.nan
-    summary.loc[secondary,'secondary_holm_p']=holm_adjust(summary.loc[secondary,'sequence_p'])
+    summary=secondary_corrections(summary)
     summary.to_csv(output/'confirmation_summary.csv',index=False)
     if localization_rows:
         pd.DataFrame(localization_rows).to_csv(output/'same_motif_localization.csv',index=False)
