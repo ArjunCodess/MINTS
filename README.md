@@ -16,7 +16,7 @@ python tools/audit_adastra_feasibility.py
 python tools/audit_mapped_variant.py
 python tools/check_query_correspondence.py
 python tools/build_paper_artifacts.py
-python -m pytest -q -m "not artifact" --basetemp .test-tmp/unit
+python -m pytest -q -m "not artifact" --basetemp .test-tmp
 python -m pytest -q -m artifact --basetemp .test-tmp/artifact
 ```
 
