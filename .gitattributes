@@ -31,3 +31,7 @@ tools/*.py text eol=lf
 tests/*.py text eol=lf
 paper/*.tex text eol=lf
 paper/*.bib text eol=lf
+
+results/correspondence_audit/** -text
+paper/generated/** -text
+paper/figures/** -text
