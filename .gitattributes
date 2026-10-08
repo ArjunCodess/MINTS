@@ -35,3 +35,5 @@ paper/*.bib text eol=lf
 results/correspondence_audit/** -text
 paper/generated/** -text
 paper/figures/** -text
+results/qk_alignment/ctcf_qk_alignment.csv text eol=crlf
+results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv text eol=crlf
