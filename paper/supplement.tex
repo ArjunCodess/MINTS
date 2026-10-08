@@ -1,0 +1,34 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{amsmath,amssymb,booktabs,graphicx,microtype,url,placeins,hyperref,xurl}
+\input{generated/supp_results}
+\title{MINTS supplementary evidence and reproduction}\author{Arjun VIjay Prakash\\Independent Researcher\\City Montessori School, Lucknow, India\\\texttt{arjunv.prakash12345@gmail.com}}\date{}
+\begin{document}\maketitle
+\section{Reporting revision and lineage}
+Reporting revision v1 preserves original scientific protocols, memberships, outcomes and timestamps. The source archive is keyed to revision \path{cc09923652f0b361f73a36f382c4358dcf8b8100}; historical hardened receipts are checked against that source. Corrected summaries in \path{paper/figures} record original-input and new-generator hashes. Original run directories remain available.
+\section{Corrected secondary dependence units}
+Eleven non-primary scheme/direction tests form one secondary family per motif. The original ambiguous Holm column used sequence p-values. Named columns below correct sequence and block p-values over the same family. Block-based inference uses block Holm; primary CTCF block p remains 0.0028. Edits remain averaged within sequence. Clean/edited/sham exact/RC checks preserve 45 CTCF and 15 TATA held-out clusters.
+\begin{table}[h]\centering\setlength{\tabcolsep}{4pt}\caption{Corrected secondary reporting from saved unadjusted p-values.}\input{generated/secondary}\end{table}\FloatBarrier
+\section{Reviewer reproduction}
+Pinned Python 3.14 CPU requirements support saved-evidence audits and reporting rebuilds without model or genome downloads. Public main and supplementary sources, diagnostics and generated inserts are available at \url{https://github.com/ArjunCodess/MINTS}. The historical diagnostic excerpt is versioned in \path{paper/diagnostic_scope.tex}; its original revision and all report-input hashes are recorded in \path{paper/figures/lineage.json}.
+\begin{verbatim}
+python -m pip install -r requirements-cpu.txt
+python tools/audit_variant_study.py
+python tools/audit_adastra_feasibility.py
+python tools/audit_mapped_variant.py
+python tools/check_query_correspondence.py
+python tools/build_paper_artifacts.py
+\end{verbatim}
+Compile \path{main.tex} and \path{supplement.tex} with \texttt{latexmk -pdf} from \path{paper}. The correspondence example uses hand-constructed maps and tests contract behavior; it is not model calibration. Original numerical evidence and query maps are public. The complete reviewer bundle and 61 unchanged raw-logit files remain prepared locally pending a stable deposit and resolution of upstream resource permissions. Once those files are available, raw divergence recomputation uses the following single-line command with the downloaded raw directory:
+\begin{verbatim}
+python -O tools/audit_mapped_variant.py --raw --raw-root RAW_DIR
+\end{verbatim}
+Full scientific execution requires the pinned tokenizer/checkpoint, verified native weights, genome, intervals and residual caches. It is unnecessary for report reproduction. Extensions require separately frozen protocols. Windows CPU validation and historical Windows CUDA execution differ from Linux CI; no new Linux scientific run is asserted. Original code is MIT and original scientific outputs are CC-BY-4.0. Third-party data and model resources retain their own terms; these grants do not resolve absent dataset or checkpoint permissions.
+\section{Diagnostic context}
+The following material preserves historical failures, alternative aggregation, cohort balance and provenance limitations. Withdrawn patch rankings are diagnostic; fixture calibration is limited to engineered computations. The sensitivity table now shows both corrections. Secondary block interpretation is superseded by the corrected table above. These diagnostics do not reopen stopped studies.
+\input{generated/supp_diagnostics}\FloatBarrier
+\section*{Author declarations}
+Arjun VIjay Prakash is the sole author and has reviewed and approved this manuscript. The author received no funding for this work and declares no competing interests. This study analyzes previously available computational and genomic resources; it reports no new participant recruitment or biological sample collection.
+\clearpage\bibliographystyle{plainnat}\bibliography{references}\end{document}

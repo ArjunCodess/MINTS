@@ -155,8 +155,29 @@ def build():
     (TEX / 'geometry.tex').write_text(table(['Fraction', 'Geometry', 'Eligible', 'Scored', 'Within', 'Overall'], geom), newline='\n')
     # Long secondary table is a separate supplement insert, using block Holm in its labeled column.
     (TEX / 'secondary.tex').write_text(table(['Motif', 'Scheme', 'Direction', 'Sequence Holm', 'Block Holm'], secondaries), newline='\n')
+    # Preserve all diagnostic material from the original manuscript as supplemental context.
+    body = (ROOT / 'paper/diagnostic_scope.tex').read_text()
+    inputs.add(ROOT / 'paper/diagnostic_scope.tex')
+    for name in ('results', 'hardened_results', 'cohort_balance', 'native_endpoint', 'native_followup', 'mapped_variant'):
+        source_path = ROOT / f'paper/{name}.tex'
+        inputs.add(source_path)
+        source = source_path.read_text()
+        source = source.replace(r'\footnotesize', r'\normalsize').replace(r'\small', r'\normalsize')
+        if name == 'hardened_results':
+            source = source.replace('Secondary tests receive Holm correction.', 'The original secondary column used sequence Holm. Reporting revision v1 below supplies both dependence units; block Holm governs block-based interpretation.')
+            source = source.replace('this trained output does not imply residual information beyond the direct motif baseline', 'this fitted concatenation underperforms the fitted direct baseline, without establishing absence of extra representational information')
+            a = source.index(r'\begin{table}[t]\centering\normalsize\caption{Recomputed geometry sensitivity.}')
+            b = source.index(r'\end{table}', a) + len(r'\end{table}')
+            source = source[:a] + r'\begin{table}[t]\centering\caption{Sensitivity counts under both saved families. Within uses 144-head maximum-statistic tests; overall Holm includes all metrics, thresholds, geometries, heads and both resampling summaries.}\label{tab:geometry}\input{generated/geometry}\end{table}' + source[b:]
+            source = source.replace('Controlled assays and independent confirmation', 'Engineered calibration and held-out trained-readout assays')
+            source = source.replace('Independent synthetic confirmation seeds.', 'Oracle fixture calibration on separate fixture seeds; per-observation head selection does not calibrate natural-data selection.')
+            source = source.replace('Fixed-head edit-only denoising confirmation.', 'Fixed-head trained-readout intervention on held-out chromosomes.')
+        (TEX / f'supp_{name}.tex').write_text(source, newline='\n')
+        body = body.replace(r'\input{' + name + '}', r'\input{generated/supp_' + name + '}')
+    body = body.replace(r'\footnotesize', r'\normalsize').replace(r'\small', r'\normalsize')
+    (TEX / 'supp_diagnostics.tex').write_text(body, newline='\n')
     outputs = [p for p in OUT.iterdir() if p.is_file() and p.name != 'lineage.json'] + list(TEX.glob('*.tex'))
-    write_json(OUT / 'lineage.json', dict(revision='public-paper-reporting-v1', scientific_revision=REVISION,
+    write_json(OUT / 'lineage.json', dict(revision='public-paper-reporting-v2-journal-route', scientific_revision=REVISION,
         scope='Saved-evidence reporting revision; no model inference, membership, protocols or gates changed',
         inputs={p.relative_to(ROOT).as_posix(): sha256_file(p) for p in sorted(inputs)},
         generators={p.relative_to(ROOT).as_posix(): sha256_file(p) for p in [Path(__file__), ROOT/'src/intervention_study.py', ROOT/'tools/audit_mapped_variant.py', ROOT/'src/inference.py', ROOT/'src/assay_stats.py', ROOT/'src/variant_statistics.py']},

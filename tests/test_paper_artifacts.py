@@ -1,5 +1,6 @@
 import hashlib
 import json
+import re
 from pathlib import Path
 import pytest
 
@@ -26,3 +27,27 @@ def test_saved_correspondence_certificate_matches_every_saved_query():
         assert case['queries'] == checked['queries']
         assert checked['candidate_accounting_complete']
         assert checked['token_counts'] == [len(ids) for ids in case['ids']]
+
+
+@pytest.mark.artifact
+def test_public_supplement_has_no_private_build_dependency():
+    """A GitHub source download must contain every transitive TeX/image input."""
+    seen = set()
+    def visit(path):
+        if path in seen:
+            return
+        seen.add(path)
+        text = path.read_text()
+        assert 'generated_v1/' not in text
+        for name in re.findall(r'\\input\{([^}]+)\}', text):
+            child = ROOT / 'paper' / (name + '.tex')
+            assert child.is_file(), name
+            visit(child)
+        for name in re.findall(r'\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}', text):
+            assert (ROOT / 'paper' / name).is_file(), name
+    visit(ROOT / 'paper/supplement.tex')
+    assert ROOT / 'paper/generated/supp_diagnostics.tex' in seen
+    lineage = json.loads((ROOT / 'paper/figures/lineage.json').read_text())
+    assert 'paper/diagnostic_scope.tex' in lineage['inputs']
+    for path in seen - {ROOT / 'paper/supplement.tex'}:
+        assert path.relative_to(ROOT).as_posix() in lineage['outputs']
