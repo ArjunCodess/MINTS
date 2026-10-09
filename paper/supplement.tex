@@ -21,10 +21,11 @@ python tools/audit_mapped_variant.py
 python tools/check_query_correspondence.py
 python tools/build_paper_artifacts.py
 \end{verbatim}
-Compile \path{main.tex} and \path{supplement.tex} with \texttt{latexmk -pdf} from \path{paper}. The correspondence example uses hand-constructed maps and tests contract behavior; it is not model calibration. Original numerical evidence and query maps are public. The complete reviewer bundle and 61 unchanged raw-logit files remain prepared locally pending a stable deposit and resolution of upstream resource permissions. Once those files are available, raw divergence recomputation uses the following single-line command with the downloaded raw directory:
+Compile \path{main.tex} and \path{supplement.tex} with \texttt{latexmk -pdf} from \path{paper}. The correspondence example uses hand-constructed maps and tests contract behavior; it is not model calibration. Sequence-free reproduction data and all 61 unchanged native logit files are publicly archived at \url{https://doi.org/10.5281/zenodo.23267982}. Extract the dataset ZIP into \texttt{DATA\_DIR} and run the verifier from the public code checkout:
 \begin{verbatim}
-python -O tools/audit_mapped_variant.py --raw --raw-root RAW_DIR
+python tools/verify_deposit.py --data-root DATA_DIR
 \end{verbatim}
+The verifier checks the deposited file hashes, all raw divergences, headline estimates and uncertainty, secondary Holm reporting and overall sensitivity corrections. It uses saved cluster assignments. Reconstructing sequence-aware clusters, eligibility, source inputs or fresh inference requires the pinned upstream resources and their terms. The private mixed-resource reviewer archive is not the public dataset.
 Full scientific execution requires the pinned tokenizer/checkpoint, verified native weights, genome, intervals and residual caches. It is unnecessary for report reproduction. Extensions require separately frozen protocols. Windows CPU validation and historical Windows CUDA execution differ from Linux CI; no new Linux scientific run is asserted. Original code is MIT and original scientific outputs are CC-BY-4.0. Third-party data and model resources retain their own terms; these grants do not resolve absent dataset or checkpoint permissions.
 \section{Diagnostic context}
 The following material preserves historical failures, alternative aggregation, cohort balance and provenance limitations. Withdrawn patch rankings are diagnostic; fixture calibration is limited to engineered computations. The sensitivity table now shows both corrections. Secondary block interpretation is superseded by the corrected table above. These diagnostics do not reopen stopped studies.
