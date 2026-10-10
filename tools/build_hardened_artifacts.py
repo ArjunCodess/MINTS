@@ -35,6 +35,22 @@ def table(headers,rows):
         " & ".join(headers)+r" \\",r"\midrule",
         *[" & ".join(map(str,row))+r" \\" for row in rows],r"\bottomrule",r"\end{tabular}"])
 
+def sensitivity_counts(native, runs):
+    rows = []
+    for run in runs:
+        t = native[(native.fraction == run['fraction']) &
+                   (native.geometry == run['geometry']) &
+                   (native.metric == 'base_density') &
+                   (native.resampling_unit == 'genomic_block')]
+        if len(t) != 144:
+            raise ValueError('Expected the complete 144-head configuration')
+        rows.append(dict(fraction=run['fraction'], geometry=run['geometry'],
+                         eligible=run['eligible_pairs'], evaluated=run.get('evaluated_pairs', 0),
+                         within_configuration=int(((t['mean'] > 0) & (t.max_stat_p < .05)).sum()),
+                         overall=int(((t['mean'] > 0) & (t.sensitivity_family_holm_p < .05)).sum())))
+    return pd.DataFrame(rows)
+
+
 def build(output=ROOT/"results/hardened"):
     output=Path(output);validate_executions(output)
     figures=output/"figures";figures.mkdir(exist_ok=True)
@@ -68,10 +84,9 @@ def build(output=ROOT/"results/hardened"):
     fig.tight_layout();fig.savefig(figures/"controlled_interventions.png",dpi=180);fig.savefig(figures/"controlled_interventions.pdf");plt.close(fig)
     genomic=json.loads((output/"genomic/native_sensitivity_manifest.json").read_text())
     native=pd.read_csv(output/"genomic/native_sensitivity_inference.csv");geometry=[]
-    for run in genomic["runs"]:
-        t=native[(native.fraction==run["fraction"])&(native.geometry==run["geometry"])&(native.metric=="base_density")&(native.resampling_unit=="genomic_block")]
-        geometry.append([f'{run["fraction"]:.2f}',run["geometry"].replace("_",r"\_"),run["eligible_pairs"],run.get("evaluated_pairs",0),
-            int(((t["mean"]>0)&(t.max_stat_p<.05)).sum())])
+    for r in sensitivity_counts(native, genomic["runs"]).itertuples():
+        geometry.append([f'{r.fraction:.2f}',r.geometry.replace("_",r"\_"),r.eligible,r.evaluated,
+                         r.within_configuration,r.overall])
     v=json.loads((output/"ctcf/target_validation.json").read_text())
     m=pd.read_csv(output/"ctcf/ctcf_accessible_peak_overlap_metrics.csv")
     auc=m[m.method=="residual"].auroc.iloc[0]
@@ -95,8 +110,8 @@ def build(output=ROOT/"results/hardened"):
         f"GM12878 DNase experiment ENCSR000EMT, GRCh38 file ENCFF598KWZ, defines accessible windows independently of the saved CTCF peaks. Cases overlap those peaks; controls do not, including motif-bearing non-overlap windows. Matching uses chromosome, 204 bp width, GC within 0.02, and log-DNase signal within 0.5. Per-class caps are 512 training, 128 validation, and 128 test. The readout passes its pre-execution validation AUROC gate of 0.6 with validation AUROC {v['validation_auroc']:.4f} and test AUROC {auc:.4f}. Localization and intervention use the same CTCF motif and trained output. The paired incremental comparison in Table~\\ref{{tab:incremental}} is negative for CTCF: this trained output does not imply residual information beyond the direct motif baseline. Peak non-overlap does not verify binding absence. Repeat annotations, quantitative occupancy, and other cell types are unavailable.",
         r"\paragraph{Native attention sensitivity.}",
         f"PWM score-range fractions 0.7, 0.8, and 0.9 recompute scoring and matching across {genomic['source_sequences']:,} peaks. Each configuration evaluates at most {genomic['pair_cap']} random eligible pairs. Token balancing requires identical real-token and target-token counts and covered widths within 2 bp. Maximum, mean, and overlap-weighted aggregation give separate QK assays. Attention compares base and token weighting, global and local queries, and native, content-only, and position-only softmax. Every native head context is checked. Table~\\ref{{tab:geometry}} counts positive base-density contrasts passing genomic-block maximum-statistic tests over 144 heads; saved inference also corrects across all sensitivity choices and reports chromosome effects.",
-        r"\begin{table}[t]\centering\small\caption{Recomputed geometry sensitivity.}\label{tab:geometry}",
-        table(["Fraction","Geometry","Eligible","Evaluated","Heads"],geometry),r"\end{table}",
+        r"\begin{table}[t]\centering\small\caption{Geometry sensitivity under both correction families. Within uses 144-head maximum-statistic tests; overall uses the complete saved sensitivity Holm family.}\label{tab:geometry}",
+        table(["Fraction","Geometry","Eligible","Evaluated","Within","Overall"],geometry),r"\end{table}",
         r"\paragraph{Scope and reproducibility.}",
         r"These experiments test computational calibration and trained-readout effects without establishing native pretrained binding causality. Protocol choices precede execution without external registration. Distant homology, label reconstruction, pretraining exposure, and classifier-seed variability remain unresolved. Immutable legacy-pipeline receipts reject changed scientific configuration, source, membership, or artifacts on resume. Isolated execution records retain prior receipts and verify source and artifact hashes before generating these results.",
     ]

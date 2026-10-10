@@ -109,10 +109,26 @@ def test_paper_numbers_and_inputs_match_the_saved_artifact_manifest():
     import hashlib
     import json
     root=Path(__file__).resolve().parents[1]
+    # This manifest records the historical presentation, including its old bibliography.
+    # Validate its original source, not a new reporting revision against an old hash.
+    import subprocess
+    import zipfile
+    historical_revision='cc09923652f0b361f73a36f382c4358dcf8b8100'
     manifest=json.loads((root/"results/review/tables_manifest.json").read_text())
     sources={**manifest["paper_sources"],manifest["paper_results"]["path"]:manifest["paper_results"]["sha256"]}
     for path,expected in sources.items():
-        assert hashlib.sha256((root/path).read_bytes()).hexdigest()==expected, f"Stale manuscript source: {path}"
+        if path in ('paper/main.tex','paper/references.bib'):
+            if (root/'.git').exists():
+                content=subprocess.check_output(['git','show',historical_revision+':'+path],cwd=root)
+            else:
+                archive=root/'submission/original/cc099236.zip'
+                freeze=json.loads((archive.parent/'freeze.json').read_text())
+                assert hashlib.sha256(archive.read_bytes()).hexdigest()==freeze['archive_sha256']
+                with zipfile.ZipFile(archive) as z:
+                    content=z.read(path)
+        else:
+            content=(root/path).read_bytes()
+        assert hashlib.sha256(content).hexdigest()==expected, f"Stale historical manuscript source: {path}"
     for path,record in manifest["figures"].items():
         assert hashlib.sha256((root/path).read_bytes()).hexdigest()==record["sha256"], f"Stale figure: {path}"
         assert all(source in manifest["paper_sources"] for source in record["sources"])

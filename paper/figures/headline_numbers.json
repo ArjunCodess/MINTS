@@ -1,0 +1,70 @@
+{
+  "intervention": [
+    [
+      "TATA",
+      "0/8",
+      16,
+      15,
+      "0.0243",
+      "[-0.0338, 0.1014]",
+      "0.5772"
+    ],
+    [
+      "CTCF",
+      "5/8",
+      64,
+      45,
+      "0.0157",
+      "[0.0066, 0.0251]",
+      "0.0028"
+    ]
+  ],
+  "leave_cluster_out_range": [
+    -0.016587125728370265,
+    -0.013038619422356481
+  ],
+  "localization": {
+    "base_density": 1.001589376354412,
+    "content_density": 0.8932021977304659,
+    "position_only_density": 1.0069347520641423
+  },
+  "mapped": {
+    "cases": 61,
+    "ci_high": -0.009145935254770282,
+    "ci_low": -0.02445395218106006,
+    "clusters": 60,
+    "mean": -0.01596574414762033,
+    "sham_js": 0.029018313879236098,
+    "variant_js": 0.013052569731615745
+  },
+  "pilot": {
+    "ci_high": 0.08692974597215648,
+    "ci_low": -0.25132797197862106,
+    "cluster_standard_deviation": 0.3128413475703733,
+    "confirmation_status": "not run; fresh uninspected cohort required",
+    "endpoint": "unchanged masked flank token log probability",
+    "genomic_clusters": 11,
+    "interpretation": "discovery feasibility only; no native mechanism or binding claim",
+    "mean": -0.05680769681930542,
+    "next_action": "stop this endpoint; any revised endpoint is a new exploratory study",
+    "p": 0.6218,
+    "reasons": [
+      "motif effect does not exceed matched sham with specified sensitivity"
+    ],
+    "retained_sequences": 12,
+    "selected_head": null,
+    "status": "stop"
+  },
+  "predictive": {
+    "ci_high": -0.0166383105306433,
+    "ci_low": -0.0755887588236135,
+    "clusters": 81,
+    "difference": -0.04541015625,
+    "estimand": "paired held-out AUROC difference conditional on fixed classifiers",
+    "first": "baseline_plus_residual",
+    "resampling_unit": "genomic_block",
+    "second": "motif_position_composition",
+    "task": "ctcf_accessible_peak_overlap",
+    "valid_draws": 1000
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "checked_at_utc": "2026-10-10T10:19:54.686553+00:00",
+  "selected_first_review": "GLBIO 2027 full paper",
+  "submission_state": "prepared, not uploaded",
+  "pdfs": {
+    "glbio": {
+      "pages": 6,
+      "sha256": "8a81fb733869d165d1add6214ff74855f22620448d12c0f171d8081bc53dc322"
+    },
+    "glbio_abstract": {
+      "pages": 1,
+      "sha256": "750abb9022de3932ba393d7cf9524a6d665d0651cf651a8d90c8c839a8ee8ef8"
+    },
+    "cbm": {
+      "pages": 8,
+      "sha256": "4208f3e2c26d70abcabc3472c3b3787daff7c466763c9fd9a355781fac79656f"
+    }
+  },
+  "abstract_word_counts": {
+    "glbio_full_abstract": 138,
+    "glbio_community_abstract": 202,
+    "cbm_abstract": 196,
+    "ismb_portable_abstract": 202
+  },
+  "visually_reviewed_pages": 15,
+  "ordinary_tests_passed": 199,
+  "artifact_tests_passed": 21,
+  "original_result_hashes_preserved": 734,
+  "deposited_files_verified": 125,
+  "raw_cases_reproduced": 61,
+  "scope": "Existing saved evidence; no new model inference, endpoints or gate changes",
+  "source_verification": "Full detached public checkout: 214 tests passed; all 15 candidate pages reproduce identical text and pixels",
+  "vendor_layout_warnings": "Unmodified OUP Modern Large running-head warnings reproduced in an independent three-page control; no body overflow",
+  "routes": {
+    "glbio_full": {
+      "open": true,
+      "deadline_aoe": "2027-01-07 23:59",
+      "notifications": "2027-02-02",
+      "blind_review": false,
+      "source": "https://www.iscb.org/glbio2027/call-for-submissions/proceedings"
+    },
+    "glbio_abstract": {
+      "open": true,
+      "activation": "Conditional fallback after full-paper rejection; avoid duplicate solo presentations",
+      "deadline_aoe": "2027-03-11 23:59",
+      "max_words": 250,
+      "source": "https://www.iscb.org/glbio2027/call-for-submissions/abstracts"
+    },
+    "cbm": {
+      "activation": "Only after GLBIO rejection or confirmed withdrawal",
+      "review": "single anonymized",
+      "abstract_max_words": 250,
+      "keywords": "1 to 7",
+      "highlights": "Required, 3 to 5, each <=85 characters",
+      "source_format": "Editable .tex or .doc/.docx; PDF alone insufficient",
+      "graphical_abstract": "Encouraged, not required",
+      "subscription_publication_fee": "No author publication fee",
+      "retrieval": "Verified through collaborative browser after ordinary HTTP returned 403",
+      "guide": "https://www.sciencedirect.com/journal/computers-in-biology-and-medicine/publish/guide-for-authors",
+      "fees": "https://www.sciencedirect.com/journal/computers-in-biology-and-medicine/about/insights",
+      "prior_abstracts": "Explicitly excepted from prior-publication prohibition; disclose any actual presentation"
+    },
+    "ismb_abstract": {
+      "regular_deadline_aoe": "2027-04-08 23:59",
+      "late_breaking_opens": "2027-04-12",
+      "late_breaking_deadline_aoe": "2027-05-06 23:59",
+      "final_call": "Redirects to ISCB login; word limit, opening and overlap rules unverified",
+      "schedule": "https://transition.iscb.org/cms_addon/conferences/ismbeccb2027/schedule/abstracts?keydate="
+    }
+  },
+  "mirror": {
+    "url": "https://anonymous.4open.science/r/MINTS/",
+    "browser_status": "Public site works",
+    "files": 871,
+    "source_commit_display": "Oct 6, 2026",
+    "snapshot_ready_display": "Oct 10, 2026",
+    "new_verifier": "File not found; refresh snapshot before treating as current code"
+  },
+  "author_dependencies": [
+    "OUP waiver decision or publication charge arrangement, separate attendance costs",
+    "Refresh anonymous snapshot if using it as current code",
+    "CBM author-confirmed CRediT roles and publisher competing-interest form",
+    "Final accessible ISMB call and track overlap rules",
+    "Author-controlled portal upload and review of assembled PDF"
+  ],
+  "public_tests_passed": 214,
+  "editable_source_zip": "25 files pass checksums and reproduce byte-identically; extracted supplement builds all 14 pages with identical text and pixels",
+  "validation_status": "verified local preparation; external author actions remain",
+  "previous_presentation_revision": "03cd4b5db6b4fbbce35e2e082582e8c3946cdbed",
+  "author_format_update": {
+    "checked_at_utc": "2026-10-10T21:08:30.417218+00:00",
+    "base_revision": "0d791bcb49a6da95e57126305084b527c88bb431",
+    "author": "Arjun Vijay Prakash",
+    "template": "All nine supplied OUP_General_Template bundle files and three active class/style files are byte-identical to the existing vendor files",
+    "pdfs": {
+      "paper/main.pdf": {
+        "pages": 8,
+        "changed_pages": [
+          1,
+          7
+        ],
+        "other_pages_pixel_identical": 6,
+        "sha256": "92490c21281f97105e613b190cbab7e218edc0a815ae2f348bc1f0275d651b0d"
+      },
+      "paper/supplement.pdf": {
+        "pages": 14,
+        "changed_pages": [
+          1,
+          13
+        ],
+        "other_pages_pixel_identical": 12,
+        "sha256": "e244b657ec03d11a24f6dc3c52a2a623dac8c2eb71905dfc25f52d2d7422514e"
+      },
+      "paper/venues/glbio.pdf": {
+        "pages": 6,
+        "changed_pages": [
+          1,
+          5
+        ],
+        "other_pages_pixel_identical": 4,
+        "sha256": "2fc43d9c463fc54dc83dca25f1fab9963b5b14ac1d55b7c263f7fadcd179f454"
+      },
+      "paper/venues/glbio_abstract.pdf": {
+        "pages": 1,
+        "changed_pages": [
+          1
+        ],
+        "other_pages_pixel_identical": 0,
+        "sha256": "149a4b259100572413ecf2d3efe8242e64e36c01e686d2f6877150f0f75c8bae"
+      },
+      "paper/venues/cbm.pdf": {
+        "pages": 8,
+        "changed_pages": [
+          1,
+          7
+        ],
+        "other_pages_pixel_identical": 6,
+        "sha256": "a665ec57688f8bda8078e56f96d8dbe30275ee33484d08e30f08cd017edd123c"
+      }
+    },
+    "changed_pages_visually_reviewed": 9,
+    "unchanged_pages_pixel_identical": 28,
+    "targeted_artifact_tests_passed": 3,
+    "text_check": "Only the requested author spelling differs across all 37 PDF pages",
+    "scientific_changes": "none"
+  },
+  "writing_review": {
+    "checked_at_utc": "2026-10-10T21:22:10.692365+00:00",
+    "base_revision": "2880792acdd443a673e3b12816fe9f2d0645e5e1",
+    "scope": "Wording, bibliography spacing and requested repository-root URL only; no model runs, experimental code, gates, results, numerical inserts or figure changes",
+    "pdfs": {
+      "paper/venues/glbio.pdf": {
+        "pages": 6,
+        "sha256": "8a81fb733869d165d1add6214ff74855f22620448d12c0f171d8081bc53dc322"
+      },
+      "paper/venues/glbio_abstract.pdf": {
+        "pages": 1,
+        "sha256": "750abb9022de3932ba393d7cf9524a6d665d0651cf651a8d90c8c839a8ee8ef8"
+      },
+      "paper/venues/cbm.pdf": {
+        "pages": 8,
+        "sha256": "4208f3e2c26d70abcabc3472c3b3787daff7c466763c9fd9a355781fac79656f"
+      },
+      "paper/main.pdf": {
+        "pages": 8,
+        "sha256": "d384a7806ae0603dc98a8dfa9367b49c63784cf3f23c288b2672a3fe09915c24"
+      },
+      "paper/supplement.pdf": {
+        "pages": 14,
+        "sha256": "0ee9de6cecb8210e710accc3e3a83fce2b7d5fcf72863c7f8b06085ff5ab2bb0"
+      }
+    },
+    "pages_visually_reviewed": 37,
+    "targeted_artifact_tests_passed": 3,
+    "manifest_hashes": "All current venue input and output hashes verified",
+    "current_code_url": "https://github.com/ArjunCodess/MINTS",
+    "template": "Unmodified OUP class and styles",
+    "review_state": "Writing review complete; portal and attendance actions remain external"
+  }
+}

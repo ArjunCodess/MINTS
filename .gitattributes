@@ -31,3 +31,15 @@ tools/*.py text eol=lf
 tests/*.py text eol=lf
 paper/*.tex text eol=lf
 paper/*.bib text eol=lf
+
+results/correspondence_audit/** -text
+paper/generated/** -text
+paper/figures/** -text
+results/qk_alignment/ctcf_qk_alignment.csv text eol=crlf
+results/enrichment/ctcf_qk_alignment_matched_attention_enrichment.csv text eol=crlf
+
+# Preserve venue manifests and unchanged third-party template bytes on checkout.
+paper/venues/** -text
+paper/venues/vendor/** -whitespace
+paper/venues/*.bst -whitespace
+docs/submission-calendar.ics -text

@@ -1,0 +1,84 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MINTS//Conditional submission reminders//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:mints-20270107-route@local
+DTSTAMP:20261010T100539Z
+DTSTART;VALUE=DATE:20270107
+DTEND;VALUE=DATE:20270108
+SUMMARY:GLBIO full-paper deadline
+DESCRIPTION:Submit only the author-bearing reviewed GLBIO PDF and necessar
+ y supplement. Deadline 23:59 Anywhere on Earth. A fee waiver requires sepa
+ rate OUP approval. Keep other full-paper reviews inactive.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mints-20270202-route@local
+DTSTAMP:20261010T100539Z
+DTSTART;VALUE=DATE:20270202
+DTEND;VALUE=DATE:20270203
+SUMMARY:GLBIO proceedings decision check
+DESCRIPTION:Published notification date. Check the actual decision. Accept
+ ance continues to invited Bioinformatics Advances review. Rejection or con
+ firmed withdrawal permits a sequential fallback. No decision means keep th
+ e freeze.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mints-20270203-route@local
+DTSTAMP:20261010T100539Z
+DTSTART;VALUE=DATE:20270203
+DTEND;VALUE=DATE:20270204
+SUMMARY:Conditional journal fallback review
+DESCRIPTION:Only after GLBIO rejection or confirmed withdrawal. Check the
+  current Computers in Biology and Medicine guide and subscription terms be
+ fore using the prepared candidate. A GLBIO poster is conditional on both v
+ enues overlap rules.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mints-20270311-route@local
+DTSTAMP:20261010T100539Z
+DTSTART;VALUE=DATE:20270311
+DTEND;VALUE=DATE:20270312
+SUMMARY:GLBIO abstract deadline\, conditional
+DESCRIPTION:Use the prepared abstract below 250 words. Poster-only require
+ s text. Talk consideration also requires a one-page PDF. Deadline 23:59 An
+ ywhere on Earth. Avoid duplicate solo-presenter submissions and check any
+  active journal policy.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mints-20270408-route@local
+DTSTAMP:20261010T100539Z
+DTSTART;VALUE=DATE:20270408
+DTEND;VALUE=DATE:20270409
+SUMMARY:ISMB/ECCB regular abstract deadline\, conditional
+DESCRIPTION:This is the ordinary talk/poster deadline\, not late-breaking.
+  Deadline 23:59 Anywhere on Earth. Verify accessible final call\, track li
+ mits and overlap permission before activation.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mints-20270412-route@local
+DTSTAMP:20261010T100539Z
+DTSTART;VALUE=DATE:20270412
+DTEND;VALUE=DATE:20270413
+SUMMARY:ISMB/ECCB late-breaking posters open
+DESCRIPTION:Late-breaking poster opening from the official schedule. Verif
+ y the final call and active journal policy\; opening does not establish su
+ bmission eligibility.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mints-20270506-route@local
+DTSTAMP:20261010T100539Z
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
+SUMMARY:ISMB/ECCB late-breaking poster deadline\, conditional
+DESCRIPTION:Deadline 23:59 Anywhere on Earth. Prepared portable text needs
+  final track compliance and overlap verification before submission.
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

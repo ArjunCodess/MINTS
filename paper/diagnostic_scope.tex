@@ -1,0 +1,109 @@
+% Historical diagnostic excerpt from cc09923652f0b361f73a36f382c4358dcf8b8100:paper/main.tex.
+\section{Datasets and audit scope}
+We use locally saved partitions of \path{InstaDeepAI/nucleotide_transformer_downstream_tasks_revised}, filtering the task field and retaining sequence, coordinate name, and binary label. Saved data have train and test partitions, with no independent validation partition. Test examples are on chromosomes 20 and 21; training examples are on chromosomes 1--19, X, and Y. Table~\ref{tab:dataset} gives exact class counts. The original run did not pin an upstream revision. New ingestion pins \path{851f9946252e90c665cdb3cc3eedb78f1f26197c}; its official card URL, content hash, and label-source URLs are saved with the audit.
+
+The released card attributes promoter labels to EPDnew human release 006, using promoter intervals and its TATA motif annotation, with genomic non-promoter windows as negatives. It attributes splice labels to GENCODE human release 44, excluding level-3 transcript annotations. We use the released labels without resampling or changing windows. The card documents promoter source filenames and splice annotation release, but does not give every sampling decision needed to independently reconstruct all labels. Membership hashes establish analyzed examples, rather than certifying the biological annotations.
+
+Ordered hashes of labels, coordinates, sequences, and tokenization agree exactly between the stored partitions and fresh ingestion of the pinned release for all four tasks. This verifies the analyzed dataset against that release, without recovering historical checkpoint provenance or independently validating its labels.
+\begin{table}[t]
+\centering\small
+\caption{Exact stored class counts. Membership, coordinates, sequence hashes, and orientation-canonical hashes are saved as JSONL.}
+\label{tab:dataset}
+\DatasetTable
+\end{table}
+
+Checks find no shared chromosomes, overlapping windows, identical sequences, or reverse-complement duplicates across stored train/test partitions. An exhaustive equal-length Hamming screen finds no cross-partition pair with at most two substitutions in either orientation. This does not cover indels, shifted windows, or longer-range homology. No reverse-complement augmentation is introduced. Chromosome-held-out evaluation cannot rule out reference-genome overlap in pretraining.
+
+CTCF sequences come from ENCODE experiment ENCSR000DKV, peak file ENCFF827JRI, and the UCSC hg38 reference. BED intervals are extracted without flanks; the prepared file contains \CTCFSequences{} intervals. Peaks are assay observations rather than proof of a particular motif or a model's binding prediction. Local source hashes are audited. New inference pins the model revision stated above; the historical unpinned checkpoint cannot be reconstructed from these hashes alone.
+
+\section{Results}
+\paragraph{The audit separates evidence that supports different claims.}
+Decodable labels and conditional attention associations do not establish causal motif use. Historical patching has broken nucleotide alignment and unstable restoration ratios. The fitted CTCF baseline-plus-residual classifier has a negative incremental comparison on the analyzed population; it does not prove absence of additional representational information. The repaired trained-readout intervention uses 64 sequences in 45 genomic clusters. Its target remains a fitted readout, so these measurements cannot establish a native biological binding mechanism. Individual-head screen failures also leave distributed mechanisms unresolved.
+\paragraph{Prediction is context, not a mechanism.}
+Table~\ref{tab:task-performance} shows higher point AUROC for the k-mer classifier than the DNABERT-2 readout on both promoter tasks; this is not a claim of statistically established superiority. The readout has higher point AUROC on splice tasks. Strong promoter composition baselines make a motif-specific explanation especially uncertain.
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Held-out AUROC with 95\% sequence-bootstrap intervals, generated from saved per-sequence predictions.}
+\label{tab:task-performance}
+\PerformanceTable
+\end{table}
+
+\paragraph{Composition matching changes the promoter result.}
+Table~\ref{tab:probe-controls} retains the historical match for auditability and compares the repaired caliper control. Historical and full promoter AUROC legitimately agree for identical memberships, but this provides no composition control. Historical splice subsets are smaller and their AUROCs differ from full scores. The caliper retains \CaliperTATACount{} examples in the TATA task, \CaliperOtherCount{} in the other-promoter task, \CaliperDonorCount{} in the donor task, and \CaliperAcceptorCount{} in the acceptor task. On these retained populations, promoter readout AUROC is lower and the GC baseline approaches chance. Because matching selects a different population, the AUROC change does not isolate an effect of GC. This supports a narrower promoter interpretation and does not establish causal motif use.
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Readout AUROC and 95\% sequence-bootstrap intervals. Full, historical, and caliper populations differ; retained counts and composition diagnostics accompany the predictions.}
+\label{tab:probe-controls}
+\ControlTable
+\end{table}
+
+\paragraph{CTCF screen failure is scoped to this assay.}
+The token-score file has \TokenRows{} rows, including \FiniteTokens{} finite scores and \UniqueSupport{} unique motif-support tokens. Summing participation separately over overlapping hits gives \HitOccurrences{} motif-hit token occurrences, the quantity used by historical enrichment. There are \AbsentSequences{} peaks without a threshold-passing PWM hit. These count different filtering and aggregation stages.
+
+The maximum historical QK correlation is \BestQK{} and reconstructed enrichment ratio is \BestEnrichment{}. No head passed the motif-local QK and attention-enrichment screens. Table~\ref{tab:sweep} gives the joint sweep from saved head tables. This does not establish absence of a CTCF detector. We withdraw inferential interpretations of old token-shuffle and permuted-head nulls, which do not provide sequence-level evidence for localization.
+\begin{table}[t]
+\centering\small
+\caption{Heads passing both descriptive cutoffs in the historical reconstructed-attention assay. No significance or confidence interval is assigned to a count of screened heads.}
+\label{tab:sweep}
+\ThresholdTable
+\end{table}
+
+\paragraph{Native attention associates with motif-present peaks.}
+The separate genomic-control assay retains \NativePairs{} pairs, with no invalid pairs. Reconstructed and native head contexts agree to the measured precision (maximum absolute error zero). There are \NativePositiveHeads{} heads with positive contrasts and Holm-adjusted $p<0.05$. The largest mean contrast, layer/head \NativeBestLayer{}/\NativeBestHead{}, is \NativeBestContrast{} (marginal 95\% interval [\NativeBestLow{}, \NativeBestHigh{}]; Holm $p=\NativeBestHolm{}$). Figure~\ref{fig:native} shows the largest observed contrasts. These conditional associations qualify the historical negative result, but do not supply a native causal output. Selection of displayed maxima is exploratory.
+\begin{figure}[t]
+\centering\includegraphics[width=.9\linewidth]{../results/review/ctcf_native_controls.png}
+\caption{Native-attention density contrasts for the eight largest observed means. Intervals bootstrap matched sequence pairs and are marginal; tests correct across all 144 heads.}
+\label{fig:native}
+\end{figure}
+
+\paragraph{Sequence-level QK is a separate localization assay.}
+The sequence-level QK analysis retains \SequenceQKPairs{} matched pairs; \SequenceQKUndefined{} pairs have undefined correlations. The largest mean motif-present correlation is \SequenceQKBestMean{} at layer/head \SequenceQKBestLayer{}/\SequenceQKBestHead{} (marginal 95\% interval [\SequenceQKBestLow{}, \SequenceQKBestHigh{}]). There are \SequenceQKHighHeads{} heads with mean $r\geq0.5$. Table~\ref{tab:sequence-qk} shows the largest observed means and their matched contrasts. The two heads with the largest mean present correlations have negative present--absent contrasts: their mean correlations are higher in motif-absent peaks. Positive within-sequence correlation alone therefore does not imply selective association with threshold-passing motifs. This is a new sequence-weighted content-QK assay, so it does not replace the pooled historical statistic or establish causal use.
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{Exploratory sequence-level QK means and contrasts. Intervals bootstrap sequence pairs; two-sided contrast tests use a separate Holm family of 144 heads. Displayed heads are selected by observed mean present correlation.}
+\label{tab:sequence-qk}
+\SequenceQKTable
+\end{table}
+
+\paragraph{Historical held-out patching is withdrawn as aligned evidence.}
+The earlier \HistoricalTATAPairs{} TATA pairs contain \HistoricalTATATrain{} training and \HistoricalTATATest{} test examples, with unique pair IDs; pooling partitions explains the apparent excess over the test-set size. That pooled effect is withdrawn as held-out causal evidence. The archived test-only results retain \HeldoutTATAPairs{} shape-compatible examples, six with nucleotide-boundary mismatches at patched positions. Table~\ref{tab:patching} reports the largest mean effects with medians and marginal intervals. Figure~\ref{fig:pairs} shows individual pairs and their denominators. Sign changes in the reference difference and variation across pairs limit interpretation of the mean ratio. The intervention changes a trained readout and cannot certify a biological detector in the pretrained model.
+\begin{table}[t]
+\centering\small
+\caption{Archived TATA probe patching, withdrawn as aligned intervention evidence and retained for diagnosis, ranked by mean PM. Intervals bootstrap pairs and are marginal, without correction for choosing maxima across 144 heads.}
+\label{tab:patching}
+\PatchingTable
+\end{table}
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{../results/review/heldout_patching.png}
+\caption{Pair PM for the head with the largest observed mean, and its clean-corrupted score difference. Selection is exploratory.}
+\label{fig:pairs}
+\end{figure}
+
+\FloatBarrier
+\input{hardened_results}
+\input{cohort_balance}
+\input{native_endpoint}
+\input{native_followup}
+\input{mapped_variant}
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{../results/native_followup/pilot_diagnostics.png}
+\caption{Discovery-pilot geometry, eligibility and cluster influence. Leave-cluster-out estimates remove every sequence in the omitted genomic cluster; changing signs indicate sensitivity to membership.}
+\label{fig:pilot-diagnostics}
+\end{figure}
+\begin{figure}[t]
+\centering\includegraphics[width=.9\linewidth]{../results/native_followup/recovery_calibration.png}
+\caption{Independent masked-token recovery on 128 fixed chromosome 16/17 windows. Vocabulary rank and log probability depend on token width; comparison uses a smoothed token-frequency baseline from chromosomes 14/15. This calibrates recovery competence without testing motif-specific sensitivity.}
+\label{fig:recovery-calibration}
+\end{figure}
+\paragraph{Donor control feasibility.}
+For a two-base GT-to-TG edit, a non-motif sham with the same width and transition multiset must change TG to GT, which creates a prohibited new hit. The resulting donor exclusion concerns the feasibility of this strict control design, rather than absence of a donor mechanism. A wider-context donor control is outside these intervention results.
+\FloatBarrier
+\section{Interpretation and limitations}
+The native extension is gated on endpoint feasibility. Its current masked-flank pilot fails that gate, and its interval is too wide for a precise null. Any revised endpoint is exploratory. A subsequent confirmation would require a fully frozen endpoint, selection and intervention rule, matched controls, eligibility, genomic clustering and a cluster-based power justification on genuinely uninspected inputs. The inspected chromosomes 20/21 cannot provide that confirmation. The recovered GSE81945 study supplement provides 15 heterozygous variants across 13 hg19 loci, with reference alleles verified against hg19. Pooled counts and two adjacent-variant groups limit independent allele inference; no hg38 transfer or biological confirmation is claimed. Natural substitutions require substitution-matched controls, rather than composition-preserving shuffle controls.
+Evidence supports frozen decodability, failure of historical CTCF screens, and sequence-level QK and native-attention measurements under matched genomic controls, without identifying native CTCF causality. A validated native pretrained causal target remains unresolved; the added CTCF target is an independently evaluated trained readout. The corrected analyses use different aggregation and a different control population from the historical screens; the assays are not interchangeable. Small selected patching populations and composition-changing corruptions prevent broad causal conclusions. The controlled assays above establish nucleotide correspondence and matched shams for their retained populations, with explicit eligibility exclusions.
+
+The affine QK observation is conditional: if logits for a fixed query equal $a+\gamma s_j$ with $\gamma>0$, softmax preserves score ordering within that sequence. This assumption is not shown empirically. Within-sequence ranking does not imply a cross-sequence motif-present/absent threshold or causal use; we make no stronger layer-1 theorem claim.
+
+The Nucleotide Transformer comparison is excluded because a pinned checkpoint, validated token alignment, and native-attention equivalence were not established. Its stored enrichment ratio is not Spearman correlation. No tokenizer-family ranking or cross-model biological conclusion is supported. Auxiliary OV and sparse-feature artifacts are historical; weak alignment does not show that an alternate circuit is absent.
+
+Intervals concern fixed classifiers and do not resolve labeling errors, pretraining contamination, distant homology or training-seed variability. The added analyses report sensitivity to within-chromosome dependence through transitive genomic blocks. Local membership matches the pinned upstream release, but historical checkpoint provenance and independent label reconstruction remain incomplete. The predictive, held-out TATA, and native-control results use the completed clean CUDA reproduction. Fresh train/test activation caches and CTCF sequence/token files match their historical counterparts byte for byte, and the historical screen conclusion is reproduced. Refitted probe outputs differ slightly across the recorded environments. The clean pipeline completed through recorded resumptions after a loader compatibility repair; a diagnostic traceback timer was removed following a native Python crash. Earlier disk-exhaustion failures and all failed or interrupted attempts are preserved.

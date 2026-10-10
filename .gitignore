@@ -250,3 +250,24 @@ paper/mapped-build/
 .venv-cpu-check/
 !results/hardened/command_*.log
 !results/mapped_variant/validation/*.log
+
+# Local review materials and build caches
+/submission/
+/results/submission_v1/
+/paper/generated_v1/
+/plan.md
+/docs/archive/
+/docs/reproduction.md
+/docs/resource_terms.md
+/examples/native_queries/
+/tools/build_submission.py
+/tools/audit_submission.py
+/tools/audit_headline_numbers.py
+/tools/minimal_example.py
+/tools/package_submission.py
+/tools/verify_clean_package.py
+/tests/test_submission_reporting.py
+/.venv-cpu-check/
+/example-output/
+/.github/workflows/raw-audit.yml
+/.github/workflows/distribution-audit.yml

@@ -1,0 +1,7425 @@
+{
+  "scope": "Post-study saved-input diagnostic; no model predictions, new controls, endpoint changes or gate decisions",
+  "cases": 61,
+  "clusters": 60,
+  "query_count": 438,
+  "shifted_index_cases": 29,
+  "full_boundary_stable_cases": 15,
+  "exact_saved_query_sets": true,
+  "model_revision": "7bce263b15377fc15361f52cfab88f8b586abda0",
+  "tokenizer_sha256": "02e2738a0aa1f7fa95a9a8acbc8b335ba9baefacf64363d328ebc23c6ab39bd6",
+  "inputs": {
+    "results/mapped_variant/cases.json": "fb043fe6ac50e6c63f42ed5a663f16c444e9973e419846043f018f81c5060f29",
+    "results/mapped_variant/protocol.json": "c4030e1773b7fcc934782c221e1f3f09c2c3130b391326482ffb6b1bf47b90f1",
+    "JASPAR MA0139.1": "e5d0e1042cc98f305ebce5f3a34515e486d7f0b3b7efbd3be4bb105050f43305"
+  },
+  "generators": {
+    "src/query_correspondence.py": "ec99ec0a96b86889fa6bebe0056a9dcc9db1963a24f832ee26a73386bec0da1f",
+    "tools/check_query_correspondence.py": "f90b2858c4d5a322a956eb124be351a9db1001fa975c73b642e2e35d8ff2f369",
+    "src/control_diagnostics.py": "5ffdbb4e6b0251f1b3d96c8f0002a753238515e423b44b2b83f2afcf1a8a612b"
+  },
+  "cases_checked": [
+    {
+      "variant_id": "chr4:132227817:C>G",
+      "cluster": 0,
+      "sequence_sha256": [
+        "b5c1f8d9579f95d43ab88c2753e7737251df3e7a9b35b549f10b0de80740707a",
+        "965c5013762889c87317dc88f1becdd5f2765cf6265e8c7dc84be9613cea6e49",
+        "d8d7119a236247210fff9cc6b743a846248ef6d588b33c1e793146c7cae5b71a"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            79,
+            85
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1040,
+          "width": 6
+        },
+        {
+          "span": [
+            123,
+            127
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 55,
+          "width": 4
+        },
+        {
+          "span": [
+            127,
+            132
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 161,
+          "width": 5
+        },
+        {
+          "span": [
+            132,
+            138
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 967,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 4,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 38,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        44,
+        44
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr1:24642639:G>A",
+      "cluster": 1,
+      "sequence_sha256": [
+        "8b99f1e0c039521adcb29af2cf33f1c21a8009c613e0b9f268798aec23f03edc",
+        "382ce7ef2b33982f5aef3c3dd0739a5bf746deb4f744920604925838229616bd",
+        "e25b9f202f48e3aa2c44bb2ec7279afaf8282f4b8841482139bbcd663b67b369"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            72
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 393,
+          "width": 5
+        },
+        {
+          "span": [
+            72,
+            76
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 55,
+          "width": 4
+        },
+        {
+          "span": [
+            76,
+            82
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 3103,
+          "width": 6
+        },
+        {
+          "span": [
+            118,
+            123
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 368,
+          "width": 5
+        },
+        {
+          "span": [
+            123,
+            126
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 24,
+          "width": 3
+        },
+        {
+          "span": [
+            126,
+            130
+          ],
+          "indices": [
+            30,
+            30,
+            30
+          ],
+          "token_id": 443,
+          "width": 4
+        },
+        {
+          "span": [
+            130,
+            136
+          ],
+          "indices": [
+            31,
+            31,
+            31
+          ],
+          "token_id": 1669,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 45,
+      "rejected": {
+        "motif_or_geometry": 38,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        47,
+        47,
+        47
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr22:32549820:T>C",
+      "cluster": 2,
+      "sequence_sha256": [
+        "e2ad2875219b59186120194e7737f72035b825079090923c383682b59118dc15",
+        "f8e42c8a6b312c1c54157db7d034c4e3ee3dc37021d6a5831eb4bf2ffe3297be",
+        "e4e85d458f6dde4d7893c2f7c37f9f802c5275d3e76a98a108ee012ad694ff8d"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            74
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 890,
+          "width": 6
+        },
+        {
+          "span": [
+            74,
+            79
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 200,
+          "width": 5
+        },
+        {
+          "span": [
+            79,
+            86
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 2080,
+          "width": 7
+        },
+        {
+          "span": [
+            86,
+            90
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 60,
+          "width": 4
+        },
+        {
+          "span": [
+            122,
+            126
+          ],
+          "indices": [
+            22,
+            22,
+            24
+          ],
+          "token_id": 73,
+          "width": 4
+        },
+        {
+          "span": [
+            126,
+            131
+          ],
+          "indices": [
+            23,
+            23,
+            25
+          ],
+          "token_id": 541,
+          "width": 5
+        },
+        {
+          "span": [
+            131,
+            137
+          ],
+          "indices": [
+            24,
+            24,
+            26
+          ],
+          "token_id": 798,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 36,
+      "rejected": {
+        "motif_or_geometry": 29,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        38,
+        38,
+        40
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr19:8609566:G>A",
+      "cluster": 3,
+      "sequence_sha256": [
+        "fa9ca3db40a23c243a36f7d676ea466886564975ee42c40da4bf1d548ec072d0",
+        "3f72cd62dc76f38174eca82ef8406a4c10302e4f503001ed7d8839573882b4d3",
+        "482bf525a278fd4bee9045d492f7005f67f2adcecde4fdf0888034f3ec1430a1"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            71
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 733,
+          "width": 6
+        },
+        {
+          "span": [
+            71,
+            75
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 139,
+          "width": 4
+        },
+        {
+          "span": [
+            122,
+            127
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 452,
+          "width": 5
+        },
+        {
+          "span": [
+            127,
+            130
+          ],
+          "indices": [
+            30,
+            30,
+            30
+          ],
+          "token_id": 33,
+          "width": 3
+        },
+        {
+          "span": [
+            130,
+            135
+          ],
+          "indices": [
+            31,
+            31,
+            31
+          ],
+          "token_id": 208,
+          "width": 5
+        },
+        {
+          "span": [
+            135,
+            141
+          ],
+          "indices": [
+            32,
+            32,
+            32
+          ],
+          "token_id": 610,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 47,
+      "rejected": {
+        "motif_or_geometry": 39,
+        "span_or_identity": 2,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        49,
+        49,
+        49
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr1:111746819:T>C",
+      "cluster": 4,
+      "sequence_sha256": [
+        "9cfc4912b313c06c23be86161482ecd7292072273151196761b16de4a90f847b",
+        "694ca5c25d1cc4717783c2f9f3c1c66323759862f15d3fffe8a9818acd7ee025",
+        "e4dc8afde5b001d830495e0fbed1da396fa2ba1a28105441301df2a2afce9b38"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            69,
+            73
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 50,
+          "width": 4
+        },
+        {
+          "span": [
+            73,
+            79
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 622,
+          "width": 6
+        },
+        {
+          "span": [
+            79,
+            83
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 100,
+          "width": 4
+        },
+        {
+          "span": [
+            115,
+            121
+          ],
+          "indices": [
+            23,
+            24,
+            23
+          ],
+          "token_id": 632,
+          "width": 6
+        },
+        {
+          "span": [
+            121,
+            127
+          ],
+          "indices": [
+            24,
+            25,
+            24
+          ],
+          "token_id": 843,
+          "width": 6
+        },
+        {
+          "span": [
+            127,
+            131
+          ],
+          "indices": [
+            25,
+            26,
+            25
+          ],
+          "token_id": 42,
+          "width": 4
+        },
+        {
+          "span": [
+            131,
+            137
+          ],
+          "indices": [
+            26,
+            27,
+            26
+          ],
+          "token_id": 762,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 38,
+      "rejected": {
+        "motif_or_geometry": 30,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        40,
+        41,
+        40
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr6:30364778:T>G",
+      "cluster": 5,
+      "sequence_sha256": [
+        "df4271532ae51415e42afa5f3204341ca6f0a6259fe54105d75312939bb26944",
+        "ab29f6f6138e4babd2f5092b23960e903416c7fc91ee335de6c0b55bf14e9a41",
+        "74c0c0784c6f44700022c1bdf48c057f878d546020d1c2692d74b5ec9e709c81"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            64,
+            70
+          ],
+          "indices": [
+            13,
+            13,
+            13
+          ],
+          "token_id": 167,
+          "width": 6
+        },
+        {
+          "span": [
+            70,
+            76
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 822,
+          "width": 6
+        },
+        {
+          "span": [
+            76,
+            78
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 15,
+          "width": 2
+        },
+        {
+          "span": [
+            78,
+            82
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 239,
+          "width": 4
+        },
+        {
+          "span": [
+            82,
+            86
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 44,
+          "width": 4
+        },
+        {
+          "span": [
+            114,
+            118
+          ],
+          "indices": [
+            24,
+            23,
+            24
+          ],
+          "token_id": 61,
+          "width": 4
+        },
+        {
+          "span": [
+            118,
+            122
+          ],
+          "indices": [
+            25,
+            24,
+            25
+          ],
+          "token_id": 63,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        42,
+        43
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr7:45591303:C>T",
+      "cluster": 6,
+      "sequence_sha256": [
+        "ea2321f22da1b8bee1fa3fd1dd36375706ccae528c84d919bb37cd9c036ddac7",
+        "51f59dba18cff7601f816dab5f72073f7fa3beb82e66affeab3af1e01b37f028",
+        "ad8da861d9d6cb626d5f012739c0d615130aa0217bc37c76d431cc45c3ae4fb9"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            72,
+            77
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 283,
+          "width": 5
+        },
+        {
+          "span": [
+            77,
+            82
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 121,
+          "width": 5
+        },
+        {
+          "span": [
+            82,
+            86
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 78,
+          "width": 4
+        },
+        {
+          "span": [
+            121,
+            125
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 60,
+          "width": 4
+        },
+        {
+          "span": [
+            125,
+            129
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 136,
+          "width": 4
+        },
+        {
+          "span": [
+            129,
+            132
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 93,
+          "width": 3
+        },
+        {
+          "span": [
+            132,
+            137
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 289,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 36,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        45
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr9:124123372:G>A",
+      "cluster": 7,
+      "sequence_sha256": [
+        "7c3961ee4ad90ec8cf4cf05cb41d1fd4bbbb3b12b32c0428b1a1b3bca0fbb152",
+        "d3c6e296a8803527e8d791090786ec85723187fa9f6f574cc6d2887927033145",
+        "32a24afee3662ac23c19d84f9fd639194a3e95343b66e6af05358a120a43368a"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            72
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 1504,
+          "width": 7
+        },
+        {
+          "span": [
+            72,
+            77
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 219,
+          "width": 5
+        },
+        {
+          "span": [
+            77,
+            80
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 35,
+          "width": 3
+        },
+        {
+          "span": [
+            80,
+            85
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 332,
+          "width": 5
+        },
+        {
+          "span": [
+            130,
+            136
+          ],
+          "indices": [
+            29,
+            28,
+            28
+          ],
+          "token_id": 521,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 5,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 35,
+        "span_or_identity": 2,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        43,
+        43
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr18:61322498:C>T",
+      "cluster": 8,
+      "sequence_sha256": [
+        "968d17c0eced0aba5a841b8a11e28198d111c607f2e59f30c2286e1c074e2700",
+        "b64bf62cbc4087a3439bb5a769f099e95e4ae35cd084fdfb402b54d32044a184",
+        "1114c15522291fe456eb006c007139badeec95e4392e7bf329a0cc48ce4e1291"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            69,
+            76
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1640,
+          "width": 7
+        },
+        {
+          "span": [
+            76,
+            81
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 601,
+          "width": 5
+        },
+        {
+          "span": [
+            113,
+            117
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 63,
+          "width": 4
+        },
+        {
+          "span": [
+            117,
+            121
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 100,
+          "width": 4
+        },
+        {
+          "span": [
+            121,
+            124
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 35,
+          "width": 3
+        },
+        {
+          "span": [
+            124,
+            129
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 200,
+          "width": 5
+        },
+        {
+          "span": [
+            129,
+            133
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 992,
+          "width": 4
+        },
+        {
+          "span": [
+            133,
+            137
+          ],
+          "indices": [
+            30,
+            30,
+            30
+          ],
+          "token_id": 136,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 44,
+      "rejected": {
+        "motif_or_geometry": 35,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        46,
+        46,
+        46
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr20:23799681:A>G",
+      "cluster": 9,
+      "sequence_sha256": [
+        "6b9eef41a0d86d5112c77a586d74adaaca3b531927786d07b72b821dad294981",
+        "cc1dafc96c2ff54ed189e624af36023763b964573908a521081534fb6d7a7c9c",
+        "395a12031d67dcc63212de743134636b72f161b190395871467df10b41738153"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            81,
+            85
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 48,
+          "width": 4
+        },
+        {
+          "span": [
+            85,
+            89
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 74,
+          "width": 4
+        },
+        {
+          "span": [
+            119,
+            126
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 2255,
+          "width": 7
+        },
+        {
+          "span": [
+            126,
+            130
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 108,
+          "width": 4
+        },
+        {
+          "span": [
+            130,
+            135
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 372,
+          "width": 5
+        },
+        {
+          "span": [
+            135,
+            141
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 455,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 40,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        42,
+        42,
+        42
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr3:196609495:G>T",
+      "cluster": 10,
+      "sequence_sha256": [
+        "f482b330cf42ac6972c07af0954dddaec04556d88c572072393756ecfd6d5209",
+        "1ed26b3e2490d5c405fe3f11d1e962c945cf2ef29e336273cbc6e2f1bc0138cf",
+        "1c76911b7285962e03d1df74128d9ed42f70a83358aa037250a5825f6491710d"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            76,
+            80
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 247,
+          "width": 4
+        },
+        {
+          "span": [
+            80,
+            86
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 527,
+          "width": 6
+        },
+        {
+          "span": [
+            116,
+            120
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 92,
+          "width": 4
+        },
+        {
+          "span": [
+            120,
+            124
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 139,
+          "width": 4
+        },
+        {
+          "span": [
+            124,
+            131
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 2231,
+          "width": 7
+        },
+        {
+          "span": [
+            131,
+            136
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 191,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 35,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        43
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr5:78548207:G>T",
+      "cluster": 11,
+      "sequence_sha256": [
+        "59afc99bdc5b1d514d244f1ecd397893b06ad660525db6e82a44e241a9a428c8",
+        "21aa8390a4b749b0d7db28817f8649d830c9ae441063a66142922b6d93f3972b",
+        "d4e4876fa5883eba8aa5a3eac315e639399ccf29b46eec671617e4ff818e767f"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            73
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 130,
+          "width": 5
+        },
+        {
+          "span": [
+            73,
+            75
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 15,
+          "width": 2
+        },
+        {
+          "span": [
+            75,
+            81
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 510,
+          "width": 6
+        },
+        {
+          "span": [
+            81,
+            84
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 30,
+          "width": 3
+        },
+        {
+          "span": [
+            116,
+            125
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 1997,
+          "width": 9
+        },
+        {
+          "span": [
+            125,
+            128
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 72,
+          "width": 3
+        },
+        {
+          "span": [
+            128,
+            135
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 2591,
+          "width": 7
+        },
+        {
+          "span": [
+            135,
+            141
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 786,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        44,
+        44
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr6:42085077:C>T",
+      "cluster": 12,
+      "sequence_sha256": [
+        "8fef1afd727b42cb786e9ab037ace94e2a01eba9b00a77e3d316e7f8cc2b9034",
+        "0fb819de621b088d988f32a5e6b14372dceee707fca675f4ef17cda9ddede74a",
+        "0449c7df72ad69e9c6120ba5d3f6f49c82eaf8e36cf99071b235b6b50df17df0"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            64,
+            70
+          ],
+          "indices": [
+            13,
+            13,
+            13
+          ],
+          "token_id": 862,
+          "width": 6
+        },
+        {
+          "span": [
+            70,
+            74
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 61,
+          "width": 4
+        },
+        {
+          "span": [
+            74,
+            79
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 268,
+          "width": 5
+        },
+        {
+          "span": [
+            79,
+            82
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 31,
+          "width": 3
+        },
+        {
+          "span": [
+            115,
+            119
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 82,
+          "width": 4
+        },
+        {
+          "span": [
+            119,
+            124
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 124,
+          "width": 5
+        },
+        {
+          "span": [
+            124,
+            126
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 14,
+          "width": 2
+        },
+        {
+          "span": [
+            126,
+            130
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 174,
+          "width": 4
+        },
+        {
+          "span": [
+            130,
+            138
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 2477,
+          "width": 8
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        44,
+        44
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr10:15168172:C>A",
+      "cluster": 13,
+      "sequence_sha256": [
+        "6eac0d411c72fcc09c72dea0d2232dc841953d856ac1baddca3122eb66f8559f",
+        "fb71d01cb165e438668d50554182b6ced12b24bc8431bdfe7d814b18ca6c2f24",
+        "7a1f68d9f9e7aca1fc76601165cd398e97ca80c91a5ac971bbdccadbcebdd2d4"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            69,
+            73
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 354,
+          "width": 4
+        },
+        {
+          "span": [
+            73,
+            76
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 35,
+          "width": 3
+        },
+        {
+          "span": [
+            76,
+            81
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 601,
+          "width": 5
+        },
+        {
+          "span": [
+            81,
+            86
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 121,
+          "width": 5
+        },
+        {
+          "span": [
+            86,
+            90
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 288,
+          "width": 4
+        },
+        {
+          "span": [
+            118,
+            122
+          ],
+          "indices": [
+            27,
+            26,
+            27
+          ],
+          "token_id": 66,
+          "width": 4
+        },
+        {
+          "span": [
+            122,
+            126
+          ],
+          "indices": [
+            28,
+            27,
+            28
+          ],
+          "token_id": 53,
+          "width": 4
+        },
+        {
+          "span": [
+            126,
+            130
+          ],
+          "indices": [
+            29,
+            28,
+            29
+          ],
+          "token_id": 169,
+          "width": 4
+        },
+        {
+          "span": [
+            130,
+            137
+          ],
+          "indices": [
+            30,
+            29,
+            30
+          ],
+          "token_id": 1617,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        44,
+        45
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr16:88698340:A>G",
+      "cluster": 14,
+      "sequence_sha256": [
+        "6fa08e52ec85ba27c4f9b14e1feab1f15758707bf798301e615fbed7e34a4a20",
+        "a776a8fa3565e0153601df744a025d777fa5011b8e9a8df4634a72edc660203a",
+        "c531aa1797d8272947c5ea7179bbc890619f34489d6a2cb7db20e691cae15fd6"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            70,
+            76
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 386,
+          "width": 6
+        },
+        {
+          "span": [
+            76,
+            80
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 63,
+          "width": 4
+        },
+        {
+          "span": [
+            80,
+            84
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 62,
+          "width": 4
+        },
+        {
+          "span": [
+            123,
+            129
+          ],
+          "indices": [
+            25,
+            26,
+            26
+          ],
+          "token_id": 879,
+          "width": 6
+        },
+        {
+          "span": [
+            129,
+            133
+          ],
+          "indices": [
+            26,
+            27,
+            27
+          ],
+          "token_id": 42,
+          "width": 4
+        },
+        {
+          "span": [
+            133,
+            137
+          ],
+          "indices": [
+            27,
+            28,
+            28
+          ],
+          "token_id": 89,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 35,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        45,
+        45
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr6:30259648:C>G",
+      "cluster": 5,
+      "sequence_sha256": [
+        "6946be7c1d1e67e92e8fd4c2855e0424299cd8c5e95de4e83ec735f4f59a838d",
+        "8cf6c37ebe67cfdae88a1755bbdb1aea2777f1dbe1526f7316b1fe0116bca912",
+        "1b0f22cbb1320f04626bb44962f8e5e49c6183ac35b0719bab5139c2140315bf"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            71
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 131,
+          "width": 5
+        },
+        {
+          "span": [
+            71,
+            77
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1413,
+          "width": 6
+        },
+        {
+          "span": [
+            77,
+            82
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 256,
+          "width": 5
+        },
+        {
+          "span": [
+            82,
+            86
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 92,
+          "width": 4
+        },
+        {
+          "span": [
+            86,
+            91
+          ],
+          "indices": [
+            20,
+            20,
+            20
+          ],
+          "token_id": 224,
+          "width": 5
+        },
+        {
+          "span": [
+            120,
+            124
+          ],
+          "indices": [
+            28,
+            27,
+            28
+          ],
+          "token_id": 92,
+          "width": 4
+        },
+        {
+          "span": [
+            124,
+            130
+          ],
+          "indices": [
+            29,
+            28,
+            29
+          ],
+          "token_id": 519,
+          "width": 6
+        },
+        {
+          "span": [
+            130,
+            137
+          ],
+          "indices": [
+            30,
+            29,
+            30
+          ],
+          "token_id": 1950,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 46,
+      "rejected": {
+        "motif_or_geometry": 38,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        48,
+        47,
+        48
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr2:128234139:A>T",
+      "cluster": 15,
+      "sequence_sha256": [
+        "7ced21e87a4ca59d902f6bd63ca07ba8b6b56b36ceed2c22ca682e9fcb79dc82",
+        "116d93138f99d28b7547553ae95698fd81bcb6cc2e0783f94dbcdb6e0a9115c0",
+        "dd56c8ea680fc380218cffcd40b99eaf6ae32567d7bb978939ded540e3c08434"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            74
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 614,
+          "width": 6
+        },
+        {
+          "span": [
+            74,
+            76
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 13,
+          "width": 2
+        },
+        {
+          "span": [
+            76,
+            82
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 321,
+          "width": 6
+        },
+        {
+          "span": [
+            82,
+            86
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 38,
+          "width": 4
+        },
+        {
+          "span": [
+            86,
+            92
+          ],
+          "indices": [
+            20,
+            20,
+            20
+          ],
+          "token_id": 313,
+          "width": 6
+        },
+        {
+          "span": [
+            121,
+            127
+          ],
+          "indices": [
+            27,
+            27,
+            26
+          ],
+          "token_id": 230,
+          "width": 6
+        },
+        {
+          "span": [
+            127,
+            131
+          ],
+          "indices": [
+            28,
+            28,
+            27
+          ],
+          "token_id": 112,
+          "width": 4
+        },
+        {
+          "span": [
+            131,
+            136
+          ],
+          "indices": [
+            29,
+            29,
+            28
+          ],
+          "token_id": 506,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        44
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr3:118595486:T>C",
+      "cluster": 16,
+      "sequence_sha256": [
+        "8401a12beae3d4cfb686668f9523b10d3955b9ca32aae987cf589a7a65396ad5",
+        "8f3feb15b23c55d911ea00e36d2a36f92ae55e2bf139ed2dfc50f505e723833c",
+        "6c309ed32d5febaa13bdeb95b6d92549e419aa889defaba14b5b2f3b5d268b8f"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            73
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 176,
+          "width": 5
+        },
+        {
+          "span": [
+            73,
+            78
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 204,
+          "width": 5
+        },
+        {
+          "span": [
+            78,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 28,
+          "width": 3
+        },
+        {
+          "span": [
+            112,
+            119
+          ],
+          "indices": [
+            23,
+            23,
+            23
+          ],
+          "token_id": 682,
+          "width": 7
+        },
+        {
+          "span": [
+            119,
+            123
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 97,
+          "width": 4
+        },
+        {
+          "span": [
+            123,
+            130
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 1751,
+          "width": 7
+        },
+        {
+          "span": [
+            130,
+            137
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 1547,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        44,
+        44
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr7:137333130:T>C",
+      "cluster": 17,
+      "sequence_sha256": [
+        "2f24ccc1e6d1b76af8ebfd9cae3b6fe56f18effe28acc1657c1d41cb6deafae7",
+        "ec968c98ba896d46904bf1f656b0c29fbb115ffa52ccc9a030f4122b5a271cb2",
+        "70c63ff431a75a8e18b867f3f67054a73994ef0a2013d0a340e30eec37b141ac"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            70
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 21,
+          "width": 4
+        },
+        {
+          "span": [
+            70,
+            76
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 531,
+          "width": 6
+        },
+        {
+          "span": [
+            76,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 281,
+          "width": 5
+        },
+        {
+          "span": [
+            81,
+            88
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1988,
+          "width": 7
+        },
+        {
+          "span": [
+            120,
+            128
+          ],
+          "indices": [
+            23,
+            23,
+            24
+          ],
+          "token_id": 1579,
+          "width": 8
+        },
+        {
+          "span": [
+            128,
+            135
+          ],
+          "indices": [
+            24,
+            24,
+            25
+          ],
+          "token_id": 3662,
+          "width": 7
+        },
+        {
+          "span": [
+            135,
+            142
+          ],
+          "indices": [
+            25,
+            25,
+            26
+          ],
+          "token_id": 2807,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 37,
+      "rejected": {
+        "motif_or_geometry": 30,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        39,
+        39,
+        40
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr20:13423741:A>C",
+      "cluster": 18,
+      "sequence_sha256": [
+        "2d67ef02b536fc15696b6febe7791efa528e298646143b742d1f86d211f8caf8",
+        "cc917f20387d6bd8a4788422e94525041b26b2f03e5c2856f7697cbb14ccb3db",
+        "f65b75d505ec74326c2215d54f8467de18ecd55b0b876fb3524688bedb01e529"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            70
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 487,
+          "width": 5
+        },
+        {
+          "span": [
+            70,
+            75
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 135,
+          "width": 5
+        },
+        {
+          "span": [
+            75,
+            81
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1164,
+          "width": 6
+        },
+        {
+          "span": [
+            118,
+            123
+          ],
+          "indices": [
+            25,
+            25,
+            24
+          ],
+          "token_id": 177,
+          "width": 5
+        },
+        {
+          "span": [
+            123,
+            127
+          ],
+          "indices": [
+            26,
+            26,
+            25
+          ],
+          "token_id": 21,
+          "width": 4
+        },
+        {
+          "span": [
+            127,
+            131
+          ],
+          "indices": [
+            27,
+            27,
+            26
+          ],
+          "token_id": 104,
+          "width": 4
+        },
+        {
+          "span": [
+            131,
+            138
+          ],
+          "indices": [
+            28,
+            28,
+            27
+          ],
+          "token_id": 2055,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        44,
+        43
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr5:172856422:T>G",
+      "cluster": 19,
+      "sequence_sha256": [
+        "d83a7212f6ba93aa532894eeca2f2db26aad2a649448cb6a4b03dac44ab9bd58",
+        "862b34b7f30f8ffbfe96692782d362452e6e6d688d77d36a2657d156994a26b3",
+        "3098cf7ef898b168ea560c76aec253a014452985c749b216230d1690abaacae0"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            69,
+            75
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 291,
+          "width": 6
+        },
+        {
+          "span": [
+            75,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 982,
+          "width": 6
+        },
+        {
+          "span": [
+            81,
+            89
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 3202,
+          "width": 8
+        },
+        {
+          "span": [
+            118,
+            122
+          ],
+          "indices": [
+            23,
+            23,
+            23
+          ],
+          "token_id": 100,
+          "width": 4
+        },
+        {
+          "span": [
+            122,
+            129
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 2407,
+          "width": 7
+        },
+        {
+          "span": [
+            129,
+            134
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 245,
+          "width": 5
+        },
+        {
+          "span": [
+            134,
+            140
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 793,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 40,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        42,
+        42,
+        42
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr14:91310090:G>A",
+      "cluster": 20,
+      "sequence_sha256": [
+        "06b6483de0a67c2f4c5cc0e185337b59e24cde7d27b063ca81a0771d819fc4c5",
+        "5f6ef9f4f23b32c00db9ee630a6d94bfd26baadcb27564f75aa374e29ef212a6",
+        "10315da1e9b57338c6f5d12a9cf82e178c9920b731010769868c69606873ca5a"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            75
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 3447,
+          "width": 7
+        },
+        {
+          "span": [
+            75,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 923,
+          "width": 6
+        },
+        {
+          "span": [
+            81,
+            85
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 66,
+          "width": 4
+        },
+        {
+          "span": [
+            85,
+            88
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 28,
+          "width": 3
+        },
+        {
+          "span": [
+            88,
+            94
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 418,
+          "width": 6
+        },
+        {
+          "span": [
+            125,
+            128
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 33,
+          "width": 3
+        },
+        {
+          "span": [
+            128,
+            135
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 1210,
+          "width": 7
+        },
+        {
+          "span": [
+            135,
+            140
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 204,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        43
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr22:46739308:A>C",
+      "cluster": 21,
+      "sequence_sha256": [
+        "56f30ebc443e1431e5e1556b1ff7dd761b1339ce8ae31b2ec60390dcedbcfca6",
+        "43eb42518bf12ec916d88da47929f131ea03c4f766935bd4b83e5f542a58fdbf",
+        "44bbf8363cf0aac2c38832b847c526f2dbf9ed3a9602ecaedccb648aa521ae64"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            72
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 123,
+          "width": 4
+        },
+        {
+          "span": [
+            72,
+            77
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 184,
+          "width": 5
+        },
+        {
+          "span": [
+            77,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 62,
+          "width": 4
+        },
+        {
+          "span": [
+            114,
+            119
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 154,
+          "width": 5
+        },
+        {
+          "span": [
+            119,
+            124
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 205,
+          "width": 5
+        },
+        {
+          "span": [
+            124,
+            127
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 34,
+          "width": 3
+        },
+        {
+          "span": [
+            127,
+            134
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 1456,
+          "width": 7
+        },
+        {
+          "span": [
+            134,
+            138
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 61,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        43
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr21:42010445:G>A",
+      "cluster": 22,
+      "sequence_sha256": [
+        "9c34b7ce6a3699df22db4e9c50cdc0f49ee6058fdb4f85298d0fa922ef75669f",
+        "c416c6caf3206d3705a6af772ead69339ccce44027c91f2f8b0a7934f11a8038",
+        "b0fa07de7f5902ec508ca4c44f6f0f16190f1c58bfc5c6544ce998f5c284e536"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            71
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 112,
+          "width": 4
+        },
+        {
+          "span": [
+            71,
+            74
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 40,
+          "width": 3
+        },
+        {
+          "span": [
+            74,
+            79
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 141,
+          "width": 5
+        },
+        {
+          "span": [
+            79,
+            83
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 354,
+          "width": 4
+        },
+        {
+          "span": [
+            119,
+            123
+          ],
+          "indices": [
+            28,
+            29,
+            29
+          ],
+          "token_id": 247,
+          "width": 4
+        },
+        {
+          "span": [
+            123,
+            127
+          ],
+          "indices": [
+            29,
+            30,
+            30
+          ],
+          "token_id": 159,
+          "width": 4
+        },
+        {
+          "span": [
+            127,
+            131
+          ],
+          "indices": [
+            30,
+            31,
+            31
+          ],
+          "token_id": 92,
+          "width": 4
+        },
+        {
+          "span": [
+            131,
+            136
+          ],
+          "indices": [
+            31,
+            32,
+            32
+          ],
+          "token_id": 846,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 47,
+      "rejected": {
+        "motif_or_geometry": 37,
+        "span_or_identity": 2,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        49,
+        50,
+        50
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr3:165206902:T>G",
+      "cluster": 23,
+      "sequence_sha256": [
+        "f39c1f61e6a1163c0af04e116b15cf8dc114d6ad5817e7d400e4c40dec2f3ed3",
+        "e0d0014bc0a1e4fe8301fb0a2458afdf0601de8df7eedad7f3d53786b1830942",
+        "e4d647937bc937813b9eeaac257cf2d3e525c80d0e7757d0f7de11b658853789"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            62,
+            70
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 2687,
+          "width": 8
+        },
+        {
+          "span": [
+            70,
+            75
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 335,
+          "width": 5
+        },
+        {
+          "span": [
+            75,
+            82
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 3052,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 3,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 40,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        45
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr8:107281981:G>A",
+      "cluster": 24,
+      "sequence_sha256": [
+        "cee02910be60756502f94d0af3661f6c32a1d9d5e542a3afd9654f0e89ebd448",
+        "73c81a8728957c46c9d58f8fc7a67831b312308268e3698c878ca7c24340dbd2",
+        "35fe3f29dc4faf213b7c56317f85c8f7a4b40206f3f5b23fb9d29c22efe8f47b"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            74
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 175,
+          "width": 6
+        },
+        {
+          "span": [
+            122,
+            126
+          ],
+          "indices": [
+            27,
+            27,
+            26
+          ],
+          "token_id": 71,
+          "width": 4
+        },
+        {
+          "span": [
+            126,
+            132
+          ],
+          "indices": [
+            28,
+            28,
+            27
+          ],
+          "token_id": 313,
+          "width": 6
+        },
+        {
+          "span": [
+            132,
+            136
+          ],
+          "indices": [
+            29,
+            29,
+            28
+          ],
+          "token_id": 97,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 4,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 36,
+        "span_or_identity": 3,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        44
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr2:170462117:C>G",
+      "cluster": 25,
+      "sequence_sha256": [
+        "49bfa07406f5c04bd40b3c7100710ab84ef8ded4e9796773b58362a2b759e17c",
+        "f32896d7a4796e6e87d9513e48cc146043c316c2be90c3d78bfdc24514c0bd7d",
+        "5ff720c3e343f3adf023760f74629e483160408e10bd65dcf0a73f3b8fdb1d37"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            75
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1647,
+          "width": 7
+        },
+        {
+          "span": [
+            75,
+            82
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 960,
+          "width": 7
+        },
+        {
+          "span": [
+            118,
+            123
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 130,
+          "width": 5
+        },
+        {
+          "span": [
+            123,
+            126
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 26,
+          "width": 3
+        },
+        {
+          "span": [
+            126,
+            131
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 130,
+          "width": 5
+        },
+        {
+          "span": [
+            131,
+            134
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 26,
+          "width": 3
+        },
+        {
+          "span": [
+            134,
+            139
+          ],
+          "indices": [
+            30,
+            30,
+            30
+          ],
+          "token_id": 213,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 44,
+      "rejected": {
+        "motif_or_geometry": 37,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        46,
+        46,
+        46
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr1:242753210:C>T",
+      "cluster": 26,
+      "sequence_sha256": [
+        "5d98086893040c9e2652bb5f7c134952cd4f0535496bbcd656f670c9aa9acbf3",
+        "240930be51927c1efa1a61ecf6697e506aed0f3a35f187bbdf0621dd028c4409",
+        "7f62abe34bfa34c978c2d81d622cb44f5bd2107ae5270330a1133d4f9f9c1486"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            63,
+            71
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 2580,
+          "width": 8
+        },
+        {
+          "span": [
+            71,
+            75
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 123,
+          "width": 4
+        },
+        {
+          "span": [
+            75,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 782,
+          "width": 6
+        },
+        {
+          "span": [
+            81,
+            84
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 27,
+          "width": 3
+        },
+        {
+          "span": [
+            84,
+            89
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 256,
+          "width": 5
+        },
+        {
+          "span": [
+            89,
+            95
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 348,
+          "width": 6
+        },
+        {
+          "span": [
+            120,
+            126
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 382,
+          "width": 6
+        },
+        {
+          "span": [
+            126,
+            134
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 3288,
+          "width": 8
+        },
+        {
+          "span": [
+            134,
+            140
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 444,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 39,
+      "rejected": {
+        "motif_or_geometry": 30,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        41,
+        41,
+        41
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr13:30133766:T>C",
+      "cluster": 27,
+      "sequence_sha256": [
+        "81154b9da7a883328223f5c58b62f87c9cc1329957ff2fd94f713ec8b338cf7b",
+        "21e1043e318bd10a2ef54312ce0a9a6076f7ad059fc5e1bcd950f4fc85ee7a4c",
+        "040d063ed27a93edbe7e9268494641be147377d4b6732f57f2097078a20ce250"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            69,
+            76
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 1549,
+          "width": 7
+        },
+        {
+          "span": [
+            76,
+            82
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 3381,
+          "width": 6
+        },
+        {
+          "span": [
+            113,
+            119
+          ],
+          "indices": [
+            21,
+            22,
+            22
+          ],
+          "token_id": 662,
+          "width": 6
+        },
+        {
+          "span": [
+            119,
+            123
+          ],
+          "indices": [
+            22,
+            23,
+            23
+          ],
+          "token_id": 169,
+          "width": 4
+        },
+        {
+          "span": [
+            123,
+            125
+          ],
+          "indices": [
+            23,
+            24,
+            24
+          ],
+          "token_id": 13,
+          "width": 2
+        },
+        {
+          "span": [
+            125,
+            130
+          ],
+          "indices": [
+            24,
+            25,
+            25
+          ],
+          "token_id": 525,
+          "width": 5
+        },
+        {
+          "span": [
+            130,
+            136
+          ],
+          "indices": [
+            25,
+            26,
+            26
+          ],
+          "token_id": 1260,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 40,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        42,
+        43,
+        43
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr1:116587673:G>A",
+      "cluster": 28,
+      "sequence_sha256": [
+        "f24436a33bb205cb3eb0449f2e3439f811576927aee74a8f431e237207cc7ec9",
+        "2cc914c65a6776fb67db5b0c86f1ae97c49be3a6f848eaba4b2550d38a7acc9d",
+        "f3c3253c43be9fe7bed105944e1f8f92279311bac9e9eec15d446af41d479d9f"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            73
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 273,
+          "width": 6
+        },
+        {
+          "span": [
+            73,
+            78
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 422,
+          "width": 5
+        },
+        {
+          "span": [
+            78,
+            82
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 42,
+          "width": 4
+        },
+        {
+          "span": [
+            82,
+            87
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 69,
+          "width": 5
+        },
+        {
+          "span": [
+            115,
+            120
+          ],
+          "indices": [
+            23,
+            23,
+            24
+          ],
+          "token_id": 289,
+          "width": 5
+        },
+        {
+          "span": [
+            120,
+            123
+          ],
+          "indices": [
+            24,
+            24,
+            25
+          ],
+          "token_id": 35,
+          "width": 3
+        },
+        {
+          "span": [
+            123,
+            128
+          ],
+          "indices": [
+            25,
+            25,
+            26
+          ],
+          "token_id": 269,
+          "width": 5
+        },
+        {
+          "span": [
+            128,
+            134
+          ],
+          "indices": [
+            26,
+            26,
+            27
+          ],
+          "token_id": 856,
+          "width": 6
+        },
+        {
+          "span": [
+            134,
+            141
+          ],
+          "indices": [
+            27,
+            27,
+            28
+          ],
+          "token_id": 4073,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 39,
+      "rejected": {
+        "motif_or_geometry": 29,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        41,
+        41,
+        42
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr3:37536185:C>T",
+      "cluster": 29,
+      "sequence_sha256": [
+        "75bd23fd5a5736b2978defaa1c9d8de4997609451f8bf4cbe2cdff9e7ff30f6a",
+        "e36ab48ab7c11bae81c5bb726e11513e0211c10bc5f4415e890caa3eec936985",
+        "e76e224bb1c7bdcb50a2bd58d5f7a83462c3cd321868e702d1247dfe3d053b60"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            88,
+            93
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 156,
+          "width": 5
+        },
+        {
+          "span": [
+            120,
+            124
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 57,
+          "width": 4
+        },
+        {
+          "span": [
+            124,
+            130
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 698,
+          "width": 6
+        },
+        {
+          "span": [
+            130,
+            135
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 152,
+          "width": 5
+        },
+        {
+          "span": [
+            135,
+            139
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 100,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 5,
+      "reference_real_tokens": 39,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        41,
+        41,
+        41
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr19:13879957:T>C",
+      "cluster": 30,
+      "sequence_sha256": [
+        "22bad61f2aa592a16680e3353321eb1f3067e4cbad4151cd7a2012487e842b7a",
+        "04053f45bf332d766da7c12007311e8f3816bc99ea27ec9a5fe88815062904c4",
+        "a888143fa1b624448f466046518e077f5092ac4bcb3307c2a6bae3d6b42ee3c5"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            74
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 890,
+          "width": 6
+        },
+        {
+          "span": [
+            74,
+            78
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 100,
+          "width": 4
+        },
+        {
+          "span": [
+            78,
+            84
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 383,
+          "width": 6
+        },
+        {
+          "span": [
+            84,
+            90
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 2957,
+          "width": 6
+        },
+        {
+          "span": [
+            117,
+            122
+          ],
+          "indices": [
+            24,
+            23,
+            24
+          ],
+          "token_id": 152,
+          "width": 5
+        },
+        {
+          "span": [
+            122,
+            127
+          ],
+          "indices": [
+            25,
+            24,
+            25
+          ],
+          "token_id": 272,
+          "width": 5
+        },
+        {
+          "span": [
+            127,
+            132
+          ],
+          "indices": [
+            26,
+            25,
+            26
+          ],
+          "token_id": 397,
+          "width": 5
+        },
+        {
+          "span": [
+            132,
+            149
+          ],
+          "indices": [
+            27,
+            26,
+            27
+          ],
+          "token_id": 2124,
+          "width": 17
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 36,
+      "rejected": {
+        "motif_or_geometry": 28,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        38,
+        37,
+        38
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr17:67348333:G>A",
+      "cluster": 31,
+      "sequence_sha256": [
+        "73469d0d422977966fed1169892308a43abc9abe16d7f126599566b9902da575",
+        "d2386be194a8e038d35fc9b111ab5a1305d341380ac018c2c3eb3aaaac1d9c6c",
+        "c0b6fc8618a10faa433494a16fce08737a041f05315decd488e85871530ac038"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            74
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 1256,
+          "width": 7
+        },
+        {
+          "span": [
+            74,
+            81
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 3471,
+          "width": 7
+        },
+        {
+          "span": [
+            81,
+            89
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 2750,
+          "width": 8
+        },
+        {
+          "span": [
+            122,
+            126
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 86,
+          "width": 4
+        },
+        {
+          "span": [
+            126,
+            132
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 734,
+          "width": 6
+        },
+        {
+          "span": [
+            132,
+            139
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 2021,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 39,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        41,
+        41,
+        41
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr6:108250653:C>A",
+      "cluster": 32,
+      "sequence_sha256": [
+        "5d899c80118dc7ce51ece9effd08a3f47d01a9a9f50117423b20beca00656a5b",
+        "2e4f5238d10269029cb7646967d5a02483b9d56c55e843acf99a2049d1e1cfb7",
+        "2726890d4635748704b33e5dd3be9f6eb091e2eb54717db2ec46b80b0f37d8be"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            70
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 120,
+          "width": 5
+        },
+        {
+          "span": [
+            70,
+            75
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 168,
+          "width": 5
+        },
+        {
+          "span": [
+            75,
+            80
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 225,
+          "width": 5
+        },
+        {
+          "span": [
+            80,
+            84
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 50,
+          "width": 4
+        },
+        {
+          "span": [
+            84,
+            88
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 92,
+          "width": 4
+        },
+        {
+          "span": [
+            88,
+            95
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 2451,
+          "width": 7
+        },
+        {
+          "span": [
+            121,
+            126
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 199,
+          "width": 5
+        },
+        {
+          "span": [
+            126,
+            130
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 78,
+          "width": 4
+        },
+        {
+          "span": [
+            130,
+            136
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 319,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        44,
+        44
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr19:48194236:G>A",
+      "cluster": 33,
+      "sequence_sha256": [
+        "eec400045a19f0873c535fa3488070e9fae619de19028d4e64edc938e0bbc377",
+        "6f75f5b1f61e80d5953a4c07fc39b4753b1251e3f022ca5ee5a82d548033db29",
+        "3b80eab1c1f1091a14c15a1a1ad613d77b0bd48a56c7816a65468c7088610973"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            71
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 169,
+          "width": 4
+        },
+        {
+          "span": [
+            71,
+            77
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 755,
+          "width": 6
+        },
+        {
+          "span": [
+            77,
+            80
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 31,
+          "width": 3
+        },
+        {
+          "span": [
+            80,
+            85
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 346,
+          "width": 5
+        },
+        {
+          "span": [
+            85,
+            89
+          ],
+          "indices": [
+            20,
+            20,
+            20
+          ],
+          "token_id": 63,
+          "width": 4
+        },
+        {
+          "span": [
+            125,
+            131
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 420,
+          "width": 6
+        },
+        {
+          "span": [
+            131,
+            134
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 26,
+          "width": 3
+        },
+        {
+          "span": [
+            134,
+            140
+          ],
+          "indices": [
+            30,
+            30,
+            30
+          ],
+          "token_id": 466,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        43
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr3:172700719:C>T",
+      "cluster": 34,
+      "sequence_sha256": [
+        "3930298656e6c7c1779330a4cbe0732ce061601351f55dfc101e6571e9e2d150",
+        "553994ea0d034af3eeb4c1901a7d7b292268145aef86f30c1cb2424b5f755169",
+        "002282b11fd2d4a8767e2252bff03a109c6fd4ff16841db5420a4f84069648b5"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            72
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 968,
+          "width": 6
+        },
+        {
+          "span": [
+            72,
+            76
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 48,
+          "width": 4
+        },
+        {
+          "span": [
+            76,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 156,
+          "width": 5
+        },
+        {
+          "span": [
+            81,
+            86
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 189,
+          "width": 5
+        },
+        {
+          "span": [
+            86,
+            94
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 2651,
+          "width": 8
+        },
+        {
+          "span": [
+            118,
+            122
+          ],
+          "indices": [
+            23,
+            23,
+            24
+          ],
+          "token_id": 64,
+          "width": 4
+        },
+        {
+          "span": [
+            122,
+            126
+          ],
+          "indices": [
+            24,
+            24,
+            25
+          ],
+          "token_id": 117,
+          "width": 4
+        },
+        {
+          "span": [
+            126,
+            131
+          ],
+          "indices": [
+            25,
+            25,
+            26
+          ],
+          "token_id": 474,
+          "width": 5
+        },
+        {
+          "span": [
+            131,
+            135
+          ],
+          "indices": [
+            26,
+            26,
+            27
+          ],
+          "token_id": 42,
+          "width": 4
+        },
+        {
+          "span": [
+            135,
+            142
+          ],
+          "indices": [
+            27,
+            27,
+            28
+          ],
+          "token_id": 2529,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 10,
+      "reference_real_tokens": 40,
+      "rejected": {
+        "motif_or_geometry": 30,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        42,
+        42,
+        43
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr20:49273805:T>C",
+      "cluster": 35,
+      "sequence_sha256": [
+        "32686b8e2a0ef5058d7e20053079f306f4216c7151820d8cb78526abb87d06b2",
+        "1aaaa942c6a2e6b302ab40f1085b27137519c520090c2c1d762afffc7fe9a034",
+        "be8731bf1885275957cf4adda2aa75c7888fd5f9967d8ef682509318ebcb11f4"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            57,
+            72
+          ],
+          "indices": [
+            11,
+            11,
+            11
+          ],
+          "token_id": 3496,
+          "width": 15
+        },
+        {
+          "span": [
+            72,
+            78
+          ],
+          "indices": [
+            12,
+            12,
+            12
+          ],
+          "token_id": 175,
+          "width": 6
+        },
+        {
+          "span": [
+            78,
+            81
+          ],
+          "indices": [
+            13,
+            13,
+            13
+          ],
+          "token_id": 23,
+          "width": 3
+        },
+        {
+          "span": [
+            81,
+            87
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 460,
+          "width": 6
+        },
+        {
+          "span": [
+            87,
+            92
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 368,
+          "width": 5
+        },
+        {
+          "span": [
+            134,
+            137
+          ],
+          "indices": [
+            23,
+            23,
+            24
+          ],
+          "token_id": 33,
+          "width": 3
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 37,
+      "rejected": {
+        "motif_or_geometry": 30,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        39,
+        39,
+        40
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr9:137117112:G>A",
+      "cluster": 36,
+      "sequence_sha256": [
+        "e8c1ef0fef6a4af0e53df880c38aab70aa31d9a74655925769cb10f4bc0fb9ad",
+        "dcc2cc78c16b37f08107e5829f1f980bf0a1f2ffe7042ed3899b6518f1f17092",
+        "8a5c5c43cb9c71322ffd2e1c95ebd55dfd356fd50154094ec4c07db16e934e9f"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            72
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 2684,
+          "width": 6
+        },
+        {
+          "span": [
+            72,
+            78
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 3120,
+          "width": 6
+        },
+        {
+          "span": [
+            78,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 72,
+          "width": 3
+        },
+        {
+          "span": [
+            81,
+            85
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 90,
+          "width": 4
+        },
+        {
+          "span": [
+            116,
+            123
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 1707,
+          "width": 7
+        },
+        {
+          "span": [
+            123,
+            130
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 2417,
+          "width": 7
+        },
+        {
+          "span": [
+            130,
+            135
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 157,
+          "width": 5
+        },
+        {
+          "span": [
+            135,
+            143
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 2031,
+          "width": 8
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 40,
+      "rejected": {
+        "motif_or_geometry": 31,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        42,
+        42,
+        42
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr9:136674614:A>G",
+      "cluster": 37,
+      "sequence_sha256": [
+        "b79a05eb1292189c9c1d9f573f0db45fae9a307cac2558daf0e5ac6fc70b777c",
+        "560b70d7faf0f44631ed09a7803efbc4b9f59e3345ad3c0f2edde85478a2cd44",
+        "60ad93258f3fdc1cafa378ca1d5fc4557705f7b210bc9badbdb5888f59371f75"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            75
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 1922,
+          "width": 7
+        },
+        {
+          "span": [
+            75,
+            83
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 1027,
+          "width": 8
+        },
+        {
+          "span": [
+            83,
+            90
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1733,
+          "width": 7
+        },
+        {
+          "span": [
+            120,
+            125
+          ],
+          "indices": [
+            25,
+            25,
+            26
+          ],
+          "token_id": 504,
+          "width": 5
+        },
+        {
+          "span": [
+            125,
+            128
+          ],
+          "indices": [
+            26,
+            26,
+            27
+          ],
+          "token_id": 72,
+          "width": 3
+        },
+        {
+          "span": [
+            128,
+            131
+          ],
+          "indices": [
+            27,
+            27,
+            28
+          ],
+          "token_id": 30,
+          "width": 3
+        },
+        {
+          "span": [
+            131,
+            136
+          ],
+          "indices": [
+            28,
+            28,
+            29
+          ],
+          "token_id": 467,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 44,
+      "rejected": {
+        "motif_or_geometry": 37,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        46,
+        46,
+        47
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr11:70077349:C>A",
+      "cluster": 38,
+      "sequence_sha256": [
+        "932f9dab9ebc1a022697080e0b385f299e5190fa9a3c5b6f527dce0065f15c65",
+        "694c6a0d822e2a1899c2b71f60f20e9ba1db6c05772b1133c60439bed0e3ad7f",
+        "253451bb41bcec6a0122445fe8ad6aab4543d39106d77c998333325f3e893982"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            72
+          ],
+          "indices": [
+            13,
+            13,
+            13
+          ],
+          "token_id": 345,
+          "width": 5
+        },
+        {
+          "span": [
+            72,
+            77
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 240,
+          "width": 5
+        },
+        {
+          "span": [
+            77,
+            82
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 345,
+          "width": 5
+        },
+        {
+          "span": [
+            82,
+            85
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 25,
+          "width": 3
+        },
+        {
+          "span": [
+            85,
+            89
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 82,
+          "width": 4
+        },
+        {
+          "span": [
+            114,
+            121
+          ],
+          "indices": [
+            23,
+            23,
+            23
+          ],
+          "token_id": 1583,
+          "width": 7
+        },
+        {
+          "span": [
+            121,
+            125
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 44,
+          "width": 4
+        },
+        {
+          "span": [
+            125,
+            127
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 13,
+          "width": 2
+        },
+        {
+          "span": [
+            127,
+            132
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 135,
+          "width": 5
+        },
+        {
+          "span": [
+            132,
+            139
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 1308,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 10,
+      "reference_real_tokens": 40,
+      "rejected": {
+        "motif_or_geometry": 30,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        42,
+        42,
+        42
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr1:203273254:C>T",
+      "cluster": 39,
+      "sequence_sha256": [
+        "437d574ae85496c46341a67dfb407fc3f6bf091b9313c7822b78632edbc01414",
+        "ab12cc46761b20992dab1ee18b1a54bdb168722e5a2d3793b1fce446cbea224e",
+        "802f6450b12969a878a4ed62d4722e0895797376037f06831c0b02b35c0cb79f"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            71
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 283,
+          "width": 5
+        },
+        {
+          "span": [
+            71,
+            75
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 42,
+          "width": 4
+        },
+        {
+          "span": [
+            75,
+            81
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 3381,
+          "width": 6
+        },
+        {
+          "span": [
+            81,
+            84
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 27,
+          "width": 3
+        },
+        {
+          "span": [
+            112,
+            116
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 60,
+          "width": 4
+        },
+        {
+          "span": [
+            116,
+            120
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 103,
+          "width": 4
+        },
+        {
+          "span": [
+            120,
+            123
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 40,
+          "width": 3
+        },
+        {
+          "span": [
+            123,
+            128
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 307,
+          "width": 5
+        },
+        {
+          "span": [
+            128,
+            134
+          ],
+          "indices": [
+            30,
+            30,
+            30
+          ],
+          "token_id": 1544,
+          "width": 6
+        },
+        {
+          "span": [
+            134,
+            138
+          ],
+          "indices": [
+            31,
+            31,
+            31
+          ],
+          "token_id": 95,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 10,
+      "reference_real_tokens": 44,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        46,
+        46,
+        46
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr17:82370769:C>T",
+      "cluster": 40,
+      "sequence_sha256": [
+        "043383691d5625c5d2982b44519a999b606fd5abdd6d3b262be91cc2bd88ebe9",
+        "e64e40e9543480a0c8145e09eabc9431a4f3d028327e7f4bd2d50d2949de54f9",
+        "9ac9908ca4d0e57becc6d2a804e5ccc40d5c2ec01b91fad287b399e7124e375b"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            72
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 757,
+          "width": 5
+        },
+        {
+          "span": [
+            72,
+            77
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 262,
+          "width": 5
+        },
+        {
+          "span": [
+            77,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 71,
+          "width": 4
+        },
+        {
+          "span": [
+            109,
+            111
+          ],
+          "indices": [
+            22,
+            22,
+            22
+          ],
+          "token_id": 16,
+          "width": 2
+        },
+        {
+          "span": [
+            111,
+            117
+          ],
+          "indices": [
+            23,
+            23,
+            23
+          ],
+          "token_id": 363,
+          "width": 6
+        },
+        {
+          "span": [
+            117,
+            123
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 619,
+          "width": 6
+        },
+        {
+          "span": [
+            123,
+            127
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 123,
+          "width": 4
+        },
+        {
+          "span": [
+            127,
+            132
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 124,
+          "width": 5
+        },
+        {
+          "span": [
+            132,
+            137
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 578,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 32,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        43
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr8:46029656:A>G",
+      "cluster": 41,
+      "sequence_sha256": [
+        "c9c7429290199a66e3a3b934643dd1635389d3be492ad07b6dfcac75a4cbd3a3",
+        "4fafbb471b966df01ce8d692630ed61700b3688c5d332905758741ea3ebbd7bd",
+        "e7f4f4caf60731df977e0bc11c4aab3f028cc052a021ce3c87f629cc04e78d4d"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            73
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 145,
+          "width": 5
+        },
+        {
+          "span": [
+            73,
+            78
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 514,
+          "width": 5
+        },
+        {
+          "span": [
+            78,
+            83
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 58,
+          "width": 5
+        },
+        {
+          "span": [
+            110,
+            113
+          ],
+          "indices": [
+            23,
+            23,
+            23
+          ],
+          "token_id": 41,
+          "width": 3
+        },
+        {
+          "span": [
+            113,
+            118
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 225,
+          "width": 5
+        },
+        {
+          "span": [
+            118,
+            123
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 1847,
+          "width": 5
+        },
+        {
+          "span": [
+            123,
+            128
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 841,
+          "width": 5
+        },
+        {
+          "span": [
+            128,
+            133
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 197,
+          "width": 5
+        },
+        {
+          "span": [
+            133,
+            138
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 124,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 45,
+      "rejected": {
+        "motif_or_geometry": 36,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        47,
+        47,
+        47
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr12:131096866:G>A",
+      "cluster": 42,
+      "sequence_sha256": [
+        "ec5d33a0bf64f03b3993231a07069dfbb69d88525426ff1c713ddc34f8ef3ae4",
+        "d6263d68ae43a6b7b2657a2f1e157458c0243eb65571ef94d8216665c3695fbd",
+        "a0b7cff300aafbacae34f246e3033868391b497302f56280c38078003804cd4d"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            64,
+            70
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 641,
+          "width": 6
+        },
+        {
+          "span": [
+            70,
+            76
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 1734,
+          "width": 6
+        },
+        {
+          "span": [
+            76,
+            81
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 199,
+          "width": 5
+        },
+        {
+          "span": [
+            121,
+            126
+          ],
+          "indices": [
+            24,
+            25,
+            24
+          ],
+          "token_id": 262,
+          "width": 5
+        },
+        {
+          "span": [
+            126,
+            131
+          ],
+          "indices": [
+            25,
+            26,
+            25
+          ],
+          "token_id": 180,
+          "width": 5
+        },
+        {
+          "span": [
+            131,
+            138
+          ],
+          "indices": [
+            26,
+            27,
+            26
+          ],
+          "token_id": 3468,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 39,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        41,
+        42,
+        41
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr17:39637302:G>C",
+      "cluster": 43,
+      "sequence_sha256": [
+        "209065b8f7ff60767c9fe93774e836bba7de72103e49d03df2e33fc7c7d65ea9",
+        "66bb8524478f4fc30e36c0781f05de1bb748b94662f93fcb107e18374dfe9c5c",
+        "1790fc4ca180514fc34798c85b3e1b232059d0cee708dc4feffe6bece1534c16"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            122,
+            126
+          ],
+          "indices": [
+            30,
+            30,
+            30
+          ],
+          "token_id": 101,
+          "width": 4
+        },
+        {
+          "span": [
+            126,
+            132
+          ],
+          "indices": [
+            31,
+            31,
+            31
+          ],
+          "token_id": 3438,
+          "width": 6
+        },
+        {
+          "span": [
+            132,
+            136
+          ],
+          "indices": [
+            32,
+            32,
+            32
+          ],
+          "token_id": 158,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 3,
+      "reference_real_tokens": 46,
+      "rejected": {
+        "motif_or_geometry": 42,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        48,
+        48,
+        48
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr16:17027657:T>C",
+      "cluster": 44,
+      "sequence_sha256": [
+        "d595b3642df39f4f29feeea9f63e39e7046a14f7d84bc9e44e7643ef1d8c012f",
+        "4821d9c57dd7a9007dc9c8d8ed8ebe6e861a266639487e2312f4a99292d5f619",
+        "7d40a81b4e8e1d295d17cb02d6586812ec1d850c95f8d99fdc361b0cf58dce93"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            72
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 1119,
+          "width": 6
+        },
+        {
+          "span": [
+            72,
+            78
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 319,
+          "width": 6
+        },
+        {
+          "span": [
+            78,
+            82
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 77,
+          "width": 4
+        },
+        {
+          "span": [
+            123,
+            129
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 582,
+          "width": 6
+        },
+        {
+          "span": [
+            129,
+            135
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 459,
+          "width": 6
+        },
+        {
+          "span": [
+            135,
+            137
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 17,
+          "width": 2
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 36,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        45
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr16:11423963:C>T",
+      "cluster": 45,
+      "sequence_sha256": [
+        "11942c11557b8c1b9f995dc7444b643acef2c5dcd128e43975af27d113f74945",
+        "a89ddf8054d4dd359f3d73151316170bd00073a95fc47d24a38ecc014b3b5afe",
+        "f0fc3ed414fa7fc4eee8b7bcf872b2fd6701d1f7701692923d908359a5f75a8c"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            118,
+            122
+          ],
+          "indices": [
+            26,
+            25,
+            26
+          ],
+          "token_id": 89,
+          "width": 4
+        },
+        {
+          "span": [
+            122,
+            127
+          ],
+          "indices": [
+            27,
+            26,
+            27
+          ],
+          "token_id": 144,
+          "width": 5
+        },
+        {
+          "span": [
+            127,
+            132
+          ],
+          "indices": [
+            28,
+            27,
+            28
+          ],
+          "token_id": 254,
+          "width": 5
+        },
+        {
+          "span": [
+            132,
+            138
+          ],
+          "indices": [
+            29,
+            28,
+            29
+          ],
+          "token_id": 2796,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 4,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 38,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        44,
+        45
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr15:78926431:C>T",
+      "cluster": 46,
+      "sequence_sha256": [
+        "1ed783ef23c65dbbdc4fe89d6c98e818cb36ac739a5225163609371d2aac88c1",
+        "5bd8a72f7794f227cf4db81a6e27b162f06e207e32449ec3de0db915a5c1aec2",
+        "890d7157c8fcdeb87bc529b607a8c6c2d13aa62cf877fceb7f15022aafaaab29"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            69,
+            74
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 148,
+          "width": 5
+        },
+        {
+          "span": [
+            74,
+            78
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 53,
+          "width": 4
+        },
+        {
+          "span": [
+            115,
+            119
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 97,
+          "width": 4
+        },
+        {
+          "span": [
+            119,
+            123
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 74,
+          "width": 4
+        },
+        {
+          "span": [
+            123,
+            128
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 264,
+          "width": 5
+        },
+        {
+          "span": [
+            128,
+            132
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 71,
+          "width": 4
+        },
+        {
+          "span": [
+            132,
+            138
+          ],
+          "indices": [
+            29,
+            29,
+            29
+          ],
+          "token_id": 437,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 36,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        45
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr8:144878886:A>G",
+      "cluster": 47,
+      "sequence_sha256": [
+        "22ba38360295cc4c4e1d87260df70dfd3fab88185ee7efb32c8431c7756452d5",
+        "925bdea1f0aef93483b90af479c3048e82a7f19a1d60b514f5619d5e7e4473b3",
+        "572376fba87928480c3135fce9e2ce708ee316ace4f32ff8ad49b76e634a10b3"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            73
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 350,
+          "width": 6
+        },
+        {
+          "span": [
+            73,
+            78
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 120,
+          "width": 5
+        },
+        {
+          "span": [
+            78,
+            83
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 190,
+          "width": 5
+        },
+        {
+          "span": [
+            125,
+            129
+          ],
+          "indices": [
+            26,
+            26,
+            27
+          ],
+          "token_id": 64,
+          "width": 4
+        },
+        {
+          "span": [
+            129,
+            135
+          ],
+          "indices": [
+            27,
+            27,
+            28
+          ],
+          "token_id": 455,
+          "width": 6
+        },
+        {
+          "span": [
+            135,
+            139
+          ],
+          "indices": [
+            28,
+            28,
+            29
+          ],
+          "token_id": 68,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 35,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        44
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr7:158663518:A>C",
+      "cluster": 48,
+      "sequence_sha256": [
+        "96fb23ced144394a93f063771c88e60c70ef1a898ba19eb15d48d4033d34beef",
+        "28a45c1cf05fafab15e6b65c4ef6443f8f82a3d1c673c2c330df2ffbae776cb7",
+        "5c5116af24e3bc6bbf084b3f47b3f8b994ada045afcbb02078f42981ba242d27"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            72
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 45,
+          "width": 4
+        },
+        {
+          "span": [
+            72,
+            78
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 853,
+          "width": 6
+        },
+        {
+          "span": [
+            78,
+            82
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 97,
+          "width": 4
+        },
+        {
+          "span": [
+            120,
+            123
+          ],
+          "indices": [
+            25,
+            26,
+            26
+          ],
+          "token_id": 37,
+          "width": 3
+        },
+        {
+          "span": [
+            123,
+            130
+          ],
+          "indices": [
+            26,
+            27,
+            27
+          ],
+          "token_id": 1557,
+          "width": 7
+        },
+        {
+          "span": [
+            130,
+            134
+          ],
+          "indices": [
+            27,
+            28,
+            28
+          ],
+          "token_id": 44,
+          "width": 4
+        },
+        {
+          "span": [
+            134,
+            139
+          ],
+          "indices": [
+            28,
+            29,
+            29
+          ],
+          "token_id": 281,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 34,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        44,
+        44
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr3:185070673:C>T",
+      "cluster": 49,
+      "sequence_sha256": [
+        "bae62c95ae56bf1f150d2ccd65b2a52331382af1302a2df3c06b59a6ff1da1b6",
+        "67c5c0e1fd0476231604240995c7d6810c253ee49c5db94a5d9879ca9ab2d10f",
+        "d9d9a9fa9f47ebce59678ea8d2758d201bede03674bbfb0c25f571a8e9fe47e7"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            73
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 1681,
+          "width": 7
+        },
+        {
+          "span": [
+            73,
+            76
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 32,
+          "width": 3
+        },
+        {
+          "span": [
+            76,
+            81
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 191,
+          "width": 5
+        },
+        {
+          "span": [
+            81,
+            87
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 290,
+          "width": 6
+        },
+        {
+          "span": [
+            133,
+            137
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 134,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 5,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 36,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        43
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr20:63238639:G>A",
+      "cluster": 50,
+      "sequence_sha256": [
+        "5f21255658f1200c2a5488081faeb6188818438dd61ae8acf8741e30ecc7d271",
+        "e0e5f6dcd44998c19dbc84bc17fe86aa28d03cfbcff99f539efdbede0897da08",
+        "06432729ad95f066f94f1ba2ff8f7094e886ca3c773ccb2cc51190968a1fc3c8"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            73
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 486,
+          "width": 5
+        },
+        {
+          "span": [
+            73,
+            77
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 78,
+          "width": 4
+        },
+        {
+          "span": [
+            77,
+            79
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 15,
+          "width": 2
+        },
+        {
+          "span": [
+            79,
+            84
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 199,
+          "width": 5
+        },
+        {
+          "span": [
+            117,
+            121
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 111,
+          "width": 4
+        },
+        {
+          "span": [
+            121,
+            128
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 1602,
+          "width": 7
+        },
+        {
+          "span": [
+            128,
+            133
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 294,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 36,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        45
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr13:48976554:C>T",
+      "cluster": 51,
+      "sequence_sha256": [
+        "1897a6a72ac327b119f421d9e74b08337dbc3fae3f0dca90c0bb39ac71692b94",
+        "f2f796ecb142655b3fb774c92cebfb3761c21b14fb82eddee98c7cc0326f14e7",
+        "150568b3c74757451b0ebe16eaeb52f1a5638a13c23b45bdc485e7d23c15761d"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            72
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 354,
+          "width": 4
+        },
+        {
+          "span": [
+            72,
+            76
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 136,
+          "width": 4
+        },
+        {
+          "span": [
+            76,
+            79
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 29,
+          "width": 3
+        },
+        {
+          "span": [
+            79,
+            86
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 1081,
+          "width": 7
+        },
+        {
+          "span": [
+            86,
+            91
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 485,
+          "width": 5
+        },
+        {
+          "span": [
+            118,
+            123
+          ],
+          "indices": [
+            27,
+            26,
+            27
+          ],
+          "token_id": 241,
+          "width": 5
+        },
+        {
+          "span": [
+            123,
+            128
+          ],
+          "indices": [
+            28,
+            27,
+            28
+          ],
+          "token_id": 165,
+          "width": 5
+        },
+        {
+          "span": [
+            128,
+            132
+          ],
+          "indices": [
+            29,
+            28,
+            29
+          ],
+          "token_id": 239,
+          "width": 4
+        },
+        {
+          "span": [
+            132,
+            136
+          ],
+          "indices": [
+            30,
+            29,
+            30
+          ],
+          "token_id": 92,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 9,
+      "reference_real_tokens": 45,
+      "rejected": {
+        "motif_or_geometry": 35,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        47,
+        46,
+        47
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr10:79163200:C>T",
+      "cluster": 52,
+      "sequence_sha256": [
+        "7bc47b2d3a51c2af88ddc7234a7194415e44019217cf9259885faf04550379ac",
+        "8ee59546ced0d73a685c3c9aeb885aa63e64cd5c5ea9e2da5424d41e747b35f8",
+        "5401293d0aa46bd9e86d5bd50c9982bf6b73235870fa00cb83091499126bf8f0"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            70
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 161,
+          "width": 5
+        },
+        {
+          "span": [
+            70,
+            74
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 169,
+          "width": 4
+        },
+        {
+          "span": [
+            74,
+            80
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 857,
+          "width": 6
+        },
+        {
+          "span": [
+            80,
+            84
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 108,
+          "width": 4
+        },
+        {
+          "span": [
+            84,
+            88
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 62,
+          "width": 4
+        },
+        {
+          "span": [
+            114,
+            120
+          ],
+          "indices": [
+            25,
+            24,
+            24
+          ],
+          "token_id": 2157,
+          "width": 6
+        },
+        {
+          "span": [
+            120,
+            124
+          ],
+          "indices": [
+            26,
+            25,
+            25
+          ],
+          "token_id": 78,
+          "width": 4
+        },
+        {
+          "span": [
+            124,
+            128
+          ],
+          "indices": [
+            27,
+            26,
+            26
+          ],
+          "token_id": 108,
+          "width": 4
+        },
+        {
+          "span": [
+            128,
+            133
+          ],
+          "indices": [
+            28,
+            27,
+            27
+          ],
+          "token_id": 263,
+          "width": 5
+        },
+        {
+          "span": [
+            133,
+            139
+          ],
+          "indices": [
+            29,
+            28,
+            28
+          ],
+          "token_id": 1404,
+          "width": 6
+        }
+      ],
+      "accepted_queries": 10,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        44,
+        44
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr16:84986455:G>A",
+      "cluster": 53,
+      "sequence_sha256": [
+        "9693d840d9fa8bdc4537b35e6383ea79a1e72625e65dfd5cc44cf66cd5647490",
+        "8d255e7d77d32c6aed296f1919881ce685e2753548df57fc7d9bd08603102acb",
+        "6c46678c3cc60e3fb7fa742ccd9ea54ed3a170a8a317dfa10132423ea987c203"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            68,
+            74
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 2442,
+          "width": 6
+        },
+        {
+          "span": [
+            74,
+            80
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 1965,
+          "width": 6
+        },
+        {
+          "span": [
+            80,
+            87
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 1918,
+          "width": 7
+        },
+        {
+          "span": [
+            114,
+            119
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 452,
+          "width": 5
+        },
+        {
+          "span": [
+            119,
+            124
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 145,
+          "width": 5
+        },
+        {
+          "span": [
+            124,
+            129
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 765,
+          "width": 5
+        },
+        {
+          "span": [
+            129,
+            132
+          ],
+          "indices": [
+            27,
+            27,
+            27
+          ],
+          "token_id": 35,
+          "width": 3
+        },
+        {
+          "span": [
+            132,
+            136
+          ],
+          "indices": [
+            28,
+            28,
+            28
+          ],
+          "token_id": 112,
+          "width": 4
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 35,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        45,
+        45
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr17:44916813:C>G",
+      "cluster": 54,
+      "sequence_sha256": [
+        "8e7c8ca0ff038b1ded547d0c5e0d4e036670e9174521ae03571e86fc7e100b32",
+        "7dab1f6745225d287e81be3e50f9e8a21fc3fb3c372febca1e091a0c3bfba486",
+        "b01fead0f032422b5aa8bf5e798c56552684714e58fb04f6284bfdd4686f8e06"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            70
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 33,
+          "width": 3
+        },
+        {
+          "span": [
+            70,
+            76
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 484,
+          "width": 6
+        },
+        {
+          "span": [
+            76,
+            80
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 57,
+          "width": 4
+        },
+        {
+          "span": [
+            80,
+            87
+          ],
+          "indices": [
+            19,
+            19,
+            19
+          ],
+          "token_id": 2189,
+          "width": 7
+        },
+        {
+          "span": [
+            87,
+            94
+          ],
+          "indices": [
+            20,
+            20,
+            20
+          ],
+          "token_id": 2615,
+          "width": 7
+        },
+        {
+          "span": [
+            94,
+            99
+          ],
+          "indices": [
+            21,
+            21,
+            21
+          ],
+          "token_id": 121,
+          "width": 5
+        },
+        {
+          "span": [
+            122,
+            126
+          ],
+          "indices": [
+            26,
+            27,
+            26
+          ],
+          "token_id": 74,
+          "width": 4
+        },
+        {
+          "span": [
+            126,
+            130
+          ],
+          "indices": [
+            27,
+            28,
+            27
+          ],
+          "token_id": 112,
+          "width": 4
+        },
+        {
+          "span": [
+            130,
+            133
+          ],
+          "indices": [
+            28,
+            29,
+            28
+          ],
+          "token_id": 26,
+          "width": 3
+        },
+        {
+          "span": [
+            133,
+            138
+          ],
+          "indices": [
+            29,
+            30,
+            29
+          ],
+          "token_id": 257,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 10,
+      "reference_real_tokens": 43,
+      "rejected": {
+        "motif_or_geometry": 33,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        45,
+        46,
+        45
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr1:156151770:A>C",
+      "cluster": 55,
+      "sequence_sha256": [
+        "92b41db1fb82436194a6c4f5f726187bfd0fd569873a01560552e21c73f50704",
+        "1367026937128ebb7767e9eaf0502dba703e6aa6143cfd35184078b3a801ee78",
+        "ec097f7fa1666b4942abdd9bedecbb1122d25973f788cd7dad54154bceac9409"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            67,
+            83
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 3839,
+          "width": 16
+        },
+        {
+          "span": [
+            83,
+            87
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 60,
+          "width": 4
+        },
+        {
+          "span": [
+            121,
+            126
+          ],
+          "indices": [
+            22,
+            22,
+            23
+          ],
+          "token_id": 704,
+          "width": 5
+        },
+        {
+          "span": [
+            126,
+            132
+          ],
+          "indices": [
+            23,
+            23,
+            24
+          ],
+          "token_id": 407,
+          "width": 6
+        },
+        {
+          "span": [
+            132,
+            137
+          ],
+          "indices": [
+            24,
+            24,
+            25
+          ],
+          "token_id": 701,
+          "width": 5
+        }
+      ],
+      "accepted_queries": 5,
+      "reference_real_tokens": 35,
+      "rejected": {
+        "motif_or_geometry": 29,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        37,
+        37,
+        38
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr5:150846823:A>G",
+      "cluster": 56,
+      "sequence_sha256": [
+        "e5b3d3db89fc37f12068ff8698392314adda1d98ff8cf82df36fd1aca9c59c7d",
+        "72bd4294cb9c963953b2e6ba72aeb85a79605fe672057656ab04792f4568ccac",
+        "bf193c405b1ccd04635063bde1044bac2db3933dbf710c41cf9e92ba63200a9f"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            66,
+            70
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 95,
+          "width": 4
+        },
+        {
+          "span": [
+            70,
+            72
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 13,
+          "width": 2
+        },
+        {
+          "span": [
+            72,
+            80
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 1030,
+          "width": 8
+        },
+        {
+          "span": [
+            80,
+            84
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 45,
+          "width": 4
+        },
+        {
+          "span": [
+            84,
+            91
+          ],
+          "indices": [
+            18,
+            18,
+            18
+          ],
+          "token_id": 1210,
+          "width": 7
+        },
+        {
+          "span": [
+            117,
+            121
+          ],
+          "indices": [
+            24,
+            24,
+            25
+          ],
+          "token_id": 78,
+          "width": 4
+        },
+        {
+          "span": [
+            121,
+            126
+          ],
+          "indices": [
+            25,
+            25,
+            26
+          ],
+          "token_id": 481,
+          "width": 5
+        },
+        {
+          "span": [
+            126,
+            130
+          ],
+          "indices": [
+            26,
+            26,
+            27
+          ],
+          "token_id": 159,
+          "width": 4
+        },
+        {
+          "span": [
+            130,
+            135
+          ],
+          "indices": [
+            27,
+            27,
+            28
+          ],
+          "token_id": 184,
+          "width": 5
+        },
+        {
+          "span": [
+            135,
+            138
+          ],
+          "indices": [
+            28,
+            28,
+            29
+          ],
+          "token_id": 20,
+          "width": 3
+        }
+      ],
+      "accepted_queries": 10,
+      "reference_real_tokens": 42,
+      "rejected": {
+        "motif_or_geometry": 32,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        44,
+        44,
+        45
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr1:210293039:A>C",
+      "cluster": 57,
+      "sequence_sha256": [
+        "7000f781691f863c64b9431ea60fa1f0aabfc8a0850e71ceab7805345b76aaa1",
+        "a2efb39348db5347ee179f2dd896d811b78ddc2ac327107cf89149d5ca2a5cb0",
+        "85afeb5a894c7f5ed1cb7cda621625341cc456488e78e5e7c204f39b32d26799"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            70
+          ],
+          "indices": [
+            14,
+            14,
+            14
+          ],
+          "token_id": 107,
+          "width": 5
+        },
+        {
+          "span": [
+            70,
+            75
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 254,
+          "width": 5
+        },
+        {
+          "span": [
+            75,
+            80
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 224,
+          "width": 5
+        },
+        {
+          "span": [
+            116,
+            120
+          ],
+          "indices": [
+            23,
+            23,
+            23
+          ],
+          "token_id": 39,
+          "width": 4
+        },
+        {
+          "span": [
+            120,
+            127
+          ],
+          "indices": [
+            24,
+            24,
+            24
+          ],
+          "token_id": 1140,
+          "width": 7
+        },
+        {
+          "span": [
+            127,
+            133
+          ],
+          "indices": [
+            25,
+            25,
+            25
+          ],
+          "token_id": 230,
+          "width": 6
+        },
+        {
+          "span": [
+            133,
+            140
+          ],
+          "indices": [
+            26,
+            26,
+            26
+          ],
+          "token_id": 1290,
+          "width": 7
+        }
+      ],
+      "accepted_queries": 7,
+      "reference_real_tokens": 39,
+      "rejected": {
+        "motif_or_geometry": 32,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        41,
+        41,
+        41
+      ],
+      "full_boundaries_equal": true,
+      "shifted_query_indices": false,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr2:85063817:C>T",
+      "cluster": 58,
+      "sequence_sha256": [
+        "72f089de465aa907456d8dd426e9ff61fd0b977ec87625d302207929797ec065",
+        "75f7bcfb5968238877465736ba8a9088f08fe2784b56bdb1fda034d81908dcc1",
+        "1c9c291e34e8e962dd7b6fec7cc3ba6259f41288582e05629a1999098c859973"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            75
+          ],
+          "indices": [
+            11,
+            11,
+            11
+          ],
+          "token_id": 2462,
+          "width": 10
+        },
+        {
+          "span": [
+            75,
+            83
+          ],
+          "indices": [
+            12,
+            12,
+            12
+          ],
+          "token_id": 3420,
+          "width": 8
+        },
+        {
+          "span": [
+            108,
+            113
+          ],
+          "indices": [
+            16,
+            17,
+            17
+          ],
+          "token_id": 190,
+          "width": 5
+        },
+        {
+          "span": [
+            113,
+            117
+          ],
+          "indices": [
+            17,
+            18,
+            18
+          ],
+          "token_id": 60,
+          "width": 4
+        },
+        {
+          "span": [
+            117,
+            123
+          ],
+          "indices": [
+            18,
+            19,
+            19
+          ],
+          "token_id": 386,
+          "width": 6
+        },
+        {
+          "span": [
+            123,
+            139
+          ],
+          "indices": [
+            19,
+            20,
+            20
+          ],
+          "token_id": 1560,
+          "width": 16
+        }
+      ],
+      "accepted_queries": 6,
+      "reference_real_tokens": 33,
+      "rejected": {
+        "motif_or_geometry": 27,
+        "span_or_identity": 0,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        35,
+        36,
+        36
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    },
+    {
+      "variant_id": "chr10:92331577:G>A",
+      "cluster": 59,
+      "sequence_sha256": [
+        "073a335c2ed1f616822b9a01e6bae54ebb24f42511ea4c53f962f8a17edb2a4a",
+        "a8ffdd84e328a414659019a662a85b046e0283183821913775a478f665813bf6",
+        "5e67e4a6246a5580bac13606c18cfdc34a3c324a4ecf29d42f19207ef2a75700"
+      ],
+      "scope": "Declared nucleotide prediction-task correspondence only",
+      "queries": [
+        {
+          "span": [
+            65,
+            70
+          ],
+          "indices": [
+            15,
+            15,
+            15
+          ],
+          "token_id": 187,
+          "width": 5
+        },
+        {
+          "span": [
+            70,
+            77
+          ],
+          "indices": [
+            16,
+            16,
+            16
+          ],
+          "token_id": 2657,
+          "width": 7
+        },
+        {
+          "span": [
+            77,
+            84
+          ],
+          "indices": [
+            17,
+            17,
+            17
+          ],
+          "token_id": 3080,
+          "width": 7
+        },
+        {
+          "span": [
+            112,
+            119
+          ],
+          "indices": [
+            24,
+            24,
+            23
+          ],
+          "token_id": 936,
+          "width": 7
+        },
+        {
+          "span": [
+            119,
+            124
+          ],
+          "indices": [
+            25,
+            25,
+            24
+          ],
+          "token_id": 170,
+          "width": 5
+        },
+        {
+          "span": [
+            124,
+            128
+          ],
+          "indices": [
+            26,
+            26,
+            25
+          ],
+          "token_id": 94,
+          "width": 4
+        },
+        {
+          "span": [
+            128,
+            132
+          ],
+          "indices": [
+            27,
+            27,
+            26
+          ],
+          "token_id": 51,
+          "width": 4
+        },
+        {
+          "span": [
+            132,
+            140
+          ],
+          "indices": [
+            28,
+            28,
+            27
+          ],
+          "token_id": 1110,
+          "width": 8
+        }
+      ],
+      "accepted_queries": 8,
+      "reference_real_tokens": 41,
+      "rejected": {
+        "motif_or_geometry": 32,
+        "span_or_identity": 1,
+        "target_content": 0,
+        "erased_contrast": 0
+      },
+      "token_counts": [
+        43,
+        43,
+        42
+      ],
+      "full_boundaries_equal": false,
+      "shifted_query_indices": true,
+      "candidate_accounting_complete": true
+    }
+  ]
+}

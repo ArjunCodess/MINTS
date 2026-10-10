@@ -1,0 +1,12 @@
+{
+  "edit_row_weighted": {
+    "base_density": 0.9958488805878987,
+    "content_density": 0.8842437399090738,
+    "position_only_density": 1.0045999552125828
+  },
+  "sequence_weighted": {
+    "base_density": 1.001589376354412,
+    "content_density": 0.8932021977304659,
+    "position_only_density": 1.0069347520641423
+  }
+}
