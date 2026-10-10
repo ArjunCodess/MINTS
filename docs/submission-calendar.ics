@@ -31,10 +31,10 @@ DTSTAMP:20261010T100539Z
 DTSTART;VALUE=DATE:20270203
 DTEND;VALUE=DATE:20270204
 SUMMARY:Conditional journal fallback review
-DESCRIPTION:Only after GLBIO rejection or confirmed withdrawal. Check the 
- current Computers in Biology and Medicine guide and subscription terms bef
- ore using the prepared candidate. A GLBIO poster is conditional on both ve
- nues overlap rules.
+DESCRIPTION:Only after GLBIO rejection or confirmed withdrawal. Check the
+  current Computers in Biology and Medicine guide and subscription terms be
+ fore using the prepared candidate. A GLBIO poster is conditional on both v
+ enues overlap rules.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -45,8 +45,8 @@ DTEND;VALUE=DATE:20270312
 SUMMARY:GLBIO abstract deadline\, conditional
 DESCRIPTION:Use the prepared abstract below 250 words. Poster-only require
  s text. Talk consideration also requires a one-page PDF. Deadline 23:59 An
- ywhere on Earth. Avoid duplicate solo-presenter submissions and check any 
- active journal policy.
+ ywhere on Earth. Avoid duplicate solo-presenter submissions and check any
+  active journal policy.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
