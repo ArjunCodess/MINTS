@@ -5,22 +5,22 @@
   "pdfs": {
     "glbio": {
       "pages": 6,
-      "sha256": "2fc43d9c463fc54dc83dca25f1fab9963b5b14ac1d55b7c263f7fadcd179f454"
+      "sha256": "8a81fb733869d165d1add6214ff74855f22620448d12c0f171d8081bc53dc322"
     },
     "glbio_abstract": {
       "pages": 1,
-      "sha256": "149a4b259100572413ecf2d3efe8242e64e36c01e686d2f6877150f0f75c8bae"
+      "sha256": "750abb9022de3932ba393d7cf9524a6d665d0651cf651a8d90c8c839a8ee8ef8"
     },
     "cbm": {
       "pages": 8,
-      "sha256": "a665ec57688f8bda8078e56f96d8dbe30275ee33484d08e30f08cd017edd123c"
+      "sha256": "4208f3e2c26d70abcabc3472c3b3787daff7c466763c9fd9a355781fac79656f"
     }
   },
   "abstract_word_counts": {
-    "glbio_full_abstract": 130,
-    "glbio_community_abstract": 198,
-    "cbm_abstract": 189,
-    "ismb_portable_abstract": 198
+    "glbio_full_abstract": 138,
+    "glbio_community_abstract": 202,
+    "cbm_abstract": 196,
+    "ismb_portable_abstract": 202
   },
   "visually_reviewed_pages": 15,
   "ordinary_tests_passed": 199,
@@ -143,5 +143,38 @@
     "targeted_artifact_tests_passed": 3,
     "text_check": "Only the requested author spelling differs across all 37 PDF pages",
     "scientific_changes": "none"
+  },
+  "writing_review": {
+    "checked_at_utc": "2026-10-10T21:22:10.692365+00:00",
+    "base_revision": "2880792acdd443a673e3b12816fe9f2d0645e5e1",
+    "scope": "Wording, bibliography spacing and requested repository-root URL only; no model runs, experimental code, gates, results, numerical inserts or figure changes",
+    "pdfs": {
+      "paper/venues/glbio.pdf": {
+        "pages": 6,
+        "sha256": "8a81fb733869d165d1add6214ff74855f22620448d12c0f171d8081bc53dc322"
+      },
+      "paper/venues/glbio_abstract.pdf": {
+        "pages": 1,
+        "sha256": "750abb9022de3932ba393d7cf9524a6d665d0651cf651a8d90c8c839a8ee8ef8"
+      },
+      "paper/venues/cbm.pdf": {
+        "pages": 8,
+        "sha256": "4208f3e2c26d70abcabc3472c3b3787daff7c466763c9fd9a355781fac79656f"
+      },
+      "paper/main.pdf": {
+        "pages": 8,
+        "sha256": "d384a7806ae0603dc98a8dfa9367b49c63784cf3f23c288b2672a3fe09915c24"
+      },
+      "paper/supplement.pdf": {
+        "pages": 14,
+        "sha256": "0ee9de6cecb8210e710accc3e3a83fce2b7d5fcf72863c7f8b06085ff5ab2bb0"
+      }
+    },
+    "pages_visually_reviewed": 37,
+    "targeted_artifact_tests_passed": 3,
+    "manifest_hashes": "All current venue input and output hashes verified",
+    "current_code_url": "https://github.com/ArjunCodess/MINTS",
+    "template": "Unmodified OUP class and styles",
+    "review_state": "Writing review complete; portal and attendance actions remain external"
   }
 }

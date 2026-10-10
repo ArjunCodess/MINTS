@@ -1,8 +1,8 @@
 {
   "inputs": {
-    "paper/main.tex": "f140c9c7583992a7f47616c1badd500d894339fbc939347bd172739863e8dffa",
-    "paper/references.bib": "afec7146136727d451670ad9d3bacdaea33a90c8400447a3c107804c9993084a",
-    "tools/build_venue_materials.py": "08c1b70b4a485ff5ca94de79a0a0aba068fec657a802e01ff7f6d1ffd32ce906",
+    "paper/main.tex": "ac6e65bd7a99ac657b18382042d964d0df1fc75d79f5bd25b4e8717127189f5f",
+    "paper/references.bib": "10957b1fdb0eb93bd120186e88a6148d5531d17f20896243b518d8afd5d98ccb",
+    "tools/build_venue_materials.py": "20d8814df8b6b704792c01b04ef3fe1efc9e997bc512bc942774aac5e64d915a",
     "paper/generated/geometry.tex": "3800d7641be91894ed9983f55422880e436d7e6f9752756d4b0b4fd926c21ade",
     "paper/generated/interventions.tex": "d70bb5eb4c7260c10598d50f07067443ee3a4159827c079bf825554e97923298",
     "paper/generated/numbers.tex": "d357b9c4425a41c3c797b8628bf2d7bab7d0f327da6e6100d825169eca0de9e0",
@@ -21,34 +21,34 @@
     "paper/references.bib": "UTF-8 with LF newlines; original worktree file is unchanged"
   },
   "files": {
-    "cbm.pdf": "a665ec57688f8bda8078e56f96d8dbe30275ee33484d08e30f08cd017edd123c",
-    "cbm.tex": "20a81abbf0ebc29d9a01d00be56d4c7db7566d1e80c495aa8d1b05a5c4aaa8af",
-    "cbm_abstract.txt": "99ea77d9ba5f91149bbf643de89f93ac9cb2827f4714a74bbe6bf3221ee68807",
+    "cbm.pdf": "4208f3e2c26d70abcabc3472c3b3787daff7c466763c9fd9a355781fac79656f",
+    "cbm.tex": "367bb91f09bf2d0f3a8e4b8017526e0d6aac831299100c3fd71391623eb1b9c7",
+    "cbm_abstract.txt": "18a5c61c9469a59e02b8a8ec2426709c72c6fd6e1d87deb8bbd6ddc37f65cf4e",
     "cbm_author_fields.md": "7ce7b3818359daae0dc6a72d389595083ed0f57a77f999c042b2cf7ccd496b5d",
     "cbm_cover_letter.txt": "af4192bcdb40ea8e0684fb192548b3a395ef6f7eaad4026ac8c4e2b2074207b4",
     "cbm_highlights.tex": "0ed28719d876cad455964549a2f2a3b0f8a83bc31d0ba5060c280ff659031aa6",
     "cbm_highlights.txt": "a29e7c8aed91b20780826fefa88d9f52c2a9254b1145611bc864d845a05f8e73",
-    "figure_alt_text.txt": "35ce737d2fb6ddca344ff8550689a2d1a98f7bde83a8c71a41ba609eef46ca45",
-    "glbio.pdf": "2fc43d9c463fc54dc83dca25f1fab9963b5b14ac1d55b7c263f7fadcd179f454",
-    "glbio.tex": "31c3107562ee6eb409a86e8a4c42c6e630f49c0af02df83b551f3d0a34b75f0f",
-    "glbio_abstract.pdf": "149a4b259100572413ecf2d3efe8242e64e36c01e686d2f6877150f0f75c8bae",
-    "glbio_abstract.tex": "366c97ee0f9396bd56605ea404a0689dc3172b1106e0be62e6d65897afb00cf4",
-    "glbio_abstract.txt": "3dca591a3e8493cceef440e367ad11310e7011977398fc45e44dc642d456f717",
-    "glbio_full_abstract.txt": "5b9a054b6abd0cdc94dc9fd640dfae9eed3e946247c666ee24c28c683d2c1dc9",
-    "ismb_abstract.txt": "3dca591a3e8493cceef440e367ad11310e7011977398fc45e44dc642d456f717",
+    "figure_alt_text.txt": "dc552f3a817a87225609f5db0959999b15fad527657009b1edf49196b05cb057",
+    "glbio.pdf": "8a81fb733869d165d1add6214ff74855f22620448d12c0f171d8081bc53dc322",
+    "glbio.tex": "013b9e3c0857de35e3146e79bc44107e54a1a01d0f142b005d6b4a346dbce665",
+    "glbio_abstract.pdf": "750abb9022de3932ba393d7cf9524a6d665d0651cf651a8d90c8c839a8ee8ef8",
+    "glbio_abstract.tex": "d6f5806eca6c261088dd14540be07a685a00fed56d3ef2eb4cb10e1cf935b374",
+    "glbio_abstract.txt": "6d321aedea66b9b57c85427f395295c6b478c9ac3e12bfc73aa0b4d0bbc7b124",
+    "glbio_full_abstract.txt": "5d078f8bd5ec73099f622d4b62b718cd84a60bbbb987d9422cbd99a1d6146e45",
+    "ismb_abstract.txt": "6d321aedea66b9b57c85427f395295c6b478c9ac3e12bfc73aa0b4d0bbc7b124",
     "oup-abbrvnat.bst": "8004033e134786884125d7312a65f042d453c18f5970a54ecc193042904e00f9",
     "oup-authoring-template.cls": "d821dccff84d040d68c4c3d0edb97a866f0778d51b5ab265a83d589b7ea7096a",
     "oup-plain.bst": "c32b0fff1ae22c72afc2357db634fa3a4366e8f2eef84b1bb90e6423aac18f51",
     "oup_waiver_request.txt": "598e3789c5ada8baa635684c6d2ca4af13f46eefb5233a9261fded7cade65104",
     "README.md": "85382056cda4cea900327c3026f0fc2f4d055e3d9f33aa98b1fda1eab2a6ecaa",
-    "references.bib": "afec7146136727d451670ad9d3bacdaea33a90c8400447a3c107804c9993084a"
+    "references.bib": "10957b1fdb0eb93bd120186e88a6148d5531d17f20896243b518d8afd5d98ccb"
   },
   "word_counts": {
-    "glbio_full_abstract": 130,
-    "glbio_community_abstract": 198,
-    "cbm_abstract": 189,
-    "ismb_portable_abstract": 198
+    "glbio_full_abstract": 138,
+    "glbio_community_abstract": 202,
+    "cbm_abstract": 196,
+    "ismb_portable_abstract": 202
   },
-  "science": "Unchanged saved-evidence master; presentation adaptations only",
+  "science": "Unchanged saved evidence and scientific outcomes; wording and presentation adaptations only",
   "state": "Local candidates, not submitted; route checks in docs/submission_routes.md"
 }
