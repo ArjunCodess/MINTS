@@ -7,7 +7,7 @@ GLBIO 2027 full paper is the active target. The files are local candidates, not 
 | `glbio.pdf`, `glbio.tex`, `glbio_full_abstract.txt` | Author-bearing OUP Modern Large proceedings candidate, maximum nine pages and 250 abstract words. |
 | `glbio_abstract.txt`, `glbio_abstract.pdf` | Conditional GLBIO abstract route; text is under 250 words and the extended abstract is one page. |
 | `ismb_abstract.txt` | Portable ISMB/ECCB candidate; final 2027 track compliance remains conditional on the accessible call. |
-| `cbm.pdf`, `cbm.tex`, `cbm_abstract.txt`, `cbm_highlights.txt`, `cbm_cover_letter.txt` | Sequential journal fallback; current author-guide and publishing-option verification is blocked by HTTP 403. |
+| `cbm.pdf`, `cbm.tex`, `cbm_abstract.txt`, `cbm_highlights.txt`, `cbm_highlights.tex`, `cbm_cover_letter.txt` | Sequential journal fallback; current author guide and no-fee subscription option are verified; contribution and declaration forms remain author actions. |
 | `figure_alt_text.txt` | Main figure description for portal accessibility fields. |
 | `oup_waiver_request.txt` | Draft supporting statement for the separate OUP process; no waiver is granted or implied. |
 | `manifest.json` | Presentation input/output hashes and abstract counts. |
