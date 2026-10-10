@@ -1,0 +1,90 @@
+{
+  "checked_at_utc": "2026-10-10T10:19:54.686553+00:00",
+  "selected_first_review": "GLBIO 2027 full paper",
+  "submission_state": "prepared, not uploaded",
+  "presentation_revision": "03cd4b5db6b4fbbce35e2e082582e8c3946cdbed",
+  "pdfs": {
+    "glbio": {
+      "pages": 6,
+      "sha256": "987931f53e90492a959168637aa6d6cfc405c2ca723aeaaef9f84a2806c6eca1"
+    },
+    "glbio_abstract": {
+      "pages": 1,
+      "sha256": "7fbb88d8379ec9d8fdd9e05dd30642f6d2af63d244ce9853f9d19d90937db67b"
+    },
+    "cbm": {
+      "pages": 8,
+      "sha256": "5ebb14da37160c30fac73ed0c37c17f6f99bf38fd2c7813d00252627026aaf3d"
+    }
+  },
+  "abstract_word_counts": {
+    "glbio_full_abstract": 130,
+    "glbio_community_abstract": 198,
+    "cbm_abstract": 189,
+    "ismb_portable_abstract": 198
+  },
+  "visually_reviewed_pages": 15,
+  "ordinary_tests_passed": 199,
+  "artifact_tests_passed": 21,
+  "original_result_hashes_preserved": 734,
+  "deposited_files_verified": 125,
+  "raw_cases_reproduced": 61,
+  "scope": "Existing saved evidence; no new model inference, endpoints or gate changes",
+  "source_verification": "Full detached public checkout: 214 tests passed; all 15 candidate pages reproduce identical text and pixels",
+  "vendor_layout_warnings": "Unmodified OUP Modern Large running-head warnings reproduced in an independent three-page control; no body overflow",
+  "routes": {
+    "glbio_full": {
+      "open": true,
+      "deadline_aoe": "2027-01-07 23:59",
+      "notifications": "2027-02-02",
+      "blind_review": false,
+      "source": "https://www.iscb.org/glbio2027/call-for-submissions/proceedings"
+    },
+    "glbio_abstract": {
+      "open": true,
+      "activation": "Conditional fallback after full-paper rejection; avoid duplicate solo presentations",
+      "deadline_aoe": "2027-03-11 23:59",
+      "max_words": 250,
+      "source": "https://www.iscb.org/glbio2027/call-for-submissions/abstracts"
+    },
+    "cbm": {
+      "activation": "Only after GLBIO rejection or confirmed withdrawal",
+      "review": "single anonymized",
+      "abstract_max_words": 250,
+      "keywords": "1 to 7",
+      "highlights": "Required, 3 to 5, each <=85 characters",
+      "source_format": "Editable .tex or .doc/.docx; PDF alone insufficient",
+      "graphical_abstract": "Encouraged, not required",
+      "subscription_publication_fee": "No author publication fee",
+      "retrieval": "Verified through collaborative browser after ordinary HTTP returned 403",
+      "guide": "https://www.sciencedirect.com/journal/computers-in-biology-and-medicine/publish/guide-for-authors",
+      "fees": "https://www.sciencedirect.com/journal/computers-in-biology-and-medicine/about/insights",
+      "prior_abstracts": "Explicitly excepted from prior-publication prohibition; disclose any actual presentation"
+    },
+    "ismb_abstract": {
+      "regular_deadline_aoe": "2027-04-08 23:59",
+      "late_breaking_opens": "2027-04-12",
+      "late_breaking_deadline_aoe": "2027-05-06 23:59",
+      "final_call": "Redirects to ISCB login; word limit, opening and overlap rules unverified",
+      "schedule": "https://transition.iscb.org/cms_addon/conferences/ismbeccb2027/schedule/abstracts?keydate="
+    }
+  },
+  "mirror": {
+    "url": "https://anonymous.4open.science/r/MINTS/",
+    "browser_status": "Public site works",
+    "files": 871,
+    "source_commit_display": "Oct 6, 2026",
+    "snapshot_ready_display": "Oct 10, 2026",
+    "new_verifier": "File not found; refresh snapshot before treating as current code"
+  },
+  "author_dependencies": [
+    "OUP waiver decision or publication charge arrangement, separate attendance costs",
+    "Refresh anonymous snapshot if using it as current code",
+    "CBM author-confirmed CRediT roles and publisher competing-interest form",
+    "Final accessible ISMB call and track overlap rules",
+    "Author-controlled portal upload and review of assembled PDF"
+  ],
+  "public_tests_passed": 214,
+  "editable_source_zip": "25 files pass checksums and reproduce byte-identically; extracted supplement builds all 14 pages with identical text and pixels",
+  "validation_status": "verified local preparation; external author actions remain"
+}

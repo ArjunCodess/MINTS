@@ -2,7 +2,9 @@
 
 MINTS audits nucleotide correspondence and control feasibility in genomic transformer interventions. Equal tensor shapes can hide mismatched nucleotide positions. Explicit span and vocabulary correspondence permits comparison of a specified prediction task across changing BPE segmentation, while surrounding segmentation and context can still differ.
 
-The [main paper](paper/main.pdf) and [supplement](paper/supplement.pdf) reports a repaired CTCF component effect on a fixed trained readout, inconclusive TATA results and failed native sensitivity gates. In the 61-case mapped-query study, sham prediction shifts exceed variant shifts. These results do not establish biological binding causality or general sensitivity to learned mechanisms.
+The [main paper](paper/main.pdf) and [supplement](paper/supplement.pdf) report a repaired CTCF component effect on a fixed trained readout, inconclusive TATA results and failed native sensitivity gates. In the 61-case mapped-query study, sham prediction shifts exceed variant shifts. These results do not establish biological binding causality or general sensitivity to learned mechanisms.
+
+GLBIO 2027 full-paper proceedings is the chosen first review. The [venue presentations](paper/venues/README.md) include its OUP manuscript and conditional journal/community candidates. [Submission routes](docs/submission_routes.md) record verified deadlines, required author information, fee dependencies and overlap checks. Preparation does not activate a submission.
 
 ## Reproduce the public evidence and paper
 

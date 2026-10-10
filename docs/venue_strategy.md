@@ -1,6 +1,6 @@
 # Venue strategy
 
-Checked against official sources on 8 October 2026. RECOMB is retired. The strongest existing contribution is an implemented computational validity audit, with declared nucleotide correspondence, limited feasibility proofs and preserved failures in one checkpoint. It is not a validated general evidence standard or a discovery of biological binding mechanisms. The recommendations below are editorial judgments, not predictions of acceptance.
+GLBIO 2027 full-paper proceedings is the chosen first review, with a conditional Computers in Biology and Medicine fallback after rejection or confirmed withdrawal. Current deliverables and conflict checks are in docs/submission_routes.md. Earlier alternatives below remain assessments, not active submissions. Requirements were rechecked on 10 October 2026. RECOMB is retired. The strongest existing contribution is an implemented computational validity audit, with declared nucleotide correspondence, limited feasibility proofs and preserved failures in one checkpoint. It is not a validated general evidence standard or a discovery of biological binding mechanisms. The recommendations below are editorial judgments, not predictions of acceptance.
 
 ## Journal choices
 
