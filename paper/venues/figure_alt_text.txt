@@ -1,0 +1,1 @@
+Scatterplot of 60 genomic cluster means for 61 mapped-query cases. Most variant-minus-sham Jensen-Shannon contrasts lie below zero. The equal-cluster mean is -0.015966 nats, with a 95 percent cluster-bootstrap interval from -0.024454 to -0.009146. Larger sham shifts fail positive differential sensitivity on this selected population; this is not a biological binding effect.

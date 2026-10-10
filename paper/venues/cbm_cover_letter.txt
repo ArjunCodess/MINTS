@@ -1,0 +1,14 @@
+Dear Editors,
+
+I submit "MINTS: Nucleotide correspondence and control feasibility in genomic transformer interventions" for consideration as an original research article in Computers in Biology and Medicine.
+
+The paper examines a validity problem in computational biology: equal activation shapes in a genomic transformer can hide interventions at different nucleotide positions. MINTS implements declared nucleotide-span and vocabulary correspondence, formalizes two limited control-feasibility obstructions, and audits trained-readout and native-prediction endpoints in a fixed checkpoint. It preserves an inconclusive TATA result and failed native sensitivity gates rather than interpreting prediction changes as biological binding causality. The correspondence checker reproduces 438 saved queries, and archived numeric evidence supports independent recomputation of the reported estimates and uncertainty.
+
+The contribution is an implemented, reproducible validity audit. Cross-model generality, improved predictive performance and clinical benefit are not established. I request assessment of whether this bounded contribution meets the journal's scope and significance criteria.
+
+The manuscript has not been published in a peer-reviewed venue. I am the sole author, have reviewed and approved the manuscript, received no funding for the work and declare no competing interests. Code and both papers are available at https://github.com/ArjunCodess/MINTS; sequence-free reproduction data are archived at https://doi.org/10.5281/zenodo.23267982.
+
+Arjun VIjay Prakash
+Independent Researcher, City Montessori School
+Lucknow, India
+arjunv.prakash12345@gmail.com
