@@ -1,21 +1,24 @@
 {
   "inputs": {
-    "paper\\main.tex": "745f17307810353ad34f280f47e0499b998e46ae3abd9b424901e53248782f81",
-    "paper\\references.bib": "ee4e270ea4d8422e54da76f4a5963cfca03000696ce555f8076068f7a236469b",
-    "tools\\build_venue_materials.py": "7aafeb8cbbf1ad8c330b00651de66e2af2a03cbca82b868b46b81a07ffb12e59",
-    "paper\\generated\\geometry.tex": "3800d7641be91894ed9983f55422880e436d7e6f9752756d4b0b4fd926c21ade",
-    "paper\\generated\\interventions.tex": "d70bb5eb4c7260c10598d50f07067443ee3a4159827c079bf825554e97923298",
-    "paper\\generated\\numbers.tex": "d357b9c4425a41c3c797b8628bf2d7bab7d0f327da6e6100d825169eca0de9e0",
-    "paper\\generated\\prediction.tex": "3a37bc132fca0447223bc14e82ff11022da98fad9247e12c0303ecbe5718be70",
-    "paper\\generated\\secondary.tex": "472de01e18bfd15c4fdbdd902a57794f9154b6ce28968c687c0ec375e7484091",
-    "paper\\generated\\supp_cohort_balance.tex": "fe4bb31ccccb423da90627ab79051c00ccf9375dc09d38ab783ccc1e9f34d57a",
-    "paper\\generated\\supp_diagnostics.tex": "9fa60b0b3d1fa44fe7e164518df37835c7f7998e09a01029bda1577f13d561bf",
-    "paper\\generated\\supp_hardened_results.tex": "68db6a7d7c0345cf2bca73823bb5003ff3ee287f305d12533f82203653a9a538",
-    "paper\\generated\\supp_mapped_variant.tex": "f831ecc94f26aa492e938da5bfbaee31a4ed512d3669e9bcadb1a29c4a7a12cd",
-    "paper\\generated\\supp_native_endpoint.tex": "ad04e4d2e703b5bc0309f0366b52ff8d449457072964483108c545c87c6e0995",
-    "paper\\generated\\supp_native_followup.tex": "5b28acf47fffc74c33d7ca56557b506808bd19f58e43adc32f2ee69a3e471c6d",
-    "paper\\generated\\supp_results.tex": "44d826f54378e918b51672ead5941bc8bbe86959dbdabfee64425c969b92fadf",
-    "paper\\figures\\mapped_effect.pdf": "c2783d679ecd1a1cd5748b733d2c485da11b2982e6365807cf60b0a0311f6f80"
+    "paper/main.tex": "745f17307810353ad34f280f47e0499b998e46ae3abd9b424901e53248782f81",
+    "paper/references.bib": "afec7146136727d451670ad9d3bacdaea33a90c8400447a3c107804c9993084a",
+    "tools/build_venue_materials.py": "6bdcbc4c80d7f6461e124614522aa0ba29aa5a18b630797efed8c10d7cd344b6",
+    "paper/generated/geometry.tex": "3800d7641be91894ed9983f55422880e436d7e6f9752756d4b0b4fd926c21ade",
+    "paper/generated/interventions.tex": "d70bb5eb4c7260c10598d50f07067443ee3a4159827c079bf825554e97923298",
+    "paper/generated/numbers.tex": "d357b9c4425a41c3c797b8628bf2d7bab7d0f327da6e6100d825169eca0de9e0",
+    "paper/generated/prediction.tex": "3a37bc132fca0447223bc14e82ff11022da98fad9247e12c0303ecbe5718be70",
+    "paper/generated/secondary.tex": "472de01e18bfd15c4fdbdd902a57794f9154b6ce28968c687c0ec375e7484091",
+    "paper/generated/supp_cohort_balance.tex": "fe4bb31ccccb423da90627ab79051c00ccf9375dc09d38ab783ccc1e9f34d57a",
+    "paper/generated/supp_diagnostics.tex": "9fa60b0b3d1fa44fe7e164518df37835c7f7998e09a01029bda1577f13d561bf",
+    "paper/generated/supp_hardened_results.tex": "68db6a7d7c0345cf2bca73823bb5003ff3ee287f305d12533f82203653a9a538",
+    "paper/generated/supp_mapped_variant.tex": "f831ecc94f26aa492e938da5bfbaee31a4ed512d3669e9bcadb1a29c4a7a12cd",
+    "paper/generated/supp_native_endpoint.tex": "ad04e4d2e703b5bc0309f0366b52ff8d449457072964483108c545c87c6e0995",
+    "paper/generated/supp_native_followup.tex": "5b28acf47fffc74c33d7ca56557b506808bd19f58e43adc32f2ee69a3e471c6d",
+    "paper/generated/supp_results.tex": "44d826f54378e918b51672ead5941bc8bbe86959dbdabfee64425c969b92fadf",
+    "paper/figures/mapped_effect.pdf": "c2783d679ecd1a1cd5748b733d2c485da11b2982e6365807cf60b0a0311f6f80"
+  },
+  "input_hash_normalization": {
+    "paper/references.bib": "UTF-8 with LF newlines; original worktree file is unchanged"
   },
   "files": {
     "cbm.pdf": "5ebb14da37160c30fac73ed0c37c17f6f99bf38fd2c7813d00252627026aaf3d",
@@ -38,7 +41,7 @@
     "oup-plain.bst": "c32b0fff1ae22c72afc2357db634fa3a4366e8f2eef84b1bb90e6423aac18f51",
     "oup_waiver_request.txt": "5209c655c09eb773b7c8d319fb75348f6cd8c9069012f90061fb37590d4f8660",
     "README.md": "85382056cda4cea900327c3026f0fc2f4d055e3d9f33aa98b1fda1eab2a6ecaa",
-    "references.bib": "ee4e270ea4d8422e54da76f4a5963cfca03000696ce555f8076068f7a236469b"
+    "references.bib": "afec7146136727d451670ad9d3bacdaea33a90c8400447a3c107804c9993084a"
   },
   "word_counts": {
     "glbio_full_abstract": 130,

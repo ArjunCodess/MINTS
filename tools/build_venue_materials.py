@@ -93,7 +93,8 @@ def build(compile_pdfs=False):
     highlights_tex += "\n" + r"\end{itemize}\end{document}" + "\n"
     (OUT / "cbm_highlights.tex").write_text(highlights_tex, encoding="utf-8", newline="\n")
     (OUT / "figure_alt_text.txt").write_text(ALT.replace("--", "-") + "\n", encoding="utf-8", newline="\n")
-    shutil.copyfile(ROOT / "paper/references.bib", OUT / "references.bib")
+    # Normalize the presentation copy, leaving the original worktree untouched.
+    (OUT / "references.bib").write_text((ROOT / "paper/references.bib").read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
     counts = {"glbio_full_abstract": len(plain(STRUCTURED).split()), "glbio_community_abstract": len(COMMUNITY.split()), "cbm_abstract": len(plain(abstract).split()), "ismb_portable_abstract": len(COMMUNITY.split())}
     assert all(count <= 250 for count in counts.values())
     assert all(len(h) <= 85 for h in HIGHLIGHTS)
@@ -122,9 +123,14 @@ def build(compile_pdfs=False):
     inputs = [ROOT / "paper/main.tex", ROOT / "paper/references.bib", Path(__file__)]
     inputs += sorted((ROOT / "paper/generated").glob("*.tex"))
     inputs += sorted((ROOT / "paper/figures").glob("*.pdf"))
-    hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}
+    def input_bytes(path):
+        if path == ROOT / "paper/references.bib":
+            return path.read_text(encoding="utf-8").encode("utf-8")
+        return path.read_bytes()
+
+    hashes = {p.relative_to(ROOT).as_posix(): hashlib.sha256(input_bytes(p)).hexdigest() for p in inputs}
     files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in OUT.iterdir() if p.is_file() and p.name != "manifest.json"}
-    (OUT / "manifest.json").write_text(json.dumps({"inputs": hashes, "files": files, "word_counts": counts, "science": "Unchanged saved-evidence master; presentation adaptations only", "state": "Local candidates, not submitted; route checks in docs/submission_routes.md"}, indent=2) + "\n", encoding="utf-8", newline="\n")
+    (OUT / "manifest.json").write_text(json.dumps({"inputs": hashes, "input_hash_normalization": {"paper/references.bib": "UTF-8 with LF newlines; original worktree file is unchanged"}, "files": files, "word_counts": counts, "science": "Unchanged saved-evidence master; presentation adaptations only", "state": "Local candidates, not submitted; route checks in docs/submission_routes.md"}, indent=2) + "\n", encoding="utf-8", newline="\n")
     # Keep the editable journal upload ZIP local. Preserve relative TeX paths,
     # include only referenced images, and exclude scientific input datasets.
     sources = [OUT / "cbm.tex", OUT / "references.bib", OUT / "cbm_highlights.tex",
@@ -138,14 +144,14 @@ def build(compile_pdfs=False):
                 raise ValueError(f"Missing or external journal figure: {image}")
             sources.append(path)
     sources = sorted(set(sources))
-    source_manifest = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
+    source_manifest = {p.relative_to(ROOT).as_posix(): hashlib.sha256(input_bytes(p)).hexdigest() for p in sources}
     archive = ROOT / "submission/glbio-selected/cbm-source.zip"
     archive.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
         for source in sources:
             entry = zipfile.ZipInfo(source.relative_to(ROOT).as_posix(), date_time=(1980, 1, 1, 0, 0, 0))
             entry.compress_type = zipfile.ZIP_DEFLATED
-            bundle.writestr(entry, source.read_bytes())
+            bundle.writestr(entry, input_bytes(source))
         entry = zipfile.ZipInfo("source-manifest.json", date_time=(1980, 1, 1, 0, 0, 0))
         entry.compress_type = zipfile.ZIP_DEFLATED
         bundle.writestr(entry, json.dumps(source_manifest, indent=2) + "\n")
