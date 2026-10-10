@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "paper/venues"
@@ -124,6 +125,30 @@ def build(compile_pdfs=False):
     hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}
     files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in OUT.iterdir() if p.is_file() and p.name != "manifest.json"}
     (OUT / "manifest.json").write_text(json.dumps({"inputs": hashes, "files": files, "word_counts": counts, "science": "Unchanged saved-evidence master; presentation adaptations only", "state": "Local candidates, not submitted; route checks in docs/submission_routes.md"}, indent=2) + "\n", encoding="utf-8", newline="\n")
+    # Keep the editable journal upload ZIP local. Preserve relative TeX paths,
+    # include only referenced images, and exclude scientific input datasets.
+    sources = [OUT / "cbm.tex", OUT / "references.bib", OUT / "cbm_highlights.tex",
+               ROOT / "paper/supplement.tex", ROOT / "paper/references.bib"]
+    sources += sorted((ROOT / "paper/generated").glob("*.tex"))
+    for source in list(sources):
+        base = OUT if source.name == "cbm.tex" else ROOT / "paper"
+        for image in re.findall(r"\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}", source.read_text(encoding="utf-8")):
+            path = (base / image).resolve()
+            if not path.is_relative_to(ROOT) or not path.is_file():
+                raise ValueError(f"Missing or external journal figure: {image}")
+            sources.append(path)
+    sources = sorted(set(sources))
+    source_manifest = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
+    archive = ROOT / "submission/glbio-selected/cbm-source.zip"
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
+        for source in sources:
+            entry = zipfile.ZipInfo(source.relative_to(ROOT).as_posix(), date_time=(1980, 1, 1, 0, 0, 0))
+            entry.compress_type = zipfile.ZIP_DEFLATED
+            bundle.writestr(entry, source.read_bytes())
+        entry = zipfile.ZipInfo("source-manifest.json", date_time=(1980, 1, 1, 0, 0, 0))
+        entry.compress_type = zipfile.ZIP_DEFLATED
+        bundle.writestr(entry, json.dumps(source_manifest, indent=2) + "\n")
     print(json.dumps(counts))
 
 
