@@ -66,7 +66,7 @@ def build(compile_pdfs=False):
 \journaltitle{Bioinformatics Advances}\DOI{}\copyrightyear{}\pubyear{}\vol{}\issue{}\access{}\appnotes{}
 """
     oup_header += r"\title[MINTS]{" + TITLE + "}\n"
-    oup_header += r"""\author[1,$\ast$]{Arjun VIjay Prakash}
+    oup_header += r"""\author[1,$\ast$]{Arjun Vijay Prakash}
 \address[1]{\orgname{Independent Researcher, City Montessori School, Lucknow, India}}
 \address[$\ast$]{Corresponding author. \texttt{arjunv.prakash12345@gmail.com}}
 """
@@ -77,7 +77,7 @@ def build(compile_pdfs=False):
 \usepackage[margin=1in]{geometry}\usepackage[T1]{fontenc}\usepackage{lmodern,url,xurl}
 """
     extended += r"\title{" + TITLE + "}\n"
-    extended += r"""\author{Arjun VIjay Prakash\\Independent Researcher, City Montessori School, Lucknow, India\\\texttt{arjunv.prakash12345@gmail.com}}\date{}
+    extended += r"""\author{Arjun Vijay Prakash\\Independent Researcher, City Montessori School, Lucknow, India\\\texttt{arjunv.prakash12345@gmail.com}}\date{}
 \begin{document}\maketitle
 """ + COMMUNITY.replace("%", r"\%") + "\n\n"
     extended += r"The correspondence certificate checks declared span maps and constraints, allowing shifted indices and unequal token counts. It does not establish tokenizer provenance or isolate segmentation elsewhere. Original memberships, endpoints, timestamps and stopped studies remain intact. Numerical reproduction uses saved clusters; fresh inference requires upstream resources under their own terms." + "\n\n"

@@ -2,19 +2,18 @@
   "checked_at_utc": "2026-10-10T10:19:54.686553+00:00",
   "selected_first_review": "GLBIO 2027 full paper",
   "submission_state": "prepared, not uploaded",
-  "presentation_revision": "03cd4b5db6b4fbbce35e2e082582e8c3946cdbed",
   "pdfs": {
     "glbio": {
       "pages": 6,
-      "sha256": "987931f53e90492a959168637aa6d6cfc405c2ca723aeaaef9f84a2806c6eca1"
+      "sha256": "2fc43d9c463fc54dc83dca25f1fab9963b5b14ac1d55b7c263f7fadcd179f454"
     },
     "glbio_abstract": {
       "pages": 1,
-      "sha256": "7fbb88d8379ec9d8fdd9e05dd30642f6d2af63d244ce9853f9d19d90937db67b"
+      "sha256": "149a4b259100572413ecf2d3efe8242e64e36c01e686d2f6877150f0f75c8bae"
     },
     "cbm": {
       "pages": 8,
-      "sha256": "5ebb14da37160c30fac73ed0c37c17f6f99bf38fd2c7813d00252627026aaf3d"
+      "sha256": "a665ec57688f8bda8078e56f96d8dbe30275ee33484d08e30f08cd017edd123c"
     }
   },
   "abstract_word_counts": {
@@ -86,5 +85,63 @@
   ],
   "public_tests_passed": 214,
   "editable_source_zip": "25 files pass checksums and reproduce byte-identically; extracted supplement builds all 14 pages with identical text and pixels",
-  "validation_status": "verified local preparation; external author actions remain"
+  "validation_status": "verified local preparation; external author actions remain",
+  "previous_presentation_revision": "03cd4b5db6b4fbbce35e2e082582e8c3946cdbed",
+  "author_format_update": {
+    "checked_at_utc": "2026-10-10T21:08:30.417218+00:00",
+    "base_revision": "0d791bcb49a6da95e57126305084b527c88bb431",
+    "author": "Arjun Vijay Prakash",
+    "template": "All nine supplied OUP_General_Template bundle files and three active class/style files are byte-identical to the existing vendor files",
+    "pdfs": {
+      "paper/main.pdf": {
+        "pages": 8,
+        "changed_pages": [
+          1,
+          7
+        ],
+        "other_pages_pixel_identical": 6,
+        "sha256": "92490c21281f97105e613b190cbab7e218edc0a815ae2f348bc1f0275d651b0d"
+      },
+      "paper/supplement.pdf": {
+        "pages": 14,
+        "changed_pages": [
+          1,
+          13
+        ],
+        "other_pages_pixel_identical": 12,
+        "sha256": "e244b657ec03d11a24f6dc3c52a2a623dac8c2eb71905dfc25f52d2d7422514e"
+      },
+      "paper/venues/glbio.pdf": {
+        "pages": 6,
+        "changed_pages": [
+          1,
+          5
+        ],
+        "other_pages_pixel_identical": 4,
+        "sha256": "2fc43d9c463fc54dc83dca25f1fab9963b5b14ac1d55b7c263f7fadcd179f454"
+      },
+      "paper/venues/glbio_abstract.pdf": {
+        "pages": 1,
+        "changed_pages": [
+          1
+        ],
+        "other_pages_pixel_identical": 0,
+        "sha256": "149a4b259100572413ecf2d3efe8242e64e36c01e686d2f6877150f0f75c8bae"
+      },
+      "paper/venues/cbm.pdf": {
+        "pages": 8,
+        "changed_pages": [
+          1,
+          7
+        ],
+        "other_pages_pixel_identical": 6,
+        "sha256": "a665ec57688f8bda8078e56f96d8dbe30275ee33484d08e30f08cd017edd123c"
+      }
+    },
+    "changed_pages_visually_reviewed": 9,
+    "unchanged_pages_pixel_identical": 28,
+    "targeted_artifact_tests_passed": 3,
+    "text_check": "Only the requested author spelling differs across all 37 PDF pages",
+    "scientific_changes": "none"
+  }
 }

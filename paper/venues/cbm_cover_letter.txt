@@ -8,7 +8,7 @@ The contribution is an implemented, reproducible validity audit. Cross-model gen
 
 The manuscript has not been published in a peer-reviewed venue. I am the sole author, have reviewed and approved the manuscript, received no funding for the work and declare no competing interests. Code and both papers are available at https://github.com/ArjunCodess/MINTS; sequence-free reproduction data are archived at https://doi.org/10.5281/zenodo.23267982.
 
-Arjun VIjay Prakash
+Arjun Vijay Prakash
 Independent Researcher, City Montessori School
 Lucknow, India
 arjunv.prakash12345@gmail.com
